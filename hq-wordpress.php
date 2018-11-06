@@ -9,13 +9,12 @@ Author URI: https://hqrentalsoftware.com
 Text Domain: hq-wordpress
 */
 
-
+namespace HQRentalsPlugin;
 /*
  * Requires Files
  */
-require_once('includes/models/HQRentalsBootstrap.php');
-require_once('includes/models/HQRentalsSettings.php');
-use HQRentalWordpressModels\HQRentalsBootstrap;
+require_once('includes/autoloader.php');
+
 
 /*
  * Activation Routine

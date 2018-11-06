@@ -15,7 +15,8 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 use HQRentalsPlugin\HQRentalsModels\HQRentalsBootstrap;
-
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
+$set = new HQRentalsAdminSettings();
 
 
 /*

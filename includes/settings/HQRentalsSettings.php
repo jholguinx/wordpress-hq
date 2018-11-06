@@ -1,5 +1,5 @@
 <?php
-namespace HQRentalsPlugin\HQRentalsModels;
+namespace HQRentalsPlugin\HQRentalsSettings;
 
 /*
  * HQ Rental Software Plugin
@@ -11,31 +11,41 @@ class HQRentalsSettings
     /*
      * Options Names
      */
-    protected $api_user_token = 'hq_wordpress_api_user_token_key_option';
-    protected $api_tenant_token = 'hq_wordpress_api_tenant_token_key_option';
-    protected $woocommerce_hq_sync = 'hq_wordpress_woocommerce_hq_rentals_sync';
-    protected $hq_datetime_format = 'hq_wordpress_system_datetime_format';
-    protected $front_end_datetime_format = 'hq_wordpress_front_end_datetime_format';
+    public $api_user_token = 'hq_wordpress_api_user_token_key_option';
+    public $api_tenant_token = 'hq_wordpress_api_tenant_token_key_option';
+    public $woocommerce_hq_sync = 'hq_wordpress_woocommerce_hq_rentals_sync';
+    public $hq_datetime_format = 'hq_wordpress_system_datetime_format';
+    public $front_end_datetime_format = 'hq_wordpress_front_end_datetime_format';
+    public $api_base_url = 'hq_wordpress_api_base_url';
+
 
     public function getApiUserToken()
     {
-        return get_option($this->api_user_token, false);
+        return get_option($this->api_user_token, true);
     }
     public function getApiTenantToken()
     {
-        return get_option($this->api_tenant_token, false);
+        return get_option($this->api_tenant_token, true);
     }
     public function getWoocommerceSyncOption()
     {
-        return get_option($this->woocommerce_hq_sync, false);
+        return get_option($this->woocommerce_hq_sync, true);
     }
     public function getHQDatetimeFormat()
     {
-        return get_option($this->hq_datetime_format,false);
+        return get_option($this->hq_datetime_format,true);
     }
     public function getFrontEndDatetimeFormat()
     {
-        return get_option($this->front_end_datetime_format);
+        return get_option($this->front_end_datetime_format, true);
+    }
+    public function getApiBaseUrl()
+    {
+        return get_option($this->api_base_url, true);
+    }
+    public function saveApiBaseUrl($newApiUrl)
+    {
+        update_option($this->api_base_url, $newApiUrl);
     }
     public function saveApiUserToken($token)
     {
@@ -58,9 +68,11 @@ class HQRentalsSettings
         return update_option($this->front_end_datetime_format, $datetime_format);
     }
 
-    public function update()
+    public function updateSettings($postDataFromSettings)
     {
-
+        foreach ($postDataFromSettings as $key => $data){
+            update_option($key, $data);
+        }
     }
     public function getSettings()
     {

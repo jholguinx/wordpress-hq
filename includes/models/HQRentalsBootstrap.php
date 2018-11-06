@@ -1,7 +1,6 @@
 <?php
-namespace HQRentalWordpressModels;
-
-use HQRentalWordpressModels\HQRentalsSettings as Settings;
+namespace HQRentalsPlugin\HQRentalsModels;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsSettings as Settings;
 
 
 class HQRentalsBootstrap

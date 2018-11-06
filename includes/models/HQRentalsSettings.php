@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Migue
- * Date: 10/29/2018
- * Time: 10:54 PM
- */
-
-namespace HQRentalWordpressModels;
-
+namespace HQRentalsPlugin\HQRentalsModels;
 
 /*
  * HQ Rental Software Plugin

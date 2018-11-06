@@ -1,5 +1,5 @@
 <?php
-namespace HQRentalWordpressModels;
+namespace HQRentalsModels;
 
 class HQRentalsBrands
 {

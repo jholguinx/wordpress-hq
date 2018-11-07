@@ -13,7 +13,6 @@ class HQRentalsApiConfiguration
 
     public function getBasicApiConfiguration()
     {
-        var_dump($this->settings->getApiEncodedToken());
         return array(
             'headers'   =>  array(
                 'Authorization' => 'Basic ' . $this->settings->getApiEncodedToken()

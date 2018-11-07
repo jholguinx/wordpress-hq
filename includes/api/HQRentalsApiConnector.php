@@ -21,8 +21,7 @@ class HQRentalsApiConnector{
         if(is_wp_error($response)){
            return new ApiResponse($response->get_error_message(), false, null);
         }else{
-
-            return new ApiResponse(null, true, $response['body']);
+            return new ApiResponse(null, true, json_decode($response['body'])->fleets_brands);
         }
     }
     public function getHQRentalsBrands()

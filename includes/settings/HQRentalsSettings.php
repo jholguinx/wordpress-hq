@@ -87,7 +87,7 @@ class HQRentalsSettings
         foreach ($postDataFromSettings as $key => $data){
             update_option($key, $data);
         }
-        $this->saveEncodedApiKey($this->api_tenant_token, $this->api_user_token);
+        $this->saveEncodedApiKey($this->getApiTenantToken(), $this->getApiUserToken());
     }
     public function getSettings()
     {

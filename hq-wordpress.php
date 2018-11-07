@@ -16,11 +16,14 @@ if ( ! defined( 'WPINC' ) ) {
 }
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 $set = new HQRentalsAdminSettings();
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 $api = new HQRentalsApiConnector();
-;
-var_dump($api->getHQRentalsBrands());
+
+
+var_dump(new HQRentalsModelsBrand($api->getHQRentalsBrands()->data[0]));
+die();
 /*
  * Activation Routine
  * @return void

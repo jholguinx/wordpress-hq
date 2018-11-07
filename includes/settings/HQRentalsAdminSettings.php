@@ -1,6 +1,9 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsSettings;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
+
+
 class HQRentalsAdminSettings
 {
     protected $settingsPageTitle = 'HQ Rentals Settings';
@@ -10,6 +13,7 @@ class HQRentalsAdminSettings
     function __construct()
     {
         $this->settings = new HQRentalsSettings();
+        $this->dateHelper = new HQRentalsDatesHelper();
         add_action('admin_menu',array ($this, 'setAdminMenuOptions') );
     }
 
@@ -51,7 +55,7 @@ class HQRentalsAdminSettings
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end Date Format</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->front_end_datetime_format; ?>">
-
+                                        <?php echo $this->dateHelper->getHtmlOptionForSettingPage(); ?>
                                     </select>
                                 </td>
                             </tr>
@@ -59,14 +63,14 @@ class HQRentalsAdminSettings
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select System Date Format</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->hq_datetime_format; ?>">
-
+                                        <?php echo $this->dateHelper->getHtmlOptionForSettingPage(); ?>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Api Region</label></th>
                                 <td>
-                                    <select name="<?php echo $this->settings->api; ?>">
+                                    <select name="<?php echo $this->settings->api_base_url; ?>">
                                         <option value="https://api.caagcrm.com/api/" <?php echo ($current_endpoint == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>America</option>
                                         <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($current_endpoint == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>Europe</option>
                                         <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($current_endpoint == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>Asia</option>

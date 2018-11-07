@@ -13,10 +13,11 @@ class HQRentalsSettings
      */
     public $api_user_token = 'hq_wordpress_api_user_token_key_option';
     public $api_tenant_token = 'hq_wordpress_api_tenant_token_key_option';
-    public $woocommerce_hq_sync = 'hq_wordpress_woocommerce_hq_rentals_sync';
-    public $hq_datetime_format = 'hq_wordpress_system_datetime_format';
-    public $front_end_datetime_format = 'hq_wordpress_front_end_datetime_format';
-    public $api_base_url = 'hq_wordpress_api_base_url';
+    public $api_encoded_token = 'hq_wordpress_api_encoded_token_option';
+    public $woocommerce_hq_sync = 'hq_wordpress_woocommerce_hq_rentals_sync_option';
+    public $hq_datetime_format = 'hq_wordpress_system_datetime_format_option';
+    public $front_end_datetime_format = 'hq_wordpress_front_end_datetime_format_option';
+    public $api_base_url = 'hq_wordpress_api_base_url_option';
 
 
     public function getApiUserToken()
@@ -43,6 +44,12 @@ class HQRentalsSettings
     {
         return get_option($this->api_base_url, true);
     }
+
+    public function getApiEncodedToken()
+    {
+        return get_option($this->api_encoded_token, true);
+    }
+
     public function saveApiBaseUrl($newApiUrl)
     {
         update_option($this->api_base_url, $newApiUrl);
@@ -67,12 +74,20 @@ class HQRentalsSettings
     {
         return update_option($this->front_end_datetime_format, $datetime_format);
     }
+    public function saveEncodedApiKey($tenantKey, $userKey)
+    {
+        update_option( $this->api_encoded_token, base64_encode( $tenantKey . ':' . $userKey ) );
+    }
 
+    /*
+     * Update All Setting from Admin Screen
+     */
     public function updateSettings($postDataFromSettings)
     {
         foreach ($postDataFromSettings as $key => $data){
             update_option($key, $data);
         }
+        $this->saveEncodedApiKey($this->api_tenant_token, $this->api_user_token);
     }
     public function getSettings()
     {

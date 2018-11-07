@@ -14,11 +14,13 @@ require_once('includes/autoloader.php');
 if ( ! defined( 'WPINC' ) ) {
     die;
 }
-use HQRentalsPlugin\HQRentalsModels\HQRentalsBootstrap;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 $set = new HQRentalsAdminSettings();
-
-
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
+$api = new HQRentalsApiConnector();
+;
+var_dump($api->getHQRentalsBrands());
 /*
  * Activation Routine
  * @return void

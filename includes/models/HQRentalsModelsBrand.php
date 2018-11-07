@@ -77,7 +77,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
                 'post_name'     =>  $this->name
             )
         );
-        $post_id = wp_insert_post( $this->queryArguments );
+        $post_id = wp_insert_post( $this->postArgs );
         $this->post_id = $post_id;
         update_post_meta( $post_id, $this->metaId, $this->id );
         update_post_meta( $post_id, $this->metaName, $this->name );

@@ -7,6 +7,10 @@ use HQRentalsPlugin\HQRentalsApi\HQRentalsApiResponse as ApiResponse;
 
 
 class HQRentalsApiConnector{
+
+    /*
+     * Constructor
+     */
     public function __construct()
     {
         $this->endpoints = new HQRentalsApiEndpoint();

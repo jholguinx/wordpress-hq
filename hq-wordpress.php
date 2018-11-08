@@ -16,23 +16,16 @@ if ( ! defined( 'WPINC' ) ) {
 }
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
-$set = new HQRentalsAdminSettings();
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
-use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
-$as = new HQRentalsCustomPostsHandler();
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
+$settind = new HQRentalsAdminSettings();
 
-/*
-function hqtest(){
-    $api = new HQRentalsApiConnector();
-    $hqBrands = $api->getHQRentalsBrands()->data;
-    foreach ($hqBrands as $brand){
-        $newBrand = new HQRentalsModelsBrand();
-        $newBrand->setBrandFromApi($brand);
-        $newBrand->create();
-    }
+
+function hqtest()
+{
+    //$newSchedule = new HQRentalsScheduler();
+    //$newSchedule->refreshHQData();
 }
-add_action('template_redirect', __NAMESPACE__ . '\hqtest');*/
+add_action('template_redirect', __NAMESPACE__ . '\hqtest');
 /*
  * Activation Routine
  * @return void

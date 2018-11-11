@@ -49,9 +49,13 @@ class HQRentalsModelsFeature
         $this->postArgs = array_merge(
             $this->postArgs,
             array(
-                'post_title'
+                'post_title'    =>  $this->label,
+                'post_name'     =>  $this->label
             )
         );
+        $post_id = wp_insert_post( $this->postArgs );
+        $this->post_id = $post_id;
+        update_post_meta( $post_id, $this->metaId, $this->id );
     }
 
 }

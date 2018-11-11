@@ -2,6 +2,7 @@
 namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsModels\HQRentalsBaseModel;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
 
 class HQRentalsModelsBrand extends HQRentalsBaseModel{
 
@@ -9,7 +10,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
      * Custom Post Configuration
      */
     public $brandsCustomPostName = 'hqwp_brands';
-    public $brandsCustomPostSlug = 'brands';
+    public $brandsCustomPostSlug = 'brand';
 
     /*
      * HQ Rentals Brand Data
@@ -27,7 +28,6 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     protected $metaMyReservationsLink = 'hq_wordpress_brand_my_reservation_link';
     protected $metaMyPackagesReservationsLink = 'hq_wordpress_brand_my_packages_reservation_link';
 
-
     /*
      * Object Data to Display
      */
@@ -43,16 +43,23 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     protected $myReservationsLink = '';
     protected $myPackagesReservationsLink = '';
 
-    public function __construct()
+    /*
+     * Constructor
+     */
+    public function __construct( $data = null )
     {
+
         $this->post_id = '';
         $this->postArgs = array(
             'post_type'     =>  $this->brandsCustomPostName,
             'post_status'   =>  'publish',
         );
+        $this->filter = new HQRentalsDataFilter();
     }
+
+
     /*
-     * Set Brand from Api
+     * Set Brand from Api Data
      */
     public function setBrandFromApi($data)
     {
@@ -68,7 +75,11 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->myReservationsLink = $data->my_reservations_link;
         $this->myPackagesReservationsLink = $data->my_package_reservations_link;
     }
-    public function create( )
+
+    /*
+     * Create Brand Model Custom Post
+     */
+    public function create()
     {
         $this->postArgs = array_merge(
             $this->postArgs,
@@ -89,6 +100,9 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         update_post_meta( $post_id, $this->metaMyReservationsLink, $this->myReservationsLink );
         update_post_meta( $post_id, $this->metaMyPackagesReservationsLink, $this->myPackagesReservationsLink );
     }
+    /*
+     * Update Brand Custom Post Information
+     */
     public function update()
     {
         update_post_meta( $this->post_id, $this->metaId, $this->id );
@@ -101,6 +115,9 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         update_post_meta( $this->post_id, $this->metaMyReservationsLink, $this->myReservationsLink );
         update_post_meta( $this->post_id, $this->metaMyPackagesReservationsLink, $this->myPackagesReservationsLink );
     }
+    /*
+     * Delete Brand Custom Post
+     */
     public function delete()
     {
         delete_post_meta( $this->post_id, $this->metaId );
@@ -114,17 +131,28 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         delete_post_meta( $this->post_id, $this->metaMyPackagesReservationsLink );
         $post_id = wp_delete_post( $this->post_id , true );
     }
-    public function save(){
-
+    /*
+     * Find
+     */
+    public function find($caag_id)
+    {
+        $query = new \WP_Query( $this->postArgs );
     }
-    public function find($id){
 
-    }
     public function first()
     {
         // TODO: Implement first() method.
     }
-    public function all(){
-
+    public function all()
+    {
+        $query = new \WP_Query($this->postArgs);
     }
+    public function set($data)
+    {
+        if($this->filter->isPost($data)){
+
+        }else{}
+        //$metas =
+    }
+
 }

@@ -17,6 +17,11 @@ if ( ! defined( 'WPINC' ) ) {
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
+
+$new =
+
+$test = new HQRentalsModelsBrand($post);
 $settind = new HQRentalsAdminSettings();
 
 

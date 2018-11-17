@@ -21,4 +21,13 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes';
     }
+
+    public function getLocationsApiEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'fleets/locations';
+    }
+    public function getAdditionalChargesEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'fleets/additional-charges';
+    }
 }

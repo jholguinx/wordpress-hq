@@ -107,10 +107,6 @@ class HQRentalsModelsVehicleClass
                 'post_name'     =>  $this->name
             )
         );
-        /*
-        protected $labels = [ ];
-        protected $shortDescriptions = [ ];
-        protected $descriptions = [ ];*/
         $post_id = wp_insert_post( $this->postArgs );
         $this->post_id = $post_id;
         update_post_meta( $post_id, $this->metaId, $this->id );
@@ -121,6 +117,15 @@ class HQRentalsModelsVehicleClass
         update_post_meta( $post_id, $this->metaRecommended, $this->recommended );
         update_post_meta( $post_id, $this->metaActive, $this->active );
         update_post_meta( $post_id, $this->metaPublicImageLink, $this->publicImageLink );
+        foreach ( $this->labels as $key => $value ){
+            update_post_meta( $post_id, $this->metaLabelForWebsite . '_' . $key, $value);
+        }
+        foreach ( $this->shortDescriptions as $key => $value ){
+            update_post_meta( $post_id, $this->metashortDescriptionForWebiste . '_' . $key, $value );
+        }
+        foreach ( $this->descriptions as $key => $value ){
+            update_post_meta( $post_id, $this->metaDescriptionForWebiste . '_' . $key, $value );
+        }
         foreach ( $this->images as $image ){
             $image->create();
         }
@@ -128,9 +133,8 @@ class HQRentalsModelsVehicleClass
             $feature->create();
         }
         $this->rate->create();
-        /*Dinamics Fields*/
     }
-
+    
     public function update()
     {
         update_post_meta( $this->post_id, $this->metaId, $this->id );

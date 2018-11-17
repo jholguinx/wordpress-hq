@@ -19,16 +19,12 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 
-$new =
-
-$test = new HQRentalsModelsBrand($post);
-$settind = new HQRentalsAdminSettings();
 
 
 function hqtest()
 {
-    //$newSchedule = new HQRentalsScheduler();
-    //$newSchedule->refreshHQData();
+    $newSchedule = new HQRentalsScheduler();
+    $newSchedule->refreshHQData();
 }
 add_action('template_redirect', __NAMESPACE__ . '\hqtest');
 /*

@@ -8,7 +8,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
      * Custom Post Configuration
      */
     public $locationsCustomPostName = 'hqwp_locations';
-    public $locationsCuustomPostSlug = 'location';
+    public $locationsCustomPostSlug = 'location';
 
     /*
      * HQ Rentals Location Data

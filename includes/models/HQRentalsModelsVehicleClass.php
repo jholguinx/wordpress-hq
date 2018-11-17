@@ -1,6 +1,6 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsVehicleClassImage;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClassImage;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsFeature;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsActiveRate;
 
@@ -81,7 +81,7 @@ class HQRentalsModelsVehicleClass
             $this->descriptions[$key] = $description;
         }
         foreach ($data->images as $image){
-            $newImage = new HQRentalsVehicleClassImage();
+            $newImage = new HQRentalsModelsVehicleClassImage();
             $newImage->setVehicleClassImageFromApi($this->id, $image);
             $this->images[] = $newImage;
         }
@@ -134,7 +134,6 @@ class HQRentalsModelsVehicleClass
         }
         $this->rate->create();
     }
-    
     public function update()
     {
         update_post_meta( $this->post_id, $this->metaId, $this->id );
@@ -174,6 +173,7 @@ class HQRentalsModelsVehicleClass
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
+        return $query->posts;
     }
     public function set($data)
     {

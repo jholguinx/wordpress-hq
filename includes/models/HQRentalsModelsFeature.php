@@ -90,10 +90,7 @@ class HQRentalsModelsFeature
     {
         // TODO: Implement first() method.
     }
-    public function all()
-    {
-        $query = new \WP_Query($this->postArgs);
-    }
+
     public function set($data)
     {
         if($this->filter->isPost($data)){
@@ -102,4 +99,12 @@ class HQRentalsModelsFeature
         //$metas =
     }
 
+    /*
+     * Return All Posts
+     */
+    public function all()
+    {
+        $query = new \WP_Query($this->postArgs);
+        return $query->posts;
+    }
 }

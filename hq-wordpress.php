@@ -15,10 +15,9 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
-
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 
 
 function hqtest()

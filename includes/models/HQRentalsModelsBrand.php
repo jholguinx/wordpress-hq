@@ -146,6 +146,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
+        return $query->posts;
     }
     public function set($data)
     {

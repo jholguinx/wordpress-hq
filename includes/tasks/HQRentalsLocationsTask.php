@@ -2,10 +2,10 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand as HQBrand;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation as HQLocation;
 
-class HQRentalsBrandsTask
+class HQRentalsLocationsTask
 {
     public function __construct()
     {

@@ -108,9 +108,23 @@ class HQRentalsModelsActiveRate
         delete_post_meta( $this->post_id, $this->metaMonthlyRate );
         $post_id = wp_delete_post( $this->post_id , true );
     }
-    public function find($caag_id)
+    public function find($vehicleClassPostId)
     {
-        $query = new \WP_Query( $this->postArgs );
+        $args = array_merge(
+            $this->postArg,
+                array(
+                    'posts_per_page'    =>  -1,
+                    'meta_query'        =>  array(
+                        array(
+                            'key'       =>  $this->metaVehicleIdClass,
+                            'value'     =>  $caag_vehicle_class_id,
+                            'compare'   =>  '='
+                        )
+                    )
+                )
+        );
+        $query = new \WP_Query( $args );
+        return $query->posts;
     }
 
     public function first()
@@ -120,6 +134,7 @@ class HQRentalsModelsActiveRate
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
+        return $query->posts;
     }
     public function set($data)
     {

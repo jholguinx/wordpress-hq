@@ -1,7 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
 
-class HQRentalsVehicleClassImage
+class HQRentalsModelsVehicleClassImage
 {
     /*
      * Custom Post Configuration
@@ -22,6 +22,7 @@ class HQRentalsVehicleClassImage
     protected $metaSize = 'hq_wordpress_vehicle_image_size_meta';
     protected $metaLabel = 'hq_wordpress_vehicle_image_label_meta';
     protected $metaPublicLink = 'hq_wordpress_vehicle_image_public_link_meta';
+    protected $metaVehicleClassPostId = 'hq_wordpress_vehicle_image_vehicle_class_post_id_meta';
 
     /*
      * Object Data to Display
@@ -34,6 +35,7 @@ class HQRentalsVehicleClassImage
     protected $size = '';
     protected $label = '';
     protected $publicLink = '';
+    protected $vehicleClassPostId = '';
 
     public function __construct()
     {
@@ -112,6 +114,7 @@ class HQRentalsVehicleClassImage
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
+        return $query->posts;
     }
     public function set($data)
     {

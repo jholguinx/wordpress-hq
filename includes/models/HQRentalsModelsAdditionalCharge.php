@@ -1,6 +1,8 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
+
 class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
 {
     /*
@@ -16,9 +18,9 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     protected $metaId = 'hq_wordpress_additional_charge_id_meta';
     protected $metaName = 'hq_wordpress_additional_charge_name_meta';
     protected $metaChargeType = 'hq_wordpress_additional_charge_charge_type_meta';
-    protected $metaMandatory = 'hq_wordpress_additional_charge_mandatory_meta';
+    protected $metaMandatoryBrands = 'hq_wordpress_additional_charge_mandatory_brands_meta';
     protected $metaSelectionType = 'hq_wordpress_additional_charge_selection_type_meta';
-    protected $metaHardcoded = 'hq_wordpress_additional_charge_hardcode_meta';
+    protected $metaHardcoded = 'hq_wordpress_additional_charge_hardcoded_meta';
     protected $metaRecommended = 'hq_wordpress_additional_charge_recommended_meta';
     protected $metaDescription = 'hq_wordpress_additional_charge_description_meta';
     protected $metaIcon = 'hq_wordpress_additional_charge_icon_meta';
@@ -27,6 +29,95 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     protected $metaSelectionRange = 'hq_wordpress_additional_charge_selection_range_meta';
 
 
+    /*
+     * Object Data to Display
+     */
+
+    protected $id = '';
+    protected $name = '';
+    protected $chargeType = '';
+    protected $mandatoryBrands = [  ];
+    protected $selectionType = '';
+    protected $hardcoded = '';
+    protected $recommended = '';
+    protected $description = [ ];
+    protected $icon = '';
+    protected $labelForWebsite = [ ];
+    protected $shortDescription = [ ];
+    protected $selectionRange = '';
+    public function __construct()
+    {
+        $this->post_id = '';
+        $this->postArgs = array(
+            'post_type'     =>  $this->additionalChargesCustomPostName,
+            'post_status'   =>  'publish'
+        );
+        $this->filter = new HQRentalsDataFilter();
+    }
+    public function setAdditionalChargeFromApi($data)
+    {
+        $this->id = $data->id;
+        $this->name = $data->name;
+        $this->chargeType = $data->charge_type;
+        if(!empty($data->mandatory)){
+            foreach($data->mandatory as $brandId){
+                $this->mandatoryBrands[] = $brandId;
+            }
+        }
+        $this->selectionType = $data->selection_type;
+        $this->hardcoded = $data->hardcoded;
+        $this->recommended = $data->recommended;
+        foreach ( $data->description as $key => $value ){
+            $this->description[$key] = $value;
+        }
+        foreach ( $data->short_description_for_website as $key => $value ){
+            $this->shortDescription[$key] = $value;
+        }
+        foreach ( $data->label_for_website as $key => $value ){
+            $this->labelForWebsite[$key] = $value;
+        }
+        $this->selectionRange = $data->selection_range;
+    }
+
+    /*
+     * Create Additional Charges
+     */
+    public function create()
+    {
+        $this->postArgs = array_merge(
+            $this->postArgs,
+            array(
+                'post_title'    =>  $this->name,
+                'post_name'     =>  $this->name
+            )
+        );
+        $post_id = wp_insert_post( $this->postArgs );
+        $this->post_id = $post_id;
+        update_post_meta( $post_id, $this->metaId, $this->id );
+        update_post_meta( $post_id, $this->metaName, $this->name );
+        update_post_meta( $post_id, $this->metaChargeType, $this->chargeType );
+        foreach ( $this->mandatoryBrands as $value ){
+            update_post_meta( $post_id, $this->metaMandatoryBrands, $value );
+        }
+        update_post_meta( $post_id, $this->metaSelectionType, $this->selectionType );
+        update_post_meta( $post_id, $this->metaHardcoded, $this->hardcoded );
+        foreach ( $this->description as $key => $value ){
+            update_post_meta( $post_id, $this->metaDescription . '_' . $key, $value );
+        }
+        update_post_meta( $post_id, $this->metaIcon, $this->icon );
+        foreach( $this->metaLabelForWebsite as $key => $value ){
+            update_post_meta( $post_id, $this->metaLabelForWebsite . '_' . $key, $value );
+        }
+        foreach( $this->shortDescription as $key => $value ){
+            update_post_meta( $post_id, $this->metaShortDescription . '_' . $key, $value );
+        }
+        update_post_meta( $post_id, $this->metaSelectionRange, $this->selectionRange );
+    }
+
+    public function update()
+    {
+        //*//dda
+    }
 
     /*
      * Find

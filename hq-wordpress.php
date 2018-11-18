@@ -29,8 +29,8 @@ $brandPostAdmin = new HQRentalsAdminBrandsPosts();
 
 function hqtest()
 {
-    $newSchedule = new HQRentalsScheduler();
-    $newSchedule->refreshHQData();
+    //$newSchedule = new HQRentalsScheduler();
+    //$newSchedule->refreshHQData();
 }
 add_action('template_redirect', __NAMESPACE__ . '\hqtest');
 /*

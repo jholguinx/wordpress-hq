@@ -27,15 +27,15 @@ class HQRentalsModelsVehicleClassImage
     /*
      * Object Data to Display
      */
-    protected $id = '';
-    protected $vehicleClassId = '';
-    protected $filename = '';
-    protected $extension = '';
-    protected $mime = '';
-    protected $size = '';
-    protected $label = '';
-    protected $publicLink = '';
-    protected $vehicleClassPostId = '';
+    public $id = '';
+    public $vehicleClassId = '';
+    public $filename = '';
+    public $extension = '';
+    public $mime = '';
+    public $size = '';
+    public $label = '';
+    public $publicLink = '';
+    public $vehicleClassPostId = '';
 
     public function __construct()
     {

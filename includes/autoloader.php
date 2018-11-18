@@ -36,6 +36,8 @@ function hq_wordpress_autoloader( $class_name ) {
     $file_path .= $file;
     if ( file_exists( $file_path ) ) {
         require_once( $file_path );
+    }else if(false === strpos( $class_name, 'WP_Http')){
+        include_once( ABSPATH . WPINC . '/class-http.php' );
     } else {
         wp_die(
             esc_html( "The file attempting to be loaded at $file_path does not exist." )

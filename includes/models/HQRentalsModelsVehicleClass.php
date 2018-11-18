@@ -3,7 +3,7 @@ namespace HQRentalsPlugin\HQRentalsModels;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClassImage;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsFeature;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsActiveRate;
-
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsThumbnailHelper;
 
 class HQRentalsModelsVehicleClass
 {
@@ -87,7 +87,8 @@ class HQRentalsModelsVehicleClass
             'exclude_from_search'       =>  false,
             'menu_icon'                 => 'dashicons-thumbs-up',
             'menu_position'             => 8,
-            'capability_type'           => 'post'
+            'capability_type'           => 'post',
+            'supports'                  =>  array( 'title', 'editor', 'thumbnail', 'excerpt' )
         );
     }
 
@@ -136,8 +137,9 @@ class HQRentalsModelsVehicleClass
         $this->postArgs = array_merge(
             $this->postArgs,
             array(
-                'post_title'     =>  $this->name,
-                'post_name'     =>  $this->name
+                'post_title'        =>  $this->name,
+                'post_name'         =>  $this->name,
+                'post_content'      =>  $this->descriptions['en'] . $this->shortDescriptions['en']
             )
         );
         $post_id = wp_insert_post( $this->postArgs );
@@ -166,6 +168,8 @@ class HQRentalsModelsVehicleClass
             $feature->create();
         }
         $this->rate->create();
+        $thumbnailHandler = new HQRentalsThumbnailHelper();
+        $thumbnailHandler->setPostThumbnail($this->images[0]->publicLink , $post_id, $this->images[0]->filename, $this->images[0]->extension);
     }
     public function update()
     {

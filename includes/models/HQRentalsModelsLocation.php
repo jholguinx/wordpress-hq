@@ -43,6 +43,39 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'post_type'     =>  $this->locationsCustomPostName,
             'post_status'   =>  'publish'
         );
+        $this->labels = array(
+            'name'               => _x( 'Locations', 'post type general name', 'your-plugin-textdomain' ),
+            'singular_name'      => _x( 'Location', 'post type singular name', 'your-plugin-textdomain' ),
+            'menu_name'          => _x( 'Locations', 'admin menu', 'your-plugin-textdomain' ),
+            'name_admin_bar'     => _x( 'Location', 'add new on admin bar', 'your-plugin-textdomain' ),
+            'add_new'            => _x( 'Add New', 'brand', 'your-plugin-textdomain' ),
+            'add_new_item'       => __( 'Add New Location', 'your-plugin-textdomain' ),
+            'new_item'           => __( 'New Location', 'your-plugin-textdomain' ),
+            'edit_item'          => __( 'Edit Location', 'your-plugin-textdomain' ),
+            'view_item'          => __( 'View Location', 'your-plugin-textdomain' ),
+            'all_items'          => __( 'All Locations', 'your-plugin-textdomain' ),
+            'search_items'       => __( 'Search Locations', 'your-plugin-textdomain' ),
+            'parent_item_colon'  => __( 'Parent Locations', 'your-plugin-textdomain' ),
+            'not_found'          => __( 'No location found.', 'your-plugin-textdomain' ),
+            'not_found_in_trash' => __( 'No location found in Trash.', 'your-plugin-textdomain' )
+        );
+        $this->customPostArgs = array(
+            'labels'                    =>  $this->labels,
+            'public'                    =>  true,
+            'show_in_admin_bar'         =>  true,
+            'publicly_queryable'        =>  true,
+            'show_ui'                   =>  true,
+            'show_in_menu'              =>  true,
+            'show_in_nav_menus'         =>  true,
+            'query_var'                 =>  true,
+            'rewrite'                   =>  array( 'slug' => $this->locationsCustomPostSlug ),
+            'has_archive'               =>  true,
+            'hierarchical'              =>  false,
+            'exclude_from_search'       =>  false,
+            'menu_icon'                 => 'dashicons-location-alt',
+            'menu_position'             => 7,
+            'capability_type'           => 'post'
+        );
     }
     public function setLocationFromApi($data)
     {

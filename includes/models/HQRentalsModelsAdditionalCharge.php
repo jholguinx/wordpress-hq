@@ -52,6 +52,9 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
             'post_type'     =>  $this->additionalChargesCustomPostName,
             'post_status'   =>  'publish'
         );
+        /*
+         * Custom Post Parameters
+         */
         $this->filter = new HQRentalsDataFilter();
     }
     public function setAdditionalChargeFromApi($data)
@@ -117,6 +120,11 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     public function update()
     {
         //*//dda
+    }
+
+    public function delete()
+    {
+
     }
 
     /*

@@ -31,17 +31,17 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     /*
      * Object Data to Display
      */
-    protected $id = '';
-    protected $name = '';
-    protected $taxLabel = '';
-    protected $websiteLink = '';
-    protected $publicReservationsLinkFull = '';
-    protected $publicPackagesLinkFull = '';
-    protected $publicReservationsFirstStepLink = '';
-    protected $publicPackagesFirstStepLink = '';
-    protected $publicReservationPackagesFirstStepLink = '';
-    protected $myReservationsLink = '';
-    protected $myPackagesReservationsLink = '';
+    public $id = '';
+    public $name = '';
+    public $taxLabel = '';
+    public $websiteLink = '';
+    public $publicReservationsLinkFull = '';
+    public $publicPackagesLinkFull = '';
+    public $publicReservationsFirstStepLink = '';
+    public $publicPackagesFirstStepLink = '';
+    public $publicReservationPackagesFirstStepLink = '';
+    public $myReservationsLink = '';
+    public $myPackagesReservationsLink = '';
 
     /*
      * Constructor
@@ -53,6 +53,39 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->postArgs = array(
             'post_type'     =>  $this->brandsCustomPostName,
             'post_status'   =>  'publish',
+        );
+        $this->labels = array(
+            'name'               => _x( 'Brands', 'post type general name', 'your-plugin-textdomain' ),
+            'singular_name'      => _x( 'Brand', 'post type singular name', 'your-plugin-textdomain' ),
+            'menu_name'          => _x( 'Brands', 'admin menu', 'your-plugin-textdomain' ),
+            'name_admin_bar'     => _x( 'Brand', 'add new on admin bar', 'your-plugin-textdomain' ),
+            'add_new'            => _x( 'Add New', 'brand', 'your-plugin-textdomain' ),
+            'add_new_item'       => __( 'Add New Brand', 'your-plugin-textdomain' ),
+            'new_item'           => __( 'New Brand', 'your-plugin-textdomain' ),
+            'edit_item'          => __( 'Edit Brand', 'your-plugin-textdomain' ),
+            'view_item'          => __( 'View Brand', 'your-plugin-textdomain' ),
+            'all_items'          => __( 'All Brands', 'your-plugin-textdomain' ),
+            'search_items'       => __( 'Search Brands', 'your-plugin-textdomain' ),
+            'parent_item_colon'  => __( 'Parent Brands', 'your-plugin-textdomain' ),
+            'not_found'          => __( 'No brands found.', 'your-plugin-textdomain' ),
+            'not_found_in_trash' => __( 'No brands found in Trash.', 'your-plugin-textdomain' )
+        );
+        $this->customPostArgs = array(
+            'labels'                    =>  $this->labels,
+            'public'                    =>  true,
+            'show_in_admin_bar'         =>  true,
+            'publicly_queryable'        =>  true,
+            'show_ui'                   =>  true,
+            'show_in_menu'              =>  true,
+            'show_in_nav_menus'         =>  true,
+            'query_var'                 =>  true,
+            'rewrite'                   =>  array( 'slug' => $this->brandsCustomPostSlug ),
+            'has_archive'               =>  true,
+            'hierarchical'              =>  false,
+            'exclude_from_search'       =>  false,
+            'menu_icon'                 => 'dashicons-store',
+            'menu_position'             => 6,
+            'capability_type'           => 'post'
         );
         $this->filter = new HQRentalsDataFilter();
     }
@@ -134,9 +167,37 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     /*
      * Find
      */
-    public function find($caag_id)
+    public function find($brandID)
     {
-        $query = new \WP_Query( $this->postArgs );
+        $args = array_merge(
+            $this->customPostArgs,
+            array(
+                'meta_key'  =>  array(
+                    array(
+                        'key'     => $this->metaId,
+                        'value'   => $brandID,
+                        'compare' => '=',
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query( $args );
+        $brandPost = $query->post[0];
+        return $this->setBrandFromPost($brandPost);
+    }
+    public function setBrandFromPost($brandPost)
+    {
+        $this->id = get_post_meta($brandPost, $this->metaId, true);
+        $this->name = get_post_meta($brandPost, $this->metaName, true);
+        $this->taxLabel = get_post_meta($brandPost, $this->metaTaxLabel, true);
+        $this->websiteLink = get_post_meta($brandPost, $this->metaWebsiteLink, true);
+        $this->publicReservationsLinkFull = get_post_meta( $brandPost, $this->metaPublicReservationsLinkFull, true );
+        $this->publicPackagesLinkFull = get_post_meta( $brandPost, $this->metaPublicPackagesLinkFull, true );
+        $this->publicReservationsFirstStepLink = get_post_meta( $brandPost, $this->metaPublicReservationsFirstStepLink, true );
+        $this->publicPackagesFirstStepLink = get_post_meta( $brandPost, $this->metaPublicPackagesFirstStepLink, true );
+        $this->publicReservationPackagesFirstStepLink = get_post_meta( $brandPost, $this->metaPublicReservationPackagesFirstStepLink, true );
+        $this->myReservationsLink = get_post_meta( $brandPost, $this->metaMyReservationsLink, true );
+        $this->myPackagesReservationsLink = get_post_meta( $brandPost, $this->metaMyPackagesReservationsLink, true );
     }
 
     public function first()
@@ -155,5 +216,6 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         }else{}
         //$metas =
     }
+
 
 }

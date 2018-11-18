@@ -12,12 +12,15 @@ class HQRentalsActiveRatesTask
     public function dropBrandsData()
     {
         $rates = new HQRate();
-        foreach($rates->all() as $ratePost){
-            $metas = get_post_meta( $ratePost->ID );
-            foreach ($metas as $key => $values){
-                delete_post_meta( $ratePost->ID, $key );
+        if(!empty($rates->all())){
+            foreach($rates->all() as $ratePost){
+                $metas = get_post_meta( $ratePost->ID );
+                foreach ($metas as $key => $values){
+                    delete_post_meta( $ratePost->ID, $key );
+                }
+                $post_id = wp_delete_post( $ratePost->ID );
             }
-            $post_id = wp_delete_post( $ratePost->ID );
         }
+
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsApi;
 
+
 class HQRentalsApiResponse
 {
     public function __construct($errors, $success, $data)

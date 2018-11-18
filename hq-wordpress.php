@@ -18,12 +18,19 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
+use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
+use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
+use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsReservationsShortcode;
+$reservation = new HQRentalsReservationsShortcode();
+$customPost = new HQRentalsCustomPostsHandler();
+$brandPostAdmin = new HQRentalsAdminBrandsPosts();
+
 
 
 function hqtest()
 {
-    $newSchedule = new HQRentalsScheduler();
-    $newSchedule->refreshHQData();
+    //$newSchedule = new HQRentalsScheduler();
+    //$newSchedule->refreshHQData();
 }
 add_action('template_redirect', __NAMESPACE__ . '\hqtest');
 /*

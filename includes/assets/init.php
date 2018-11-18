@@ -79,9 +79,7 @@ add_action( 'wp_enqueue_scripts', 'caag_hq_rental_global_variables_to_js', 12);
  * @return string List of times
  */
 function caag_hq_rental_get_times_military( $begining, $end, $default = '12:00', $interval = '+15 minutes' ) {
-
     $output = '';
-
     $current = strtotime( $begining );
     $end = strtotime( $end   );
 

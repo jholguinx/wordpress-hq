@@ -20,8 +20,11 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
 use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
-use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsReservationsShortcode;
-$reservation = new HQRentalsReservationsShortcode();
+use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsPackagesShortcode;
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+$assets = new HQRentalsAssetsHandler();
+$reservation = new HQRentalsPackagesShortcode();
+
 $customPost = new HQRentalsCustomPostsHandler();
 $brandPostAdmin = new HQRentalsAdminBrandsPosts();
 

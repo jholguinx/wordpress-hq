@@ -46,10 +46,10 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     /*
      * Constructor
      */
-    public function __construct( $data = null )
+    public function __construct( $id = null )
     {
-
         $this->post_id = '';
+        $this->systemId = $id;
         $this->postArgs = array(
             'post_type'     =>  $this->brandsCustomPostName,
             'post_status'   =>  'publish',
@@ -167,7 +167,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     /*
      * Find
      */
-    public function find($brandID)
+    public function find($brandId)
     {
         $args = array_merge(
             $this->postArgs,
@@ -175,15 +175,14 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
                 'meta_query'  =>  array(
                     array(
                         'key'     => $this->metaId,
-                        'value'   => $brandID,
+                        'value'   => $brandId,
                         'compare' => '=',
                     )
                 )
             )
         );
         $query = new \WP_Query( $args );
-        $brandPost = $query->posts[0];
-        return $this->setBrandFromPost($brandPost);
+        $this->setBrandFromPost($query->posts[0]);
     }
     public function setBrandFromPost($brandPost)
     {

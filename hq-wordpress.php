@@ -21,12 +21,14 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
 use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
 use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsPackagesShortcode;
+use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsReservationsShortcode;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 $assets = new HQRentalsAssetsHandler();
 $reservation = new HQRentalsPackagesShortcode();
 
 $customPost = new HQRentalsCustomPostsHandler();
 $brandPostAdmin = new HQRentalsAdminBrandsPosts();
+$reservationShort = new HQRentalsReservationsShortcode();
 
 
 

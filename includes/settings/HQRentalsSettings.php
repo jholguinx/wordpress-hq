@@ -18,8 +18,6 @@ class HQRentalsSettings
     public $hq_datetime_format = 'hq_wordpress_system_datetime_format_option';
     public $front_end_datetime_format = 'hq_wordpress_front_end_datetime_format_option';
     public $api_base_url = 'hq_wordpress_api_base_url_option';
-
-
     public function getApiUserToken()
     {
         return get_option($this->api_user_token, true);

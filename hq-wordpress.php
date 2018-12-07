@@ -26,6 +26,7 @@ use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 $assets = new HQRentalsAssetsHandler();
 $reservation = new HQRentalsPackagesShortcode();
 
+
 $customPost = new HQRentalsCustomPostsHandler();
 $brandPostAdmin = new HQRentalsAdminBrandsPosts();
 $reservationShort = new HQRentalsReservationsShortcode();

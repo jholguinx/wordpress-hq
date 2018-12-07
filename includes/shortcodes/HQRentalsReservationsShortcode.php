@@ -50,12 +50,12 @@ class HQRentalsReservationsShortcode
                     <?php endforeach; ?>
                     <input type="submit" style="display: none;">
                 </form>
-                <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull; ?>" scrolling="no"></iframe>
+                <iframe id="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull; ?>" scrolling="no"></iframe>
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
             }else{
                 ?>
-                <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull; ?>" scrolling="no"></iframe>
+                <iframe id="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull; ?>" scrolling="no"></iframe>
                 <?php
             }
         } catch (Exception $e) {

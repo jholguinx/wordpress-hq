@@ -1,4 +1,10 @@
-#hq-rental-iframe {
+/*
+ * Plugin Styles
+ */
+
+
+
+#hq-rental-iframe{
     width: 1px;
     min-width: 100%;
     border: none;
@@ -8,7 +14,7 @@
 /*
  * Setting Page Styles
  */
-.caag-notice-wp {
+.caag-notice-wp{
     margin: 5px 0 5px;
     padding-bottom: 15px;
 }

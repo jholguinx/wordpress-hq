@@ -16,8 +16,6 @@ if ( ! defined( 'WPINC' ) ) {
 }
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsBootstrap\HQRentalsBootstrapPlugin;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
-
 $bootstraper = new HQRentalsBootstrapPlugin();
 /*
  * Activation Routine

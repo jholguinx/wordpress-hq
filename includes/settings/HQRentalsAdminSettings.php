@@ -33,6 +33,26 @@ class HQRentalsAdminSettings
     {
         if (!empty($_POST)) {
             $this->settings->updateSettings($_POST);
+            ?>
+            <div class="wrap">
+                <div id="wrap">
+                    <h1>Caag Software Authentication Access</h1>
+                    <div class="caag-notice-wp notice caag-notice">
+                        <p>Don't have an account yet? Create a new account by clicking on this link</p>
+                        <a href="https://caagsoftware.com/" class="caag-button caag-button-primary caag-button-external-link" target="_blank">Register Now</a>
+                    </div>
+                </div>
+            </div>
+            <?php if($_POST['success'] == 'success'): ?>
+                <div class="wrap">
+                    <div class="message updated"><p>The Setting were Successfully Saved!</p></div>
+                </div>
+            <?php else: ?>
+                <div class="wrap">
+                    <div class="message updated"><p>The was something wrong</p></div>
+                </div>
+            <?php endif; ?>
+            <?php
         } else {
             ?>
             <div class="wrap">
@@ -83,13 +103,13 @@ class HQRentalsAdminSettings
                                         Region</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->api_base_url; ?>">
-                                        <option value="https://api.caagcrm.com/api/" <?php echo ($current_endpoint == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
+                                        <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
                                             America
                                         </option>
-                                        <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($current_endpoint == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
+                                        <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
                                             Europe
                                         </option>
-                                        <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($current_endpoint == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
+                                        <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
                                             Asia
                                         </option>
                                     </select>
@@ -97,8 +117,7 @@ class HQRentalsAdminSettings
                             </tr>
                             </tbody>
                         </table>
-                        <input type="submit" name="publish" id="publish" class="button button-primary button-large"
-                               value="Save">
+                        <input type="submit" name="save" class="button button-primary button-large">
                     </form>
                 </div>
                 <div class="notice updated is-dismissible fw-brz-dismiss">
@@ -124,40 +143,6 @@ class HQRentalsAdminSettings
                         Once you have created the A record please create a support ticket inside the HQ application so
                         our team can proceed with the installation.
                     </p>
-                    <style>
-                        .fw-brz-dismiss {
-                            border-left-color: #d62c64 !important;
-                        }
-
-                        .fw-brz-dismiss p:last-of-type a {
-                            color: #fff;
-                            font-size: 13px;
-                            line-height: 1;
-                            background-color: #d62c64;
-                            box-shadow: 0px 2px 0px 0px #981e46;
-                            padding: 11px 27px 12px;
-                            border: 1px solid #d62c64;
-                            border-bottom: 0;
-                            border-radius: 3px;
-                            text-shadow: none;
-                            height: auto;
-                            text-decoration: none;
-                            display: inline-block;
-                            transition: all 200ms linear;
-                        }
-
-                        .fw-brz__btn-install:hover {
-                            background-color: #141923;
-                            color: #fff;
-                            border-color: #141923;
-                            box-shadow: 0px 2px 0px 0px #141923;
-                        }
-
-                        .hq-warning-woo {
-                            font-weight: bold;
-                            color: red;
-                        }
-                    </style>
                     <button type="button" class="notice-dismiss"><span
                                 class="screen-reader-text">Dismiss this notice.</span></button>
                 </div>
@@ -169,5 +154,42 @@ class HQRentalsAdminSettings
             <?php endif; ?>
             <?php
         }
+        ?>
+        <style>
+            .fw-brz-dismiss {
+                border-left-color: #d62c64 !important;
+            }
+
+            .fw-brz-dismiss p:last-of-type a {
+                color: #fff;
+                font-size: 13px;
+                line-height: 1;
+                background-color: #d62c64;
+                box-shadow: 0px 2px 0px 0px #981e46;
+                padding: 11px 27px 12px;
+                border: 1px solid #d62c64;
+                border-bottom: 0;
+                border-radius: 3px;
+                text-shadow: none;
+                height: auto;
+                text-decoration: none;
+                display: inline-block;
+                transition: all 200ms linear;
+            }
+
+            .fw-brz__btn-install:hover {
+                background-color: #141923;
+                color: #fff;
+                border-color: #141923;
+                box-shadow: 0px 2px 0px 0px #141923;
+            }
+
+            .hq-warning-woo {
+                font-weight: bold;
+                color: red;
+            }
+        </style>
+        <?php
+
     }
 }

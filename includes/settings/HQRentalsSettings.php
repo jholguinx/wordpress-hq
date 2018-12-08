@@ -27,6 +27,10 @@ class HQRentalsSettings
     {
         return get_option($this->api_tenant_token, true);
     }
+    public function getApiDecodedToken()
+    {
+        return get_option($this->api_encoded_token, true);
+    }
     public function getWoocommerceSyncOption()
     {
         return get_option($this->woocommerce_hq_sync, true);
@@ -83,14 +87,26 @@ class HQRentalsSettings
      */
     public function updateSettings($postDataFromSettings)
     {
-        foreach ($postDataFromSettings as $key => $data){
-            update_option($key, $data);
-        }
+        $settings = $this->getSettings();
         $this->saveEncodedApiKey($this->getApiTenantToken(), $this->getApiUserToken());
+        foreach ($postDataFromSettings as $key => $data){
+            if($key != 'save'){
+                update_option($key, $data);
+            }
+        }
+        $_POST['success'] = 'success';
     }
     public function getSettings()
     {
-
+        return array(
+            $this->api_user_token               =>  $this->getApiUserToken(),
+            $this->api_tenant_token             =>  $this->getApiTenantToken(),
+            $this->api_encoded_token            =>  $this->getApiEncodedToken(),
+            $this->woocommerce_hq_sync          =>  $this->getWoocommerceSyncOption(),
+            $this->hq_datetime_format           =>  $this->getHQDatetimeFormat(),
+            $this->front_end_datetime_format    =>  $this->getFrontEndDatetimeFormat(),
+            $this->api_base_url                 =>  $this->getApiBaseUrl()
+        );
     }
     public function thereAreSomeSettingMissing()
     {

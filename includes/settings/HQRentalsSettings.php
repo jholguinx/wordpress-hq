@@ -1,6 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsSettings;
 
+use HQRentalsPlugin\HQRentalsVendor\Carbon;
 /*
  * HQ Rental Software Plugin
  *
@@ -99,5 +100,4 @@ class HQRentalsSettings
                 empty ($this->getHQDatetimeFormat()) or
                 empty ($this->getFrontEndDatetimeFormat());
     }
-
 }

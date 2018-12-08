@@ -7,6 +7,7 @@ use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsShortcoder;
 use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 
 class HQRentalsBootstrapPlugin
 {
@@ -17,5 +18,6 @@ class HQRentalsBootstrapPlugin
         $this->brandPostAdmin = new HQRentalsAdminBrandsPosts();
         $this->shortcoder = new HQRentalsShortcoder();
         $this->posts = new HQRentalsCustomPostsHandler();
+        $this->settingsAdmin = new HQRentalsAdminSettings();
     }
 }

@@ -65,7 +65,7 @@ class HQRentalsAdminSettings
                                         Date Format</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->front_end_datetime_format; ?>">
-                                        <?php echo $this->dateHelper->getHtmlOptionForSettingPage(); ?>
+                                        <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
                                     </select>
                                 </td>
                             </tr>
@@ -74,7 +74,7 @@ class HQRentalsAdminSettings
                                         Date Format</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->hq_datetime_format; ?>">
-                                        <?php echo $this->dateHelper->getHtmlOptionForSettingPage(); ?>
+                                        <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
                                     </select>
                                 </td>
                             </tr>

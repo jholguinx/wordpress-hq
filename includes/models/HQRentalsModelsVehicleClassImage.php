@@ -123,5 +123,18 @@ class HQRentalsModelsVehicleClassImage
         }else{}
         //$metas =
     }
+    public function getImagesByVehicleClassID($vehicleClassId){
+        $args = array_merge(
+            $this->postArgs,
+            array(
+                'meta_query'    =>  array(
+                    'key'       =>  $this->metaVehicleClassId,
+                    'value'     =>  $vehicleClassId,
+                    'compare'   =>  '='
+                )
+            )
+        );
+        $query = new \WP_Query();
+    }
 
 }

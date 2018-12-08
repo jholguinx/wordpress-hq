@@ -219,4 +219,8 @@ class HQRentalsModelsVehicleClass
         }else{}
         //$metas =
     }
+    public function getImages()
+    {
+
+    }
 }

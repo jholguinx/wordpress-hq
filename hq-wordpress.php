@@ -15,30 +15,10 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
-use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
-use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
-use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
-use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsPackagesShortcode;
-use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsReservationsShortcode;
-use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-$assets = new HQRentalsAssetsHandler();
-$reservation = new HQRentalsPackagesShortcode();
+use HQRentalsPlugin\HQRentalsBootstrap\HQRentalsBootstrapPlugin;
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 
-
-$customPost = new HQRentalsCustomPostsHandler();
-$brandPostAdmin = new HQRentalsAdminBrandsPosts();
-$reservationShort = new HQRentalsReservationsShortcode();
-
-
-
-function hqtest()
-{
-    //$newSchedule = new HQRentalsScheduler();
-    //$newSchedule->refreshHQData();
-}
-add_action('template_redirect', __NAMESPACE__ . '\hqtest');
+$bootstraper = new HQRentalsBootstrapPlugin();
 /*
  * Activation Routine
  * @return void

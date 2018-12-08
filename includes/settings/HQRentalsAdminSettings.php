@@ -1,4 +1,5 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsSettings;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
@@ -14,7 +15,7 @@ class HQRentalsAdminSettings
     {
         $this->settings = new HQRentalsSettings();
         $this->dateHelper = new HQRentalsDatesHelper();
-        add_action('admin_menu',array ($this, 'setAdminMenuOptions') );
+        add_action('admin_menu', array($this, 'setAdminMenuOptions'));
     }
 
     public function setAdminMenuOptions()
@@ -24,35 +25,44 @@ class HQRentalsAdminSettings
             $this->settingsMenuTitle,
             'manage_options',
             $this->settingsSlug,
-            array( $this, 'displaySettingsPage' )
+            array($this, 'displaySettingsPage')
         );
     }
+
     public function displaySettingsPage()
     {
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             $this->settings->updateSettings($_POST);
-        }else{
+        } else {
             ?>
             <div class="wrap">
                 <div id="wrap">
                     <h1>Caag Software Authentication Access</h1>
                     <div class="caag-notice-wp notice caag-notice">
                         <p>Don't have an account yet? Create a new account by clicking on this link</p>
-                        <a href="https://caagsoftware.com/" class="caag-button caag-button-primary caag-button-external-link" target="_blank">Register Now</a>
+                        <a href="https://caagsoftware.com/"
+                           class="caag-button caag-button-primary caag-button-external-link" target="_blank">Register
+                            Now</a>
                     </div>
                     <form action="" method="post">
                         <table class="form-table">
                             <tbody>
                             <tr>
                                 <th><label class="wp-heading-inline" id="title" for="title">Tenant Token</label></th>
-                                <td> <input type="text" name="<?php echo $this->settings->api_tenant_token; ?>" size="70" value="<?php echo $this->settings->getApiTenantToken(); ?>" id="title" spellcheck="true" autocomplete="off"></td>
+                                <td><input type="text" name="<?php echo $this->settings->api_tenant_token; ?>" size="70"
+                                           value="<?php echo $this->settings->getApiTenantToken(); ?>" id="title"
+                                           spellcheck="true" autocomplete="off"></td>
                             </tr>
                             <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User Token</label></th>
-                                <td><input type="text" name="<?php echo $this->settings->api_user_token; ?>" size="70" value="<?php echo $this->settings->getApiUserToken(); ?>" id="title" spellcheck="true" autocomplete="off"></td>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User
+                                        Token</label></th>
+                                <td><input type="text" name="<?php echo $this->settings->api_user_token; ?>" size="70"
+                                           value="<?php echo $this->settings->getApiUserToken(); ?>" id="title"
+                                           spellcheck="true" autocomplete="off"></td>
                             </tr>
                             <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end Date Format</label></th>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end
+                                        Date Format</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->front_end_datetime_format; ?>">
                                         <?php echo $this->dateHelper->getHtmlOptionForSettingPage(); ?>
@@ -60,7 +70,8 @@ class HQRentalsAdminSettings
                                 </td>
                             </tr>
                             <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select System Date Format</label></th>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select System
+                                        Date Format</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->hq_datetime_format; ?>">
                                         <?php echo $this->dateHelper->getHtmlOptionForSettingPage(); ?>
@@ -68,18 +79,26 @@ class HQRentalsAdminSettings
                                 </td>
                             </tr>
                             <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Api Region</label></th>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Api
+                                        Region</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->api_base_url; ?>">
-                                        <option value="https://api.caagcrm.com/api/" <?php echo ($current_endpoint == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>America</option>
-                                        <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($current_endpoint == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>Europe</option>
-                                        <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($current_endpoint == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>Asia</option>
+                                        <option value="https://api.caagcrm.com/api/" <?php echo ($current_endpoint == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
+                                            America
+                                        </option>
+                                        <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($current_endpoint == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
+                                            Europe
+                                        </option>
+                                        <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($current_endpoint == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
+                                            Asia
+                                        </option>
                                     </select>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                        <input type="submit" name="publish" id="publish" class="button button-primary button-large" value="Save">
+                        <input type="submit" name="publish" id="publish" class="button button-primary button-large"
+                               value="Save">
                     </form>
                 </div>
                 <div class="notice updated is-dismissible fw-brz-dismiss">
@@ -87,12 +106,14 @@ class HQRentalsAdminSettings
                         Safari & Opera Browser
                     </p>
                     <p style="text-align: justify;">
-                        Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe has to be updated.
+                        Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe has to
+                        be updated.
                         You will need to add an A record in your DNS records where the value is the name of your tenant.
 
                     </p>
                     <p style="text-align: justify;">
-                        For example if your link is rentals.caagcrm.com the value for the A record has to be “rentals” and the IP address will be dependent on your installation:
+                        For example if your link is rentals.caagcrm.com the value for the A record has to be “rentals”
+                        and the IP address will be dependent on your installation:
                     </p>
                     <ul>
                         <li>America: 45.79.176.147</li>
@@ -100,12 +121,14 @@ class HQRentalsAdminSettings
                         <li>Asia: 139.162.35.27</li>
                     </ul>
                     <p style="text-align: justify;">
-                        Once you have created the A record please create a support ticket inside the HQ application so our team can proceed with the installation.
+                        Once you have created the A record please create a support ticket inside the HQ application so
+                        our team can proceed with the installation.
                     </p>
                     <style>
                         .fw-brz-dismiss {
                             border-left-color: #d62c64 !important;
                         }
+
                         .fw-brz-dismiss p:last-of-type a {
                             color: #fff;
                             font-size: 13px;
@@ -119,23 +142,31 @@ class HQRentalsAdminSettings
                             text-shadow: none;
                             height: auto;
                             text-decoration: none;
-                            display:inline-block;
+                            display: inline-block;
                             transition: all 200ms linear;
                         }
+
                         .fw-brz__btn-install:hover {
                             background-color: #141923;
                             color: #fff;
                             border-color: #141923;
                             box-shadow: 0px 2px 0px 0px #141923;
                         }
-                        .hq-warning-woo{
+
+                        .hq-warning-woo {
                             font-weight: bold;
                             color: red;
                         }
                     </style>
-                    <button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+                    <button type="button" class="notice-dismiss"><span
+                                class="screen-reader-text">Dismiss this notice.</span></button>
                 </div>
             </div>
+            <?php if (!empty($devMode)): ?>
+                <div class="notice updated is-dismissible fw-brz-dismiss">
+                    hello Dev Mode
+                </div>
+            <?php endif; ?>
             <?php
         }
     }

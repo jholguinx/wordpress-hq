@@ -52,6 +52,14 @@ class HQRentalsApiConnector{
             return new ApiResponse(null, true, json_decode($response['body'])->fleets_additional_charges);
         }
     }
+    public function resolverApiCallSystemAssets( $response )
+    {
+        if(is_wp_error( $response )){
+            return new ApiResponse( $response->get_error_message(), false, null );
+        }else{
+            return new ApiResponse( null, true, json_decode( $response['body'] ) );
+        }
+    }
 
     public function getHQRentalsBrands()
     {
@@ -73,5 +81,9 @@ class HQRentalsApiConnector{
         $response = wp_remote_get( $this->endpoints->getAdditionalChargesEndpoint(), $this->configuration->getBasicApiConfiguration() );
         return $this->resolveApiCallAdditionalCharges( $response );
     }
-
+    public function getHQRentalsSystemAssets()
+    {
+        $response = wp_remote_get( $this->endpoints->getHQAssetsEndpoint(), $this->configuration->getBasicApiConfiguration() );
+        return $this->resolverApiCallSystemAssets( $response );
+    }
 }

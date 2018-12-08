@@ -30,4 +30,8 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'fleets/additional-charges';
     }
+    public function getHQAssetsEndpoint()
+    {
+        return 'https://api.caagcrm.com/api/assets/files';
+    }
 }

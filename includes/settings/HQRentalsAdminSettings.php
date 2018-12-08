@@ -31,8 +31,13 @@ class HQRentalsAdminSettings
 
     public function displaySettingsPage()
     {
+        $devMode = $_GET['devmode'];
         if (!empty($_POST)) {
-            $this->settings->updateSettings($_POST);
+            if($_POST['hq_force_update'] == '1'){
+                $this->settings->forceSyncOnHQData();
+            }else{
+                $this->settings->updateSettings($_POST);
+            }
             ?>
             <div class="wrap">
                 <div id="wrap">
@@ -46,6 +51,10 @@ class HQRentalsAdminSettings
             <?php if($_POST['success'] == 'success'): ?>
                 <div class="wrap">
                     <div class="message updated"><p>The Setting were Successfully Saved!</p></div>
+                </div>
+            <?php elseif($_POST['forcing_update'] == 'success'): ?>
+                <div class="wrap">
+                    <div class="message updated"><p>All data was saved</p></div>
                 </div>
             <?php else: ?>
                 <div class="wrap">
@@ -117,7 +126,7 @@ class HQRentalsAdminSettings
                             </tr>
                             </tbody>
                         </table>
-                        <input type="submit" name="save" class="button button-primary button-large">
+                        <input type="submit" name="save" value="Save" class="button button-primary button-large">
                     </form>
                 </div>
                 <div class="notice updated is-dismissible fw-brz-dismiss">
@@ -148,8 +157,19 @@ class HQRentalsAdminSettings
                 </div>
             </div>
             <?php if (!empty($devMode)): ?>
-                <div class="notice updated is-dismissible fw-brz-dismiss">
-                    hello Dev Mode
+                <div class="">
+                    <form method="post">
+                        <table class="form-table">
+                            <tbody>
+                            <tr>
+                                <th><label class="wp-heading-inline" id="title" for="title">Force Sync Update</label></th>
+                                <td>
+                                    <input type="hidden" value="1" name="hq_force_update"/>
+                                    <input type="submit" value="Force Update" name="save" class="button button-primary button-large" >
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                 </div>
             <?php endif; ?>
             <?php

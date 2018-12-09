@@ -34,22 +34,22 @@ class HQRentalsModelsVehicleClass
     /*
      * Object Data to Display
      */
-    protected $id = '';
-    protected $brandId = '';
-    protected $name = '';
-    protected $order = '';
-    protected $availableOnWebsite = '';
-    protected $recommended = '';
-    protected $active = '';
-    protected $publicImageLink = '';
-    protected $labels = [ ];
-    protected $shortDescriptions = [ ];
-    protected $descriptions = [ ];
-    protected $images = [ ];
-    protected $features = [ ];
-    protected $rate = '';
+    public $id = '';
+    public $brandId = '';
+    public $name = '';
+    public $order = '';
+    public $availableOnWebsite = '';
+    public $recommended = '';
+    public $active = '';
+    public $publicImageLink = '';
+    public $labels = [ ];
+    public $shortDescriptions = [ ];
+    public $descriptions = [ ];
+    public $images = [ ];
+    public $features = [ ];
+    public $rate = '';
 
-    public function __construct()
+    public function __construct( $post = null )
     {
         $this->post_id = '';
         $this->postArgs = array(
@@ -90,6 +90,9 @@ class HQRentalsModelsVehicleClass
             'capability_type'           => 'post',
             'supports'                  =>  array( 'title', 'editor', 'thumbnail', 'excerpt' )
         );
+        if(!empty($post)){
+            $this->setFromPost( $post );
+        }
     }
 
     /*
@@ -220,6 +223,45 @@ class HQRentalsModelsVehicleClass
         //$metas =
     }
     public function getImages()
+    {
+
+    }
+    public function getAllMetaTags()
+    {
+        return array(
+            'id'                    =>  $this->metaId,
+            'brandId'               =>  $this->metaBrandId,
+            'name'                  =>  $this->metaName,
+            'order'                 =>  $this->metaOrder,
+            'availableOnWebsite'    =>  $this->metaAvailableOnWebsite,
+            'recommended'           =>  $this->metaRecommended,
+            'active'                =>  $this->metaActive,
+            'publicImageLink'       =>  $this->metaPublicImageLink,
+            'labels'                =>  $this->metaLabelForWebsite,
+            'shortDescriptions'     =>  $this->metashortDescriptionForWebiste,
+            'descriptions'          =>  $this->metaDescriptionForWebiste,
+        );
+    }
+
+    /**
+     * @param $post
+     */
+    public function setFromPost($post)
+    {
+        foreach ($this->getAllMetaTags() as $property => $metakey){
+            $this->{$property} = get_post_meta( $post->ID, $metakey, true );
+        }
+    }
+
+    public function rate()
+    {
+        return new HQRentalsModelsActiveRate($this->id);
+    }
+    public function images()
+    {
+
+    }
+    public function setDescription()
     {
 
     }

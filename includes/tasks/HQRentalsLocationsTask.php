@@ -11,33 +11,36 @@ class HQRentalsLocationsTask
     {
         $this->connector = new Connector();
     }
-    public function refreshLocationsData(){
-        $this->dropBrandsData();
-        $this->createBrandsData();
+
+    public function refreshLocationsData()
+    {
+        $this->dropLocationsData();
+        $this->createLocationsData();
     }
-    public function createBrandsData()
+
+    public function createLocationsData()
     {
         $locations = $this->connector->getHQRentalsLocations();
-        if($locations->success){
-            foreach ($locations->data as $location){
+        if ($locations->success) {
+            foreach ($locations->data as $location) {
                 $newLocation = new HQLocation();
                 $newLocation->setLocationFromApi($location);
                 $newLocation->create();
             }
-        }else{
+        } else {
             return false;
         }
     }
-    
-    public function dropBrandsData()
+
+    public function dropLocationsData()
     {
         $location = new HQLocation();
-        foreach($location->all() as $locationPost){
-            $metas = get_post_meta( $locationPost->ID );
-            foreach ($metas as $key => $values){
-                delete_post_meta( $locationPost->ID, $key );
+        foreach ($location->all() as $locationPost) {
+            $metas = get_post_meta($locationPost->ID);
+            foreach ($metas as $key => $values) {
+                delete_post_meta($locationPost->ID, $key);
             }
-            $post_id = wp_delete_post( $locationPost->ID );
+            $post_id = wp_delete_post($locationPost->ID);
         }
     }
 }

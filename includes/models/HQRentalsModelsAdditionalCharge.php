@@ -151,4 +151,13 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
         }else{}
         //$metas =
     }
+    public function getAllMetaTags()
+    {
+        return array(
+            'id'    =>  $this->metaId,
+            'name'  =>  $this->metaName,
+            'chargeType'    =>  $this->metaChargeType,
+            'mandatoryBrands'
+        )
+    }
 }

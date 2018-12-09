@@ -1,4 +1,5 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsModels;
 
 class HQRentalsModelsActiveRate
@@ -28,23 +29,26 @@ class HQRentalsModelsActiveRate
     /*
      * Object Data to Display
      */
-    protected $id = '';
-    protected $seasonId = '';
-    protected $vehicleClassId = '';
-    protected $baseRate = '';
-    protected $minuteRate = '';
-    protected $hourlyRate = '';
-    protected $dailyRate = '';
-    protected $weeklyRate = '';
-    protected $monthlyRate = '';
+    public $id = '';
+    public $seasonId = '';
+    public $vehicleClassId = '';
+    public $baseRate = '';
+    public $minuteRate = '';
+    public $hourlyRate = '';
+    public $dailyRate = '';
+    public $weeklyRate = '';
+    public $monthlyRate = '';
 
-    public function __construct()
+    public function __construct($vehicleClassID = null)
     {
         $this->post_id = '';
         $this->postArg = array(
-            'post_type'     =>  $this->activeRateCustomPostName,
-            'post_status'   =>  'publish'
+            'post_type' => $this->activeRateCustomPostName,
+            'post_status' => 'publish'
         );
+        if (!empty($vehicleClassID)) {
+            $this->setFromVehicleClass($vehicleClassID);
+        }
     }
 
     public function setActiveRateFromApi($data)
@@ -66,64 +70,66 @@ class HQRentalsModelsActiveRate
         $this->postArg = array_merge(
             $this->postArg,
             array(
-                'post_title'    =>  'Active Rate ' .  $this->id,
-                'post_name'     =>  'Active Rate ' . $this->id
+                'post_title' => 'Active Rate ' . $this->id,
+                'post_name' => 'Active Rate ' . $this->id
             )
         );
-        $post_id = wp_insert_post( $this->postArg );
+        $post_id = wp_insert_post($this->postArg);
         $this->post_id = $post_id;
-        update_post_meta( $post_id, $this->metaId, $this->id );
-        update_post_meta( $post_id, $this->metaSeasonId, $this->seasonId );
-        update_post_meta( $post_id, $this->metaVehicleIdClass, $this->vehicleClassId );
-        update_post_meta( $post_id, $this->metaBaseRate, $this->baseRate );
-        update_post_meta( $post_id, $this->metaMinuteRate, $this->minuteRate );
-        update_post_meta( $post_id, $this->metaHourRate, $this->hourlyRate );
-        update_post_meta( $post_id, $this->metaDailyRate, $this->dailyRate );
-        update_post_meta( $post_id, $this->metaWeeklyRate, $this->weeklyRate );
-        update_post_meta( $post_id, $this->metaMonthlyRate, $this->monthlyRate );
+        update_post_meta($post_id, $this->metaId, $this->id);
+        update_post_meta($post_id, $this->metaSeasonId, $this->seasonId);
+        update_post_meta($post_id, $this->metaVehicleIdClass, $this->vehicleClassId);
+        update_post_meta($post_id, $this->metaBaseRate, $this->baseRate);
+        update_post_meta($post_id, $this->metaMinuteRate, $this->minuteRate);
+        update_post_meta($post_id, $this->metaHourRate, $this->hourlyRate);
+        update_post_meta($post_id, $this->metaDailyRate, $this->dailyRate);
+        update_post_meta($post_id, $this->metaWeeklyRate, $this->weeklyRate);
+        update_post_meta($post_id, $this->metaMonthlyRate, $this->monthlyRate);
     }
-    public function  update()
+
+    public function update()
     {
-        update_post_meta( $this->post_id, $this->metaId, $this->id );
-        update_post_meta( $this->post_id, $this->metaSeasonId, $this->seasonId );
-        update_post_meta( $this->post_id, $this->metaVehicleIdClass, $this->vehicleClassId );
-        update_post_meta( $this->post_id, $this->metaBaseRate, $this->baseRate );
-        update_post_meta( $this->post_id, $this->metaMinuteRate, $this->minuteRate );
-        update_post_meta( $this->post_id, $this->metaHourRate, $this->hourlyRate );
-        update_post_meta( $this->post_id, $this->metaDailyRate, $this->dailyRate );
-        update_post_meta( $this->post_id, $this->metaWeeklyRate, $this->weeklyRate );
-        update_post_meta( $this->post_id, $this->metaMonthlyRate, $this->monthlyRate );
+        update_post_meta($this->post_id, $this->metaId, $this->id);
+        update_post_meta($this->post_id, $this->metaSeasonId, $this->seasonId);
+        update_post_meta($this->post_id, $this->metaVehicleIdClass, $this->vehicleClassId);
+        update_post_meta($this->post_id, $this->metaBaseRate, $this->baseRate);
+        update_post_meta($this->post_id, $this->metaMinuteRate, $this->minuteRate);
+        update_post_meta($this->post_id, $this->metaHourRate, $this->hourlyRate);
+        update_post_meta($this->post_id, $this->metaDailyRate, $this->dailyRate);
+        update_post_meta($this->post_id, $this->metaWeeklyRate, $this->weeklyRate);
+        update_post_meta($this->post_id, $this->metaMonthlyRate, $this->monthlyRate);
     }
-    
+
     public function delete()
     {
-        delete_post_meta( $this->post_id, $this->metaId );
-        delete_post_meta( $this->post_id, $this->metaSeasonId );
-        delete_post_meta( $this->post_id, $this->metaVehicleIdClass );
-        delete_post_meta( $this->post_id, $this->metaBaseRate );
-        delete_post_meta( $this->post_id, $this->metaMinuteRate );
-        delete_post_meta( $this->post_id, $this->metaHourRate );
-        delete_post_meta( $this->post_id, $this->metaDailyRate );
-        delete_post_meta( $this->post_id, $this->metaWeeklyRate );
-        delete_post_meta( $this->post_id, $this->metaMonthlyRate );
-        $post_id = wp_delete_post( $this->post_id , true );
+        delete_post_meta($this->post_id, $this->metaId);
+        delete_post_meta($this->post_id, $this->metaSeasonId);
+        delete_post_meta($this->post_id, $this->metaVehicleIdClass);
+        delete_post_meta($this->post_id, $this->metaBaseRate);
+        delete_post_meta($this->post_id, $this->metaMinuteRate);
+        delete_post_meta($this->post_id, $this->metaHourRate);
+        delete_post_meta($this->post_id, $this->metaDailyRate);
+        delete_post_meta($this->post_id, $this->metaWeeklyRate);
+        delete_post_meta($this->post_id, $this->metaMonthlyRate);
+        $post_id = wp_delete_post($this->post_id, true);
     }
+
     public function find($vehicleClassPostId)
     {
         $args = array_merge(
             $this->postArg,
-                array(
-                    'posts_per_page'    =>  -1,
-                    'meta_query'        =>  array(
-                        array(
-                            'key'       =>  $this->metaVehicleIdClass,
-                            'value'     =>  $caag_vehicle_class_id,
-                            'compare'   =>  '='
-                        )
+            array(
+                'posts_per_page' => -1,
+                'meta_query' => array(
+                    array(
+                        'key' => $this->metaVehicleIdClass,
+                        'value' => $caag_vehicle_class_id,
+                        'compare' => '='
                     )
                 )
+            )
         );
-        $query = new \WP_Query( $args );
+        $query = new \WP_Query($args);
         return $query->posts;
     }
 
@@ -131,16 +137,65 @@ class HQRentalsModelsActiveRate
     {
         // TODO: Implement first() method.
     }
+
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
         return $query->posts;
     }
+
     public function set($data)
     {
-        if($this->filter->isPost($data)){
+        if ($this->filter->isPost($data)) {
 
-        }else{}
+        } else {
+        }
         //$metas =
+    }
+
+    /***
+     * Maps Class Properties with Posts Metas
+     * @return array
+     */
+    public function getAllMetaTag()
+    {
+        return array(
+            'id'                => $this->metaId,
+            'seasonId'          => $this->metaSeasonId,
+            'vehicleClassId'    => $this->metaVehicleIdClass,
+            'baseRate'          => $this->metaBaseRate,
+            'minuteRate'        => $this->metaMinuteRate,
+            'hourlyRate'        => $this->metaHourRate,
+            'dailyRate'         => $this->metaDailyRate,
+            'weeklyRate'        => $this->metaWeeklyRate,
+            'monthlyRate'       => $this->metaMonthlyRate
+        );
+    }
+
+    public function getQueryArgumentsFromVehicleClass($vehicleClassID)
+    {
+        return array_merge(
+            $this->postArg,
+            array(
+                'meta_query'    => array(
+                        array(
+                            'key'       => $this->metaVehicleIdClass,
+                            'value'     => $vehicleClassID,
+                            'compare'   => '='
+                        )
+                )
+            )
+        );
+    }
+
+    public function setFromVehicleClass($vehicleClassId)
+    {
+
+        $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
+
+        $post = $query->posts[0];
+        foreach ($this->getAllMetaTag() as $property => $metakey) {
+            $this->{$property} = get_post_meta($post->ID, $metakey, true);
+        }
     }
 }

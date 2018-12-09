@@ -2,21 +2,31 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
-use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
-
 class HQRentalsCronJob
 {
     public function __construct()
     {
         $this->scheduler = new HQRentalsScheduler();
-        add_action('refreshAllHQDataJob', array($this, 'refreshAllData'));
-        if (!wp_next_scheduled(array($this, 'refreshAllData'))) {
-            wp_schedule_event(time(), 'hourly', 'refreshAllHQDataJob');
+        add_filter('cron_schedules', array($this, 'addCustomScheduleTime'));
+        add_action( 'refreshAllHQDataJob', array($this, 'refreshAllData') );
+        if ( ! wp_next_scheduled( 'refreshAllHQDataJob' ) ) {
+            wp_schedule_event( time(), 'hourly', 'refreshAllHQDataJob' );
         }
+
     }
-    function refreshAllData()
+
+    public function refreshAllData()
     {
         $this->scheduler->refreshHQData();
+    }
+
+    public function addCustomScheduleTime($schedules)
+    {
+        $schedules['hqRefreshTime'] = array(
+            'interval' => 300,
+            'display' => __('Once every five minutes')
+        );
+        return $schedules;
     }
 }
 

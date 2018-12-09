@@ -37,13 +37,16 @@ class HQRentalsModelsVehicleClassImage
     public $publicLink = '';
     public $vehicleClassPostId = '';
 
-    public function __construct()
+    public function __construct( $post = null )
     {
         $this->post_id = '';
         $this->postArgs = array(
             'post_type'     =>  $this->vehicleClassImageCustomPostName,
             'post_status'   =>  'publish'
         );
+        if(!empty(null)){
+            $this->setFromVehicleClassPost( $post );
+        }
     }
 
     public function setVehicleClassImageFromApi($vehicleId, $data)
@@ -135,6 +138,10 @@ class HQRentalsModelsVehicleClassImage
             )
         );
         $query = new \WP_Query();
+    }
+    public function setFromVehicleClassPost( $post )
+    {
+
     }
 
 }

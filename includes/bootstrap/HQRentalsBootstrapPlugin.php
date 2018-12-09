@@ -13,7 +13,7 @@ class HQRentalsBootstrapPlugin
 {
     public function __construct()
     {
-        //$this->worker = new HQRentalsCronJob();
+        $this->worker = new HQRentalsCronJob();
         $this->assets = new HQRentalsAssetsHandler();
         $this->brandPostAdmin = new HQRentalsAdminBrandsPosts();
         $this->shortcoder = new HQRentalsShortcoder();

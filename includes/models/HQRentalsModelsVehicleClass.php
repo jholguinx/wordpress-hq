@@ -1,9 +1,8 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClassImage;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsFeature;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsActiveRate;
+
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsThumbnailHelper;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 
 class HQRentalsModelsVehicleClass
 {
@@ -42,21 +41,22 @@ class HQRentalsModelsVehicleClass
     public $recommended = '';
     public $active = '';
     public $publicImageLink = '';
-    public $labels = [ ];
-    public $shortDescriptions = [ ];
-    public $descriptions = [ ];
-    public $images = [ ];
-    public $features = [ ];
+    public $labels = array();
+    public $shortDescriptions = array();
+    public $descriptions = array();
+    public $images = array();
+    public $features = array();
     public $rate = '';
 
     public function __construct( $post = null )
     {
         $this->post_id = '';
+        $this->locale = new HQRentalsLocaleHelper();
         $this->postArgs = array(
             'post_type'     =>  $this->vehicleClassesCustomPostName,
             'post_status'   =>  'publish'
         );
-        $this->labels = array(
+        $this->labelsPost = array(
             'name'               => _x( 'Vehicle Classes', 'post type general name', 'your-plugin-textdomain' ),
             'singular_name'      => _x( 'Vehicle Class', 'post type singular name', 'your-plugin-textdomain' ),
             'menu_name'          => _x( 'Vehicle Classes', 'admin menu', 'your-plugin-textdomain' ),
@@ -73,7 +73,7 @@ class HQRentalsModelsVehicleClass
             'not_found_in_trash' => __( 'No vehicles classes found in Trash.', 'your-plugin-textdomain' )
         );
         $this->customPostArgs = array(
-            'labels'                    =>  $this->labels,
+            'labels'                    =>  $this->labelsPost,
             'public'                    =>  true,
             'show_in_admin_bar'         =>  true,
             'publicly_queryable'        =>  true,
@@ -243,16 +243,68 @@ class HQRentalsModelsVehicleClass
         );
     }
 
+    public function getLabelsQueryArguments(){
+    }
     /**
      * @param $post
      */
     public function setFromPost($post)
     {
+        $labelsMetaKeys = $this->getMetaKeysFromLabel();
+        $shortDescriptionKeys = $this->getMetaKeysFromShortDescription();
+        $descriptionsKeys = $this->getMetaKeysFromDescription();
         foreach ($this->getAllMetaTags() as $property => $metakey){
             $this->{$property} = get_post_meta( $post->ID, $metakey, true );
         }
+        foreach ($labelsMetaKeys as $key => $value){
+            $metakey = explode('_', $value[0]);
+            $this->labels[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+        }
+        foreach ($shortDescriptionKeys as $key => $value){
+            $metakey = explode('_', $value[0]);
+            $this->shortDescriptions[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+        }
+        foreach ($descriptionsKeys as $key => $value){
+            $metakey = explode('_', $value[0]);
+            $this->descriptions[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+        }
     }
-
+    public function getMetaKeysFromLabel()
+    {
+        global $wpdb;
+        return $wpdb->get_results(
+            "SELECT DISTINCT(meta_key)
+                    FROM {$wpdb->prefix}postmeta 
+                    WHERE meta_key 
+                    LIKE '{$this->metaLabelForWebsite}%'
+                    ",
+                    ARRAY_N
+        );
+    }
+    public function getMetaKeysFromShortDescription()
+    {
+        global $wpdb;
+        return $wpdb->get_results(
+            "SELECT DISTINCT(meta_key)
+                    FROM {$wpdb->prefix}postmeta 
+                    WHERE meta_key 
+                    LIKE '{$this->metashortDescriptionForWebiste}%'
+                    ",
+            ARRAY_N
+        );
+    }
+    public function getMetaKeysFromDescription()
+    {
+        global $wpdb;
+        return $wpdb->get_results(
+            "SELECT DISTINCT(meta_key)
+                    FROM {$wpdb->prefix}postmeta 
+                    WHERE meta_key 
+                    LIKE '{$this->metaDescriptionForWebiste}%'
+                    ",
+            ARRAY_N
+        );
+    }
     public function rate()
     {
         return new HQRentalsModelsActiveRate($this->id);
@@ -265,4 +317,32 @@ class HQRentalsModelsVehicleClass
     {
 
     }
+    public function getDescription( $forced_locale = null )
+    {
+        if(!empty($forced_locale)){
+            return $this->descriptions[$forced_locale];
+        }else{
+            return $this->descriptions[$this->locale->language];
+        }
+    }
+    public function getLabel( $forcedLocale = null )
+    {
+        var_dump($this->labels);
+        if(! empty($forcedLocale)){
+            return $this->labels[$forcedLocale];
+        }else{
+            return $this->labels[$this->locale->language];
+        }
+
+    }
+    public function getShortDescription($forced_locale = null)
+    {
+        if(!empty($forced_locale)){
+            return $this->shortDescriptions[$forced_locale];
+        }else{
+            return $this->shortDescriptions[$this->locale->language];
+        }
+
+    }
 }
+

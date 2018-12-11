@@ -192,7 +192,6 @@ class HQRentalsModelsActiveRate
     {
 
         $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
-
         $post = $query->posts[0];
         foreach ($this->getAllMetaTag() as $property => $metakey) {
             $this->{$property} = get_post_meta($post->ID, $metakey, true);

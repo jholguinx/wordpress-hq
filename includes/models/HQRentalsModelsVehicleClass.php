@@ -3,6 +3,7 @@ namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsThumbnailHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
+use function PHPSTORM_META\map;
 
 class HQRentalsModelsVehicleClass
 {
@@ -222,10 +223,6 @@ class HQRentalsModelsVehicleClass
         }else{}
         //$metas =
     }
-    public function getImages()
-    {
-
-    }
     public function getAllMetaTags()
     {
         return array(
@@ -295,6 +292,10 @@ class HQRentalsModelsVehicleClass
             ARRAY_N
         );
     }
+    /*
+     * Eliminar en el futuro
+     *
+     */
     public function getMetaKeysFromDescription()
     {
         global $wpdb;
@@ -313,7 +314,21 @@ class HQRentalsModelsVehicleClass
     }
     public function images()
     {
-
+        $images = new HQRentalsModelsVehicleClassImage();
+        $imagesForReturn = array();
+        foreach ($images->getImagesPostByVehicleClassID($this->id) as $post){
+            $imagesForReturn[] = new HQRentalsModelsVehicleClassImage($post);
+        }
+        return $imagesForReturn;
+    }
+    public function additionalCharges()
+    {
+        $charges = new HQRentalsModelsAdditionalCharge();
+        $chargesForReturn = array();
+        foreach ($charges->getAdditionalChargesByVehicleClassID($this->id) as $post){
+            $chargesForReturn[] = new HQRentalsModelsAdditionalCharge($post);
+        }
+        return $chargesForReturn;
     }
     public function getDescription( $forced_locale = null )
     {

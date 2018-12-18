@@ -197,6 +197,7 @@ class HQRentalsModelsActiveRate
         }
     }
 
+
     public function getFormattedBaseRate()
     {
         return number_format((float) $this->baseRate, 2, '.', '');

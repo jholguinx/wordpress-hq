@@ -16,6 +16,7 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
      * Custom Post Meta
      */
     protected $metaId = 'hq_wordpress_additional_charge_id_meta';
+    protected $metaVehicleClassId = 'hq_wordpress_additional_charge_vehicle_class_id_meta';
     protected $metaName = 'hq_wordpress_additional_charge_name_meta';
     protected $metaChargeType = 'hq_wordpress_additional_charge_charge_type_meta';
     protected $metaMandatoryBrands = 'hq_wordpress_additional_charge_mandatory_brands_meta';
@@ -33,19 +34,22 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
      * Object Data to Display
      */
 
-    protected $id = '';
-    protected $name = '';
-    protected $chargeType = '';
-    protected $mandatoryBrands = [  ];
-    protected $selectionType = '';
-    protected $hardcoded = '';
-    protected $recommended = '';
-    protected $description = [ ];
-    protected $icon = '';
-    protected $labelForWebsite = [ ];
-    protected $shortDescription = [ ];
-    protected $selectionRange = '';
-    public function __construct()
+    public $id = '';
+    public $vehicleClassId = '';
+    public $name = '';
+    public $chargeType = '';
+    public $mandatoryBrands = [  ];
+    public $selectionType = '';
+    public $hardcoded = '';
+    public $recommended = '';
+    public $description = [ ];
+    public $icon = '';
+    public $labels = [ ];
+    public $shortDescription = [ ];
+    public $selectionRange = '';
+
+
+    public function __construct($post = null)
     {
         $this->post_id = '';
         $this->postArgs = array(
@@ -55,7 +59,10 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
         /*
          * Custom Post Parameters
          */
-        $this->filter = new HQRentalsDataFilter();
+        if(!empty($post)){
+            $this->setFromPost( $post );
+        }
+
     }
     public function setAdditionalChargeFromApi($data)
     {
@@ -151,13 +158,106 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
         }else{}
         //$metas =
     }
+
+    public function getMetaKeysFromLabel()
+    {
+        global $wpdb;
+        return $wpdb->get_results(
+            "SELECT DISTINCT(meta_key)
+                    FROM {$wpdb->prefix}postmeta 
+                    WHERE meta_key 
+                    LIKE '{$this->metaLabelForWebsite}%'
+                    ",
+            ARRAY_N
+        );
+    }
+    public function getMetaKeysFromShortDescription()
+    {
+        global $wpdb;
+        return $wpdb->get_results(
+            "SELECT DISTINCT(meta_key)
+                    FROM {$wpdb->prefix}postmeta 
+                    WHERE meta_key 
+                    LIKE '{$this->metashortDescriptionForWebiste}%'
+                    ",
+            ARRAY_N
+        );
+    }
+    /*
+     * Eliminar en el futuro
+     *
+     */
+    public function getMetaKeysFromDescription()
+    {
+        global $wpdb;
+        return $wpdb->get_results(
+            "SELECT DISTINCT(meta_key)
+                    FROM {$wpdb->prefix}postmeta 
+                    WHERE meta_key 
+                    LIKE '{$this->metaDescriptionForWebiste}%'
+                    ",
+            ARRAY_N
+        );
+    }
+    public function getAdditionalChargesByVehicleClassID($vehicleClassID)
+    {
+        $args = array_merge(
+            $this->postArgs,
+            array(
+                'meta_query'    =>  array(
+                    'key'           =>  $this->metaVehicleClassId,
+                    'value'         =>  $vehicleClassID,
+                    'compare'       =>  '='
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return $query->posts;
+    }
+
     public function getAllMetaTags()
     {
         return array(
-            'id'    =>  $this->metaId,
-            'name'  =>  $this->metaName,
-            'chargeType'    =>  $this->metaChargeType,
-            'mandatoryBrands'
-        )
+            'id'                =>  $this->metaId,
+            'vehicleClassId'    =>  $this->metaVehicleClassId,
+            'name'              =>  $this->metaName,
+            'chargeType'        =>  $this->metaChargeType,
+            'mandatoryBrands'   =>  $this->metaMandatoryBrands,
+            'selectionType'     =>  $this->metaSelectionType,
+            'hardcoded'         =>  $this->metaHardcoded,
+            'recommended'       =>  $this->metaRecommended,
+            'description'       =>  $this->metaDescription,
+            'icon'              =>  $this->metaIcon,
+            'labelForWebsite'   =>  $this->metaLabelForWebsite,
+            'shortDescription'  =>  $this->metaShortDescription,
+            'selectionRange'    =>  $this->metaSelectionRange
+        );
+    }
+    public function setFromPost($post)
+    {
+        $labelsMetaKeys = $this->getMetaKeysFromLabel();
+        $shortDescriptionKeys = $this->getMetaKeysFromShortDescription();
+        $descriptionsKeys = $this->getMetaKeysFromDescription();
+        foreach ($this->getAllMetaTags() as $property => $metakey)
+        {
+            if (! in_array($property, ['labels', 'shortDescriptions', 'descriptions']) ) {
+                $this->{$property} = get_post_meta( $post->ID, $metakey, true );
+            }
+        }
+        /*
+         * Languages
+         */
+        foreach ($labelsMetaKeys as $key => $value){
+            $metakey = explode('_', $value[0]);
+            $this->labels[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+        }
+        foreach ($shortDescriptionKeys as $key => $value){
+            $metakey = explode('_', $value[0]);
+            $this->shortDescription[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+        }
+        foreach ($descriptionsKeys as $key => $value){
+            $metakey = explode('_', $value[0]);
+            $this->description[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+        }
     }
 }

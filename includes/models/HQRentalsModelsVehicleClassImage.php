@@ -37,6 +37,7 @@ class HQRentalsModelsVehicleClassImage
     public $publicLink = '';
     public $vehicleClassPostId = '';
 
+
     public function __construct( $post = null )
     {
         $this->post_id = '';
@@ -44,8 +45,8 @@ class HQRentalsModelsVehicleClassImage
             'post_type'     =>  $this->vehicleClassImageCustomPostName,
             'post_status'   =>  'publish'
         );
-        if(!empty(null)){
-            $this->setFromVehicleClassPost( $post );
+        if(!empty($post)){
+            $this->setFromPost( $post );
         }
     }
 
@@ -105,7 +106,7 @@ class HQRentalsModelsVehicleClassImage
         delete_post_meta( $this->post_id, $this->metaPublicLink );
         $post_id = wp_delete_post( $this->post_id , true );
     }
-    public function find($caag_id)
+    public function find($caagImage)
     {
         $query = new \WP_Query( $this->postArgs );
     }
@@ -126,7 +127,8 @@ class HQRentalsModelsVehicleClassImage
         }else{}
         //$metas =
     }
-    public function getImagesByVehicleClassID($vehicleClassId){
+    public function getImagesPostByVehicleClassID($vehicleClassId){
+
         $args = array_merge(
             $this->postArgs,
             array(
@@ -137,11 +139,29 @@ class HQRentalsModelsVehicleClassImage
                 )
             )
         );
-        $query = new \WP_Query();
+        $query = new \WP_Query($args);
+        return $query->posts;
     }
-    public function setFromVehicleClassPost( $post )
+    public function getAllMetaTag()
     {
-
+        return array(
+            'id'                    =>  $this->metaId,
+            'vehicleClassId'        =>  $this->vehicleClassId,
+            'filename'              =>  $this->metaFilename,
+            'extension'             =>  $this->metaExtension,
+            'mime'                  =>  $this->metaMime,
+            'size'                  =>  $this->metaSize,
+            'label'                 =>  $this->metaLabel,
+            'publicLink'            =>  $this->metaPublicLink,
+            'vehicleClassPostId'    =>  $this->metaVehicleClassPostId
+        );
     }
+    public function setFromPost( $post )
+    {
+        foreach ($this->getAllMetaTag() as $property => $metakey){
+            $this->{$property} = get_post_meta($post->ID, $metakey, true);
+        }
+    }
+
 
 }

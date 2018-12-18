@@ -236,10 +236,7 @@ class HQRentalsModelsVehicleClass
             'availableOnWebsite'    =>  $this->metaAvailableOnWebsite,
             'recommended'           =>  $this->metaRecommended,
             'active'                =>  $this->metaActive,
-            'publicImageLink'       =>  $this->metaPublicImageLink,
-            'labels'                =>  $this->metaLabelForWebsite,
-            'shortDescriptions'     =>  $this->metashortDescriptionForWebiste,
-            'descriptions'          =>  $this->metaDescriptionForWebiste,
+            'publicImageLink'       =>  $this->metaPublicImageLink
         );
     }
 
@@ -253,9 +250,14 @@ class HQRentalsModelsVehicleClass
         $labelsMetaKeys = $this->getMetaKeysFromLabel();
         $shortDescriptionKeys = $this->getMetaKeysFromShortDescription();
         $descriptionsKeys = $this->getMetaKeysFromDescription();
-        foreach ($this->getAllMetaTags() as $property => $metakey){
-            $this->{$property} = get_post_meta( $post->ID, $metakey, true );
+        foreach ($this->getAllMetaTags() as $property => $metakey) {
+            if (! in_array($property, ['labels', 'shortDescriptions', 'descriptions']) ) {
+                $this->{$property} = get_post_meta( $post->ID, $metakey, true );
+            }
         }
+        /*
+         * Languages
+         */
         foreach ($labelsMetaKeys as $key => $value){
             $metakey = explode('_', $value[0]);
             $this->labels[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
@@ -313,10 +315,6 @@ class HQRentalsModelsVehicleClass
     {
 
     }
-    public function setDescription()
-    {
-
-    }
     public function getDescription( $forced_locale = null )
     {
         if(!empty($forced_locale)){
@@ -327,13 +325,11 @@ class HQRentalsModelsVehicleClass
     }
     public function getLabel( $forcedLocale = null )
     {
-        var_dump($this->labels);
         if(! empty($forcedLocale)){
             return $this->labels[$forcedLocale];
         }else{
             return $this->labels[$this->locale->language];
         }
-
     }
     public function getShortDescription($forced_locale = null)
     {

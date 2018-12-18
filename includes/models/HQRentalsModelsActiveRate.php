@@ -190,11 +190,35 @@ class HQRentalsModelsActiveRate
 
     public function setFromVehicleClass($vehicleClassId)
     {
-
         $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
         $post = $query->posts[0];
         foreach ($this->getAllMetaTag() as $property => $metakey) {
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
         }
+    }
+
+    public function getFormattedBaseRate()
+    {
+        return number_format((float) $this->baseRate, 2, '.', '');
+    }
+    public function getFormmattedMinuteRate()
+    {
+        return number_format((float) $this->minuteRate, 2, '.', '');
+    }
+    public function getFormmattedHourlyRate()
+    {
+        return number_format((float) $this->hourlyRate, 2, '.', '');
+    }
+    public function getFormmattedDailyRate()
+    {
+        return number_format((float) $this->dailyRate, 2, '.', '');
+    }
+    public function getFormmattedWeeklyRate()
+    {
+        return number_format((float) $this->weeklyRate, 2, '.', '');
+    }
+    public function getFormmattedMonthlyRate()
+    {
+        return number_format((float) $this->monthlyRate, 2, '.', '');
     }
 }

@@ -38,10 +38,10 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     public $selectionType = '';
     public $hardcoded = '';
     public $recommended = '';
-    public $description = [ ];
+    public $descriptions = [ ];
     public $icon = '';
     public $labels = [ ];
-    public $shortDescription = [ ];
+    public $shortDescriptions = [ ];
     public $selectionRange = '';
 
 
@@ -74,13 +74,13 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
         $this->hardcoded = $data->hardcoded;
         $this->recommended = $data->recommended;
         foreach ( $data->description as $key => $value ){
-            $this->description[$key] = $value;
+            $this->descriptions[$key] = $value;
         }
         foreach ( $data->short_description_for_website as $key => $value ){
-            $this->shortDescription[$key] = $value;
+            $this->shortDescriptions[$key] = $value;
         }
         foreach ( $data->label_for_website as $key => $value ){
-            $this->labelForWebsite[$key] = $value;
+            $this->labels[$key] = $value;
         }
         $this->selectionRange = $data->selection_range;
     }
@@ -107,14 +107,14 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
         }
         update_post_meta( $post_id, $this->metaSelectionType, $this->selectionType );
         update_post_meta( $post_id, $this->metaHardcoded, $this->hardcoded );
-        foreach ( $this->description as $key => $value ){
+        foreach ( $this->descriptions as $key => $value ){
             update_post_meta( $post_id, $this->metaDescription . '_' . $key, $value );
         }
         update_post_meta( $post_id, $this->metaIcon, $this->icon );
-        foreach( $this->metaLabelForWebsite as $key => $value ){
+        foreach( $this->labels as $key => $value ){
             update_post_meta( $post_id, $this->metaLabelForWebsite . '_' . $key, $value );
         }
-        foreach( $this->shortDescription as $key => $value ){
+        foreach( $this->shortDescriptions as $key => $value ){
             update_post_meta( $post_id, $this->metaShortDescription . '_' . $key, $value );
         }
         update_post_meta( $post_id, $this->metaSelectionRange, $this->selectionRange );
@@ -206,10 +206,10 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
             'selectionType'     =>  $this->metaSelectionType,
             'hardcoded'         =>  $this->metaHardcoded,
             'recommended'       =>  $this->metaRecommended,
-            'description'       =>  $this->metaDescription,
+            'descriptions'      =>  $this->metaDescription,
             'icon'              =>  $this->metaIcon,
-            'labelForWebsite'   =>  $this->metaLabelForWebsite,
-            'shortDescription'  =>  $this->metaShortDescription,
+            'labels'            =>  $this->metaLabelForWebsite,
+            'shortDescriptions' =>  $this->metaShortDescription,
             'selectionRange'    =>  $this->metaSelectionRange
         );
     }
@@ -243,6 +243,6 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     public function getAllAdditionalChargesPosts()
     {
         $query = new \WP_Query($this->postArgs);
-        $query->posts;
+        return $query->posts;
     }
 }

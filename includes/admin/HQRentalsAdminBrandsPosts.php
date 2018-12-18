@@ -19,10 +19,7 @@ class HQRentalsAdminBrandsPosts
             'cb' => '<input type="checkbox" />',
             'title' => 'Title',
             'reservation_shortcode' => 'Reservation Shortcode',
-            'packages_shortcode' => 'Packages Shortcode',
-            'reservation_packages_shortcode' => 'Reservation + PackagesShortcode',
             'my_reservation_shortcode' => 'My Reservation Shortcode',
-            'my_package_reservation_shortcode' => 'My Package + Reservation Shortocode',
             'vehicle_class_calendar' => 'Vehicle Class Calendar',
             'date' => 'Date',
 
@@ -37,17 +34,8 @@ class HQRentalsAdminBrandsPosts
             case('reservation_shortcode'):
                 echo '[hq_rentals_reservations id=' . $currentBrand->id . ']';
                 break;
-            case('packages_shortcode'):
-                echo '[hq_rentals_packages id=' . $currentBrand->id . ']';
-                break;
-            case('reservation_packages_shortcode'):
-                echo '[hq_rentals_reservation_packages id=' . $currentBrand->id . ']';
-                break;
             case('my_reservation_shortcode'):
                 echo '[hq_rentals_my_reservation id=' . $currentBrand->id . ']';
-                break;
-            case('my_package_reservation_shortcode'):
-                echo '[hq_rentals_my_packages_reservations id=' . $currentBrand->id . ']';
                 break;
             case('vehicle_class_calendar'):
                 echo '[hq_rentals_vehicle_calendar id=' . $currentBrand->id . ']';

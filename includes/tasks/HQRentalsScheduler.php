@@ -11,6 +11,7 @@ class HQRentalsScheduler
         $this->vehicleClassesTask = new HQRentalsVehicleClassesTask();
         $this->featuresTask = new HQRentalsFeaturesTask();
         $this->activeRatesTask = new HQRentalsActiveRatesTask();
+        $this->additionalChargesTask = new HQRentalsAdditionalChargesTask();
         $this->vehicleClassImagesTask = new HQRentalsVehicleClassImagesTask();
     }
 
@@ -20,7 +21,8 @@ class HQRentalsScheduler
         $this->featuresTask->refreshFeaturesData();
         $this->vehicleClassImagesTask->refreshVehicleClassImagesData();
         $this->activeRatesTask->refreshActiveRateData();
-        $this->vehicleClassesTask->refreshVehicleClassesData();
         $this->locationsTask->refreshLocationsData();
+        $this->additionalChargesTask->refreshAdditionalChargesData();
+        $this->vehicleClassesTask->refreshVehicleClassesData();
     }
 }

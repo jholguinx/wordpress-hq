@@ -1,8 +1,6 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
 
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
-
 class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
 {
     /*
@@ -16,7 +14,6 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
      * Custom Post Meta
      */
     protected $metaId = 'hq_wordpress_additional_charge_id_meta';
-    protected $metaVehicleClassId = 'hq_wordpress_additional_charge_vehicle_class_id_meta';
     protected $metaName = 'hq_wordpress_additional_charge_name_meta';
     protected $metaChargeType = 'hq_wordpress_additional_charge_charge_type_meta';
     protected $metaMandatoryBrands = 'hq_wordpress_additional_charge_mandatory_brands_meta';
@@ -35,7 +32,6 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
      */
 
     public $id = '';
-    public $vehicleClassId = '';
     public $name = '';
     public $chargeType = '';
     public $mandatoryBrands = [  ];
@@ -199,27 +195,11 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
             ARRAY_N
         );
     }
-    public function getAdditionalChargesByVehicleClassID($vehicleClassID)
-    {
-        $args = array_merge(
-            $this->postArgs,
-            array(
-                'meta_query'    =>  array(
-                    'key'           =>  $this->metaVehicleClassId,
-                    'value'         =>  $vehicleClassID,
-                    'compare'       =>  '='
-                )
-            )
-        );
-        $query = new \WP_Query($args);
-        return $query->posts;
-    }
 
     public function getAllMetaTags()
     {
         return array(
             'id'                =>  $this->metaId,
-            'vehicleClassId'    =>  $this->metaVehicleClassId,
             'name'              =>  $this->metaName,
             'chargeType'        =>  $this->metaChargeType,
             'mandatoryBrands'   =>  $this->metaMandatoryBrands,
@@ -259,5 +239,10 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
             $metakey = explode('_', $value[0]);
             $this->description[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
         }
+    }
+    public function getAllAdditionalChargesPosts()
+    {
+        $query = new \WP_Query($this->postArgs);
+        $query->posts;
     }
 }

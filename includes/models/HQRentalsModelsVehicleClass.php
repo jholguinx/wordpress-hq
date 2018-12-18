@@ -321,15 +321,6 @@ class HQRentalsModelsVehicleClass
         }
         return $imagesForReturn;
     }
-    public function additionalCharges()
-    {
-        $charges = new HQRentalsModelsAdditionalCharge();
-        $chargesForReturn = array();
-        foreach ($charges->getAdditionalChargesByVehicleClassID($this->id) as $post){
-            $chargesForReturn[] = new HQRentalsModelsAdditionalCharge($post);
-        }
-        return $chargesForReturn;
-    }
     public function getDescription( $forced_locale = null )
     {
         if(!empty($forced_locale)){

@@ -215,6 +215,10 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         }else{}
         //$metas =
     }
+    public function allToFront()
+    {
+        $query = new \WP_Query($this->postArgs);
 
+    }
 
 }

@@ -2,6 +2,11 @@
 
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
+/**
+ * Class HQRentalsShortcoder
+ * @package HQRentalsPlugin\HQRentalsShortcodes
+ * This class its just for making the Shortcodes accesible to Wordpress
+ */
 class HQRentalsShortcoder
 {
     public function __construct()

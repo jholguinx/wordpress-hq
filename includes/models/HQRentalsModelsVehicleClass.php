@@ -29,6 +29,7 @@ class HQRentalsModelsVehicleClass
     protected $metaLabelForWebsite = 'hq_wordpress_vehicle_class_label_for_website_meta';
     protected $metashortDescriptionForWebiste = 'hq_wordpress_vehicle_class_short_description_meta';
     protected $metaDescriptionForWebiste = 'hq_wordpress_vehicle_class_description_for_webiste_meta';
+    protected $metaCustomField = 'hq_wordpress_vehicle_class_custom_field_';
 
 
     /*
@@ -48,6 +49,7 @@ class HQRentalsModelsVehicleClass
     public $images = array();
     public $features = array();
     public $rate = '';
+    public $customField = '';
 
     public function __construct( $post = null )
     {
@@ -103,7 +105,6 @@ class HQRentalsModelsVehicleClass
      */
     public function setVehicleClassFromApi($data, $customFields = null)
     {
-        var_dump($customFields);
         $this->id = $data->id;
         $this->brandId = $data->brand_id;
         $this->name = $data->name;
@@ -130,6 +131,11 @@ class HQRentalsModelsVehicleClass
             $newFeature = new HQRentalsModelsFeature();
             $newFeature->setFeatureFromApi( $this->id, $feature );
             $this->features[] = $newFeature;
+        }
+        if(!empty($customFields)){
+            foreach ($customFields as $field){
+                $this->{$this->metaCustomField . $field->dbcolumn} = $data->{$field->dbcolumn};
+            }
         }
         $newRate = new HQRentalsModelsActiveRate();
         $newRate->setActiveRateFromApi($data->active_rates[0]);
@@ -173,6 +179,10 @@ class HQRentalsModelsVehicleClass
         }
         foreach ( $this->features as $feature ){
             $feature->create();
+        }
+        $customFieldsPropertyNames = $this->getCustomDataProperties();
+        foreach ($customFieldsPropertyNames as $fieldsPropertyName){
+            update_post_meta($post_id, $fieldsPropertyName, $this->{$fieldsPropertyName});
         }
         $this->rate->create();
         $thumbnailHandler = new HQRentalsThumbnailHelper();
@@ -348,6 +358,17 @@ class HQRentalsModelsVehicleClass
             return $this->shortDescriptions[$this->locale->language];
         }
 
+    }
+    public function getCustomDataProperties()
+    {
+        $properties = get_object_vars($this);
+        $customProperties = array();
+        foreach ($properties as $key => $property){
+            if( strpos($key, $this->metaCustomField) >= 0  ){
+                $customProperties[] = $key;
+            }
+        }
+        return $customProperties;
     }
 }
 

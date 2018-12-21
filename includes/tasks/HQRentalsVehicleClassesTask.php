@@ -26,22 +26,20 @@ class HQRentalsVehicleClassesTask
         $vehicleClasses = $this->connector->getHQRentalsVehicleClasses();
         $customFields = $this->connector->getHQVehicleClassCustomFields();
         if($customFields->success){
-            foreach ($customFields as $field){
-                $newField = new HQRentalsModelsVehicleClassCustomFields();
-                $newField->setCustomFieldFromApi($field);
-                $newField->create();
+            foreach ($customFields->data as $field){
+                //$newField = new HQRentalsModelsVehicleClassCustomFields();
+                //$newField->setCustomFieldFromApi($field);
+                //$newField->create();
             }
         }
         if ($vehicleClasses->success) {
             foreach ($vehicleClasses->data as $class) {
-
                 $newVehicleClass = new HQVehicleClass();
                 if($customFields->success){
                     $newVehicleClass->setVehicleClassFromApi($class, $customFields->data);
                 }else{
                     $newVehicleClass->setVehicleClassFromApi($class);
                 }
-
                 $newVehicleClass->create();
             }
         }

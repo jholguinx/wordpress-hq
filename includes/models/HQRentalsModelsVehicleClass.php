@@ -101,8 +101,9 @@ class HQRentalsModelsVehicleClass
     /*
      * set Vehicle Class From Api
      */
-    public function setVehicleClassFromApi($data)
+    public function setVehicleClassFromApi($data, $customFields = null)
     {
+        var_dump($customFields);
         $this->id = $data->id;
         $this->brandId = $data->brand_id;
         $this->name = $data->name;

@@ -88,8 +88,10 @@ class HQRentalsModelsVehicleClass
             'exclude_from_search'       =>  false,
             'menu_icon'                 => 'dashicons-thumbs-up',
             'menu_position'             => 8,
-            'capability_type'           => 'post',
-            'supports'                  =>  array( 'title', 'editor', 'thumbnail', 'excerpt' )
+            'supports'                  =>  array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+            'capabilities'              => array(
+                'create_posts' => 'do_not_allow'
+            )
         );
         if(!empty($post)){
             $this->setFromPost( $post );

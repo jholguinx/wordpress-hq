@@ -85,7 +85,9 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
             'exclude_from_search'       =>  false,
             'menu_icon'                 => 'dashicons-store',
             'menu_position'             => 6,
-            'capability_type'           => 'post'
+            'capabilities'              => array(
+                'create_posts' => 'do_not_allow'
+            )
         );
         $this->filter = new HQRentalsDataFilter();
     }
@@ -182,7 +184,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
             )
         );
         $query = new \WP_Query( $args );
-        $this->setBrandFromPost($query->posts[0]);
+        $this->setBrandFromPost($query->posts[0]->ID);
     }
     public function setBrandFromPost($brandPost)
     {
@@ -219,6 +221,23 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     {
         $query = new \WP_Query($this->postArgs);
 
+    }
+    public function findBySystemId($hqBrandId)
+    {
+        $args = array_merge(
+            $this->postArgs,
+            array(
+                'meta_query'  =>  array(
+                    array(
+                        'key'     => $this->metaId,
+                        'value'   => $hqBrandId,
+                        'compare' => '=',
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query( $args );
+        return $this->setBrandFromPost($query->posts[0]->ID);
     }
 
 }

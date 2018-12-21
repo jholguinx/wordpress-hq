@@ -22,13 +22,13 @@ class HQRentalsReservationsShortcode
             array(
                 'id' => '1',
                 'forced_locale' => 'en',
-                'new' => '',
+                'new' => 'true',
 
             )
             , $atts, 'hq_rentals_reservations');
         $post_data = $_POST;
         $brand = new HQRentalsModelsBrand();
-        $brand->find($atts['id']);
+        $brand->findBySystemId( $atts['id']);
         $this->assets->getIframeResizerAssets();
         try {
             if ($post_data['pick_up_date']) {

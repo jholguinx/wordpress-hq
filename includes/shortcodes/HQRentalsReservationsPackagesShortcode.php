@@ -2,12 +2,12 @@
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 
-class HQRentalsPackagesShortcode
+class HQRentalsReservationsPackagesShortcode
 {
     public function __construct()
     {
         $this->brand = new HQRentalsModelsBrand();
-            add_shortcode('hq_rentals_packages' , array ($this, 'packagesShortcode'));
+            add_shortcode('hq_rentals_reservation_packages' , array ($this, 'packagesShortcode'));
     }
     public function packagesShortcode( $atts = [] )
     {
@@ -22,6 +22,6 @@ class HQRentalsPackagesShortcode
         wp_enqueue_script('hq-iframe-resizer-script');
         wp_enqueue_script('hq-resize-script');
         $this->brand->findBySystemId( $atts['id'] );
-        return '<iframe id="hq-rentals-integration-wrapper" src="' . $this->brand->publicPackagesLinkFull .  $langParams . '" scrolling="no"></iframe>';
+        return '<iframe id="hq-rentals-integration-wrapper" src="' . $this->brand->publicReservationPackagesFirstStepLink .  $langParams . '" scrolling="no"></iframe>';
     }
 }

@@ -11,8 +11,12 @@ class HQRentalsShortcoder
 {
     public function __construct()
     {
-        $this->packagesShortcode = new HQRentalsPackagesShortcode();
         $this->reservationShortcode = new HQRentalsReservationsShortcode();
+        $this->packagesShortcode = new HQRentalsPackagesShortcode();
+        $this->reservationPackages = new HQRentalsReservationsPackagesShortcode();
+        $this->myReservations = new HQRentalsMyReservationsShortcode();
+        $this->myPackagesReservations = new HQRentalsMyPackagesReservationsShortcode();
+        $this->formLink = new HQRentalsFormLink();
         $this->systemAssetsShortcode = new HQRentalsSystemAssets();
     }
 }

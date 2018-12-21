@@ -56,4 +56,5 @@ class HQRentalsVehicleClassesTask
             $post_id = wp_delete_post($vehicle->ID);
         }
     }
+
 }

@@ -23,7 +23,7 @@ class HQRentalsModelsVehicleClassCustomFields
     public $type = '';
     public $dbcolumn = '';
 
-    public function __construct()
+    public function __construct($dbColumn = null)
     {
         $this->post_id = '';
         $this->postArgs = array(

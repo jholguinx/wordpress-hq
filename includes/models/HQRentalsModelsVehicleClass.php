@@ -3,7 +3,7 @@ namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsThumbnailHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
-use function PHPSTORM_META\map;
+
 
 class HQRentalsModelsVehicleClass
 {
@@ -369,6 +369,11 @@ class HQRentalsModelsVehicleClass
             }
         }
         return $customProperties;
+    }
+    public function getCustomField($dbColumn)
+    {
+        var_dump($this->post_id, $this->metaCustomField);
+        return get_post_meta($this->post_id, $this->metaCustomField . $dbColumn, true);
     }
 }
 

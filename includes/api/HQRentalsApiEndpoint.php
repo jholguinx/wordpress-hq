@@ -34,4 +34,8 @@ class HQRentalsApiEndpoint{
     {
         return 'https://api.caagcrm.com/api/assets/files';
     }
+    public function getVehicleClassCustomFields()
+    {
+        return $this->settings->getApiBaseUrl() . 'fields/?item_type=fleets.vehicle_classes';
+    }
 }

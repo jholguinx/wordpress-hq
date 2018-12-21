@@ -1,6 +1,5 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsShortcodes;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 
 class HQRentalsFormLink
 {

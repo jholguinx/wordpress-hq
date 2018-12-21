@@ -19,6 +19,9 @@ class HQRentalsVehicleClassesTask
     public function createVehicleClassesData()
     {
         $vehicleClasses = $this->connector->getHQRentalsVehicleClasses();
+        $customFields = $this->connector->getHQVehicleClassCustomFields();
+        var_dump($customFields);
+        die();
         if($vehicleClasses->success){
             foreach ($vehicleClasses->data as $class){
                 $newVehicleClass = new HQVehicleClass();

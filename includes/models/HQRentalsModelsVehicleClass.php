@@ -36,6 +36,7 @@ class HQRentalsModelsVehicleClass
      * Object Data to Display
      */
     public $id = '';
+    public $postId = '';
     public $brandId = '';
     public $name = '';
     public $order = '';
@@ -280,6 +281,7 @@ class HQRentalsModelsVehicleClass
             $metakey = explode('_', $value[0]);
             $this->descriptions[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
         }
+        $this->postId = $post->ID;
     }
     public function getMetaKeysFromLabel()
     {

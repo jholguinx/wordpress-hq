@@ -27,16 +27,16 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     /*
      * Object Data to Display
      */
-    protected $id = '';
-    protected $brandId = '';
-    protected $name = '';
-    protected $isAirport = '';
-    protected $isOffice = '';
-    protected $coordinates = '';
-    protected $isActive = '';
+    public $id = '';
+    public $brandId = '';
+    public $name = '';
+    public $isAirport = '';
+    public $isOffice = '';
+    public $coordinates = '';
+    public $isActive = '';
 
 
-    public function __construct()
+    public function __construct($post = null)
     {
         $this->post_id = '';
         $this->postArgs = array(
@@ -78,6 +78,9 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
                 'create_posts' => 'do_not_allow'
             )
         );
+        if(!empty($post)){
+            $this->setFromPost($post);
+        }
     }
     public function setLocationFromApi($data)
     {
@@ -155,5 +158,24 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
 
         }else{}
         //$metas =
+    }
+    public function setFromPost($post)
+    {
+        foreach ($this->getAllMetaTags() as $property   =>   $metakey){
+            $this->{$property} = get_post_meta($post->ID, $metakey, true);
+        }
+    }
+
+    public function getAllMetaTags()
+    {
+        return array(
+            'id'            =>  $this->metaId,
+            'brandId'       =>  $this->brandId,
+            'name'          =>  $this->metaName,
+            'isAirport'     =>  $this->metaAirport,
+            'isOffice'      =>  $this->metaOffice,
+            'coordinates'   =>  $this->metaCoordinates,
+            'isActive'      =>  $this->metaIsActive
+        );
     }
 }

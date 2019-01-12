@@ -90,6 +90,9 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
             )
         );
         $this->filter = new HQRentalsDataFilter();
+        if(! empty( $post ) ){
+            $this->setBrandFromPost($post);
+        }
     }
 
 
@@ -216,11 +219,6 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
 
         }else{}
         //$metas =
-    }
-    public function allToFront()
-    {
-        $query = new \WP_Query($this->postArgs);
-
     }
     public function findBySystemId($hqBrandId)
     {

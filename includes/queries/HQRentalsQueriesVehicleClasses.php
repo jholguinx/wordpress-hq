@@ -20,4 +20,13 @@ class HQRentalsQueriesVehicleClasses
         }
         return $data;
     }
+    public function allVehicleClassesToFrontEnd()
+    {
+        $vehicleClassesPosts = $this->model->all();
+        $data = array();
+        foreach ($vehicleClassesPosts as $post){
+            $data[] = new HQRentalsModelsVehicleClass($post);
+        }
+        return $data;
+    }
 }

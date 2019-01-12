@@ -18,5 +18,14 @@ class HQRentalsQueriesLocations{
         }
         return $data;
     }
+    public function allLocationToFrontEnd()
+    {
+        $locations = $this->model->all();
+        $data = array();
+        foreach ($locations as $post){
+            $data[] = new HQRentalsModelsLocation($post);
+        }
+        return $data;
+    }
 
 }

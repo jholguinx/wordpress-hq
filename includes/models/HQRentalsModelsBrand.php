@@ -191,17 +191,17 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     }
     public function setBrandFromPost($brandPost)
     {
-        $this->id = get_post_meta($brandPost, $this->metaId, true);
-        $this->name = get_post_meta( $brandPost, $this->metaName, true);
-        $this->taxLabel = get_post_meta($brandPost, $this->metaTaxLabel, true);
-        $this->websiteLink = get_post_meta($brandPost, $this->metaWebsiteLink, true);
-        $this->publicReservationsLinkFull = get_post_meta( $brandPost, $this->metaPublicReservationsLinkFull, true );
-        $this->publicPackagesLinkFull = get_post_meta( $brandPost, $this->metaPublicPackagesLinkFull, true );
-        $this->publicReservationsFirstStepLink = get_post_meta( $brandPost, $this->metaPublicReservationsFirstStepLink, true );
-        $this->publicPackagesFirstStepLink = get_post_meta($brandPost, $this->metaPublicPackagesFirstStepLink, true );
-        $this->publicReservationPackagesFirstStepLink = get_post_meta( $brandPost, $this->metaPublicReservationPackagesFirstStepLink, true );
-        $this->myReservationsLink = get_post_meta( $brandPost, $this->metaMyReservationsLink, true );
-        $this->myPackagesReservationsLink = get_post_meta(  $brandPost, $this->metaMyPackagesReservationsLink, true );
+        $this->id = get_post_meta($brandPost->ID, $this->metaId, true);
+        $this->name = get_post_meta( $brandPost->ID, $this->metaName, true);
+        $this->taxLabel = get_post_meta($brandPost->ID, $this->metaTaxLabel, true);
+        $this->websiteLink = get_post_meta($brandPost->ID, $this->metaWebsiteLink, true);
+        $this->publicReservationsLinkFull = get_post_meta( $brandPost->ID, $this->metaPublicReservationsLinkFull, true );
+        $this->publicPackagesLinkFull = get_post_meta( $brandPost->ID, $this->metaPublicPackagesLinkFull, true );
+        $this->publicReservationsFirstStepLink = get_post_meta( $brandPost->ID, $this->metaPublicReservationsFirstStepLink, true );
+        $this->publicPackagesFirstStepLink = get_post_meta($brandPost->ID, $this->metaPublicPackagesFirstStepLink, true );
+        $this->publicReservationPackagesFirstStepLink = get_post_meta( $brandPost->ID, $this->metaPublicReservationPackagesFirstStepLink, true );
+        $this->myReservationsLink = get_post_meta( $brandPost->ID, $this->metaMyReservationsLink, true );
+        $this->myPackagesReservationsLink = get_post_meta(  $brandPost->ID, $this->metaMyPackagesReservationsLink, true );
     }
 
     public function first()
@@ -235,7 +235,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
             )
         );
         $query = new \WP_Query( $args );
-        return $this->setBrandFromPost($query->posts[0]->ID);
+        return $this->setBrandFromPost($query->posts[0]);
     }
 
 }

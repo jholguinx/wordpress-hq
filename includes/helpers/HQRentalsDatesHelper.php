@@ -27,7 +27,6 @@ class HQRentalsDatesHelper
         'ch_c' => 'Y-m-d G:i',
         'wp_c' => 'd-m-Y G:i'
     );
-
     public function getHtmlOptionForFrontEndDateSettingOption()
     {
         $html = '';
@@ -53,5 +52,13 @@ class HQRentalsDatesHelper
 
         }
         return $html;
+    }
+    public function getDateFormatFromCarbon($format)
+    {
+        return explode(' ', $format)[0];
+    }
+    public function getTimeFormatFromCarbon($format)
+    {
+        return explode(' ', $format)[1];
     }
 }

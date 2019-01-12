@@ -51,6 +51,7 @@ class HQRentalsModelsVehicleClass
     public $features = array();
     public $rate = '';
     public $customField = '';
+    public $permalink = '';
 
     public function __construct( $post = null )
     {
@@ -282,6 +283,7 @@ class HQRentalsModelsVehicleClass
             $this->descriptions[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
         }
         $this->postId = $post->ID;
+        $this->permalink = get_permalink($post->ID);
     }
     public function getMetaKeysFromLabel()
     {

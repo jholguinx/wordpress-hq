@@ -29,4 +29,17 @@ class HQRentalsQueriesVehicleClasses
         }
         return $data;
     }
+    public function getVehicleClassIdFromPost($post){
+        if(get_post_type($post) === 'hqwp_veh_classes'){
+            $class = new HQRentalsModelsVehicleClass($post);
+            return $class->id;
+        }else{
+            return '';
+        }
+    }
+    public function getVehicleClassFilterByCustomField($filterField)
+    {
+        $vehicleClassesPost = $this->model->all();
+        var_dump($vehicleClassesPost);
+    }
 }

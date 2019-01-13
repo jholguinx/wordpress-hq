@@ -73,14 +73,20 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
         $this->selectionType = $data->selection_type;
         $this->hardcoded = $data->hardcoded;
         $this->recommended = $data->recommended;
-        foreach ( $data->description as $key => $value ){
-            $this->descriptions[$key] = $value;
+        if(!empty($data->description)){
+            foreach ( $data->description as $key => $value ){
+                $this->descriptions[$key] = $value;
+            }
         }
-        foreach ( $data->short_description_for_website as $key => $value ){
-            $this->shortDescriptions[$key] = $value;
+        if(!empty($data->short_description_for_website)){
+            foreach ( $data->short_description_for_website as $key => $value ){
+                $this->shortDescriptions[$key] = $value;
+            }
         }
-        foreach ( $data->label_for_website as $key => $value ){
-            $this->labels[$key] = $value;
+        if(!empty($data->label_for_website)){
+            foreach ( $data->label_for_website as $key => $value ){
+                $this->labels[$key] = $value;
+            }
         }
         $this->selectionRange = $data->selection_range;
     }

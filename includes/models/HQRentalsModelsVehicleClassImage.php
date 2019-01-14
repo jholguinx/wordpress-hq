@@ -20,6 +20,7 @@ class HQRentalsModelsVehicleClassImage
     protected $metaExtension = 'hq_wordpress_vehicle_image_extension_meta';
     protected $metaMime = 'hq_wordpress_vehicle_image_mime_meta';
     protected $metaSize = 'hq_wordpress_vehicle_image_size_meta';
+    protected $metaOrder = 'hq_wordpress_vehicle_image_order_meta';
     protected $metaLabel = 'hq_wordpress_vehicle_image_label_meta';
     protected $metaPublicLink = 'hq_wordpress_vehicle_image_public_link_meta';
     protected $metaVehicleClassPostId = 'hq_wordpress_vehicle_image_vehicle_class_post_id_meta';
@@ -34,6 +35,7 @@ class HQRentalsModelsVehicleClassImage
     public $mime = '';
     public $size = '';
     public $label = '';
+    public $order = '';
     public $publicLink = '';
     public $vehicleClassPostId = '';
 
@@ -58,6 +60,7 @@ class HQRentalsModelsVehicleClassImage
         $this->extension = $data->extension;
         $this->mime = $data->mime;
         $this->size = $data->size;
+        $this->order = $data->order;
         $this->label = $data-> label;
         $this->publicLink = $data->public_link;
     }
@@ -78,6 +81,7 @@ class HQRentalsModelsVehicleClassImage
         update_post_meta( $post_id, $this->metaExtension, $this->extension );
         update_post_meta( $post_id, $this->metaMime, $this->mime );
         update_post_meta( $post_id, $this->metaSize, $this->size );
+        update_post_meta( $post_id, $this->metaOrder, $this->order );
         update_post_meta( $post_id, $this->metaLabel, $this->label );
         update_post_meta( $post_id, $this->metaPublicLink, $this->publicLink );
     }
@@ -90,6 +94,7 @@ class HQRentalsModelsVehicleClassImage
         update_post_meta( $this->post_id, $this->metaExtension, $this->extension );
         update_post_meta( $this->post_id, $this->metaMime, $this->mime );
         update_post_meta( $this->post_id, $this->metaSize, $this->size );
+        update_post_meta( $this->post_id, $this->metaOrder, $this->order );
         update_post_meta( $this->post_id, $this->metaLabel, $this->label );
         update_post_meta( $this->post_id, $this->metaPublicLink, $this->publicLink );
     }
@@ -102,6 +107,7 @@ class HQRentalsModelsVehicleClassImage
         delete_post_meta( $this->post_id, $this->metaExtension );
         delete_post_meta( $this->post_id, $this->metaMime );
         delete_post_meta( $this->post_id, $this->metaSize );
+        delete_post_meta( $this->post_id, $this->metaOrder );
         delete_post_meta( $this->post_id, $this->metaLabel );
         delete_post_meta( $this->post_id, $this->metaPublicLink );
         $post_id = wp_delete_post( $this->post_id , true );
@@ -151,6 +157,7 @@ class HQRentalsModelsVehicleClassImage
             'extension'             =>  $this->metaExtension,
             'mime'                  =>  $this->metaMime,
             'size'                  =>  $this->metaSize,
+            'order'                 =>  $this->metaOrder,
             'label'                 =>  $this->metaLabel,
             'publicLink'            =>  $this->metaPublicLink,
             'vehicleClassPostId'    =>  $this->metaVehicleClassPostId

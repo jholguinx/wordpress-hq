@@ -29,7 +29,7 @@ class HQRentalsAdminBrandsPosts
     public function displayBrandsDataOnAdminTable($columnName, $postId)
     {
         $currentBrand = new HQRentalsModelsBrand();
-        $currentBrand->setBrandFromPost($postId);
+        $currentBrand->setBrandFromPostId($postId);
         switch ($columnName) {
             case('reservation_shortcode'):
                 echo '[hq_rentals_reservations id=' . $currentBrand->id . ']';

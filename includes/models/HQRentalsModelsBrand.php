@@ -203,6 +203,20 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->myReservationsLink = get_post_meta( $brandPost->ID, $this->metaMyReservationsLink, true );
         $this->myPackagesReservationsLink = get_post_meta(  $brandPost->ID, $this->metaMyPackagesReservationsLink, true );
     }
+    public function setBrandFromPostId($id)
+    {
+        $this->id = get_post_meta($id, $this->metaId, true);
+        $this->name = get_post_meta( $id, $this->metaName, true);
+        $this->taxLabel = get_post_meta($id, $this->metaTaxLabel, true);
+        $this->websiteLink = get_post_meta($id, $this->metaWebsiteLink, true);
+        $this->publicReservationsLinkFull = get_post_meta( $id, $this->metaPublicReservationsLinkFull, true );
+        $this->publicPackagesLinkFull = get_post_meta( $id, $this->metaPublicPackagesLinkFull, true );
+        $this->publicReservationsFirstStepLink = get_post_meta( $id, $this->metaPublicReservationsFirstStepLink, true );
+        $this->publicPackagesFirstStepLink = get_post_meta($id, $this->metaPublicPackagesFirstStepLink, true );
+        $this->publicReservationPackagesFirstStepLink = get_post_meta( $id, $this->metaPublicReservationPackagesFirstStepLink, true );
+        $this->myReservationsLink = get_post_meta( $id, $this->metaMyReservationsLink, true );
+        $this->myPackagesReservationsLink = get_post_meta(  $id, $this->metaMyPackagesReservationsLink, true );
+    }
 
     public function first()
     {

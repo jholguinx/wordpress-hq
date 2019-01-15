@@ -59,7 +59,7 @@ class HQRentalsModelsVehicleClass
         $this->locale = new HQRentalsLocaleHelper();
         $this->postArgs = array(
             'post_type'     =>  $this->vehicleClassesCustomPostName,
-            'post_status'   =>  'publish'
+            'post_status'   =>  'publish',
         );
         $this->labelsPost = array(
             'name'               => _x( 'Vehicle Classes', 'post type general name', 'your-plugin-textdomain' ),
@@ -228,7 +228,13 @@ class HQRentalsModelsVehicleClass
     }
     public function all()
     {
-        $query = new \WP_Query($this->postArgs);
+        $args = array_merge(
+            $this->postArgs,
+            array(
+                'posts_per_page'    =>  -1
+            )
+        );
+        $query = new \WP_Query($args);
         return $query->posts;
     }
     public function set($data)
@@ -376,7 +382,7 @@ class HQRentalsModelsVehicleClass
     }
     public function getCustomField($dbColumn)
     {
-        var_dump($this->post_id, $this->metaCustomField);
+        //var_dump($this->post_id, $this->metaCustomField);
         return get_post_meta($this->post_id, $this->metaCustomField . $dbColumn, true);
     }
 }

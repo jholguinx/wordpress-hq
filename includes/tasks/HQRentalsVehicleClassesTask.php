@@ -50,7 +50,7 @@ class HQRentalsVehicleClassesTask
         $vehicles = new HQRentalsModelsVehicleClass();
         foreach ($vehicles->all() as $vehicle) {
             $metas = get_post_meta($vehicle->ID);
-            foreach ($metas as $key => $values) {
+            foreach ($metas as $key => $value) {
                 delete_post_meta($vehicle->ID, $key);
             }
             $post_id = wp_delete_post($vehicle->ID);

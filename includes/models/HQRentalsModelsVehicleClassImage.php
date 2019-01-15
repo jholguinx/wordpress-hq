@@ -130,7 +130,9 @@ class HQRentalsModelsVehicleClassImage
     {
         if($this->filter->isPost($data)){
 
-        }else{}
+        }else{
+
+        }
         //$metas =
     }
     public function getImagesPostByVehicleClassID($vehicleClassId){
@@ -148,6 +150,11 @@ class HQRentalsModelsVehicleClassImage
         $query = new \WP_Query($args);
         return $query->posts;
     }
+
+    /**
+     * Match Model Properties with Post Meta for Saving
+     * @return array
+     */
     public function getAllMetaTag()
     {
         return array(

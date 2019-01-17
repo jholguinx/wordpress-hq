@@ -37,9 +37,26 @@ class HQRentalsQueriesVehicleClasses
             return '';
         }
     }
-    public function getVehicleClassFilterByCustomField($filterField)
+    public function getVehicleClassFilterByCustomField($filterField, $value)
     {
-        $vehicleClassesPost = $this->model->all();
-        var_dump($vehicleClassesPost);
+        $data = array();
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query'    =>  array(
+                    array(
+                        'key'       => $this->model->getCustomFieldMetaPrefix() . $filterField,
+                        'value'     =>  $value,
+                        'compare'   =>  '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        foreach ($query->posts as $post){
+            $class = new HQRentalsModelsVehicleClass($post);
+            $data[] = $class;
+        }
+        return $data;
     }
 }

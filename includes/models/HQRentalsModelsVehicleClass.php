@@ -385,5 +385,9 @@ class HQRentalsModelsVehicleClass
         //var_dump($this->post_id, $this->metaCustomField);
         return get_post_meta($this->post_id, $this->metaCustomField . $dbColumn, true);
     }
+    public function getCustomFieldMetaPrefix()
+    {
+        return $this->metaCustomField;
+    }
 }
 

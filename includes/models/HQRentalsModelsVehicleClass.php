@@ -3,6 +3,7 @@ namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsThumbnailHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 
 
 class HQRentalsModelsVehicleClass
@@ -57,6 +58,7 @@ class HQRentalsModelsVehicleClass
     {
         $this->post_id = '';
         $this->locale = new HQRentalsLocaleHelper();
+        $this->queryFeatures = new HQRentalsQueriesFeatures();
         $this->postArgs = array(
             'post_type'     =>  $this->vehicleClassesCustomPostName,
             'post_status'   =>  'publish',
@@ -344,6 +346,11 @@ class HQRentalsModelsVehicleClass
         }
         return $imagesForReturn;
     }
+    public function features()
+    {
+        $query = new HQRentalsQueriesFeatures();
+        return $query->getVehicleClassFeatures($this->id);
+    }
     public function getDescription( $forced_locale = null )
     {
         if(!empty($forced_locale)){
@@ -389,5 +396,6 @@ class HQRentalsModelsVehicleClass
     {
         return $this->metaCustomField;
     }
+
 }
 

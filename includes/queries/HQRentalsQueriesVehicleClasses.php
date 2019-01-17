@@ -3,6 +3,7 @@ namespace HQRentalsPlugin\HQRentalsQueries;
 
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 
+
 class HQRentalsQueriesVehicleClasses
 {
     public function __construct()

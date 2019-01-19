@@ -60,8 +60,9 @@ class HQRentalsModelsVehicleClass
         $this->locale = new HQRentalsLocaleHelper();
         $this->queryFeatures = new HQRentalsQueriesFeatures();
         $this->postArgs = array(
-            'post_type'     =>  $this->vehicleClassesCustomPostName,
-            'post_status'   =>  'publish',
+            'post_type'         =>  $this->vehicleClassesCustomPostName,
+            'post_status'       =>  'publish',
+            'posts_per_page'    =>  -1
         );
         $this->labelsPost = array(
             'name'               => _x( 'Vehicle Classes', 'post type general name', 'your-plugin-textdomain' ),

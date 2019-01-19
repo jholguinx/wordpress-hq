@@ -43,8 +43,9 @@ class HQRentalsModelsActiveRate
     {
         $this->post_id = '';
         $this->postArg = array(
-            'post_type' => $this->activeRateCustomPostName,
-            'post_status' => 'publish'
+            'post_type'         => $this->activeRateCustomPostName,
+            'post_status'       => 'publish',
+            'posts_per_page'    =>  -1
         );
         if (!empty($vehicleClassID)) {
             $this->setFromVehicleClass($vehicleClassID);

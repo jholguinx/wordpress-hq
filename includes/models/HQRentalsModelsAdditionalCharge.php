@@ -49,8 +49,9 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     {
         $this->post_id = '';
         $this->postArgs = array(
-            'post_type'     =>  $this->additionalChargesCustomPostName,
-            'post_status'   =>  'publish'
+            'post_type'         =>  $this->additionalChargesCustomPostName,
+            'post_status'       =>  'publish',
+            'posts_per_page'    =>  -1
         );
         /*
          * Custom Post Parameters

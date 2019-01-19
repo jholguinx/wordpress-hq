@@ -40,8 +40,9 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     {
         $this->post_id = '';
         $this->postArgs = array(
-            'post_type'     =>  $this->locationsCustomPostName,
-            'post_status'   =>  'publish'
+            'post_type'         =>  $this->locationsCustomPostName,
+            'post_status'       =>  'publish',
+            'posts_per_page'    =>  -1
         );
         $this->labels = array(
             'name'               => _x( 'Locations', 'post type general name', 'hq-wordpress' ),

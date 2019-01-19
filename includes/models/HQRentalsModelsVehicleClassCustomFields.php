@@ -27,8 +27,9 @@ class HQRentalsModelsVehicleClassCustomFields
     {
         $this->post_id = '';
         $this->postArgs = array(
-            'post_type'     =>  $this->customFieldsPostName,
-            'post_status'   =>  'publish'
+            'post_type'         =>  $this->customFieldsPostName,
+            'post_status'       =>  'publish',
+            'posts_per_page'    =>  -1
         );
     }
     public function setCustomFieldFromApi( $data )

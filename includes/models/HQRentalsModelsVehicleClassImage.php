@@ -44,8 +44,9 @@ class HQRentalsModelsVehicleClassImage
     {
         $this->post_id = '';
         $this->postArgs = array(
-            'post_type'     =>  $this->vehicleClassImageCustomPostName,
-            'post_status'   =>  'publish'
+            'post_type'         =>  $this->vehicleClassImageCustomPostName,
+            'post_status'       =>  'publish',
+            'posts_per_page'    =>  -1
         );
         if(!empty($post)){
             $this->setFromPost( $post );

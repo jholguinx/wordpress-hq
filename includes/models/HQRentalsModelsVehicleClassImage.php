@@ -141,9 +141,12 @@ class HQRentalsModelsVehicleClassImage
             $this->postArgs,
             array(
                 'meta_query'    =>  array(
-                    'key'       =>  $this->metaVehicleClassId,
-                    'value'     =>  $vehicleClassId,
-                    'compare'   =>  '='
+                    array(
+                        'key'       =>  $this->metaVehicleClassId,
+                        'value'     =>  $vehicleClassId,
+                        'compare'   =>  '='
+                    )
+
                 )
             )
         );

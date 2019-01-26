@@ -46,10 +46,12 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     /*
      * Constructor
      */
-    public function __construct( $id = null )
+    public function __construct( $post = null )
     {
         $this->post_id = '';
-        $this->systemId = $id;
+        if ($post) {
+	        $this->systemId = $post->ID;
+        }
         $this->postArgs = array(
             'post_type'         =>  $this->brandsCustomPostName,
             'post_status'       =>  'publish',
@@ -174,6 +176,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->myReservationsLink = get_post_meta( $brandPost->ID, $this->metaMyReservationsLink, true );
         $this->myPackagesReservationsLink = get_post_meta(  $brandPost->ID, $this->metaMyPackagesReservationsLink, true );
     }
+
     public function setBrandFromPostId($id)
     {
         $this->id = get_post_meta($id, $this->metaId, true);

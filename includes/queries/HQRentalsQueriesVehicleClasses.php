@@ -4,7 +4,7 @@ namespace HQRentalsPlugin\HQRentalsQueries;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 
 
-class HQRentalsQueriesVehicleClasses
+class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
 {
     public function __construct()
     {
@@ -18,15 +18,6 @@ class HQRentalsQueriesVehicleClasses
         foreach ($vehicleClassesPosts as $post){
             $vehicle = new HQRentalsModelsVehicleClass($post);
             $data[] = $vehicle;
-        }
-        return $data;
-    }
-    public function allVehicleClassesToFrontEnd()
-    {
-        $vehicleClassesPosts = $this->model->all();
-        $data = array();
-        foreach ($vehicleClassesPosts as $post){
-            $data[] = new HQRentalsModelsVehicleClass($post);
         }
         return $data;
     }
@@ -60,4 +51,8 @@ class HQRentalsQueriesVehicleClasses
         }
         return $data;
     }
+
+	public function getAllMetaKey() {
+    	return 'hq_wordpress_vehicle_class_all_for_frontend';
+	}
 }

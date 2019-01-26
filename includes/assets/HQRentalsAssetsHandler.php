@@ -9,6 +9,7 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 
 class HQRentalsAssetsHandler
 {
+	public static $count = 0;
     protected $brandsGlobalFrontName = 'hqRentalsBrands';
     protected $locationsGlobalFrontName = 'hqRentalsLocations';
     protected $vehiclesGlobalFrontName = 'hqRentalsVehicles';
@@ -17,12 +18,15 @@ class HQRentalsAssetsHandler
 
     public function __construct()
     {
+	    static::$count++;
         $this->brandQueries = new HQRentalsQueriesBrands();
         $this->locationQueries = new HQRentalsQueriesLocations();
         $this->vehicleQueries = new HQRentalsQueriesVehicleClasses();
         $this->settings = new HQRentalsSettings();
-        add_action('wp_enqueue_scripts', array( $this, 'registerPluginAssets' ), 10);
-        add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
+	    if (static::$count === 1) {
+		    add_action('wp_enqueue_scripts', array( $this, 'registerPluginAssets' ), 10);
+		    add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
+	    }
     }
     public function registerPluginAssets()
     {
@@ -47,15 +51,10 @@ class HQRentalsAssetsHandler
     }
     public function registerAndEnqueueFrontEndGlobalVariables()
     {
-        $brands = $this->brandQueries->allToFrontEnd();
-        $locations = $this->locationQueries->allLocationToFrontEnd();
-        $vehicles = $this->vehicleQueries->allVehicleClassesToFrontEnd();
-        $frontDateFormat = $this->settings->getFrontEndDatetimeFormat();
-        $systemDateFormat = $this->settings->getHQDatetimeFormat();
-        wp_localize_script('hq-dummy-script', $this->brandsGlobalFrontName, $brands);
-        wp_localize_script('hq-dummy-script', $this->locationsGlobalFrontName, $locations);
-        wp_localize_script('hq-dummy-script', $this->vehiclesGlobalFrontName, $vehicles);
-        wp_localize_script('hq-dummy-script', $this->frontDateFormatFrontName, $frontDateFormat);
-        wp_localize_script('hq-dummy-script', $this->systemDateFormatFrontName, $systemDateFormat);
+	    wp_localize_script('hq-dummy-script', $this->brandsGlobalFrontName, $this->brandQueries->allToFrontEnd());
+	    wp_localize_script('hq-dummy-script', $this->locationsGlobalFrontName, $this->locationQueries->allToFrontEnd());
+	    wp_localize_script('hq-dummy-script', $this->vehiclesGlobalFrontName, $this->vehicleQueries->allToFrontEnd());
+		wp_localize_script('hq-dummy-script', $this->frontDateFormatFrontName, $this->settings->getFrontEndDatetimeFormat());
+		wp_localize_script('hq-dummy-script', $this->systemDateFormatFrontName, $this->settings->getHQDatetimeFormat());
     }
 }

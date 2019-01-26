@@ -24,15 +24,33 @@ class HQRentalsVehicleClassesTask{
 		}
 
 		if ( $vehicleClasses->success ) {
-			foreach ( $vehicleClasses->data as $class ) {
-				$newVehicleClass = new HQVehicleClass();
-				if ( $customFields->success ) {
-					$newVehicleClass->setVehicleClassFromApi( $class, $customFields->data );
-				} else {
-					$newVehicleClass->setVehicleClassFromApi( $class );
-				}
-				$newVehicleClass->create();
-			}
+			$this->createVehicleClasses( $vehicleClasses->data, $customFields );
+			$this->createAllVehicleClassesForFrontend( $vehicleClasses->data );
 		}
+	}
+
+	protected function createVehicleClasses( $vehicleClasses, $customFields ) {
+		foreach ( $vehicleClasses as $vehicle_class ) {
+			$newVehicleClass = new HQVehicleClass();
+			$newVehicleClass->setVehicleClassFromApi( $vehicle_class );
+			$newVehicleClass->create();
+		}
+	}
+
+	protected function createAllVehicleClassesForFrontend( $vehicleClasses ) {
+		$all_id         = wp_insert_post( [
+			'post_type'      => 'hqwp_veh_classes',
+			'post_status'    => 'publish',
+			'posts_per_page' => - 1,
+			'post_title'     => 'All Vehicle Classes',
+			'post_name'      => 'all_vehicle_classes',
+		] );
+		$allForFrontEnd = array_map( function ( $vehicleClass ) {
+			return [
+				'id'   => $vehicleClass->id,
+				'name' => $vehicleClass->name,
+			];
+		}, $vehicleClasses );
+		hq_update_post_meta( $all_id, 'hq_wordpress_vehicle_class_all_for_frontend', json_encode( $allForFrontEnd ) );
 	}
 }

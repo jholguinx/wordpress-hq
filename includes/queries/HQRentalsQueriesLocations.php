@@ -2,7 +2,7 @@
 namespace HQRentalsPlugin\HQRentalsQueries;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation;
 
-class HQRentalsQueriesLocations{
+class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
 
     public function __construct()
     {
@@ -18,14 +18,7 @@ class HQRentalsQueriesLocations{
         }
         return $data;
     }
-    public function allLocationToFrontEnd()
-    {
-        $locations = $this->model->all();
-        $data = array();
-        foreach ($locations as $post){
-            $data[] = new HQRentalsModelsLocation($post);
-        }
-        return $data;
-    }
-
+	public function getAllMetaKey() {
+    	return 'hq_wordpress_location_all_for_frontend';
+	}
 }

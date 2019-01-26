@@ -31,28 +31,19 @@ class HQRentalsAdminSettings
 
     public function displaySettingsPage()
     {
-        $devMode = $_GET['devmode'];
+        $devMode = isset($_GET['devmode']) && $_GET['devmode'];
         if (!empty($_POST)) {
-            if($_POST['hq_force_update'] == '1'){
+            if(isset($_POST['hq_force_update'])){
                 $this->settings->forceSyncOnHQData();
             }else{
                 $this->settings->updateSettings($_POST);
             }
             ?>
-            <div class="wrap">
-                <div id="wrap">
-                    <h1>Caag Software Authentication Access</h1>
-                    <div class="caag-notice-wp notice caag-notice">
-                        <p>Don't have an account yet? Create a new account by clicking on this link</p>
-                        <a href="https://caagsoftware.com/" class="caag-button caag-button-primary caag-button-external-link" target="_blank">Register Now</a>
-                    </div>
-                </div>
-            </div>
-            <?php if($_POST['success'] == 'success'): ?>
+            <?php if(isset($_POST['success']) && $_POST['success'] == 'success'): ?>
                 <div class="wrap">
                     <div class="message updated"><p>The Setting were Successfully Saved!</p></div>
                 </div>
-            <?php elseif($_POST['forcing_update'] == 'success'): ?>
+            <?php elseif(isset($_POST['forcing_update']) && $_POST['forcing_update'] == 'success'): ?>
                 <div class="wrap">
                     <div class="message updated"><p>All data was saved</p></div>
                 </div>
@@ -66,13 +57,7 @@ class HQRentalsAdminSettings
             ?>
             <div class="wrap">
                 <div id="wrap">
-                    <h1>Caag Software Authentication Access</h1>
-                    <div class="caag-notice-wp notice caag-notice">
-                        <p>Don't have an account yet? Create a new account by clicking on this link</p>
-                        <a href="https://caagsoftware.com/"
-                           class="caag-button caag-button-primary caag-button-external-link" target="_blank">Register
-                            Now</a>
-                    </div>
+                    <h1>HQ Rentals Authentication Access</h1>
                     <form action="" method="post">
                         <table class="form-table">
                             <tbody>

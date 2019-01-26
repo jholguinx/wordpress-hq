@@ -13,7 +13,6 @@ class HQRentalsAdditionalChargesTask
     }
     public function refreshAdditionalChargesData()
     {
-        $this->dropAdditionalChargesData();
         $this->createAdditionalChargesData();
     }
     
@@ -26,17 +25,6 @@ class HQRentalsAdditionalChargesTask
                 $newCharge->setAdditionalChargeFromApi($charge);
                 $newCharge->create();
             }
-        }
-    }
-    public function dropAdditionalChargesData()
-    {
-        $charges = new HQCharge();
-        foreach ( $charges->all() as $charge ){
-            $metas = get_post_meta( $charge->ID );
-            foreach ( $metas as $key => $values ){
-                delete_post_meta( $charge->ID, $key );
-            }
-            $post_id = wp_delete_post( $charge->ID );
         }
     }
 }

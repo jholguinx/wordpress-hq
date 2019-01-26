@@ -129,47 +129,17 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         );
         $post_id = wp_insert_post( $this->postArgs );
         $this->post_id = $post_id;
-        update_post_meta( $post_id, $this->metaId, $this->id );
-        update_post_meta( $post_id, $this->metaName, $this->name );
-        update_post_meta( $post_id, $this->metaTaxLabel, $this->taxLabel );
-        update_post_meta( $post_id, $this->metaWebsiteLink, $this->websiteLink );
-        update_post_meta( $post_id, $this->metaPublicReservationsLinkFull, $this->publicReservationsLinkFull );
-        update_post_meta( $post_id, $this->metaPublicPackagesLinkFull, $this->publicPackagesLinkFull );
-        update_post_meta( $post_id, $this->metaPublicReservationsFirstStepLink, $this->publicReservationsFirstStepLink );
-        update_post_meta( $post_id, $this->metaMyReservationsLink, $this->myReservationsLink );
-        update_post_meta( $post_id, $this->metaMyPackagesReservationsLink, $this->myPackagesReservationsLink );
+        hq_update_post_meta( $post_id, $this->metaId, $this->id );
+        hq_update_post_meta( $post_id, $this->metaName, $this->name );
+        hq_update_post_meta( $post_id, $this->metaTaxLabel, $this->taxLabel );
+        hq_update_post_meta( $post_id, $this->metaWebsiteLink, $this->websiteLink );
+        hq_update_post_meta( $post_id, $this->metaPublicReservationsLinkFull, $this->publicReservationsLinkFull );
+        hq_update_post_meta( $post_id, $this->metaPublicPackagesLinkFull, $this->publicPackagesLinkFull );
+        hq_update_post_meta( $post_id, $this->metaPublicReservationsFirstStepLink, $this->publicReservationsFirstStepLink );
+        hq_update_post_meta( $post_id, $this->metaMyReservationsLink, $this->myReservationsLink );
+        hq_update_post_meta( $post_id, $this->metaMyPackagesReservationsLink, $this->myPackagesReservationsLink );
     }
-    /*
-     * Update Brand Custom Post Information
-     */
-    public function update()
-    {
-        update_post_meta( $this->post_id, $this->metaId, $this->id );
-        update_post_meta( $this->post_id, $this->metaName, $this->name );
-        update_post_meta( $this->post_id, $this->metaTaxLabel, $this->taxLabel );
-        update_post_meta( $this->post_id, $this->metaWebsiteLink, $this->websiteLink );
-        update_post_meta( $this->post_id, $this->metaPublicReservationsLinkFull, $this->publicReservationsLinkFull );
-        update_post_meta( $this->post_id, $this->metaPublicPackagesLinkFull, $this->publicPackagesLinkFull );
-        update_post_meta( $this->post_id, $this->metaPublicReservationsFirstStepLink, $this->publicReservationsFirstStepLink );
-        update_post_meta( $this->post_id, $this->metaMyReservationsLink, $this->myReservationsLink );
-        update_post_meta( $this->post_id, $this->metaMyPackagesReservationsLink, $this->myPackagesReservationsLink );
-    }
-    /*
-     * Delete Brand Custom Post
-     */
-    public function delete()
-    {
-        delete_post_meta( $this->post_id, $this->metaId );
-        delete_post_meta( $this->post_id, $this->metaName );
-        delete_post_meta( $this->post_id, $this->metaTaxLabel );
-        delete_post_meta( $this->post_id, $this->metaWebsiteLink );
-        delete_post_meta( $this->post_id, $this->metaPublicReservationsLinkFull );
-        delete_post_meta( $this->post_id, $this->metaPublicPackagesLinkFull );
-        delete_post_meta( $this->post_id, $this->metaPublicReservationsFirstStepLink );
-        delete_post_meta( $this->post_id, $this->metaMyReservationsLink );
-        delete_post_meta( $this->post_id, $this->metaMyPackagesReservationsLink );
-        $post_id = wp_delete_post( $this->post_id , true );
-    }
+
     /*
      * Find
      */

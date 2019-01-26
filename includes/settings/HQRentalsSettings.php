@@ -86,7 +86,7 @@ class HQRentalsSettings
 
     public function saveHQDatetimeFormat($datetime_format)
     {
-        return update_option($this->hq_datetime_format, $datetimeformat);
+        return update_option($this->hq_datetime_format, $datetime_format);
     }
 
     public function saveFrontEndDateTimeFormat($datetime_format)

@@ -14,7 +14,6 @@ class HQRentalsLocationsTask
 
     public function refreshLocationsData()
     {
-        $this->dropLocationsData();
         $this->createLocationsData();
     }
 
@@ -29,18 +28,6 @@ class HQRentalsLocationsTask
             }
         } else {
             return false;
-        }
-    }
-
-    public function dropLocationsData()
-    {
-        $location = new HQLocation();
-        foreach ($location->all() as $locationPost) {
-            $metas = get_post_meta($locationPost->ID);
-            foreach ($metas as $key => $values) {
-                delete_post_meta($locationPost->ID, $key);
-            }
-            $post_id = wp_delete_post($locationPost->ID);
         }
     }
 }

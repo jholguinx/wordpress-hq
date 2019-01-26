@@ -1,7 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
 
-class HQRentalsModelsVehicleClassImage
+class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
 {
     /*
      * Custom Post Configuration
@@ -62,9 +62,10 @@ class HQRentalsModelsVehicleClassImage
         $this->mime = $data->mime;
         $this->size = $data->size;
         $this->order = $data->order;
-        $this->label = $data-> label;
+        $this->label = $data->label;
         $this->publicLink = $data->public_link;
     }
+
     public function create()
     {
         $this->postArgs = array_merge(
@@ -76,43 +77,17 @@ class HQRentalsModelsVehicleClassImage
         );
         $post_id = wp_insert_post( $this->postArgs );
         $this->post_id = $post_id;
-        update_post_meta( $post_id, $this->metaId, $this->id );
-        update_post_meta( $post_id, $this->metaVehicleClassId, $this->vehicleClassId );
-        update_post_meta( $post_id, $this->metaFilename, $this->filename );
-        update_post_meta( $post_id, $this->metaExtension, $this->extension );
-        update_post_meta( $post_id, $this->metaMime, $this->mime );
-        update_post_meta( $post_id, $this->metaSize, $this->size );
-        update_post_meta( $post_id, $this->metaOrder, $this->order );
-        update_post_meta( $post_id, $this->metaLabel, $this->label );
-        update_post_meta( $post_id, $this->metaPublicLink, $this->publicLink );
+        hq_update_post_meta( $post_id, $this->metaId, $this->id );
+        hq_update_post_meta( $post_id, $this->metaVehicleClassId, $this->vehicleClassId );
+        hq_update_post_meta( $post_id, $this->metaFilename, $this->filename );
+        hq_update_post_meta( $post_id, $this->metaExtension, $this->extension );
+        hq_update_post_meta( $post_id, $this->metaMime, $this->mime );
+        hq_update_post_meta( $post_id, $this->metaSize, $this->size );
+        hq_update_post_meta( $post_id, $this->metaOrder, $this->order );
+        hq_update_post_meta( $post_id, $this->metaLabel, $this->label );
+        hq_update_post_meta( $post_id, $this->metaPublicLink, $this->publicLink );
     }
 
-    public function update()
-    {
-        update_post_meta( $this->post_id, $this->metaId, $this->id );
-        update_post_meta( $this->post_id, $this->metaVehicleClassId, $this->vehicleClassId );
-        update_post_meta( $this->post_id, $this->metaFilename, $this->filename );
-        update_post_meta( $this->post_id, $this->metaExtension, $this->extension );
-        update_post_meta( $this->post_id, $this->metaMime, $this->mime );
-        update_post_meta( $this->post_id, $this->metaSize, $this->size );
-        update_post_meta( $this->post_id, $this->metaOrder, $this->order );
-        update_post_meta( $this->post_id, $this->metaLabel, $this->label );
-        update_post_meta( $this->post_id, $this->metaPublicLink, $this->publicLink );
-    }
-
-    public function delete()
-    {
-        delete_post_meta( $this->post_id, $this->metaId );
-        delete_post_meta( $this->post_id, $this->metaVehicleClassId );
-        delete_post_meta( $this->post_id, $this->metaFilename );
-        delete_post_meta( $this->post_id, $this->metaExtension );
-        delete_post_meta( $this->post_id, $this->metaMime );
-        delete_post_meta( $this->post_id, $this->metaSize );
-        delete_post_meta( $this->post_id, $this->metaOrder );
-        delete_post_meta( $this->post_id, $this->metaLabel );
-        delete_post_meta( $this->post_id, $this->metaPublicLink );
-        $post_id = wp_delete_post( $this->post_id , true );
-    }
     public function find($caagImage)
     {
         $query = new \WP_Query( $this->postArgs );

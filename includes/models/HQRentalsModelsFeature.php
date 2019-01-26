@@ -2,7 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 
-class HQRentalsModelsFeature
+class HQRentalsModelsFeature extends HQRentalsBaseModel
 {
     /*
      * Custom Post Configuration
@@ -63,30 +63,11 @@ class HQRentalsModelsFeature
         );
         $post_id = wp_insert_post($this->postArgs);
         $this->post_id = $post_id;
-        update_post_meta($post_id, $this->metaId, $this->id);
-        update_post_meta($post_id, $this->metaVehicleClassId, $this->vehicleClassId);
-        update_post_meta($post_id, $this->metaLabel, $this->label);
-        update_post_meta($post_id, $this->metaIcon, $this->icon);
-        update_post_meta($post_id, $this->metaOrder, $this->order);
-    }
-
-    public function update()
-    {
-        update_post_meta($this->post_id, $this->metaId, $this->id);
-        update_post_meta($this->post_id, $this->metaVehicleClassId, $this->vehicleClassId);
-        update_post_meta($this->post_id, $this->metaLabel, $this->label);
-        update_post_meta($this->post_id, $this->metaIcon, $this->icon);
-        update_post_meta($this->post_id, $this->metaOrder, $this->order);
-    }
-
-    public function delete()
-    {
-        delete_post_meta($this->post_id, $this->metaId);
-        delete_post_meta($this->post_id, $this->metaVehicleClassId);
-        delete_post_meta($this->post_id, $this->metaLabel);
-        delete_post_meta($this->post_id, $this->metaIcon);
-        delete_post_meta($this->post_id, $this->metaOrder);
-        $post_id = wp_delete_post($this->post_id);
+        hq_update_post_meta($post_id, $this->metaId, $this->id);
+        hq_update_post_meta($post_id, $this->metaVehicleClassId, $this->vehicleClassId);
+        hq_update_post_meta($post_id, $this->metaLabel, $this->label);
+        hq_update_post_meta($post_id, $this->metaIcon, $this->icon);
+        hq_update_post_meta($post_id, $this->metaOrder, $this->order);
     }
 
     public function find($caag_id)

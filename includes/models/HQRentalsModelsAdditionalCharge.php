@@ -106,35 +106,25 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
         );
         $post_id = wp_insert_post( $this->postArgs );
         $this->post_id = $post_id;
-        update_post_meta( $post_id, $this->metaId, $this->id );
-        update_post_meta( $post_id, $this->metaName, $this->name );
-        update_post_meta( $post_id, $this->metaChargeType, $this->chargeType );
+        hq_update_post_meta( $post_id, $this->metaId, $this->id );
+        hq_update_post_meta( $post_id, $this->metaName, $this->name );
+        hq_update_post_meta( $post_id, $this->metaChargeType, $this->chargeType );
         foreach ( $this->mandatoryBrands as $value ){
-            update_post_meta( $post_id, $this->metaMandatoryBrands, $value );
+            hq_update_post_meta( $post_id, $this->metaMandatoryBrands, $value );
         }
-        update_post_meta( $post_id, $this->metaSelectionType, $this->selectionType );
-        update_post_meta( $post_id, $this->metaHardcoded, $this->hardcoded );
+        hq_update_post_meta( $post_id, $this->metaSelectionType, $this->selectionType );
+        hq_update_post_meta( $post_id, $this->metaHardcoded, $this->hardcoded );
         foreach ( $this->descriptions as $key => $value ){
-            update_post_meta( $post_id, $this->metaDescription . '_' . $key, $value );
+            hq_update_post_meta( $post_id, $this->metaDescription . '_' . $key, $value );
         }
-        update_post_meta( $post_id, $this->metaIcon, $this->icon );
+        hq_update_post_meta( $post_id, $this->metaIcon, $this->icon );
         foreach( $this->labels as $key => $value ){
-            update_post_meta( $post_id, $this->metaLabelForWebsite . '_' . $key, $value );
+            hq_update_post_meta( $post_id, $this->metaLabelForWebsite . '_' . $key, $value );
         }
         foreach( $this->shortDescriptions as $key => $value ){
-            update_post_meta( $post_id, $this->metaShortDescription . '_' . $key, $value );
+            hq_update_post_meta( $post_id, $this->metaShortDescription . '_' . $key, $value );
         }
-        update_post_meta( $post_id, $this->metaSelectionRange, $this->selectionRange );
-    }
-
-    public function update()
-    {
-        //*//dda
-    }
-
-    public function delete()
-    {
-
+        hq_update_post_meta( $post_id, $this->metaSelectionRange, $this->selectionRange );
     }
 
     /*

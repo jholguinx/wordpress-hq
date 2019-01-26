@@ -2,7 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 
-class HQRentalsModelsVehicleClassCustomFields
+class HQRentalsModelsVehicleClassCustomFields extends HQRentalsBaseModel
 {
     /*
      *
@@ -49,10 +49,22 @@ class HQRentalsModelsVehicleClassCustomFields
             )
         );
         $post_id = wp_insert_post( $queryArgs );
-        update_post_meta( $post_id, $this->idMeta, $this->id );
-        update_post_meta( $post_id, $this->labelMeta, $this->label );
-        update_post_meta( $post_id, $this->typeMeta, $this->type );
-        update_post_meta( $post_id, $this->dbcolumnMeta, $this->dbcolumn );
+        hq_update_post_meta( $post_id, $this->idMeta, $this->id );
+        hq_update_post_meta( $post_id, $this->labelMeta, $this->label );
+        hq_update_post_meta( $post_id, $this->typeMeta, $this->type );
+        hq_update_post_meta( $post_id, $this->dbcolumnMeta, $this->dbcolumn );
 
     }
+
+	protected function find( $caag_id ) {
+		// TODO: Implement find() method.
+	}
+
+	protected function first() {
+		// TODO: Implement first() method.
+	}
+
+	protected function all() {
+		// TODO: Implement all() method.
+	}
 }

@@ -106,36 +106,15 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         );
         $post_id = wp_insert_post($this->postArgs);
         $this->post_id = $post_id;
-        update_post_meta( $post_id, $this->metaId, $this->id );
-        update_post_meta( $post_id, $this->metaBrandId, $this->brandId );
-        update_post_meta( $post_id, $this->metaName, $this->name);
-        update_post_meta( $post_id, $this->metaAirport, $this->isAirport );
-        update_post_meta( $post_id, $this->metaOffice, $this->isOffice );
-        update_post_meta( $post_id, $this->metaCoordinates, $this->coordinates );
-        update_post_meta( $post_id, $this->metaIsActive, $this->isActive );
-    }
-    public function update()
-    {
-        update_post_meta( $this->post_id, $this->metaId, $this->id );
-        update_post_meta( $this->post_id, $this->metaBrandId, $this->brandId );
-        update_post_meta( $this->post_id, $this->metaName, $this->name);
-        update_post_meta( $this->post_id, $this->metaAirport, $this->isAirport );
-        update_post_meta( $this->post_id, $this->metaOffice, $this->isOffice );
-        update_post_meta( $this->post_id, $this->metaCoordinates, $this->coordinates );
-        update_post_meta( $this->post_id, $this->metaIsActive, $this->isActive );
+        hq_update_post_meta( $post_id, $this->metaId, $this->id );
+        hq_update_post_meta( $post_id, $this->metaBrandId, $this->brandId );
+        hq_update_post_meta( $post_id, $this->metaName, $this->name);
+        hq_update_post_meta( $post_id, $this->metaAirport, $this->isAirport );
+        hq_update_post_meta( $post_id, $this->metaOffice, $this->isOffice );
+        hq_update_post_meta( $post_id, $this->metaCoordinates, $this->coordinates );
+        hq_update_post_meta( $post_id, $this->metaIsActive, $this->isActive );
     }
 
-    public function delete()
-    {
-        delete_post_meta( $this->post_id, $this->metaId );
-        delete_post_meta( $this->post_id, $this->metaBrandId );
-        delete_post_meta( $this->post_id, $this->metaName );
-        delete_post_meta( $this->post_id, $this->metaAirport );
-        delete_post_meta( $this->post_id, $this->metaOffice );
-        delete_post_meta( $this->post_id, $this->metaCoordinates );
-        delete_post_meta( $this->post_id, $this->metaIsActive );
-        $post_id = wp_delete_post( $this->post_id , true );
-    }
     /*
      * Find
      */

@@ -2,27 +2,40 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
-class HQRentalsScheduler
-{
-    public function __construct()
-    {
-        $this->brandsTask = new HQRentalsBrandsTask();
-        $this->locationsTask = new HQRentalsLocationsTask();
-        $this->vehicleClassesTask = new HQRentalsVehicleClassesTask();
-        $this->featuresTask = new HQRentalsFeaturesTask();
-        $this->activeRatesTask = new HQRentalsActiveRatesTask();
-        $this->additionalChargesTask = new HQRentalsAdditionalChargesTask();
-        $this->vehicleClassImagesTask = new HQRentalsVehicleClassImagesTask();
-    }
 
-    public function refreshHQData()
-    {
-        $this->brandsTask->refreshBrandsData();
-        $this->featuresTask->refreshFeaturesData();
-        $this->vehicleClassImagesTask->refreshVehicleClassImagesData();
-        $this->activeRatesTask->refreshActiveRateData();
-        $this->locationsTask->refreshLocationsData();
-        $this->additionalChargesTask->refreshAdditionalChargesData();
-        $this->vehicleClassesTask->refreshVehicleClassesData();
-    }
+class HQRentalsScheduler{
+	/**
+	 * @var HQRentalsBrandsTask
+	 */
+	protected $brandsTask;
+	/**
+	 * @var HQRentalsLocationsTask
+	 */
+	protected $locationsTask;
+	/**
+	 * @var HQRentalsVehicleClassesTask
+	 */
+	protected $vehicleClassesTask;
+	/**
+	 * @var HQRentalsAdditionalChargesTask
+	 */
+	protected $additionalChargesTask;
+
+	public function __construct() {
+		$this->brandsTask            = new HQRentalsBrandsTask();
+		$this->locationsTask         = new HQRentalsLocationsTask();
+		$this->vehicleClassesTask    = new HQRentalsVehicleClassesTask();
+		$this->additionalChargesTask = new HQRentalsAdditionalChargesTask();
+	}
+
+	public function refreshHQData() {
+		global $wpdb;
+		$wpdb->get_results( "delete from wp_posts where post_type like 'hqwp%';" );
+		$wpdb->get_results( "delete from wp_postmeta where meta_key like 'hq_wordpress%'" );
+
+		$this->brandsTask->refreshBrandsData();
+		$this->locationsTask->refreshLocationsData();
+		$this->additionalChargesTask->refreshAdditionalChargesData();
+		$this->vehicleClassesTask->refreshVehicleClassesData();
+	}
 }

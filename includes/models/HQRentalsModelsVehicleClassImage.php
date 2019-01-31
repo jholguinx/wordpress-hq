@@ -111,8 +111,8 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         }
         //$metas =
     }
-    public function getImagesPostByVehicleClassID($vehicleClassId){
-
+    public function getImagesPostByVehicleClassID($vehicleClassId)
+    {
         $args = array_merge(
             $this->postArgs,
             array(
@@ -128,6 +128,11 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         );
         $query = new \WP_Query($args);
         return $query->posts;
+    }
+    public function getImageFromPostByVehicleClassID($vehicleClassId)
+    {
+        $posts = $this->getImagesPostByVehicleClassID($vehicleClassId);
+        return $posts[0];
     }
 
     /**

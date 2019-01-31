@@ -18,7 +18,7 @@ class HQRentalsBrandsTask{
 		$brands = $this->connector->getHQRentalsBrands();
 		if ( $brands->success ) {
 			$this->createBrands( $brands->data );
-			$this->createAllBrandsForFrontEnd( $brands->data );
+			//$this->createAllBrandsForFrontEnd( $brands->data );
 		}
 	}
 
@@ -29,7 +29,7 @@ class HQRentalsBrandsTask{
 			$newBrand->create();
 		}
 	}
-
+    /*
 	protected function createAllBrandsForFrontEnd( $brands ) {
 		$all_id         = wp_insert_post( [
 			'post_type'      => 'hqwp_brands',
@@ -45,5 +45,5 @@ class HQRentalsBrandsTask{
 			];
 		}, $brands );
 		hq_update_post_meta( $all_id, 'hq_wordpress_brand_all_for_frontend', json_encode( $allForFrontEnd ) );
-	}
+	}*/
 }

@@ -4,7 +4,8 @@ namespace HQRentalsPlugin\HQRentalsQueries;
 
 abstract class HQRentalsQueriesBaseClass{
 	abstract public function getAllMetaKey();
-
+    abstract public function allToFrontEnd();
+    /*
 	public function allToFrontEnd() {
 		global $wpdb;
 
@@ -14,5 +15,5 @@ abstract class HQRentalsQueriesBaseClass{
 			return json_decode( $all[0]->meta_value );
 		}
 		return false;
-	}
+	}*/
 }

@@ -21,4 +21,17 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
 	public function getAllMetaKey() {
     	return 'hq_wordpress_location_all_for_frontend';
 	}
+	public function allToFrontEnd()
+    {
+        $locationsPost = $this->model->all();
+        $data = [];
+        foreach ( $locationsPost as $post ){
+            $location = new HQRentalsModelsLocation($post);
+            $newData = new \stdClass(  );
+            $newData->id = $location->id;
+            $newData->name = $location->name;
+            $data[] = $newData;
+        }
+        return $data;
+    }
 }

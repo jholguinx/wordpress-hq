@@ -79,22 +79,22 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'not_found_in_trash' => __('No vehicles classes found in Trash.', 'your-plugin-textdomain'),
         ];
         $this->customPostArgs = [
-            'labels' => $this->labelsPost,
-            'public' => true,
-            'show_in_admin_bar' => true,
-            'publicly_queryable' => true,
-            'show_ui' => true,
-            'show_in_menu' => true,
-            'show_in_nav_menus' => true,
-            'query_var' => true,
-            'rewrite' => ['slug' => $this->vehicleClassesCustomPostSlug],
-            'has_archive' => true,
-            'hierarchical' => false,
-            'exclude_from_search' => false,
-            'menu_icon' => 'dashicons-thumbs-up',
-            'menu_position' => 8,
-            'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
-            'capabilities' => [
+            'labels'                    => $this->labelsPost,
+            'public'                    => true,
+            'show_in_admin_bar'         => true,
+            'publicly_queryable'        => true,
+            'show_ui'                   => true,
+            'show_in_menu'              => true,
+            'show_in_nav_menus'         => true,
+            'query_var'                 => true,
+            'rewrite'                   => ['slug' => $this->vehicleClassesCustomPostSlug],
+            'has_archive'               => true,
+            'hierarchical'              => false,
+            'exclude_from_search'       => false,
+            'menu_icon'                 => 'dashicons-thumbs-up',
+            'menu_position'             => 8,
+            'supports'                  => ['title', 'editor', 'thumbnail', 'excerpt'],
+            'capabilities'              => [
                 'create_posts' => 'do_not_allow',
             ],
         ];
@@ -116,19 +116,28 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->recommended = $data->recommended;
         $this->active = $data->active;
         $this->publicImageLink = $data->public_image_link;
-        foreach ($data->label_for_website as $key => $label) {
-            $this->labels[$key] = $label;
+        if(!empty($data->label_for_website)){
+            foreach ($data->label_for_website as $key => $label) {
+                $this->labels[$key] = $label;
+            }
         }
-        foreach ($data->short_description_for_website as $key => $shortDescription) {
-            $this->shortDescriptions[$key] = $shortDescription;
+
+        if(!empty($data->short_description_for_website)){
+            foreach ($data->short_description_for_website as $key => $shortDescription) {
+                $this->shortDescriptions[$key] = $shortDescription;
+            }
         }
-        foreach ($data->description_for_website as $key => $description) {
-            $this->descriptions[$key] = $description;
+        if(!empty($data->description_for_website)){
+            foreach ($data->description_for_website as $key => $description) {
+                $this->descriptions[$key] = $description;
+            }
         }
-        foreach ($data->images as $image) {
-            $newImage = new HQRentalsModelsVehicleClassImage();
-            $newImage->setVehicleClassImageFromApi($this->id, $image);
-            $this->images[] = $newImage;
+        if(!empty($data->images)){
+            foreach ($data->images as $image) {
+                $newImage = new HQRentalsModelsVehicleClassImage();
+                $newImage->setVehicleClassImageFromApi($this->id, $image);
+                $this->images[] = $newImage;
+            }
         }
         foreach ($data->features as $feature) {
             $newFeature = new HQRentalsModelsFeature();
@@ -402,6 +411,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getCustomFieldMetaPrefix()
     {
         return $this->metaCustomField;
+    }
+    public function getVehicleClassIdMeta()
+    {
+        return $this->metaId;
     }
 }
 

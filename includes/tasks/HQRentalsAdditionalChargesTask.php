@@ -18,7 +18,7 @@ class HQRentalsAdditionalChargesTask{
 		$charges = $this->connector->getHQRentalsAdditionalCharges();
 		if ( $charges->success ) {
 			$this->createAdditionalCharges( $charges->data );
-			$this->createAllAdditionalChargesForFrontend( $charges->data );
+			//$this->createAllAdditionalChargesForFrontend( $charges->data );
 		}
 	}
 
@@ -29,7 +29,7 @@ class HQRentalsAdditionalChargesTask{
 			$newCharge->create();
 		}
 	}
-
+    /*
 	protected function createAllAdditionalChargesForFrontend( $additionalCharges ) {
 		$all_id         = wp_insert_post( [
 			'post_type'      => 'hqwp_charges',
@@ -45,5 +45,5 @@ class HQRentalsAdditionalChargesTask{
 			];
 		}, $additionalCharges );
 		hq_update_post_meta( $all_id, 'hq_wordpress_additional_charge_all_for_frontend', json_encode( $allForFrontEnd ) );
-	}
+	}*/
 }

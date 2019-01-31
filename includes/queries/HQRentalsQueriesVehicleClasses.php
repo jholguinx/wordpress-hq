@@ -51,8 +51,40 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         }
         return $data;
     }
+    public function getVehicleClassBySystemId( $hqId )
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query'    =>  array(
+                    array(
+                        'key'       => 'hq_wordpress_vehicle_class_id_meta',
+                        'value'     =>  $hqId,
+                        'compare'   =>  '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query( $args );
+        return new HQRentalsModelsVehicleClass($query->posts[0]);
 
-	public function getAllMetaKey() {
+    }
+    public function allToFrontEnd()
+    {
+        $vehiclesPost = $this->model->all();
+        $data = [];
+        foreach ( $vehiclesPost as $post ){
+            $vehicle = new HQRentalsModelsVehicleClass($post);
+            $newData = new \stdClass(  );
+            $newData->id = $vehicle->id;
+            $newData->name = $vehicle->name;
+            $newData->permalink = $vehicle->permalink;
+            $data[] = $newData;
+        }
+        return $data;
+    }
+
+    public function getAllMetaKey() {
     	return 'hq_wordpress_vehicle_class_all_for_frontend';
 	}
 }

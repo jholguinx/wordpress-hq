@@ -13,7 +13,6 @@ abstract class HQRentalsQueriesBaseClass{
 		if ( isset( $all[0]->meta_value ) ) {
 			return json_decode( $all[0]->meta_value );
 		}
-
 		return false;
 	}
 }

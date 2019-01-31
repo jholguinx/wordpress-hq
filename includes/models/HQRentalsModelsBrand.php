@@ -225,5 +225,4 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $query = new \WP_Query( $args );
         return $this->setBrandFromPost($query->posts[0]);
     }
-
 }

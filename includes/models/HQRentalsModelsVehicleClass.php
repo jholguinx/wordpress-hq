@@ -322,6 +322,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel{
 
 		return $imagesForReturn;
 	}
+	public function getImage() {
+
+    }
 
 	public function features() {
 		$query = new HQRentalsQueriesFeatures();

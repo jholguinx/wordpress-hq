@@ -106,7 +106,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     /*
      * set Vehicle Class From Api
      */
-    public function setVehicleClassFromApi($data)
+    public function setVehicleClassFromApi($data, $customFields = null)
     {
         $this->id = $data->id;
         $this->brandId = $data->brand_id;
@@ -416,5 +416,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return $this->metaId;
     }
+
 }
 

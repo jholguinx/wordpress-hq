@@ -32,7 +32,7 @@ class HQRentalsVehicleClassesTask{
 	protected function createVehicleClasses( $vehicleClasses, $customFields ) {
 		foreach ( $vehicleClasses as $vehicle_class ) {
 			$newVehicleClass = new HQVehicleClass();
-			$newVehicleClass->setVehicleClassFromApi( $vehicle_class );
+			$newVehicleClass->setVehicleClassFromApi( $vehicle_class, $customFields );
 			$newVehicleClass->create();
 		}
 	}

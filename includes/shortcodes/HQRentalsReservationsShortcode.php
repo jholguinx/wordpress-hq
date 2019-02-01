@@ -25,7 +25,6 @@ class HQRentalsReservationsShortcode
                 'id' => '1',
                 'forced_locale' => 'en',
                 'new' => 'true',
-
             )
             , $atts, 'hq_rentals_reservations');
         $post_data = $_POST;

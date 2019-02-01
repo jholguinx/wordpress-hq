@@ -49,7 +49,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $images = [];
     public $features = [];
     public $rate = '';
-    public $customField = '';
+    public $customField = [];
     public $permalink = '';
 
     public function __construct($post = null)

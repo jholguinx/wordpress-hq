@@ -108,7 +108,12 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return $query->posts;
     }
 
-    public function getAllValuesFromCustomField($dbColumn)
+    /**
+     * Retrieves all distinct meta value from the vehicle classes
+     * @param $dbColumn
+     * @return array|null|object
+     */
+    public function getAllDifferentsValuesFromCustomField($dbColumn)
     {
         global $wpdb;
         $queryString = "SELECT DISTINCT(meta_value)
@@ -116,10 +121,49 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
                     WHERE meta_key = '" . $this->model->getCustomFieldMetaPrefix() . $dbColumn . "'
                     ";
         $data = $wpdb->get_results($queryString, ARRAY_A);
-        return array_filter( $data, function($item){
+        return array_filter($data, function ($item) {
             return $item['meta_value'] != 'N;';
-    } );
+        });
+    }
 
+    public function getCheapestClassesFromCustomField($dbColumn)
+    {
+        $customFieldsValues = $this->getAllDifferentsValuesFromCustomField($dbColumn);
+        $data = [];
+        foreach ($customFieldsValues as $value) {
+            $data[] = $this->getCheapestClassFromCustomFieldValue($dbColumn, $value['meta_value']);
+        }
+        return $data;
+    }
+
+    public function getCheapestClassFromCustomFieldValue($dbColumn, $value)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->model->getCustomFieldMetaPrefix() . $dbColumn,
+                        'value' => $value,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+
+        if (empty($query->posts)) {
+            return array();
+        } else {
+            $cheapestPost = new HQRentalsModelsVehicleClass($query->posts[0]);
+        }
+        foreach ($query->posts as $post) {
+            $newClass = new HQRentalsModelsVehicleClass($post);
+            if ($cheapestPost->rate()->getFormattedDailyRateAsNumber() < $newClass->rate()->getFormattedDailyRateAsNumber()) {
+                $cheapestPost = $newClass;
+            }
+        }
+        return $cheapestPost;
     }
 
     public function getAllMetaKey()

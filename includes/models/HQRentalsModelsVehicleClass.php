@@ -404,8 +404,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 
     public function getCustomField($dbColumn)
     {
-        //var_dump($this->post_id, $this->metaCustomField);
-        return get_post_meta($this->post_id, $this->metaCustomField . $dbColumn, true);
+        return get_post_meta($this->postId, $this->metaCustomField . $dbColumn, true);
     }
 
     public function getCustomFieldMetaPrefix()
@@ -416,6 +415,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return $this->metaId;
     }
+
 
 }
 

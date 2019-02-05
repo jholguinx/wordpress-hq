@@ -417,5 +417,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     }
 
 
+
 }
 

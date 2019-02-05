@@ -9,6 +9,7 @@ use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsShortcoder;
 use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsTemplates\HQRentalsTemplatesMenus;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesAries;
 
 class HQRentalsBootstrapPlugin
 {
@@ -24,6 +25,7 @@ class HQRentalsBootstrapPlugin
         $this->shortcoder = new HQRentalsShortcoder();
         $this->posts = new HQRentalsCustomPostsHandler();
         $this->settingsAdmin = new HQRentalsAdminSettings();
+        $this->ariesQueries = new HQRentalsQueriesAries();
         //$this->menus = new HQRentalsTemplatesMenus();
         //add_action('template_redirect', array($this, ''));
     }

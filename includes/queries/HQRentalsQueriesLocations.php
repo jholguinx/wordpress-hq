@@ -11,12 +11,7 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
     public function allLocations()
     {
         $locations = $this->model->all();
-        $data = array();
-        foreach ($locations as $post){
-            $location = new HQRentalsModelsLocation($post);
-            $data[] = $location;
-        }
-        return $data;
+        return $this->fillModelWithPosts($locations);
     }
 	public function getAllMetaKey() {
     	return 'hq_wordpress_location_all_for_frontend';
@@ -31,6 +26,16 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
             $newData->id = $location->id;
             $newData->name = $location->name;
             $data[] = $newData;
+        }
+        return $data;
+    }
+
+    public function fillModelWithPosts($posts)
+    {
+        $data = [];
+        foreach ($posts as $post){
+            $location = new HQRentalsModelsLocation($post);
+            $data[] = $location;
         }
         return $data;
     }

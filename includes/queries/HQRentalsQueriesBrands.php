@@ -19,11 +19,7 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
     public function getAllBrands()
     {
         $brandsPosts = $this->model->all();
-        $data = [];
-        foreach ($brandsPosts as $post) {
-            $data[] = new HQRentalsModelsBrand($post);
-        }
-        return $data;
+        return $this->fillModelWithPosts($brandsPosts);
     }
 
     public function allToFrontEnd()
@@ -36,6 +32,14 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
             $newData->id = $brand->id;
             $newData->name = $brand->name;
             $data[] = $newData;
+        }
+        return $data;
+    }
+    public function fillModelWithPosts( $posts )
+    {
+        $data = [];
+        foreach ($posts as $post) {
+            $data[] = new HQRentalsModelsBrand($post);
         }
         return $data;
     }

@@ -10,7 +10,8 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 class HQRentalsAssetsHandler
 {
 	public static $count = 0;
-    protected $brandsGlobalFrontName = 'hqRentalsBrands';
+
+	protected $brandsGlobalFrontName = 'hqRentalsBrands';
     protected $locationsGlobalFrontName = 'hqRentalsLocations';
     protected $vehiclesGlobalFrontName = 'hqRentalsVehicles';
     protected $frontDateFormatFrontName = 'hqRentalsFrontEndDateformat';
@@ -25,7 +26,7 @@ class HQRentalsAssetsHandler
         $this->settings = new HQRentalsSettings();
 	    if (static::$count === 1) {
 		    add_action('wp_enqueue_scripts', array( $this, 'registerPluginAssets' ), 10);
-		    add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
+            add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
 	    }
     }
     public function registerPluginAssets()

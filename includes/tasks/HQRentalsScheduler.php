@@ -31,7 +31,7 @@ class HQRentalsScheduler{
 	public function refreshHQData() {
 		global $wpdb;
 		$wpdb->get_results( "delete from wp_posts where post_type like 'hqwp%';" );
-		$wpdb->get_results( "delete from wp_postmeta where meta_key like 'hq_wordpress%'" );
+		$wpdb->get_results( "delete from wp_postmeta where meta_key like 'hq_wordpress%';" );
 
 		$this->brandsTask->refreshBrandsData();
 		$this->locationsTask->refreshLocationsData();

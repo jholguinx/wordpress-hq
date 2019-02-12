@@ -259,6 +259,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
      */
     public function setFromPost($post)
     {
+        $this->name = $post->post_name;
         $labelsMetaKeys = $this->getMetaKeysFromLabel();
         $shortDescriptionKeys = $this->getMetaKeysFromShortDescription();
         $descriptionsKeys = $this->getMetaKeysFromDescription();
@@ -358,7 +359,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function features()
     {
         $query = new HQRentalsQueriesFeatures();
-
         return $query->getVehicleClassFeatures($this->id);
     }
 

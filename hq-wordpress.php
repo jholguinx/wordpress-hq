@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: HQ Rental Plugin
+Plugin Name: HQ Rental Software Plugin
 Plugin URI: https://hqrentalsoftware.com
 Description: HQ Rental Software Plugin
-Version: 1.0.0
+Version: 0.0.5
 Author: HQ Rental Software
 Author URI: https://hqrentalsoftware.com
 Text Domain: hq-wordpress

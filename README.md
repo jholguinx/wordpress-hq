@@ -1,1 +1,2 @@
-hq-wordpress
+###HQ Rentals Wordpress Plugin
+

@@ -10,6 +10,9 @@
     border: none;
     min-height: 600px;
 }
+#hq-rentals-integration-iframe{
+    width: 100%;
+}
 
 /*
  * Setting Page Styles

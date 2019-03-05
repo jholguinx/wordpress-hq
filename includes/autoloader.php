@@ -57,16 +57,16 @@ function hq_wordpress_folder_selector( $folder ) {
 if ( ! function_exists( 'hq_update_post_meta' ) ) {
 	function hq_update_post_meta( $post_id, $meta_key, $meta_value ) {
 		global $wpdb;
+		$dbPrefix = $wpdb->prefix;
 		if ( ! is_string( $meta_value ) && ! is_numeric( $meta_value ) && ! is_bool( $meta_value ) ) {
 			$meta_value = serialize( $meta_value );
 		}
 
-		$result =
-			$wpdb->get_results( "SELECT meta_id FROM wp_postmeta WHERE post_id = '.$post_id.' AND meta_key = '.$meta_key.'" );
+		$result = $wpdb->get_results( "SELECT meta_id FROM ". $dbPrefix ."postmeta WHERE post_id = '.$post_id.' AND meta_key = '.$meta_key.'" );
 		if ( count( $result ) ) {
-			$wpdb->query( $wpdb->prepare( "UPDATE wp_postmeta SET meta_value = '%s' WHERE post_id = '%d' AND meta_key = '%s'", $meta_value, $post_id, $meta_key ) );
+			$wpdb->query( $wpdb->prepare( "UPDATE " . $dbPrefix . "postmeta SET meta_value = '%s' WHERE post_id = '%d' AND meta_key = '%s'", $meta_value, $post_id, $meta_key ) );
 		} else {
-			$wpdb->query( $wpdb->prepare( "INSERT INTO wp_postmeta (post_id, meta_key, meta_value) VALUES ('%d', '%s', '%s')", $post_id, $meta_key, $meta_value ) );
+			$wpdb->query( $wpdb->prepare( "INSERT INTO ". $dbPrefix ."postmeta (post_id, meta_key, meta_value) VALUES ('%d', '%s', '%s')", $post_id, $meta_key, $meta_value ) );
 		}
 	}
 }

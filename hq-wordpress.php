@@ -3,7 +3,7 @@
 Plugin Name: HQ Rental Software Plugin
 Plugin URI: https://hqrentalsoftware.com
 Description: HQ Rental Software Plugin
-Version: 0.0.5
+Version: 0.5.0
 Author: HQ Rental Software
 Author URI: https://hqrentalsoftware.com
 Text Domain: hq-wordpress

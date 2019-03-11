@@ -22,6 +22,11 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
         return $this->fillModelWithPosts($brandsPosts);
     }
 
+    /**
+     * Data to use on the Front End
+     * Can be retrieves as hqRentalsBrands
+     * @return array
+     */
     public function allToFrontEnd()
     {
         $brandsPost = $this->model->all();
@@ -31,6 +36,7 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
             $newData = new \stdClass();
             $newData->id = $brand->id;
             $newData->name = $brand->name;
+            $newData->iframePageURL = $brand->websiteLink;
             $data[] = $newData;
         }
         return $data;

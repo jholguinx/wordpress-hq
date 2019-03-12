@@ -394,7 +394,7 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
     protected function resolveMapOnFloors($prefix, $floor)
     {
         if($this->id != 20){
-            return $prefix . $floor->f1567[0]->uuid . '/redirect';
+            return empty($floor->f1567[0]->uuid) ? '' : $prefix . $floor->f1567[0]->uuid . '/redirect';
         }else{
             return $prefix . $floor->f1402[0]->uuid . '/redirect';
         }

@@ -3,10 +3,15 @@ locations.forEach( function (location){
     if(location.hasFloors === '1'){
         var floors = Object.entries(location.floors);
         floors.forEach(function(floor){
-            setFloor(floor[1], location);
+            if(floor[1].map){
+                setFloor(floor[1], location);
+            }
         });
     }else{
-        setMaps(location);
+        if(location.mapUUID){
+            setMaps(location);
+        }
+
     }
 
 });

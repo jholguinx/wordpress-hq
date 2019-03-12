@@ -28,11 +28,13 @@ class HQRentalsScheduler
         $this->locationsTask = new HQRentalsLocationsTask();
         $this->vehicleClassesTask = new HQRentalsVehicleClassesTask();
         $this->additionalChargesTask = new HQRentalsAdditionalChargesTask();
+        $this->workspot = new HQRentalsLocationsWorkspotTask();
     }
 
     public function refreshHQData()
     {
         global $wpdb;
+        $site = get_site_url();
         $dbPrefix = $wpdb->prefix;
         $wpdb->get_results("delete from " . $dbPrefix . "posts where post_type like 'hqwp%';");
         $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like 'hq_wordpress%';");
@@ -41,5 +43,8 @@ class HQRentalsScheduler
         $this->locationsTask->refreshLocationsData();
         $this->additionalChargesTask->refreshAdditionalChargesData();
         $this->vehicleClassesTask->refreshVehicleClassesData();
+        if($site == 'http://workspot.test' or $site == 'https://workspot.nu/'){
+            $this->workspot->refreshLocationsData();
+        }
     }
 }

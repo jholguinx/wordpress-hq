@@ -19,7 +19,6 @@ class HQRentalsBootstrapPlugin
      */
     public function __construct()
     {
-        $this->currentWebsite = get_site_url();
         $this->worker = new HQRentalsCronJob();
         $this->assets = new HQRentalsAssetsHandler();
         $this->brandPostAdmin = new HQRentalsAdminBrandsPosts();
@@ -27,9 +26,6 @@ class HQRentalsBootstrapPlugin
         $this->posts = new HQRentalsCustomPostsHandler();
         $this->settingsAdmin = new HQRentalsAdminSettings();
         $this->ariesQueries = new HQRentalsQueriesAries();
-        if($this->currentWebsite === 'https://workspot.nu' or $this->currentWebsite === 'http://workspot.test'){
-            $this->workspot = new HQRentalsWorkspotBootstrap();
-        }
         //$this->menus = new HQRentalsTemplatesMenus();
         //add_action('template_redirect', array($this, ''));
     }

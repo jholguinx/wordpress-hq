@@ -40,7 +40,7 @@ class HQRentalsApiEndpoint{
     }
     public function getWorkspotLocationsEndpoint()
     {
-        return $this->settings->getApiBaseUrl() . 'sheets/10/items';
+        return $this->settings->getApiBaseUrl() . 'sheets/10/items?limit=100';
     }
     public function getWorkspotLocationDetailEndpoint( $location )
     {

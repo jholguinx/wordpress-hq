@@ -20,8 +20,8 @@ class HQRentalsLocationsWorkspotTask{
     public function createWorkspotLocations()
     {
         $locations = $this->connector->getWorkspotLocations();
-        if($locations->success){
-            $this->createLocations( $locations->data );
+        if($locations->success and !empty($locations->data)){
+            $this->createLocationsData( $locations->data );
         }
     }
     public function createLocationsData( $locations )
@@ -38,7 +38,7 @@ class HQRentalsLocationsWorkspotTask{
         $locations = $this->query->allLocations();
         foreach ($locations as $location){
             $details = $this->connector->getWorkspotLocationDetail($location);
-            if($details->success){
+            if($details->success and !empty($details)){
                 $location->saveDetails( $details->data );
             }
         }

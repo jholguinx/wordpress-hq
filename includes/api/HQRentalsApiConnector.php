@@ -68,6 +68,23 @@ class HQRentalsApiConnector{
             return new ApiResponse( null, true, json_decode( $response['body'] )->data);
         }
     }
+    public function resolveApiCallForWorkspotLocations( $response )
+    {
+        if(is_wp_error( $response )){
+            return new ApiResponse( $response->get_error_message(), false, null );
+        }else{
+            return new ApiResponse( null, true, json_decode( $response['body'] ));
+        }
+    }
+    public function resolveApiCallForWorkspotLocationDetail( $response )
+    {
+        if(is_wp_error( $response )){
+            return new ApiResponse( $response->get_error_message(), false, null );
+        }else{
+            return new ApiResponse( null, true, json_decode( $response['body'] )->{'sheets-10'});
+        }
+    }
+
     public function getHQRentalsBrands()
     {
         $response = wp_remote_get($this->endpoints->getBrandsApiEndpoint(), $this->configuration->getBasicApiConfiguration());
@@ -97,5 +114,15 @@ class HQRentalsApiConnector{
     {
         $response = wp_remote_get( $this->endpoints->getVehicleClassCustomFields(), $this->configuration->getBasicApiConfiguration() );
         return $this->resolveApiCallForCustomFields( $response );
+    }
+    public function getWorkspotLocations()
+    {
+        $response = wp_remote_get( $this->endpoints->getWorkspotLocationsEndpoint(), $this->configuration->getBasicApiConfiguration() );
+        return $this->resolveApiCallForWorkspotLocations( $response );
+    }
+    public function getWorkspotLocationDetail($location)
+    {
+        $response = wp_remote_get( $this->endpoints->getWorkspotLocationDetailEndpoint($location), $this->configuration->getBasicApiConfiguration() );
+        return $this->resolveApiCallForWorkspotLocationDetail( $response );
     }
 }

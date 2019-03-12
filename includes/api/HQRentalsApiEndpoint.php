@@ -38,4 +38,12 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'fields/?item_type=fleets.vehicle_classes';
     }
+    public function getWorkspotLocationsEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'sheets/10/items';
+    }
+    public function getWorkspotLocationDetailEndpoint( $location )
+    {
+        return $this->settings->getApiBaseUrl() . 'workspot/locations/' . $location->id;
+    }
 }

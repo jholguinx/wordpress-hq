@@ -18,9 +18,17 @@ class HQRentalsQueriesWorkspotLocations
 
     public function fillModelWithPosts($posts)
     {
-        $data = [];
+        $data = array();
         foreach ($posts as $post){
             $location = new HQRentalsModelsWorkspotLocations($post);
+            $data[] = $location;
+        }
+        return $data;
+    }
+    public function getLocationsToFrontEnd()
+    {
+        $data = array();
+        foreach ($this->allLocations() as $location){
             $data[] = $location;
         }
         return $data;

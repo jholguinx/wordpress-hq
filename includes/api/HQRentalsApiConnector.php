@@ -97,6 +97,7 @@ class HQRentalsApiConnector{
     }
     public function getHQRentalsLocations()
     {
+        dd($this->configuration->getBasicApiConfiguration());
         $response = wp_remote_get($this->endpoints->getLocationsApiEndpoint(), $this->configuration->getBasicApiConfiguration());
         return $this->resolveApiCallLocations( $response );
     }

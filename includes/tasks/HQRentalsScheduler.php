@@ -43,7 +43,7 @@ class HQRentalsScheduler
         $this->locationsTask->refreshLocationsData();
         $this->additionalChargesTask->refreshAdditionalChargesData();
         $this->vehicleClassesTask->refreshVehicleClassesData();
-        if($site == 'http://workspot.test' or $site == 'https://workspot.nu/'){
+        if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
             $this->workspot->refreshLocationsData();
         }
     }

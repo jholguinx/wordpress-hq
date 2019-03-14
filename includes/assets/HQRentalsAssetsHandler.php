@@ -64,7 +64,7 @@ class HQRentalsAssetsHandler
 	    wp_localize_script('hq-dummy-script', $this->vehiclesGlobalFrontName, $this->vehicleQueries->allToFrontEnd());
 		wp_localize_script('hq-dummy-script', $this->frontDateFormatFrontName, $this->settings->getFrontEndDatetimeFormat());
 		wp_localize_script('hq-dummy-script', $this->systemDateFormatFrontName, $this->settings->getHQDatetimeFormat());
-        if($site == 'http://workspot.test' or $site == 'https://workspot.nu/'){
+        if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
             wp_localize_script('hq-dummy-script', $this->workspotLocationsDataName, $this->workspotQuery->getLocationsToFrontEnd());
         }
     }

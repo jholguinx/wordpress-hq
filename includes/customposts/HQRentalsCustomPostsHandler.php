@@ -25,7 +25,7 @@ class HQRentalsCustomPostsHandler
         register_post_type( $this->brands->brandsCustomPostName , $this->brands->customPostArgs );
         register_post_type( $this->locations->locationsCustomPostName, $this->locations->customPostArgs );
         register_post_type( $this->vehicleClasses->vehicleClassesCustomPostName, $this->vehicleClasses->customPostArgs );
-        if($this->currentWebsite == 'http://workspot.test' or $this->currentWebsite == 'https://workspot.nu/'){
+        if($this->currentWebsite == 'http://workspot.test' or $this->currentWebsite == 'https://workspot.nu'){
             register_post_type( $this->workspot->locationsCustomPostName, $this->workspot->customPostArgs );
         }
     }

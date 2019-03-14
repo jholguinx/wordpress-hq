@@ -219,6 +219,7 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
         }
     }
     protected function processSpotsForGebouw($units, $prefix, $details){
+        $prefix = "https://files-europe.caagcrm.com/tenants/93a9ba46-f29c-4582-a651-25f681c65d9f/files/";
         return array_map(function ($unit) use (&$show_units, $prefix, $details) {
             return [
                 'id' => $unit->id,

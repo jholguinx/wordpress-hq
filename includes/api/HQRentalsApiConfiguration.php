@@ -16,7 +16,17 @@ class HQRentalsApiConfiguration
         return array(
             'headers'   =>  array(
                 'Authorization' => 'Basic ' . $this->settings->getApiEncodedToken()
-            )
+            ),
+            'timeout'   =>  10
+        );
+    }
+    public function getBasicApiConfigurationForGebouwWorkspotLocation()
+    {
+        return array(
+            'headers'   =>  array(
+                'Authorization' => 'Basic ' . $this->settings->getEncodedApiKeyForWorkspotLocation()
+            ),
+            'timeout'   =>  10
         );
     }
 

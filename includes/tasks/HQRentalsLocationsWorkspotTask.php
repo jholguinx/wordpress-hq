@@ -38,11 +38,16 @@ class HQRentalsLocationsWorkspotTask{
         $locations = $this->query->allLocations();
         foreach ($locations as $location){
             $details = $this->connector->getWorkspotLocationDetail($location);
-            if($details->success and !empty($details)){
-                $location->saveDetails( $details->data );
-            }
-            if($location->id === '20'){
-
+            if($location->id == 20){
+                $floors = $this->connector->getWorkspotGebouwLocationDetail();
+                $units = $this->connector->getWorkspotGebouwUnits();
+                if($floors->success and $units->success and $details->success and !empty($details)){
+                    $location->saveDetailsGebouwLocation($details->data, $floors->data, $units->data);
+                }
+            }else{
+                if($details->success and !empty($details)){
+                    $location->saveDetails( $details->data );
+                }
             }
         }
     }

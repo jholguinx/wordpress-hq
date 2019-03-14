@@ -193,6 +193,23 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
         hq_update_post_meta($this->post_id, $this->metaMapUUID, $mapUUID);
     }
 
+    /***
+     * Gebouw Data Details
+     * @param $data
+     * @param $floors
+     * @param $units
+     */
+    public function saveDetailsGebouwLocation($data, $floors, $units)
+    {
+        $prefix = 'https://files-europe.caagcrm.com/tenants/a3b37f43-16d3-4251-9ea3-2cc36cafb7ec/files/';
+        $spots = $this->processSpotsForGebouw($units, $prefix, $data);
+        $processSpots = $this->proccessMapGebouw($spots, $floors, $prefix);
+        hq_update_post_meta($this->post_id, $this->metaHasFloors, 1);
+        hq_update_post_meta($this->post_id, $this->metaFloors, $processSpots);
+        $mapUUID = empty($data->f461[0]->uuid) ? '' : ($prefix . $data->f461[0]->uuid . '/redirect');
+        hq_update_post_meta($this->post_id, $this->metaMapUUID, $mapUUID);
+    }
+
     protected function resolverSpotCover($cover, $details, $prefix)
     {
         if (empty($cover)) {
@@ -200,6 +217,27 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
         } else {
             return $prefix . $cover . '/redirect';
         }
+    }
+    protected function processSpotsForGebouw($units, $prefix, $details){
+        return array_map(function ($unit) use (&$show_units, $prefix, $details) {
+            return [
+                'id' => $unit->id,
+                'title' => $unit->f353,
+                'cover' => $this->resolverSpotCover($unit->f358[0]->uuid, $details, $prefix),
+                'sticker_label' => $unit->f355,
+                'sticker_color' => $unit->f356,
+                'coordinates' => $unit->f462,
+                'status' => $unit->f453,
+                'price' => $unit->f543,
+                'unit_number' => $unit->f482 ?? '',
+                'website_product' => $unit->website_product->label,
+                'product_name' => $unit->product->label,
+                'available_date' => $unit->f513 ? Carbon::parse($unit->f513)->format('d-m-Y') : null,
+                'show_in_website' => $unit->f501,
+                'floor' => $this->id != 20 ? $unit->f1574 : $unit->f1397,
+                'location_id' => $this->id
+            ];
+        }, $units);
     }
     protected function processSpots($details, $prefix)
     {
@@ -380,7 +418,6 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
                 }, $spots);
 
                 $array_key = $this->id != 20 ? 'f1601' : 'f1403';
-                //dd($floor);
                 $processedFloors[$floor->f1601] = $floor;
                 $processedFloors[$floor->f1601]->available_spots_coordinates_Json = json_encode($floor->available_spots_coordinates_Json);
                 $processedFloors[$floor->f1601]->unavailable_spots_coordinates_Json = json_encode($floor->unavailable_spots_coordinates_Json);
@@ -390,6 +427,86 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
             }
             return json_encode($processedFloors);
         }
+    }
+    protected function proccessMapGebouw($spots, $floors, $prefix)
+    {
+        $processedFloors = [];
+        foreach ($floors as $floor) {
+            $floor->available_spots_coordinates_Json = caag_init_Json();
+            $floor->unavailable_spots_coordinates_Json = caag_init_Json();
+            $floor->rented_spots_coordinates_Json = caag_init_Json();
+            $floor->available_from_spots_coordinates_Json = caag_init_Json();
+            $floor->option_spots_coordinates_Json = caag_init_Json();
+            $floor->map = $this->resolveMapOnFloors($prefix, $floor);
+            array_map(function ($spot) use (&$floor) {
+                if ($spot['floor'] == $floor->id) {
+                    switch ($spot['status']) {
+                        case 'available':
+                            if ($spot['coordinates']) {
+                                foreach (json_decode($spot['coordinates'])->features as $feature) {
+                                    if ($feature->properties) {
+                                        $feature->properties->status = 'Beschikbaar';
+                                        caag_setFeatureProperties($feature, $spot, $this->post_id);
+                                    }
+                                    array_push($floor->available_spots_coordinates_Json->features, $feature);
+                                }
+                            }
+                            break;
+                        case 'unavailable':
+                            if ($spot['coordinates']) {
+                                foreach (json_decode($spot['coordinates'])->features as $feature) {
+                                    if ($feature->properties) {
+                                        $feature->properties->status = 'Algemene Ruimte';
+                                        caag_setFeatureProperties($feature, $spot, $this->post_id);
+                                    }
+                                    array_push($floor->unavailable_spots_coordinates_Json->features, $feature);
+                                }
+                            }
+                            break;
+                        case 'rented':
+                            if ($spot['coordinates']) {
+                                foreach (json_decode($spot['coordinates'])->features as $feature) {
+                                    if ($feature->properties) {
+                                        $feature->properties->status = 'Verhuurd';
+                                        caag_setFeatureProperties($feature, $spot, $this->post_id);
+                                    }
+                                    array_push($floor->rented_spots_coordinates_Json->features, $feature);
+                                }
+                            }
+                            break;
+                        case 'available_from':
+                            if ($spot['coordinates']) {
+                                foreach (json_decode($spot['coordinates'])->features as $feature) {
+                                    if ($feature->properties) {
+                                        $feature->properties->status = 'Beschikbaar vanaf';
+                                        caag_setFeatureProperties($feature, $spot, $this->post_id);
+                                    }
+                                    array_push($floor->available_from_spots_coordinates_Json->features, $feature);
+                                }
+                            }
+                            break;
+                        case 'option':
+                            if ($spot['coordinates']) {
+                                foreach (json_decode($spot['coordinates'])->features as $feature) {
+                                    if ($feature->properties) {
+                                        $feature->properties->status = 'In Optie';
+                                        caag_setFeatureProperties($feature, $spot, $this->post_id);
+                                    }
+                                    array_push($floor->option_spots_coordinates_Json->features, $feature);
+                                }
+                            }
+                    }
+                }
+
+            }, $spots);
+            $processedFloors[$floor->f1403] = $floor;
+            $processedFloors[$floor->f1403]->available_spots_coordinates_Json = json_encode($floor->available_spots_coordinates_Json);
+            $processedFloors[$floor->f1403]->unavailable_spots_coordinates_Json = json_encode($floor->unavailable_spots_coordinates_Json);
+            $processedFloors[$floor->f1403]->rented_spots_coordinates_Json = json_encode($floor->rented_spots_coordinates_Json);
+            $processedFloors[$floor->f1403]->available_from_spots_coordinates_Json = json_encode($floor->available_from_spots_coordinates_Json);
+            $processedFloors[$floor->f1403]->option_spots_coordinates_Json = json_encode($floor->option_spots_coordinates_Json);
+        }
+        return json_encode($processedFloors);
     }
     protected function resolveMapOnFloors($prefix, $floor)
     {

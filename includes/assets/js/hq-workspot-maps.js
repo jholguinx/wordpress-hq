@@ -11,9 +11,7 @@ locations.forEach( function (location){
         if(location.mapUUID){
             setMaps(location);
         }
-
     }
-
 });
 
 
@@ -322,8 +320,16 @@ function setFloor(floor, location){
         }
 
         //Set everything for popups
-        var container = document.getElementById('popup-' + location.id + '-' + floor['f1601'] );
-        var content = document.getElementById('popup-content-' + location.id + '-' + floor['f1601']);
+        if(location.id == 20){
+            var container = document.getElementById('popup-' + location.id + '-' + floor['f1393'] );
+            var content = document.getElementById('popup-content-' + location.id + '-' + floor['f1393']);
+            var target = 'location-map-' + location.id + '-' + floor['f1393'];
+        }else{
+            var container = document.getElementById('popup-' + location.id + '-' + floor['f1601'] );
+            var content = document.getElementById('popup-content-' + location.id + '-' + floor['f1601']);
+            var target = 'location-map-' + location.id + '-' + floor['f1601'];
+        }
+
         //var closer = document.getElementById('popup-closer');
         var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
             element: container,
@@ -331,7 +337,7 @@ function setFloor(floor, location){
         }));
         //Set Map
         var map = new ol.Map({
-            target: 'location-map-' + location.id + '-' + floor['f1601'],
+            target: target,
             layers: [location_map, availableSpotsLayer, unavailableSpotsLayer, rentedSpotsLayer, availableFromSpotsLayer],
             overlays: [overlay],
             //Disable interactions

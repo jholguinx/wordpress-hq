@@ -46,4 +46,10 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'workspot/locations/' . $location->id;
     }
+    public function getGebouwFloorDetailEndpoint(){
+        return $this->settings->getApiBaseUrl() . 'sheets/37/items/?limit=100';
+    }
+    public function getGebouwUnitsEndpoint(){
+        return $this->settings->getApiBaseUrl() . 'sheets/11/items/?limit=100';
+    }
 }

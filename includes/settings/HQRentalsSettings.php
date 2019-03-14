@@ -50,7 +50,9 @@ class HQRentalsSettings
     {
         return get_option($this->api_encoded_token, true);
     }
-
+    public function getEncodedApiKeyForWorkspotLocation(){
+        return get_option($this->api_encoded_token_workspot_gebouw_location);
+    }
     public function getWoocommerceSyncOption()
     {
         return get_option($this->woocommerce_hq_sync, true);

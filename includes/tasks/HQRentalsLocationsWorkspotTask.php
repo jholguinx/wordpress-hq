@@ -41,6 +41,9 @@ class HQRentalsLocationsWorkspotTask{
             if($details->success and !empty($details)){
                 $location->saveDetails( $details->data );
             }
+            if($location->id === '20'){
+
+            }
         }
     }
 }

@@ -74,6 +74,21 @@ class HQRentalsAdminSettings
                                            value="<?php echo $this->settings->getApiUserToken(); ?>" id="title"
                                            spellcheck="true" autocomplete="off"></td>
                             </tr>
+                            <?php if(get_site_url() == 'https://workspot.nu' or get_site_url() == 'http://workspot.test'): ?>
+                                <tr>
+                                    <th><label class="wp-heading-inline" id="title" for="title">Tenant Token Workspot Gebouw Tenant</label></th>
+                                    <td><input type="text" name="<?php echo $this->settings->api_tenant_token_workspot_gebouw_location; ?>" size="70"
+                                               value="<?php echo $this->settings->getApiTenantTokenForWorkspotLocation(); ?>" id="title"
+                                               spellcheck="true" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User
+                                            Token Workspot Gebouw Tenant</label></th>
+                                    <td><input type="text" name="<?php echo $this->settings->api_user_token_workspot_gebouw_location; ?>" size="70"
+                                               value="<?php echo $this->settings->getApiUserTokenForWorkspotLocation(); ?>" id="title"
+                                               spellcheck="true" autocomplete="off"></td>
+                                </tr>
+                            <?php endif; ?>
                             <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end
                                         Date Format</label></th>

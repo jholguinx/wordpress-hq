@@ -63,10 +63,17 @@ class HQRentalsReservationsShortcode
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
             } else {
-                ?>
-                <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull; ?>"
-                        scrolling="no"></iframe>
-                <?php
+                if(!empty($_GET['vehicle_class_id'])){
+                    ?>
+                    <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull . '&vehicle_class_id=' . $_GET['vehicle_class_id']; ?>"
+                            scrolling="no"></iframe>
+                    <?php
+                }else{
+                    ?>
+                    <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull; ?>"
+                            scrolling="no"></iframe>
+                    <?php
+                }
             }
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";

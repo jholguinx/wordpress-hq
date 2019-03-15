@@ -6,6 +6,7 @@ use HQRentalsPlugin\HQRentalsHelpers\HQRentalsThumbnailHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 
+
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 {
     public static $custom_fields = [];
@@ -51,6 +52,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $rate = '';
     public $customField = [];
     public $permalink = '';
+    public $priceIntervals = [];
 
     public function __construct($post = null)
     {
@@ -152,6 +154,14 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             $newRate->setActiveRateFromApi($data->active_rates[0]);
             $this->rate = $newRate;
         }
+
+        if(!empty($data->active_rates[0]->price_intervals)){
+            foreach ($data->active_rates[0]->price_intervals as $price){
+                $newPrice = new HQRentalsModelsPriceInterval();
+                $newPrice->setIntervalRateFromApi($price, $this->id);
+                $this->priceIntervals[] = $newPrice;
+            }
+        }
     }
 
     /*
@@ -159,6 +169,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
      */
     public function create()
     {
+
         $this->postArgs = array_merge(
             $this->postArgs,
             [
@@ -169,7 +180,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         );
         $post_id = wp_insert_post($this->postArgs);
         $this->post_id = $post_id;
-
         hq_update_post_meta($post_id, $this->metaId, $this->id);
         hq_update_post_meta($post_id, $this->metaBrandId, $this->brandId);
         hq_update_post_meta($post_id, $this->metaName, $this->name);
@@ -199,6 +209,13 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         if ($this->rate instanceof HQRentalsModelsActiveRate) {
             $this->rate->create();
         }
+        if(!empty($this->priceIntervals)){
+            foreach ($this->priceIntervals as $price){
+                if(!empty($price)){
+                    $price->create();
+                }
+            }
+        }
     }
 
     /*
@@ -218,9 +235,15 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         $args = array_merge(
             $this->postArgs,
-            [
-                'posts_per_page' => -1,
-            ]
+            array(
+                'meta_query'    =>  array(
+                    array(
+                        'key'     => $this->metaActive,
+                        'value'   => '1',
+                        'compare' => '='
+                    )
+                )
+            )
         );
         $query = new \WP_Query($args);
 
@@ -338,6 +361,15 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         return new HQRentalsModelsActiveRate($this->id);
     }
 
+    public function getPriceIntervals(){
+        $prices = new HQRentalsModelsPriceInterval();
+        $data= [];
+        foreach ($prices->getIntervalPricesByVehicleId( $this->id ) as $pricePost){
+            $data[] = new HQRentalsModelsPriceInterval($pricePost);
+        }
+        return $data;
+    }
+
     public function images()
     {
         $images = new HQRentalsModelsVehicleClassImage();
@@ -416,7 +448,11 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         return $this->metaId;
     }
 
-
-
+    public function getCheapestPriceInterval()
+    {
+        $price = new HQRentalsModelsPriceInterval();
+        $cheapestPost = $price->getCheapestPriceInterval($this->id);
+        return new HQRentalsModelsPriceInterval($cheapestPost);
+    }
 }
 

@@ -38,4 +38,23 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'fields/?item_type=fleets.vehicle_classes';
     }
+    public function getWorkspotLocationsEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'sheets/10/items?limit=100';
+    }
+    public function getWorkspotLocationDetailEndpoint( $location )
+    {
+        return $this->settings->getApiBaseUrl() . 'workspot/locations/' . $location->id;
+    }
+    public function getGebouwFloorDetailEndpoint(){
+        return $this->settings->getApiBaseUrl() . 'sheets/37/items/?limit=100';
+    }
+    public function getGebouwUnitsEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'sheets/11/items/?limit=100';
+    }
+    public function getWorkspotRegionsEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'sheets/49/items/?limit=100';
+    }
 }

@@ -49,7 +49,12 @@ class HQRentalsApiEndpoint{
     public function getGebouwFloorDetailEndpoint(){
         return $this->settings->getApiBaseUrl() . 'sheets/37/items/?limit=100';
     }
-    public function getGebouwUnitsEndpoint(){
+    public function getGebouwUnitsEndpoint()
+    {
         return $this->settings->getApiBaseUrl() . 'sheets/11/items/?limit=100';
+    }
+    public function getWorkspotRegionsEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'sheets/49/items/?limit=100';
     }
 }

@@ -4,7 +4,7 @@ namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
-class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
+class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
 {
 
     /*
@@ -28,6 +28,7 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
     protected $metaRented_spots_coordinates_Json = 'hq_wordpress_workspot_rented_spots_coordinates_Json_meta';
     protected $metaAvailable_from_spots_coordinates_Json = 'hq_wordpress_workspot_available_from_spots_coordinates_Json_meta';
     protected $metaFloors = 'hq_wordpress_workspot_meta_floors_Json_meta';
+    protected $metaRegions = 'hq_wordpress_workspot_meta_regions_meta';
     /*
      * Object Data to Display
      */
@@ -38,6 +39,7 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
     public $post_id = '';
     public $hasFloors = '';
     public $floors = '';
+    public $regions = '';
     public $available_spots_coordinates_Json = '';
     public $unavailable_spots_coordinates_Json = '';
     public $rented_spots_coordinates_Json = '';
@@ -97,6 +99,7 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
         $this->id = $data->id;
         $this->label = $data->label;
         $this->uuid = $data->uuid;
+        $this->regions = $data->f1804;
     }
 
 
@@ -115,6 +118,7 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaId, $this->id);
         hq_update_post_meta($post_id, $this->metaLabel, $this->label);
         hq_update_post_meta($post_id, $this->metaUUID, $this->uuid);
+        hq_update_post_meta($post_id, $this->metaRegions, $this->regions);
     }
 
     /*
@@ -170,7 +174,8 @@ class HQRentalsModelsWorkspotLocations extends HQRentalsBaseModel
             'unavailable_spots_coordinates_Json' => $this->metaUnavailable_spots_coordinates_Json,
             'rented_spots_coordinates_Json' => $this->metaRented_spots_coordinates_Json,
             'available_from_spots_coordinates_Json' => $this->metaAvailable_from_spots_coordinates_Json,
-            'floors'    => $this->metaFloors
+            'floors'    => $this->metaFloors,
+            'regions'   =>  $this->metaRegions
         );
     }
 

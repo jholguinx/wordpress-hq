@@ -139,12 +139,20 @@ class HQRentalsApiConnector{
         $response = wp_remote_get( $this->endpoints->getWorkspotLocationDetailEndpoint($location), $this->configuration->getBasicApiConfiguration() );
         return $this->resolveApiCallForWorkspotLocationDetail( $response );
     }
-    public function getWorkspotGebouwLocationDetail(){
+    public function getWorkspotGebouwLocationDetail()
+    {
         $response = wp_remote_get( $this->endpoints->getGebouwFloorDetailEndpoint(), $this->configuration->getBasicApiConfigurationForGebouwWorkspotLocation() );
         return $this->resolveApiCallForGebouwLocation( $response );
     }
-    public function getWorkspotGebouwUnits(){
+    public function getWorkspotGebouwUnits()
+    {
         $response = wp_remote_get( $this->endpoints->getGebouwUnitsEndpoint(), $this->configuration->getBasicApiConfigurationForGebouwWorkspotLocation() );
         return $this->resolveApiCallForGebouwUnits( $response );
     }
+    public function getWorkspotRegions()
+    {
+        $response = wp_remote_get( $this->endpoints->getWorkspotRegionsEndpoint(), $this->configuration->getBasicApiConfiguration() );
+        return $this->resolveApiCallForGebouwLocation( $response );
+    }
+
 }

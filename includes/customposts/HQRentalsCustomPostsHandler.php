@@ -4,7 +4,8 @@ namespace HQRentalsPlugin\HQRentalsCustomPosts;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotLocations;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotLocation;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotRegion;
 
 class HQRentalsCustomPostsHandler
 {
@@ -14,7 +15,8 @@ class HQRentalsCustomPostsHandler
         $this->brands = new HQRentalsModelsBrand();
         $this->vehicleClasses = new HQRentalsModelsVehicleClass();
         $this->locations = new HQRentalsModelsLocation();
-        $this->workspot = new HQRentalsModelsWorkspotLocations();
+        $this->workspotLocations = new HQRentalsModelsWorkspotLocation();
+        $this->workspotRegions = new HQRentalsModelsWorkspotRegion();
         add_action( 'init', array( $this, 'registerAllHQRentalsCustomPosts' ) );
     }
     /*
@@ -26,7 +28,8 @@ class HQRentalsCustomPostsHandler
         register_post_type( $this->locations->locationsCustomPostName, $this->locations->customPostArgs );
         register_post_type( $this->vehicleClasses->vehicleClassesCustomPostName, $this->vehicleClasses->customPostArgs );
         if($this->currentWebsite == 'http://workspot.test' or $this->currentWebsite == 'https://workspot.nu'){
-            register_post_type( $this->workspot->locationsCustomPostName, $this->workspot->customPostArgs );
+            register_post_type( $this->workspotLocations->locationsCustomPostName, $this->workspotLocations->customPostArgs );
+            register_post_type( $this->workspotRegions->regionsCustomPostName, $this->workspotRegions->customPostArgs );
         }
     }
 }

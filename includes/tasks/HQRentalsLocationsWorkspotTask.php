@@ -2,8 +2,9 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotLocations;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotLocation;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesWorkspotLocations;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotRegion;
 
 class HQRentalsLocationsWorkspotTask{
 
@@ -15,6 +16,7 @@ class HQRentalsLocationsWorkspotTask{
 
     public function refreshLocationsData()
     {
+        $this->createWorkspotRegions();
         $this->createWorkspotLocations();
     }
     public function createWorkspotLocations()
@@ -27,7 +29,7 @@ class HQRentalsLocationsWorkspotTask{
     public function createLocationsData( $locations )
     {
         foreach ($locations as $location){
-            $newLocation = new HQRentalsModelsWorkspotLocations();
+            $newLocation = new HQRentalsModelsWorkspotLocation();
             $newLocation->setLocationFromApi($location);
             $newLocation->create();
         }
@@ -48,6 +50,17 @@ class HQRentalsLocationsWorkspotTask{
                 if($details->success and !empty($details)){
                     $location->saveDetails( $details->data );
                 }
+            }
+        }
+    }
+    public function createWorkspotRegions()
+    {
+        $regions = $this->connector->getWorkspotRegions();
+        if($regions->success){
+            foreach ($regions->data as $region){
+                $newRegion = new HQRentalsModelsWorkspotRegion();
+                $newRegion->setRegionFromApi($region);
+                $newRegion->create();
             }
         }
     }

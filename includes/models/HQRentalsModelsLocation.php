@@ -129,7 +129,19 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     }
     public function all()
     {
-        $query = new \WP_Query($this->postArgs);
+        $args = array_merge(
+            $this->postArgs,
+            array(
+                'meta_query'    =>  array(
+                    array(
+                        'key'     => $this->metaIsActive,
+                        'value'   => '1',
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
         return $query->posts;
     }
     public function set($data)

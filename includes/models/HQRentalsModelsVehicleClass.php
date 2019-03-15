@@ -218,9 +218,15 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         $args = array_merge(
             $this->postArgs,
-            [
-                'posts_per_page' => -1,
-            ]
+            array(
+                'meta_query'    =>  array(
+                    array(
+                        'key'     => $this->metaActive,
+                        'value'   => '1',
+                        'compare' => '='
+                    )
+                )
+            )
         );
         $query = new \WP_Query($args);
 

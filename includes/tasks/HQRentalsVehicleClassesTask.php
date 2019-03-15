@@ -23,7 +23,7 @@ class HQRentalsVehicleClassesTask{
 			}
 		}
 
-		if ( $vehicleClasses->success ) {
+		if ( $vehicleClasses->success and !empty($vehicleClasses->data)) {
 			$this->createVehicleClasses( $vehicleClasses->data, $customFields );
 			//$this->createAllVehicleClassesForFrontend( $vehicleClasses->data );
 		}

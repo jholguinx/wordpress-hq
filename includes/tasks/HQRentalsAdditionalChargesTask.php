@@ -16,7 +16,7 @@ class HQRentalsAdditionalChargesTask{
 
 	public function createAdditionalChargesData() {
 		$charges = $this->connector->getHQRentalsAdditionalCharges();
-		if ( $charges->success ) {
+		if ( $charges->success and !empty($charges->data)) {
 			$this->createAdditionalCharges( $charges->data );
 			//$this->createAllAdditionalChargesForFrontend( $charges->data );
 		}

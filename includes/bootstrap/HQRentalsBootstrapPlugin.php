@@ -8,8 +8,8 @@ use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsShortcoder;
 use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
-use HQRentalsPlugin\HQRentalsTemplates\HQRentalsTemplatesMenus;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesAries;
+use HQRentalsPlugin\HQRentalsWorkspot\HQRentalsWorkspotBootstrap;
 
 class HQRentalsBootstrapPlugin
 {

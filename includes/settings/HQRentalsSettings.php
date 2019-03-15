@@ -23,6 +23,9 @@ class HQRentalsSettings
     public $hq_datetime_format = 'hq_wordpress_system_datetime_format_option';
     public $front_end_datetime_format = 'hq_wordpress_front_end_datetime_format_option';
     public $api_base_url = 'hq_wordpress_api_base_url_option';
+    public $api_user_token_workspot_gebouw_location = 'hq_wordpress_api_user_token_key_workspot_gebouw_location_option';
+    public $api_tenant_token_workspot_gebouw_location = 'hq_wordpress_api_tenant_token_key_workspot_gebouw_location_option';
+    public $api_encoded_token_workspot_gebouw_location = 'hq_wordpress_api_encoded_token_workspot_gebouw_location_option';
 
     public function getApiUserToken()
     {
@@ -33,12 +36,23 @@ class HQRentalsSettings
     {
         return get_option($this->api_tenant_token, true);
     }
+    public function getApiUserTokenForWorkspotLocation()
+    {
+        return get_option($this->api_user_token_workspot_gebouw_location, true);
+    }
+
+    public function getApiTenantTokenForWorkspotLocation()
+    {
+        return get_option($this->api_tenant_token_workspot_gebouw_location, true);
+    }
 
     public function getApiDecodedToken()
     {
         return get_option($this->api_encoded_token, true);
     }
-
+    public function getEncodedApiKeyForWorkspotLocation(){
+        return get_option($this->api_encoded_token_workspot_gebouw_location);
+    }
     public function getWoocommerceSyncOption()
     {
         return get_option($this->woocommerce_hq_sync, true);
@@ -98,13 +112,17 @@ class HQRentalsSettings
     {
         update_option($this->api_encoded_token, base64_encode($tenantKey . ':' . $userKey));
     }
-
+    public function saveEncodedApiKeyForWorkspotLocation($tenantKey, $userKey)
+    {
+        update_option($this->api_encoded_token_workspot_gebouw_location, base64_encode($tenantKey . ':' . $userKey));
+    }
     /*
      * Update All Setting from Admin Screen
      */
     public function updateSettings($postDataFromSettings)
     {
-        $this->saveEncodedApiKey($this->getApiTenantToken(), $this->getApiUserToken());
+        $this->saveEncodedApiKey($postDataFromSettings[$this->api_tenant_token], $postDataFromSettings[$this->api_user_token]);
+        $this->saveEncodedApiKeyForWorkspotLocation( $postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location], $postDataFromSettings[$this->api_user_token_workspot_gebouw_location] );
         foreach ($postDataFromSettings as $key => $data) {
             if ($key != 'save') {
                 update_option($key, $data);

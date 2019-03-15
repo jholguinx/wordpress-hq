@@ -22,7 +22,6 @@ class HQRentalsVehicleClassesTask{
 				HQVehicleClass::$custom_fields[] = $field->dbcolumn;
 			}
 		}
-
 		if ( $vehicleClasses->success and !empty($vehicleClasses->data)) {
 			$this->createVehicleClasses( $vehicleClasses->data, $customFields );
 			//$this->createAllVehicleClassesForFrontend( $vehicleClasses->data );

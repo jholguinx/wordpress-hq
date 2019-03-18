@@ -40,10 +40,10 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
             'posts_per_page'    =>  -1
         );
         if (!empty($post)) {
-            $this->setFromFromPost($post);
+            $this->setFromPost($post);
         }
     }
-    public function setFromFromPost($post)
+    public function setFromPost($post)
     {
         foreach ($this->getAllMetaTags() as $property => $metakey) {
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
@@ -127,7 +127,7 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
             'price'             =>  $this->metaPrice,
             'order'             =>  $this->metaOrder,
             'endInterval'       =>  $this->metaEndInterval,
-            'startInterval'     =>  $this->startInterval
+            'startInterval'     =>  $this->metaStartInterval
         );
     }
 

@@ -34,6 +34,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $isOffice = '';
     public $coordinates = '';
     public $isActive = '';
+    public $order = '';
 
 
     public function __construct($post = null)

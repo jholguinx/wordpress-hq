@@ -195,4 +195,8 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
     {
         return number_format((float) $this->price, $decimal, '.', '');
     }
+    public function getPriceAsANumber()
+    {
+        return (float) $this->price;
+    }
 }

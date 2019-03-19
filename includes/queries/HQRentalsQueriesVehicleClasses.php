@@ -124,6 +124,15 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         }
         return $data;
     }
+    public function getCheapestClassesFromCustomFieldAndPriceIntervals($dbColumn)
+    {
+        $customFieldsValues = $this->getAllDifferentsValuesFromCustomField($dbColumn);
+        $data = [];
+        foreach ($customFieldsValues as $value) {
+            $data[] = $this->getCheapestClassFromCustomFieldValueAndPriceInterval($dbColumn, $value['meta_value']);
+        }
+        return $data;
+    }
 
     public function getClassFromCustomField($dbColumn, $value)
     {
@@ -166,6 +175,35 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         foreach ($query->posts as $post) {
             $newClass = new HQRentalsModelsVehicleClass($post);
             if ($cheapestPost->rate()->getFormattedDailyRateAsNumber() < $newClass->rate()->getFormattedDailyRateAsNumber()) {
+                $cheapestPost = $newClass;
+            }
+        }
+        return $cheapestPost;
+    }
+
+    public function getCheapestClassFromCustomFieldValueAndPriceInterval($dbColumn, $value)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->model->getCustomFieldMetaPrefix() . $dbColumn,
+                        'value' => $value,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        if (empty($query->posts)) {
+            return array();
+        } else {
+            $cheapestPost = new HQRentalsModelsVehicleClass($query->posts[0]);
+        }
+        foreach ($query->posts as $post) {
+            $newClass = new HQRentalsModelsVehicleClass($post);
+            if ($cheapestPost->getCheapestPriceInterval()->getPriceAsANumber() < $newClass->getCheapestPriceInterval()->getPriceAsANumber()) {
                 $cheapestPost = $newClass;
             }
         }

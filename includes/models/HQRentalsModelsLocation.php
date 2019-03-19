@@ -22,7 +22,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     protected $metaOffice = 'hq_wordpress_location_is_office_meta';
     protected $metaCoordinates = 'hq_wordpress_location_coordinates_meta';
     protected $metaIsActive = 'hq_wordpress_location_is_active_meta';
-
+    protected $metaOrder = 'hq_wordpress_location_order_meta';
 
     /*
      * Object Data to Display
@@ -93,6 +93,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->isOffice = $data->is_office;
         $this->coordinates = $data->coordinates;
         $this->isActive = $data->active;
+        $this->order = $data->order;
     }
 
 
@@ -114,6 +115,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaOffice, $this->isOffice );
         hq_update_post_meta( $post_id, $this->metaCoordinates, $this->coordinates );
         hq_update_post_meta( $post_id, $this->metaIsActive, $this->isActive );
+        hq_update_post_meta( $post_id, $this->metaOrder, $this->order );
     }
 
     /*
@@ -132,6 +134,11 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     {
         $args = array_merge(
             $this->postArgs,
+            array(
+                'meta_key'   =>  $this->metaOrder,
+                'orderby'    =>  'meta_value',
+                'order'      =>  'ASC',
+            ),
             array(
                 'meta_query'    =>  array(
                     array(
@@ -168,7 +175,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'isAirport'     =>  $this->metaAirport,
             'isOffice'      =>  $this->metaOffice,
             'coordinates'   =>  $this->metaCoordinates,
-            'isActive'      =>  $this->metaIsActive
+            'isActive'      =>  $this->metaIsActive,
+            'order'         =>  $this->metaOrder
         );
     }
 }

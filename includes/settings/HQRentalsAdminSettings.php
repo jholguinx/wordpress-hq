@@ -31,7 +31,6 @@ class HQRentalsAdminSettings
 
     public function displaySettingsPage()
     {
-        $devMode = isset($_GET['devmode']) && $_GET['devmode'];
         if (!empty($_POST)) {
             if(isset($_POST['hq_force_update'])){
                 $this->settings->forceSyncOnHQData();
@@ -156,22 +155,23 @@ class HQRentalsAdminSettings
                                 class="screen-reader-text">Dismiss this notice.</span></button>
                 </div>
             </div>
-            <?php if (!empty($devMode)): ?>
-                <div class="">
-                    <form method="post">
-                        <table class="form-table">
-                            <tbody>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title" for="title">Force Sync Update</label></th>
-                                <td>
-                                    <input type="hidden" value="1" name="hq_force_update"/>
-                                    <input type="submit" value="Force Update" name="save" class="button button-primary button-large" >
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                </div>
-            <?php endif; ?>
+            <div class="">
+                <form method="post">
+                    <table class="form-table">
+                        <tbody>
+                        <tr>
+                            <th><label class="wp-heading-inline" id="title" for="title">Force Sync Update</label><p style="text-align: justify;">
+                                    All the previous data will be deleted
+                                </p></th>
+                            <td>
+                                <input type="hidden" value="1" name="hq_force_update"/>
+                                <input type="submit" value="Force Update" name="save" class="button button-primary button-large" >
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
             <?php
         }
         ?>

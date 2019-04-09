@@ -21,6 +21,7 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsBootstrap\HQRentalsBootstrapPlugin;
 
 $bootstraper = new HQRentalsBootstrapPlugin();
+
 /*
  * Activation Routine
  * @return void

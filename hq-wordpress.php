@@ -30,5 +30,4 @@ function hq_rentals_wordpress_activation() {
 	$boot = new HQRentalsBootstrap();
 	$boot->onPluginActivation();
 }
-
 register_activation_hook( __FILE__, __NAMESPACE__ . '\hq_rentals_wordpress_activation' );

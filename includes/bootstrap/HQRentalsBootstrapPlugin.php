@@ -26,11 +26,5 @@ class HQRentalsBootstrapPlugin
         $this->posts = new HQRentalsCustomPostsHandler();
         $this->settingsAdmin = new HQRentalsAdminSettings();
         $this->ariesQueries = new HQRentalsQueriesAries();
-        //$this->menus = new HQRentalsTemplatesMenus();
-        //add_action('template_redirect', array($this, ''));
-    }
-    public function triggerActionsOnTemplateRedirect()
-    {
-        //$this->menus->updateMenuItems();
     }
 }

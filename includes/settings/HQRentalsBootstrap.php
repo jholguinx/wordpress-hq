@@ -10,12 +10,12 @@ class HQRentalsBootstrap
      * Plugin Option to be configured by users
      * The names of this option are on thhe Settings Class
      */
-    protected $api_user_token_default_value = '';
-    protected $api_tenant_token_default_value = '';
+    protected $api_user_token_default_value = "";
+    protected $api_tenant_token_default_value = "";
     protected $woocommerce_hq_sync_default_value = false;
-    protected $hq_datetime_format_default_value = 'Y-m-d H:i';
-    protected $front_end_datetime_format_default_value = 'Y-m-d H:i';
-    protected $api_base_url_default_value  = 'https://api.caagcrm.com/api/';
+    protected $hq_datetime_format_default_value = "Y-m-d H:i";
+    protected $front_end_datetime_format_default_value = "Y-m-d H:i";
+    protected $api_base_url_default_value  = "https://api.caagcrm.com/api/";
 
     public function __construct()
     {

@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: HQ Rental Software Plugin
+Plugin Name: HQ Rental Software
 Plugin URI: https://hqrentalsoftware.com
-Description: HQ Rental Software Plugin
-Version: 0.5.3
+Description: This plugin is to easily integrate HQ Rental Software with your website which will allow your rental business to receive reservations directly from your site.
+Version: 1.0.0
 Author: HQ Rental Software
 Author URI: https://hqrentalsoftware.com
 Text Domain: hq-wordpress
@@ -21,6 +21,7 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsBootstrap\HQRentalsBootstrapPlugin;
 
 $bootstraper = new HQRentalsBootstrapPlugin();
+
 /*
  * Activation Routine
  * @return void

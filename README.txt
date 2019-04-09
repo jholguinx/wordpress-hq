@@ -1,6 +1,7 @@
-=== HQ Rentals Plugin ===
+=== HQ Rental Software ===
 Contributors: faggioni
-Tags: hqrentals
+Donate link: https://hqrentalsoftware.com
+Tags: hqrentalsoftware
 Requires at least: 3.0.1
 Tested up to: 5.1
 Requires PHP: 7.1
@@ -55,3 +56,14 @@ There is nothing to upgrade
 6. You will see a table with the user where you can click on the user that you would like to use to manage, and click on your user name.
 8. Once you have generated the new tokens, paste them in the fields marked in the image below. Next, select the API Region that you are currently in circled in orange in the picture below. To find out which API region you are currently on, check your URL. If you have xxx.caagcrm.com, your region is in America. For Europe, it would be xxx.hqrentals.eu and for Asia, it would be xxx.hqrentals.asia.
 9. Once you have copied both tokens you will see HQ Rentals inside the WordPress menu and you should see this table; now just copy the “HTML shortcode reservations” and paste that on the page where you would like to display the bookings process. The system will automatically resize the iFrame on this page.
+
+== Frequently Asked Questions ==
+
+= A question that someone might have =
+
+An answer to that question.
+
+= What about foo bar? =
+
+Answer to foo bar dilemma.
+

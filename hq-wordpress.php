@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: HQ Rental Software Plugin
+Plugin Name: HQ Rental Software
 Plugin URI: https://hqrentalsoftware.com
 Description: This plugin is to easily integrate HQ Rental Software with your website which will allow your rental business to receive reservations directly from your site.
 Version: 1.0.0

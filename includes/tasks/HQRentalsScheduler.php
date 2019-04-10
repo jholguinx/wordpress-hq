@@ -33,6 +33,7 @@ class HQRentalsScheduler
 
     public function refreshHQData()
     {
+        //Should be some sort of validation -> return true is ok!!!
         global $wpdb;
         $site = get_site_url();
         $dbPrefix = $wpdb->prefix;

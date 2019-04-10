@@ -29,6 +29,7 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     public $order = '';
     public $metaClassId = 'hq_wordpress_feature_vehicle_id_meta';
     public $postID = '';
+    public $metaOrderKey = 'hq_wordpress_feature_order_meta';
 
     public function __construct($post = null)
     {

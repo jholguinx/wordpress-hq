@@ -12,7 +12,7 @@ class HQRentalsWebhooksManager{
     }
     public function setCustomApiRoutes(){
         register_rest_route( 'hqrentals', '/update/', array(
-            'methods' => 'GET',
+            'methods' => 'POST',
             'callback' => array ($this, 'fireUpdate'),
         ) );
     }

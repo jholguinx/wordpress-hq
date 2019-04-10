@@ -9,7 +9,7 @@ use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsShortcoder;
 use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesAries;
-use HQRentalsPlugin\HQRentalsWorkspot\HQRentalsWorkspotBootstrap;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFilters;
 
 class HQRentalsBootstrapPlugin
 {
@@ -23,6 +23,7 @@ class HQRentalsBootstrapPlugin
         $this->assets = new HQRentalsAssetsHandler();
         $this->brandPostAdmin = new HQRentalsAdminBrandsPosts();
         $this->shortcoder = new HQRentalsShortcoder();
+        $this->filters = new HQRentalsFilters();
         $this->posts = new HQRentalsCustomPostsHandler();
         $this->settingsAdmin = new HQRentalsAdminSettings();
         $this->ariesQueries = new HQRentalsQueriesAries();

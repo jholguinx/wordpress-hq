@@ -63,9 +63,10 @@ class HQRentalsReservationsShortcode
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
             } else {
-                if(!empty($_GET['vehicle_class_id'])){
+                if(!empty($_GET)){
+                    $query = http_build_query($_GET);
                     ?>
-                    <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull . '&vehicle_class_id=' . $_GET['vehicle_class_id']; ?>"
+                    <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo $brand->publicReservationsLinkFull . '?' . $query ?>"
                             scrolling="no"></iframe>
                     <?php
                 }else{

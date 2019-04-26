@@ -27,6 +27,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     protected $metaPublicReservationPackagesFirstStepLink = 'hq_wordpress_brand_public_reservation_packages_first_step_link';
     protected $metaMyReservationsLink = 'hq_wordpress_brand_my_reservation_link';
     protected $metaMyPackagesReservationsLink = 'hq_wordpress_brand_my_packages_reservation_link';
+    protected $metaPublicCalendarLink = 'hq_wordpress_brand_public_calendar_link';
 
     /*
      * Object Data to Display
@@ -42,6 +43,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     public $publicReservationPackagesFirstStepLink = '';
     public $myReservationsLink = '';
     public $myPackagesReservationsLink = '';
+    public $publicCalendarLink = '';
 
     /*
      * Constructor
@@ -104,6 +106,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
      */
     public function setBrandFromApi($data)
     {
+        $baseUrlForCalendar = explode('packages', $data->my_package_reservations_link);
         $this->id = $data->id;
         $this->name = $data->name;
         $this->taxLabel = $data->tax_label;
@@ -115,6 +118,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->publicReservationPackagesFirstStepLink = $data->public_reservations_packages_link_first_step;
         $this->myReservationsLink = $data->my_reservations_link;
         $this->myPackagesReservationsLink = $data->my_package_reservations_link;
+        $this->publicCalendarLink = $baseUrlForCalendar[0] . 'calendar?brand_id=' . $data->uuid;
     }
 
     /*
@@ -140,6 +144,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         hq_update_post_meta( $post_id, $this->metaPublicReservationsFirstStepLink, $this->publicReservationsFirstStepLink );
         hq_update_post_meta( $post_id, $this->metaMyReservationsLink, $this->myReservationsLink );
         hq_update_post_meta( $post_id, $this->metaMyPackagesReservationsLink, $this->myPackagesReservationsLink );
+        hq_update_post_meta( $post_id, $this->metaPublicCalendarLink, $this->publicCalendarLink );
     }
 
     /*
@@ -175,6 +180,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->publicReservationPackagesFirstStepLink = get_post_meta( $brandPost->ID, $this->metaPublicReservationPackagesFirstStepLink, true );
         $this->myReservationsLink = get_post_meta( $brandPost->ID, $this->metaMyReservationsLink, true );
         $this->myPackagesReservationsLink = get_post_meta(  $brandPost->ID, $this->metaMyPackagesReservationsLink, true );
+        $this->publicCalendarLink = get_post_meta( $brandPost->ID, $this->metaPublicCalendarLink, true );
     }
 
     public function setBrandFromPostId($id)

@@ -20,5 +20,6 @@ class HQRentalsShortcoder
         $this->formLink = new HQRentalsFormLink();
         $this->reservationsAdvanced = new HQRentalsReservationsAdvancedShortcode();
         $this->systemAssetsShortcode = new HQRentalsSystemAssets();
+        $this->calendarShortcode = new HQRentalsAvailabilityCalendarShortcode();
     }
 }

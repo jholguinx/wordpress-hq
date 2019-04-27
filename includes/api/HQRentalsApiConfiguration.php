@@ -9,15 +9,25 @@ class HQRentalsApiConfiguration
     {
         $this->settings = new HQRentalsSettings();
         $this->endpoints = new HQRentalsApiEndpoint();
+        $this->normalTimeout = 10;
     }
 
-    public function getBasicApiConfiguration()
+    public function getBasicApiConfiguration( $data = null )
     {
+        if($data){
+            return array(
+                'headers'   =>  array(
+                    'Authorization' => 'Basic ' . $this->settings->getApiEncodedToken()
+                ),
+                'body'      =>  $data,
+                'timeout'   =>  10
+            );
+        }
         return array(
             'headers'   =>  array(
                 'Authorization' => 'Basic ' . $this->settings->getApiEncodedToken()
             ),
-            'timeout'   =>  10
+            'timeout'   =>  $this->normalTimeout
         );
     }
     public function getBasicApiConfigurationForGebouwWorkspotLocation()
@@ -26,8 +36,7 @@ class HQRentalsApiConfiguration
             'headers'   =>  array(
                 'Authorization' => 'Basic ' . $this->settings->getEncodedApiKeyForWorkspotLocation()
             ),
-            'timeout'   =>  10
+            'timeout'   =>  $this->normalTimeout
         );
     }
-
 }

@@ -35,7 +35,6 @@ class HQRentalsReservationsFilteredShortcode
             , $atts, 'hq_rentals_reservations');
         $post_data = $_POST;
         $post_data = $this->frontHelper->sanitizeTextInputs($post_data);
-        $post_data = $this->frontHelper->sanitizeTextInputs($post_data);
         $this->brand->findBySystemId($atts['id']);
         $this->assets->getIframeResizerAssets();
         try {
@@ -48,9 +47,9 @@ class HQRentalsReservationsFilteredShortcode
                     $return_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['return_date']);
                 }
 
-                $queryStringVehicle = $this->queryStringHelper->getVehicleClassesQueryString($_POST['vehicle_class_filter_db_column'], $_POST['vehicle_classes_filter']);
+                $queryStringVehicle = $this->queryStringHelper->getVehicleClassesQueryString($post_data['vehicle_class_filter_db_column'], $post_data['vehicle_classes_filter']);
                 ?>
-                <form action="<?php echo $this->brand->publicReservationsFirstStepLink . $queryStringVehicle; ?>" method="POST"
+                <form action="<?php echo esc_url($this->brand->publicReservationsFirstStepLink . $queryStringVehicle); ?>" method="POST"
                       target="hq-rental-iframe" id="hq-form-init">
                     <input type="hidden" name="pick_up_date"
                            value="<?php echo esc_attr($pickup_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />

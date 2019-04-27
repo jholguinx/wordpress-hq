@@ -9,6 +9,11 @@ class HQRentalsApiEndpoint{
         $this->settings = new HQRentalsSettings();
     }
 
+    public function getAvailabilityEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'car-rental/availability';
+    }
+
     /*
      * Get Brand Api Endpoint
      */

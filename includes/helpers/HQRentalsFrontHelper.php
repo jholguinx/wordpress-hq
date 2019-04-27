@@ -20,4 +20,11 @@ class HQRentalsFrontHelper
 
         return $output;
     }
+    public function sanitizeInput($postData)
+    {
+        foreach ($postData as $key => $value){
+            $postData[$key] = sanitize_text_field($value);
+        }
+        return $postData;
+    }
 }

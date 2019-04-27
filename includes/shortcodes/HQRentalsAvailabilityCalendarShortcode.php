@@ -29,6 +29,6 @@ class HQRentalsAvailabilityCalendarShortcode
         $url = $this->brand->publicCalendarLink;
         $lang = '&forced_locale=' . $atts['forced_locale'];
         $vehicle_class = (empty($atts['vehicle_class_id'])) ? '' : '&vehicle_class_id=' . $atts['vehicle_class_id'];
-        return '<iframe id="hq-rental-iframe" src="' . $url . $lang . $vehicle_class . '" scrolling="no"></iframe>';
+        return '<iframe id="hq-rental-iframe" src="' . esc_url($url . $lang . $vehicle_class) . '" scrolling="no"></iframe>';
     }
 }

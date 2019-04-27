@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
@@ -20,6 +21,7 @@ class HQRentalsReservationsFilteredShortcode
         $this->assets = new HQRentalsAssetsHandler();
         $this->queryVehicles = new HQRentalsQueriesVehicleClasses();
         $this->queryStringHelper = new HQRentalsQueryStringHelper();
+        $this->frontHelper = new HQRentalsFrontHelper();
         add_shortcode('hq_rentals_reservation_filter' , array ($this, 'reservationsShortcode'));
     }
     public function reservationsShortcode($atts = [])
@@ -32,6 +34,8 @@ class HQRentalsReservationsFilteredShortcode
             )
             , $atts, 'hq_rentals_reservations');
         $post_data = $_POST;
+        $post_data = $this->frontHelper->sanitizeTextInputs($post_data);
+        $post_data = $this->frontHelper->sanitizeTextInputs($post_data);
         $this->brand->findBySystemId($atts['id']);
         $this->assets->getIframeResizerAssets();
         try {
@@ -49,27 +53,27 @@ class HQRentalsReservationsFilteredShortcode
                 <form action="<?php echo $this->brand->publicReservationsFirstStepLink . $queryStringVehicle; ?>" method="POST"
                       target="hq-rental-iframe" id="hq-form-init">
                     <input type="hidden" name="pick_up_date"
-                           value="<?php echo $pickup_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat())); ?>" />
+                           value="<?php echo esc_attr($pickup_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
                     <input type="hidden" name="pick_up_time"
-                           value="<?php echo $pickup_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat())); ?>" />
+                           value="<?php echo esc_attr($pickup_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
                     <input type="hidden" name="return_date"
-                           value="<?php echo $return_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat())); ?>" />
+                           value="<?php echo esc_attr($return_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
                     <input type="hidden" name="return_time"
-                           value="<?php echo $return_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat())); ?>" />
+                           value="<?php echo esc_attr($return_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
                     <?php foreach ($post_data as $key => $value): ?>
                         <?php if ($key !== 'pick_up_date' and $key !== 'pick_up_time' and $key !== 'return_date' and $key !== 'return_time' and $key != 'vehicle_class_filter_db_column' and $key != 'vehicle_classes_filter'): ?>
-                            <input type="hidden" name="<?php echo $key ?>" value="<?php echo $value; ?>" />
+                            <input type="hidden" name="<?php echo esc_attr($key); ?>" value="<?php echo esc_attr($value); ?>" />
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <input type="submit" style="display: none;">
                 </form>
                 <iframe id="hq-rental-iframe" name="hq-rental-iframe"
-                        src="<?php echo $this->brand->publicReservationsLinkFull; ?>" scrolling="no"></iframe>
+                        src="<?php echo esc_url($this->brand->publicReservationsLinkFull); ?>" scrolling="no"></iframe>
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
             } else {
                 ?>
-                <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo $this->brand->publicReservationsLinkFull; ?>"
+                <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($this->brand->publicReservationsLinkFull); ?>"
                         scrolling="no"></iframe>
                 <?php
             }

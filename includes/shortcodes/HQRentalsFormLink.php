@@ -25,7 +25,7 @@ class HQRentalsFormLink
         wp_enqueue_script('hq-resize-script');
         if(!empty($_POST['hq-integration'])){
             $post_data = $_POST;
-            $post_data = $this->helper->sanitizeInput($post_data);
+            $post_data = $this->helper->sanitizeTextInputs($post_data);
             ?>
             <form action="<?php echo esc_url($atts['url']); ?>" method="POST"
                   target="hq-rental-iframe" id="hq-form-init">

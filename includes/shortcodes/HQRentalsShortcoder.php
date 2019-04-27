@@ -18,6 +18,8 @@ class HQRentalsShortcoder
         $this->myReservations = new HQRentalsMyReservationsShortcode();
         $this->myPackagesReservations = new HQRentalsMyPackagesReservationsShortcode();
         $this->formLink = new HQRentalsFormLink();
+        $this->reservationsAdvanced = new HQRentalsReservationsAdvancedShortcode();
         $this->systemAssetsShortcode = new HQRentalsSystemAssets();
+        $this->calendarShortcode = new HQRentalsAvailabilityCalendarShortcode();
     }
 }

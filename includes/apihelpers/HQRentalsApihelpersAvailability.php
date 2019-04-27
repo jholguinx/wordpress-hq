@@ -1,7 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsApihelpers;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
-use HQRentalsPlugin\HQRentalsVendor\Carbon;
+
 
 class HQRentalsApihelpersAvailability{
     protected static $systemFormat = 'Y-m-d H:i';

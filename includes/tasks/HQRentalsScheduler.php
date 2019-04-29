@@ -34,6 +34,7 @@ class HQRentalsScheduler
     public function refreshHQData()
     {
         //Should be some sort of validation -> return true is ok!!!
+        // we could add some try catch over here!!!
         global $wpdb;
         $site = get_site_url();
         $dbPrefix = $wpdb->prefix;

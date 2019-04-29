@@ -18,12 +18,12 @@ class HQRentalsWebhooksManager{
     }
     public function fireUpdate(\WP_REST_Request $request)
     {
-        //Should be validate -> add Success params to the response
+        //Should be validated -> add Success params to the response
         $this->scheduler->refreshHQData();
         $data = array(
             'message'   =>  'Successful Update',
             'status'    =>  200,
-            'data'      =>  []
+            'data'      =>  [ ]
         );
         $response = new \WP_REST_Response($data);
         $response->status = 200;

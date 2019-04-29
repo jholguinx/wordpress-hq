@@ -2,8 +2,6 @@
 
 namespace HQRentalsPlugin\HQRentalsQueries;
 
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
-
 
 class HQRentalsQueryStringHelper
 {

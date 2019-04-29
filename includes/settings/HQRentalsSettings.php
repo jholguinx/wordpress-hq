@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsSettings;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
@@ -26,6 +27,11 @@ class HQRentalsSettings
     public $api_user_token_workspot_gebouw_location = 'hq_wordpress_api_user_token_key_workspot_gebouw_location_option';
     public $api_tenant_token_workspot_gebouw_location = 'hq_wordpress_api_tenant_token_key_workspot_gebouw_location_option';
     public $api_encoded_token_workspot_gebouw_location = 'hq_wordpress_api_encoded_token_workspot_gebouw_location_option';
+
+    public function __construct()
+    {
+        $this->helper = new HQRentalsFrontHelper();
+    }
 
     public function getApiUserToken()
     {
@@ -121,6 +127,7 @@ class HQRentalsSettings
      */
     public function updateSettings($postDataFromSettings)
     {
+        $postDataFromSettings = $this->helper->sanitizeTextInputs($postDataFromSettings);
         $this->saveEncodedApiKey($postDataFromSettings[$this->api_tenant_token], $postDataFromSettings[$this->api_user_token]);
         $this->saveEncodedApiKeyForWorkspotLocation( $postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location], $postDataFromSettings[$this->api_user_token_workspot_gebouw_location] );
         foreach ($postDataFromSettings as $key => $data) {
@@ -134,13 +141,13 @@ class HQRentalsSettings
     public function getSettings()
     {
         return array(
-            $this->api_user_token => $this->getApiUserToken(),
-            $this->api_tenant_token => $this->getApiTenantToken(),
-            $this->api_encoded_token => $this->getApiEncodedToken(),
-            $this->woocommerce_hq_sync => $this->getWoocommerceSyncOption(),
-            $this->hq_datetime_format => $this->getHQDatetimeFormat(),
-            $this->front_end_datetime_format => $this->getFrontEndDatetimeFormat(),
-            $this->api_base_url => $this->getApiBaseUrl()
+            $this->api_user_token               => $this->getApiUserToken(),
+            $this->api_tenant_token             => $this->getApiTenantToken(),
+            $this->api_encoded_token            => $this->getApiEncodedToken(),
+            $this->woocommerce_hq_sync          => $this->getWoocommerceSyncOption(),
+            $this->hq_datetime_format           => $this->getHQDatetimeFormat(),
+            $this->front_end_datetime_format    => $this->getFrontEndDatetimeFormat(),
+            $this->api_base_url                 => $this->getApiBaseUrl()
         );
     }
 

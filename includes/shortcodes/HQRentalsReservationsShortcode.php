@@ -67,7 +67,8 @@ class HQRentalsReservationsShortcode
                 $this->assets->getFirstStepShortcodeAssets();
             } else {
                 if(!empty($_GET)){
-                    $query = http_build_query($_GET);
+                    $getData = $this->frontHelper->sanitizeTextInputs($_GET);
+                    $query = http_build_query($getData);
                     ?>
                     <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($brand->publicReservationsLinkFull . '?' . $query); ?>"
                             scrolling="no"></iframe>

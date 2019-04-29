@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsSettings;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 
 
 class HQRentalsAdminSettings
@@ -15,6 +16,7 @@ class HQRentalsAdminSettings
     {
         $this->settings = new HQRentalsSettings();
         $this->dateHelper = new HQRentalsDatesHelper();
+        $this->frontHelper = new HQRentalsFrontHelper();
         add_action('admin_menu', array($this, 'setAdminMenuOptions'));
     }
 
@@ -62,29 +64,29 @@ class HQRentalsAdminSettings
                             <tbody>
                             <tr>
                                 <th><label class="wp-heading-inline" id="title" for="title">Tenant Token</label></th>
-                                <td><input type="text" name="<?php echo $this->settings->api_tenant_token; ?>" size="70"
-                                           value="<?php echo $this->settings->getApiTenantToken(); ?>" id="title"
+                                <td><input type="text" name="<?php echo esc_attr($this->settings->api_tenant_token); ?>" size="70"
+                                           value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>" id="title"
                                            spellcheck="true" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User
                                         Token</label></th>
-                                <td><input type="text" name="<?php echo $this->settings->api_user_token; ?>" size="70"
-                                           value="<?php echo $this->settings->getApiUserToken(); ?>" id="title"
+                                <td><input type="text" name="<?php echo esc_attr($this->settings->api_user_token); ?>" size="70"
+                                           value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>" id="title"
                                            spellcheck="true" autocomplete="off"></td>
                             </tr>
                             <?php if(get_site_url() == 'https://workspot.nu' or get_site_url() == 'http://workspot.test'): ?>
                                 <tr>
                                     <th><label class="wp-heading-inline" id="title" for="title">Tenant Token Workspot Gebouw Tenant</label></th>
-                                    <td><input type="text" name="<?php echo $this->settings->api_tenant_token_workspot_gebouw_location; ?>" size="70"
-                                               value="<?php echo $this->settings->getApiTenantTokenForWorkspotLocation(); ?>" id="title"
+                                    <td><input type="text" name="<?php echo esc_attr($this->settings->api_tenant_token_workspot_gebouw_location); ?>" size="70"
+                                               value="<?php echo esc_attr($this->settings->getApiTenantTokenForWorkspotLocation()); ?>" id="title"
                                                spellcheck="true" autocomplete="off"></td>
                                 </tr>
                                 <tr>
                                     <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User
                                             Token Workspot Gebouw Tenant</label></th>
-                                    <td><input type="text" name="<?php echo $this->settings->api_user_token_workspot_gebouw_location; ?>" size="70"
-                                               value="<?php echo $this->settings->getApiUserTokenForWorkspotLocation(); ?>" id="title"
+                                    <td><input type="text" name="<?php echo esc_url($this->settings->api_user_token_workspot_gebouw_location); ?>" size="70"
+                                               value="<?php echo esc_url($this->settings->getApiUserTokenForWorkspotLocation()); ?>" id="title"
                                                spellcheck="true" autocomplete="off"></td>
                                 </tr>
                             <?php endif; ?>
@@ -92,7 +94,7 @@ class HQRentalsAdminSettings
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end
                                         Date Format</label></th>
                                 <td>
-                                    <select name="<?php echo $this->settings->front_end_datetime_format; ?>">
+                                    <select name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
                                         <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
                                     </select>
                                 </td>

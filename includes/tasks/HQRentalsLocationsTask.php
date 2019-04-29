@@ -35,21 +35,4 @@ class HQRentalsLocationsTask
 			$newLocation->create();
 		}
 	}
-    /*
-	protected function createAllLocationsForFrontend( $locations )
-    {
-		$all_id         = wp_insert_post( [
-			'post_type'      => 'hqwp_locations',
-			'post_status'    => 'publish',
-			'post_title'     => 'All Locations',
-			'post_name'      => 'all_locations',
-		] );
-		$allForFrontEnd = array_map( function ( $location ) {
-			return [
-				'id'   => $location->id,
-				'name' => $location->name,
-			];
-		}, $locations );
-		hq_update_post_meta( $all_id, 'hq_wordpress_location_all_for_frontend', json_encode( $allForFrontEnd ) );
-	}*/
 }

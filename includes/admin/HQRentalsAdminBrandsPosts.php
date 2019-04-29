@@ -16,12 +16,12 @@ class HQRentalsAdminBrandsPosts
     public function addNewColumnsOnBrandAdminScreen($defaults)
     {
         return array(
-            'cb' => '<input type="checkbox" />',
-            'title' => 'Title',
-            'reservation_shortcode' => 'Reservation Shortcode',
-            'my_reservation_shortcode' => 'My Reservation Shortcode',
-            'vehicle_class_calendar' => 'Vehicle Class Calendar',
-            'date' => 'Date',
+            'cb'                        => '<input type="checkbox" />',
+            'title'                     => 'Title',
+            'reservation_shortcode'     => 'Reservation Shortcode',
+            'my_reservation_shortcode'  => 'My Reservation Shortcode',
+            'vehicle_class_calendar'    => 'Vehicle Class Calendar',
+            'date'                      => 'Date',
 
         );
     }

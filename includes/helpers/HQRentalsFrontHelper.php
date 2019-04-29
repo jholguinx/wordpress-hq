@@ -27,4 +27,11 @@ class HQRentalsFrontHelper
         }
         return $postData;
     }
+    public function escapeAttributes($data)
+    {
+        foreach ($data as $key => $value){
+            $data[$key] = esc_attr($value);
+        }
+        return $data;
+    }
 }

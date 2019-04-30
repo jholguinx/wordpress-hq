@@ -9,7 +9,6 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueryStringHelper;
-use function Symfony\Component\VarDumper\Dumper\esc;
 
 
 class HQRentalsReservationsAdvancedShortcode

@@ -116,6 +116,8 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         $args = array_merge(
             $this->postArgs,
             array(
+                'meta_key'   =>  $this->metaOrder,
+                'orderby'    =>  'meta_value',
                 'meta_query'    =>  array(
                     array(
                         'key'       =>  $this->metaVehicleClassId,

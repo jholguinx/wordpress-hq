@@ -36,7 +36,7 @@ class HQRentalsAssetsHandler
     {
         wp_register_style('hq-wordpress-iframe-styles', plugin_dir_url(__FILE__) . 'css/hq-rentals.css', array(), '1.0.1', 'all');
         wp_register_style('hq-wordpress-openlayer-styles', plugin_dir_url(__FILE__) . 'css/ol.css', array(), '1.0.0', 'all');
-        wp_register_script( 'hq-iframe-resizer-script', plugin_dir_url(__FILE__) . 'js/iframeResizer.min', array(), '4.1.1', true);
+        wp_register_script( 'hq-iframe-resizer-script', plugin_dir_url(__FILE__) . 'js/iframeResizer.min.js', array(), '4.1.1', true);
         wp_register_script( 'hq-moment', plugin_dir_url(__FILE__) . 'js/moment.min.js', array(), '1.0.0', true);
         wp_register_script( 'hq-wordpress-openlayer-js', plugin_dir_url(__FILE__) . 'js/ol.js', array(), '1.0.0', true);
         wp_register_script( 'hq-wordpress-workspot-js', plugin_dir_url(__FILE__) . 'js/hq-workspot-maps.js', array(), '1.0.0', true);

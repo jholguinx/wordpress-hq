@@ -4,12 +4,6 @@ namespace HQRentalsPlugin\HQRentalsSettings;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
-use HQRentalsPlugin\HQRentalsVendor\Carbon;
-
-/*
- * HQ Rental Software Plugin
- *
- */
 
 class HQRentalsSettings
 {
@@ -86,41 +80,41 @@ class HQRentalsSettings
 
     public function saveApiBaseUrl($newApiUrl)
     {
-        update_option($this->api_base_url, $newApiUrl);
+        return update_option($this->api_base_url, sanitize_text_field($newApiUrl));
     }
 
     public function saveApiUserToken($token)
     {
-        return update_option($this->api_user_token, $token);
+        return update_option($this->api_user_token, sanitize_text_field($token));
     }
 
     public function saveApiTenantToken($token)
     {
-        return update_option($this->api_tenant_token, $token);
+        return update_option($this->api_tenant_token, sanitize_text_field($token));
     }
 
     public function saveWoocommerSyncOption($value = false)
     {
-        return update_option($this->woocommerce_hq_sync, $value);
+        return update_option($this->woocommerce_hq_sync, sanitize_text_field($value));
     }
 
     public function saveHQDatetimeFormat($datetime_format)
     {
-        return update_option($this->hq_datetime_format, $datetime_format);
+        return update_option($this->hq_datetime_format, sanitize_text_field($datetime_format));
     }
 
     public function saveFrontEndDateTimeFormat($datetime_format)
     {
-        return update_option($this->front_end_datetime_format, $datetime_format);
+        return update_option($this->front_end_datetime_format, sanitize_text_field($datetime_format));
     }
 
     public function saveEncodedApiKey($tenantKey, $userKey)
     {
-        update_option($this->api_encoded_token, base64_encode($tenantKey . ':' . $userKey));
+        return update_option($this->api_encoded_token, sanitize_text_field(base64_encode($tenantKey . ':' . $userKey)));
     }
     public function saveEncodedApiKeyForWorkspotLocation($tenantKey, $userKey)
     {
-        update_option($this->api_encoded_token_workspot_gebouw_location, base64_encode($tenantKey . ':' . $userKey));
+        return update_option($this->api_encoded_token_workspot_gebouw_location, sanitize_text_field(base64_encode($tenantKey . ':' . $userKey)));
     }
     /*
      * Update All Setting from Admin Screen
@@ -132,7 +126,7 @@ class HQRentalsSettings
         $this->saveEncodedApiKeyForWorkspotLocation( $postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location], $postDataFromSettings[$this->api_user_token_workspot_gebouw_location] );
         foreach ($postDataFromSettings as $key => $data) {
             if ($key != 'save') {
-                update_option($key, $data);
+                update_option($key, sanitize_text_field($data));
             }
         }
         $_POST['success'] = 'success';

@@ -21,7 +21,7 @@ class HQRentalsSystemAssets
         $html = '';
         if( $assets->success ){
             foreach ( $assets->data as $key => $asset ){
-                $html .= "<link rel='stylesheet' id='hq-css-" . $key . "' href='". $asset ."' type='text/css' media='all' />";
+                $html .= "<link rel='stylesheet' id='hq-css-" . esc_attr( $key ) . "' href='". esc_url($asset) ."' type='text/css' media='all' />";
             }
         }
         return $html;

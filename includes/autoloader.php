@@ -44,16 +44,6 @@ function hq_wordpress_autoloader( $class_name ) {
 		);
 	}
 }
-
-/*
- *  Folder Organizer
- */
-function hq_wordpress_folder_selector( $folder ) {
-	switch ( $folder ) {
-		case ( '' ):
-	}
-}
-
 if ( ! function_exists( 'hq_update_post_meta' ) ) {
 	function hq_update_post_meta( $post_id, $meta_key, $meta_value ) {
 		global $wpdb;

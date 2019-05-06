@@ -15,26 +15,28 @@ class HQRentalsDatesHelper
     }
 
     public $systemSupportedDatesFormats = array(
-        'iso' => 'Y-m-d H:i',
-        'eu' => 'd-m-Y H:i',
-        'us' => 'm/d/Y g:iA',
-        'us_c' => 'm/d/Y g:i',
-        'us_G' => 'm/d/Y G:i',
-        've' => 'd/m/Y g:iA',
-        'int' => 'd.m.Y g:iA',
-        'id' => 'd-M-Y g:iA',
-        'ch' => 'd.m.Y H:i',
-        'ch_c' => 'Y-m-d G:i',
-        'wp_c' => 'd-m-Y G:i'
+        'iso'   => 'Y-m-d H:i',
+        'eu'    => 'd-m-Y H:i',
+        'eu_a'  => 'd-m-Y g:iA',
+        'us'    => 'm/d/Y g:iA',
+        'us_c'  => 'm/d/Y g:i',
+        'us_G'  => 'm/d/Y G:i',
+        've'    => 'd/m/Y g:iA',
+        'int'   => 'd.m.Y g:iA',
+        'id'    => 'd-M-Y g:iA',
+        'ch'    => 'd.m.Y H:i',
+        'ch_c'  => 'Y-m-d G:i',
+        'wp_c'  => 'd-m-Y G:i',
+        'wp_d'  => 'Y-m-d G:i'
     );
     public function getHtmlOptionForFrontEndDateSettingOption()
     {
         $html = '';
         foreach ($this->systemSupportedDatesFormats as $datesFormat) {
             if ($this->settings->getFrontEndDatetimeFormat() == $datesFormat) {
-                $html .= '<option value="' . $datesFormat . '" selected="selected">' . $this->carbon->format($datesFormat) . '</option>';
+                $html .= '<option value="' . esc_attr($datesFormat) . '" selected="selected">' . esc_attr($this->carbon->format($datesFormat)) . '</option>';
             } else {
-                $html .= '<option value="' . $datesFormat . '">' . $this->carbon->format($datesFormat) . '</option>';
+                $html .= '<option value="' . esc_attr($datesFormat) . '">' . esc_attr($this->carbon->format($datesFormat)) . '</option>';
             }
 
         }
@@ -45,9 +47,9 @@ class HQRentalsDatesHelper
         $html = '';
         foreach ($this->systemSupportedDatesFormats as $datesFormat) {
             if ($this->settings->getHQDatetimeFormat() == $datesFormat) {
-                $html .= '<option value="' . $datesFormat . '" selected="selected">' . $this->carbon->format($datesFormat) . '</option>';
+                $html .= '<option value="' . esc_attr($datesFormat) . '" selected="selected">' . esc_attr($this->carbon->format($datesFormat)) . '</option>';
             } else {
-                $html .= '<option value="' . $datesFormat . '">' . $this->carbon->format($datesFormat) . '</option>';
+                $html .= '<option value="' . esc_attr($datesFormat) . '">' . esc_attr($this->carbon->format($datesFormat)) . '</option>';
             }
 
         }

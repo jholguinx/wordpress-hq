@@ -22,6 +22,6 @@ class HQRentalsReservationsPackagesShortcode
         wp_enqueue_script('hq-iframe-resizer-script');
         wp_enqueue_script('hq-resize-script');
         $this->brand->findBySystemId( $atts['id'] );
-        return '<iframe id="hq-rentals-integration-wrapper" src="' . $this->brand->publicReservationPackagesFirstStepLink .  $langParams . '" scrolling="no"></iframe>';
+        return '<iframe id="hq-rentals-integration-wrapper" src="' . esc_url($this->brand->publicReservationPackagesFirstStepLink .  $langParams) . '" scrolling="no"></iframe>';
     }
 }

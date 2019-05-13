@@ -2,6 +2,7 @@ var locations = hqWorkspotLocations;
 locations.forEach( function (location){
     if(location.hasFloors === '1'){
         var floors = Object.entries(location.floors);
+
         floors.forEach(function(floor){
             if(floor[1].map){
                 setFloor(floor[1], location);
@@ -321,9 +322,9 @@ function setFloor(floor, location){
 
         //Set everything for popups
         if(location.id == 20){
-            var container = document.getElementById('popup-' + location.id + '-' + floor['f1393'] );
-            var content = document.getElementById('popup-content-' + location.id + '-' + floor['f1393']);
-            var target = 'location-map-' + location.id + '-' + floor['f1393'];
+            var container = document.getElementById('popup-' + location.id + '-' + floor['f1403'] );
+            var content = document.getElementById('popup-content-' + location.id + '-' + floor['f1403']);
+            var target = 'location-map-' + location.id + '-' + floor['f1403'];
         }else{
             var container = document.getElementById('popup-' + location.id + '-' + floor['f1601'] );
             var content = document.getElementById('popup-content-' + location.id + '-' + floor['f1601']);

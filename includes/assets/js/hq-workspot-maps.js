@@ -156,7 +156,7 @@ function setMaps(location){
                 }
 
                 feature_data += '<p>' + feature.get('status') + '</p>';
-                if (feature.get('status') == 'Algemene Ruimte') {
+                if (feature.get('status') == 'Algemene Ruimte' && feature.get('website_product') === null) {
                     feature_data += '<p>Vergaderruimte</p>';
                 }
 

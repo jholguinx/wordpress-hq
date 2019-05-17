@@ -59,11 +59,32 @@ There is nothing to upgrade
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= How can I setup the plugin? =
 
-An answer to that question.
+The setup its straightforward, you can find this under the Installation tab at this page or go to https://docs.hqrentalsoftware.com/knowledgebase/wordpress-plugin/ and go through the steps.
 
-= What about foo bar? =
+= I received an error on the setup screen =
 
-Answer to foo bar dilemma.
+Please make sure you select the right API Region depending on your installation. If your system link ends in caagcrm you should select America. In case your system link ends in hqrentals.eu, you should select Europe. Finally, if it ends in hqrentals.asia, please select Asia.
 
+= What does the Force Update button do? =
+
+This button triggers the synchronization between your WordPress installation and the system. This will refresh all the current system data on your WordPress website.
+
+= I’m having problems with the reservation workflow on Safari =
+
+Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe must be updated. You will need to add an A record in your DNS records where the value is the name of your tenant. For example, if your link is rentals.caagcrm.com, then the value for the A record needs to be “rentals” and the IP address will depend on your installation as listed below:
+
+America: 45.79.176.147
+Europe: 45.77.139.237
+Asia: 139.162.30.137
+
+Once you have created the A record on your domain, please create a support ticket inside the HQ application so our team can proceed with the update of the system.
+
+= I need to make a custom integration using the system data =
+
+We have a REST API available that can help you interact with the system. For more information regarding technical information please visit https://api-docs.caagcrm.com/
+
+= Need more help? =
+
+You can contact us via our chat at https://hqrentalsoftware.com or you can create a support ticket clicking on the “?” icon in your HQ application.

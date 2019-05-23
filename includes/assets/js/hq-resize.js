@@ -3,13 +3,12 @@ iFrameResize({
     checkOrigin: false,
     maxWidth: screen.width,
     sizeWidth: true,
-    resizedCallback: function(message) {
+    onResized: function(message) {
         var height = document.getElementById('hq-rental-iframe').clientHeight;
         var newheight = height * 1.1;
         document.getElementById("hq-rental-iframe").style.height = newheight + "px";
     }
 }, '#hq-rental-iframe');
-
 /***
  * Scroll on Top for Iframe
  * @type {string}
@@ -22,3 +21,14 @@ eventer(messageEvent, function (e) {
         window.scroll(0,0);
     }
 });
+/*
+*  Redirect Safari Browser
+* */
+redirectInSafariBrowser();
+
+function redirectInSafariBrowser(){
+    if(hqSafariData.isSafari === '1'){
+        window.open(hqSafariData.urlRedirect);
+        return false;
+    }
+}

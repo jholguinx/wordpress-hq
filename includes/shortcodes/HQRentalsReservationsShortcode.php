@@ -37,11 +37,7 @@ class HQRentalsReservationsShortcode
         $brand = new HQRentalsModelsBrand();
         $brand->findBySystemId($atts['id']);
         $this->assets->getIframeResizerAssets();
-        if(!$is_safari and $this->shortcodeHelper->noDNSConfig(esc_url($brand->publicReservationsFirstStepLink))){
-            $this->shortcodeHelper->setForSafariBrowser($post_data, esc_url($brand->publicReservationsFirstStepLink));
-        }else{
-            $this->shortcodeHelper->setForNotSafariBrowser($post_data, esc_url($brand->publicReservationsFirstStepLink));
-        }
+        $this->shortcodeHelper->resolvesSafariIssue($is_safari,$post_data, $brand->publicReservationsFirstStepLink);
         try {
             if ($post_data['pick_up_date']) {
                 if ($post_data['pick_up_time']) {

@@ -36,6 +36,7 @@ class HQRentalsFormLink
             </form>
             <?php
             $this->assets->getFirstStepShortcodeAssets();
+            $this->shortcodeHelper->resolvesSafariIssue($is_safari,$post_data, $brand->publicReservationsFirstStepLink);
         }
         return '<iframe id="hq-rental-iframe" src="' . esc_url($atts['url'] .  $langParams) . '" scrolling="no"></iframe>';
     }

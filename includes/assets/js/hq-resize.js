@@ -3,13 +3,12 @@ iFrameResize({
     checkOrigin: false,
     maxWidth: screen.width,
     sizeWidth: true,
-    resizedCallback: function(message) {
+    onResized: function(message) {
         var height = document.getElementById('hq-rental-iframe').clientHeight;
         var newheight = height * 1.1;
         document.getElementById("hq-rental-iframe").style.height = newheight + "px";
     }
 }, '#hq-rental-iframe');
-redirectInSafariBrowser();
 /***
  * Scroll on Top for Iframe
  * @type {string}

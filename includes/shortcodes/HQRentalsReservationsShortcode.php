@@ -8,6 +8,7 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsShortcodeHelper;
 
 class HQRentalsReservationsShortcode
 {
@@ -17,11 +18,13 @@ class HQRentalsReservationsShortcode
         $this->dateHelper = new HQRentalsDatesHelper();
         $this->assets = new HQRentalsAssetsHandler();
         $this->frontHelper = new HQRentalsFrontHelper();
+        $this->shortcodeHelper = new HQRentalsShortcodeHelper();
         add_shortcode('hq_rentals_reservations', array($this, 'reservationsShortcode'));
     }
 
     public function reservationsShortcode($atts = [])
     {
+        global $is_safari;
         $atts = shortcode_atts(
             array(
                 'id' => '1',
@@ -34,6 +37,11 @@ class HQRentalsReservationsShortcode
         $brand = new HQRentalsModelsBrand();
         $brand->findBySystemId($atts['id']);
         $this->assets->getIframeResizerAssets();
+        if(!$is_safari and $this->shortcodeHelper->noDNSConfig(esc_url($brand->publicReservationsFirstStepLink))){
+            $this->shortcodeHelper->setForSafariBrowser($post_data, esc_url($brand->publicReservationsFirstStepLink));
+        }else{
+            $this->shortcodeHelper->setForNotSafariBrowser($post_data, esc_url($brand->publicReservationsFirstStepLink));
+        }
         try {
             if ($post_data['pick_up_date']) {
                 if ($post_data['pick_up_time']) {

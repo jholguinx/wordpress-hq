@@ -9,7 +9,7 @@ iFrameResize({
         document.getElementById("hq-rental-iframe").style.height = newheight + "px";
     }
 }, '#hq-rental-iframe');
-
+redirectInSafariBrowser();
 /***
  * Scroll on Top for Iframe
  * @type {string}
@@ -22,3 +22,14 @@ eventer(messageEvent, function (e) {
         window.scroll(0,0);
     }
 });
+/*
+*  Redirect Safari Browser
+* */
+redirectInSafariBrowser();
+
+function redirectInSafariBrowser(){
+    if(hqSafariData.isSafari === '1'){
+        window.open(hqSafariData.urlRedirect);
+        return false;
+    }
+}

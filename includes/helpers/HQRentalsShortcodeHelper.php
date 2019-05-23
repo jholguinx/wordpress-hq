@@ -8,7 +8,7 @@ class HQRentalsShortcodeHelper
 
     public function resolvesSafariIssue($is_safari, $post_data, $iframeBaseUrl)
     {
-        if (!$is_safari and $this->noDNSConfig(esc_url($iframeBaseUrl))) {
+        if ($is_safari and $this->noDNSConfig(esc_url($iframeBaseUrl))) {
             $this->setForSafariBrowser($post_data, esc_url($iframeBaseUrl));
         } else {
             $this->setForNotSafariBrowser($post_data, esc_url($iframeBaseUrl));

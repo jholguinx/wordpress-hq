@@ -20,7 +20,7 @@ class HQRentalsMyPackagesReservationsShortcode
                     'forced_locale' => 'en',
                 ), $atts
             );
-        $langParams = '?forced_locale=' . $atts['forced_locale'];
+        $langParams = '&forced_locale=' . $atts['forced_locale'];
         wp_enqueue_style('hq-wordpress-styles');
         wp_enqueue_script('hq-iframe-resizer-script');
         wp_enqueue_script('hq-resize-script');

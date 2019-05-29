@@ -70,14 +70,14 @@ class HQRentalsReservationsFilteredShortcode
                     <input type="submit" style="display: none;">
                 </form>
                 <iframe id="hq-rental-iframe" name="hq-rental-iframe"
-                        src="<?php echo esc_url($this->brand->publicReservationsLinkFull); ?>" scrolling="no"></iframe>
+                        src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>" scrolling="no"></iframe>
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
             } else {
-                $this->shortcodeHelper->resolvesSafariIssue($is_safari, [], esc_url($this->brand->publicReservationsLinkFull));
+                $this->shortcodeHelper->resolvesSafariIssue($is_safari, [], esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']));
                 ?>
 
-                <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($this->brand->publicReservationsLinkFull); ?>"
+                <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>"
                         scrolling="no"></iframe>
                 <?php
             }

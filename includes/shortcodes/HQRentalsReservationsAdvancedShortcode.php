@@ -37,7 +37,7 @@ class HQRentalsReservationsAdvancedShortcode
         $post_data = $this->frontHelper->sanitizeTextInputs($post_data);
         $this->shortcodeHelper->resolvesSafariIssue($is_safari, $post_data, esc_url($atts['reservation_advanced_url'] . '&' . http_build_query($post_data) ));
         ?>
-            <iframe id="hq-iframe" src="<?php echo esc_url($atts['reservation_advanced_url'] . '&' . http_build_query($post_data) ); ?>" scrolling="no"></iframe>
+            <iframe id="hq-iframe" src="<?php echo esc_url($atts['reservation_advanced_url'] . '&' . http_build_query($post_data) . '&' . 'forced_locale=' . $atts['forced_locale']); ?>" scrolling="no"></iframe>
         <?php
         $this->assets->getIframeResizerAssets();
     }

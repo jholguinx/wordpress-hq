@@ -19,12 +19,12 @@ class HQRentalsShortcodeHelper
     {
         if (empty($postData)) {
             $metaDataSafari = array(
-                'urlRedirect' => $urlFirstStep,
+                'urlRedirect' => $urlFirstStep ,
                 'isSafari' => 1
             );
         } else {
             $metaDataSafari = array(
-                'urlRedirect' => $urlFirstStep . '&' . http_build_query($postData),
+                'urlRedirect' => $urlFirstStep . '&' . http_build_query($postData) . '&target_step=2',
                 'isSafari' => 1
             );
         }

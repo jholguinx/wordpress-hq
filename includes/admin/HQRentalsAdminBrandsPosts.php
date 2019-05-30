@@ -35,7 +35,7 @@ class HQRentalsAdminBrandsPosts
                 echo '[hq_rentals_reservations id=' . $currentBrand->id . ']';
                 break;
             case('my_reservation_shortcode'):
-                echo '[hq_rentals_my_reservation id=' . $currentBrand->id . ']';
+                echo '[hq_rentals_my_reservations id=' . $currentBrand->id . ']';
                 break;
             case('vehicle_class_calendar'):
                 echo '[hq_rentals_vehicle_calendar id=' . $currentBrand->id . ']';

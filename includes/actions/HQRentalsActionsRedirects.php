@@ -23,8 +23,11 @@ class HQRentalsActionsRedirects{
         global $is_safari;
         if (!is_singular()) return;
         if (!empty($post->post_content)) {
-            $regex = get_shortcode_regex();
-            if ((strpos($post->post_content, '[hq_rentals_reservations') !== false) and $is_safari ) {
+            $pattern = get_shortcode_regex();
+            if (   preg_match_all( '/'. $pattern .'/s', $post->post_content, $matches )
+                && array_key_exists( 2, $matches )
+                && in_array( 'hq_rentals_reservations', $matches[2] )
+                and  $is_safari ){
                 // redirect to third party site
                 $post_data = $_POST;
                 $brandID = $this->getBrandIDFromRegex($post->post_content, 'hq_rentals_reservations');

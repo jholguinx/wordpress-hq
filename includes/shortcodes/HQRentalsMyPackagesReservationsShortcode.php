@@ -1,5 +1,6 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsShortcodes;
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsShortcodeHelper;
 
@@ -9,6 +10,7 @@ class HQRentalsMyPackagesReservationsShortcode
     {
         $this->brand = new HQRentalsModelsBrand();
         $this->shortcodeHelper = new HQRentalsShortcodeHelper();
+        $this->assetsHelper = new HQRentalsAssetsHandler();
         add_shortcode('hq_rentals_my_packages_reservations' , array ($this, 'packagesShortcode'));
     }
     public function packagesShortcode( $atts = [] )
@@ -21,9 +23,7 @@ class HQRentalsMyPackagesReservationsShortcode
                 ), $atts
             );
         $langParams = '&forced_locale=' . $atts['forced_locale'];
-        wp_enqueue_style('hq-wordpress-styles');
-        wp_enqueue_script('hq-iframe-resizer-script');
-        wp_enqueue_script('hq-resize-script');
+        $this->assetsHelper->getIframeResizerAssets();
         $this->brand->findBySystemId( $atts['id'] );
         $this->shortcodeHelper->resolvesSafariIssue($is_safari, [],esc_url($this->brand->myPackagesReservationsLink.  $langParams));
         return '<iframe id="hq-rentals-integration-wrapper" src="' . esc_url($this->brand->myPackagesReservationsLink.  $langParams) . '" scrolling="no"></iframe>';

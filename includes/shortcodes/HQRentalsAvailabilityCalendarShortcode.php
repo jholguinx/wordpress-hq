@@ -10,14 +10,13 @@ class HQRentalsAvailabilityCalendarShortcode
     {
         $this->assets = new HQRentalsAssetsHandler();
         $this->brand = new HQRentalsModelsBrand();
+        $this->assetsHelper = new HQRentalsAssetsHandler();
         add_shortcode('hq_rentals_vehicle_calendar', array( $this, 'calendarShortcode' ));
     }
 
     public function calendarShortcode( $atts = [] )
     {
-        wp_enqueue_style('hq-wordpress-iframe-styles');
-        wp_enqueue_script('hq-iframe-resizer-script');
-        wp_enqueue_script('hq-resize-script');
+        $this->assetsHelper->getIframeResizerAssets();
         $atts = shortcode_atts(
                 array(
                     'id'                =>  '1',

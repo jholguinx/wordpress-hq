@@ -20,9 +20,7 @@ class HQRentalsFormLink
                 ), $atts
             );
         $langParams = '&forced_locale=' . $atts['forced_locale'];
-        wp_enqueue_style('hq-wordpress-styles');
-        wp_enqueue_script('hq-iframe-resizer-script');
-        wp_enqueue_script('hq-resize-script');
+        $this->assets->getIframeResizerAssets();
         if(!empty($_POST['hq-integration'])){
             $post_data = $_POST;
             $post_data = $this->helper->sanitizeTextInputs($post_data);

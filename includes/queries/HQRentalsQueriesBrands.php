@@ -49,4 +49,5 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
         }
         return $data;
     }
+
 }

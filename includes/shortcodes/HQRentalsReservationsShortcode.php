@@ -24,7 +24,6 @@ class HQRentalsReservationsShortcode
 
     public function reservationsShortcode($atts = [])
     {
-        ob_clean();
         global $is_safari;
         $atts = shortcode_atts(
             array(
@@ -32,15 +31,12 @@ class HQRentalsReservationsShortcode
                 'forced_locale' => 'en',
                 'new' => 'true',
             )
-            , $atts, 'hq_rentals_reservations');
+                , $atts, 'hq_rentals_reservations');
         $post_data = $_POST;
         $post_data = $this->frontHelper->sanitizeTextInputs($post_data);
         $brand = new HQRentalsModelsBrand();
         $brand->findBySystemId($atts['id']);
         $this->assets->getIframeResizerAssets();
-        wp_redirect("https://caag.caagcrm.com/");
-        exit;
-        $this->shortcodeHelper->resolvesSafariIssue($is_safari,$post_data, $brand->publicReservationsFirstStepLink);
         try {
             if ($post_data['pick_up_date']) {
                 if ($post_data['pick_up_time']) {

@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsBootstrap;
 
+use HQRentalsPlugin\HQRentalsActions\HQRentalsActionsRedirects;
 use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
@@ -27,5 +28,6 @@ class HQRentalsBootstrapPlugin
         $this->posts = new HQRentalsCustomPostsHandler();
         $this->settingsAdmin = new HQRentalsAdminSettings();
         $this->ariesQueries = new HQRentalsQueriesAries();
+        $this->actions = new HQRentalsActionsRedirects();
     }
 }

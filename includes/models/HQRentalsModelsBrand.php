@@ -44,6 +44,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     public $myReservationsLink = '';
     public $myPackagesReservationsLink = '';
     public $publicCalendarLink = '';
+    public $metaBrandId = 'hq_wordpress_brand_id_meta';
 
     /*
      * Constructor

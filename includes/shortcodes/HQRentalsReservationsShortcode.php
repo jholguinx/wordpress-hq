@@ -8,6 +8,7 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsShortcodeHelper;
 
 class HQRentalsReservationsShortcode
 {
@@ -17,18 +18,20 @@ class HQRentalsReservationsShortcode
         $this->dateHelper = new HQRentalsDatesHelper();
         $this->assets = new HQRentalsAssetsHandler();
         $this->frontHelper = new HQRentalsFrontHelper();
+        $this->shortcodeHelper = new HQRentalsShortcodeHelper();
         add_shortcode('hq_rentals_reservations', array($this, 'reservationsShortcode'));
     }
 
     public function reservationsShortcode($atts = [])
     {
+        global $is_safari;
         $atts = shortcode_atts(
             array(
                 'id' => '1',
                 'forced_locale' => 'en',
                 'new' => 'true',
             )
-            , $atts, 'hq_rentals_reservations');
+                , $atts, 'hq_rentals_reservations');
         $post_data = $_POST;
         $post_data = $this->frontHelper->sanitizeTextInputs($post_data);
         $brand = new HQRentalsModelsBrand();
@@ -44,7 +47,7 @@ class HQRentalsReservationsShortcode
                     $return_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['return_date']);
                 }
                 ?>
-                <form action="<?php echo esc_url($brand->publicReservationsFirstStepLink); ?>" method="POST"
+                <form action="<?php echo esc_url($brand->publicReservationsFirstStepLink . '&' . 'forced_locale=' . $atts['forced_locale']); ?>" method="POST"
                       target="hq-rental-iframe" id="hq-form-init">
                     <input type="hidden" name="pick_up_date"
                            value="<?php echo esc_attr($pickup_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
@@ -62,7 +65,7 @@ class HQRentalsReservationsShortcode
                     <input type="submit" style="display: none;">
                 </form>
                 <iframe id="hq-rental-iframe" name="hq-rental-iframe"
-                        src="<?php echo esc_url($brand->publicReservationsLinkFull); ?>" scrolling="no"></iframe>
+                        src="<?php echo esc_url($brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>" scrolling="no"></iframe>
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
             } else {
@@ -70,12 +73,12 @@ class HQRentalsReservationsShortcode
                     $getData = $this->frontHelper->sanitizeTextInputs($_GET);
                     $query = http_build_query($getData);
                     ?>
-                    <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($brand->publicReservationsLinkFull . '?' . $query); ?>"
+                    <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($brand->publicReservationsLinkFull . '&' . $query . '&' . 'forced_locale=' . $atts['forced_locale']); ?>"
                             scrolling="no"></iframe>
                     <?php
                 }else{
                     ?>
-                    <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($brand->publicReservationsLinkFull); ?>"
+                    <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>"
                             scrolling="no"></iframe>
                     <?php
                 }

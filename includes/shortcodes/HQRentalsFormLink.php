@@ -20,9 +20,7 @@ class HQRentalsFormLink
                 ), $atts
             );
         $langParams = '&forced_locale=' . $atts['forced_locale'];
-        wp_enqueue_style('hq-wordpress-styles');
-        wp_enqueue_script('hq-iframe-resizer-script');
-        wp_enqueue_script('hq-resize-script');
+        $this->assets->getIframeResizerAssets();
         if(!empty($_POST['hq-integration'])){
             $post_data = $_POST;
             $post_data = $this->helper->sanitizeTextInputs($post_data);
@@ -36,6 +34,7 @@ class HQRentalsFormLink
             </form>
             <?php
             $this->assets->getFirstStepShortcodeAssets();
+            $this->shortcodeHelper->resolvesSafariIssue($is_safari,$post_data, $brand->publicReservationsFirstStepLink);
         }
         return '<iframe id="hq-rental-iframe" src="' . esc_url($atts['url'] .  $langParams) . '" scrolling="no"></iframe>';
     }

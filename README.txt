@@ -21,7 +21,7 @@ Step 1: Go to your HQ Rental Software to generate API tokens for your tenant and
 
 Step 2: Once you have generated the tokens by completing the previous step, you can set up the credentials to connect to the system. In WordPress go to Settings > HQ Rentals. Paste the tokens in the corresponding fields labeled Tenant Token and User Token.
 
-Step 3: Select the API Region that you are in. Note: To find out which API region you are currently on, check your URL. If you have xxx.caagcrm.com, your region is in America. For Europe, it would be xxx.hqrentals.eu and for Asia, it would be xxx.hqrentals.asia.
+Step 3: Select the API Region that you are in. Note: To find out which API region you are currently on, check your URL. If you have xxx.caagcrm.com or xxx.hqrentals.app, your region is in America. For Europe, it would be xxx.hqrentals.eu and for Asia, it would be xxx.hqrentals.asia.
 
 Step 4: Once you have copied both tokens you will see HQ Rentals inside the WordPress menu and you
 should see this table; now just copy the “HTML shortcode reservations” and paste that on the page

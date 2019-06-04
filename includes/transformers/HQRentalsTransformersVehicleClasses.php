@@ -29,6 +29,7 @@ class HQRentalsTransformersVehicleClasses{
             $transformation->images = $data->images;
             $transformation->features = $data->features;
             $transformation->active_rates = $data->activeRates;
+            $transformation->allData = $data;
             return $transformation;
         }
         return $data;

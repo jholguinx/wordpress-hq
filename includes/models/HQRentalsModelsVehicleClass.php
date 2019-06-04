@@ -4,6 +4,7 @@ namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
@@ -58,6 +59,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->post_id = '';
         $this->locale = new HQRentalsLocaleHelper();
         $this->queryFeatures = new HQRentalsQueriesFeatures();
+        $this->pluginSettings = new HQRentalsSettings();
         $this->postArgs = [
             'post_type' => $this->vehicleClassesCustomPostName,
             'post_status' => 'publish',
@@ -159,7 +161,13 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             }
         }
         foreach (static::$custom_fields as $custom_field) {
-            $this->{$this->metaCustomField . $custom_field} = $data->{$custom_field};
+            /*Minified Response*/
+            if($this->pluginSettings->getSupportForMinifiedResponse() == "true"){
+                $this->{$this->metaCustomField . $custom_field} = $data->allData->{$custom_field};
+            }else{
+                $this->{$this->metaCustomField . $custom_field} = $data->{$custom_field};
+            }
+
         }
     }
 

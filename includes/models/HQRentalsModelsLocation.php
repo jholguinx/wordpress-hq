@@ -179,4 +179,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'order'         =>  $this->metaOrder
         );
     }
+    public function getMetaKeyFromBrandID()
+    {
+        return $this->metaBrandId;
+    }
 }

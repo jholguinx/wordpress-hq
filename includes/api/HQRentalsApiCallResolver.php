@@ -2,8 +2,14 @@
 namespace HQRentalsPlugin\HQRentalsApi;
 
 
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+
 class HQRentalsApiCallResolver{
 
+    public function __construct()
+    {
+        $this->settings = new HQRentalsSettings();
+    }
 
     /**
      * Resolve Availability Data from API
@@ -43,7 +49,12 @@ class HQRentalsApiCallResolver{
         if(is_wp_error($response)){
             return new HQRentalsApiResponse($response->get_error_message(), false, null);
         }else{
-            return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_vehicle_classes);
+            if($this->settings->getSupportForMinifiedResponse() == "true"){
+                return new HQRentalsApiResponse(null, true, json_decode($response['body'])->data);
+            }else{
+                return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_vehicle_classes);
+            }
+
         }
     }
 

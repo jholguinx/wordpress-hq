@@ -21,6 +21,7 @@ class HQRentalsSettings
     public $api_user_token_workspot_gebouw_location = 'hq_wordpress_api_user_token_key_workspot_gebouw_location_option';
     public $api_tenant_token_workspot_gebouw_location = 'hq_wordpress_api_tenant_token_key_workspot_gebouw_location_option';
     public $api_encoded_token_workspot_gebouw_location = 'hq_wordpress_api_encoded_token_workspot_gebouw_location_option';
+    public $support_for_minified_response_on_vehicle_classes = 'hq_wordpress_support_for_minified_response_on_vehicle_classes';
 
     public function __construct()
     {
@@ -66,6 +67,10 @@ class HQRentalsSettings
     public function getFrontEndDatetimeFormat()
     {
         return get_option($this->front_end_datetime_format, true);
+    }
+    public function getSupportForMinifiedResponse()
+    {
+        return get_option($this->support_for_minified_response_on_vehicle_classes, 'false');
     }
 
     public function getApiBaseUrl()
@@ -116,6 +121,10 @@ class HQRentalsSettings
     {
         return update_option($this->api_encoded_token_workspot_gebouw_location, sanitize_text_field(base64_encode($tenantKey . ':' . $userKey)));
     }
+    public function saveMinifiedResponse($value)
+    {
+        return update_option($this->support_for_minified_response_on_vehicle_classes, sanitize_text_field($value));
+    }
     /*
      * Update All Setting from Admin Screen
      */
@@ -129,19 +138,23 @@ class HQRentalsSettings
                 update_option($key, sanitize_text_field($data));
             }
         }
+        if(empty($postDataFromSettings[$this->support_for_minified_response_on_vehicle_classes])){
+            update_option($this->support_for_minified_response_on_vehicle_classes, "false");
+        }
         $_POST['success'] = 'success';
     }
 
     public function getSettings()
     {
         return array(
-            $this->api_user_token               => $this->getApiUserToken(),
-            $this->api_tenant_token             => $this->getApiTenantToken(),
-            $this->api_encoded_token            => $this->getApiEncodedToken(),
-            $this->woocommerce_hq_sync          => $this->getWoocommerceSyncOption(),
-            $this->hq_datetime_format           => $this->getHQDatetimeFormat(),
-            $this->front_end_datetime_format    => $this->getFrontEndDatetimeFormat(),
-            $this->api_base_url                 => $this->getApiBaseUrl()
+            $this->api_user_token                                       => $this->getApiUserToken(),
+            $this->api_tenant_token                                     => $this->getApiTenantToken(),
+            $this->api_encoded_token                                    => $this->getApiEncodedToken(),
+            $this->woocommerce_hq_sync                                  => $this->getWoocommerceSyncOption(),
+            $this->hq_datetime_format                                   => $this->getHQDatetimeFormat(),
+            $this->front_end_datetime_format                            => $this->getFrontEndDatetimeFormat(),
+            $this->api_base_url                                         => $this->getApiBaseUrl(),
+            $this->support_for_minified_response_on_vehicle_classes     =>  $this->getSupportForMinifiedResponse()
         );
     }
 
@@ -151,7 +164,8 @@ class HQRentalsSettings
             empty ($this->getApiUserToken()) or
             empty ($this->getWoocommerceSyncOption()) or
             empty ($this->getHQDatetimeFormat()) or
-            empty ($this->getFrontEndDatetimeFormat());
+            empty ($this->getFrontEndDatetimeFormat()) or
+            empty ($this->getSupportForMinifiedResponse());
     }
 
     public function forceSyncOnHQData()

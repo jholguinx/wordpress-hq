@@ -109,8 +109,13 @@ class HQRentalsAdminSettings
                                 </td>
                             </tr>
                             <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Api
-                                        Region</label></th>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Support for minified response</label></th>
+                                <td>
+                                    <input type="checkbox" name="<?php echo $this->settings->support_for_minified_response_on_vehicle_classes; ?>" value="true" <?php echo ($this->settings->getSupportForMinifiedResponse() === 'true') ? 'checked' : ''; ?>/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Api Region</label></th>
                                 <td>
                                     <select name="<?php echo $this->settings->api_base_url; ?>">
                                         <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>

@@ -2,7 +2,6 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsThumbnailHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 

@@ -4,6 +4,7 @@ namespace HQRentalsPlugin\HQRentalsApi;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiEndpoint;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConfiguration;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiResponse as ApiResponse;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
 class HQRentalsApiConnector{
@@ -16,6 +17,7 @@ class HQRentalsApiConnector{
         $this->endpoints = new HQRentalsApiEndpoint();
         $this->configuration = new HQRentalsApiConfiguration();
         $this->resolver = new HQRentalsApiCallResolver();
+        $this->settings = new HQRentalsSettings();
     }
 
 
@@ -32,7 +34,11 @@ class HQRentalsApiConnector{
     }
     public function getHQRentalsVehicleClasses()
     {
-        $response = wp_remote_get( $this->endpoints->getVehicleClassesApiEndpoint(), $this->configuration->getBasicApiConfiguration() );
+        if($this->settings->getSupportForMinifiedResponse() == "true"){
+            $response = wp_remote_get( $this->endpoints->getVehicleClassesApiEndpoint(true), $this->configuration->getBasicApiConfiguration() );
+        }else{
+            $response = wp_remote_get( $this->endpoints->getVehicleClassesApiEndpoint(), $this->configuration->getBasicApiConfiguration() );
+        }
         return $this->resolver->resolveApiCallVehicleClasses( $response );
     }
     public function getHQRentalsLocations()

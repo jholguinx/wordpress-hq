@@ -16,6 +16,7 @@ class HQRentalsBootstrap
     public $hq_datetime_format_default_value = "Y-m-d H:i";
     public $front_end_datetime_format_default_value = "Y-m-d H:i";
     public $api_base_url_default_value  = "https://api.caagcrm.com/api/";
+    public $support_minified_response_default_value = "false";
 
     public function __construct()
     {
@@ -30,6 +31,7 @@ class HQRentalsBootstrap
             $this->settings->saveHQDatetimeFormat( $this->hq_datetime_format_default_value );
             $this->settings->saveFrontEndDateTimeFormat($this->front_end_datetime_format_default_value);
             $this->settings->saveApiBaseUrl($this->api_base_url_default_value);
+            $this->settings->saveMinifiedResponse($this->support_minified_response_default_value);
         }
     }
 }

@@ -22,9 +22,14 @@ class HQRentalsApiEndpoint{
         return $this->settings->getApiBaseUrl() . 'fleets/brands';
     }
 
-    public function getVehicleClassesApiEndpoint()
+    public function getVehicleClassesApiEndpoint($minified = null)
     {
-        return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes?only_available_on_website=1';
+        if($minified){
+            return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes?only_available_on_website=1&minified_response=1';
+        }else{
+            return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes?only_available_on_website=1';
+        }
+
     }
 
     public function getLocationsApiEndpoint()

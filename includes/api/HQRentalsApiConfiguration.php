@@ -9,7 +9,7 @@ class HQRentalsApiConfiguration
     {
         $this->settings = new HQRentalsSettings();
         $this->endpoints = new HQRentalsApiEndpoint();
-        $this->normalTimeout = 10;
+        $this->normalTimeout = 20;
     }
 
     public function getBasicApiConfiguration( $data = null )

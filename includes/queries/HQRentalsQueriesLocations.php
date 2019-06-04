@@ -39,4 +39,26 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
         }
         return $data;
     }
+    public function getLocationsByBrand($brandId)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query'    =>  array(
+                    array(
+                        'value'         => $brandId,
+                        'compare'       =>  '=',
+                        'key'           =>  $this->model->getMetaKeyFromBrandID()
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        $data = [];
+        foreach ($query->posts as $post){
+            $data[] = new HQRentalsModelsLocation($post);
+        }
+        return $data;
+    }
+
 }

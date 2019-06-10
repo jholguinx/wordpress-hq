@@ -24,6 +24,7 @@ class HQRentalsSettings
     public $api_encoded_token_workspot_gebouw_location = 'hq_wordpress_api_encoded_token_workspot_gebouw_location_option';
     public $support_for_minified_response_on_vehicle_classes = 'hq_wordpress_support_for_minified_response_on_vehicle_classes';
     public $new_auth_scheme = 'hq_wordpress_new_auth_scheme_enabled';
+    public $hq_integration_on_home = 'hq_wordpress_home_integration_enabled';
 
     public function __construct()
     {
@@ -142,6 +143,11 @@ class HQRentalsSettings
     public function getSupportForMinifiedResponse()
     {
         return get_option($this->support_for_minified_response_on_vehicle_classes, 'false');
+    }
+
+    public function getSupportForHomeIntegration()
+    {
+        return get_option($this->hq_integration_on_home, 'false');
     }
 
     /**
@@ -271,6 +277,11 @@ class HQRentalsSettings
         return update_option($this->new_auth_scheme, sanitize_text_field($data));
     }
 
+    public function saveHomeIntegration($data)
+    {
+        return update_option($this->hq_integration_on_home, sanitize_text_field($data));
+    }
+
     /***
      * Save Settings on Database
      * @param $postDataFromSettings
@@ -298,6 +309,9 @@ class HQRentalsSettings
         }
         if (empty($postDataFromSettings[$this->support_for_minified_response_on_vehicle_classes])) {
             update_option($this->support_for_minified_response_on_vehicle_classes, "false");
+        }
+        if (empty($postDataFromSettings[$this->hq_integration_on_home])) {
+            update_option($this->hq_integration_on_home, "false");
         }
         $_POST['success'] = 'success';
     }
@@ -337,22 +351,42 @@ class HQRentalsSettings
             empty (get_option($this->hq_datetime_format));
     }
 
+    /**
+     * Checks if new auth scheme exits
+     * @return bool
+     */
     public function noNewAuthSchemeOption()
     {
         return empty(get_option($this->new_auth_scheme));
     }
 
+    /*
+     * Check if minified option exists
+     */
     public function noMinifiedResponseOption()
     {
         return empty(get_option($this->support_for_minified_response_on_vehicle_classes));
     }
 
+    /**
+     * Check if new Auth Scheme is enabled
+     * @return bool
+     */
     public function newAuthSchemeEnabled()
     {
         return get_option($this->new_auth_scheme) == 'true';
     }
 
-    public function forceSyncOnHQData()
+    public function noHomeIntegrationOption()
+    {
+        return empty(get_option($this->hq_integration_on_home));
+    }
+    public function homeIntegration()
+    {
+        return get_option($this->hq_integration_on_home) == 'true';
+    }
+
+        public function forceSyncOnHQData()
     {
         $schedule = new HQRentalsScheduler();
         $schedule->refreshHQData();

@@ -41,6 +41,7 @@ class HQRentalsAssetsHandler
         wp_register_script( 'hq-wordpress-openlayer-js', plugin_dir_url(__FILE__) . 'js/ol.js', array(), '1.0.0', true);
         wp_register_script( 'hq-wordpress-workspot-js', plugin_dir_url(__FILE__) . 'js/hq-workspot-maps.js', array(), '1.0.1', true);
         wp_register_script( 'hq-resize-script', plugin_dir_url(__FILE__) . 'js/hq-resize.js', array(), '1.0.2', true);
+        wp_register_script( 'hq-scroll-script', plugin_dir_url(__FILE__) . 'js/hq-scroll-to-top.js', array(), '1.0.2', true);
         wp_register_script( 'hq-submit-script', plugin_dir_url(__FILE__) . 'js/hq-submit.js', array(), '1.0.1', true);
         wp_register_script( 'hq-dummy-script', plugin_dir_url(__FILE__) . 'js/hq-dummy.js', array(), '1.0.0', true);
         wp_enqueue_script('hq-dummy-script');
@@ -50,6 +51,9 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-iframe-resizer-script');
         wp_enqueue_script( 'hq-resize-script');
         wp_enqueue_style('hq-wordpress-iframe-styles');
+        if(! $this->settings->homeIntegration() ){
+            wp_enqueue_script("hq-scroll-script");
+        }
     }
     public function getFirstStepShortcodeAssets()
     {

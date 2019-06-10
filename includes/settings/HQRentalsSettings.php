@@ -356,26 +356,6 @@ class HQRentalsSettings
         return get_option($this->new_auth_scheme, true) == 'true';
     }
 
-    public function updateTokensOnActivation()
-    {
-        //Define Logic
-        //Remember that there are websites with the tokens, so if I used encrypt/decrypt -> auth issue...
-        // save in the database if the tokens have been hashed.. in this case use new auth method... in case of not
-        // use old one...
-
-        //Tell rafael to test this in a website
-
-        //1.- if not exists -> create and set to 0
-        //2.- if update settings set to 1
-        //3.- use old with 0 - use new with 1
-
-
-        //Test
-        //Install new version
-        //With updating tokens -> force update -> if all good -> update token and redo -> all good -> we are good to go
-        // Also test in a new website
-
-    }
     public function forceSyncOnHQData()
     {
         $schedule = new HQRentalsScheduler();

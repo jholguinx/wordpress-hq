@@ -24,7 +24,6 @@ class HQRentalsReservationsShortcode
 
     public function reservationsShortcode($atts = [])
     {
-        global $is_safari;
         $atts = shortcode_atts(
             array(
                 'id' => '1',

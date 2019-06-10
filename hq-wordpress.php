@@ -3,7 +3,7 @@
 Plugin Name: HQ Rental Software
 Plugin URI: https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/
 Description: This plugin is to easily integrate HQ Rental Software with your website which will allow your rental business to receive reservations directly from your site.
-Version: 1.1.6
+Version: 1.1.5
 Author: HQ Rental Software
 Author URI: https://hqrentalsoftware.com
 Text Domain: hq-wordpress

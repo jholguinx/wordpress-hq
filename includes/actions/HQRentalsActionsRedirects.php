@@ -33,33 +33,35 @@ class HQRentalsActionsRedirects{
                 $brandID = $this->getBrandIDFromRegex($post->post_content, 'hq_rentals_reservations');
                 $brand = new HQRentalsModelsBrand();
                 $brand->findBySystemId($brandID);
-                $queryString = $brand->publicReservationsFirstStepLink;
-                try{
-                    if ($post_data['pick_up_date']) {
-                        if ($post_data['pick_up_time']) {
-                            $pickup_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['pick_up_date'] . ' ' . $post_data['pick_up_time']);
-                            $return_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['return_date'] . ' ' . $post_data['return_time']);
-                        } else {
-                            $pickup_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['pick_up_date']);
-                            $return_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['return_date']);
-                        }
-                        $queryString .= '&pick_up_date=' . $pickup_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat())) . $pickup_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()));
-                        $queryString .= '&return_date =' . $return_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat())) . $return_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()));
-                        foreach ($post_data as $key => $value){
-                            if ($key !== 'pick_up_date' and $key !== 'pick_up_time' and $key !== 'return_date' and $key !== 'return_time'){
-                                $queryString .= '&' . $key . '=' . $value;
+                if($this->noDNSRecordSetup($brand->publicReservationsFirstStepLink)){
+                    $queryString = $brand->publicReservationsFirstStepLink;
+                    try{
+                        if ($post_data['pick_up_date']) {
+                            if ($post_data['pick_up_time']) {
+                                $pickup_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['pick_up_date'] . ' ' . $post_data['pick_up_time']);
+                                $return_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['return_date'] . ' ' . $post_data['return_time']);
+                            } else {
+                                $pickup_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['pick_up_date']);
+                                $return_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['return_date']);
                             }
+                            $queryString .= '&pick_up_date=' . $pickup_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat())) . $pickup_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()));
+                            $queryString .= '&return_date =' . $return_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat())) . $return_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()));
+                            foreach ($post_data as $key => $value){
+                                if ($key !== 'pick_up_date' and $key !== 'pick_up_time' and $key !== 'return_date' and $key !== 'return_time'){
+                                    $queryString .= '&' . $key . '=' . $value;
+                                }
+                            }
+                            $queryString .= '&target_step=2';
+                            wp_redirect($queryString);
+                            exit;
+                        }else{
+                            wp_redirect($queryString);
+                            exit;
                         }
-                        $queryString .= '&target_step=2';
-                        wp_redirect($queryString);
-                        exit;
-                    }else{
+                    } catch (Exception $e) {
                         wp_redirect($queryString);
                         exit;
                     }
-                } catch (Exception $e) {
-                    wp_redirect($queryString);
-                    exit;
                 }
             }
         }
@@ -76,4 +78,11 @@ class HQRentalsActionsRedirects{
         return $shortcodePieces[1][0];
     }
 
+    public function noDNSRecordSetup($url)
+    {
+        return (strpos($url, 'caagcrm.com') !== false) or
+            (strpos($url, 'hqrentals.eu') !== false) or
+            (strpos($url, 'hqrentals.asia') !== false) or
+            (strpos($url, 'hqrentals.app') !== false);
+    }
 }

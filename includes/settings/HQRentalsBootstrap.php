@@ -17,6 +17,7 @@ class HQRentalsBootstrap
     public $front_end_datetime_format_default_value = "Y-m-d H:i";
     public $api_base_url_default_value  = "https://api.caagcrm.com/api/";
     public $support_minified_response_default_value = "false";
+    public $hq_new_auth_scheme = 'false';
 
     public function __construct()
     {
@@ -32,6 +33,10 @@ class HQRentalsBootstrap
             $this->settings->saveFrontEndDateTimeFormat($this->front_end_datetime_format_default_value);
             $this->settings->saveApiBaseUrl($this->api_base_url_default_value);
             $this->settings->saveMinifiedResponse($this->support_minified_response_default_value);
+        }
+        if($this->settings->noNewAuthSchemeOption()){
+            //Encrypt on existing websites
+            $this->settings->saveNewAuthScheme('false');
         }
     }
 }

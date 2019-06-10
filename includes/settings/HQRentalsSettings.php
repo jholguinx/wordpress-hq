@@ -23,6 +23,7 @@ class HQRentalsSettings
     public $api_tenant_token_workspot_gebouw_location = 'hq_wordpress_api_tenant_token_key_workspot_gebouw_location_option';
     public $api_encoded_token_workspot_gebouw_location = 'hq_wordpress_api_encoded_token_workspot_gebouw_location_option';
     public $support_for_minified_response_on_vehicle_classes = 'hq_wordpress_support_for_minified_response_on_vehicle_classes';
+    public $new_auth_scheme = 'hq_wordpress_new_auth_scheme_enabled';
 
     public function __construct()
     {
@@ -35,7 +36,11 @@ class HQRentalsSettings
      */
     public function getApiUserToken()
     {
-        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token, true));
+        if($this->newAuthSchemeEnabled()){
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token, true));
+        }else{
+            return get_option($this->api_user_token, true);
+        }
     }
 
     /**
@@ -44,7 +49,11 @@ class HQRentalsSettings
      */
     public function getApiTenantToken()
     {
-        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token, true));
+        if($this->newAuthSchemeEnabled()){
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token, true));
+        }else{
+            return get_option($this->api_tenant_token, true);
+        }
     }
 
     /**
@@ -53,7 +62,12 @@ class HQRentalsSettings
      */
     public function getApiDecodedToken()
     {
-        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token, true));
+        if($this->newAuthSchemeEnabled()){
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token, true));
+        }else{
+            return get_option($this->api_encoded_token, true);
+        }
+
     }
 
     /**
@@ -62,7 +76,11 @@ class HQRentalsSettings
      */
     public function getApiUserTokenForWorkspotLocation()
     {
-        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token_workspot_gebouw_location, true));
+        if($this->newAuthSchemeEnabled()){
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token_workspot_gebouw_location, true));
+        }else{
+            return get_option($this->api_user_token_workspot_gebouw_location, true);
+        }
     }
 
     /**
@@ -71,18 +89,37 @@ class HQRentalsSettings
      */
     public function getApiTenantTokenForWorkspotLocation()
     {
-        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token_workspot_gebouw_location, true));
+        if($this->newAuthSchemeEnabled()){
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token_workspot_gebouw_location, true));
+        }else{
+            return get_option($this->api_tenant_token_workspot_gebouw_location, true);
+        }
     }
 
+    /**
+     * Retrieve encoded api token
+     * @return mixed|void
+     */
+    public function getApiEncodedToken()
+    {
+        if($this->newAuthSchemeEnabled()){
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token, true));
+        }else{
+            return get_option($this->api_encoded_token, true);
+        }
+    }
     /**
      * Retrieve Encoded Api Token from Workspot Module
      * @return mixed|void
      */
     public function getEncodedApiKeyForWorkspotLocation()
     {
-        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token_workspot_gebouw_location));
+        if ($this->newAuthSchemeEnabled()) {
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token_workspot_gebouw_location));
+        } else {
+            return get_option($this->api_encoded_token_workspot_gebouw_location);
+        }
     }
-
     /***
      * Retrieve Woocommerce Option - This should be erased
      * @return mixed|void
@@ -126,15 +163,6 @@ class HQRentalsSettings
     public function getApiBaseUrl()
     {
         return get_option($this->api_base_url, true);
-    }
-
-    /**
-     * Retrieve encoded api token
-     * @return mixed|void
-     */
-    public function getApiEncodedToken()
-    {
-        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token, true));
     }
 
     /**
@@ -249,6 +277,11 @@ class HQRentalsSettings
         return update_option($this->support_for_minified_response_on_vehicle_classes, sanitize_text_field($value));
     }
 
+    public function saveNewAuthScheme($data)
+    {
+        return update_option($this->new_auth_scheme, sanitize_text_field($data));
+    }
+
     /***
      * Save Settings on Database
      * @param $postDataFromSettings
@@ -258,6 +291,7 @@ class HQRentalsSettings
         $postDataFromSettings = $this->helper->sanitizeTextInputs($postDataFromSettings);
         $this->saveEncodedApiKey($postDataFromSettings[$this->api_tenant_token], $postDataFromSettings[$this->api_user_token]);
         $this->saveEncodedApiKeyForWorkspotLocation($postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location], $postDataFromSettings[$this->api_user_token_workspot_gebouw_location]);
+        $this->saveNewAuthScheme('true');
         foreach ($postDataFromSettings as $key => $data) {
             if ($key != 'save') {
                 if($key == $this->api_tenant_token){
@@ -313,6 +347,35 @@ class HQRentalsSettings
             empty ($this->getSupportForMinifiedResponse());
     }
 
+    public function noNewAuthSchemeOption()
+    {
+        return empty(get_option($this->new_auth_scheme));
+    }
+    public function newAuthSchemeEnabled()
+    {
+        return get_option($this->new_auth_scheme, true) == 'true';
+    }
+
+    public function updateTokensOnActivation()
+    {
+        //Define Logic
+        //Remember that there are websites with the tokens, so if I used encrypt/decrypt -> auth issue...
+        // save in the database if the tokens have been hashed.. in this case use new auth method... in case of not
+        // use old one...
+
+        //Tell rafael to test this in a website
+
+        //1.- if not exists -> create and set to 0
+        //2.- if update settings set to 1
+        //3.- use old with 0 - use new with 1
+
+
+        //Test
+        //Install new version
+        //With updating tokens -> force update -> if all good -> update token and redo -> all good -> we are good to go
+        // Also test in a new website
+
+    }
     public function forceSyncOnHQData()
     {
         $schedule = new HQRentalsScheduler();

@@ -55,6 +55,7 @@ class HQRentalsAdminSettings
             <?php endif; ?>
             <?php
         } else {
+
             ?>
             <div class="wrap">
                 <div id="wrap">

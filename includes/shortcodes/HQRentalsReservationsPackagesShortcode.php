@@ -2,14 +2,13 @@
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsShortcodeHelper;
+
 
 class HQRentalsReservationsPackagesShortcode
 {
     public function __construct()
     {
         $this->brand = new HQRentalsModelsBrand();
-        $this->helper = new HQRentalsShortcodeHelper();
         $this->assetsHelper = new HQRentalsAssetsHandler();
         add_shortcode('hq_rentals_reservation_packages' , array ($this, 'packagesShortcode'));
     }
@@ -25,7 +24,6 @@ class HQRentalsReservationsPackagesShortcode
         $langParams = '?forced_locale=' . $atts['forced_locale'];
         $this->assetsHelper->getIframeResizerAssets();
         $this->brand->findBySystemId( $atts['id'] );
-        $this->helper->resolvesSafariIssue($is_safari, [], esc_url($this->brand->publicReservationPackagesFirstStepLink .  $langParams));
         return '<iframe id="hq-rentals-integration-wrapper" src="' . esc_url($this->brand->publicReservationPackagesFirstStepLink .  $langParams) . '" scrolling="no"></iframe>';
     }
 }

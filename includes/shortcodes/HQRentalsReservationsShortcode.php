@@ -8,7 +8,6 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsShortcodeHelper;
 
 class HQRentalsReservationsShortcode
 {
@@ -18,13 +17,11 @@ class HQRentalsReservationsShortcode
         $this->dateHelper = new HQRentalsDatesHelper();
         $this->assets = new HQRentalsAssetsHandler();
         $this->frontHelper = new HQRentalsFrontHelper();
-        $this->shortcodeHelper = new HQRentalsShortcodeHelper();
         add_shortcode('hq_rentals_reservations', array($this, 'reservationsShortcode'));
     }
 
     public function reservationsShortcode($atts = [])
     {
-        global $is_safari;
         $atts = shortcode_atts(
             array(
                 'id' => '1',

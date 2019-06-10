@@ -10,7 +10,6 @@ use HQRentalsPlugin\HQRentalsVendor\Carbon;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueryStringHelper;
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsShortcodeHelper;
 
 class HQRentalsReservationsFilteredShortcode
 {
@@ -23,7 +22,6 @@ class HQRentalsReservationsFilteredShortcode
         $this->queryVehicles = new HQRentalsQueriesVehicleClasses();
         $this->queryStringHelper = new HQRentalsQueryStringHelper();
         $this->frontHelper = new HQRentalsFrontHelper();
-        $this->shortcodeHelper = new HQRentalsShortcodeHelper();
         add_shortcode('hq_rentals_reservation_filter' , array ($this, 'reservationsShortcode'));
     }
     public function reservationsShortcode($atts = [])
@@ -50,7 +48,6 @@ class HQRentalsReservationsFilteredShortcode
                     $return_date = Carbon::createFromFormat($this->settings->getFrontEndDatetimeFormat(), $post_data['return_date']);
                 }
                 $queryStringVehicle = $this->queryStringHelper->getVehicleClassesQueryString($post_data['vehicle_class_filter_db_column'], $post_data['vehicle_classes_filter']);
-                $this->shortcodeHelper->resolvesSafariIssue($is_safari, $post_data, esc_url($this->brand->publicReservationsFirstStepLink . $queryStringVehicle))
                 ?>
                 <form action="<?php echo esc_url($this->brand->publicReservationsFirstStepLink . $queryStringVehicle); ?>" method="POST"
                       target="hq-rental-iframe" id="hq-form-init">
@@ -74,9 +71,7 @@ class HQRentalsReservationsFilteredShortcode
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
             } else {
-                $this->shortcodeHelper->resolvesSafariIssue($is_safari, [], esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']));
                 ?>
-
                 <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>"
                         scrolling="no"></iframe>
                 <?php

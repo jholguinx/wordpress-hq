@@ -3,9 +3,9 @@ Contributors: faggioni
 Donate link: https://hqrentalsoftware.com
 Tags: hqrentalsoftware
 Requires at least: 3.0.1
-Tested up to: 5.1
-Requires PHP: 7.1
-Stable tag: 1.1.6
+Tested up to: 7.2
+Requires PHP: 7.0
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,9 @@ Minified response functionality added
 
 = 1.1.6 =
 New datetime format added
+
+= 1.1.7 =
+Adding support for homepage integrations
 
 == Upgrade Notice ==
 

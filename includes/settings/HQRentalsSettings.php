@@ -36,10 +36,10 @@ class HQRentalsSettings
      */
     public function getApiUserToken()
     {
-        if($this->newAuthSchemeEnabled()){
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token, true));
-        }else{
-            return get_option($this->api_user_token, true);
+        if ($this->newAuthSchemeEnabled()) {
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
+        } else {
+            return get_option($this->api_user_token);
         }
     }
 
@@ -49,25 +49,11 @@ class HQRentalsSettings
      */
     public function getApiTenantToken()
     {
-        if($this->newAuthSchemeEnabled()){
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token, true));
-        }else{
-            return get_option($this->api_tenant_token, true);
+        if ($this->newAuthSchemeEnabled()) {
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token));
+        } else {
+            return get_option($this->api_tenant_token);
         }
-    }
-
-    /**
-     * Retrieve Api Decoded Token
-     * @return mixed|void
-     */
-    public function getApiDecodedToken()
-    {
-        if($this->newAuthSchemeEnabled()){
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token, true));
-        }else{
-            return get_option($this->api_encoded_token, true);
-        }
-
     }
 
     /**
@@ -76,10 +62,10 @@ class HQRentalsSettings
      */
     public function getApiUserTokenForWorkspotLocation()
     {
-        if($this->newAuthSchemeEnabled()){
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token_workspot_gebouw_location, true));
-        }else{
-            return get_option($this->api_user_token_workspot_gebouw_location, true);
+        if ($this->newAuthSchemeEnabled()) {
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token_workspot_gebouw_location));
+        } else {
+            return get_option($this->api_user_token_workspot_gebouw_location);
         }
     }
 
@@ -89,10 +75,10 @@ class HQRentalsSettings
      */
     public function getApiTenantTokenForWorkspotLocation()
     {
-        if($this->newAuthSchemeEnabled()){
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token_workspot_gebouw_location, true));
-        }else{
-            return get_option($this->api_tenant_token_workspot_gebouw_location, true);
+        if ($this->newAuthSchemeEnabled()) {
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token_workspot_gebouw_location));
+        } else {
+            return get_option($this->api_tenant_token_workspot_gebouw_location);
         }
     }
 
@@ -102,12 +88,13 @@ class HQRentalsSettings
      */
     public function getApiEncodedToken()
     {
-        if($this->newAuthSchemeEnabled()){
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token, true));
-        }else{
-            return get_option($this->api_encoded_token, true);
+        if ($this->newAuthSchemeEnabled()) {
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token));
+        } else {
+            return get_option($this->api_encoded_token);
         }
     }
+
     /**
      * Retrieve Encoded Api Token from Workspot Module
      * @return mixed|void
@@ -120,13 +107,14 @@ class HQRentalsSettings
             return get_option($this->api_encoded_token_workspot_gebouw_location);
         }
     }
+
     /***
      * Retrieve Woocommerce Option - This should be erased
      * @return mixed|void
      */
     public function getWoocommerceSyncOption()
     {
-        return get_option($this->woocommerce_hq_sync, true);
+        return get_option($this->woocommerce_hq_sync);
     }
 
     /**
@@ -135,7 +123,7 @@ class HQRentalsSettings
      */
     public function getHQDatetimeFormat()
     {
-        return get_option($this->hq_datetime_format, true);
+        return get_option($this->hq_datetime_format);
     }
 
     /***
@@ -144,7 +132,7 @@ class HQRentalsSettings
      */
     public function getFrontEndDatetimeFormat()
     {
-        return get_option($this->front_end_datetime_format, true);
+        return get_option($this->front_end_datetime_format);
     }
 
     /**
@@ -204,6 +192,7 @@ class HQRentalsSettings
     {
         return update_option($this->api_tenant_token, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($token)));
     }
+
     /**
      * Save api tenant token for workspot module
      * @param $token
@@ -263,7 +252,7 @@ class HQRentalsSettings
      */
     public function saveEncodedApiKeyForWorkspotLocation($tenantKey, $userKey)
     {
-        return update_option($this->api_encoded_token_workspot_gebouw_location, HQRentalsEncryptionHandler::encrypt(sanitize_text_field(base64_encode($tenantKey . ':' . $userKey))) );
+        return update_option($this->api_encoded_token_workspot_gebouw_location, HQRentalsEncryptionHandler::encrypt(sanitize_text_field(base64_encode($tenantKey . ':' . $userKey))));
     }
 
 
@@ -294,15 +283,15 @@ class HQRentalsSettings
         $this->saveNewAuthScheme('true');
         foreach ($postDataFromSettings as $key => $data) {
             if ($key != 'save') {
-                if($key == $this->api_tenant_token){
+                if ($key == $this->api_tenant_token) {
                     $this->saveApiTenantToken($postDataFromSettings[$this->api_tenant_token]);
-                }elseif($key == $this->api_user_token){
+                } elseif ($key == $this->api_user_token) {
                     $this->saveApiUserToken($postDataFromSettings[$this->api_user_token]);
-                }elseif($key == $this->api_tenant_token_workspot_gebouw_location){
+                } elseif ($key == $this->api_tenant_token_workspot_gebouw_location) {
                     $this->saveApiTenantTokenForWorkspot($postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location]);
-                }elseif($key == $this->api_user_token_workspot_gebouw_location){
+                } elseif ($key == $this->api_user_token_workspot_gebouw_location) {
                     $this->saveApiUserTokenForWorkspotModule($postDataFromSettings[$this->api_user_token_workspot_gebouw_location]);
-                }else{
+                } else {
                     update_option($key, sanitize_text_field($data));
                 }
             }
@@ -339,21 +328,28 @@ class HQRentalsSettings
      */
     public function thereAreSomeSettingMissing()
     {
-        return empty ($this->getApiTenantToken()) or
-            empty ($this->getApiUserToken()) or
-            empty ($this->getWoocommerceSyncOption()) or
-            empty ($this->getHQDatetimeFormat()) or
-            empty ($this->getFrontEndDatetimeFormat()) or
-            empty ($this->getSupportForMinifiedResponse());
+        /*
+         * Options missing on DB
+         * */
+        return empty (get_option($this->api_tenant_token)) or
+            empty (get_option($this->api_user_token)) or
+            empty (get_option($this->front_end_datetime_format)) or
+            empty (get_option($this->hq_datetime_format));
     }
 
     public function noNewAuthSchemeOption()
     {
         return empty(get_option($this->new_auth_scheme));
     }
+
+    public function noMinifiedResponseOption()
+    {
+        return empty(get_option($this->support_for_minified_response_on_vehicle_classes));
+    }
+
     public function newAuthSchemeEnabled()
     {
-        return get_option($this->new_auth_scheme, true) == 'true';
+        return get_option($this->new_auth_scheme) == 'true';
     }
 
     public function forceSyncOnHQData()

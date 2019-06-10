@@ -15,7 +15,6 @@ class HQRentalsSettings
     public $api_user_token = 'hq_wordpress_api_user_token_key_option';
     public $api_tenant_token = 'hq_wordpress_api_tenant_token_key_option';
     public $api_encoded_token = 'hq_wordpress_api_encoded_token_option';
-    public $woocommerce_hq_sync = 'hq_wordpress_woocommerce_hq_rentals_sync_option';
     public $hq_datetime_format = 'hq_wordpress_system_datetime_format_option';
     public $front_end_datetime_format = 'hq_wordpress_front_end_datetime_format_option';
     public $api_base_url = 'hq_wordpress_api_base_url_option';
@@ -109,15 +108,6 @@ class HQRentalsSettings
         }
     }
 
-    /***
-     * Retrieve Woocommerce Option - This should be erased
-     * @return mixed|void
-     */
-    public function getWoocommerceSyncOption()
-    {
-        return get_option($this->woocommerce_hq_sync);
-    }
-
     /**
      * Retrieve System Datetime format
      * @return mixed|void
@@ -207,16 +197,6 @@ class HQRentalsSettings
     public function saveApiTenantTokenForWorkspot($token)
     {
         return update_option($this->api_tenant_token_workspot_gebouw_location, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($token)));
-    }
-
-    /**
-     * Save woocommence option - this should be deleted
-     * @param bool $value
-     * @return bool
-     */
-    public function saveWoocommerSyncOption($value = false)
-    {
-        return update_option($this->woocommerce_hq_sync, sanitize_text_field($value));
     }
 
     /**
@@ -326,7 +306,6 @@ class HQRentalsSettings
             $this->api_user_token => $this->getApiUserToken(),
             $this->api_tenant_token => $this->getApiTenantToken(),
             $this->api_encoded_token => $this->getApiEncodedToken(),
-            $this->woocommerce_hq_sync => $this->getWoocommerceSyncOption(),
             $this->hq_datetime_format => $this->getHQDatetimeFormat(),
             $this->front_end_datetime_format => $this->getFrontEndDatetimeFormat(),
             $this->api_base_url => $this->getApiBaseUrl(),

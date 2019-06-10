@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 3.0.1
 Tested up to: 5.1
 Requires PHP: 7.1
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,9 @@ Once you have created the A record on your domain you will receive an SSL error.
 
 = 1.1.5 =
 Minified response functionality added
+
+= 1.1.6 =
+New datetime format added
 
 == Upgrade Notice ==
 

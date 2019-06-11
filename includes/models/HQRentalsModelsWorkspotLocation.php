@@ -20,6 +20,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
 
     protected $metaId = 'hq_wordpress_workspot_location_id_meta';
     protected $metaLabel = 'hq_wordpress_workspot_location_label_meta';
+    protected $metaActive = 'hq_wordpress_workspot_location_active_meta';
     protected $metaUUID = 'hq_wordpress_workspot_location_uuid_meta';
     protected $metaMapUUID = 'hq_wordpress_workspot_location_map_uuid_meta';
     protected $metaHasFloors = 'hq_wordpress_workspot_location_has_floors_meta';
@@ -27,6 +28,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
     protected $metaUnavailable_spots_coordinates_Json = 'hq_wordpress_workspot_unavailable_spots_coordinates_Json_meta';
     protected $metaRented_spots_coordinates_Json = 'hq_wordpress_workspot_rented_spots_coordinates_Json_meta';
     protected $metaAvailable_from_spots_coordinates_Json = 'hq_wordpress_workspot_available_from_spots_coordinates_Json_meta';
+    protected $metaOptions_spots_coordinates_Json = 'hq_wordpress_workspot_options_spots_coordinates_Json';
     protected $metaFloors = 'hq_wordpress_workspot_meta_floors_Json_meta';
     protected $metaRegions = 'hq_wordpress_workspot_meta_regions_meta';
     /*
@@ -35,6 +37,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
     public $id = '';
     public $label = '';
     public $uuid = '';
+    public $active = '';
     public $mapUUID = '';
     public $post_id = '';
     public $hasFloors = '';
@@ -99,6 +102,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
         $this->id = $data->id;
         $this->label = $data->label;
         $this->uuid = $data->uuid;
+        $this->active = $data->f450;
         $this->regions = $data->f1804;
     }
 
@@ -119,6 +123,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaLabel, $this->label);
         hq_update_post_meta($post_id, $this->metaUUID, $this->uuid);
         hq_update_post_meta($post_id, $this->metaRegions, $this->regions);
+        hq_update_post_meta($post_id, $this->metaActive, $this->active);
     }
 
     /*
@@ -169,11 +174,13 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             'label' => $this->metaLabel,
             'uuid' => $this->metaUUID,
             'mapUUID' => $this->metaMapUUID,
+            'active'    =>  $this->metaActive,
             'hasFloors' =>  $this->metaHasFloors,
             'available_spots_coordinates_Json' => $this->metaAvailable_spots_coordinates_Json,
             'unavailable_spots_coordinates_Json' => $this->metaUnavailable_spots_coordinates_Json,
             'rented_spots_coordinates_Json' => $this->metaRented_spots_coordinates_Json,
             'available_from_spots_coordinates_Json' => $this->metaAvailable_from_spots_coordinates_Json,
+            'option_spots_coordinates_Json'         => $this->metaOptions_spots_coordinates_Json,
             'floors'    => $this->metaFloors,
             'regions'   =>  $this->metaRegions
         );
@@ -190,6 +197,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             hq_update_post_meta($this->post_id, $this->metaUnavailable_spots_coordinates_Json, $processSpots['unavailable_spots_coordinates_Json']);
             hq_update_post_meta($this->post_id, $this->metaRented_spots_coordinates_Json, $processSpots['rented_spots_coordinates_Json']);
             hq_update_post_meta($this->post_id, $this->metaAvailable_from_spots_coordinates_Json, $processSpots['available_from_spots_coordinates_Json']);
+            hq_update_post_meta($this->post_id, $this->metaOptions_spots_coordinates_Json, $processSpots['option_spots_coordinates_Json']);
         }else{
             hq_update_post_meta($this->post_id, $this->metaHasFloors, 1);
             hq_update_post_meta($this->post_id, $this->metaFloors, $processSpots);
@@ -295,7 +303,8 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             $unavailable_spots_coordinates_Json = caag_init_Json();
             $rented_spots_coordinates_Json = caag_init_Json();
             $available_from_spots_coordinates_Json = caag_init_Json();
-            $spots = array_map(function ($spot) use (&$available_spots_coordinates_Json, &$unavailable_spots_coordinates_Json, &$rented_spots_coordinates_Json, &$available_from_spots_coordinates_Json) {
+            $option_spots_coordinates_Json = caag_init_Json();
+            $spots = array_map(function ($spot) use (&$available_spots_coordinates_Json, &$unavailable_spots_coordinates_Json, &$rented_spots_coordinates_Json, &$available_from_spots_coordinates_Json, &$option_spots_coordinates_Json) {
                 switch ($spot['status']) {
                     case 'available':
                         if ($spot['coordinates']) {
@@ -340,17 +349,31 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
                                 array_push($available_from_spots_coordinates_Json->features, $feature);
                             }
                         }
+                        break;
+                    case 'option':
+                        if ($spot['coordinates']) {
+                            foreach (json_decode($spot['coordinates'])->features as $feature) {
+                                if ($feature->properties) {
+                                    $feature->properties->status = 'In Optie';
+                                    caag_setFeatureProperties($feature, $spot, $this->post_id);
+                                }
+                                array_push($option_spots_coordinates_Json->features, $feature);
+                            }
+                        }
+                        break;
                 }
             }, $spots);
             $available_spots_coordinates_Json = json_encode($available_spots_coordinates_Json);
             $unavailable_spots_coordinates_Json = json_encode($unavailable_spots_coordinates_Json);
             $rented_spots_coordinates_Json = json_encode($rented_spots_coordinates_Json);
             $available_from_spots_coordinates_Json = json_encode($available_from_spots_coordinates_Json);
+            $option_spots_coordinates_Json = json_encode($option_spots_coordinates_Json);
             return [
                 'available_spots_coordinates_Json'      => $available_spots_coordinates_Json,
                 'unavailable_spots_coordinates_Json'    =>  $unavailable_spots_coordinates_Json,
                 'rented_spots_coordinates_Json'         =>  $rented_spots_coordinates_Json,
-                'available_from_spots_coordinates_Json' =>  $available_from_spots_coordinates_Json
+                'available_from_spots_coordinates_Json' =>  $available_from_spots_coordinates_Json,
+                'option_spots_coordinates_Json'         =>  $option_spots_coordinates_Json
             ];
         }else{
             $processedFloors = [];
@@ -418,6 +441,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
                                         array_push($floor->option_spots_coordinates_Json->features, $feature);
                                     }
                                 }
+                                break;
                         }
                     }
 
@@ -425,6 +449,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
 
                 $array_key = $this->id != 20 ? 'f1601' : 'f1403';
                 $processedFloors[$floor->f1601] = $floor;
+                $processedFloors[$floor->f1601]->active = $floor->f1569;
                 $processedFloors[$floor->f1601]->available_spots_coordinates_Json = json_encode($floor->available_spots_coordinates_Json);
                 $processedFloors[$floor->f1601]->unavailable_spots_coordinates_Json = json_encode($floor->unavailable_spots_coordinates_Json);
                 $processedFloors[$floor->f1601]->rented_spots_coordinates_Json = json_encode($floor->rented_spots_coordinates_Json);
@@ -501,6 +526,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
                                     array_push($floor->option_spots_coordinates_Json->features, $feature);
                                 }
                             }
+                            break;
                     }
                 }
 

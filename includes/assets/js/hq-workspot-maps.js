@@ -2,16 +2,14 @@ var locations = hqWorkspotLocations;
 locations.forEach( function (location){
     if(location.hasFloors === '1'){
         var floors = Object.entries(location.floors);
-
         floors.forEach(function(floor){
             if(floor[1].map){
                 setFloor(floor[1], location);
             }
         });
-    }else{
-        if(location.mapUUID){
-            setMaps(location);
-        }
+    }
+    if(location.mapUUID){
+        setMaps(location);
     }
 });
 
@@ -50,6 +48,11 @@ function setMaps(location){
                 fill: new ol.style.Fill({
                     color: 'rgba(255, 255, 255, 0)'
                 })
+            })],
+            'option': [new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgba(255, 255, 255, 0)'
+                })
             })]
         };
 
@@ -82,6 +85,7 @@ function setMaps(location){
         var unavailableSpotsLayer = initLayer();
         var rentedSpotsLayer = initLayer();
         var availableFromSpotsLayer = initLayer();
+        var optionSpotsLayer = initLayer();
         if(location.available_spots_coordinates_Json){
             availableSpotsLayer = addVector(location.available_spots_coordinates_Json, 'available');
         }
@@ -92,7 +96,10 @@ function setMaps(location){
             rentedSpotsLayer = addVector(location.rented_spots_coordinates_Json, 'rented');
         }
         if(location.available_from_spots_coordinates_Json){
-            availableFromSpotsLayer = addVector(location.available_from_spots_coordinates_Json, 'available')
+            availableFromSpotsLayer = addVector(location.available_from_spots_coordinates_Json, 'available');
+        }
+        if(location.option_spots_coordinates_Json){
+            optionSpotsLayer = addVector(location.option_spots_coordinates_Json, 'option');
         }
 
         //Set everything for popups
@@ -106,7 +113,7 @@ function setMaps(location){
         //Set Map
         var map = new ol.Map({
             target: 'location-map-' + location.id,
-            layers: [location_map, availableSpotsLayer, unavailableSpotsLayer, rentedSpotsLayer, availableFromSpotsLayer],
+            layers: [location_map, availableSpotsLayer, unavailableSpotsLayer, rentedSpotsLayer, availableFromSpotsLayer, optionSpotsLayer],
             overlays: [overlay],
             //Disable interactions
             interactions: ol.interaction.defaults({
@@ -275,6 +282,11 @@ function setFloor(floor, location){
                 fill: new ol.style.Fill({
                     color: 'rgba(255, 255, 255, 0)'
                 })
+            })],
+            'option': [new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgba(255, 255, 255, 0)'
+                })
             })]
         };
 
@@ -307,6 +319,7 @@ function setFloor(floor, location){
         var unavailableSpotsLayer = initLayer();
         var rentedSpotsLayer = initLayer();
         var availableFromSpotsLayer = initLayer();
+        var optionSpotsLayer = initLayer();
         if(floor.available_spots_coordinates_Json){
             availableSpotsLayer = addVector(floor.available_spots_coordinates_Json, 'available');
         }
@@ -317,7 +330,10 @@ function setFloor(floor, location){
             rentedSpotsLayer = addVector(floor.rented_spots_coordinates_Json, 'rented');
         }
         if(floor.available_from_spots_coordinates_Json){
-            availableFromSpotsLayer = addVector(floor.available_from_spots_coordinates_Json, 'available')
+            availableFromSpotsLayer = addVector(floor.available_from_spots_coordinates_Json, 'available');
+        }
+        if(floor.option_spots_coordinates_Json){
+            optionSpotsLayer = addVector(floor.option_spots_coordinates_Json, 'option');
         }
 
         //Set everything for popups
@@ -339,7 +355,7 @@ function setFloor(floor, location){
         //Set Map
         var map = new ol.Map({
             target: target,
-            layers: [location_map, availableSpotsLayer, unavailableSpotsLayer, rentedSpotsLayer, availableFromSpotsLayer],
+            layers: [location_map, availableSpotsLayer, unavailableSpotsLayer, rentedSpotsLayer, availableFromSpotsLayer, optionSpotsLayer],
             overlays: [overlay],
             //Disable interactions
             interactions: ol.interaction.defaults({
@@ -405,6 +421,10 @@ function setFloor(floor, location){
                     feature_data += '<IMG HEIGHT=100 WIDTH=160 SRC=' + feature.get('image_url') + '>';
                 }
 
+                if (feature.get('image_url') && feature.get('status') != 'In Optie') {
+                    feature_data += '<IMG HEIGHT=100 WIDTH=160 SRC=' + feature.get('image_url') + '>';
+                }
+
                 content.innerHTML = feature_data;
 
                 overlay.setPosition(coordinates);
@@ -427,6 +447,9 @@ function setFloor(floor, location){
                             overlay_color = 'rgba(237, 31, 98, 0.5)';
                             break;
                         case 'Verhuurd':
+                            overlay_color = 'rgba(145, 145, 145, 0.5)';
+                            break;
+                        case 'In Optie':
                             overlay_color = 'rgba(145, 145, 145, 0.5)';
                             break;
                     }

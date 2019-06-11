@@ -23,7 +23,6 @@ class HQRentalsLocationsTask
         $locations = $this->connector->getHQRentalsLocations();
         if ($locations->success and !empty($locations->data)) {
         	$this->createLocations($locations->data);
-        	//$this->createAllLocationsForFrontend($locations->data);
         }
     }
 

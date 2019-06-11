@@ -47,6 +47,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
     public $unavailable_spots_coordinates_Json = '';
     public $rented_spots_coordinates_Json = '';
     public $available_from_spots_coordinates_Json = '';
+    public $idMeta = 'hq_wordpress_workspot_location_id_meta';
 
 
     public function __construct($post = null)

@@ -125,9 +125,9 @@ class HQRentalsAdminSettings
                                     <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User
                                             Token Workspot Gebouw Tenant</label></th>
                                     <td><input type="text"
-                                               name="<?php echo esc_url($this->settings->api_user_token_workspot_gebouw_location); ?>"
+                                               name="<?php echo esc_attr($this->settings->api_user_token_workspot_gebouw_location); ?>"
                                                size="70"
-                                               value="<?php echo esc_url($this->settings->getApiUserTokenForWorkspotLocation()); ?>"
+                                               value="<?php echo esc_attr($this->settings->getApiUserTokenForWorkspotLocation()); ?>"
                                                id="title"
                                                spellcheck="true" autocomplete="off"></td>
                                 </tr>

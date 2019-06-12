@@ -5,6 +5,7 @@ namespace HQRentalsPlugin\HQRentalsQueries;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 
 
+
 class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
 {
     public function __construct()
@@ -12,7 +13,12 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         $this->model = new HQRentalsModelsVehicleClass();
     }
 
-    public function allVehicleClasses()
+
+    /***
+     * Return all vehicles classes order by daily rate
+     * @return array
+     */
+    public function allVehicleClasses($order)
     {
         $vehicleClassesPosts = $this->model->all();
         return $this->fillModelWithPosts($vehicleClassesPosts);

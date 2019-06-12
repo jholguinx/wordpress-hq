@@ -97,7 +97,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
                 'meta_query' => array(
                     array(
                         'key' => $this->metaVehicleIdClass,
-                        'value' => $caag_vehicle_class_id,
+                        'value' => $vehicleClassPostId,
                         'compare' => '='
                     )
                 )
@@ -112,9 +112,17 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         // TODO: Implement first() method.
     }
 
-    public function all()
+    public function all($order = null)
     {
-        $query = new \WP_Query();
+        $args = array_merge(
+            $this->postArg,
+            array(
+                'order'     => 'ASC',
+                'orderby'   =>  'meta_value',
+                'meta_key'  =>  ( ! ( empty($order) ) ) ? $this->getOrderMetaForQuery($order) : $this->metaDailyRate
+            )
+        );
+        $query = new \WP_Query( $args );
         return $query->posts;
     }
 
@@ -218,5 +226,28 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function getFormattedMonthlyRateAsNumber()
     {
         return (float)$this->getFormattedMonthlyRate();
+    }
+    public function getOrderMetaForQuery($order)
+    {
+        switch ($order) {
+            case 'minute':
+                return $this->metaMinuteRate;
+                break;
+            case 'hourly':
+                return $this->metaHourRate;
+                break;
+            case 'daily':
+                return $this->metaDailyRate;
+                break;
+            case 'weekly':
+                return $this->metaWeeklyRate;
+                break;
+            case 'monthly':
+                return $this->metaMonthlyRate;
+                break;
+            default:
+                return $this->metaDailyRate;
+                break;
+        }
     }
 }

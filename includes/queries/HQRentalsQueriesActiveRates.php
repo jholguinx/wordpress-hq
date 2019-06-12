@@ -13,7 +13,8 @@ class HQRentalsQueriesActiveRates{
     }
     public function allActiveRates($orderBy = null)
     {
-        $rates = $this->model->all();
+        $ratesPosts = $this->model->all($orderBy);
+        return $this->setRatesFromPosts($ratesPosts);
     }
     protected function setRatesFromPosts($posts)
     {

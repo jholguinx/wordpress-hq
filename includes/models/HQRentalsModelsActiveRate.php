@@ -2,6 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
+
 class HQRentalsModelsActiveRate extends HQRentalsBaseModel
 {
     /*
@@ -42,12 +44,15 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function __construct($vehicleClassID = null)
     {
         $this->post_id = '';
+        $this->dataType = new HQRentalsDataFilter();
         $this->postArg = array(
             'post_type'         => $this->activeRateCustomPostName,
             'post_status'       => 'publish',
             'posts_per_page'    =>  -1
         );
-        if (!empty($vehicleClassID)) {
+        if ($this->dataType->isPost($vehicleClassID)){
+            $this->setFromPost($vehicleClassID);
+        }else if(!empty($vehicleClassID)) {
             $this->setFromVehicleClass($vehicleClassID);
         }
     }
@@ -112,7 +117,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         // TODO: Implement first() method.
     }
 
-    public function all($order = null)
+    public function all($order = 'daily')
     {
         $args = array_merge(
             $this->postArg,
@@ -133,6 +138,12 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         } else {
         }
         //$metas =
+    }
+    public function setFromPost($post)
+    {
+        foreach ($this->getAllMetaTag() as $property => $metaKey){
+            $this->{$property} = get_post_meta($post->ID, $metaKey, true);
+        }
     }
 
     /***

@@ -24,25 +24,12 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function allVehicleClasses($order = null)
     {
-        /*
-         * Old Way
-         * */
-        if(empty($order)){
-            $vehicleClassesPosts = $this->model->all();
-            return $this->fillModelWithPosts($vehicleClassesPosts);
-        }else{
-            /*
-             * If a vehicle class does not have rates
-             * will not be available
-             *
-             * */
-            $rates = $this->rateQuery->allActiveRates($order);
-            $data = [];
-            foreach ($rates as $rate){
-                $data[] = $this->getVehicleClassBySystemId($rate->vehicleClassId);
-            }
-            return $data;
+        $rates = $this->rateQuery->allActiveRates($order);
+        $data = [];
+        foreach ($rates as $rate){
+            $data[] = $this->getVehicleClassBySystemId($rate->vehicleClassId);
         }
+        return $data;
     }
 
     /**

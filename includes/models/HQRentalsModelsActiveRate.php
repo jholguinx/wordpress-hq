@@ -2,6 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
+
 class HQRentalsModelsActiveRate extends HQRentalsBaseModel
 {
     /*
@@ -42,12 +44,15 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function __construct($vehicleClassID = null)
     {
         $this->post_id = '';
+        $this->dataType = new HQRentalsDataFilter();
         $this->postArg = array(
             'post_type'         => $this->activeRateCustomPostName,
             'post_status'       => 'publish',
             'posts_per_page'    =>  -1
         );
-        if (!empty($vehicleClassID)) {
+        if ($this->dataType->isPost($vehicleClassID)){
+            $this->setFromPost($vehicleClassID);
+        }else if(!empty($vehicleClassID)) {
             $this->setFromVehicleClass($vehicleClassID);
         }
     }
@@ -97,7 +102,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
                 'meta_query' => array(
                     array(
                         'key' => $this->metaVehicleIdClass,
-                        'value' => $caag_vehicle_class_id,
+                        'value' => $vehicleClassPostId,
                         'compare' => '='
                     )
                 )
@@ -112,9 +117,17 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         // TODO: Implement first() method.
     }
 
-    public function all()
+    public function all($order = 'daily')
     {
-        $query = new \WP_Query();
+        $args = array_merge(
+            $this->postArg,
+            array(
+                'order'     => 'ASC',
+                'orderby'   =>  'meta_value',
+                'meta_key'  =>  ( ! ( empty($order) ) ) ? $this->getOrderMetaForQuery($order) : $this->metaDailyRate
+            )
+        );
+        $query = new \WP_Query( $args );
         return $query->posts;
     }
 
@@ -125,6 +138,12 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         } else {
         }
         //$metas =
+    }
+    public function setFromPost($post)
+    {
+        foreach ($this->getAllMetaTag() as $property => $metaKey){
+            $this->{$property} = get_post_meta($post->ID, $metaKey, true);
+        }
     }
 
     /***
@@ -218,5 +237,28 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function getFormattedMonthlyRateAsNumber()
     {
         return (float)$this->getFormattedMonthlyRate();
+    }
+    public function getOrderMetaForQuery($order)
+    {
+        switch ($order) {
+            case 'minute':
+                return $this->metaMinuteRate;
+                break;
+            case 'hourly':
+                return $this->metaHourRate;
+                break;
+            case 'daily':
+                return $this->metaDailyRate;
+                break;
+            case 'weekly':
+                return $this->metaWeeklyRate;
+                break;
+            case 'monthly':
+                return $this->metaMonthlyRate;
+                break;
+            default:
+                return $this->metaDailyRate;
+                break;
+        }
     }
 }

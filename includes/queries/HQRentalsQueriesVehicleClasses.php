@@ -5,19 +5,38 @@ namespace HQRentalsPlugin\HQRentalsQueries;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 
 
+
 class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
 {
+    /**
+     * HQRentalsQueriesVehicleClasses constructor.
+     */
     public function __construct()
     {
         $this->model = new HQRentalsModelsVehicleClass();
+        $this->rateQuery = new HQRentalsQueriesActiveRates();
     }
 
-    public function allVehicleClasses()
+
+    /***
+     * Return all vehicles classes order by daily rate
+     * @return array
+     */
+    public function allVehicleClasses($order = null)
     {
-        $vehicleClassesPosts = $this->model->all();
-        return $this->fillModelWithPosts($vehicleClassesPosts);
+        $rates = $this->rateQuery->allActiveRates($order);
+        $data = [];
+        foreach ($rates as $rate){
+            $data[] = $this->getVehicleClassBySystemId($rate->vehicleClassId);
+        }
+        return $data;
     }
 
+    /**
+     * Retrieve vehicle class id from WP Post
+     * @param $post
+     * @return string
+     */
     public function getVehicleClassIdFromPost($post)
     {
         if (get_post_type($post) === 'hqwp_veh_classes') {
@@ -27,6 +46,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             return '';
         }
     }
+
 
     public function getVehicleClassFilterByCustomField($dbColumn, $value)
     {
@@ -46,6 +66,11 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return $this->fillModelWithPosts($query->posts);
     }
 
+    /**
+     * Retrieve vehicle class by system id
+     * @param $hqId
+     * @return HQRentalsModelsVehicleClass
+     */
     public function getVehicleClassBySystemId($hqId)
     {
         $args = array_merge(
@@ -64,6 +89,10 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return new HQRentalsModelsVehicleClass($query->posts[0]);
     }
 
+    /**
+     * Retrieve all vehicle classes to front end
+     * @return array
+     */
     public function allToFrontEnd()
     {
         $vehiclesPost = $this->model->all();
@@ -79,23 +108,6 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return $data;
     }
 
-    public function getClassesFilterByCustomField($dbColumn, $value)
-    {
-        $args = array_merge(
-            $this->model->postArgs,
-            array(
-                'meta_query' => array(
-                    array(
-                        'key' => $this->model->getCustomFieldMetaPrefix() . $dbColumn,
-                        'value' => $value,
-                        'compare' => '='
-                    )
-                )
-            )
-        );
-        $query = new \WP_Query($args);
-        return $query->posts;
-    }
 
     /**
      * Retrieves all distinct meta value from the vehicle classes
@@ -115,6 +127,11 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         });
     }
 
+    /***
+     * Retrieve Cheaspest classes from custom field value
+     * @param $dbColumn
+     * @return array
+     */
     public function getCheapestClassesFromCustomField($dbColumn)
     {
         $customFieldsValues = $this->getAllDifferentsValuesFromCustomField($dbColumn);
@@ -134,6 +151,12 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return $data;
     }
 
+    /**
+     * Retrieve vehicle classes filter by a single custom field value
+     * @param $dbColumn
+     * @param $value
+     * @return array
+     */
     public function getClassFromCustomField($dbColumn, $value)
     {
         $args = array_merge(
@@ -151,7 +174,30 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         $query = new \WP_Query($args);
         return $this->fillModelWithPosts($query->posts);
     }
+    public function getClassesFilterByCustomField($dbColumn, $value)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->model->getCustomFieldMetaPrefix() . $dbColumn,
+                        'value' => $value,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return $query->posts;
+    }
 
+    /***
+     * Retrieve a single vehicle class filter by custom field
+     * @param $dbColumn
+     * @param $value
+     * @return array|HQRentalsModelsVehicleClass
+     */
     public function getCheapestClassFromCustomFieldValue($dbColumn, $value)
     {
         $args = array_merge(
@@ -181,6 +227,12 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return $cheapestPost;
     }
 
+    /**
+     * Retrieve a single class filter by custom field and based on proce intervals
+     * @param $dbColumn
+     * @param $value
+     * @return array|HQRentalsModelsVehicleClass
+     */
     public function getCheapestClassFromCustomFieldValueAndPriceInterval($dbColumn, $value)
     {
         $args = array_merge(
@@ -214,6 +266,12 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
     {
         return 'hq_wordpress_vehicle_class_all_for_frontend';
     }
+
+    /***
+     * Fills Models with Posts
+     * @param $posts
+     * @return array
+     */
     public function fillModelWithPosts( $posts )
     {
         $data = [];
@@ -222,6 +280,14 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         }
         return $data;
     }
+
+    /***
+     * Retrieve ids from vehicles classes filtering by custom field
+     *
+     * @param $dbColumn
+     * @param $value
+     * @return array
+     */
     public function getVehiclesIdsFromCustomField( $dbColumn, $value ){
         $classes = $this->getVehicleClassFilterByCustomField( $dbColumn, $value );
         $data = [];

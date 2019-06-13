@@ -177,14 +177,16 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
            $this->postArg,
            array(
                'meta_key'   =>  $this->metaPrice,
-               'orderby'    =>  'meta_value',
+               'orderby'    =>  'meta_value_num',
                'order'      =>  'ASC',
            ),
            array(
                'meta_query' =>  array(
-                   'key'       =>  $this->metaVehicleIdClass,
-                   'value'     =>  $vehicleClassId,
-                   'compare'   =>  '='
+                   array(
+                       'key'       =>  $this->metaVehicleIdClass,
+                       'value'     =>  $vehicleClassId,
+                       'compare'   =>  '='
+                   )
                )
            )
        );

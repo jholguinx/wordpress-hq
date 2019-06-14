@@ -168,7 +168,7 @@ class HQRentalsAdminSettings
                                 </td>
                             </tr>
                             <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Disable Sync</label></th>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Disabled Sync</label></th>
                                 <td>
                                     <input type="checkbox"
                                            name="<?php echo $this->settings->hq_disable_cronjob_option; ?>"

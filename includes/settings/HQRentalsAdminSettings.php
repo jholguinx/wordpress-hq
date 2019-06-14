@@ -168,6 +168,14 @@ class HQRentalsAdminSettings
                                 </td>
                             </tr>
                             <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Disable Sync</label></th>
+                                <td>
+                                    <input type="checkbox"
+                                           name="<?php echo $this->settings->hq_disable_cronjob_option; ?>"
+                                           value="true" <?php echo ($this->settings->getDisableCronjobOption() === 'true') ? 'checked' : ''; ?>/>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Api
                                         Region</label></th>
                                 <td>

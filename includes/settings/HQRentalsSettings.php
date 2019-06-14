@@ -24,6 +24,7 @@ class HQRentalsSettings
     public $support_for_minified_response_on_vehicle_classes = 'hq_wordpress_support_for_minified_response_on_vehicle_classes';
     public $new_auth_scheme = 'hq_wordpress_new_auth_scheme_enabled';
     public $hq_integration_on_home = 'hq_wordpress_home_integration_enabled';
+    public $hq_disable_cronjob_option = 'hq_wordpress_disable_cronjob_option';
 
     public function __construct()
     {
@@ -138,6 +139,10 @@ class HQRentalsSettings
     public function getSupportForHomeIntegration()
     {
         return get_option($this->hq_integration_on_home, 'false');
+    }
+    public function getDisableCronjobOption()
+    {
+        return get_option($this->hq_disable_cronjob_option, 'false');
     }
 
     /**
@@ -261,6 +266,10 @@ class HQRentalsSettings
     {
         return update_option($this->hq_integration_on_home, sanitize_text_field($data));
     }
+    public function saveDisableCronjobOption($data)
+    {
+        return update_option($this->hq_disable_cronjob_option, sanitize_text_field($data));
+    }
 
     /***
      * Save Settings on Database
@@ -292,6 +301,9 @@ class HQRentalsSettings
         }
         if (empty($postDataFromSettings[$this->hq_integration_on_home])) {
             update_option($this->hq_integration_on_home, "false");
+        }
+        if (empty($postDataFromSettings[$this->hq_disable_cronjob_option])) {
+            update_option($this->hq_disable_cronjob_option, "false");
         }
         $_POST['success'] = 'success';
     }
@@ -360,12 +372,17 @@ class HQRentalsSettings
     {
         return empty(get_option($this->hq_integration_on_home));
     }
+    public function noDisabledCronjobOption()
+    {
+        return empty(get_option($this->hq_disable_cronjob_option));
+    }
+
     public function homeIntegration()
     {
         return get_option($this->hq_integration_on_home) == 'true';
     }
 
-        public function forceSyncOnHQData()
+    public function forceSyncOnHQData()
     {
         $schedule = new HQRentalsScheduler();
         $schedule->refreshHQData();

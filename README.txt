@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.2.1
 Requires PHP: 5.6.0
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,13 +40,19 @@ Once you have created the A record on your domain you will receive an SSL error.
 
 == Changelog ==
 
-= 1.2.1 =
-Order vehicles by class
+= 1.2.3 =
+Remove woocommerce sync functionality.
+
+= 1.2.4 =
+America 2 region added to the plugin.
+
+= 1.2.5 =
+Fixes on price intervals.
 
 == Upgrade Notice ==
 
-= 1.2.1 =
-Order vehicles by class
+= 1.2.6 =
+Setting added to disable sync.
 
 == Screenshots ==
 

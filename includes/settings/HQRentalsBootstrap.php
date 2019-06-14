@@ -19,6 +19,7 @@ class HQRentalsBootstrap
     public $support_minified_response_default_value = "false";
     public $hq_new_auth_scheme_default_value = 'false';
     public $hq_integration_on_home_default_value = 'false';
+    public $hq_cronjob_disable_option_default_value = 'false';
 
     public function __construct()
     {
@@ -43,6 +44,9 @@ class HQRentalsBootstrap
         }
         if($this->settings->noHomeIntegrationOption()){
             $this->settings->saveHomeIntegration($this->hq_integration_on_home_default_value);
+        }
+        if($this->settings->noDisabledCronjobOption()){
+            $this->settings->saveDisableCronjobOption($this->hq_cronjob_disable_option_default_value);
         }
     }
 }

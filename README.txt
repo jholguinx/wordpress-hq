@@ -40,6 +40,10 @@ Once you have created the A record on your domain you will receive an SSL error.
 
 == Changelog ==
 
+= 1.2.3 =
+
+Removed Woocommerce sync functionality.
+
 = 1.2.4 =
 America 2 region added to the plugin.
 

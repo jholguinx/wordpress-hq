@@ -34,6 +34,7 @@ class HQRentalsReservationsShortcode
         $brand = new HQRentalsModelsBrand();
         $brand->findBySystemId($atts['id']);
         $this->assets->getIframeResizerAssets();
+        
         try {
             if ($post_data['pick_up_date']) {
                 if ($post_data['pick_up_time']) {

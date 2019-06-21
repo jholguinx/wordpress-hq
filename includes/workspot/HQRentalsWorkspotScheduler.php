@@ -2,6 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsWorkspot;
 
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsLocationsWorkspotTask;
+
 class HQRentalsWorkspotScheduler
 {
     /**
@@ -12,8 +14,7 @@ class HQRentalsWorkspotScheduler
 
     public function __construct()
     {
-        $this->brandsTask = new HQRentalsBrandsTask();
-        $this->locationsTask = new HQRentalsLocationsTask();
+        $this->locationsTask = new HQRentalsLocationsWorkspotTask();
     }
 
     public function refreshHQData()

@@ -19,6 +19,7 @@ class HQRentalsAssetsHandler
     protected $systemDateFormatFrontName = 'hqRentalsSystemDateformat';
     protected $workspotLocationsDataName = 'hqWorkspotLocations';
     protected $workspotLocationDataForShortcodeName = 'hqWorkspotLocationsShortcodes';
+    protected $tenantDatetimeFormatFrontName = 'hqRentalsTenantDatetimeFormat';
     protected $pluginVersion = '1.3.1';
 
     public function __construct()
@@ -81,6 +82,10 @@ class HQRentalsAssetsHandler
 	    wp_localize_script('hq-dummy-script', $this->vehiclesGlobalFrontName, $this->vehicleQueries->allToFrontEnd());
 		wp_localize_script('hq-dummy-script', $this->frontDateFormatFrontName, $this->settings->getFrontEndDatetimeFormat());
 		wp_localize_script('hq-dummy-script', $this->systemDateFormatFrontName, $this->settings->getHQDatetimeFormat());
+		wp_localize_script( 'hq-dummy-script', $this->tenantDatetimeFormatFrontName, $this->settings->getTenantDatetimeFormat());
+		/*
+		 * Just for Workspot
+		 * */
         if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
             wp_localize_script('hq-dummy-script', $this->workspotLocationsDataName, $this->workspotQuery->getLocationsToFrontEnd());
         }

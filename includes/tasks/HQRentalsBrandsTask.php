@@ -10,11 +10,13 @@ class HQRentalsBrandsTask{
 		$this->connector = new Connector();
 	}
 
-	public function refreshBrandsData() {
+	public function refreshBrandsData()
+    {
 		$this->createBrandsData();
 	}
 
-	public function createBrandsData() {
+	public function createBrandsData()
+    {
 		$brands = $this->connector->getHQRentalsBrands();
 		if ( $brands->success and !empty($brands->data)) {
 			$this->createBrands( $brands->data );
@@ -22,7 +24,8 @@ class HQRentalsBrandsTask{
 		}
 	}
 
-	protected function createBrands( $brands ) {
+	protected function createBrands( $brands )
+    {
 		foreach ( $brands as $brand ) {
 			$newBrand = new HQBrand();
 			$newBrand->setBrandFromApi( $brand );

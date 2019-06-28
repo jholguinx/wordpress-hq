@@ -25,6 +25,7 @@ class HQRentalsSettings
     public $new_auth_scheme = 'hq_wordpress_new_auth_scheme_enabled';
     public $hq_integration_on_home = 'hq_wordpress_home_integration_enabled';
     public $hq_disable_cronjob_option = 'hq_wordpress_disable_cronjob_option';
+    public $hq_tenant_datetime_format = 'hq_wordpress_tenant_datetime_format';
 
     public function __construct()
     {
@@ -143,6 +144,10 @@ class HQRentalsSettings
     public function getDisableCronjobOption()
     {
         return get_option($this->hq_disable_cronjob_option, 'false');
+    }
+    public function getTenantDatetimeFormat()
+    {
+        return get_option($this->hq_tenant_datetime_format, '');
     }
 
     /**
@@ -270,6 +275,10 @@ class HQRentalsSettings
     {
         return update_option($this->hq_disable_cronjob_option, sanitize_text_field($data));
     }
+    public function saveTenantDatetimeOption($data)
+    {
+        return update_option($this->hq_tenant_datetime_format, sanitize_text_field($data));
+    }
 
     /***
      * Save Settings on Database
@@ -366,6 +375,10 @@ class HQRentalsSettings
     public function newAuthSchemeEnabled()
     {
         return get_option($this->new_auth_scheme) == 'true';
+    }
+    public function noTenantDatetimeFormat()
+    {
+        return empty(get_option($this->hq_tenant_datetime_format));
     }
 
     public function noHomeIntegrationOption()

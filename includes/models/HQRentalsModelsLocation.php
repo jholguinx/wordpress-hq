@@ -63,7 +63,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         );
         $this->customPostArgs = array(
             'labels'                    =>  $this->labels,
-            'public'                    =>  true,
+            'public'                    =>  false,
             'show_in_admin_bar'         =>  true,
             'publicly_queryable'        =>  true,
             'show_ui'                   =>  true,

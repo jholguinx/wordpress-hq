@@ -51,9 +51,8 @@ Fixes on README file.
 
 == Upgrade Notice ==
 
-= 1.2.8 =
+= 1.2.9 =
 Tenant datetime format added to the front-end assets under the name of hqRentalsTenantDatetimeFormat.
-
 Safari option on plugin settings
 
 == Screenshots ==

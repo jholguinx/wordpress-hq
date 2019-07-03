@@ -17,7 +17,7 @@ class HQRentalsSettingsTask{
     {
         $settings = $this->connector->getHQRentalsTenantsSettings();
         if($settings->success){
-            $this->settings->saveTenantDatetimeOption($settings->date_format);
+            $this->settings->saveTenantDatetimeOption($settings->data->date_format);
         }
     }
 }

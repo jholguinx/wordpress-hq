@@ -88,7 +88,7 @@ class HQRentalsApiConnector{
     }
     public function getHQRentalsTenantsSettings()
     {
-        $response = wp_remote_get( $this->endpoints->getTenantsSettingsEndpoint, $this->configuration->getBasicApiConfiguration() );
+        $response = wp_remote_get( $this->endpoints->getTenantsSettingsEndpoint(), $this->configuration->getBasicApiConfiguration() );
         return $this->resolver->resolveApiCallTenantsSettings( $response );
     }
 

@@ -176,6 +176,14 @@ class HQRentalsAdminSettings
                                 </td>
                             </tr>
                             <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Disabled Safari Redirect Functionality</label></th>
+                                <td>
+                                    <input type="checkbox"
+                                           name="<?php echo $this->settings->hq_disable_safari_functionality; ?>"
+                                           value="true" <?php echo ($this->settings->getDisableSafari() === 'true') ? 'checked' : ''; ?>/>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Api
                                         Region</label></th>
                                 <td>

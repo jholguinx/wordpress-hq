@@ -21,7 +21,7 @@ class HQRentalsActionsRedirects{
         global $post;
         global $is_safari;
         if (!is_singular()) return;
-        if (!empty($post->post_content) and !($this->settings->homeIntegration())) {
+        if (!empty($post->post_content) and !($this->settings->homeIntegration()) and !($this->settings->getDisableSafariValue())) {
             $pattern = get_shortcode_regex();
             if (   preg_match_all( '/'. $pattern .'/s', $post->post_content, $matches )
                 && array_key_exists( 2, $matches )

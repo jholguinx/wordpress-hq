@@ -26,6 +26,7 @@ class HQRentalsSettings
     public $hq_integration_on_home = 'hq_wordpress_home_integration_enabled';
     public $hq_disable_cronjob_option = 'hq_wordpress_disable_cronjob_option';
     public $hq_tenant_datetime_format = 'hq_wordpress_tenant_datetime_format';
+    public $hq_disable_safari_functionality = 'hq_disable_safari_functionality';
 
     public function __construct()
     {
@@ -148,6 +149,14 @@ class HQRentalsSettings
     public function getTenantDatetimeFormat()
     {
         return get_option($this->hq_tenant_datetime_format, '');
+    }
+    public function getDisableSafari()
+    {
+        return get_option($this->hq_disable_safari_functionality, 'false');
+    }
+    public function getDisableSafariValue()
+    {
+        return get_option($this->hq_disable_safari_functionality, 'false') == 'true';
     }
 
     /**
@@ -279,6 +288,11 @@ class HQRentalsSettings
     {
         return update_option($this->hq_tenant_datetime_format, sanitize_text_field($data));
     }
+    public function saveDisableSafariOption($data)
+    {
+        return update_option($this->hq_disable_safari_functionality, sanitize_text_field($data));
+    }
+
 
     /***
      * Save Settings on Database
@@ -287,6 +301,7 @@ class HQRentalsSettings
     public function updateSettings($postDataFromSettings)
     {
         $postDataFromSettings = $this->helper->sanitizeTextInputs($postDataFromSettings);
+
         $this->saveEncodedApiKey($postDataFromSettings[$this->api_tenant_token], $postDataFromSettings[$this->api_user_token]);
         $this->saveEncodedApiKeyForWorkspotLocation($postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location], $postDataFromSettings[$this->api_user_token_workspot_gebouw_location]);
         $this->saveNewAuthScheme('true');
@@ -313,6 +328,9 @@ class HQRentalsSettings
         }
         if (empty($postDataFromSettings[$this->hq_disable_cronjob_option])) {
             update_option($this->hq_disable_cronjob_option, "false");
+        }
+        if (empty($postDataFromSettings[$this->hq_disable_safari_functionality])) {
+            update_option($this->hq_disable_safari_functionality, "false");
         }
         $_POST['success'] = 'success';
     }
@@ -358,6 +376,10 @@ class HQRentalsSettings
     public function noNewAuthSchemeOption()
     {
         return empty(get_option($this->new_auth_scheme));
+    }
+    public function noDisableSafariFunctionality()
+    {
+        return empty(get_option($this->hq_disable_safari_functionality));
     }
 
     /*

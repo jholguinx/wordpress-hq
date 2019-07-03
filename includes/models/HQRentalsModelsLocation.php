@@ -63,7 +63,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         );
         $this->customPostArgs = array(
             'labels'                    =>  $this->labels,
-            'public'                    =>  true,
+            'public'                    =>  false,
             'show_in_admin_bar'         =>  true,
             'publicly_queryable'        =>  true,
             'show_ui'                   =>  true,
@@ -71,7 +71,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'show_in_nav_menus'         =>  true,
             'query_var'                 =>  true,
             'rewrite'                   =>  array( 'slug' => $this->locationsCustomPostSlug ),
-            'has_archive'               =>  true,
+            'has_archive'               =>  false,
             'hierarchical'              =>  false,
             'exclude_from_search'       =>  false,
             'menu_icon'                 => 'dashicons-location-alt',

@@ -203,6 +203,9 @@ function setMaps(location){
                         case 'Verhuurd':
                             overlay_color = 'rgba(145, 145, 145, 0.5)';
                             break;
+                        case 'In Optie':
+                            overlay_color = 'rgba(255,165,0, 0.5)';
+                            break;
                     }
                     var style = new ol.style.Style({
                         fill: new ol.style.Fill({
@@ -285,7 +288,7 @@ function setFloor(floor, location){
             })],
             'option': [new ol.style.Style({
                 fill: new ol.style.Fill({
-                    color: 'rgba(255, 255, 255, 0)'
+                    color: 'rgba(255,165,0, 0.5)'
                 })
             })]
         };
@@ -450,7 +453,7 @@ function setFloor(floor, location){
                             overlay_color = 'rgba(145, 145, 145, 0.5)';
                             break;
                         case 'In Optie':
-                            overlay_color = 'rgba(145, 145, 145, 0.5)';
+                            overlay_color = 'rgba(255,165,0, 0.5)';
                             break;
                     }
                     var style = new ol.style.Style({

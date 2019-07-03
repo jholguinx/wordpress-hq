@@ -167,5 +167,14 @@ class HQRentalsApiCallResolver{
             return new HQRentalsApiResponse( null, true, json_decode( $response['body'] )->data);
         }
     }
+
+    public function resolveApiCallTenantsSettings($response)
+    {
+        if(is_wp_error( $response )){
+            return new HQRentalsApiResponse( $response->get_error_message(), false, null );
+        }else{
+            return new HQRentalsApiResponse( null, true, json_decode( $response['body'] )->data);
+        }
+    }
     
 }

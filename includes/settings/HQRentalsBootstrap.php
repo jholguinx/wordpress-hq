@@ -20,6 +20,8 @@ class HQRentalsBootstrap
     public $hq_new_auth_scheme_default_value = 'false';
     public $hq_integration_on_home_default_value = 'false';
     public $hq_cronjob_disable_option_default_value = 'false';
+    public $hq_tenant_date_time_format = "Y-m-d H:i";
+    public $hq_disable_safari_option_default_value = 'false';
 
     public function __construct()
     {
@@ -48,5 +50,12 @@ class HQRentalsBootstrap
         if($this->settings->noDisabledCronjobOption()){
             $this->settings->saveDisableCronjobOption($this->hq_cronjob_disable_option_default_value);
         }
+        if($this->settings->noTenantDatetimeFormat()){
+            $this->settings->saveTenantDatetimeOption($this->hq_tenant_date_time_format);
+        }
+        if($this->settings->noDisableSafariFunctionality()){
+            $this->settings->saveDisableSafariOption($this->hq_disable_safari_option_default_value);
+        }
     }
+
 }

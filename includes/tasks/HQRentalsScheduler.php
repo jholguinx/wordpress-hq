@@ -28,6 +28,7 @@ class HQRentalsScheduler
         $this->locationsTask = new HQRentalsLocationsTask();
         $this->vehicleClassesTask = new HQRentalsVehicleClassesTask();
         $this->additionalChargesTask = new HQRentalsAdditionalChargesTask();
+        $this->settingsTask = new HQRentalsSettingsTask();
         $this->workspot = new HQRentalsLocationsWorkspotTask();
     }
 
@@ -41,6 +42,10 @@ class HQRentalsScheduler
         $wpdb->get_results("delete from " . $dbPrefix . "posts where post_type like 'hqwp%';");
         $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like 'hq_wordpress%';");
 
+        /*
+         * Load data into WP
+         * */
+        $this->settingsTask->refreshSettingsData();
         $this->brandsTask->refreshBrandsData();
         $this->locationsTask->refreshLocationsData();
         $this->additionalChargesTask->refreshAdditionalChargesData();

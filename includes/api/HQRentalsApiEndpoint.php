@@ -67,4 +67,8 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'sheets/49/items/?limit=100';
     }
+    public function getTenantsSettingsEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'tenants/current';
+    }
 }

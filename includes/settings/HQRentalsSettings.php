@@ -156,7 +156,7 @@ class HQRentalsSettings
     }
     public function getDisableSafariValue()
     {
-        return get_option($this->hq_disable_safari_functionality, 'false') == 'true';
+        return $this->getDisableSafari() == 'true';
     }
 
     /**
@@ -301,7 +301,6 @@ class HQRentalsSettings
     public function updateSettings($postDataFromSettings)
     {
         $postDataFromSettings = $this->helper->sanitizeTextInputs($postDataFromSettings);
-
         $this->saveEncodedApiKey($postDataFromSettings[$this->api_tenant_token], $postDataFromSettings[$this->api_user_token]);
         $this->saveEncodedApiKeyForWorkspotLocation($postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location], $postDataFromSettings[$this->api_user_token_workspot_gebouw_location]);
         $this->saveNewAuthScheme('true');

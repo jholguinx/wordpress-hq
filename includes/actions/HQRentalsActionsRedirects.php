@@ -21,18 +21,18 @@ class HQRentalsActionsRedirects{
         global $post;
         global $is_safari;
         if (!is_singular()) return;
-        if (!empty($post->post_content) and !($this->settings->homeIntegration()) and !($this->settings->getDisableSafariValue())) {
+        if (!empty($post->post_content) and !($this->settings->homeIntegration())) {
             $pattern = get_shortcode_regex();
             if (   preg_match_all( '/'. $pattern .'/s', $post->post_content, $matches )
                 && array_key_exists( 2, $matches )
                 && in_array( 'hq_rentals_reservations', $matches[2] )
-                and  $is_safari ){
+                and ($is_safari) ){
                 // redirect to third party site
                 $post_data = $_POST;
                 $brandID = $this->getBrandIDFromRegex($post->post_content, 'hq_rentals_reservations');
                 $brand = new HQRentalsModelsBrand();
                 $brand->findBySystemId($brandID);
-                if($this->noDNSRecordSetup($brand->publicReservationsFirstStepLink)){
+                if($this->applyRedirect($brand->publicReservationsFirstStepLink)){
                     $queryString = $brand->publicReservationsFirstStepLink;
                     try{
                         if ($post_data['pick_up_date']) {
@@ -83,5 +83,12 @@ class HQRentalsActionsRedirects{
             (strpos($url, 'hqrentals.eu') !== false) or
             (strpos($url, 'hqrentals.asia') !== false) or
             (strpos($url, 'hqrentals.app') !== false);
+    }
+    public function applyRedirect($url)
+    {
+        if($this->settings->getDisableSafariValue()){
+            return false;
+        }
+        return $this->noDNSRecordSetup($url);
     }
 }

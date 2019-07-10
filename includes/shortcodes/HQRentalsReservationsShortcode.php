@@ -22,6 +22,7 @@ class HQRentalsReservationsShortcode
 
     public function reservationsShortcode($atts = [])
     {
+        ob_start();
         $atts = shortcode_atts(
             array(
                 'id' => '1',
@@ -84,5 +85,8 @@ class HQRentalsReservationsShortcode
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
+        $content = ob_get_flush();
+        ob_end_clean();
+        echo $content;
     }
 }

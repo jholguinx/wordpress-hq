@@ -29,6 +29,7 @@ class HQRentalsReservationsShortcode
                 'new' => 'true',
             )
                 , $atts, 'hq_rentals_reservations');
+        ob_start();
         $post_data = $_POST;
         $post_data = $this->frontHelper->sanitizeTextInputs($post_data);
         $brand = new HQRentalsModelsBrand();
@@ -84,5 +85,8 @@ class HQRentalsReservationsShortcode
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
     }
 }

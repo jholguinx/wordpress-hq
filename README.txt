@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.2.1
 Requires PHP: 5.6.0
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Once you have created the A record on your domain you will receive an SSL error.
 
 == Changelog ==
 
+= 1.3.4 =
+Fix buffering
+
 = 1.3.3 =
 Fixes on README files
 
@@ -58,8 +61,8 @@ Safari option on plugin settings
 
 == Upgrade Notice ==
 
-= 1.3.2 =
-Remove buffer on shortcode
+= 1.3.4 =
+Fix buffering
 
 == Screenshots ==
 

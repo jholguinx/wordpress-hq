@@ -40,29 +40,23 @@ Once you have created the A record on your domain you will receive an SSL error.
 
 == Changelog ==
 
-= 1.2.5 =
-Fixes on price intervals.
+= 1.3.2 =
+Remove buffer on Reservation Shortcode
 
-= 1.2.6 =
-Setting added to disable sync.
+= 1.3.1 =
+Fixes on buffering
 
-= 1.2.7 =
-Fixes on README file.
+= 1.3.0 =
+Adding buffer handler on Reservation Shortcode, update assets
 
 = 1.2.9 =
 Tenant datetime format added to the front-end assets under the name of hqRentalsTenantDatetimeFormat.
 Safari option on plugin settings
 
-= 1.3.0 =
-Adding buffer handler on Reservation Shortcode, update assets
-
-= 1.3.1 =
-Fixes on buffering
-
 == Upgrade Notice ==
 
-= 1.3.1 =
-Fixes on buffering
+= 1.3.2 =
+Remove buffer on shortcode
 
 == Screenshots ==
 

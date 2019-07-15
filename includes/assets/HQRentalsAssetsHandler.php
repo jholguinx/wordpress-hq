@@ -20,7 +20,7 @@ class HQRentalsAssetsHandler
     protected $workspotLocationsDataName = 'hqWorkspotLocations';
     protected $workspotLocationDataForShortcodeName = 'hqWorkspotLocationsShortcodes';
     protected $tenantDatetimeFormatFrontName = 'hqRentalsTenantDatetimeFormat';
-    protected $pluginVersion = '1.3.1';
+    protected $pluginVersion = '1.3.2';
 
     public function __construct()
     {

@@ -85,6 +85,8 @@ class HQRentalsReservationsShortcode
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
-        return ob_end_clean();
+        $content = ob_get_flush();
+        ob_end_clean();
+        return $content;
     }
 }

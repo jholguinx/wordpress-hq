@@ -136,7 +136,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             $this->postArgs,
             array(
                 'meta_key'   =>  $this->metaOrder,
-                'orderby'    =>  'meta_value',
+                'orderby'    =>  'meta_value_num',
                 'order'      =>  'ASC',
             ),
             array(

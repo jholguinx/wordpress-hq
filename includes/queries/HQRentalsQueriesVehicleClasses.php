@@ -20,6 +20,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
 
     /***
      * Return all vehicles classes order by daily rate
+     * @param null $order
      * @return array
      */
     public function allVehicleClasses($order = null)

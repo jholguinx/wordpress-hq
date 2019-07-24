@@ -123,7 +123,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
             $this->postArg,
             array(
                 'order'     => 'ASC',
-                'orderby'   =>  'meta_value',
+                'orderby'   =>  'meta_value_num',
                 'meta_key'  =>  ( ! ( empty($order) ) ) ? $this->getOrderMetaForQuery($order) : $this->metaDailyRate
             )
         );

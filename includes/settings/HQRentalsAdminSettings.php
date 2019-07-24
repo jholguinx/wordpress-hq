@@ -61,34 +61,8 @@ class HQRentalsAdminSettings
                 <div id="wrap">
                     <h1>HQ Rentals Authentication Access</h1>
                     <div class="notice updated is-dismissible fw-brz-dismiss">
-                        <p style="font-size:14px; font-weight: bold;">
-                            Safari & Opera Browser
-                        </p>
-                        <p style="text-align: justify;">
-                            Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe has
-                            to
-                            be updated.
-                            You will need to add an A record in your DNS records where the value is the name of your
-                            tenant.
-
-                        </p>
-                        <p style="text-align: justify;">
-                            For example if your link is rentals.caagcrm.com the value for the A record has to be
-                            “rentals”
-                            and the IP address will be dependent on your installation:
-                        </p>
-                        <ul>
-                            <li>America: 45.79.176.147</li>
-                            <li>Europe: 45.77.139.237</li>
-                            <li>Asia: 139.162.35.27</li>
-                        </ul>
-                        <p style="text-align: justify;">
-                            Once you have created the A record please create a support ticket inside the HQ application
-                            so
-                            our team can proceed with the installation.
-                        </p>
-                        <button type="button" class="notice-dismiss"><span
-                                    class="screen-reader-text">Dismiss this notice.</span></button>
+                        <button type="button" class="notice-dismiss">
+                            <span class="screen-reader-text">Dismiss this notice.</span></button>
                     </div>
                     <form action="" method="post">
                         <table class="form-table">

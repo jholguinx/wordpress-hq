@@ -102,12 +102,14 @@ class HQRentalsAdminSettings
                                                spellcheck="true" autocomplete="off"></td>
                                 </tr>
                             <?php endif; ?>
-                            <tr>
+                            <?php //This comments were added for dev debug ?>
+                            <?php //Should be deleted in next releases ?>
+                            <!--<tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end
                                         Date Format</label></th>
                                 <td>
-                                    <select name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
-                                        <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
+                                    <select name="<?php //echo esc_attr($this->settings->front_end_datetime_format); ?>">
+                                        <?php //echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
                                     </select>
                                 </td>
                             </tr>
@@ -115,11 +117,11 @@ class HQRentalsAdminSettings
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select System
                                         Date Format</label></th>
                                 <td>
-                                    <select name="<?php echo $this->settings->hq_datetime_format; ?>">
-                                        <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
+                                    <select name="<?php //echo $this->settings->hq_datetime_format; ?>">
+                                        <?php //echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
                                     </select>
                                 </td>
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Support for
                                         minified response</label></th>

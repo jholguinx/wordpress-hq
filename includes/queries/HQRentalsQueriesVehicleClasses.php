@@ -25,12 +25,33 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function allVehicleClasses($order = null)
     {
+        /*
+         * By Default the vehicles classes should be order by price
+         * */
         $rates = $this->rateQuery->allActiveRates($order);
         $data = [];
         foreach ($rates as $rate){
             $data[] = $this->getVehicleClassBySystemId($rate->vehicleClassId);
         }
         return $data;
+    }
+
+    /**
+     * Retrieve classes by order
+     * @return array
+     */
+    public function allVehicleClassesByOrder()
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'order'     =>  'ASC',
+                'orderby'   =>  'meta_value_num',
+                'meta_key'  =>  $this->model->getOrderMetaKey(),
+            )
+        );
+        $query = new \WP_Query($args);
+        return $this->fillModelWithPosts($query->posts);
     }
 
     /**

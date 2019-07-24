@@ -461,5 +461,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $cheapestPost = $price->getCheapestPriceInterval($this->id);
         return new HQRentalsModelsPriceInterval($cheapestPost);
     }
+    public function getOrderMetaKey()
+    {
+        return $this->metaOrder;
+    }
 }
 

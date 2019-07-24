@@ -60,10 +60,6 @@ class HQRentalsAdminSettings
             <div class="wrap">
                 <div id="wrap">
                     <h1>HQ Rentals Authentication Access</h1>
-                    <div class="notice updated is-dismissible fw-brz-dismiss">
-                        <button type="button" class="notice-dismiss">
-                            <span class="screen-reader-text">Dismiss this notice.</span></button>
-                    </div>
                     <form action="" method="post">
                         <table class="form-table">
                             <tbody>

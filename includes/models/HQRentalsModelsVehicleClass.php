@@ -111,7 +111,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
      */
     public function setVehicleClassFromApi($data, $customFields = null)
     {
-        $this->id = $data->id;
+       
+        $this->id = $data->id;  
         $this->brandId = $data->brand_id;
         $this->name = $data->name;
         $this->order = $data->order;
@@ -135,6 +136,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $this->descriptions[$key] = $description;
             }
         }
+        
         if(!empty($data->images)){
             foreach ($data->images as $image) {
                 $newImage = new HQRentalsModelsVehicleClassImage();
@@ -142,14 +144,17 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $this->images[] = $newImage;
             }
         }
+        
         foreach ($data->features as $feature) {
             $newFeature = new HQRentalsModelsFeature();
             $newFeature->setFeatureFromApi($this->id, $feature);
             $this->features[] = $newFeature;
         }
+
         if (isset($data->active_rates[0])) {
+           
             $newRate = new HQRentalsModelsActiveRate();
-            $newRate->setActiveRateFromApi($data->active_rates[0]);
+            $newRate->setActiveRateFromApi($this->id,$data->active_rates[0]);
             $this->rate = $newRate;
         }
 
@@ -162,13 +167,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
         foreach (static::$custom_fields as $custom_field) {
             /*Minified Response*/
-            if($this->pluginSettings->getSupportForMinifiedResponse() == "true"){
                 $this->{$this->metaCustomField . $custom_field} = $data->allData->{$custom_field};
-            }else{
-                $this->{$this->metaCustomField . $custom_field} = $data->{$custom_field};
-            }
-
+           
         }
+
     }
 
     /*

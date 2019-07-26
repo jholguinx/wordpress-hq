@@ -31,6 +31,7 @@ class HQRentalsVehicleClassesTask{
 
 	protected function createVehicleClasses( $vehicleClasses, $customFields ) {
 		foreach ( $vehicleClasses as $vehicle_class ) {
+			
 			$newVehicleClass = new HQVehicleClass();
 			$newVehicleClass->setVehicleClassFromApi( $this->transformer->transformApiData($vehicle_class), $customFields );
 			$newVehicleClass->create();

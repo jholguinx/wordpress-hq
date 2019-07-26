@@ -49,12 +49,7 @@ class HQRentalsApiCallResolver{
         if(is_wp_error($response)){
             return new HQRentalsApiResponse($response->get_error_message(), false, null);
         }else{
-            if($this->settings->getSupportForMinifiedResponse() == "true"){
-                return new HQRentalsApiResponse(null, true, json_decode($response['body'])->data);
-            }else{
-                return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_vehicle_classes);
-            }
-
+            return new HQRentalsApiResponse(null, true, json_decode($response['body'])->data);
         }
     }
 

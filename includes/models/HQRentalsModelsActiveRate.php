@@ -59,7 +59,6 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
 
     public function setActiveRateFromApi($vehicle_class_id, $data)
     {
-        var_dump($data);
         $this->id = $data->id;
         $this->seasonId = $data->season_id;
         $this->baseRate = $data->base_rate;

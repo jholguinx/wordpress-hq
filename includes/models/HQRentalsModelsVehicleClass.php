@@ -159,7 +159,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
 
         if(!empty($data->active_rates[0]->price_intervals)){
-            foreach ($data->active_rates[0]->price_intervals as $price){
+            foreach ($data->active_rates[0]->price_intervals as $price){                
                 $newPrice = new HQRentalsModelsPriceInterval();
                 $newPrice->setIntervalRateFromApi($price, $this->id);
                 $this->priceIntervals[] = $newPrice;
@@ -461,7 +461,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         $price = new HQRentalsModelsPriceInterval();
         $cheapestPost = $price->getCheapestPriceInterval($this->id);
-        return new HQRentalsModelsPriceInterval($cheapestPost);
+        $interval = new HQRentalsModelsPriceInterval($cheapestPost);
+        return $interval;
     }
     public function getOrderMetaKey()
     {

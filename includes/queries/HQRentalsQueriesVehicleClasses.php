@@ -270,6 +270,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             )
         );
         $query = new \WP_Query($args);
+
         if (empty($query->posts)) {
             return array();
         } else {
@@ -277,11 +278,13 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         }
         foreach ($query->posts as $post) {
             $newClass = new HQRentalsModelsVehicleClass($post);
-            if ($cheapestPost->getCheapestPriceInterval()->getPriceAsANumber() < $newClass->getCheapestPriceInterval()->getPriceAsANumber()) {
+            if ($cheapestPost->getCheapestPriceInterval()->getPriceAsANumber() > $newClass->getCheapestPriceInterval()->getPriceAsANumber()) {
                 $cheapestPost = $newClass;
             }
         }
         return $cheapestPost;
+
+
     }
 
     public function getAllMetaKey()

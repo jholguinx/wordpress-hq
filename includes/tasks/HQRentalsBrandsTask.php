@@ -12,7 +12,8 @@ class HQRentalsBrandsTask{
 
 	public function refreshBrandsData()
     {
-		$this->createBrandsData();
+		$res = $this->createBrandsData();
+		return $res;
 	}
 
 	public function createBrandsData()
@@ -22,6 +23,7 @@ class HQRentalsBrandsTask{
 			$this->createBrands( $brands->data );
 			//$this->createAllBrandsForFrontEnd( $brands->data );
 		}
+		return $brands;
 	}
 
 	protected function createBrands( $brands )

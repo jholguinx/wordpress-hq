@@ -386,7 +386,13 @@ class HQRentalsSettings
     public function forceSyncOnHQData()
     {
         $schedule = new HQRentalsScheduler();
-        $schedule->refreshHQData();
-        $_POST['forcing_update'] = 'success';
+        $res = $schedule->refreshHQData();
+        if($res === true){
+            $_POST['forcing_update'] = 'success';
+        }else{
+            $_POST['forcing_update'] = $res;
+        }
+   
+   
     }
 }

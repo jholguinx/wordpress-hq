@@ -11,7 +11,8 @@ class HQRentalsAdditionalChargesTask{
 	}
 
 	public function refreshAdditionalChargesData() {
-		$this->createAdditionalChargesData();
+		$res = $this->createAdditionalChargesData();
+		return $res;
 	}
 
 	public function createAdditionalChargesData() {
@@ -20,6 +21,7 @@ class HQRentalsAdditionalChargesTask{
 			$this->createAdditionalCharges( $charges->data );
 			//$this->createAllAdditionalChargesForFrontend( $charges->data );
 		}
+		return $charges;
 	}
 
 	protected function createAdditionalCharges( $additionalCharges ) {

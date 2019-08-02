@@ -13,12 +13,14 @@ class HQRentalsVehicleClassesTask{
 	}
 
 	public function refreshVehicleClassesData() {
-		$this->createVehicleClassesData();
+		$res = $this->createVehicleClassesData();
+		return $res;
 	}
 
 	public function createVehicleClassesData() {
 		$vehicleClasses = $this->connector->getHQRentalsVehicleClasses();
 		$customFields   = $this->connector->getHQVehicleClassCustomFields();
+		// var_dump($customFields);
 		if ( $customFields->success ) {
 			foreach ( $customFields->data as $field ) {
 				HQVehicleClass::$custom_fields[] = $field->dbcolumn;
@@ -27,6 +29,7 @@ class HQRentalsVehicleClassesTask{
 		if ( $vehicleClasses->success and !empty($vehicleClasses->data)) {
 			$this->createVehicleClasses( $vehicleClasses->data, $customFields );
 		}
+		return $vehicleClasses;
 	}
 
 	protected function createVehicleClasses( $vehicleClasses, $customFields ) {

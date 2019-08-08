@@ -242,7 +242,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         }
         foreach ($query->posts as $post) {
             $newClass = new HQRentalsModelsVehicleClass($post);
-            if ($cheapestPost->rate()->getFormattedDailyRateAsNumber() < $newClass->rate()->getFormattedDailyRateAsNumber()) {
+            if ($cheapestPost->rate()->getFormattedDailyRateAsNumber() > $newClass->rate()->getFormattedDailyRateAsNumber()) {
                 $cheapestPost = $newClass;
             }
         }

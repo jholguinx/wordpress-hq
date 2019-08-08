@@ -50,7 +50,7 @@ class HQRentalsAdminSettings
                 </div>
             <?php elseif (isset($_POST['forcing_update']) && $_POST['forcing_update'] != 'success'): ?>
                 <div class="wrap">
-                    <div class="message updated"><p><?php echo $_POST['forcing_update']; ?></p></div>
+                    <div class="notice notice-error"><p><?php echo $_POST['forcing_update']; ?></p></div>
                 </div>
             <?php else: ?>
                 <div class="wrap">

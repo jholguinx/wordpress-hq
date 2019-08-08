@@ -35,8 +35,6 @@ class HQRentalsScheduler
 
     public function refreshHQData()
     {
-        //Should be some sort of validation -> return true is ok!!!
-        // we could add some try catch over here!!!
         try{
             global $wpdb;
             $site = get_site_url();
@@ -56,23 +54,23 @@ class HQRentalsScheduler
                $workspot = $this->workspot->refreshLocationsData();
             }
             
-            if($settings->success == false){
+            if(!$settings->success){
                 $message .=  $settings->errors. " \n";
                 throw new Exception($message); 
             }
-            if($brands->success == false){
+            if(!$brands->success){
                 $message .=  $brands->errors. " \n";
                 throw new Exception($message); 
             }
-            if($locations->success == false){
+            if(!$locations->success){
                 $message .=  $locations->errors. " \n";
                 throw new Exception($message); 
             }
-            if($addCharges->success == false){
+            if(!$addCharges->success){
                 $message .=  $addCharges->errors. " \n";
                 throw new Exception($message); 
             }
-            if($vehClasses->success == false){
+            if(!$vehClasses->success){
                 $message .=  $vehClasses->errors. " \n";
                 throw new Exception($message); 
             }
@@ -82,9 +80,7 @@ class HQRentalsScheduler
                     throw new Exception($message); 
                 }
             }
-
             return true;
-
         }catch(Exception $e){
             return $e->getMessage();
         }

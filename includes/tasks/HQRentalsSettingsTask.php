@@ -11,7 +11,8 @@ class HQRentalsSettingsTask{
     }
     public function refreshSettingsData()
     {
-        $this->syncSettingsData();
+        $res = $this->syncSettingsData();
+        return $res;
     }
     public function syncSettingsData()
     {
@@ -19,5 +20,6 @@ class HQRentalsSettingsTask{
         if($settings->success){
             $this->settings->saveTenantDatetimeOption($settings->data->date_format);
         }
+        return $settings;
     }
 }

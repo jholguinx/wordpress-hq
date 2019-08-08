@@ -13,7 +13,7 @@ class HQRentalsVehicleClassesTask{
 	}
 
 	public function refreshVehicleClassesData() {
-		$this->createVehicleClassesData();
+		return $this->createVehicleClassesData();
 	}
 
 	public function createVehicleClassesData() {
@@ -27,10 +27,12 @@ class HQRentalsVehicleClassesTask{
 		if ( $vehicleClasses->success and !empty($vehicleClasses->data)) {
 			$this->createVehicleClasses( $vehicleClasses->data, $customFields );
 		}
+		return $vehicleClasses;
 	}
 
 	protected function createVehicleClasses( $vehicleClasses, $customFields ) {
 		foreach ( $vehicleClasses as $vehicle_class ) {
+			
 			$newVehicleClass = new HQVehicleClass();
 			$newVehicleClass->setVehicleClassFromApi( $this->transformer->transformApiData($vehicle_class), $customFields );
 			$newVehicleClass->create();

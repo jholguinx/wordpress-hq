@@ -11,6 +11,11 @@ class HQRentalsApiCallResolver{
         $this->settings = new HQRentalsSettings();
     }
 
+    public function resolveErrorMessageFromResponse($wpResponse)
+    {
+        return $wpResponse['response']['code']." - ".$wpResponse['response']['message'];
+    }
+
     /**
      * Resolve Availability Data from API
      * @param $response
@@ -18,8 +23,8 @@ class HQRentalsApiCallResolver{
      */
     public function resolveApiCallAvailability($response)
     {
-        if(is_wp_error($response)){
-            return new HQRentalsApiResponse($response->get_error_message(), false, null);
+        if(!isset(json_decode($response['body'])->success)){
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         }else{
             return new HQRentalsApiResponse(null, true, json_decode($response['body']));
         }
@@ -32,8 +37,8 @@ class HQRentalsApiCallResolver{
      */
     public function resolveApiCallBrands($response)
     {
-        if(is_wp_error($response)){
-            return new HQRentalsApiResponse($response->get_error_message(), false, null);
+        if($response['response']['code'] != 200){
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         }else{
             return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_brands);
         }
@@ -46,15 +51,10 @@ class HQRentalsApiCallResolver{
      */
     public function resolveApiCallVehicleClasses($response)
     {
-        if(is_wp_error($response)){
-            return new HQRentalsApiResponse($response->get_error_message(), false, null);
+        if(!isset(json_decode($response['body'])->success)){
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         }else{
-            if($this->settings->getSupportForMinifiedResponse() == "true"){
-                return new HQRentalsApiResponse(null, true, json_decode($response['body'])->data);
-            }else{
-                return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_vehicle_classes);
-            }
-
+            return new HQRentalsApiResponse(null, true, json_decode($response['body'])->data);
         }
     }
 
@@ -65,8 +65,8 @@ class HQRentalsApiCallResolver{
      */
     public function resolveApiCallLocations( $response )
     {
-        if(is_wp_error($response)){
-            return new HQRentalsApiResponse($response->get_error_message(), false, null);
+        if($response['response']['code'] != 200){
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         }else{
             return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_locations);
         }
@@ -79,8 +79,8 @@ class HQRentalsApiCallResolver{
      */
     public function resolveApiCallAdditionalCharges( $response )
     {
-        if(is_wp_error($response)){
-            return new HQRentalsApiResponse($response->get_error_message(), false, null);
+        if($response['response']['code'] != 200){
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         }else{
             return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_additional_charges);
         }
@@ -93,8 +93,9 @@ class HQRentalsApiCallResolver{
      */
     public function resolverApiCallSystemAssets( $response )
     {
-        if(is_wp_error( $response )){
-            return new HQRentalsApiResponse( $response->get_error_message(), false, null );
+        if(!isset(json_decode($response['body'])->success)){
+            
+            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null );
         }else{
             return new HQRentalsApiResponse( null, true, json_decode( $response['body'] ) );
         }
@@ -106,9 +107,9 @@ class HQRentalsApiCallResolver{
      * @return HQRentalsApiResponse
      */
     public function resolveApiCallForCustomFields( $response )
-    {
-        if(is_wp_error( $response )){
-            return new HQRentalsApiResponse( $response->get_error_message(), false, null );
+    {   
+        if(!isset(json_decode($response['body'])->success)){
+            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null );
         }else{
             return new HQRentalsApiResponse( null, true, json_decode( $response['body'] )->data);
         }
@@ -121,8 +122,8 @@ class HQRentalsApiCallResolver{
      */
     public function resolveApiCallForWorkspotLocations( $response )
     {
-        if(is_wp_error( $response )){
-            return new HQRentalsApiResponse( $response->get_error_message(), false, null );
+        if(!isset(json_decode($response['body'])->success)){
+            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null );
         }else{
             return new HQRentalsApiResponse( null, true, json_decode( $response['body'] )->data);
         }
@@ -135,8 +136,8 @@ class HQRentalsApiCallResolver{
      */
     public function resolveApiCallForWorkspotLocationDetail( $response )
     {
-        if(is_wp_error( $response )){
-            return new HQRentalsApiResponse( $response->get_error_message(), false, null );
+        if(!isset(json_decode($response['body'])->success)){
+            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null );
         }else{
             return new HQRentalsApiResponse( null, true, json_decode( $response['body'] )->{'sheets-10'});
         }
@@ -148,8 +149,8 @@ class HQRentalsApiCallResolver{
      * @return HQRentalsApiResponse
      */
     public function resolveApiCallForGebouwLocation($response){
-        if(is_wp_error( $response )){
-            return new HQRentalsApiResponse( $response->get_error_message(), false, null );
+        if(!isset(json_decode($response['body'])->success)){
+            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null );
         }else{
             return new HQRentalsApiResponse( null, true, json_decode( $response['body'] )->data);
         }
@@ -161,8 +162,8 @@ class HQRentalsApiCallResolver{
      * @return HQRentalsApiResponse
      */
     public function resolveApiCallForGebouwUnits($response){
-        if(is_wp_error( $response )){
-            return new HQRentalsApiResponse( $response->get_error_message(), false, null );
+        if(!isset(json_decode($response['body'])->success)){
+            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null );
         }else{
             return new HQRentalsApiResponse( null, true, json_decode( $response['body'] )->data);
         }
@@ -170,8 +171,8 @@ class HQRentalsApiCallResolver{
 
     public function resolveApiCallTenantsSettings($response)
     {
-        if(is_wp_error( $response )){
-            return new HQRentalsApiResponse( $response->get_error_message(), false, null );
+        if(!isset(json_decode($response['body'])->success)){
+            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null );
         }else{
             return new HQRentalsApiResponse( null, true, json_decode( $response['body'] )->data);
         }

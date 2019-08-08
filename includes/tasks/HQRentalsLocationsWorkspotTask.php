@@ -16,8 +16,10 @@ class HQRentalsLocationsWorkspotTask{
 
     public function refreshLocationsData()
     {
-        $this->createWorkspotRegions();
-        $this->createWorkspotLocations();
+        $res = [];
+        $res[0] = $this->createWorkspotRegions();
+        $res[1] = $this->createWorkspotLocations();
+        return $res;
     }
     public function createWorkspotLocations()
     {
@@ -25,6 +27,8 @@ class HQRentalsLocationsWorkspotTask{
         if($locations->success and !empty($locations->data)){
             $this->createLocationsData( $locations->data );
         }
+        return $locations;
+
     }
     public function createLocationsData( $locations )
     {
@@ -34,6 +38,7 @@ class HQRentalsLocationsWorkspotTask{
             $newLocation->create();
         }
         $this->createLocationsDetails();
+        
     }
     public function createLocationsDetails()
     {
@@ -63,5 +68,7 @@ class HQRentalsLocationsWorkspotTask{
                 $newRegion->create();
             }
         }
+        return $regions;
+
     }
 }

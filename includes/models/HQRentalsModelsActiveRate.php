@@ -57,12 +57,12 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         }
     }
 
-    public function setActiveRateFromApi($data)
+    public function setActiveRateFromApi($vehicle_class_id, $data)
     {
         $this->id = $data->id;
         $this->seasonId = $data->season_id;
-        $this->vehicleClassId = $data->vehicle_class_id;
         $this->baseRate = $data->base_rate;
+        $this->vehicleClassId = $vehicle_class_id;
         $this->minuteRate = $data->minute_rate;
         $this->hourlyRate = $data->hourly_rate;
         $this->dailyRate = $data->daily_rate;
@@ -72,6 +72,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
 
     public function create()
     {
+
         //ojo si da problemas con esot
         $this->postArg = array_merge(
             $this->postArg,
@@ -193,7 +194,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
 
     public function getFormattedBaseRate()
     {
-        return number_format((float) $this->baseRate, 2, '.', '');
+        return number_format((float) $this->baseRate->amount, 2, '.', '');
     }
     public function getFormattedBaseRateAsNumber()
     {
@@ -201,7 +202,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedMinuteRate()
     {
-        return number_format((float) $this->minuteRate, 2, '.', '');
+        return number_format((float) $this->minuteRate->amount, 2, '.', '');
     }
     public function getFormattedMinuteRateAsNumber()
     {
@@ -209,22 +210,23 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedHourlyRate()
     {
-        return number_format((float) $this->hourlyRate, 2, '.', '');
+        return number_format((float) $this->hourlyRate->amount, 2, '.', '');
     }
     public function getFormattedHourlyRateAsNumber()
     {
         return (float)$this->getFormattedHourlyRate();
     }
     public function getFormattedDailyRate()
-    {
-        return number_format((float) $this->dailyRate, 2, '.', '');
+    {   
+        
+        return number_format((float) $this->dailyRate->amount, 2, '.', '');
     }
     public function getFormattedDailyRateAsNumber(){
         return (float)$this->getFormattedDailyRate();
     }
     public function getFormattedWeeklyRate()
     {
-        return number_format((float) $this->weeklyRate, 2, '.', '');
+        return number_format((float) $this->weeklyRate->amount, 2, '.', '');
     }
     public function getFormattedWeeklyRateAsNumber()
     {
@@ -232,7 +234,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedMonthlyRate()
     {
-        return number_format((float) $this->monthlyRate, 2, '.', '');
+        return number_format((float) $this->monthlyRate->amount, 2, '.', '');
     }
     public function getFormattedMonthlyRateAsNumber()
     {

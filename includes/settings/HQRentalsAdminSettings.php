@@ -48,6 +48,10 @@ class HQRentalsAdminSettings
                 <div class="wrap">
                     <div class="message updated"><p>All data was saved</p></div>
                 </div>
+            <?php elseif (isset($_POST['forcing_update']) && $_POST['forcing_update'] != 'success'): ?>
+                <div class="wrap">
+                    <div class="notice notice-error"><p><?php echo $_POST['forcing_update']; ?></p></div>
+                </div>
             <?php else: ?>
                 <div class="wrap">
                     <div class="message updated"><p>The was something wrong</p></div>
@@ -122,15 +126,15 @@ class HQRentalsAdminSettings
                                     </select>
                                 </td>
                             </tr>-->
-                            <tr>
+                            <!-- <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Support for
                                         minified response</label></th>
                                 <td>
                                     <input type="checkbox"
-                                           name="<?php echo $this->settings->support_for_minified_response_on_vehicle_classes; ?>"
-                                           value="true" <?php echo ($this->settings->getSupportForMinifiedResponse() === 'true') ? 'checked' : ''; ?>/>
+                                           name="<?php //echo $this->settings->support_for_minified_response_on_vehicle_classes; ?>"
+                                           value="true" <?php // echo ($this->settings->getSupportForMinifiedResponse() === 'true') ? 'checked' : ''; ?>/>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Support for home integration</label></th>
                                 <td>

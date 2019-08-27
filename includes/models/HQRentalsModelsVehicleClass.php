@@ -464,6 +464,23 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $interval = new HQRentalsModelsPriceInterval($cheapestPost);
         return $interval;
     }
+
+    /**
+     * @param boolean $cheapest Use to decide if user needs highest or lowest price interval for display.
+     * Default returns cheapest price interval.
+     */
+    public function getUsersPriceIntervalOption($cheapest = true)
+    {
+        $price = new HQRentalsModelsPriceInterval();
+        if($cheapest){
+            $post = $price->getCheapestPriceInterval($this->id);
+        }else{
+            $post = $price->getHighestPriceInterval($this->id);
+        }
+        $interval = new HQRentalsModelsPriceInterval($Post);
+        return $interval;
+    }
+
     public function getOrderMetaKey()
     {
         return $this->metaOrder;

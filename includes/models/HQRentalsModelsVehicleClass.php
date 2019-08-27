@@ -477,7 +477,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }else{
             $post = $price->getHighestPriceInterval($this->id);
         }
-        $interval = new HQRentalsModelsPriceInterval($Post);
+        $interval = new HQRentalsModelsPriceInterval($post);
         return $interval;
     }
 

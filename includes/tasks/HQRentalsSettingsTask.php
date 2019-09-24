@@ -11,8 +11,8 @@ class HQRentalsSettingsTask{
     }
     public function refreshSettingsData()
     {
-        $res = $this->syncSettingsData();
-        return $res;
+        $response = $this->syncSettingsData();
+        return $response;
     }
     public function syncSettingsData()
     {

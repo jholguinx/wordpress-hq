@@ -4,12 +4,13 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass as HQVehicleClass;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
-use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersVehicleClasses;
+use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersTransformersVehicleClasses;
 
 class HQRentalsVehicleClassesTask{
-	public function __construct() {
+
+    public function __construct() {
 		$this->connector = new Connector();
-		$this->transformer = new HQRentalsTransformersVehicleClasses();
+		$this->transformer = new HQRentalsTransformersTransformersVehicleClasses();
 	}
 
 	public function refreshVehicleClassesData() {
@@ -32,7 +33,6 @@ class HQRentalsVehicleClassesTask{
 
 	protected function createVehicleClasses( $vehicleClasses, $customFields ) {
 		foreach ( $vehicleClasses as $vehicle_class ) {
-			
 			$newVehicleClass = new HQVehicleClass();
 			$newVehicleClass->setVehicleClassFromApi( $this->transformer->transformApiData($vehicle_class), $customFields );
 			$newVehicleClass->create();

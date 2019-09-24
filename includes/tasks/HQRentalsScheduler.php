@@ -43,17 +43,17 @@ class HQRentalsScheduler
             $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like 'hq_wordpress%';");
             /*
              * Load data into WP
-             * */
+             */
             $message = "There was an error, please check the settings of your HQ Rental Software account. Error message: \n";
             $settings = $this->settingsTask->refreshSettingsData();
             $brands = $this->brandsTask->refreshBrandsData();
             $locations = $this->locationsTask->refreshLocationsData();
             $addCharges = $this->additionalChargesTask->refreshAdditionalChargesData();
-            $vehClasses = $this->vehicleClassesTask->refreshVehicleClassesData();
+            $vehicleClasses = $this->vehicleClassesTask->refreshVehicleClassesData();
             if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
                $workspot = $this->workspot->refreshLocationsData();
             }
-            
+            /*
             if(!$settings->success){
                 $message .=  $settings->errors. " \n";
                 throw new Exception($message); 
@@ -70,8 +70,8 @@ class HQRentalsScheduler
                 $message .=  $addCharges->errors. " \n";
                 throw new Exception($message); 
             }
-            if(!$vehClasses->success){
-                $message .=  $vehClasses->errors. " \n";
+            if(!$vehicleClasses->success){
+                $message .=  $vehicleClasses->errors. " \n";
                 throw new Exception($message); 
             }
             if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
@@ -79,7 +79,7 @@ class HQRentalsScheduler
                     $message .=  $workspot->errors. " \n";
                     throw new Exception($message); 
                 }
-            }
+            }*/
             return true;
         }catch(Exception $e){
             return $e->getMessage();

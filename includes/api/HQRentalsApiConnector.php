@@ -19,9 +19,6 @@ class HQRentalsApiConnector{
         $this->resolver = new HQRentalsApiCallResolver();
         $this->settings = new HQRentalsSettings();
     }
-
-
-
     public function getHQRentalsAvailability($data)
     {
         $response = wp_remote_get($this->endpoints->getAvailabilityEndpoint(), $this->configuration->getBasicApiConfiguration($data));

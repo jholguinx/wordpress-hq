@@ -34,4 +34,12 @@ class HQRentalsFrontHelper
         }
         return $data;
     }
+    public static function resolveFontAwesomeIcon($icon)
+    {
+        if((strpos($icon, 'fas fa') !== false) or (strpos($icon, 'fab fa') !== false)){
+            return $icon;
+        }else{
+            return 'fas fa-'. $icon;
+        }
+    }
 }

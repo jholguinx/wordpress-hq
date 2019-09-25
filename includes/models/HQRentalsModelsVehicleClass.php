@@ -235,15 +235,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         return $query->posts;
     }
 
-    public function set($data)
-    {
-        if ($this->filter->isPost($data)) {
-
-        } else {
-        }
-        //$metas =
-    }
-
     public function getAllMetaTags()
     {
         return [
@@ -254,10 +245,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'availableOnWebsite' => $this->metaAvailableOnWebsite,
             'publicImageLink' => $this->metaPublicImageLink,
         ];
-    }
-
-    public function getLabelsQueryArguments()
-    {
     }
 
     /**

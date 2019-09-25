@@ -113,12 +113,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
        
         $this->id = $data->id;  
-        $this->brandId = $data->brand_id;
+        $this->brandId = $data->brand->id;
         $this->name = $data->name;
         $this->order = $data->order;
-        $this->availableOnWebsite = $data->available_on_website;
-        $this->recommended = $data->recommended;
-        $this->active = $data->active;
         $this->publicImageLink = $data->public_image_link;
         if(!empty($data->label_for_website)){
             foreach ($data->label_for_website as $key => $label) {
@@ -151,15 +148,14 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             $this->features[] = $newFeature;
         }
 
-        if (isset($data->active_rates[0])) {
-           
+        if (!empty($data->activeRates)) {
             $newRate = new HQRentalsModelsActiveRate();
-            $newRate->setActiveRateFromApi($this->id,$data->active_rates[0]);
+            $newRate->setActiveRateFromApi($this->id, $data->activeRates);
             $this->rate = $newRate;
         }
 
-        if(!empty($data->active_rates[0]->price_intervals)){
-            foreach ($data->active_rates[0]->price_intervals as $price){                
+        if(!empty($data->activeRates->price_intervals)){
+            foreach ($data->activeRates->price_intervals as $price){
                 $newPrice = new HQRentalsModelsPriceInterval();
                 $newPrice->setIntervalRateFromApi($price, $this->id);
                 $this->priceIntervals[] = $newPrice;
@@ -167,8 +163,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
         foreach (static::$custom_fields as $custom_field) {
             /*Minified Response*/
-                $this->{$this->metaCustomField . $custom_field} = $data->allData->{$custom_field};
-           
+            $this->{$this->metaCustomField . $custom_field} = $data->allData->{$custom_field};
         }
 
     }

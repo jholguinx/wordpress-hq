@@ -4,7 +4,7 @@ namespace HQRentalsPlugin\HQRentalsTransformers;
 
 class HQRentalsTransformersLocations extends HQRentalsTransformersBase
 {
-    protected static $singleBrandProperties = [
+    protected static $singleLocationProperties = [
         'id',
         'name',
         'brand_id',
@@ -24,6 +24,6 @@ class HQRentalsTransformersLocations extends HQRentalsTransformersBase
     }
     public static function transformSingleLocation($location)
     {
-        return HQRentalsTransformersLocations::extractDataFromApiObject(HQRentalsTransformersLocations::$singleBrandProperties, $location);
+        return HQRentalsTransformersLocations::extractDataFromApiObject(HQRentalsTransformersLocations::$singleLocationProperties, $location);
     }
 }

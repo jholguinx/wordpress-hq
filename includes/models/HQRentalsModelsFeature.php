@@ -15,18 +15,14 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
      * Custom Post Metas
      */
 
-    protected $metaId = 'hq_wordpress_feature_id_meta';
     protected $metaVehicleClassId = 'hq_wordpress_feature_vehicle_id_meta';
     protected $metaLabel = 'hq_wordpress_feature_label_meta';
     protected $metaIcon = 'hq_wordpress_feature_icon_meta';
-    protected $metaOrder = 'hq_wordpress_feature_order_meta';
     //Labels per Languague
 
-    public $id = '';
     public $vehicleClassId = '';
     public $label = '';
     public $icon = '';
-    public $order = '';
     public $metaClassId = 'hq_wordpress_feature_vehicle_id_meta';
     public $postID = '';
     public $metaOrderKey = 'hq_wordpress_feature_order_meta';
@@ -46,11 +42,9 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
 
     public function setFeatureFromApi($vehicle_id, $data)
     {
-        $this->id = $data->id;
         $this->vehicleClassId = $vehicle_id;
-        $this->label = $data->label;
+        $this->label = $data->label_for_website;
         $this->icon = $data->icon;
-        $this->order = $data->order;
     }
 
     public function create()
@@ -64,11 +58,9 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
         );
         $post_id = wp_insert_post($this->postArgs);
         $this->post_id = $post_id;
-        hq_update_post_meta($post_id, $this->metaId, $this->id);
         hq_update_post_meta($post_id, $this->metaVehicleClassId, $this->vehicleClassId);
         hq_update_post_meta($post_id, $this->metaLabel, $this->label);
         hq_update_post_meta($post_id, $this->metaIcon, $this->icon);
-        hq_update_post_meta($post_id, $this->metaOrder, $this->order);
     }
 
     public function find($caag_id)
@@ -110,11 +102,9 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     public function getAllMetaTags()
     {
         return array(
-            'id' => $this->metaId,
             'vehicleClassId' => $this->metaVehicleClassId,
             'label' => $this->metaLabel,
             'icon' => $this->metaIcon,
-            'order' => $this->metaOrder,
         );
     }
 

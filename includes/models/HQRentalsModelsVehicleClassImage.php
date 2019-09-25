@@ -18,10 +18,7 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
     protected $metaVehicleClassId = 'hq_wordpress_vehicle_image_vehicle_class_id_meta';
     protected $metaFilename = 'hq_wordpress_vehicle_image_filename_meta';
     protected $metaExtension = 'hq_wordpress_vehicle_image_extension_meta';
-    protected $metaMime = 'hq_wordpress_vehicle_image_mime_meta';
-    protected $metaSize = 'hq_wordpress_vehicle_image_size_meta';
     protected $metaOrder = 'hq_wordpress_vehicle_image_order_meta';
-    protected $metaLabel = 'hq_wordpress_vehicle_image_label_meta';
     protected $metaPublicLink = 'hq_wordpress_vehicle_image_public_link_meta';
     protected $metaVehicleClassPostId = 'hq_wordpress_vehicle_image_vehicle_class_post_id_meta';
 
@@ -32,10 +29,6 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
     public $vehicleClassId = '';
     public $filename = '';
     public $extension = '';
-    public $mime = '';
-    public $size = '';
-    public $label = '';
-    public $order = '';
     public $publicLink = '';
     public $vehicleClassPostId = '';
 
@@ -59,10 +52,6 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         $this->vehicleClassId = $vehicleId;
         $this->filename = $data->filename;
         $this->extension = $data->extension;
-        $this->mime = $data->mime;
-        $this->size = $data->size;
-        $this->order = $data->order;
-        $this->label = $data->label;
         $this->publicLink = $data->public_link;
     }
 
@@ -81,10 +70,7 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaVehicleClassId, $this->vehicleClassId );
         hq_update_post_meta( $post_id, $this->metaFilename, $this->filename );
         hq_update_post_meta( $post_id, $this->metaExtension, $this->extension );
-        hq_update_post_meta( $post_id, $this->metaMime, $this->mime );
-        hq_update_post_meta( $post_id, $this->metaSize, $this->size );
         hq_update_post_meta( $post_id, $this->metaOrder, $this->order );
-        hq_update_post_meta( $post_id, $this->metaLabel, $this->label );
         hq_update_post_meta( $post_id, $this->metaPublicLink, $this->publicLink );
     }
 
@@ -148,10 +134,6 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
             'vehicleClassId'        =>  $this->vehicleClassId,
             'filename'              =>  $this->metaFilename,
             'extension'             =>  $this->metaExtension,
-            'mime'                  =>  $this->metaMime,
-            'size'                  =>  $this->metaSize,
-            'order'                 =>  $this->metaOrder,
-            'label'                 =>  $this->metaLabel,
             'publicLink'            =>  $this->metaPublicLink,
             'vehicleClassPostId'    =>  $this->metaVehicleClassPostId
         );

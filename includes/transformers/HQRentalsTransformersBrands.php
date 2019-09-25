@@ -8,25 +8,26 @@ class HQRentalsTransformersBrands extends HQRentalsTransformersBase
         'id',
         'name',
         'website_link',
+        'tax_label',
         'public_reservations_link_full',
         'public_packages_link_full',
-        'public_reservations_first_step_link',
-        'public_packages_first_step_link',
-        'public_reservation_packages_first_step_link',
-        'my_reservation_link',
-        'my_packages_reservation_link',
-        'public_calendar_link'
+        'public_reservations_link_first_step',
+        'public_packages_link_first_step',
+        'public_reservations_packages_link_first_step',
+        'my_reservations_link',
+        'my_package_reservations_link'
     ];
+
     public static function transformDataFromApi($apiData)
     {
-        return HQRentalsTransformersBrands::resolveArrayOfObjects($apiData, HQRentalsTransformersBrands::transformSingleBrand($data));
+        return HQRentalsTransformersBrands::resolveArrayOfObjects($apiData, function($apiSingleBrand){
+            return HQRentalsTransformersBrands::transformSingleBrand($apiSingleBrand);
+        });
     }
+
     public static function transformSingleBrand($apiBrand)
     {
-        $object = new \stdClass();
-        foreach (HQRentalsTransformersBrands::$singleBrandProperties as $property) {
-            return $object{$property} = HQRentalsTransformersBrands::resolveSingleAttribute($property);
-        }
-        return $object;
+        return HQRentalsTransformersBrands::extractDataFromApiObject(HQRentalsTransformersBrands::$singleBrandProperties, $apiBrand);
     }
+
 }

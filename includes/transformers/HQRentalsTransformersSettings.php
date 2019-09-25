@@ -4,11 +4,17 @@ namespace HQRentalsPlugin\HQRentalsTransformers;
 
 class HQRentalsTransformersSettings extends HQRentalsTransformersBase
 {
+    protected static $singleSettingsProperties = [
+        'date_format'
+    ];
+
     public static function transformDataFromApi($apiData)
     {
-        $dataToReturn = new \stdClass();
-        $dataToReturn->date_format = HQRentalsTransformersSettings::resolveSingleAttribute($apiData->date_format);
-        return $dataToReturn;
+        return HQRentalsTransformersSettings::transformSettings($apiData);
     }
-    pub
+
+    public static function transformSettings($apiSettings)
+    {
+        return HQRentalsTransformersSettings::extractDataFromApiObject(HQRentalsTransformersSettings::$singleSettingsProperties, $apiSettings);
+    }
 }

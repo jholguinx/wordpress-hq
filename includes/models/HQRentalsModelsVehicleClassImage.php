@@ -18,7 +18,6 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
     protected $metaVehicleClassId = 'hq_wordpress_vehicle_image_vehicle_class_id_meta';
     protected $metaFilename = 'hq_wordpress_vehicle_image_filename_meta';
     protected $metaExtension = 'hq_wordpress_vehicle_image_extension_meta';
-    protected $metaOrder = 'hq_wordpress_vehicle_image_order_meta';
     protected $metaPublicLink = 'hq_wordpress_vehicle_image_public_link_meta';
     protected $metaVehicleClassPostId = 'hq_wordpress_vehicle_image_vehicle_class_post_id_meta';
 
@@ -70,7 +69,6 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaVehicleClassId, $this->vehicleClassId );
         hq_update_post_meta( $post_id, $this->metaFilename, $this->filename );
         hq_update_post_meta( $post_id, $this->metaExtension, $this->extension );
-        hq_update_post_meta( $post_id, $this->metaOrder, $this->order );
         hq_update_post_meta( $post_id, $this->metaPublicLink, $this->publicLink );
     }
 
@@ -102,8 +100,6 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         $args = array_merge(
             $this->postArgs,
             array(
-                'meta_key'   =>  $this->metaOrder,
-                'orderby'    =>  'meta_value_num',
                 'meta_query'    =>  array(
                     array(
                         'key'       =>  $this->metaVehicleClassId,
@@ -144,6 +140,12 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
         }
     }
-
+    public function getImageWithSize($size = 500)
+    {
+        return $this->publicLink . '?size=' . $size;
+    }
+    public function getImagePublicLink(){
+        return $this->getImageWithSize(1000);
+    }
 
 }

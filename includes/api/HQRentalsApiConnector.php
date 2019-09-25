@@ -31,9 +31,7 @@ class HQRentalsApiConnector{
     }
     public function getHQRentalsVehicleClasses()
     {
-
         $response = wp_remote_get( $this->endpoints->getVehicleClassesApiEndpoint(), $this->configuration->getBasicApiConfiguration() );
-        
         return $this->resolver->resolveApiCallVehicleClasses( $response );
     }
     public function getHQRentalsLocations()

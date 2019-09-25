@@ -100,7 +100,6 @@ class HQRentalsApiCallResolver
     public function resolverApiCallSystemAssets($response)
     {
         if (!isset(json_decode($response['body'])->success)) {
-
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
             return new HQRentalsApiResponse(null, true, json_decode($response['body']));

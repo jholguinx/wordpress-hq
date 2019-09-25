@@ -4,6 +4,7 @@ namespace HQRentalsPlugin\HQRentalsApi;
 
 
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersLocations;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersTransformersVehicleClasses;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersSettings;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersBrands;
@@ -73,7 +74,7 @@ class HQRentalsApiCallResolver
         if ($response['response']['code'] != 200) {
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
-            return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_locations);
+            return new HQRentalsApiResponse(null, true, HQRentalsTransformersLocations::transformDataFromApi(json_decode($response['body'])->fleets_locations));
         }
     }
 

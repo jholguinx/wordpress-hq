@@ -1,6 +1,9 @@
 <?php
 get_header();
-$url = 'https://codex.wordpress.org/Plugin_API/Filter_Reference/template_include';
+$get_data = $_GET;
+$quote = $get_data['quote_id'];
+$forced_locale = $get_data['forced_locale'];
+$quote_brand_uuid = $get_data['quote_brand_uuid'];
 ?>
     <div class="hq-container">
         <div class="hq-iframe-wrapper">

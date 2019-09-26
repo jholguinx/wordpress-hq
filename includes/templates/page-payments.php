@@ -1,9 +1,11 @@
 <?php
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
+$settings = new HQRentalsSettings();
+$front = new HQRentalsFrontHelper();
 get_header();
 $get_data = $_GET;
-$quote = $get_data['quote_id'];
-$forced_locale = $get_data['forced_locale'];
-$quote_brand_uuid = $get_data['quote_brand_uuid'];
+$url = $front->resolveUrlOnPayments($settings->getTenantLink(),$get_data['payment_id']);
 ?>
     <div class="hq-container">
         <div class="hq-iframe-wrapper">

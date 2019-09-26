@@ -14,6 +14,7 @@ class HQRentalsActionsRedirects{
         $this->settings = new HQRentalsSettings();
         $this->dateHelper = new HQRentalsDatesHelper();
         add_action('template_redirect', array($this, 'safariRedirect') );
+        add_action('template_redirect', array($this, 'quotePageRedirect') );
     }
 
     public function safariRedirect()
@@ -90,5 +91,12 @@ class HQRentalsActionsRedirects{
             return false;
         }
         return $this->noDNSRecordSetup($url);
+    }
+    public function quotePageRedirect(){
+        if(is_page('quotes')){
+            $get_data = $_GET;
+
+
+        }
     }
 }

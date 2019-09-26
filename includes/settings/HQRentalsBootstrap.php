@@ -57,20 +57,29 @@ class HQRentalsBootstrap
 
     public function resolveDefaultPages()
     {
-        $page = get_page_by_title('Quote');
+        $page = get_page_by_title('Quotes');
+        $payments = get_page_by_title('Payments');
         if (empty($page)) {
-            $args = array(
-                'post_title' => 'Quote',
-                'post_type' => 'page',
-                'post_status' => 'publish'
-            );
-            $post_id = wp_insert_post($args);
-            if (is_wp_error($post_id)) {
-                $this->resolveDefaultPages();
-            } else {
-                update_post_meta($post_id, 'hq_wordpress_is_wordpress_page', '1' );
-            }
+            $this->resolvePageOnCreation('Quotes');
+        }
+        if(empty($payments)){
+            $this->resolvePageOnCreation('Payments');
         }
     }
+    public function resolvePageOnCreation($pageTitle)
+    {
+        $args = array(
+            'post_title' => $pageTitle,
+            'post_type' => 'page',
+            'post_status' => 'publish'
+        );
+        $post_id = wp_insert_post($args);
+        if (is_wp_error($post_id)) {
+            $this->resolvePageOnCreation($pageTitle);
+        } else {
+            update_post_meta($post_id, 'hq_wordpress_is_wordpress_page', '1' );
+        }
+    }
+
 
 }

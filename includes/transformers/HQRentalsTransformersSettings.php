@@ -5,7 +5,8 @@ namespace HQRentalsPlugin\HQRentalsTransformers;
 class HQRentalsTransformersSettings extends HQRentalsTransformersBase
 {
     protected static $singleSettingsProperties = [
-        'date_format'
+        'date_format',
+        'tenant_link'
     ];
 
     public static function transformDataFromApi($apiData)

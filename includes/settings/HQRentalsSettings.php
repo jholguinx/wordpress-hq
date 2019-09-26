@@ -24,7 +24,8 @@ class HQRentalsSettings
     public $new_auth_scheme = 'hq_wordpress_new_auth_scheme_enabled';
     public $hq_integration_on_home = 'hq_wordpress_home_integration_enabled';
     public $hq_disable_cronjob_option = 'hq_wordpress_disable_cronjob_option';
-        public $hq_tenant_datetime_format = 'hq_wordpress_tenant_datetime_format';
+    public $hq_tenant_datetime_format = 'hq_wordpress_tenant_datetime_format';
+    public $hq_tenant_link = 'hq_wordpress_tenant_link';
     public $hq_disable_safari_functionality = 'hq_disable_safari_functionality';
 
     public function __construct()
@@ -266,6 +267,12 @@ class HQRentalsSettings
     public function saveTenantDatetimeOption($data)
     {
         return update_option($this->hq_tenant_datetime_format, sanitize_text_field($data));
+    }
+    public function saveTenantLink($data){
+        return update_option($this->hq_tenant_link, sanitize_text_field($data));
+    }
+    public function getTenantLink(){
+        return get_option($this->hq_tenant_link, '');
     }
     public function saveDisableSafariOption($data)
     {

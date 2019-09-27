@@ -1,9 +1,6 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsApi;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiEndpoint;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConfiguration;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiResponse as ApiResponse;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
@@ -84,6 +81,4 @@ class HQRentalsApiConnector{
         $response = wp_remote_get( $this->endpoints->getTenantsSettingsEndpoint(), $this->configuration->getBasicApiConfiguration() );
         return $this->resolver->resolveApiCallTenantsSettings( $response );
     }
-
-
 }

@@ -107,6 +107,5 @@ class HQRentalsActionsRedirects{
                 exit;
             }
         }
-
     }
 }

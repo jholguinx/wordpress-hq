@@ -1,9 +1,9 @@
 <?php
+get_header();
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 $settings = new HQRentalsSettings();
 $front = new HQRentalsFrontHelper();
-get_header();
 $get_data = $_GET;
 $url = $front->resolveUrlOnPayments($settings->getTenantLink(),$get_data['payment_id']);
 ?>

@@ -1,7 +1,6 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
 
-use HQRentalsPlugin\HQRentalsModels\HQRentalsBaseModel;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
 
 class HQRentalsModelsBrand extends HQRentalsBaseModel{
@@ -207,13 +206,6 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     {
         $query = new \WP_Query($this->postArgs);
         return $query->posts;
-    }
-    public function set($data)
-    {
-        if($this->filter->isPost($data)){
-
-        }else{}
-        //$metas =
     }
     public function findBySystemId($hqBrandId)
     {

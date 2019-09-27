@@ -19,8 +19,8 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     protected $metaVehicleClassId = 'hq_wordpress_feature_vehicle_id_meta';
     protected $metaLabel = 'hq_wordpress_feature_label_meta';
     protected $metaIcon = 'hq_wordpress_feature_icon_meta';
-    //Labels per Languague
 
+    //Labels per Language
     public $vehicleClassId = '';
     public $label = '';
     public $icon = '';
@@ -53,8 +53,8 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
         $this->postArgs = array_merge(
             $this->postArgs,
             array(
-                'post_title' => $this->label,
-                'post_name' => $this->label
+                'post_title' => (empty($this->label) ? "Feature" : $this->label),
+                'post_name' => (empty($this->label) ? "Feature" : $this->label)
             )
         );
         $post_id = wp_insert_post($this->postArgs);

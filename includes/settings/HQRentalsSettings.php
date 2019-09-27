@@ -39,10 +39,20 @@ class HQRentalsSettings
      */
     public function getApiUserToken()
     {
+        $option = get_option($this->api_user_token);
         if ($this->newAuthSchemeEnabled()) {
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
+            if(!empty($option)){
+                return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
+            }else{
+                return '';
+            }
         } else {
-            return get_option($this->api_user_token);
+            if(!empty($option)){
+                return get_option($this->api_user_token);
+            }else{
+                return '';
+            }
+
         }
     }
 

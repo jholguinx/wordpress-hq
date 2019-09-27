@@ -207,9 +207,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             hq_update_post_meta($post_id, $this->metaCustomField . $custom_field, $this->{$this->metaCustomField . $custom_field});
         }
         if (!empty($this->rate)) {
-            foreach ($this->rate() as $rate){
+            foreach ($this->rate as $rate){
                 if($rate instanceof HQRentalsModelsActiveRate){
-                    $this->rate->create();
+                    $rate->create();
                 }
             }
         }

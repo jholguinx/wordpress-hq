@@ -154,11 +154,11 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
             $this->postArg,
             array(
                 'meta_query'    => array(
-                        array(
-                            'key'       => $this->metaVehicleIdClass,
-                            'value'     => $vehicleClassID,
-                            'compare'   => '='
-                        )
+                    array(
+                        'key'       => $this->metaVehicleIdClass,
+                        'value'     => $vehicleClassID,
+                        'compare'   => '='
+                    )
                 )
             )
         );
@@ -169,6 +169,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         if($getAllRates){
             $rates = [];
             $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
+            dd($query->posts);
             foreach ($query->posts as $ratePost){
                 $rates[] = new HQRentalsModelsActiveRate($ratePost);
             }

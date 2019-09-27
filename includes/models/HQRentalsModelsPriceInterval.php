@@ -107,14 +107,6 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
         return $query->posts;
     }
 
-    public function set($data)
-    {
-        if ($this->filter->isPost($data)) {
-
-        } else {
-        }
-        //$metas =
-    }
 
     /***
      * Maps Class Properties with Posts Metas

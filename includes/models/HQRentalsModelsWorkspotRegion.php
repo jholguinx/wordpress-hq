@@ -87,10 +87,6 @@ class HQRentalsModelsWorkspotRegion extends HQRentalsBaseModel
         $query = new \WP_Query($this->postArgs);
     }
 
-    public function first()
-    {
-        // TODO: Implement first() method.
-    }
 
     public function all()
     {

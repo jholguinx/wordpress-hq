@@ -399,7 +399,5 @@ class HQRentalsSettings
         }else{
             $_POST['forcing_update'] = $res;
         }
-   
-   
     }
 }

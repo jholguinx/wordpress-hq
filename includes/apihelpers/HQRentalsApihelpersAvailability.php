@@ -4,6 +4,7 @@ use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 
 
 class HQRentalsApihelpersAvailability{
+
     protected static $systemFormat = 'Y-m-d H:i';
 
     public function __construct()

@@ -10,7 +10,6 @@ class HQRentalsActionsRedirects{
 
     public function __construct()
     {
-
         $this->settings = new HQRentalsSettings();
         $this->dateHelper = new HQRentalsDatesHelper();
         add_action('template_redirect', array($this, 'safariRedirect') );

@@ -17,5 +17,6 @@ class HQRentalsTemplateHandler
         if (is_page('payments')) {
             load_template(__DIR__ . '/page-payments.php');
         }
+        return $defaultTemplate;
     }
 }

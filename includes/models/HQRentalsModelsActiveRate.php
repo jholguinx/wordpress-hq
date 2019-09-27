@@ -37,7 +37,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public $weeklyRate = '';
     public $monthlyRate = '';
 
-    public function __construct($vehicleClassID = null)
+    public function __construct($vehicleClassID = null, $allRates = null)
     {
         $this->post_id = '';
         $this->dataType = new HQRentalsDataFilter();
@@ -49,7 +49,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         if ($this->dataType->isPost($vehicleClassID)){
             $this->setFromPost($vehicleClassID);
         }else if(!empty($vehicleClassID)) {
-            $this->setFromVehicleClass($vehicleClassID);
+            $this->setFromVehicleClass($vehicleClassID, $allRates);
         }
     }
 
@@ -164,13 +164,23 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         );
     }
 
-    public function setFromVehicleClass($vehicleClassId)
+    public function setFromVehicleClass($vehicleClassId, $getAllRates = null)
     {
-        $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
-        $post = $query->posts[0];
-        foreach ($this->getAllMetaTag() as $property => $metakey) {
-            $this->{$property} = get_post_meta($post->ID, $metakey, true);
+        if($getAllRates){
+            $rates = [];
+            $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
+            foreach ($query->posts as $ratePost){
+                $rates[] = new HQRentalsModelsActiveRate($ratePost);
+            }
+            return $rates;
+        }else{
+            $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
+            $post = $query->posts[0];
+            foreach ($this->getAllMetaTag() as $property => $metakey) {
+                $this->{$property} = get_post_meta($post->ID, $metakey, true);
+            }
         }
+
     }
 
 

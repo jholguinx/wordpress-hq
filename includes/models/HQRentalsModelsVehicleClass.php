@@ -45,7 +45,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $descriptions = [];
     public $images = [];
     public $features = [];
-    public $rate = '';
+    public $rate = [];
     public $customField = [];
     public $permalink = '';
     public $priceIntervals = [];
@@ -143,10 +143,12 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             $newFeature->setFeatureFromApi($this->id, $feature);
             $this->features[] = $newFeature;
         }
-        if (!empty($data->activeRates[0])) {
-            $newRate = new HQRentalsModelsActiveRate();
-            $newRate->setActiveRateFromApi($this->id, $data->activeRates[0]);
-            $this->rate = $newRate;
+        if (!empty($data->activeRates)) {
+            foreach ($data->activeRates as $rate){
+                $newRate = new HQRentalsModelsActiveRate();
+                $newRate->setActiveRateFromApi($this->id, $rate);
+                $this->rate[] = $newRate;
+            }
         }
 
         if(!empty($data->activeRates->price_intervals)){
@@ -204,8 +206,12 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         foreach (static::$custom_fields as $custom_field) {
             hq_update_post_meta($post_id, $this->metaCustomField . $custom_field, $this->{$this->metaCustomField . $custom_field});
         }
-        if ($this->rate instanceof HQRentalsModelsActiveRate) {
-            $this->rate->create();
+        if (!empty($this->rate)) {
+            foreach ($this->rate() as $rate){
+                if($rate instanceof HQRentalsModelsActiveRate){
+                    $this->rate->create();
+                }
+            }
         }
         if(!empty($this->priceIntervals)){
             foreach ($this->priceIntervals as $price){
@@ -330,6 +336,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return new HQRentalsModelsActiveRate($this->id);
     }
+    public function rates()
+    {
+        return new HQRentalsModelsActiveRate($this->id, true);
+    }
 
     public function getPriceIntervals(){
         $prices = new HQRentalsModelsPriceInterval();
@@ -426,10 +436,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         return $interval;
     }
 
-    /**
-     * @param boolean $cheapest Use to decide if user needs highest or lowest price interval for display.
-     * Default returns cheapest price interval.
-     */
     public function getUsersPriceIntervalOption($cheapest = true)
     {
         $price = new HQRentalsModelsPriceInterval();

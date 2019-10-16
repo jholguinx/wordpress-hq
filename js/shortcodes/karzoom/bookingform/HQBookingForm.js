@@ -1,11 +1,42 @@
 import React, { PureComponent } from 'react';
-import Select from "./components/inputs/Select";
-import Map from './components/maps/Map'
+import Select from "../components/inputs/Select";
+import Map from '../components/maps/Map'
+import HQBookingController from "./controllers/HQBookingController";
+
 class HQBookingForm extends PureComponent{
     constructor(props){
         super(props);
+        this.controller = new HQBookingController();
+        this.state = {
+            suggestionInput: '',
+            brands:[],
+            makes: '',
+            vehicleClasses: '',
+            errors: '',
+            form: {
+                brand:{},
+                vehicleClass:{},
+                make:{},
+                pickupDate: '',
+                returnDate: ''
+            },
+            mapCenter:{
+                lat: -34.397,
+                lng: 150.644
+            }
+        }
     }
     componentDidMount(){
+        this.controller.componentInit(this);
+        this.controller.getLocation( (location) => {
+            console.log(location);
+        },
+            () => console.log('error')
+
+        );
+    }
+
+    OnChangeMapSuggestions(){
 
     }
 
@@ -25,17 +56,18 @@ class HQBookingForm extends PureComponent{
                                     <h2 className="ppb_title">{"Find Best Car &amp; Limousine"}</h2>
                                     <div className="page_tagline">{"From as low as $10 per day with limited\n" +
                                     "                                time offer discounts"}</div>
-                                    <form className="car_search_form" method="get"
-                                          action="http://themes.themegoods.com/grandcarrental/demo/car-list-right-sidebar/">
+                                    <form className="car_search_form" method="get" >
                                         <div className="car_search_wrapper">
-                                            <div className="one_fourth themeborder">
+                                            <div className="one themeborder">
                                                 <Select
-                                                    id="test"
-                                                    name="test"
-                                                    options={[]}
+                                                    id="hq-brands"
+                                                    name="brands"
+                                                    placeholder="Select Brands"
+                                                    options={this.state.brands}
+                                                    labelProperty="name"
                                                 />
                                             </div>
-                                            <div className="one_fourth themeborder">
+                                            <div className="one themeborder">
                                                 <Select
                                                     id="test"
                                                     name="test"
@@ -59,12 +91,14 @@ class HQBookingForm extends PureComponent{
                         </div>
                     </div>
                 </div>
-                <div className="one_half">
-
-                    <Map
-                        defaultZoom={8}
-                        defaultCenter={{ lat: -34.397, lng: 150.644 }}
-                    />
+                <div className="one_half map-wrapper">
+                    <div className="hq-map-wrapper">
+                        <Map
+                            defaultZoom={8}
+                            zoom={8}
+                            defaultCenter={this.mapCenter}
+                        />
+                    </div>
                 </div>
             </div>
 

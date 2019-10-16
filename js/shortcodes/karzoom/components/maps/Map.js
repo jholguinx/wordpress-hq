@@ -11,19 +11,24 @@ export class MapContainer extends Component {
     onInfoWindowClose(){
         console.log('testdasdsad');
     }
+    renderMarkers() {
+        this.props.markers.map(marker =>
+            <Marker
+                onPressMarker={this.onPressMarker}
+            />
+        );
+    }
+    onPressMarker(marker){
+        this.props.onPressMarker(marker);
+    }
     render() {
         return (
             <Map
                 google={this.props.google}
-                zoom={14}
+                zoom={this.props.zoom}
+                mapCenter={this.props.mapCenter}
             >
-                <Marker onClick={this.onMarkerClick}
-                        name={'Current location'} />
-                <InfoWindow onClose={this.onInfoWindowClose}>
-                    <div>
-                        <h1>{"dasdsa"}</h1>
-                    </div>
-                </InfoWindow>
+                {this.renderMarkers}
             </Map>
         );
     }

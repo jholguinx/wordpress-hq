@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import HQBookingForm from "./HQBookingForm";
+import HQBookingForm from "./bookingform/HQBookingForm";
 /*
  *  Components
  */

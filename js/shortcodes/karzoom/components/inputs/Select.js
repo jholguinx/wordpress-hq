@@ -5,12 +5,12 @@ class Select extends PureComponent{
         super(props);
     }
     renderOptions() {
-        return this.props.options.map(option => <option value={option.value}>{option.label}</option>);
+        return this.props.options.map((option,  index) => <option key={index} value={option.value}>{option[this.props.labelProperty]}</option>);
     }
     render(){
         return(
             <div>
-                <select id={this.props.id} name={this.props.name}>
+                <select id={this.props.id} name={this.props.name} placeholder={this.props.placeholder} className="hq-inputs-select">
                     {this.renderOptions()}
                 </select>
                 <span className="ti-angle-down" />

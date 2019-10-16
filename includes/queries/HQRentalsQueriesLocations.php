@@ -60,5 +60,14 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
         }
         return $data;
     }
+    public function getLocationsForBrandsFrontEnd($brandId){
+        $location = $this->getLocationsByBrand($brandId);
+        return array_map(function($location){
+            $newObject= new \stdClass();
+            $newObject->id = $location->id;
+            $newObject->name = $location->name;
+            return $newObject;
+        }, $location);
+    }
 
 }

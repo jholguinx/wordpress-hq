@@ -49,6 +49,7 @@ class HQRentalsAssetsHandler
         wp_register_script( 'hq-submit-script', plugin_dir_url(__FILE__) . 'js/hq-submit.js', array(), $this->pluginVersion, true);
         wp_register_script( 'hq-dummy-script', plugin_dir_url(__FILE__) . 'js/hq-dummy.js', array(), $this->pluginVersion, true);
         wp_register_script( 'hq-workspot-sc-script', plugin_dir_url(__FILE__) . 'js/hq-workspot-map-shortcode.js', array(), $this->pluginVersion, true);
+        wp_register_script( 'hq-karzoom-form-script', plugin_dir_url(__FILE__) . 'js/hq-karzoom-booking-form.js', array(), $this->pluginVersion, true);
         wp_enqueue_script('hq-dummy-script');
     }
     public function getIframeResizerAssets()
@@ -89,5 +90,9 @@ class HQRentalsAssetsHandler
         if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
             wp_localize_script('hq-dummy-script', $this->workspotLocationsDataName, $this->workspotQuery->getLocationsToFrontEnd());
         }
+    }
+    public function loadKarzoomFormAssets()
+    {
+        wp_enqueue_script("hq-karzoom-form-script");
     }
 }

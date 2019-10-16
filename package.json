@@ -1,0 +1,39 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.6.3",
+        "axios": "^0.19",
+        "cross-env": "^5.1",
+        "html-react-parser": "^0.7.0",
+        "laravel-mix": "^4.0.7",
+        "lodash": "^4.17.13",
+        "prop-types": "^15.7.2",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-google-recaptcha": "^1.0.5",
+        "react-html-parser": "^2.0.2",
+        "react-recaptcha": "^2.3.10",
+        "react-redux": "^6.0.1",
+        "react-router-dom": "^4.3.1",
+        "react-visibility-sensor": "^5.0.2",
+        "redux": "^4.0.1",
+        "redux-thunk": "^2.3.0",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.15.2",
+        "sass-loader": "^7.1.0",
+        "tippy.js": "^4.3.0"
+    },
+    "dependencies": {
+        "google-maps-react": "^2.0.2",
+        "react-google-maps": "^9.4.5"
+    }
+}

@@ -41,7 +41,7 @@ class HQRentalsAdminBrandsPosts
                 echo '[hq_rentals_vehicle_calendar id=' . $currentBrand->id . ']';
                 break;
             default:
-                return '';
+                echo '';
         }
     }
 }

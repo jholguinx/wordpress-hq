@@ -21,7 +21,6 @@ class HQRentalsBrandsTask{
 		$brands = $this->connector->getHQRentalsBrands();
 		if ( $brands->success and !empty($brands->data)) {
 			$this->createBrands( $brands->data );
-			//$this->createAllBrandsForFrontEnd( $brands->data );
 		}
 		return $brands;
 	}

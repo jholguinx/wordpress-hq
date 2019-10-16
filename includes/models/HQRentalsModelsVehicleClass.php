@@ -25,8 +25,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     protected $metaName = 'hq_wordpress_vehicle_class_name_meta';
     protected $metaOrder = 'hq_wordpress_vehicle_class_order_meta';
     protected $metaAvailableOnWebsite = 'hq_wordpress_vehicle_class_available_on_website_meta';
-    protected $metaRecommended = 'hq_wordpress_vehicle_class_recommended_meta';
-    protected $metaActive = 'hq_wordpress_vehicle_class_active_meta';
     protected $metaPublicImageLink = 'hq_wordpress_vehicle_class_public_image_link_meta';
     protected $metaLabelForWebsite = 'hq_wordpress_vehicle_class_label_for_website_meta';
     protected $metashortDescriptionForWebiste = 'hq_wordpress_vehicle_class_short_description_meta';
@@ -41,15 +39,13 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $name = '';
     public $order = '';
     public $availableOnWebsite = '';
-    public $recommended = '';
-    public $active = '';
     public $publicImageLink = '';
     public $labels = [];
     public $shortDescriptions = [];
     public $descriptions = [];
     public $images = [];
     public $features = [];
-    public $rate = '';
+    public $rate = [];
     public $customField = [];
     public $permalink = '';
     public $priceIntervals = [];
@@ -113,12 +109,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
        
         $this->id = $data->id;  
-        $this->brandId = $data->brand_id;
+        $this->brandId = $data->brand->id;
         $this->name = $data->name;
         $this->order = $data->order;
-        $this->availableOnWebsite = $data->available_on_website;
-        $this->recommended = $data->recommended;
-        $this->active = $data->active;
         $this->publicImageLink = $data->public_image_link;
         if(!empty($data->label_for_website)){
             foreach ($data->label_for_website as $key => $label) {
@@ -150,16 +143,16 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             $newFeature->setFeatureFromApi($this->id, $feature);
             $this->features[] = $newFeature;
         }
-
-        if (isset($data->active_rates[0])) {
-           
-            $newRate = new HQRentalsModelsActiveRate();
-            $newRate->setActiveRateFromApi($this->id,$data->active_rates[0]);
-            $this->rate = $newRate;
+        if (!empty($data->activeRates)) {
+            foreach ($data->activeRates as $rate){
+                $newRate = new HQRentalsModelsActiveRate();
+                $newRate->setActiveRateFromApi($this->id, $rate);
+                $this->rate[] = $newRate;
+            }
         }
 
-        if(!empty($data->active_rates[0]->price_intervals)){
-            foreach ($data->active_rates[0]->price_intervals as $price){                
+        if(!empty($data->activeRates->price_intervals)){
+            foreach ($data->activeRates->price_intervals as $price){
                 $newPrice = new HQRentalsModelsPriceInterval();
                 $newPrice->setIntervalRateFromApi($price, $this->id);
                 $this->priceIntervals[] = $newPrice;
@@ -167,8 +160,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
         foreach (static::$custom_fields as $custom_field) {
             /*Minified Response*/
-                $this->{$this->metaCustomField . $custom_field} = $data->allData->{$custom_field};
-           
+            $this->{$this->metaCustomField . $custom_field} = $data->allData->{$custom_field};
         }
 
     }
@@ -194,8 +186,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaName, $this->name);
         hq_update_post_meta($post_id, $this->metaOrder, $this->order);
         hq_update_post_meta($post_id, $this->metaAvailableOnWebsite, $this->availableOnWebsite);
-        hq_update_post_meta($post_id, $this->metaRecommended, $this->recommended);
-        hq_update_post_meta($post_id, $this->metaActive, $this->active);
+
         hq_update_post_meta($post_id, $this->metaPublicImageLink, $this->publicImageLink);
         foreach ($this->labels as $key => $value) {
             hq_update_post_meta($post_id, $this->metaLabelForWebsite . '_' . $key, $value);
@@ -215,8 +206,12 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         foreach (static::$custom_fields as $custom_field) {
             hq_update_post_meta($post_id, $this->metaCustomField . $custom_field, $this->{$this->metaCustomField . $custom_field});
         }
-        if ($this->rate instanceof HQRentalsModelsActiveRate) {
-            $this->rate->create();
+        if (!empty($this->rate)) {
+            foreach ($this->rate as $rate){
+                if($rate instanceof HQRentalsModelsActiveRate){
+                    $rate->create();
+                }
+            }
         }
         if(!empty($this->priceIntervals)){
             foreach ($this->priceIntervals as $price){
@@ -242,30 +237,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 
     public function all()
     {
-        $args = array_merge(
-            $this->postArgs,
-            array(
-                'meta_query'    =>  array(
-                    array(
-                        'key'     => $this->metaActive,
-                        'value'   => '1',
-                        'compare' => '='
-                    )
-                )
-            )
-        );
-        $query = new \WP_Query($args);
-
+        $query = new \WP_Query($this->postArgs);
         return $query->posts;
-    }
-
-    public function set($data)
-    {
-        if ($this->filter->isPost($data)) {
-
-        } else {
-        }
-        //$metas =
     }
 
     public function getAllMetaTags()
@@ -276,14 +249,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'name' => $this->metaName,
             'order' => $this->metaOrder,
             'availableOnWebsite' => $this->metaAvailableOnWebsite,
-            'recommended' => $this->metaRecommended,
-            'active' => $this->metaActive,
             'publicImageLink' => $this->metaPublicImageLink,
         ];
-    }
-
-    public function getLabelsQueryArguments()
-    {
     }
 
     /**
@@ -368,6 +335,11 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function rate()
     {
         return new HQRentalsModelsActiveRate($this->id);
+    }
+    public function rates()
+    {
+        $rateModel = new HQRentalsModelsActiveRate();
+        return $rateModel->allRatesFromVehicleClass($this->id);
     }
 
     public function getPriceIntervals(){
@@ -465,10 +437,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         return $interval;
     }
 
-    /**
-     * @param boolean $cheapest Use to decide if user needs highest or lowest price interval for display.
-     * Default returns cheapest price interval.
-     */
     public function getUsersPriceIntervalOption($cheapest = true)
     {
         $price = new HQRentalsModelsPriceInterval();

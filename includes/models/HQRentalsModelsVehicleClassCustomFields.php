@@ -60,9 +60,7 @@ class HQRentalsModelsVehicleClassCustomFields extends HQRentalsBaseModel
 		// TODO: Implement find() method.
 	}
 
-	protected function first() {
-		// TODO: Implement first() method.
-	}
+
 
 	protected function all() {
 		// TODO: Implement all() method.

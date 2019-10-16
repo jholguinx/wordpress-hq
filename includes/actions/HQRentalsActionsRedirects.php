@@ -5,15 +5,15 @@ use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
-use mysql_xdevapi\Exception;
 
 class HQRentalsActionsRedirects{
+
     public function __construct()
     {
-
         $this->settings = new HQRentalsSettings();
         $this->dateHelper = new HQRentalsDatesHelper();
         add_action('template_redirect', array($this, 'safariRedirect') );
+        add_action('template_redirect', array($this, 'pageRedirect') );
     }
 
     public function safariRedirect()
@@ -69,7 +69,7 @@ class HQRentalsActionsRedirects{
     public function getBrandIDFromRegex($postContent, $shortcode )
     {
         /*
-         * This can fail if the client has more thant 10 brands
+         * This can fail if the client has more than 10 brands
          * */
         preg_match_all('/\['. $shortcode .' id=(.*?)\]/', $postContent, $matches);
         $fullShortcode = $matches[0][0];
@@ -90,5 +90,21 @@ class HQRentalsActionsRedirects{
             return false;
         }
         return $this->noDNSRecordSetup($url);
+    }
+    public function pageRedirect()
+    {
+        $get_data = $_GET;
+        if(is_page('quotes')){
+            if(empty($get_data['quote_id'])){
+                wp_redirect('home');
+                exit;
+            }
+        }
+        if(is_page('payments')){
+            if(empty($get_data['payment_id'])){
+                wp_redirect('home');
+                exit;
+            }
+        }
     }
 }

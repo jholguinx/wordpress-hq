@@ -28,12 +28,8 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         /*
          * By Default the vehicles classes should be order by price
          * */
-        $rates = $this->rateQuery->allActiveRates($order);
         $data = [];
-        foreach ($rates as $rate){
-            $data[] = $this->getVehicleClassBySystemId($rate->vehicleClassId);
-        }
-        return $data;
+        return $this->allVehicleClassesByOrder();
     }
 
     /**

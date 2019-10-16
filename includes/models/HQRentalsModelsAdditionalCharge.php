@@ -18,7 +18,6 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     protected $metaChargeType = 'hq_wordpress_additional_charge_charge_type_meta';
     protected $metaMandatoryBrands = 'hq_wordpress_additional_charge_mandatory_brands_meta';
     protected $metaSelectionType = 'hq_wordpress_additional_charge_selection_type_meta';
-    protected $metaHardcoded = 'hq_wordpress_additional_charge_hardcoded_meta';
     protected $metaRecommended = 'hq_wordpress_additional_charge_recommended_meta';
     protected $metaDescription = 'hq_wordpress_additional_charge_description_meta';
     protected $metaIcon = 'hq_wordpress_additional_charge_icon_meta';
@@ -36,7 +35,6 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     public $chargeType = '';
     public $mandatoryBrands = [  ];
     public $selectionType = '';
-    public $hardcoded = '';
     public $recommended = '';
     public $descriptions = [ ];
     public $icon = '';

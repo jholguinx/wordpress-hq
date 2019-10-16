@@ -25,6 +25,7 @@ class HQRentalsSettings
     public $hq_integration_on_home = 'hq_wordpress_home_integration_enabled';
     public $hq_disable_cronjob_option = 'hq_wordpress_disable_cronjob_option';
     public $hq_tenant_datetime_format = 'hq_wordpress_tenant_datetime_format';
+    public $hq_tenant_link = 'hq_wordpress_tenant_link';
     public $hq_disable_safari_functionality = 'hq_disable_safari_functionality';
 
     public function __construct()
@@ -38,10 +39,20 @@ class HQRentalsSettings
      */
     public function getApiUserToken()
     {
+        $option = get_option($this->api_user_token);
         if ($this->newAuthSchemeEnabled()) {
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
+            if(!empty($option)){
+                return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
+            }else{
+                return '';
+            }
         } else {
-            return get_option($this->api_user_token);
+            if(!empty($option)){
+                return get_option($this->api_user_token);
+            }else{
+                return '';
+            }
+
         }
     }
 
@@ -267,6 +278,12 @@ class HQRentalsSettings
     {
         return update_option($this->hq_tenant_datetime_format, sanitize_text_field($data));
     }
+    public function saveTenantLink($data){
+        return update_option($this->hq_tenant_link, sanitize_text_field($data));
+    }
+    public function getTenantLink(){
+        return get_option($this->hq_tenant_link, '');
+    }
     public function saveDisableSafariOption($data)
     {
         return update_option($this->hq_disable_safari_functionality, sanitize_text_field($data));
@@ -392,7 +409,5 @@ class HQRentalsSettings
         }else{
             $_POST['forcing_update'] = $res;
         }
-   
-   
     }
 }

@@ -87,26 +87,12 @@ class HQRentalsModelsWorkspotRegion extends HQRentalsBaseModel
         $query = new \WP_Query($this->postArgs);
     }
 
-    public function first()
-    {
-        // TODO: Implement first() method.
-    }
 
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
         return $query->posts;
     }
-
-    public function set($data)
-    {
-        if ($this->filter->isPost($data)) {
-
-        } else {
-        }
-        //$metas =
-    }
-
     public function setFromPost($post)
     {
         foreach ($this->getAllMetaTags() as $property => $metakey) {

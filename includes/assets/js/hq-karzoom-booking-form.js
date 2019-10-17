@@ -123,8 +123,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/inputs/Select */ "./js/shortcodes/karzoom/components/inputs/Select.js");
-/* harmony import */ var _components_maps_Map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/maps/Map */ "./js/shortcodes/karzoom/components/maps/Map.js");
-/* harmony import */ var _controllers_HQBookingController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controllers/HQBookingController */ "./js/shortcodes/karzoom/bookingform/controllers/HQBookingController.js");
+/* harmony import */ var _components_inputs_TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/inputs/TextInput */ "./js/shortcodes/karzoom/components/inputs/TextInput.js");
+/* harmony import */ var _components_inputs_TextInput__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_inputs_TextInput__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_maps_Map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/maps/Map */ "./js/shortcodes/karzoom/components/maps/Map.js");
+/* harmony import */ var _controllers_HQBookingController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./controllers/HQBookingController */ "./js/shortcodes/karzoom/bookingform/controllers/HQBookingController.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -148,6 +150,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var HQBookingForm =
 /*#__PURE__*/
 function (_PureComponent) {
@@ -159,7 +162,7 @@ function (_PureComponent) {
     _classCallCheck(this, HQBookingForm);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HQBookingForm).call(this, props));
-    _this.controller = new _controllers_HQBookingController__WEBPACK_IMPORTED_MODULE_3__["default"]();
+    _this.controller = new _controllers_HQBookingController__WEBPACK_IMPORTED_MODULE_4__["default"]();
     _this.state = {
       suggestionInput: '',
       brands: [],
@@ -174,8 +177,8 @@ function (_PureComponent) {
         returnDate: ''
       },
       mapCenter: {
-        lat: -34.397,
-        lng: 150.644
+        lat: 52.2550356,
+        lng: -1.3115472
       }
     };
     return _this;
@@ -190,6 +193,11 @@ function (_PureComponent) {
       }, function () {
         return console.log('error');
       });
+    }
+  }, {
+    key: "onChangeBrand",
+    value: function onChangeBrand(event) {
+      console.log(event.target.value);
     }
   }, {
     key: "OnChangeMapSuggestions",
@@ -230,16 +238,11 @@ function (_PureComponent) {
         name: "brands",
         placeholder: "Select Brands",
         options: this.state.brands,
-        labelProperty: "name"
+        labelProperty: "name",
+        onChange: this.onChangeBrand.bind(this)
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one themeborder"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        id: "test",
-        name: "test",
-        options: []
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one_fourth themeborder"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_TextInput__WEBPACK_IMPORTED_MODULE_2___default.a, {
         id: "test",
         name: "test",
         options: []
@@ -254,10 +257,11 @@ function (_PureComponent) {
         className: "one_half map-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hq-map-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_maps_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_maps_Map__WEBPACK_IMPORTED_MODULE_3__["default"], {
         defaultZoom: 8,
         zoom: 8,
-        defaultCenter: this.mapCenter
+        defaultCenter: this.state.mapCenter,
+        mapCenter: this.state.mapCenter
       }))));
     }
   }]);
@@ -405,7 +409,8 @@ function (_PureComponent) {
         id: this.props.id,
         name: this.props.name,
         placeholder: this.props.placeholder,
-        className: "hq-inputs-select"
+        className: "hq-inputs-select",
+        onChange: this.props.onChange
       }, this.renderOptions()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "ti-angle-down"
       }));
@@ -416,6 +421,17 @@ function (_PureComponent) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Select);
+
+/***/ }),
+
+/***/ "./js/shortcodes/karzoom/components/inputs/TextInput.js":
+/*!**************************************************************!*\
+  !*** ./js/shortcodes/karzoom/components/inputs/TextInput.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\js\\shortcodes\\karzoom\\components\\inputs\\TextInput.js: Support for the experimental syntax 'classProperties' isn't currently enabled (21:14):\n\n\u001b[0m \u001b[90m 19 | \u001b[39m    }\u001b[0m\n\u001b[0m \u001b[90m 20 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 21 | \u001b[39m    onChange \u001b[33m=\u001b[39m (event\u001b[33m,\u001b[39m { newValue }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 22 | \u001b[39m        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39msetState({\u001b[0m\n\u001b[0m \u001b[90m 23 | \u001b[39m            value\u001b[33m:\u001b[39m newValue\u001b[0m\n\u001b[0m \u001b[90m 24 | \u001b[39m        })\u001b[33m;\u001b[39m\u001b[0m\n\nAdd @babel/plugin-proposal-class-properties (https://git.io/vb4SL) to the 'plugins' section of your Babel config to enable transformation.\n    at Object.raise (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:6420:17)\n    at Object.expectPlugin (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:7778:18)\n    at Object.parseClassProperty (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:11013:12)\n    at Object.pushClassProperty (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10978:30)\n    at Object.parseClassMemberWithIsStatic (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10917:14)\n    at Object.parseClassMember (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10851:10)\n    at withTopicForbiddingContext (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10806:14)\n    at Object.withTopicForbiddingContext (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:9884:14)\n    at Object.parseClassBody (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10783:10)\n    at Object.parseClass (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10757:22)\n    at Object.parseStatementContent (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10051:21)\n    at Object.parseStatement (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10009:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10585:25)\n    at Object.parseBlockBody (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:10572:10)\n    at Object.parseTopLevel (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:9940:10)\n    at Object.parse (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:11447:17)\n    at parse (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\parser\\lib\\index.js:11483:38)\n    at parser (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:168:34)\n    at normalizeFile (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:102:11)\n    at runSync (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\core\\lib\\transformation\\index.js:44:43)\n    at runAsync (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\core\\lib\\transformation\\index.js:35:14)\n    at process.nextTick (C:\\laragon\\www\\karzoom\\wp-content\\plugins\\hq-wordpress\\node_modules\\@babel\\core\\lib\\transform.js:34:34)\n    at process._tickCallback (internal/process/next_tick.js:61:11)");
 
 /***/ }),
 

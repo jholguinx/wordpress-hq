@@ -10,7 +10,13 @@ class Select extends PureComponent{
     render(){
         return(
             <div>
-                <select id={this.props.id} name={this.props.name} placeholder={this.props.placeholder} className="hq-inputs-select">
+                <select
+                    id={this.props.id}
+                    name={this.props.name}
+                    placeholder={this.props.placeholder}
+                    className="hq-inputs-select"
+                    onChange={this.props.onChange}
+                >
                     {this.renderOptions()}
                 </select>
                 <span className="ti-angle-down" />

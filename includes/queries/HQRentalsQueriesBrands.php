@@ -58,6 +58,10 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
             return $this->brandPublicInterface($brand);
         }, $brands);
     }
+    public function singleBrandPublicInterface($brandId){
+        $brand = $this->getBrand($brandId);
+        return $this->brandPublicInterface($brand);
+    }
     public function brandPublicInterface($brand)
     {
         $queryLocation = new HQRentalsQueriesLocations();
@@ -68,8 +72,32 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
             'locations' => array(
                 'property_name' => 'locations',
                 'values' => $queryLocation->getLocationsForBrandsFrontEnd($brand->id)
+            ),
+            'makes' => array(
+                'property_name' => 'makes',
+                'values' => 'dadas'
+            ),
+            'vehicleClasses' => array(
+                'property_name' => 'classes',
+                'values' => 'classes'
             )
         ), $brand);
     }
-
+    public function getBrand($brandId){
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->model->metaBrandId,
+                        'value' => $brandId,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        $brand = new HQRentalsModelsBrand($query->posts[0]);
+        return $brand;
+    }
 }

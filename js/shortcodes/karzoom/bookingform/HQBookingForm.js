@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Select from "../components/inputs/Select";
+import TextInput from '../components/inputs/TextInput';
 import Map from '../components/maps/Map'
 import HQBookingController from "./controllers/HQBookingController";
 
@@ -21,8 +22,8 @@ class HQBookingForm extends PureComponent{
                 returnDate: ''
             },
             mapCenter:{
-                lat: -34.397,
-                lng: 150.644
+                lat: 52.2550356,
+                lng: -1.3115472
             }
         }
     }
@@ -34,6 +35,9 @@ class HQBookingForm extends PureComponent{
             () => console.log('error')
 
         );
+    }
+    onChangeBrand(event){
+        console.log(event.target.value);
     }
 
     OnChangeMapSuggestions(){
@@ -65,17 +69,11 @@ class HQBookingForm extends PureComponent{
                                                     placeholder="Select Brands"
                                                     options={this.state.brands}
                                                     labelProperty="name"
+                                                    onChange={this.onChangeBrand.bind(this)}
                                                 />
                                             </div>
                                             <div className="one themeborder">
-                                                <Select
-                                                    id="test"
-                                                    name="test"
-                                                    options={[]}
-                                                />
-                                            </div>
-                                            <div className="one_fourth themeborder">
-                                                <Select
+                                                <TextInput
                                                     id="test"
                                                     name="test"
                                                     options={[]}
@@ -96,7 +94,8 @@ class HQBookingForm extends PureComponent{
                         <Map
                             defaultZoom={8}
                             zoom={8}
-                            defaultCenter={this.mapCenter}
+                            defaultCenter={this.state.mapCenter}
+                            mapCenter={this.state.mapCenter}
                         />
                     </div>
                 </div>

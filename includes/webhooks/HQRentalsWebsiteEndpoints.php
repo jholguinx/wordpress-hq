@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\Webhooks;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
+use mysql_xdevapi\Exception;
 
 class HQRentalsWebsiteEndpoints{
 
@@ -15,11 +16,35 @@ class HQRentalsWebsiteEndpoints{
             'methods' => 'GET',
             'callback' => array ($this, 'brands'),
         ));
+        register_rest_route( 'hqrentals', '/brand/', array(
+            'methods' => 'GET',
+            'callback' => array ($this, 'brand'),
+        ));
+    }
+    public function brand()
+    {
+        $id = $_GET['id'];
+        try {
+            if (empty($id)) {
+                return $this->resolveResponse("Brand id Empty", false);
+            } else {
+                $query = new HQRentalsQueriesBrands();
+                return $this->resolveResponse($query->singleBrandPublicInterface($id), true);
+            }
+        } catch (Exception $e){
+            return $this->resolveResponse($e, false);
+        }
+
     }
     public function brands(){
-        $query = new HQRentalsQueriesBrands();
-        $brands = $query->brandsPublicInterface();
-        return $this->resolveResponse($brands, true);
+        try{
+            $query = new HQRentalsQueriesBrands();
+            $brands = $query->brandsPublicInterface();
+            return $this->resolveResponse($brands, true);
+        }catch (Exception $e){
+            return $this->resolveResponse($e, false);
+        }
+
     }
     public function resolveResponse($data, $status){
         if(! empty($data) and $status){
@@ -28,7 +53,7 @@ class HQRentalsWebsiteEndpoints{
             return $response;
         }else{
             $response = new \WP_REST_Response($this->resolveResponseData([]), false);
-            $response->status = 500;
+            $response->status = 404;
             return $response;
         }
     }

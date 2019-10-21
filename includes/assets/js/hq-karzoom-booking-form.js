@@ -198,22 +198,27 @@ function (_PureComponent) {
       });
     }
   }, {
-    key: "onChangeBrand",
-    value: function onChangeBrand(event) {
-      console.log(event.target.value);
+    key: "onChangeSuggestionInput",
+    value: function onChangeSuggestionInput(value) {
+      this.controller.onChangeSuggestion(value, this);
     }
   }, {
-    key: "onChangeSuggestionInput",
-    value: function onChangeSuggestionInput(event) {
-      var target = event.target;
+    key: "onClickOnSuggestion",
+    value: function onClickOnSuggestion(suggestion) {
+      this.controller.centerMapOnSuggestionSelection(suggestion, this);
+    }
+  }, {
+    key: "clearSuggestions",
+    value: function clearSuggestions() {
       this.setState({
-        suggestionInput: target.value
+        suggestions: []
       });
-      this.controller.onChangeSuggestion(target.value, this);
-    } //style="padding-top: 150px !important;text-align:center;height:800px;background-image:url(http://themes.themegoods.com/grandcarrental/demo/wp-content/uploads/2017/01/IMG_3496bfree.jpg);background-position: center center;color:#ffffff;"
-    //style="color: #fff"
-    //style="background:#000000;background:rgb(0,0,0,0.2);background:rgba(0,0,0,0.2);"
-
+    }
+  }, {
+    key: "onSelectLocationOnMap",
+    value: function onSelectLocationOnMap(location) {
+      this.controller.onSelectLocationOnMap(location, this);
+    }
   }, {
     key: "render",
     value: function render() {
@@ -241,7 +246,7 @@ function (_PureComponent) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "car_search_wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder"
+        className: "one themeborder hq-input-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_SuggestionInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
         id: "hq-user-location",
         name: "user-location",
@@ -249,22 +254,17 @@ function (_PureComponent) {
         suggestions: this.state.suggestions,
         labelProperty: "name",
         onChangeInput: this.onChangeSuggestionInput.bind(this),
-        value: this.state.suggestionInput
+        value: this.state.suggestionInput,
+        onClickSuggestion: this.onClickOnSuggestion.bind(this),
+        clearSuggestions: this.clearSuggestions.bind(this)
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder"
+        className: "one themeborder hq-input-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        id: "hq-brands",
-        name: "brands",
-        placeholder: "Select Brands",
-        options: this.state.brands,
-        labelProperty: "name",
-        onChange: this.onChangeBrand.bind(this)
+        options: this.state.makes
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        id: "test",
-        name: "test",
-        options: []
+        className: "one themeborder hq-input-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        options: this.state.vehicleClasses
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one_fourth last themeborder"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -280,7 +280,8 @@ function (_PureComponent) {
         zoom: 15,
         initialCenter: this.state.mapCenter,
         mapCenter: this.state.mapCenter,
-        locations: this.state.locations
+        locations: this.state.locations,
+        onPressMarker: this.onSelectLocationOnMap.bind(this)
       }))));
     }
   }]);
@@ -304,6 +305,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_api_ApiConnector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers/api/ApiConnector */ "./js/shortcodes/karzoom/helpers/api/ApiConnector.js");
 /* harmony import */ var _helpers_api_ApiConfigurationManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/api/ApiConfigurationManager */ "./js/shortcodes/karzoom/helpers/api/ApiConfigurationManager.js");
 /* harmony import */ var _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers/api/Parser */ "./js/shortcodes/karzoom/helpers/api/Parser.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -347,20 +354,24 @@ function () {
   }, {
     key: "onChangeSuggestion",
     value: function onChangeSuggestion(value, app) {
-      this.connector.makeRequest(this.config.getPlacesConfig(value), function (response) {
-        if (response.data) {
-          app.setState({
-            suggestions: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseSuggestions(response.data)
-          });
-        } //THIS should be removed when cors issue is gone
-
-
-        app.setState({
-          suggestions: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseSuggestions(response.data)
-        });
-      }, function (error) {
-        console.log(error, 'error');
+      app.setState({
+        suggestions: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseSuggestions()
       });
+      /*
+      this.connector.makeRequest(
+          this.config.getPlacesConfig(value),
+              response => {
+              if(response.data){
+                     app.setState({ suggestions: Parser.parseSuggestions(response.data) })
+              }
+                  //THIS should be removed when cors issue is gone
+                  app.setState({ suggestions: Parser.parseSuggestions(response.data) })
+              },
+              error => {
+                  console.log(error, 'error');
+                  app.setState({ suggestions: Parser.parseSuggestions(error.data) })
+              }
+      );*/
     }
   }, {
     key: "getLocation",
@@ -370,6 +381,31 @@ function () {
       } else {
         failedCallback();
       }
+    }
+  }, {
+    key: "centerMapOnSuggestionSelection",
+    value: function centerMapOnSuggestionSelection(suggestion, app) {
+      /*
+      this.connector.makeRequest(
+          this.config.getPlaceDetails(suggestion),
+          response => {
+              app.setState({ mapCenter: Parser.parsePlaceDetails(response.data) });
+          },
+          error => {
+            }
+      );*/
+      app.setState({
+        mapCenter: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parsePlaceDetails()
+      });
+    }
+  }, {
+    key: "onSelectLocationOnMap",
+    value: function onSelectLocationOnMap(location, app) {
+      app.setState({
+        form: _objectSpread({}, app.state.form, {
+          brand: location.brand_id
+        })
+      });
     }
   }]);
 
@@ -443,9 +479,7 @@ function (_PureComponent) {
         placeholder: this.props.placeholder,
         className: "hq-inputs-select",
         onChange: this.props.onChange
-      }, this.renderOptions()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "ti-angle-down"
-      }));
+      }, this.renderOptions()));
     }
   }]);
 
@@ -475,6 +509,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -491,15 +527,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
 var SuggestionInput =
 /*#__PURE__*/
-function (_PureComponent) {
-  _inherits(SuggestionInput, _PureComponent);
+function (_Component) {
+  _inherits(SuggestionInput, _Component);
 
   function SuggestionInput(props) {
     var _this;
@@ -507,13 +541,6 @@ function (_PureComponent) {
     _classCallCheck(this, SuggestionInput);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SuggestionInput).call(this, props));
-
-    _defineProperty(_assertThisInitialized(_this), "onSuggestionsClearRequested", function () {
-      _this.setState({
-        suggestions: []
-      });
-    });
-
     _this.state = {
       inputProps: {
         placeholder: '',
@@ -543,36 +570,72 @@ function (_PureComponent) {
     key: "onSuggestionsFetchRequested",
     value: function onSuggestionsFetchRequested(_ref) {
       var value = _ref.value;
+      return value;
+    }
+  }, {
+    key: "onSuggestionsClearRequested",
+    // Autosuggest will call this function every time you need to clear suggestions.
+    value: function onSuggestionsClearRequested() {
+      this.props.clearSuggestions();
     }
   }, {
     key: "onChange",
     value: function onChange(event) {
-      this.props.onChangeInput(event);
+      if (event.target.value) {
+        this.setState({
+          inputProps: _objectSpread({}, this.state.inputProps, {
+            value: event.target.value
+          })
+        });
+        this.props.onChangeInput(event.target.value);
+      }
     }
   }, {
     key: "getSuggestionValue",
-    value: function getSuggestionValue() {}
+    value: function getSuggestionValue(suggestion) {
+      return suggestion.description;
+    }
+  }, {
+    key: "shouldRenderSuggestions",
+    value: function shouldRenderSuggestions(value) {
+      if (value) {
+        return value.trim().length > 2;
+      }
+    }
   }, {
     key: "renderSuggestion",
-    value: function renderSuggestion(suggestion) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, suggestion.description));
+    value: function renderSuggestion(suggestion, _ref2) {
+      var query = _ref2.query,
+          isHighlighted = _ref2.isHighlighted;
+
+      if (suggestion) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, suggestion.description));
+      }
+    }
+  }, {
+    key: "onSuggestionSelected",
+    value: function onSuggestionSelected(event, _ref3) {
+      var suggestion = _ref3.suggestion;
+      this.props.onClickSuggestion(suggestion);
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        suggestions: this.props.suggestions,
         onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this),
         onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this),
         getSuggestionValue: this.getSuggestionValue.bind(this),
         renderSuggestion: this.renderSuggestion.bind(this),
-        inputProps: this.state.inputProps
+        onSuggestionSelected: this.onSuggestionSelected.bind(this),
+        shouldRenderSuggestions: this.shouldRenderSuggestions.bind(this),
+        inputProps: this.state.inputProps,
+        suggestions: this.props.suggestions
       });
     }
   }]);
 
   return SuggestionInput;
-}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (SuggestionInput);
 
@@ -725,7 +788,7 @@ function (_Component) {
         if (location.coordinates.lng && location.coordinates.lat) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
             key: index,
-            onClick: _this.onPressMarker,
+            onClick: _this.onPressMarker.bind(_this, location),
             position: location.coordinates
           });
         }
@@ -733,7 +796,7 @@ function (_Component) {
     }
   }, {
     key: "onPressMarker",
-    value: function onPressMarker(marker) {
+    value: function onPressMarker(marker, location) {
       this.props.onPressMarker(marker);
     }
   }, {
@@ -901,6 +964,20 @@ function () {
         }
       };
     }
+  }, {
+    key: "getPlaceDetails",
+    value: function getPlaceDetails(place) {
+      return {
+        url: this.endpoints.getGooglePlaceDetailEndpoint(),
+        params: _objectSpread({}, this.placesDefaultConfig, {
+          place_id: place.place_id
+        }),
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+    }
   }]);
 
   return ApiConfigurationManager;
@@ -1057,6 +1134,11 @@ function () {
     value: function getGoogleAutocompleteEndpoint() {
       return 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     }
+  }, {
+    key: "getGooglePlaceDetailEndpoint",
+    value: function getGooglePlaceDetailEndpoint() {
+      return 'https://maps.googleapis.com/maps/api/place/details/json';
+    }
   }]);
 
   return ApiEndpointHandler;
@@ -1119,11 +1201,13 @@ function () {
     value: function parseLocation(location) {
       var id = location.id,
           name = location.name,
-          coordinates = location.coordinates;
+          coordinates = location.coordinates,
+          brand_id = location.brand_id;
       return {
         id: id,
         name: name,
-        coordinates: Parser.parseCoordinate(coordinates)
+        coordinates: Parser.parseCoordinate(coordinates),
+        brand_id: brand_id
       };
     }
   }, {
@@ -1196,6 +1280,31 @@ function () {
     key: "parseProperty",
     value: function parseProperty(prop) {
       return prop ? prop : '';
+    }
+    /*
+    static parsePlaceDetails(googlePlace){
+        const {
+            geometry
+        } = googlePlace;
+        const {
+            location
+        } = geometry;
+        return {
+            location: Parser.parseCoordinate(location)
+        }
+    }*/
+
+  }, {
+    key: "parsePlaceDetails",
+    value: function parsePlaceDetails(googlePlace) {
+      var geometry = googlePlace.geometry;
+      var location = geometry.location;
+      return {
+        location: {
+          lat: 10.5011604802915,
+          lng: -66.78293951970849
+        }
+      };
     }
   }]);
 

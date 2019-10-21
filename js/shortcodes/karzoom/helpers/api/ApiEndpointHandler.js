@@ -19,6 +19,9 @@ class ApiEndpointHandler{
     getGoogleAutocompleteEndpoint(){
         return 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     }
+    getGooglePlaceDetailEndpoint(){
+        return 'https://maps.googleapis.com/maps/api/place/details/json';
+    }
 
 }
 export default ApiEndpointHandler;

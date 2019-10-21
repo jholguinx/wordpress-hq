@@ -172,7 +172,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     {
         return array(
             'id'            =>  $this->metaId,
-            'brandId'       =>  $this->brandId,
+            'brandId'       =>  $this->metaBrandId,
             'name'          =>  $this->metaName,
             'isAirport'     =>  $this->metaAirport,
             'isOffice'      =>  $this->metaOffice,
@@ -184,5 +184,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public function getMetaKeyFromBrandID()
     {
         return $this->metaBrandId;
+    }
+    public function getBrandId(){
+        return $this->brandId;
     }
 }

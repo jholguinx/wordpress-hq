@@ -26,12 +26,14 @@ class Parser {
         const {
             id,
             name,
-            coordinates
+            coordinates,
+            brand_id
         } = location;
         return {
             id: id,
             name: name,
-            coordinates: Parser.parseCoordinate(coordinates)
+            coordinates: Parser.parseCoordinate(coordinates),
+            brand_id: brand_id
         }
     }
 
@@ -109,5 +111,32 @@ class Parser {
     static parseProperty(prop) {
         return (prop) ? prop : '';
     }
+    /*
+    static parsePlaceDetails(googlePlace){
+        const {
+            geometry
+        } = googlePlace;
+        const {
+            location
+        } = geometry;
+        return {
+            location: Parser.parseCoordinate(location)
+        }
+    }*/
+    static parsePlaceDetails(googlePlace){
+        const {
+            geometry
+        } = googlePlace;
+        const {
+            location
+        } = geometry;
+        return {
+            location: {
+                lat: 10.5011604802915,
+                lng: -66.78293951970849
+            }
+        }
+    }
 }
+
 export default Parser

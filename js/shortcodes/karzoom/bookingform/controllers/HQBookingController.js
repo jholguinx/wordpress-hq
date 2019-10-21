@@ -26,6 +26,8 @@ class HQBookingController{
         )
     }
     onChangeSuggestion(value, app){
+        app.setState({ suggestions: Parser.parseSuggestions() });
+        /*
         this.connector.makeRequest(
             this.config.getPlacesConfig(value),
                 response => {
@@ -37,8 +39,9 @@ class HQBookingController{
                 },
                 error => {
                     console.log(error, 'error');
+                    app.setState({ suggestions: Parser.parseSuggestions(error.data) })
                 }
-        );
+        );*/
     }
     getLocation( successCallback, failedCallback) {
         if (navigator.geolocation) {
@@ -46,6 +49,27 @@ class HQBookingController{
         }else{
             failedCallback();
         }
+    }
+    centerMapOnSuggestionSelection(suggestion, app){
+        /*
+        this.connector.makeRequest(
+            this.config.getPlaceDetails(suggestion),
+            response => {
+                app.setState({ mapCenter: Parser.parsePlaceDetails(response.data) });
+            },
+            error => {
+
+            }
+        );*/
+        app.setState({ mapCenter: Parser.parsePlaceDetails() });
+    }
+    onSelectLocationOnMap(location, app){
+        app.setState({
+            form: {
+                ...app.state.form,
+                brand: location.brand_id
+            }
+        });
     }
 }
 export default HQBookingController;

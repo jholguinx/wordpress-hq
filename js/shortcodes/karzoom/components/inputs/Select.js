@@ -19,7 +19,6 @@ class Select extends PureComponent{
                 >
                     {this.renderOptions()}
                 </select>
-                <span className="ti-angle-down" />
             </div>
 
         );

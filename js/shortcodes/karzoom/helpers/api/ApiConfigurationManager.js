@@ -41,6 +41,19 @@ class ApiConfigurationManager {
             }
         }
     }
+    getPlaceDetails(place){
+        return {
+            url: this.endpoints.getGooglePlaceDetailEndpoint(),
+            params: {
+                ...this.placesDefaultConfig,
+                place_id: place.place_id
+            },
+            method: 'get',
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        }
+    }
 
 }
 

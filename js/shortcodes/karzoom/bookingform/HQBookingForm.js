@@ -39,22 +39,18 @@ class HQBookingForm extends PureComponent{
 
         );
     }
-    onChangeBrand(event){
-        console.log(event.target.value);
+    onChangeSuggestionInput(value){
+        this.controller.onChangeSuggestion(value, this);
     }
-
-    onChangeSuggestionInput(event){
-        const {
-            target
-        } = event;
-        this.setState({ suggestionInput: target.value });
-        this.controller.onChangeSuggestion(target.value, this);
+    onClickOnSuggestion(suggestion){
+        this.controller.centerMapOnSuggestionSelection(suggestion, this);
     }
-
-    //style="padding-top: 150px !important;text-align:center;height:800px;background-image:url(http://themes.themegoods.com/grandcarrental/demo/wp-content/uploads/2017/01/IMG_3496bfree.jpg);background-position: center center;color:#ffffff;"
-
-    //style="color: #fff"
-    //style="background:#000000;background:rgb(0,0,0,0.2);background:rgba(0,0,0,0.2);"
+    clearSuggestions(){
+        this.setState({ suggestions: [] });
+    }
+    onSelectLocationOnMap(location){
+        this.controller.onSelectLocationOnMap(location, this);
+    }
     render(){
         return(
             <div className="one">
@@ -69,7 +65,7 @@ class HQBookingForm extends PureComponent{
                                     "                                time offer discounts"}</div>
                                     <form className="car_search_form" method="get" >
                                         <div className="car_search_wrapper">
-                                            <div className="one themeborder">
+                                            <div className="one themeborder hq-input-wrapper">
                                                 <SuggestionInput
                                                     id="hq-user-location"
                                                     name="user-location"
@@ -78,23 +74,18 @@ class HQBookingForm extends PureComponent{
                                                     labelProperty="name"
                                                     onChangeInput={this.onChangeSuggestionInput.bind(this)}
                                                     value={this.state.suggestionInput}
+                                                    onClickSuggestion={this.onClickOnSuggestion.bind(this)}
+                                                    clearSuggestions={this.clearSuggestions.bind(this)}
                                                 />
                                             </div>
-                                            <div className="one themeborder">
+                                            <div className="one themeborder hq-input-wrapper">
                                                 <Select
-                                                    id="hq-brands"
-                                                    name="brands"
-                                                    placeholder="Select Brands"
-                                                    options={this.state.brands}
-                                                    labelProperty="name"
-                                                    onChange={this.onChangeBrand.bind(this)}
+                                                    options={this.state.makes}
                                                 />
                                             </div>
-                                            <div className="one themeborder">
-                                                <TextInput
-                                                    id="test"
-                                                    name="test"
-                                                    options={[]}
+                                            <div className="one themeborder hq-input-wrapper">
+                                                <Select
+                                                    options={this.state.vehicleClasses}
                                                 />
                                             </div>
                                             <div className="one_fourth last themeborder">
@@ -114,6 +105,7 @@ class HQBookingForm extends PureComponent{
                             initialCenter={this.state.mapCenter}
                             mapCenter={this.state.mapCenter}
                             locations={this.state.locations}
+                            onPressMarker={this.onSelectLocationOnMap.bind(this)}
                         />
                     </div>
                 </div>

@@ -18,14 +18,14 @@ export class MapContainer extends Component {
             if((location.coordinates.lng) && (location.coordinates.lat)){
                 return <Marker
                         key={index}
-                        onClick={this.onPressMarker}
+                        onClick={this.onPressMarker.bind(this, location)}
                         position={location.coordinates}
                     />
                 }
             }
         );
     }
-    onPressMarker(marker){
+    onPressMarker(marker, location){
         this.props.onPressMarker(marker);
     }
     render() {

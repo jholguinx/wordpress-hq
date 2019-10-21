@@ -69,5 +69,20 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
             return $newObject;
         }, $location);
     }
+    public function locationsPublicInterface()
+    {
+        $locations = $this->allLocations();
+        return array_map(function($location){
+            return $this->locationPublicInterface($location);
+        }, $locations);
+    }
+    public function locationPublicInterface($location)
+    {
+        return $this->parseObject(array(
+            'id',
+            'name',
+            'coordinates',
+        ), $location);
+    }
 
 }

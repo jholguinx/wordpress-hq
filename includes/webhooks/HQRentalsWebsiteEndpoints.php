@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\Webhooks;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use mysql_xdevapi\Exception;
 
 class HQRentalsWebsiteEndpoints{
@@ -19,6 +20,10 @@ class HQRentalsWebsiteEndpoints{
         register_rest_route( 'hqrentals', '/brand/', array(
             'methods' => 'GET',
             'callback' => array ($this, 'brand'),
+        ));
+        register_rest_route( 'hqrentals', '/shortcodes/bookingform', array(
+            'methods' => 'GET',
+            'callback' => array ($this, 'bookingform'),
         ));
     }
     public function brand()
@@ -62,5 +67,20 @@ class HQRentalsWebsiteEndpoints{
             'success' => ! empty($success),
             'data'  =>  $data
         );
+    }
+    public function bookingform()
+    {
+        try{
+            $query = new HQRentalsQueriesBrands();
+            $queryLocation = new HQRentalsQueriesLocations();
+            $brands = $query->brandsPublicInterface();
+            $locations = $queryLocation->locationsPublicInterface();
+            $responseData = new \stdClass();
+            $responseData->locations = $locations;
+            $responseData->brands = $brands;
+            return $this->resolveResponse($responseData, true);
+        }catch (Exception $e){
+            return $this->resolveResponse($e, false);
+        }
     }
 }

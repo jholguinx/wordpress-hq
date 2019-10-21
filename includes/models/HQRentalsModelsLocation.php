@@ -1,5 +1,6 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsModelsLocation extends HQRentalsBaseModel
 {
@@ -40,6 +41,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public function __construct($post = null)
     {
         $this->post_id = '';
+        $this->settings = new HQRentalsSettings();
         $this->postArgs = array(
             'post_type'         =>  $this->locationsCustomPostName,
             'post_status'       =>  'publish',

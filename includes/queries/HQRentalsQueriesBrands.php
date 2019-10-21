@@ -100,4 +100,5 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
         $brand = new HQRentalsModelsBrand($query->posts[0]);
         return $brand;
     }
+
 }

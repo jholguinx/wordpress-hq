@@ -12,7 +12,10 @@ class HQBookingController{
             this.config.getInitConfig(),
             response => {
                 if(response.data.success){
-                    app.setState({ brands: Parser.parseBrands(response.data.data) });
+                    app.setState({
+                        brands: Parser.parseBrands(response.data.data.brands),
+                        locations: Parser.parseLocations(response.data.data.locations)
+                    });
                 }else{
                     app.setState({ errors: 'there was an issue' });
                 }
@@ -22,15 +25,25 @@ class HQBookingController{
             }
         )
     }
-    onChangeSuggestion(){
+    onChangeSuggestion(value, app){
+        this.connector.makeRequest(
+            this.config.getPlacesConfig(value),
+                response => {
+                if(response.data){
+                       app.setState({ suggestions: Parser.parseSuggestions(response.data) })
+                }
+                    //THIS should be removed when cors issue is gone
+                    app.setState({ suggestions: Parser.parseSuggestions(response.data) })
+                },
+                error => {
+                    console.log(error, 'error');
+                }
+        );
     }
     getLocation( successCallback, failedCallback) {
         if (navigator.geolocation) {
-            console.log('tre');
             navigator.geolocation.getCurrentPosition( successCallback );
-            console.log('tredasdads');
         }else{
-            console.log('tdasdas');
             failedCallback();
         }
     }

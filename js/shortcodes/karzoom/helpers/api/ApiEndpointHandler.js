@@ -10,8 +10,14 @@ class ApiEndpointHandler{
     getBaseUrl(){
         return 'http://karzoom.test/';
     }
+    getInitEndpoint(){
+        return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';
+    }
     getBrandEndpoint(){
-        return this.getBaseUrl() + 'wp-json/hqrentals/brands/';
+        return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';
+    }
+    getGoogleAutocompleteEndpoint(){
+        return 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     }
 
 }

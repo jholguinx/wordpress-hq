@@ -106,35 +106,6 @@ class HQRentalsAdminSettings
                                                spellcheck="true" autocomplete="off"></td>
                                 </tr>
                             <?php endif; ?>
-                            <?php //This comments were added for dev debug ?>
-                            <?php //Should be deleted in next releases ?>
-                            <!--<tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end
-                                        Date Format</label></th>
-                                <td>
-                                    <select name="<?php //echo esc_attr($this->settings->front_end_datetime_format); ?>">
-                                        <?php //echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select System
-                                        Date Format</label></th>
-                                <td>
-                                    <select name="<?php //echo $this->settings->hq_datetime_format; ?>">
-                                        <?php //echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
-                                    </select>
-                                </td>
-                            </tr>-->
-                            <!-- <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Support for
-                                        minified response</label></th>
-                                <td>
-                                    <input type="checkbox"
-                                           name="<?php //echo $this->settings->support_for_minified_response_on_vehicle_classes; ?>"
-                                           value="true" <?php // echo ($this->settings->getSupportForMinifiedResponse() === 'true') ? 'checked' : ''; ?>/>
-                                </td>
-                            </tr> -->
                             <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Support for home integration</label></th>
                                 <td>
@@ -149,6 +120,14 @@ class HQRentalsAdminSettings
                                     <input type="checkbox"
                                            name="<?php echo $this->settings->hq_disable_cronjob_option; ?>"
                                            value="true" <?php echo ($this->settings->getDisableCronjobOption() === 'true') ? 'checked' : ''; ?>/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Coordinate Field</label></th>
+                                <td>
+                                    <input type="text"
+                                           name="<?php echo $this->settings->hq_location_coordinate_field; ?>"
+                                           value="<?php echo esc_attr($this->settings->getLocationCoordinateField()); ?>"/>
                                 </td>
                             </tr>
                             <tr>

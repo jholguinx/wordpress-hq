@@ -27,6 +27,7 @@ class HQRentalsSettings
     public $hq_tenant_datetime_format = 'hq_wordpress_tenant_datetime_format';
     public $hq_tenant_link = 'hq_wordpress_tenant_link';
     public $hq_disable_safari_functionality = 'hq_disable_safari_functionality';
+    public $hq_location_coordinate_field = 'hq_location_coordinate_field';
 
     public function __construct()
     {
@@ -287,6 +288,21 @@ class HQRentalsSettings
     public function saveDisableSafariOption($data)
     {
         return update_option($this->hq_disable_safari_functionality, sanitize_text_field($data));
+    }
+
+
+    public function noLocationCoordinateSetting()
+    {
+        return empty(get_option($this->hq_location_coordinate_field));
+    }
+
+    public function saveLocationCoordinateSetting($data)
+    {
+        return update_option($this->hq_location_coordinate_field, sanitize_text_field($data));
+    }
+    public function getLocationCoordinateField()
+    {
+        return get_option($this->hq_location_coordinate_field, '');
     }
 
 

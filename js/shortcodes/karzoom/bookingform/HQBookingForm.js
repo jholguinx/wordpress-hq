@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import Select from "../components/inputs/Select";
-import TextInput from '../components/inputs/TextInput';
 import Map from '../components/maps/Map'
 import HQBookingController from "./controllers/HQBookingController";
+import SuggestionInput from "../components/inputs/SuggestionInput";
+import TextInput from '../components/inputs/TextInput';
 
 class HQBookingForm extends PureComponent{
     constructor(props){
@@ -11,6 +12,7 @@ class HQBookingForm extends PureComponent{
         this.state = {
             suggestionInput: '',
             brands:[],
+            locations: [],
             makes: '',
             vehicleClasses: '',
             errors: '',
@@ -22,9 +24,10 @@ class HQBookingForm extends PureComponent{
                 returnDate: ''
             },
             mapCenter:{
-                lat: 52.2550356,
-                lng: -1.3115472
-            }
+                lat: 10.4984684,
+                lng: -66.7956924
+            },
+            suggestions:[]
         }
     }
     componentDidMount(){
@@ -40,8 +43,12 @@ class HQBookingForm extends PureComponent{
         console.log(event.target.value);
     }
 
-    OnChangeMapSuggestions(){
-
+    onChangeSuggestionInput(event){
+        const {
+            target
+        } = event;
+        this.setState({ suggestionInput: target.value });
+        this.controller.onChangeSuggestion(target.value, this);
     }
 
     //style="padding-top: 150px !important;text-align:center;height:800px;background-image:url(http://themes.themegoods.com/grandcarrental/demo/wp-content/uploads/2017/01/IMG_3496bfree.jpg);background-position: center center;color:#ffffff;"
@@ -62,6 +69,17 @@ class HQBookingForm extends PureComponent{
                                     "                                time offer discounts"}</div>
                                     <form className="car_search_form" method="get" >
                                         <div className="car_search_wrapper">
+                                            <div className="one themeborder">
+                                                <SuggestionInput
+                                                    id="hq-user-location"
+                                                    name="user-location"
+                                                    placeholder="Your Address"
+                                                    suggestions={this.state.suggestions}
+                                                    labelProperty="name"
+                                                    onChangeInput={this.onChangeSuggestionInput.bind(this)}
+                                                    value={this.state.suggestionInput}
+                                                />
+                                            </div>
                                             <div className="one themeborder">
                                                 <Select
                                                     id="hq-brands"
@@ -92,10 +110,10 @@ class HQBookingForm extends PureComponent{
                 <div className="one_half map-wrapper">
                     <div className="hq-map-wrapper">
                         <Map
-                            defaultZoom={8}
-                            zoom={8}
-                            defaultCenter={this.state.mapCenter}
+                            zoom={15}
+                            initialCenter={this.state.mapCenter}
                             mapCenter={this.state.mapCenter}
+                            locations={this.state.locations}
                         />
                     </div>
                 </div>

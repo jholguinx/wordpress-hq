@@ -1,61 +1,29 @@
-import React , { PureComponent } from 'react';
-import Autosuggest from 'react-autosuggest';
-const getSuggestions = value => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
+import React, { PureComponent } from 'react'
 
-    return inputLength === 0 ? [] : languages.filter(lang =>
-        lang.name.toLowerCase().slice(0, inputLength) === inputValue
-    );
-};
-
-class SuggestionInput extends PureComponent{
+class TextInput extends PureComponent{
     constructor(props){
         super(props);
-        this.state = {
-            value: '',
-            suggestions: []
-        };
     }
-
-    onChange = (event, { newValue }) => {
-        this.setState({
-            value: newValue
-        });
-    };
-    // Autosuggest will call this function every time you need to update suggestions.
-    // You already implemented this logic above, so just use it.
-    onSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
-            suggestions: getSuggestions(value)
-        });
-    };
-
-    // Autosuggest will call this function every time you need to clear suggestions.
-    onSuggestionsClearRequested = () => {
-        this.setState({
-            suggestions: []
-        });
-    };
+    renderOptions() {
+        return this.props.options.map((option,  index) => <option key={index} value={option.value}>{option[this.props.labelProperty]}</option>);
+    }
+    /*
+    * <input
+                    id={this.props.id}
+                    name={this.props.name}
+                    placeholder={this.props.placeholder}
+                    className="hq-inputs-select"
+                    onChange={this.props.onChange}
+                >
+                    {this.renderOptions()}
+                </input>*/
     render(){
-        const { value, suggestions } = this.state;
-
-        // Autosuggest will pass through all these props to the input.
-        const inputProps = {
-            placeholder: 'Type a programming language',
-            value,
-            onChange: this.onChange
-        };
         return(
-            <Autosuggest
-                suggestions={suggestions}
-                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
-                inputProps={inputProps}
-            />
+            <div>
+                <span className="ti-angle-down" />
+            </div>
+
         );
     }
 }
-export default SuggestionInput;
+export default TextInput;

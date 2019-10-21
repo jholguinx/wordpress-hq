@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map,GoogleApiWrapper, Marker} from 'google-maps-react';
+import MapMarker from "./MapMarker";
 
 export class MapContainer extends Component {
     constructor(props){
@@ -11,11 +12,17 @@ export class MapContainer extends Component {
     onInfoWindowClose(){
         console.log('testdasdsad');
     }
+
     renderMarkers() {
-        this.props.markers.map(marker =>
-            <Marker
-                onPressMarker={this.onPressMarker}
-            />
+        return this.props.locations.map( ( location, index ) => {
+            if((location.coordinates.lng) && (location.coordinates.lat)){
+                return <Marker
+                        key={index}
+                        onClick={this.onPressMarker}
+                        position={location.coordinates}
+                    />
+                }
+            }
         );
     }
     onPressMarker(marker){
@@ -24,11 +31,13 @@ export class MapContainer extends Component {
     render() {
         return (
             <Map
+                style={{width: '100%', height: '100%', position: 'relative'}}
                 google={this.props.google}
                 zoom={this.props.zoom}
-                mapCenter={this.props.mapCenter}
+                center={this.props.mapCenter}
+                initialCenter={this.props.initialCenter}
             >
-                {this.renderMarkers}
+                {this.renderMarkers()}
             </Map>
         );
     }

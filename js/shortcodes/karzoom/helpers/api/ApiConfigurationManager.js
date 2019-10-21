@@ -8,11 +8,37 @@ import ApiEndpointHandler from './ApiEndpointHandler';
 class ApiConfigurationManager {
     constructor() {
         this.endpoints = new ApiEndpointHandler();
+        this.placesDefaultConfig = {
+            key: 'AIzaSyAodJ3h4T6uXjUJZ0q8aLk9rEz21m_kWqE',
+            input:'',
+            language: 'en'
+        }
     }
     getInitConfig(){
         return {
-            url: this.endpoints.getBrandEndpoint(),
-            method: 'get'
+            url: this.endpoints.getInitEndpoint(),
+            method: 'get',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }
+    }
+    getPlacesConfig(newInput){
+        return {
+            url: this.endpoints.getGoogleAutocompleteEndpoint(),
+            params: {
+                ...this.placesDefaultConfig,
+                input: newInput
+            },
+            data: {
+                ...this.placesDefaultConfig,
+                input: newInput,
+                componenst: 'country:ve'
+            },
+            method: 'get',
+            headers: {
+                'Content-Type' : 'application/json'
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsTransformers;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 abstract class HQRentalsTransformersBase
 {
@@ -30,10 +31,15 @@ abstract class HQRentalsTransformersBase
     public static function extractDataFromApiObject($properties, $apiObject, $nestedObject = null)
     {
         $objectToReturn = new \stdClass();
+        $setting = new HQRentalsSettings();
         foreach ($properties as $property) {
             if (empty($nestedObject)) {
                 $objectToReturn->{$property} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$property});
             }
+        }
+        $coordinate = $setting->getLocationCoordinateField();
+        if(!empty($coordinate)){
+            $objectToReturn->coordinates = $apiObject->{$coordinate};
         }
         return $objectToReturn;
     }

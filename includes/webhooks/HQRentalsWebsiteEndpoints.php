@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\Webhooks;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use mysql_xdevapi\Exception;
 
 class HQRentalsWebsiteEndpoints{
@@ -24,6 +25,10 @@ class HQRentalsWebsiteEndpoints{
         register_rest_route( 'hqrentals', '/shortcodes/bookingform', array(
             'methods' => 'GET',
             'callback' => array ($this, 'bookingform'),
+        ));
+        register_rest_route( 'hqrentals', '/shortcodes/vehicle-types', array(
+            'methods' => 'GET',
+            'callback' => array ($this, 'vehicleTypes'),
         ));
     }
     public function brand()
@@ -79,6 +84,25 @@ class HQRentalsWebsiteEndpoints{
             $responseData->locations = $locations;
             $responseData->brands = $brands;
             return $this->resolveResponse($responseData, true);
+        }catch (Exception $e){
+            return $this->resolveResponse($e, false);
+        }
+    }
+    public function vehicleTypes(){
+        $brandID = $_GET['brand_id'];
+        $customField = $_GET['custom_field'];
+        try{
+            $query = new HQRentalsQueriesVehicleClasses();
+            $vehicles = $query->getVehicleClassesByBrand($brandID);
+            $types = array(  );
+            var_dump($vehicles[0]->getCustomField($customField));
+            foreach ($vehicles as $vehicle){
+                $type = $vehicle->getCustomField($customField);
+                if(! in_array($type, $types) ){
+                    $types[] = $type;
+                }
+            }
+            return $this->resolveResponse($types, true);
         }catch (Exception $e){
             return $this->resolveResponse($e, false);
         }

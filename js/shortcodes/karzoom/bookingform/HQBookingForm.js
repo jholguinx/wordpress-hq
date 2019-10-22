@@ -29,7 +29,7 @@ class HQBookingForm extends PureComponent{
                 lng: -66.7956924
             },
             suggestions:[]
-        }
+        };
     }
     componentDidMount(){
         this.controller.componentInit(this);
@@ -51,6 +51,7 @@ class HQBookingForm extends PureComponent{
     }
     onSelectLocationOnMap(location){
         this.controller.onSelectLocationOnMap(location, this);
+
     }
     onChangePickupDate(date){
         this.setState({
@@ -58,7 +59,7 @@ class HQBookingForm extends PureComponent{
                 ...this.state.form,
                 pickupDate: date,
             }
-        })
+        });
     }
     onChangeReturnDate(date){
         this.setState({
@@ -66,7 +67,7 @@ class HQBookingForm extends PureComponent{
                 ...this.state.form,
                 returnDate: date,
             }
-        })
+        });
     }
     render(){
         return(

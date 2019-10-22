@@ -123,13 +123,7 @@ class Parser {
             location: Parser.parseCoordinate(location)
         }
     }*/
-    static parsePlaceDetails(googlePlace){
-        const {
-            geometry
-        } = googlePlace;
-        const {
-            location
-        } = geometry;
+    static parsePlaceDetails(){
         return {
             location: {
                 lat: 10.5011604802915,

@@ -1,6 +1,7 @@
 import ApiConnector from "../../helpers/api/ApiConnector";
 import ApiConfigurationManager from "../../helpers/api/ApiConfigurationManager";
 import Parser from "../../helpers/api/Parser";
+
 class HQBookingController{
     constructor() {
         this.connector = new ApiConnector();

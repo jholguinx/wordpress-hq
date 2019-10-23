@@ -4,6 +4,7 @@ import Map from '../components/maps/Map'
 import HQBookingController from "./controllers/HQBookingController";
 import SuggestionInput from "../components/inputs/SuggestionInput";
 import TextInput from '../components/inputs/TextInput';
+import Hidden from "../components/inputs/Hidden";
 import DatesPicker from "../components/inputs/DatesPicker";
 
 class HQBookingForm extends PureComponent{
@@ -18,13 +19,17 @@ class HQBookingForm extends PureComponent{
             vehicleClasses: [],
             errors: '',
             form: {
-                brand:{},
-                vehicleClass:{},
-                make:{},
+                brand:'',
+                vehicleClass:'',
+                make:'',
                 pickupDate: '',
-                returnDate: ''
+                returnDate: '',
+                pickupLocation: '',
+                returnLocation: ''
             },
+            formAction: '',
             mapCenter:{
+                //Default Value
                 lat: 10.4984684,
                 lng: -66.7956924
             },
@@ -51,7 +56,18 @@ class HQBookingForm extends PureComponent{
     }
     onSelectLocationOnMap(location){
         this.controller.onSelectLocationOnMap(location, this);
-
+        this.setState({
+            formAction: this.resolveActionLink(location),
+            form:{
+                ...this.state.form,
+                pickupLocation: location.id,
+                returnLocation: location.id
+            }
+        });
+    }
+    resolveActionLink(location){
+        const selectedBrand = this.state.brands.filter( brand => String(brand.id) === location.brand_id )[0];
+        return selectedBrand.websiteLink;
     }
     onChangePickupDate(date){
         this.setState({
@@ -65,7 +81,26 @@ class HQBookingForm extends PureComponent{
         this.setState({
             form: {
                 ...this.state.form,
-                returnDate: date,
+                returnDate: date
+            }
+        });
+    }
+    onChangeVehicleBrand(event){
+        const { value } = event.target;
+        this.setState({
+            form: {
+                ...this.state.form,
+                make: value
+            }
+        });
+        this.controller.onChangeVehicleBrand(value, this);
+    }
+    onChangeVehicleClass(event){
+        const { value } = event.target;
+        this.setState({
+            form: {
+                ...this.state.form,
+                vehicleClass: value
             }
         });
     }
@@ -81,7 +116,7 @@ class HQBookingForm extends PureComponent{
                                     <h2 className="ppb_title">{"Find Best Car &amp; Limousine"}</h2>
                                     <div className="page_tagline">{"From as low as $10 per day with limited\n" +
                                     "                                time offer discounts"}</div>
-                                    <form className="car_search_form" method="get" >
+                                    <form className="car_search_form" method="POST" action={this.state.formAction} >
                                         <div className="car_search_wrapper">
                                             <div className="one themeborder hq-input-wrapper">
                                                 <SuggestionInput
@@ -101,6 +136,7 @@ class HQBookingForm extends PureComponent{
                                                     placeholder="Brands"
                                                     options={this.state.makes}
                                                     makes={true}
+                                                    onChange={this.onChangeVehicleBrand.bind(this)}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
@@ -108,6 +144,7 @@ class HQBookingForm extends PureComponent{
                                                     placeholder="Vehicle Classes"
                                                     options={this.state.vehicleClasses}
                                                     vehicleClass={true}
+                                                    onChange={this.onChangeVehicleClass.bind(this)}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
@@ -123,6 +160,22 @@ class HQBookingForm extends PureComponent{
                                                 />
                                             </div>
                                             <div className="one_fourth last themeborder">
+                                                <Hidden
+                                                    name="pick_up_location"
+                                                    value={this.state.form.pickupLocation}
+                                                />
+                                                <Hidden
+                                                    name="return_location"
+                                                    value={this.state.form.returnLocation}
+                                                />
+                                                <Hidden
+                                                    name="pick_up_date"
+                                                    value={this.state.form.pickupDate}
+                                                />
+                                                <Hidden
+                                                    name="return_date"
+                                                    value={this.state.form.returnDate}
+                                                />
                                                 <input id="car_search_btn" type="submit" className="button" value="Search" />
                                             </div>
                                         </div>

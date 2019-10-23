@@ -74,13 +74,33 @@ class HQBookingController{
         this.connector.makeRequest(
             this.config.getOnChangeLocationConfig(location),
             response => {
+                const makes = Parser.parserMakes(response.data.data);
+                const classes = Parser.parseVehicles(response.data.data);
                 app.setState({
-                    makes: Parser.parserMakes(response.data.data),
-                    vehicleClasses: Parser.parseVehicles(response.data.data),
+                    makes: makes,
+                    vehicleClasses: classes,
+                    form: {
+                        ...app.state.form,
+                        make: makes[0],
+                        vehicleClass: classes[0].id
+                    }
                 });
             },
             error => {
                 console.log('errr',error);
+            }
+        );
+    }
+    onChangeVehicleBrand(newType, app){
+        const { form } = app.state;
+        const { brand } = form;
+        this.connector.makeRequest(
+            this.config.getConfigOnChangeTypes(brand, newType),
+            response => {
+                console.log(response, 'res');
+            },
+            errors => {
+                console.log(errors, 'err');
             }
         );
     }

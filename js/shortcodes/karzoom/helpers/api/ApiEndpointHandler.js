@@ -13,7 +13,9 @@ class ApiEndpointHandler{
     getInitEndpoint(){
         return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';
     }
+
     getBrandEndpoint(){
+        console.log('2');
         return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';
     }
     getTypesAndVehiclesEndpoint(){

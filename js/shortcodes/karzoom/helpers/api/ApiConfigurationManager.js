@@ -39,7 +39,7 @@ class ApiConfigurationManager {
             headers: {
                 'Content-Type' : 'application/json'
             }
-        }
+        };
     }
     getPlaceDetails(place){
         return {
@@ -67,7 +67,17 @@ class ApiConfigurationManager {
             }
         };
     }
-
+    getConfigOnChangeTypes(brandId, customField){
+        return {
+            url: this.endpoints.getTypesAndVehiclesEndpoint(),
+            method: 'get',
+            params:{
+                brand_id: brandId,
+                custom_field: 'f236',
+                custom_field_value: customField
+            }
+        };
+    }
 }
 
 export default ApiConfigurationManager;

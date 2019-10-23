@@ -85,8 +85,8 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
             'brand_id' => array(
                 'property_name' => 'brand_id',
                 'values' => $location->getBrandId()
-            )
+            ),
+
         ), $location);
     }
-
 }

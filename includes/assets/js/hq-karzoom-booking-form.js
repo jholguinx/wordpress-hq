@@ -135,7 +135,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_HQBookingController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controllers/HQBookingController */ "./js/shortcodes/karzoom/bookingform/controllers/HQBookingController.js");
 /* harmony import */ var _components_inputs_SuggestionInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/inputs/SuggestionInput */ "./js/shortcodes/karzoom/components/inputs/SuggestionInput.js");
 /* harmony import */ var _components_inputs_TextInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/inputs/TextInput */ "./js/shortcodes/karzoom/components/inputs/TextInput.js");
-/* harmony import */ var _components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/inputs/DatesPicker */ "./js/shortcodes/karzoom/components/inputs/DatesPicker.js");
+/* harmony import */ var _components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/inputs/Hidden */ "./js/shortcodes/karzoom/components/inputs/Hidden.js");
+/* harmony import */ var _components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/inputs/DatesPicker */ "./js/shortcodes/karzoom/components/inputs/DatesPicker.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -168,6 +169,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var HQBookingForm =
 /*#__PURE__*/
 function (_PureComponent) {
@@ -188,13 +190,17 @@ function (_PureComponent) {
       vehicleClasses: [],
       errors: '',
       form: {
-        brand: {},
-        vehicleClass: {},
-        make: {},
+        brand: '',
+        vehicleClass: '',
+        make: '',
         pickupDate: '',
-        returnDate: ''
+        returnDate: '',
+        pickupLocation: '',
+        returnLocation: ''
       },
+      formAction: '',
       mapCenter: {
+        //Default Value
         lat: 10.4984684,
         lng: -66.7956924
       },
@@ -234,6 +240,21 @@ function (_PureComponent) {
     key: "onSelectLocationOnMap",
     value: function onSelectLocationOnMap(location) {
       this.controller.onSelectLocationOnMap(location, this);
+      this.setState({
+        formAction: this.resolveActionLink(location),
+        form: _objectSpread({}, this.state.form, {
+          pickupLocation: location.id,
+          returnLocation: location.id
+        })
+      });
+    }
+  }, {
+    key: "resolveActionLink",
+    value: function resolveActionLink(location) {
+      var selectedBrand = this.state.brands.filter(function (brand) {
+        return String(brand.id) === location.brand_id;
+      })[0];
+      return selectedBrand.websiteLink;
     }
   }, {
     key: "onChangePickupDate",
@@ -250,6 +271,27 @@ function (_PureComponent) {
       this.setState({
         form: _objectSpread({}, this.state.form, {
           returnDate: date
+        })
+      });
+    }
+  }, {
+    key: "onChangeVehicleBrand",
+    value: function onChangeVehicleBrand(event) {
+      var value = event.target.value;
+      this.setState({
+        form: _objectSpread({}, this.state.form, {
+          make: value
+        })
+      });
+      this.controller.onChangeVehicleBrand(value, this);
+    }
+  }, {
+    key: "onChangeVehicleClass",
+    value: function onChangeVehicleClass(event) {
+      var value = event.target.value;
+      this.setState({
+        form: _objectSpread({}, this.state.form, {
+          vehicleClass: value
         })
       });
     }
@@ -276,7 +318,8 @@ function (_PureComponent) {
         className: "page_tagline"
       }, "From as low as $10 per day with limited\n" + "                                time offer discounts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "car_search_form",
-        method: "get"
+        method: "POST",
+        action: this.state.formAction
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "car_search_wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -296,26 +339,40 @@ function (_PureComponent) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
         placeholder: "Brands",
         options: this.state.makes,
-        makes: true
+        makes: true,
+        onChange: this.onChangeVehicleBrand.bind(this)
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one themeborder hq-input-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
         placeholder: "Vehicle Classes",
         options: this.state.vehicleClasses,
-        vehicleClass: true
+        vehicleClass: true,
+        onChange: this.onChangeVehicleClass.bind(this)
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one themeborder hq-input-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_7__["default"], {
         placeholder: "Pickup Date",
         onChange: this.onChangePickupDate.bind(this)
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one themeborder hq-input-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_7__["default"], {
         placeholder: "Return Date",
         onChange: this.onChangeReturnDate.bind(this)
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one_fourth last themeborder"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        name: "pick_up_location",
+        value: this.state.form.pickupLocation
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        name: "return_location",
+        value: this.state.form.returnLocation
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        name: "pick_up_date",
+        value: this.state.form.pickupDate
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        name: "return_date",
+        value: this.state.form.returnDate
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "car_search_btn",
         type: "submit",
         className: "button",
@@ -455,12 +512,29 @@ function () {
         })
       });
       this.connector.makeRequest(this.config.getOnChangeLocationConfig(location), function (response) {
+        var makes = _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parserMakes(response.data.data);
+        var classes = _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseVehicles(response.data.data);
         app.setState({
-          makes: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parserMakes(response.data.data),
-          vehicleClasses: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseVehicles(response.data.data)
+          makes: makes,
+          vehicleClasses: classes,
+          form: _objectSpread({}, app.state.form, {
+            make: makes[0],
+            vehicleClass: classes[0].id
+          })
         });
       }, function (error) {
         console.log('errr', error);
+      });
+    }
+  }, {
+    key: "onChangeVehicleBrand",
+    value: function onChangeVehicleBrand(newType, app) {
+      var form = app.state.form;
+      var brand = form.brand;
+      this.connector.makeRequest(this.config.getConfigOnChangeTypes(brand, newType), function (response) {
+        console.log(response, 'res');
+      }, function (errors) {
+        console.log(errors, 'err');
       });
     }
   }]);
@@ -534,6 +608,66 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (DatesPicker);
+
+/***/ }),
+
+/***/ "./js/shortcodes/karzoom/components/inputs/Hidden.js":
+/*!***********************************************************!*\
+  !*** ./js/shortcodes/karzoom/components/inputs/Hidden.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Hidden =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Hidden, _Component);
+
+  function Hidden(props) {
+    _classCallCheck(this, Hidden);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Hidden).call(this, props));
+  }
+
+  _createClass(Hidden, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "hidden",
+        name: this.props.name,
+        value: this.props.value
+      });
+    }
+  }]);
+
+  return Hidden;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Hidden);
 
 /***/ }),
 
@@ -1128,6 +1262,19 @@ function () {
         }
       };
     }
+  }, {
+    key: "getConfigOnChangeTypes",
+    value: function getConfigOnChangeTypes(brandId, customField) {
+      return {
+        url: this.endpoints.getTypesAndVehiclesEndpoint(),
+        method: 'get',
+        params: {
+          brand_id: brandId,
+          custom_field: 'f236',
+          custom_field_value: customField
+        }
+      };
+    }
   }]);
 
   return ApiConfigurationManager;
@@ -1277,6 +1424,7 @@ function () {
   }, {
     key: "getBrandEndpoint",
     value: function getBrandEndpoint() {
+      console.log('2');
       return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';
     }
   }, {
@@ -1337,11 +1485,13 @@ function () {
     value: function parseBrand(brand) {
       var id = brand.id,
           name = brand.name,
-          locations = brand.locations;
+          locations = brand.locations,
+          websiteLink = brand.websiteLink;
       return {
         id: id,
         name: name,
-        locations: locations
+        locations: locations,
+        websiteLink: websiteLink
       };
     }
   }, {

@@ -93,11 +93,12 @@ class HQRentalsWebsiteEndpoints{
     public function vehicleTypes(){
         $brandID = $_GET['brand_id'];
         $customField = $_GET['custom_field'];
+        $customFieldValue = $_GET['custom_field_value'];
         try{
             //fix later - no two querys
             $query = new HQRentalsQueriesVehicleClasses();
             $vehicles = $query->getVehicleClassesByBrand($brandID);
-            $vehiclesForResponse = $query->vehiclesPublicInterface();
+            $vehiclesForResponse = $query->vehiclesPublicInterface($brandID);
             $types = array();
             foreach ($vehicles as $vehicle){
                 $type = $vehicle->getCustomField($customField);

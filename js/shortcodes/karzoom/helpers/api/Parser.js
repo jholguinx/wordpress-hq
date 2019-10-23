@@ -2,24 +2,26 @@
 
 class Parser {
     static parseBrands(brands) {
-        return brands.map(brand => Parser.parseBrand(brand))
+        return brands.map(brand => Parser.parseBrand(brand));
     }
 
     static parseBrand(brand) {
         const {
             id,
             name,
-            locations
+            locations,
+            websiteLink,
         } = brand;
         return {
             id: id,
             name: name,
-            locations: locations
-        }
+            locations: locations,
+            websiteLink: websiteLink,
+        };
     }
 
     static parseLocations(locations) {
-        return locations.map(location => Parser.parseLocation(location))
+        return locations.map(location => Parser.parseLocation(location));
     }
 
     static parseLocation(location) {
@@ -34,7 +36,7 @@ class Parser {
             name: name,
             coordinates: Parser.parseCoordinate(coordinates),
             brand_id: brand_id
-        }
+        };
     }
 
     static parseCoordinate(coordinate) {

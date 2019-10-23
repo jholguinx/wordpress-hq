@@ -65,7 +65,7 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
     public function brandPublicInterface($brand)
     {
         $queryLocation = new HQRentalsQueriesLocations();
-        return $this->parseObject(array(
+        return $this->parseObject( array(
             'id',
             'name',
             'websiteLink',

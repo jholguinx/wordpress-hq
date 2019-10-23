@@ -453,5 +453,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return $this->metaOrder;
     }
+
+    public function getBrandIdMetaKey()
+    {
+        return $this->metaBrandId;
+    }
 }
 

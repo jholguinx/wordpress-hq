@@ -71,6 +71,15 @@ class HQBookingController{
                 brand: location.brand_id
             }
         });
+        this.connector.makeRequest(
+            this.config.getOnChangeLocationConfig(),
+            response => {
+                this.
+            },
+            error => {
+
+            }
+        )
     }
 }
 export default HQBookingController;

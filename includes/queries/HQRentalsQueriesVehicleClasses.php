@@ -84,6 +84,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return $this->fillModelWithPosts($query->posts);
     }
 
+
     /**
      * Retrieve vehicle class by system id
      * @param $hqId
@@ -316,5 +317,23 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             $data[] = $class->id;
         }
         return $data;
+    }
+
+    public function getVehicleClassesByBrand($brandId)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->model->getBrandIdMetaKey(),
+                        'value' => $brandId,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return $this->fillModelWithPosts($query->posts);
     }
 }

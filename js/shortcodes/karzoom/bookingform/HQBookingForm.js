@@ -100,23 +100,25 @@ class HQBookingForm extends PureComponent{
                                                 <Select
                                                     placeholder="Brands"
                                                     options={this.state.makes}
+                                                    makes={true}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <Select
                                                     placeholder="Vehicle Classes"
                                                     options={this.state.vehicleClasses}
+                                                    vehicleClass={true}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <DatesPicker
-                                                    placeholder="Vehicle Classes"
+                                                    placeholder="Pickup Date"
                                                     onChange={this.onChangePickupDate.bind(this)}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <DatesPicker
-                                                    placeholder="Vehicle Classes"
+                                                    placeholder="Return Date"
                                                     onChange={this.onChangeReturnDate.bind(this)}
                                                 />
                                             </div>

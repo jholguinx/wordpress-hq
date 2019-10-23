@@ -52,18 +52,18 @@ class ApiConfigurationManager {
             headers: {
                 'Content-Type' : 'application/json'
             }
-        }
+        };
     }
     getOnChangeLocationConfig(location){
+        const {
+            brand_id
+        } = location;
         return {
-            url: this.endpoints.getGooglePlaceDetailEndpoint(),
-            params: {
-                ...this.placesDefaultConfig,
-                place_id: place.place_id
-            },
+            url: this.endpoints.getTypesAndVehiclesEndpoint(),
             method: 'get',
-            headers: {
-                'Content-Type' : 'application/json'
+            params:{
+                brand_id: brand_id,
+                custom_field: 'f236'
             }
         };
     }

@@ -336,4 +336,35 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         $query = new \WP_Query($args);
         return $this->fillModelWithPosts($query->posts);
     }
+
+    public function vehiclesPublicInterface($brandId = null){
+        if(empty($brandId)){
+            $vehicles = $this->allVehicleClasses();
+        }else{
+            $vehicles = $this->getVehicleClassesByBrand($brandId);
+        }
+        return array_map( function($vehicle){
+                return $this->vehiclePublicInterface($vehicle);
+        },$vehicles );
+    }
+    public function vehiclePublicInterface($vehicle){
+        return $this->parseObject(array(
+            'id',
+            'name',
+            'publicImageLink',
+            'order',
+            'labels' => array(
+                'property_name' => 'labels',
+                'values' => $vehicle->getLabels()
+            ),
+            'descriptions' => array(
+                'property_name' => 'descriptions',
+                'values' => $vehicle->getDescriptions()
+            ),
+            'custom_fields' => array(
+                'property_name' => 'custom_fields',
+                'values' => $vehicle->getCustomFields()
+            )
+        ), $vehicle);
+    }
 }

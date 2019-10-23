@@ -73,6 +73,7 @@ class HQRentalsWebsiteEndpoints{
             'data'  =>  $data
         );
     }
+
     public function bookingform()
     {
         try{
@@ -88,12 +89,15 @@ class HQRentalsWebsiteEndpoints{
             return $this->resolveResponse($e, false);
         }
     }
+
     public function vehicleTypes(){
         $brandID = $_GET['brand_id'];
         $customField = $_GET['custom_field'];
         try{
+            //fix later - no two querys
             $query = new HQRentalsQueriesVehicleClasses();
             $vehicles = $query->getVehicleClassesByBrand($brandID);
+            $vehiclesForResponse = $query->vehiclesPublicInterface();
             $types = array();
             foreach ($vehicles as $vehicle){
                 $type = $vehicle->getCustomField($customField);
@@ -101,7 +105,11 @@ class HQRentalsWebsiteEndpoints{
                     $types[] = $type;
                 }
             }
-            return $this->resolveResponse($types, true);
+            $data = array(
+                'vehicles'  =>  $vehiclesForResponse,
+                'types'     =>  $types
+            );
+            return $this->resolveResponse($data, true);
         }catch (Exception $e){
             return $this->resolveResponse($e, false);
         }

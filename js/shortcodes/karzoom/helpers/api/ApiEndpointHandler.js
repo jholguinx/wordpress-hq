@@ -16,6 +16,9 @@ class ApiEndpointHandler{
     getBrandEndpoint(){
         return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';
     }
+    getTypesAndVehiclesEndpoint(){
+        return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/vehicle-types/';
+    }
     getGoogleAutocompleteEndpoint(){
         return 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     }

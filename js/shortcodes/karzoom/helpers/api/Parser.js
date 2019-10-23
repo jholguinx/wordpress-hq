@@ -129,8 +129,25 @@ class Parser {
                 lat: 10.5011604802915,
                 lng: -66.78293951970849
             }
-        }
+        };
+    }
+    static parserMakes(response){
+        const {
+            types
+        } = response;
+        return types.map( type => Parser.parseMake(type) );
+    }
+    static parseMake(make){
+        return (make) ? (make) : '';
+    }
+    static parseVehicles(response){
+        const {
+            vehicles
+        } = response;
+        return vehicles.map( vehicle => Parser.parseVehicle(vehicle));
+    }
+    static parseVehicle(vehicle){
+        return vehicle;
     }
 }
-
-export default Parser
+export default Parser;

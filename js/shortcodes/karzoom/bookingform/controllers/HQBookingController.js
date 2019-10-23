@@ -72,14 +72,17 @@ class HQBookingController{
             }
         });
         this.connector.makeRequest(
-            this.config.getOnChangeLocationConfig(),
+            this.config.getOnChangeLocationConfig(location),
             response => {
-                this.
+                app.setState({
+                    makes: Parser.parserMakes(response.data.data),
+                    vehicleClasses: Parser.parseVehicles(response.data.data),
+                });
             },
             error => {
-
+                console.log('errr',error);
             }
-        )
+        );
     }
 }
 export default HQBookingController;

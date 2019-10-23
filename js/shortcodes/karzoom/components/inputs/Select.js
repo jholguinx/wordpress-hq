@@ -5,7 +5,14 @@ class Select extends PureComponent{
         super(props);
     }
     renderOptions() {
-        return this.props.options.map((option,  index) => <option key={index} value={option.value}>{option[this.props.labelProperty]}</option>);
+        if(this.props.vehicleClass){
+            return this.props.options.map((option,  index) => <option key={index} value={option.id}>{option.name}</option>);
+        }else if(this.props.makes){
+            return this.props.options.map((option,  index) => <option key={index} value={option}>{option}</option>);
+        }else{
+            return this.props.options.map((option,  index) => <option key={index} value={option.value}>{option[this.props.labelProperty]}</option>);
+        }
+
     }
     render(){
         return(

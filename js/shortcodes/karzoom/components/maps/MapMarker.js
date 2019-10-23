@@ -9,7 +9,6 @@ class MapMarker extends Component {
         this.props.onPressMarker(marker);
     }
     render() {
-        console.log(this.props.location.coordinates);
         return (
             <Marker
                 id={this.props.location.id}

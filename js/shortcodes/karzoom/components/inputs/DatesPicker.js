@@ -2,6 +2,8 @@ import React , { Component } from 'react';
 import { DateTimePicker } from 'react-widgets';
 import moment from 'moment';
 const styles = require('../../../../../node_modules/react-widgets/dist/css/react-widgets.css');
+const fonts = require('../../../../../node_modules/react-widgets/dist/fonts/rw-widgets.ttf');
+const fontsTwo = require('../../../../../node_modules/react-widgets/dist/fonts/rw-widgets.woff');
 import { APP_DATE_FORMAT, APP_TIME_FORMAT } from "../../App";
 
 //https://jquense.github.io/react-widgets/api/DateTimePicker/

@@ -67,6 +67,12 @@ class SuggestionInput extends Component{
 
     }
     onSuggestionSelected(event,{suggestion}) {
+        this.setState({
+            inputProps: {
+                ...this.state.inputProps,
+                value: suggestion.description
+            },
+        });
         this.props.onClickSuggestion(suggestion);
     }
     render(){

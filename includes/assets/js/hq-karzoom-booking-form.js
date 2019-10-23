@@ -589,6 +589,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var styles = __webpack_require__(/*! ../../../../../node_modules/react-widgets/dist/css/react-widgets.css */ "./node_modules/react-widgets/dist/css/react-widgets.css");
 
+var fonts = __webpack_require__(/*! ../../../../../node_modules/react-widgets/dist/fonts/rw-widgets.ttf */ "./node_modules/react-widgets/dist/fonts/rw-widgets.ttf");
+
+var fontsTwo = __webpack_require__(/*! ../../../../../node_modules/react-widgets/dist/fonts/rw-widgets.woff */ "./node_modules/react-widgets/dist/fonts/rw-widgets.woff");
+
  //https://jquense.github.io/react-widgets/api/DateTimePicker/
 
 var DatesPicker =
@@ -902,6 +906,11 @@ function (_Component) {
     key: "onSuggestionSelected",
     value: function onSuggestionSelected(event, _ref3) {
       var suggestion = _ref3.suggestion;
+      this.setState({
+        inputProps: _objectSpread({}, this.state.inputProps, {
+          value: suggestion.description
+        })
+      });
       this.props.onClickSuggestion(suggestion);
     }
   }, {
@@ -1163,7 +1172,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props.location.coordinates);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
         id: this.props.location.id,
         name: this.props.location.name,
@@ -62323,6 +62331,17 @@ module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.svg?792dcd18baf5f5
 
 /***/ }),
 
+/***/ "./node_modules/react-widgets/dist/fonts/rw-widgets.ttf":
+/*!**************************************************************!*\
+  !*** ./node_modules/react-widgets/dist/fonts/rw-widgets.ttf ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.ttf?eceddf474df95d8d4a7e316668c3be85";
+
+/***/ }),
+
 /***/ "./node_modules/react-widgets/dist/fonts/rw-widgets.ttf?v=4.1.0":
 /*!**********************************************************************!*\
   !*** ./node_modules/react-widgets/dist/fonts/rw-widgets.ttf?v=4.1.0 ***!
@@ -62331,6 +62350,17 @@ module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.svg?792dcd18baf5f5
 /***/ (function(module, exports) {
 
 module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.ttf?eceddf474df95d8d4a7e316668c3be85";
+
+/***/ }),
+
+/***/ "./node_modules/react-widgets/dist/fonts/rw-widgets.woff":
+/*!***************************************************************!*\
+  !*** ./node_modules/react-widgets/dist/fonts/rw-widgets.woff ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.woff?12f0820c451bdc75f4d1ef97732bf6e8";
 
 /***/ }),
 

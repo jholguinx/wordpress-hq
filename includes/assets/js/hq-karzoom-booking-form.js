@@ -90,11 +90,13 @@
 /*!**************************************!*\
   !*** ./js/shortcodes/karzoom/App.js ***!
   \**************************************/
-/*! no exports provided */
+/*! exports provided: APP_DATE_FORMAT, APP_TIME_FORMAT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_DATE_FORMAT", function() { return APP_DATE_FORMAT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_TIME_FORMAT", function() { return APP_TIME_FORMAT; });
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -111,6 +113,8 @@ __webpack_require__.r(__webpack_exports__);
 
 moment__WEBPACK_IMPORTED_MODULE_3___default.a.locale('en');
 react_widgets_moment__WEBPACK_IMPORTED_MODULE_4___default()();
+var APP_DATE_FORMAT = "DD-MM-YYYY HH:mm";
+var APP_TIME_FORMAT = "HH:mm";
 /*
  *  Components
  */
@@ -137,6 +141,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_inputs_TextInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/inputs/TextInput */ "./js/shortcodes/karzoom/components/inputs/TextInput.js");
 /* harmony import */ var _components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/inputs/Hidden */ "./js/shortcodes/karzoom/components/inputs/Hidden.js");
 /* harmony import */ var _components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/inputs/DatesPicker */ "./js/shortcodes/karzoom/components/inputs/DatesPicker.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../App */ "./js/shortcodes/karzoom/App.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -160,6 +167,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -218,6 +227,13 @@ function (_PureComponent) {
       }, function () {
         return console.log('error');
       });
+      var now = moment__WEBPACK_IMPORTED_MODULE_8___default()().format(_App__WEBPACK_IMPORTED_MODULE_9__["APP_DATE_FORMAT"]);
+      this.setState({
+        form: _objectSpread({}, this.state.form, {
+          pickupDate: now,
+          returnDate: now
+        })
+      });
     }
   }, {
     key: "onChangeSuggestionInput",
@@ -259,18 +275,20 @@ function (_PureComponent) {
   }, {
     key: "onChangePickupDate",
     value: function onChangePickupDate(date) {
+      var parseDate = moment__WEBPACK_IMPORTED_MODULE_8___default()(date).format(_App__WEBPACK_IMPORTED_MODULE_9__["APP_DATE_FORMAT"]);
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          pickupDate: date
+          pickupDate: parseDate
         })
       });
     }
   }, {
     key: "onChangeReturnDate",
     value: function onChangeReturnDate(date) {
+      var parseDate = moment__WEBPACK_IMPORTED_MODULE_8___default()(date).format(_App__WEBPACK_IMPORTED_MODULE_9__["APP_DATE_FORMAT"]);
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          returnDate: date
+          returnDate: parseDate
         })
       });
     }
@@ -326,7 +344,6 @@ function (_PureComponent) {
         className: "one themeborder hq-input-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_SuggestionInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
         id: "hq-user-location",
-        name: "user-location",
         placeholder: "Your Address",
         suggestions: this.state.suggestions,
         labelProperty: "name",
@@ -561,6 +578,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_widgets__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-widgets */ "./node_modules/react-widgets/lib/index.js");
 /* harmony import */ var react_widgets__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_widgets__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../App */ "./js/shortcodes/karzoom/App.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -582,8 +602,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var styles = __webpack_require__(/*! ../../../../../node_modules/react-widgets/dist/css/react-widgets.css */ "./node_modules/react-widgets/dist/css/react-widgets.css"); //https://jquense.github.io/react-widgets/api/DateTimePicker/
 
+var styles = __webpack_require__(/*! ../../../../../node_modules/react-widgets/dist/css/react-widgets.css */ "./node_modules/react-widgets/dist/css/react-widgets.css");
+
+ //https://jquense.github.io/react-widgets/api/DateTimePicker/
 
 var DatesPicker =
 /*#__PURE__*/
@@ -601,7 +623,12 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_widgets__WEBPACK_IMPORTED_MODULE_1__["DateTimePicker"], {
         onChange: this.props.onChange,
-        defaultValue: new Date()
+        defaultValue: new Date(),
+        format: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_FORMAT"],
+        timeFormat: _App__WEBPACK_IMPORTED_MODULE_3__["APP_TIME_FORMAT"],
+        parse: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_FORMAT"],
+        min: new Date(),
+        placeholder: "Select Date"
       });
     }
   }]);

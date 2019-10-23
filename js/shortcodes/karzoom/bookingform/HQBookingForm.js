@@ -6,6 +6,8 @@ import SuggestionInput from "../components/inputs/SuggestionInput";
 import TextInput from '../components/inputs/TextInput';
 import Hidden from "../components/inputs/Hidden";
 import DatesPicker from "../components/inputs/DatesPicker";
+import moment from 'moment';
+import { APP_DATE_FORMAT } from "../App";
 
 class HQBookingForm extends PureComponent{
     constructor(props){
@@ -44,6 +46,14 @@ class HQBookingForm extends PureComponent{
             () => console.log('error')
 
         );
+        const now = moment().format(APP_DATE_FORMAT);
+        this.setState({
+            form: {
+                ...this.state.form,
+                pickupDate: now,
+                returnDate: now,
+            }
+        });
     }
     onChangeSuggestionInput(value){
         this.controller.onChangeSuggestion(value, this);
@@ -70,18 +80,20 @@ class HQBookingForm extends PureComponent{
         return selectedBrand.websiteLink;
     }
     onChangePickupDate(date){
+        const parseDate = moment(date).format(APP_DATE_FORMAT);
         this.setState({
             form: {
                 ...this.state.form,
-                pickupDate: date,
+                pickupDate: parseDate
             }
         });
     }
     onChangeReturnDate(date){
+        const parseDate = moment(date).format(APP_DATE_FORMAT);
         this.setState({
             form: {
                 ...this.state.form,
-                returnDate: date
+                returnDate: parseDate
             }
         });
     }
@@ -121,7 +133,6 @@ class HQBookingForm extends PureComponent{
                                             <div className="one themeborder hq-input-wrapper">
                                                 <SuggestionInput
                                                     id="hq-user-location"
-                                                    name="user-location"
                                                     placeholder="Your Address"
                                                     suggestions={this.state.suggestions}
                                                     labelProperty="name"

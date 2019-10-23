@@ -107,6 +107,24 @@ class HQRentalsAdminSettings
                                 </tr>
                             <?php endif; ?>
                             <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end
+                                        Date Format</label></th>
+                                <td>
+                                    <select name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
+                                        <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select System
+                                        Date Format</label></th>
+                                <td>
+                                    <select name="<?php echo $this->settings->hq_datetime_format; ?>">
+                                        <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Support for home integration</label></th>
                                 <td>
                                     <input type="checkbox"

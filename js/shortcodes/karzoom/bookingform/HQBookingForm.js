@@ -58,11 +58,7 @@ class HQBookingForm extends PureComponent{
                 ...this.state.form,
                 pickupDate: date,
             }
-<<<<<<< HEAD
         });
-=======
-        })
->>>>>>> karzoom
     }
     onChangeReturnDate(date){
         this.setState({

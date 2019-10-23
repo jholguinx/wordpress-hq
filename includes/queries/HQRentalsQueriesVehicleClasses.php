@@ -345,7 +345,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         }
         return array_map( function($vehicle){
                 return $this->vehiclePublicInterface($vehicle);
-        },$vehicles );
+        }, $vehicles );
     }
     public function vehiclePublicInterface($vehicle){
         return $this->parseObject(array(
@@ -366,5 +366,35 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
                 'values' => $vehicle->getCustomFields()
             )
         ), $vehicle);
+    }
+    public function vehiclesPublicInterfaceFiltered($brandId, $customField, $customFieldValue)
+    {
+        $vehicles = $this->getVehiclesByBrandAndCustomField($brandId, $customField, $customFieldValue);
+        return array_map(function($vehicle) use ($brandId) {
+            return $this->vehiclePublicInterface($vehicle);
+        }, $vehicles);
+    }
+    public function getVehiclesByBrandAndCustomField($brandId, $customField, $customFieldValue)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    'custom_field_clause' => array(
+                        'key' => $this->model->getCustomFieldMetaPrefix() . $customField,
+                        'value' => $customFieldValue,
+                        'compare' => '='
+                    ),
+                    'brand_clause' => array(
+                        'key' => $this->model->getBrandIdMetaKey(),
+                        'value' => $brandId,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return $this->fillModelWithPosts($query->posts);
     }
 }

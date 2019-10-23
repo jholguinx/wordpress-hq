@@ -97,7 +97,7 @@ class HQBookingController{
         this.connector.makeRequest(
             this.config.getConfigOnChangeTypes(brand, newType),
             response => {
-                console.log(response, 'res');
+                app.setState({ vehicleClasses: Parser.parseVehicles(response.data.data) });
             },
             errors => {
                 console.log(errors, 'err');

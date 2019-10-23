@@ -98,7 +98,7 @@ class HQRentalsWebsiteEndpoints{
             //fix later - no two querys
             $query = new HQRentalsQueriesVehicleClasses();
             $vehicles = $query->getVehicleClassesByBrand($brandID);
-            $vehiclesForResponse = $query->vehiclesPublicInterface($brandID);
+            $vehiclesForResponse = empty($customFieldValue) ? $query->vehiclesPublicInterface($brandID) : $query->vehiclesPublicInterfaceFiltered($brandID, $customField, $customFieldValue);
             $types = array();
             foreach ($vehicles as $vehicle){
                 $type = $vehicle->getCustomField($customField);

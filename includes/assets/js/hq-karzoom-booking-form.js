@@ -532,7 +532,9 @@ function () {
       var form = app.state.form;
       var brand = form.brand;
       this.connector.makeRequest(this.config.getConfigOnChangeTypes(brand, newType), function (response) {
-        console.log(response, 'res');
+        app.setState({
+          vehicleClasses: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseVehicles(response.data.data)
+        });
       }, function (errors) {
         console.log(errors, 'err');
       });

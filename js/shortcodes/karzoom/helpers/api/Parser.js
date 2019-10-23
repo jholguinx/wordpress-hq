@@ -79,7 +79,6 @@ class Parser {
         return (prop) ? prop : '';
     }
     static parsePlaceDetails(googlePlace){
-        console.log('details', googlePlace);
         const {
             geometry
         } = googlePlace;

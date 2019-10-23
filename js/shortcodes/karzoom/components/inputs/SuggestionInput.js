@@ -37,7 +37,7 @@ class SuggestionInput extends Component{
     }
 
     onChange(event){
-        if(event.target.value){
+        if(event.target.value || (event.target.value === "")){
             this.setState({
                 inputProps: {
                     ...this.state.inputProps,

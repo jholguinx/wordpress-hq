@@ -865,7 +865,7 @@ function (_Component) {
   }, {
     key: "onChange",
     value: function onChange(event) {
-      if (event.target.value) {
+      if (event.target.value || event.target.value === "") {
         this.setState({
           inputProps: _objectSpread({}, this.state.inputProps, {
             value: event.target.value
@@ -1560,7 +1560,6 @@ function () {
   }, {
     key: "parsePlaceDetails",
     value: function parsePlaceDetails(googlePlace) {
-      console.log('details', googlePlace);
       var geometry = googlePlace.geometry;
       var location = geometry.location;
       return Parser.parseCoordinate(location);

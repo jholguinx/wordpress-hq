@@ -94,8 +94,7 @@ class HQRentalsWebsiteEndpoints{
         try{
             $query = new HQRentalsQueriesVehicleClasses();
             $vehicles = $query->getVehicleClassesByBrand($brandID);
-            $types = array(  );
-            var_dump($vehicles[0]->getCustomField($customField));
+            $types = array();
             foreach ($vehicles as $vehicle){
                 $type = $vehicle->getCustomField($customField);
                 if(! in_array($type, $types) ){

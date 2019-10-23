@@ -1,6 +1,7 @@
 import ApiConnector from "../../helpers/api/ApiConnector";
 import ApiConfigurationManager from "../../helpers/api/ApiConfigurationManager";
 import Parser from "../../helpers/api/Parser";
+
 class HQBookingController{
     constructor() {
         this.connector = new ApiConnector();
@@ -23,7 +24,7 @@ class HQBookingController{
             error => {
                 app.setState({ errors: 'there was an issue' });
             }
-        )
+        );
     }
     onChangeSuggestion(value, app){
         app.setState({ suggestions: Parser.parseSuggestions() });
@@ -61,7 +62,7 @@ class HQBookingController{
 
             }
         );*/
-        app.setState({ mapCenter: Parser.parsePlaceDetails() });
+        app.setState({ mapCenter: Parser.parsePlaceDetails().location });
     }
     onSelectLocationOnMap(location, app){
         app.setState({

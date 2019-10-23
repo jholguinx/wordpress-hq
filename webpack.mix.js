@@ -11,4 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            'cldr$': 'cldrjs',
+            'cldr': 'cldrjs/dist/cldr'
+        }
+    }
+});
 mix.react('js/shortcodes/karzoom/App.js', 'includes/assets/js/hq-karzoom-booking-form.js');

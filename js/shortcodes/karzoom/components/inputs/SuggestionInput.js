@@ -29,12 +29,12 @@ class SuggestionInput extends Component{
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested({ value }){
         return value;
-    };
+    }
 
     // Autosuggest will call this function every time you need to clear suggestions.
     onSuggestionsClearRequested(){
-        this.props.clearSuggestions()
-    };
+        this.props.clearSuggestions();
+    }
 
     onChange(event){
         if(event.target.value){

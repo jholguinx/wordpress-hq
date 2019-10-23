@@ -4,6 +4,7 @@ import Map from '../components/maps/Map'
 import HQBookingController from "./controllers/HQBookingController";
 import SuggestionInput from "../components/inputs/SuggestionInput";
 import TextInput from '../components/inputs/TextInput';
+import DatesPicker from "../components/inputs/DatesPicker";
 
 class HQBookingForm extends PureComponent{
     constructor(props){
@@ -13,8 +14,8 @@ class HQBookingForm extends PureComponent{
             suggestionInput: '',
             brands:[],
             locations: [],
-            makes: '',
-            vehicleClasses: '',
+            makes: [],
+            vehicleClasses: [],
             errors: '',
             form: {
                 brand:{},
@@ -51,6 +52,22 @@ class HQBookingForm extends PureComponent{
     onSelectLocationOnMap(location){
         this.controller.onSelectLocationOnMap(location, this);
     }
+    onChangePickupDate(date){
+        this.setState({
+            form: {
+                ...this.state.form,
+                pickupDate: date,
+            }
+        });
+    }
+    onChangeReturnDate(date){
+        this.setState({
+            form: {
+                ...this.state.form,
+                returnDate: date,
+            }
+        })
+    }
     render(){
         return(
             <div className="one">
@@ -80,12 +97,26 @@ class HQBookingForm extends PureComponent{
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <Select
+                                                    placeholder="Brands"
                                                     options={this.state.makes}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <Select
+                                                    placeholder="Vehicle Classes"
                                                     options={this.state.vehicleClasses}
+                                                />
+                                            </div>
+                                            <div className="one themeborder hq-input-wrapper">
+                                                <DatesPicker
+                                                    placeholder="Vehicle Classes"
+                                                    onChange={this.onChangePickupDate.bind(this)}
+                                                />
+                                            </div>
+                                            <div className="one themeborder hq-input-wrapper">
+                                                <DatesPicker
+                                                    placeholder="Vehicle Classes"
+                                                    onChange={this.onChangeReturnDate.bind(this)}
                                                 />
                                             </div>
                                             <div className="one_fourth last themeborder">

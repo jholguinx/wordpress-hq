@@ -17,6 +17,17 @@ mix.webpackConfig({
             'cldr$': 'cldrjs',
             'cldr': 'cldrjs/dist/cldr'
         }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: {
+                    loader: 'file-loader'
+                }
+
+            }
+        ]
     }
 });
 mix.react('js/shortcodes/karzoom/App.js', 'includes/assets/js/hq-karzoom-booking-form.js');

@@ -31,7 +31,7 @@ export class MapContainer extends Component {
     render() {
         return (
             <Map
-                style={{width: '100%', height: '100%', position: 'relative'}}
+                style={{width: '50%', height: '50%', position: 'relative'}}
                 google={this.props.google}
                 zoom={this.props.zoom}
                 center={this.props.mapCenter}

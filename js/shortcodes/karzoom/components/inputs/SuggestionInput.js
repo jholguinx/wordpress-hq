@@ -59,7 +59,7 @@ class SuggestionInput extends Component{
     renderSuggestion(suggestion, { query, isHighlighted }){
         if(suggestion){
             return(
-                <div>
+                <div className="hq-suggestion-wrapper">
                     <p>{suggestion.description}</p>
                 </div>
             );

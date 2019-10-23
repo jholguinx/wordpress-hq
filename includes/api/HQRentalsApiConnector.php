@@ -81,4 +81,13 @@ class HQRentalsApiConnector{
         $response = wp_remote_get( $this->endpoints->getTenantsSettingsEndpoint(), $this->configuration->getBasicApiConfiguration() );
         return $this->resolver->resolveApiCallTenantsSettings( $response );
     }
+    public function getGooglePlacesOnAutocomplete($input)
+    {
+        $response = wp_remote_get( $this->endpoints->getGoogleAutocompleteEndpoint($input) );
+        return $this->resolver->resolveGoogleAutocomplete( $response );
+    }
+    public function getGooglePlaceDetailsData($placeId){
+        $response = wp_remote_get( $this->endpoints->getGooglePlaceDetailsEndpoint($placeId) );
+        return $this->resolver->resolveGooglePlaceDetails( $response );
+    }
 }

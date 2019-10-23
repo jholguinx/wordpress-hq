@@ -15,17 +15,16 @@ class ApiEndpointHandler{
     }
 
     getBrandEndpoint(){
-        console.log('2');
         return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';
     }
     getTypesAndVehiclesEndpoint(){
         return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/vehicle-types/';
     }
     getGoogleAutocompleteEndpoint(){
-        return 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+        return '/wp-json/hqrentals/google/autocomplete/';
     }
     getGooglePlaceDetailEndpoint(){
-        return 'https://maps.googleapis.com/maps/api/place/details/json';
+        return '/wp-json/hqrentals/google/place/';
     }
 
 }

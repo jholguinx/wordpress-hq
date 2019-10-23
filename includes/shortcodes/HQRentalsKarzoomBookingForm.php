@@ -14,6 +14,12 @@ class HQRentalsKarzoomBookingForm
     public function shortcode( $atts = [] )
     {
         $this->assets->loadKarzoomFormAssets();
+        $atts = shortcode_atts(
+            array(
+                'background_url'   => ' ',
+            ), $atts
+        );
+        wp_localize_script('hq-karzoom-form-script', 'HQMapShortcodeBackground', $atts['background_url'] );
         ?>
             <div id="hq-booking-form-karzoom"></div>
         <?php

@@ -198,6 +198,7 @@ function (_PureComponent) {
       makes: [],
       vehicleClasses: [],
       errors: '',
+      backgroundStyle: {},
       form: {
         brand: '',
         vehicleClass: '',
@@ -232,7 +233,10 @@ function (_PureComponent) {
         form: _objectSpread({}, this.state.form, {
           pickupDate: now,
           returnDate: now
-        })
+        }),
+        backgroundStyle: {
+          backgroundImage: 'url(' + HQMapShortcodeBackground + ')'
+        }
       });
     }
   }, {
@@ -317,7 +321,9 @@ function (_PureComponent) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one"
+        className: "one",
+        id: "hq-map-shortcode",
+        style: this.state.backgroundStyle
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one_half"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -331,9 +337,9 @@ function (_PureComponent) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "standard_wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "ppb_title"
-      }, "Find Best Car &amp; Limousine"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "page_tagline"
+        className: "ppb_title hq-shortcode-map-title"
+      }, "Find Best Cars"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "page_tagline hq-shortcode-map-title"
       }, "From as low as $10 per day with limited\n" + "                                time offer discounts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "car_search_form",
         method: "POST",
@@ -476,24 +482,13 @@ function () {
   }, {
     key: "onChangeSuggestion",
     value: function onChangeSuggestion(value, app) {
-      app.setState({
-        suggestions: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseSuggestions()
-      });
-      /*
-      this.connector.makeRequest(
-          this.config.getPlacesConfig(value),
-              response => {
-              if(response.data){
-                     app.setState({ suggestions: Parser.parseSuggestions(response.data) })
-              }
-                  //THIS should be removed when cors issue is gone
-                  app.setState({ suggestions: Parser.parseSuggestions(response.data) })
-              },
-              error => {
-                  console.log(error, 'error');
-                  app.setState({ suggestions: Parser.parseSuggestions(error.data) })
-              }
-      );*/
+      this.connector.makeRequest(this.config.getPlacesConfig(value), function (response) {
+        if (response.data) {
+          app.setState({
+            suggestions: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseSuggestions(response.data.data.predictions)
+          });
+        }
+      }, function (error) {});
     }
   }, {
     key: "getLocation",
@@ -507,18 +502,11 @@ function () {
   }, {
     key: "centerMapOnSuggestionSelection",
     value: function centerMapOnSuggestionSelection(suggestion, app) {
-      /*
-      this.connector.makeRequest(
-          this.config.getPlaceDetails(suggestion),
-          response => {
-              app.setState({ mapCenter: Parser.parsePlaceDetails(response.data) });
-          },
-          error => {
-            }
-      );*/
-      app.setState({
-        mapCenter: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parsePlaceDetails().location
-      });
+      this.connector.makeRequest(this.config.getPlaceDetails(suggestion), function (response) {
+        app.setState({
+          mapCenter: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parsePlaceDetails(response.data.data.place)
+        });
+      }, function (error) {});
     }
   }, {
     key: "onSelectLocationOnMap",
@@ -539,9 +527,7 @@ function () {
             vehicleClass: classes[0].id
           })
         });
-      }, function (error) {
-        console.log('errr', error);
-      });
+      }, function (error) {});
     }
   }, {
     key: "onChangeVehicleBrand",
@@ -552,9 +538,7 @@ function () {
         app.setState({
           vehicleClasses: _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseVehicles(response.data.data)
         });
-      }, function (errors) {
-        console.log(errors, 'err');
-      });
+      }, function (errors) {});
     }
   }]);
 
@@ -779,7 +763,7 @@ function (_PureComponent) {
         placeholder: this.props.placeholder,
         className: "hq-inputs-select",
         onChange: this.props.onChange
-      }, this.renderOptions()));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.props.placeholder), this.renderOptions()));
     }
   }]);
 
@@ -909,7 +893,9 @@ function (_Component) {
           isHighlighted = _ref2.isHighlighted;
 
       if (suggestion) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, suggestion.description));
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hq-suggestion-wrapper"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, suggestion.description));
       }
     }
   }, {
@@ -1104,8 +1090,8 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
         style: {
-          width: '100%',
-          height: '100%',
+          width: '50%',
+          height: '50%',
           position: 'relative'
         },
         google: this.props.google,
@@ -1204,12 +1190,6 @@ function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ApiEndpointHandler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ApiEndpointHandler */ "./js/shortcodes/karzoom/helpers/api/ApiEndpointHandler.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1251,17 +1231,10 @@ function () {
     value: function getPlacesConfig(newInput) {
       return {
         url: this.endpoints.getGoogleAutocompleteEndpoint(),
-        params: _objectSpread({}, this.placesDefaultConfig, {
+        params: {
           input: newInput
-        }),
-        data: _objectSpread({}, this.placesDefaultConfig, {
-          input: newInput,
-          componenst: 'country:ve'
-        }),
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        },
+        method: 'get'
       };
     }
   }, {
@@ -1269,13 +1242,10 @@ function () {
     value: function getPlaceDetails(place) {
       return {
         url: this.endpoints.getGooglePlaceDetailEndpoint(),
-        params: _objectSpread({}, this.placesDefaultConfig, {
+        params: {
           place_id: place.place_id
-        }),
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        },
+        method: 'get'
       };
     }
   }, {
@@ -1453,7 +1423,6 @@ function () {
   }, {
     key: "getBrandEndpoint",
     value: function getBrandEndpoint() {
-      console.log('2');
       return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';
     }
   }, {
@@ -1464,12 +1433,12 @@ function () {
   }, {
     key: "getGoogleAutocompleteEndpoint",
     value: function getGoogleAutocompleteEndpoint() {
-      return 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+      return '/wp-json/hqrentals/google/autocomplete/';
     }
   }, {
     key: "getGooglePlaceDetailEndpoint",
     value: function getGooglePlaceDetailEndpoint() {
-      return 'https://maps.googleapis.com/maps/api/place/details/json';
+      return '/wp-json/hqrentals/google/place/';
     }
   }]);
 
@@ -1560,42 +1529,15 @@ function () {
     }
   }, {
     key: "parseSuggestions",
-    value: function parseSuggestions() {
-      return [{
-        description: "Universidad Metropolitana de Caracas, Caracas, Miranda, Venezuela",
-        id: "b1464f102dd20cbd9f3d71c80cd274064e23d165",
-        matched_substrings: [{
-          length: 25,
-          offset: 0
-        }],
-        place_id: "ChIJByMUVG1XKowRfjYm4eWkajQ",
-        reference: "ChIJByMUVG1XKowRfjYm4eWkajQ"
-      }, {
-        description: "Universidad Metropolitana Extensión Postgrado, Calle Rivera, Puerto La Cruz, Anzoategui, Venezuela",
-        id: "aa5d79f155652d09194abb5db44f84c386211c3e",
-        place_id: "ChIJMaFXgyV0LYwRzettfwM8n_E",
-        reference: "ChIJMaFXgyV0LYwRzettfwM8n_E"
-      }, {
-        description: "Avenida Universidad Metropolitana, Caracas, Miranda, Venezuela",
-        id: "903b4b2bbdbe183b005ddf9b86a600ab90929079",
-        place_id: "Ej5BdmVuaWRhIFVuaXZlcnNpZGFkIE1ldHJvcG9saXRhbmEsIENhcmFjYXMsIE1pcmFuZGEsIFZlbmV6dWVsYSIuKiwKFAoSCXXTF5VtVyqMESzuWixzkr-hEhQKEgkHSILNrVgqjBGDhJkKri7dkw",
-        reference: "Ej5BdmVuaWRhIFVuaXZlcnNpZGFkIE1ldHJvcG9saXRhbmEsIENhcmFjYXMsIE1pcmFuZGEsIFZlbmV6dWVsYSIuKiwKFAoSCXXTF5VtVyqMESzuWixzkr-hEhQKEgkHSILNrVgqjBGDhJkKri7dkw"
-      }, {
-        description: "Entrada Universidad Metropolitana, Caracas, Capital District, Venezuela",
-        id: "13b1e22f2e6c0f339156bbb6d127e714d5090064",
-        place_id: "EkdFbnRyYWRhIFVuaXZlcnNpZGFkIE1ldHJvcG9saXRhbmEsIENhcmFjYXMsIENhcGl0YWwgRGlzdHJpY3QsIFZlbmV6dWVsYSIuKiwKFAoSCRV9uHoSVyqMEQxc2hEVm6KgEhQKEgkHSILNrVgqjBGDhJkKri7dkw",
-        reference: "EkdFbnRyYWRhIFVuaXZlcnNpZGFkIE1ldHJvcG9saXRhbmEsIENhcmFjYXMsIENhcGl0YWwgRGlzdHJpY3QsIFZlbmV6dWVsYSIuKiwKFAoSCRV9uHoSVyqMEQxc2hEVm6KgEhQKEgkHSILNrVgqjBGDhJkKri7dkw"
-      }];
+    value: function parseSuggestions(predictions) {
+      if (Array.isArray(predictions)) {
+        return predictions.map(function (prediction) {
+          return Parser.parseGooglePrediction(prediction);
+        });
+      } else {
+        return [];
+      }
     }
-    /*
-    static parseSuggestions(predictions) {
-        if (Array.isArray(predictions)) {
-            return predictions.map( prediction => Parser.parseGooglePrediction(prediction) );
-        }else{
-            return [];
-        }
-    }*/
-
   }, {
     key: "parseGooglePrediction",
     value: function parseGooglePrediction(prediction) {
@@ -1615,28 +1557,13 @@ function () {
     value: function parseProperty(prop) {
       return prop ? prop : '';
     }
-    /*
-    static parsePlaceDetails(googlePlace){
-        const {
-            geometry
-        } = googlePlace;
-        const {
-            location
-        } = geometry;
-        return {
-            location: Parser.parseCoordinate(location)
-        }
-    }*/
-
   }, {
     key: "parsePlaceDetails",
-    value: function parsePlaceDetails() {
-      return {
-        location: {
-          lat: 10.5011604802915,
-          lng: -66.78293951970849
-        }
-      };
+    value: function parsePlaceDetails(googlePlace) {
+      console.log('details', googlePlace);
+      var geometry = googlePlace.geometry;
+      var location = geometry.location;
+      return Parser.parseCoordinate(location);
     }
   }, {
     key: "parserMakes",

@@ -4,6 +4,7 @@ namespace HQRentalsPlugin\HQRentalsApi;
 
 
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersGoogle;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersLocations;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersTransformersVehicleClasses;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersSettings;
@@ -19,7 +20,7 @@ class HQRentalsApiCallResolver
 
     public function resolveErrorMessageFromResponse($wpResponse)
     {
-        return $wpResponse['response']['code'] . " - " . $wpResponse['response']['message'];
+        return $wpResponse->get_error_message();
     }
 
     /*
@@ -194,6 +195,22 @@ class HQRentalsApiCallResolver
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
             return new HQRentalsApiResponse(null, true, HQRentalsTransformersSettings::transformDataFromApi(json_decode($response['body'])->data));
+        }
+    }
+    public function resolveGoogleAutocomplete($response)
+    {
+        if (is_wp_error($response)) {
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
+        } else {
+            return new HQRentalsApiResponse(null, true, HQRentalsTransformersGoogle::transformGoogleAutocompleteData(json_decode($response['body'])));
+        }
+    }
+    public function resolveGooglePlaceDetails($response)
+    {
+        if (is_wp_error($response)) {
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
+        } else {
+            return new HQRentalsApiResponse(null, true, HQRentalsTransformersGoogle::transformGooglePlaceData(json_decode($response['body'])));
         }
     }
 

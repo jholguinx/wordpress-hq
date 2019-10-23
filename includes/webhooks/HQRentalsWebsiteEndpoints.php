@@ -4,7 +4,7 @@ namespace HQRentalsPlugin\Webhooks;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
-use mysql_xdevapi\Exception;
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 
 class HQRentalsWebsiteEndpoints{
 
@@ -29,6 +29,14 @@ class HQRentalsWebsiteEndpoints{
         register_rest_route( 'hqrentals', '/shortcodes/vehicle-types', array(
             'methods' => 'GET',
             'callback' => array ($this, 'vehicleTypes'),
+        ));
+        register_rest_route( 'hqrentals', '/google/autocomplete', array(
+            'methods' => 'GET',
+            'callback' => array ($this, 'googleAutocomplete'),
+        ));
+        register_rest_route( 'hqrentals', '/google/place', array(
+            'methods' => 'GET',
+            'callback' => array ($this, 'googlePlace'),
         ));
     }
     public function brand()
@@ -114,5 +122,36 @@ class HQRentalsWebsiteEndpoints{
         }catch (Exception $e){
             return $this->resolveResponse($e, false);
         }
+    }
+    public function googleAutocomplete()
+    {
+        try{
+            //fix later - no two querys
+            $input = $_GET['input'];
+            $connector = new HQRentalsApiConnector();
+            $data = $connector->getGooglePlacesOnAutocomplete($input);
+            $data = array(
+                'predictions'  =>  $data->data
+            );
+            return $this->resolveResponse($data, true);
+        }catch (Exception $e){
+            return $this->resolveResponse($e, false);
+        }
+    }
+    public function googlePlace()
+    {
+        try{
+            $placeId = $_GET['place_id'];
+            $connector = new HQRentalsApiConnector();
+            $data = $connector->getGooglePlaceDetailsData($placeId);
+            $data = array(
+                'place'  =>  $data->data
+            );
+            return $this->resolveResponse($data, true);
+        }catch (Exception $e){
+            return $this->resolveResponse($e, false);
+        }
+
+
     }
 }

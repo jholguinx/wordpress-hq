@@ -66,4 +66,24 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'tenants/current';
     }
+    public function getGoogleAutocompleteEndpoint($input)
+    {
+        $args = array(
+            'key'           =>  'AIzaSyAodJ3h4T6uXjUJZ0q8aLk9rEz21m_kWqE',
+            'input'         =>  $input,
+            'components'    =>  'country:ve',
+            'lang'          =>  'en'
+        );
+        return 'https://maps.googleapis.com/maps/api/place/autocomplete/json?' . http_build_query($args);
+    }
+    public function getGooglePlaceDetailsEndpoint($placeId)
+    {
+        $args = array(
+            'key'           =>  'AIzaSyAodJ3h4T6uXjUJZ0q8aLk9rEz21m_kWqE',
+            'place_id'         =>  $placeId,
+        );
+        return 'https://maps.googleapis.com/maps/api/place/details/json?' . http_build_query($args);
+    }
+
+
 }

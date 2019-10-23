@@ -53,48 +53,13 @@ class Parser {
             return null;
         }
     }
-    static parseSuggestions(){
-        return [
-            {
-                description: "Universidad Metropolitana de Caracas, Caracas, Miranda, Venezuela",
-                id: "b1464f102dd20cbd9f3d71c80cd274064e23d165",
-                matched_substrings: [
-                    {
-                        length: 25,
-                        offset: 0
-                    }
-                ],
-                place_id: "ChIJByMUVG1XKowRfjYm4eWkajQ",
-                reference: "ChIJByMUVG1XKowRfjYm4eWkajQ",
-            },
-            {
-                description: "Universidad Metropolitana Extensión Postgrado, Calle Rivera, Puerto La Cruz, Anzoategui, Venezuela",
-                id: "aa5d79f155652d09194abb5db44f84c386211c3e",
-                place_id: "ChIJMaFXgyV0LYwRzettfwM8n_E",
-                reference: "ChIJMaFXgyV0LYwRzettfwM8n_E",
-            },
-            {
-                description: "Avenida Universidad Metropolitana, Caracas, Miranda, Venezuela",
-                id: "903b4b2bbdbe183b005ddf9b86a600ab90929079",
-                place_id: "Ej5BdmVuaWRhIFVuaXZlcnNpZGFkIE1ldHJvcG9saXRhbmEsIENhcmFjYXMsIE1pcmFuZGEsIFZlbmV6dWVsYSIuKiwKFAoSCXXTF5VtVyqMESzuWixzkr-hEhQKEgkHSILNrVgqjBGDhJkKri7dkw",
-                reference: "Ej5BdmVuaWRhIFVuaXZlcnNpZGFkIE1ldHJvcG9saXRhbmEsIENhcmFjYXMsIE1pcmFuZGEsIFZlbmV6dWVsYSIuKiwKFAoSCXXTF5VtVyqMESzuWixzkr-hEhQKEgkHSILNrVgqjBGDhJkKri7dkw",
-            },
-            {
-                description: "Entrada Universidad Metropolitana, Caracas, Capital District, Venezuela",
-                id: "13b1e22f2e6c0f339156bbb6d127e714d5090064",
-                place_id: "EkdFbnRyYWRhIFVuaXZlcnNpZGFkIE1ldHJvcG9saXRhbmEsIENhcmFjYXMsIENhcGl0YWwgRGlzdHJpY3QsIFZlbmV6dWVsYSIuKiwKFAoSCRV9uHoSVyqMEQxc2hEVm6KgEhQKEgkHSILNrVgqjBGDhJkKri7dkw",
-                reference: "EkdFbnRyYWRhIFVuaXZlcnNpZGFkIE1ldHJvcG9saXRhbmEsIENhcmFjYXMsIENhcGl0YWwgRGlzdHJpY3QsIFZlbmV6dWVsYSIuKiwKFAoSCRV9uHoSVyqMEQxc2hEVm6KgEhQKEgkHSILNrVgqjBGDhJkKri7dkw",
-            }
-        ];
-    }
-    /*
     static parseSuggestions(predictions) {
         if (Array.isArray(predictions)) {
             return predictions.map( prediction => Parser.parseGooglePrediction(prediction) );
         }else{
             return [];
         }
-    }*/
+    }
     static parseGooglePrediction(prediction) {
         const {
             description,
@@ -113,25 +78,15 @@ class Parser {
     static parseProperty(prop) {
         return (prop) ? prop : '';
     }
-    /*
     static parsePlaceDetails(googlePlace){
+        console.log('details', googlePlace);
         const {
             geometry
         } = googlePlace;
         const {
             location
         } = geometry;
-        return {
-            location: Parser.parseCoordinate(location)
-        }
-    }*/
-    static parsePlaceDetails(){
-        return {
-            location: {
-                lat: 10.5011604802915,
-                lng: -66.78293951970849
-            }
-        };
+        return Parser.parseCoordinate(location);
     }
     static parserMakes(response){
         const {

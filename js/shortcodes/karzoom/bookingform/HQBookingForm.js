@@ -20,6 +20,7 @@ class HQBookingForm extends PureComponent{
             makes: [],
             vehicleClasses: [],
             errors: '',
+            backgroundStyle: {},
             form: {
                 brand:'',
                 vehicleClass:'',
@@ -52,6 +53,9 @@ class HQBookingForm extends PureComponent{
                 ...this.state.form,
                 pickupDate: now,
                 returnDate: now,
+            },
+            backgroundStyle: {
+                backgroundImage: 'url(' + HQMapShortcodeBackground + ')'
             }
         });
     }
@@ -118,15 +122,15 @@ class HQBookingForm extends PureComponent{
     }
     render(){
         return(
-            <div className="one">
+            <div className="one" id="hq-map-shortcode" style={this.state.backgroundStyle}>
                 <div className="one_half">
                     <div className="withsmallpadding ppb_car_search_background parallax withbg">
                         <div className="overlay_background" />
                         <div className="center_wrapper">
                             <div className="inner_content">
                                 <div className="standard_wrapper">
-                                    <h2 className="ppb_title">{"Find Best Car &amp; Limousine"}</h2>
-                                    <div className="page_tagline">{"From as low as $10 per day with limited\n" +
+                                    <h2 className="ppb_title hq-shortcode-map-title">{"Find Best Cars"}</h2>
+                                    <div className="page_tagline hq-shortcode-map-title">{"From as low as $10 per day with limited\n" +
                                     "                                time offer discounts"}</div>
                                     <form className="car_search_form" method="POST" action={this.state.formAction} >
                                         <div className="car_search_wrapper">

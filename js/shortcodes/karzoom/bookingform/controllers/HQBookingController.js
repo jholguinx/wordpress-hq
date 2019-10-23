@@ -27,22 +27,16 @@ class HQBookingController{
         );
     }
     onChangeSuggestion(value, app){
-        app.setState({ suggestions: Parser.parseSuggestions() });
-        /*
         this.connector.makeRequest(
             this.config.getPlacesConfig(value),
                 response => {
-                if(response.data){
-                       app.setState({ suggestions: Parser.parseSuggestions(response.data) })
-                }
-                    //THIS should be removed when cors issue is gone
-                    app.setState({ suggestions: Parser.parseSuggestions(response.data) })
+                    if(response.data){
+                           app.setState({ suggestions: Parser.parseSuggestions(response.data.data.predictions) });
+                    }
                 },
                 error => {
-                    console.log(error, 'error');
-                    app.setState({ suggestions: Parser.parseSuggestions(error.data) })
                 }
-        );*/
+        );
     }
     getLocation( successCallback, failedCallback) {
         if (navigator.geolocation) {
@@ -52,17 +46,15 @@ class HQBookingController{
         }
     }
     centerMapOnSuggestionSelection(suggestion, app){
-        /*
         this.connector.makeRequest(
             this.config.getPlaceDetails(suggestion),
             response => {
-                app.setState({ mapCenter: Parser.parsePlaceDetails(response.data) });
+                app.setState({ mapCenter: Parser.parsePlaceDetails(response.data.data.place) });
             },
             error => {
 
             }
-        );*/
-        app.setState({ mapCenter: Parser.parsePlaceDetails().location });
+        );
     }
     onSelectLocationOnMap(location, app){
         app.setState({
@@ -87,7 +79,6 @@ class HQBookingController{
                 });
             },
             error => {
-                console.log('errr',error);
             }
         );
     }
@@ -100,7 +91,6 @@ class HQBookingController{
                 app.setState({ vehicleClasses: Parser.parseVehicles(response.data.data) });
             },
             errors => {
-                console.log(errors, 'err');
             }
         );
     }

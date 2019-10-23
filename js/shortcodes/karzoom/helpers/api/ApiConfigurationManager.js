@@ -12,7 +12,7 @@ class ApiConfigurationManager {
             key: 'AIzaSyAodJ3h4T6uXjUJZ0q8aLk9rEz21m_kWqE',
             input:'',
             language: 'en'
-        }
+        };
     }
     getInitConfig(){
         return {
@@ -21,37 +21,24 @@ class ApiConfigurationManager {
             headers: {
                 'Content-type': 'application/json'
             }
-        }
+        };
     }
     getPlacesConfig(newInput){
         return {
             url: this.endpoints.getGoogleAutocompleteEndpoint(),
             params: {
-                ...this.placesDefaultConfig,
                 input: newInput
             },
-            data: {
-                ...this.placesDefaultConfig,
-                input: newInput,
-                componenst: 'country:ve'
-            },
-            method: 'get',
-            headers: {
-                'Content-Type' : 'application/json'
-            }
+            method: 'get'
         };
     }
     getPlaceDetails(place){
         return {
             url: this.endpoints.getGooglePlaceDetailEndpoint(),
             params: {
-                ...this.placesDefaultConfig,
                 place_id: place.place_id
             },
             method: 'get',
-            headers: {
-                'Content-Type' : 'application/json'
-            }
         };
     }
     getOnChangeLocationConfig(location){

@@ -1,14 +1,8 @@
-const endpoints = {
-
-};
 
 class ApiEndpointHandler{
-    constructor(){
-        this.endpoints = endpoints;
-    }
     /*Get this from wordpress - Somewhere*/
     getBaseUrl(){
-        return 'http://karzoom.test/';
+        return HQMapFormShortcode.baseURL;
     }
     getInitEndpoint(){
         return this.getBaseUrl() + 'wp-json/hqrentals/shortcodes/bookingform/';

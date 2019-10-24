@@ -235,7 +235,7 @@ function (_PureComponent) {
           returnDate: now
         }),
         backgroundStyle: {
-          backgroundImage: 'url(' + HQMapShortcodeBackground + ')'
+          backgroundImage: 'url(' + HQMapFormShortcode.backgroundImageURL + ')'
         }
       });
     }
@@ -264,7 +264,8 @@ function (_PureComponent) {
         formAction: this.resolveActionLink(location),
         form: _objectSpread({}, this.state.form, {
           pickupLocation: location.id,
-          returnLocation: location.id
+          returnLocation: location.id,
+          brand: location.brand_id
         })
       });
     }
@@ -318,6 +319,36 @@ function (_PureComponent) {
       });
     }
   }, {
+    key: "onChangeBranch",
+    value: function onChangeBranch(event) {
+      var value = event.target.value;
+      this.setState({
+        formAction: this.resolveActionLinkWithBrandID(value),
+        form: _objectSpread({}, this.state.form, {
+          pickupLocation: this.resolveLocationIdOnBrands(value),
+          returnLocation: this.resolveLocationIdOnBrands(value),
+          brand: value
+        })
+      });
+    }
+  }, {
+    key: "resolveActionLinkWithBrandID",
+    value: function resolveActionLinkWithBrandID(id) {
+      var selectedBrand = this.state.brands.find(function (brand) {
+        return String(brand.id) === String(id);
+      });
+      return selectedBrand.websiteLink;
+    }
+  }, {
+    key: "resolveLocationIdOnBrands",
+    value: function resolveLocationIdOnBrands(brandId) {
+      var selectedBrand = this.state.brands.find(function (brand) {
+        return String(brand.id) === String(brandId);
+      });
+      var selectedLocation = selectedBrand.locations[0];
+      return selectedLocation.id;
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -357,6 +388,13 @@ function (_PureComponent) {
         value: this.state.suggestionInput,
         onClickSuggestion: this.onClickOnSuggestion.bind(this),
         clearSuggestions: this.clearSuggestions.bind(this)
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "one themeborder hq-input-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        placeholder: "Branches",
+        options: this.state.brands,
+        branches: true,
+        onChange: this.onChangeBranch.bind(this)
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one themeborder hq-input-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -511,11 +549,6 @@ function () {
   }, {
     key: "onSelectLocationOnMap",
     value: function onSelectLocationOnMap(location, app) {
-      app.setState({
-        form: _objectSpread({}, app.state.form, {
-          brand: location.brand_id
-        })
-      });
       this.connector.makeRequest(this.config.getOnChangeLocationConfig(location), function (response) {
         var makes = _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parserMakes(response.data.data);
         var classes = _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseVehicles(response.data.data);
@@ -748,6 +781,13 @@ function (_PureComponent) {
             key: index,
             value: option
           }, option);
+        });
+      } else if (this.props.branches) {
+        return this.props.options.map(function (option, index) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            key: index,
+            value: option.id
+          }, option.name);
         });
       } else {
         return this.props.options.map(function (option, index) {
@@ -1405,23 +1445,19 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var endpoints = {};
-
 var ApiEndpointHandler =
 /*#__PURE__*/
 function () {
   function ApiEndpointHandler() {
     _classCallCheck(this, ApiEndpointHandler);
-
-    this.endpoints = endpoints;
   }
-  /*Get this from wordpress - Somewhere*/
-
 
   _createClass(ApiEndpointHandler, [{
     key: "getBaseUrl",
+
+    /*Get this from wordpress - Somewhere*/
     value: function getBaseUrl() {
-      return 'http://karzoom.test/';
+      return HQMapFormShortcode.baseURL;
     }
   }, {
     key: "getInitEndpoint",
@@ -62305,7 +62341,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.eot?fffee840413d911b9d18e73888dbd10f";
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.eot?55ad455437f92282c5df9c7e7fe73c7e";
 
 /***/ }),
 
@@ -62316,7 +62352,7 @@ module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.eot?fffee840413d91
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.eot?fffee840413d911b9d18e73888dbd10f";
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.eot?55ad455437f92282c5df9c7e7fe73c7e";
 
 /***/ }),
 
@@ -62327,7 +62363,7 @@ module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.eot?fffee840413d91
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.svg?0b58f5d7664a15850e3cbb5157965d2d";
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.svg?b36735f5507b70a2e716ef9cac7e6280";
 
 /***/ }),
 
@@ -62338,7 +62374,7 @@ module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.svg?0b58f5d7664a15
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.ttf?9d6336c0982169c242a3f067f806fb2e";
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.ttf?521c3f63e5771b87fcf6e381b60b9628";
 
 /***/ }),
 
@@ -62349,7 +62385,7 @@ module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.ttf?9d6336c0982169
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.ttf?9d6336c0982169c242a3f067f806fb2e";
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.ttf?521c3f63e5771b87fcf6e381b60b9628";
 
 /***/ }),
 
@@ -62360,7 +62396,7 @@ module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.ttf?9d6336c0982169
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.woff?6736e07069ded7c26b29c3201d2a7d80";
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.woff?8fb55676b7f7c1cd52f21b1273106e0a";
 
 /***/ }),
 
@@ -62371,7 +62407,7 @@ module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.woff?6736e07069ded
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.woff?6736e07069ded7c26b29c3201d2a7d80";
+module.exports = "/fonts/vendor/react-widgets/dist/rw-widgets.woff?8fb55676b7f7c1cd52f21b1273106e0a";
 
 /***/ }),
 

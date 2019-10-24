@@ -55,7 +55,7 @@ class HQBookingForm extends PureComponent{
                 returnDate: now,
             },
             backgroundStyle: {
-                backgroundImage: 'url(' + HQMapShortcodeBackground + ')'
+                backgroundImage: 'url(' + HQMapFormShortcode.backgroundImageURL + ')'
             }
         });
     }
@@ -75,7 +75,8 @@ class HQBookingForm extends PureComponent{
             form:{
                 ...this.state.form,
                 pickupLocation: location.id,
-                returnLocation: location.id
+                returnLocation: location.id,
+                brand: location.brand_id
             }
         });
     }
@@ -120,6 +121,27 @@ class HQBookingForm extends PureComponent{
             }
         });
     }
+    onChangeBranch(event){
+        const { value } = event.target;
+        this.setState({
+            formAction: this.resolveActionLinkWithBrandID(value),
+            form:{
+                ...this.state.form,
+                pickupLocation: this.resolveLocationIdOnBrands(value),
+                returnLocation: this.resolveLocationIdOnBrands(value),
+                brand: value
+            }
+        });
+    }
+    resolveActionLinkWithBrandID(id){
+        const selectedBrand = this.state.brands.find( brand => String(brand.id) === String(id) );
+        return selectedBrand.websiteLink;
+    }
+    resolveLocationIdOnBrands(brandId){
+        const selectedBrand = this.state.brands.find( brand => String(brand.id) === String(brandId) );
+        const selectedLocation = selectedBrand.locations[0];
+        return selectedLocation.id;
+    }
     render(){
         return(
             <div className="one" id="hq-map-shortcode" style={this.state.backgroundStyle}>
@@ -144,6 +166,14 @@ class HQBookingForm extends PureComponent{
                                                     value={this.state.suggestionInput}
                                                     onClickSuggestion={this.onClickOnSuggestion.bind(this)}
                                                     clearSuggestions={this.clearSuggestions.bind(this)}
+                                                />
+                                            </div>
+                                            <div className="one themeborder hq-input-wrapper">
+                                                <Select
+                                                    placeholder="Branches"
+                                                    options={this.state.brands}
+                                                    branches={true}
+                                                    onChange={this.onChangeBranch.bind(this)}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">

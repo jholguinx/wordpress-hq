@@ -57,12 +57,6 @@ class HQBookingController{
         );
     }
     onSelectLocationOnMap(location, app){
-        app.setState({
-            form: {
-                ...app.state.form,
-                brand: location.brand_id
-            }
-        });
         this.connector.makeRequest(
             this.config.getOnChangeLocationConfig(location),
             response => {

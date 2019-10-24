@@ -9,6 +9,8 @@ class Select extends PureComponent{
             return this.props.options.map((option,  index) => <option key={index} value={option.id}>{option.name}</option>);
         }else if(this.props.makes){
             return this.props.options.map((option,  index) => <option key={index} value={option}>{option}</option>);
+        }else if(this.props.branches){
+            return this.props.options.map((option,  index) => <option key={index} value={option.id}>{option.name}</option>);
         }else{
             return this.props.options.map((option,  index) => <option key={index} value={option.value}>{option[this.props.labelProperty]}</option>);
         }

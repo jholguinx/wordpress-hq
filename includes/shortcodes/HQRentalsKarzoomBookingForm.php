@@ -19,7 +19,11 @@ class HQRentalsKarzoomBookingForm
                 'background_url'   => ' ',
             ), $atts
         );
-        wp_localize_script('hq-karzoom-form-script', 'HQMapShortcodeBackground', $atts['background_url'] );
+        $dataToJS = array(
+            'backgroundImageURL'    => $atts['background_url'],
+            'baseURL'               =>  get_site_url() . '/'
+        );
+        wp_localize_script('hq-karzoom-form-script', 'HQMapFormShortcode', $dataToJS );
         ?>
             <div id="hq-booking-form-karzoom"></div>
         <?php

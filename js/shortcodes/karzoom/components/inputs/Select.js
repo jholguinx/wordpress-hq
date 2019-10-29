@@ -25,6 +25,7 @@ class Select extends PureComponent{
                     placeholder={this.props.placeholder}
                     className="hq-inputs-select"
                     onChange={this.props.onChange}
+                    value={this.props.value}
                 >
                     <option>{this.props.placeholder}</option>
                     {this.renderOptions()}

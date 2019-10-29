@@ -39,7 +39,15 @@ abstract class HQRentalsTransformersBase
         }
         $coordinate = $setting->getLocationCoordinateField();
         if(!empty($coordinate)){
-            $objectToReturn->coordinates = $apiObject->{$coordinate};
+            $objectToReturn->coordinates = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$coordinate});
+        }
+        $image = $setting->getLocationImageField();
+        if(!empty($image)){
+            $objectToReturn->image = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$image});
+        }
+        $description = $setting->getLocationDescriptionField();
+        if(!empty($description)){
+            $objectToReturn->description = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$description});
         }
         return $objectToReturn;
     }

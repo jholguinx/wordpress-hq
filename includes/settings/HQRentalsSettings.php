@@ -28,6 +28,8 @@ class HQRentalsSettings
     public $hq_tenant_link = 'hq_wordpress_tenant_link';
     public $hq_disable_safari_functionality = 'hq_disable_safari_functionality';
     public $hq_location_coordinate_field = 'hq_location_coordinate_field';
+    public $hq_location_image_field = 'hq_location_image_field';
+    public $hq_location_description_field = 'hq_location_description_field';
 
     public function __construct()
     {
@@ -304,6 +306,31 @@ class HQRentalsSettings
     {
         return get_option($this->hq_location_coordinate_field, '');
     }
+
+    public function noLocationImageSetting(){
+        return empty(get_option($this->hq_location_image_field));
+    }
+    public function saveLocationImageSetting($data)
+    {
+        return update_option($this->hq_location_image_field, $data);
+    }
+    public function getLocationImageField()
+    {
+        return get_option($this->hq_location_image_field, '');
+    }
+
+    public function noLocationDescriptionSetting(){
+        return empty(get_option($this->hq_location_description_field));
+    }
+    public function saveLocationDescriptionSetting($data)
+    {
+        return update_option($this->hq_location_description_field, $data);
+    }
+    public function getLocationDescriptionField()
+    {
+        return get_option($this->hq_location_description_field, '');
+    }
+
 
 
     /***

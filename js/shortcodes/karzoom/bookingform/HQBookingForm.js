@@ -33,19 +33,25 @@ class HQBookingForm extends PureComponent{
             formAction: '',
             mapCenter:{
                 //Default Value
-                lat: 10.4984684,
-                lng: -66.7956924
+                lat: 52.3742108,
+                lng: -1.5132913
             },
             suggestions:[]
         };
     }
     componentDidMount(){
         this.controller.componentInit(this);
-        this.controller.getLocation( (location) => {
-            console.log(location);
+        this.controller.getLocation( (position) => {
+            const { coords } = position;
+            const { latitude, longitude } = coords;
+            this.setState({
+                mapCenter: {
+                    lat: latitude,
+                    lng: longitude
+                }
+            });
         },
-            () => console.log('error')
-
+            // Do Nothing
         );
         const now = moment().format(APP_DATE_FORMAT);
         this.setState({
@@ -170,10 +176,11 @@ class HQBookingForm extends PureComponent{
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <Select
-                                                    placeholder="Branches"
+                                                    placeholder="Dealers"
                                                     options={this.state.brands}
                                                     branches={true}
                                                     onChange={this.onChangeBranch.bind(this)}
+                                                    value={this.state.form.brand}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
@@ -182,6 +189,7 @@ class HQBookingForm extends PureComponent{
                                                     options={this.state.makes}
                                                     makes={true}
                                                     onChange={this.onChangeVehicleBrand.bind(this)}
+                                                    value={this.state.form.make}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
@@ -190,6 +198,7 @@ class HQBookingForm extends PureComponent{
                                                     options={this.state.vehicleClasses}
                                                     vehicleClass={true}
                                                     onChange={this.onChangeVehicleClass.bind(this)}
+                                                    value={this.state.form.vehicleClass}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">

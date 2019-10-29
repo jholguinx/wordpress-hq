@@ -149,6 +149,22 @@ class HQRentalsAdminSettings
                                 </td>
                             </tr>
                             <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Description Field</label></th>
+                                <td>
+                                    <input type="text"
+                                           name="<?php echo $this->settings->hq_location_description_field; ?>"
+                                           value="<?php echo esc_attr($this->settings->getLocationDescriptionField()); ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Image Field</label></th>
+                                <td>
+                                    <input type="text"
+                                           name="<?php echo $this->settings->hq_location_image_field; ?>"
+                                           value="<?php echo esc_attr($this->settings->getLocationImageField()); ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Disabled Safari Redirect Functionality</label></th>
                                 <td>
                                     <input type="checkbox"

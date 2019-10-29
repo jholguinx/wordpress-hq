@@ -22,6 +22,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     protected $metaAirport = 'hq_wordpress_location_is_airport_meta';
     protected $metaOffice = 'hq_wordpress_location_is_office_meta';
     protected $metaCoordinates = 'hq_wordpress_location_coordinates_meta';
+    protected $metaImage = 'hq_wordpress_location_image_meta';
+    protected $metaDescription = 'hq_wordpress_location_description_meta';
     protected $metaIsActive = 'hq_wordpress_location_is_active_meta';
     protected $metaOrder = 'hq_wordpress_location_order_meta';
 
@@ -36,6 +38,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $coordinates = '';
     public $isActive = '';
     public $order = '';
+    public $image = '';
+    public $description = '';
 
 
     public function __construct($post = null)
@@ -96,6 +100,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->coordinates = $data->coordinates;
         $this->isActive = $data->active;
         $this->order = $data->order;
+        $this->image =$data->image;
+        $this->description = $data->description;
     }
 
 
@@ -118,6 +124,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaCoordinates, $this->coordinates );
         hq_update_post_meta( $post_id, $this->metaIsActive, $this->isActive );
         hq_update_post_meta( $post_id, $this->metaOrder, $this->order );
+        hq_update_post_meta( $post_id, $this->metaImage, $this->image );
+        hq_update_post_meta( $post_id, $this->metaDescription, $this->description );
     }
 
     /*
@@ -163,7 +171,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     }
     public function setFromPost($post)
     {
-        foreach ($this->getAllMetaTags() as $property   =>   $metakey){
+        foreach ($this->getAllMetaTags() as $property => $metakey){
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
         }
     }
@@ -178,7 +186,9 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'isOffice'      =>  $this->metaOffice,
             'coordinates'   =>  $this->metaCoordinates,
             'isActive'      =>  $this->metaIsActive,
-            'order'         =>  $this->metaOrder
+            'order'         =>  $this->metaOrder,
+            'image'         =>  $this->metaImage,
+            'description'   =>  $this->metaDescription
         );
     }
     public function getMetaKeyFromBrandID()

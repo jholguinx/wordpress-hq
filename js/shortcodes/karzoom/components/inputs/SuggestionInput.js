@@ -86,6 +86,7 @@ class SuggestionInput extends Component{
                 shouldRenderSuggestions={this.shouldRenderSuggestions.bind(this)}
                 inputProps={this.state.inputProps}
                 suggestions={this.props.suggestions}
+                focusInputOnSuggestionClick={false}
             />
         );
     }

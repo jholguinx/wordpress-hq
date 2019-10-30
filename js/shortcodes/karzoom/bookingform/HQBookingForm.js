@@ -157,8 +157,8 @@ class HQBookingForm extends PureComponent{
                         <div className="center_wrapper">
                             <div className="inner_content">
                                 <div className="standard_wrapper">
-                                    <h2 className="ppb_title hq-shortcode-map-title">{"Find Best Cars"}</h2>
-                                    <div className="page_tagline hq-shortcode-map-title">{"From as low as $10 per day with limited\n" +
+                                    <h2 className="ppb_title hq-shortcode-map-title">{"Car Hire Where You Need It!"}</h2>
+                                    <div className="page_tagline hq-shortcode-map-subtitle">{"From as low as $10 per day with limited\n" +
                                     "                                time offer discounts"}</div>
                                     <form className="car_search_form" method="POST" action={this.state.formAction} >
                                         <div className="car_search_wrapper">
@@ -176,7 +176,7 @@ class HQBookingForm extends PureComponent{
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <Select
-                                                    placeholder="Dealers"
+                                                    placeholder="Select Pick-up Location"
                                                     options={this.state.brands}
                                                     branches={true}
                                                     onChange={this.onChangeBranch.bind(this)}

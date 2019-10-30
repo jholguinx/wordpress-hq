@@ -31,3 +31,4 @@ mix.webpackConfig({
     }
 });
 mix.react('js/shortcodes/karzoom/App.js', 'includes/assets/js/hq-karzoom-booking-form.js');
+mix.react('js/shortcodes/karzoom/AppForm.js', 'includes/assets/js/hq-karzoom-contact-form.js');

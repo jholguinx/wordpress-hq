@@ -19,13 +19,14 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     protected $metaVehicleClassId = 'hq_wordpress_feature_vehicle_id_meta';
     protected $metaLabel = 'hq_wordpress_feature_label_meta';
     protected $metaIcon = 'hq_wordpress_feature_icon_meta';
+    protected $metaLabelForWebsite = 'hq_wordpress_feature_label_for_website_meta';
 
     //Labels per Language
     public $vehicleClassId = '';
     public $label = '';
+    public $label_for_website = '';
     public $icon = '';
     public $metaClassId = 'hq_wordpress_feature_vehicle_id_meta';
-    public $postID = '';
     public $metaOrderKey = 'hq_wordpress_feature_order_meta';
 
     public function __construct($post = null)
@@ -44,7 +45,8 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     public function setFeatureFromApi($vehicle_id, $data)
     {
         $this->vehicleClassId = $vehicle_id;
-        $this->label = $data->label_for_website;
+        $this->label = $data->label;
+        $this->label_for_website = $data->label_for_website;
         $this->icon = $data->icon;
     }
 
@@ -88,9 +90,10 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     public function getAllMetaTags()
     {
         return array(
-            'vehicleClassId' => $this->metaVehicleClassId,
-            'label' => $this->metaLabel,
-            'icon' => $this->metaIcon,
+            'vehicleClassId'        => $this->metaVehicleClassId,
+            'label'                 => $this->metaLabel,
+            'icon'                  => $this->metaIcon,
+            'label_for_website'     =>  $this->metaLabelForWebsite
         );
     }
 

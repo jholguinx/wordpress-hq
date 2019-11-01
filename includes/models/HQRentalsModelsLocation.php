@@ -24,9 +24,11 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     protected $metaCoordinates = 'hq_wordpress_location_coordinates_meta';
     protected $metaImage = 'hq_wordpress_location_image_meta';
     protected $metaDescription = 'hq_wordpress_location_description_meta';
+    protected $metaAddressLabel = 'hq_wordpress_location_address_label_meta';
+    protected $metaOfficeHours = 'hq_wordpress_location_office_hours_meta';
+    protected $metaBrands = 'hq_wordpress_location_brands_meta';
     protected $metaIsActive = 'hq_wordpress_location_is_active_meta';
     protected $metaOrder = 'hq_wordpress_location_order_meta';
-
     /*
      * Object Data to Display
      */
@@ -40,6 +42,9 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $order = '';
     public $image = '';
     public $description = '';
+    public $addressLabel = '';
+    public $officeHours = '';
+    public $brands = [];
 
 
     public function __construct($post = null)
@@ -102,6 +107,9 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->order = $data->order;
         $this->image =$data->image;
         $this->description = $data->description;
+        $this->officeHours = $data->officeHours;
+        $this->addressLabel = $data->addressLabel;
+        $this->brands = $data->brands;
     }
 
 
@@ -126,6 +134,9 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaOrder, $this->order );
         hq_update_post_meta( $post_id, $this->metaImage, $this->image );
         hq_update_post_meta( $post_id, $this->metaDescription, $this->description );
+        hq_update_post_meta( $post_id, $this->metaBrands, $this->brands );
+        hq_update_post_meta( $post_id, $this->metaOfficeHours, $this->officeHours );
+        hq_update_post_meta( $post_id, $this->metaAddressLabel, $this->addressLabel );
     }
 
     /*
@@ -164,10 +175,6 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     }
     public function set($data)
     {
-        if($this->filter->isPost($data)){
-
-        }else{}
-        //$metas =
     }
     public function setFromPost($post)
     {
@@ -188,7 +195,10 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'isActive'      =>  $this->metaIsActive,
             'order'         =>  $this->metaOrder,
             'image'         =>  $this->metaImage,
-            'description'   =>  $this->metaDescription
+            'description'   =>  $this->metaDescription,
+            'officeHours'   =>  $this->metaOfficeHours,
+            'addressLabel'  =>  $this->metaAddressLabel,
+            'brands'        =>  $this->metaBrands
         );
     }
     public function getMetaKeyFromBrandID()
@@ -197,5 +207,23 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     }
     public function getBrandId(){
         return $this->brandId;
+    }
+    public function getOfficeHours($cssClass = "")
+    {
+        $html = '';
+        foreach (explode(PHP_EOL, $this->officeHours) as $hour){
+            $html .= '<p class="'. $cssClass .'" >' . $hour . '</p>';
+        }
+        return $html;
+    }
+    public function getBrands()
+    {
+        if(is_array($this->brands)){
+            $html = '';
+            foreach ($this->brands as $brand){
+                $html .= $brand . ' ';
+            }
+            return $html;
+        }
     }
 }

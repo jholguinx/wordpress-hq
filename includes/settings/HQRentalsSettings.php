@@ -5,6 +5,7 @@ namespace HQRentalsPlugin\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsEncryptionHandler;
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
 
 class HQRentalsSettings
 {
@@ -30,6 +31,9 @@ class HQRentalsSettings
     public $hq_location_coordinate_field = 'hq_location_coordinate_field';
     public $hq_location_image_field = 'hq_location_image_field';
     public $hq_location_description_field = 'hq_location_description_field';
+    public $hq_location_address_label_field = 'hq_location_address_label_field';
+    public $hq_location_brands_field = 'hq_location_brands_field';
+    public $hq_location_office_hours_field = 'hq_location_office_hours_field';
 
     public function __construct()
     {
@@ -331,6 +335,42 @@ class HQRentalsSettings
         return get_option($this->hq_location_description_field, '');
     }
 
+    public function noAddressLabelSetting(){
+        return empty(get_option($this->hq_location_address_label_field));
+    }
+    public function saveAddressLabelSetting($data)
+    {
+        return update_option($this->hq_location_address_label_field, $data);
+    }
+    public function getAddressLabelField()
+    {
+        return get_option($this->hq_location_address_label_field, '');
+    }
+
+    public function noOfficeHoursSetting(){
+        return empty(get_option($this->hq_location_office_hours_field));
+    }
+    public function saveOfficeHoursSetting($data)
+    {
+        return update_option($this->hq_location_office_hours_field, $data);
+    }
+    public function getOfficeHoursSetting()
+    {
+        return get_option($this->hq_location_office_hours_field, '');
+    }
+
+    public function noBrandsSetting(){
+        return empty(get_option($this->hq_location_brands_field));
+    }
+    public function saveBrandsSetting($data)
+    {
+        return update_option($this->hq_location_brands_field, $data);
+    }
+    public function getBrandsSetting()
+    {
+        return get_option($this->hq_location_brands_field, '');
+    }
+
 
 
     /***
@@ -367,6 +407,9 @@ class HQRentalsSettings
         if (empty($postDataFromSettings[$this->hq_disable_safari_functionality])) {
             update_option($this->hq_disable_safari_functionality, "false");
         }
+        /*Refresh data on save */
+        $worker = new HQRentalsCronJob();
+        $worker->refreshAllData();
         $_POST['success'] = 'success';
     }
 

@@ -28,27 +28,41 @@ abstract class HQRentalsTransformersBase
         }
     }
 
-    public static function extractDataFromApiObject($properties, $apiObject, $nestedObject = null)
+    public static function extractDataFromApiObject($properties, $apiObject, $nestedObject = null, $isLocation = false)
     {
         $objectToReturn = new \stdClass();
-        $setting = new HQRentalsSettings();
+
         foreach ($properties as $property) {
             if (empty($nestedObject)) {
                 $objectToReturn->{$property} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$property});
             }
         }
-        $coordinate = $setting->getLocationCoordinateField();
-        if(!empty($coordinate)){
-            $objectToReturn->coordinates = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$coordinate});
-        }
-        $image = $setting->getLocationImageField();
-        if(!empty($image)){
-            $objectToReturn->image = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$image});
-        }
-        $description = $setting->getLocationDescriptionField();
-        if(!empty($description)){
-            $objectToReturn->description = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$description});
+        if($isLocation){
+            HQRentalsTransformersBase::resolveCustomFieldsOnLocation($objectToReturn, $apiObject);
         }
         return $objectToReturn;
+    }
+    public static function resolveCustomFieldsOnLocation($objectToReturn, $apiObject)
+    {
+        $setting = new HQRentalsSettings();
+        $coordinates = $setting->getLocationCoordinateField();
+        $image = $setting->getLocationImageField();
+        $description = $setting->getLocationDescriptionField();
+        $hours = $setting->getOfficeHoursSetting();
+        $addressLabel = $setting->getAddressLabelField();
+        $brands = $setting->getBrandsSetting();
+        HQRentalsTransformersBase::resolveSingleCustomField($coordinates, $objectToReturn, $apiObject, 'coordinates');
+        HQRentalsTransformersBase::resolveSingleCustomField($image, $objectToReturn, $apiObject, 'image');
+        HQRentalsTransformersBase::resolveSingleCustomField($description, $objectToReturn, $apiObject, 'description');
+        HQRentalsTransformersBase::resolveSingleCustomField($hours, $objectToReturn, $apiObject, 'officeHours');
+        HQRentalsTransformersBase::resolveSingleCustomField($addressLabel, $objectToReturn, $apiObject, 'addressLabel');
+        HQRentalsTransformersBase::resolveSingleCustomField($brands, $objectToReturn, $apiObject, 'brands');
+
+    }
+    public static function resolveSingleCustomField($settingField, $objectToReturn, $apiObject, $newPropertyName)
+    {
+        if(!empty($settingField)){
+            $objectToReturn->{$newPropertyName} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$settingField});
+        }
     }
 }

@@ -59,12 +59,12 @@ class HQRentalsAdminSettings
             <?php endif; ?>
             <?php
         } else {
-
             ?>
             <div class="wrap">
                 <div id="wrap">
                     <h1>HQ Rentals Authentication Access</h1>
                     <form action="" method="post">
+                        <h3>General Settings</h3>
                         <table class="form-table">
                             <tbody>
                             <tr>
@@ -73,7 +73,9 @@ class HQRentalsAdminSettings
                                            size="70"
                                            value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
                                            id="title"
-                                           spellcheck="true" autocomplete="off"></td>
+                                           spellcheck="true" autocomplete="off">
+                                </td>
+
                             </tr>
                             <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User
@@ -164,6 +166,33 @@ class HQRentalsAdminSettings
                                            value="<?php echo esc_attr($this->settings->getLocationImageField()); ?>"/>
                                 </td>
                             </tr>
+
+                            <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Address Label Field</label></th>
+                                <td>
+                                    <input type="text"
+                                           name="<?php echo $this->settings->hq_location_address_label_field; ?>"
+                                           value="<?php echo esc_attr($this->settings->getAddressLabelField()); ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Vehicles Brands Field</label></th>
+                                <td>
+                                    <input type="text"
+                                           name="<?php echo $this->settings->hq_location_brands_field; ?>"
+                                           value="<?php echo esc_attr($this->settings->getBrandsSetting()); ?>"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Office Hours Field</label></th>
+                                <td>
+                                    <input type="text"
+                                           name="<?php echo $this->settings->hq_location_office_hours_field; ?>"
+                                           value="<?php echo esc_attr($this->settings->getOfficeHoursSetting()); ?>"/>
+                                </td>
+                            </tr>
+
+
                             <tr>
                                 <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Disabled Safari Redirect Functionality</label></th>
                                 <td>
@@ -182,6 +211,9 @@ class HQRentalsAdminSettings
                                         </option>
                                         <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
                                             America 2
+                                        </option>
+                                        <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
+                                            America West
                                         </option>
                                         <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
                                             Europe

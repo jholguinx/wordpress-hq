@@ -24,6 +24,6 @@ class HQRentalsTransformersLocations extends HQRentalsTransformersBase
     }
     public static function transformSingleLocation($location)
     {
-        return HQRentalsTransformersLocations::extractDataFromApiObject(HQRentalsTransformersLocations::$singleLocationProperties, $location);
+        return HQRentalsTransformersLocations::extractDataFromApiObject(HQRentalsTransformersLocations::$singleLocationProperties, $location, null, true);
     }
 }

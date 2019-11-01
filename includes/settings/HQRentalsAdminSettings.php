@@ -64,199 +64,262 @@ class HQRentalsAdminSettings
                 <div id="wrap">
                     <h1>HQ Rentals Authentication Access</h1>
                     <form action="" method="post">
-                        <h3>General Settings</h3>
-                        <table class="form-table">
-                            <tbody>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title" for="title">Tenant Token</label></th>
-                                <td><input type="text" name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
-                                           size="70"
-                                           value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
-                                           id="title"
-                                           spellcheck="true" autocomplete="off">
-                                </td>
 
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User
-                                        Token</label></th>
-                                <td><input type="text" name="<?php echo esc_attr($this->settings->api_user_token); ?>"
-                                           size="70"
-                                           value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
-                                           id="title"
-                                           spellcheck="true" autocomplete="off"></td>
-                            </tr>
-                            <?php if (get_site_url() == 'https://workspot.nu' or get_site_url() == 'http://workspot.test'): ?>
-                                <tr>
-                                    <th><label class="wp-heading-inline" id="title" for="title">Tenant Token Workspot
-                                            Gebouw Tenant</label></th>
-                                    <td><input type="text"
-                                               name="<?php echo esc_attr($this->settings->api_tenant_token_workspot_gebouw_location); ?>"
-                                               size="70"
-                                               value="<?php echo esc_attr($this->settings->getApiTenantTokenForWorkspotLocation()); ?>"
-                                               id="title"
-                                               spellcheck="true" autocomplete="off"></td>
-                                </tr>
-                                <tr>
-                                    <th><label class="wp-heading-inline" id="title-prompt-text" for="title">User
-                                            Token Workspot Gebouw Tenant</label></th>
-                                    <td><input type="text"
-                                               name="<?php echo esc_attr($this->settings->api_user_token_workspot_gebouw_location); ?>"
-                                               size="70"
-                                               value="<?php echo esc_attr($this->settings->getApiUserTokenForWorkspotLocation()); ?>"
-                                               id="title"
-                                               spellcheck="true" autocomplete="off"></td>
-                                </tr>
-                            <?php endif; ?>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Front-end
-                                        Date Format</label></th>
-                                <td>
-                                    <select name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
-                                        <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select System
-                                        Date Format</label></th>
-                                <td>
-                                    <select name="<?php echo $this->settings->hq_datetime_format; ?>">
-                                        <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Support for home integration</label></th>
-                                <td>
-                                    <input type="checkbox"
-                                           name="<?php echo $this->settings->hq_integration_on_home; ?>"
-                                           value="true" <?php echo ($this->settings->getSupportForHomeIntegration() === 'true') ? 'checked' : ''; ?>/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Disabled Sync</label></th>
-                                <td>
-                                    <input type="checkbox"
-                                           name="<?php echo $this->settings->hq_disable_cronjob_option; ?>"
-                                           value="true" <?php echo ($this->settings->getDisableCronjobOption() === 'true') ? 'checked' : ''; ?>/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Coordinate Field</label></th>
-                                <td>
-                                    <input type="text"
-                                           name="<?php echo $this->settings->hq_location_coordinate_field; ?>"
-                                           value="<?php echo esc_attr($this->settings->getLocationCoordinateField()); ?>"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Description Field</label></th>
-                                <td>
-                                    <input type="text"
-                                           name="<?php echo $this->settings->hq_location_description_field; ?>"
-                                           value="<?php echo esc_attr($this->settings->getLocationDescriptionField()); ?>"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Image Field</label></th>
-                                <td>
-                                    <input type="text"
-                                           name="<?php echo $this->settings->hq_location_image_field; ?>"
-                                           value="<?php echo esc_attr($this->settings->getLocationImageField()); ?>"/>
-                                </td>
-                            </tr>
+                        <style>
+                            .hq-general-settings-wrapper {
+                                display: flex;
+                                flex: 1;
+                                flex-direction: row;
+                                width: 80%;
+                            }
 
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Address Label Field</label></th>
-                                <td>
-                                    <input type="text"
-                                           name="<?php echo $this->settings->hq_location_address_label_field; ?>"
-                                           value="<?php echo esc_attr($this->settings->getAddressLabelField()); ?>"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Vehicles Brands Field</label></th>
-                                <td>
-                                    <input type="text"
-                                           name="<?php echo $this->settings->hq_location_brands_field; ?>"
-                                           value="<?php echo esc_attr($this->settings->getBrandsSetting()); ?>"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Locations Office Hours Field</label></th>
-                                <td>
-                                    <input type="text"
-                                           name="<?php echo $this->settings->hq_location_office_hours_field; ?>"
-                                           value="<?php echo esc_attr($this->settings->getOfficeHoursSetting()); ?>"/>
-                                </td>
-                            </tr>
+                            .hq-general-settings-item-wrapper {
+                                display: flex;
+                                flex: 1;
+                                flex-direction: column;
+                                padding-right: 50px;
+                            }
 
+                            .hq-general-settings-item {
+                                display: flex;
+                                flex: 1;
+                                flex-direction: row;
+                            }
 
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Disabled Safari Redirect Functionality</label></th>
-                                <td>
-                                    <input type="checkbox"
-                                           name="<?php echo $this->settings->hq_disable_safari_functionality; ?>"
-                                           value="true" <?php echo ($this->settings->getDisableSafari() === 'true') ? 'checked' : ''; ?>/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><label class="wp-heading-inline" id="title-prompt-text" for="title">Select Api
-                                        Region</label></th>
-                                <td>
-                                    <select name="<?php echo $this->settings->api_base_url; ?>">
-                                        <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
-                                            America
-                                        </option>
-                                        <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
-                                            America 2
-                                        </option>
-                                        <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
-                                            America West
-                                        </option>
-                                        <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
-                                            Europe
-                                        </option>
-                                        <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
-                                            Asia
-                                        </option>
-                                    </select>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <input type="submit" name="save" value="Save" class="button button-primary button-large">
+                            .hq-admin-text-input, .hq-admin-select-input {
+                                height: 35px;
+                                width: 100%;
+                                border-radius: 5px;
+                            }
+
+                            .hq-general-input-wrapper {
+                                display: flex;
+                                flex: 3;
+                                align-items: center;
+                                justify-content: flex-start;
+                            }
+
+                            .hq-general-label-wrapper {
+                                display: flex;
+                                flex: 1;
+                                align-items: center;
+                                justify-content: flex-start;
+                            }
+                            .small{
+                                max-width: 100px;
+                            }
+                        </style>
+                        <div class="hq-general-settings-section-wrapper">
+                            <h3>General Settings</h3>
+                            <div class="hq-general-settings-wrapper">
+                                <div class="hq-general-settings-item-wrapper">
+                                    <div class="hq-general-settings-item">
+                                        <div class="hq-general-label-wrapper">
+                                            <h4 class="wp-heading-inline" for="title">Tenant token</h4>
+                                        </div>
+                                        <div class="hq-general-input-wrapper">
+                                            <input class="hq-admin-text-input"
+                                                   type="text"
+                                                   name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
+                                                   value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
+                                                   id="title"
+                                                   spellcheck="true" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="hq-general-settings-item">
+                                        <div class="hq-general-label-wrapper">
+                                            <h4 class="wp-heading-inline" for="title">User token</h4>
+                                        </div>
+                                        <div class="hq-general-input-wrapper">
+                                            <input class="hq-admin-text-input"
+                                                   type="text"
+                                                   name="<?php echo esc_attr($this->settings->api_user_token); ?>"
+                                                   value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
+                                                   spellcheck="true" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hq-general-settings-item-wrapper">
+                                    <div class="hq-general-settings-item">
+                                        <div class="hq-general-label-wrapper">
+                                            <h4 class="wp-heading-inline" for="title">Select front-end date Format</h4>
+                                        </div>
+                                        <div class="hq-general-input-wrapper">
+                                            <select class="hq-admin-select-input"
+                                                    name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
+                                                <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="hq-general-settings-item">
+                                        <div class="hq-general-label-wrapper">
+                                            <h4 class="wp-heading-inline" for="title">Select system date format</h4>
+                                        </div>
+                                        <div class="hq-general-input-wrapper">
+                                            <select class="hq-admin-select-input"
+                                                    name="<?php echo $this->settings->hq_datetime_format; ?>">
+                                                <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="hq-general-settings-item">
+                                        <div class="hq-general-label-wrapper">
+                                            <h4 class="wp-heading-inline" for="title">API tenant region</h4>
+                                        </div>
+                                        <div class="hq-general-input-wrapper">
+                                            <select class="hq-admin-select-input"
+                                                    name="<?php echo $this->settings->api_base_url; ?>">
+                                                <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
+                                                    America
+                                                </option>
+                                                <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
+                                                    America 2
+                                                </option>
+                                                <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
+                                                    America West
+                                                </option>
+                                                <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
+                                                    Europe
+                                                </option>
+                                                <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
+                                                    Asia
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hq-advanced-section">
+                            <h3>Advanced Development Settings</h3>
+                            <div class="hq-general-settings-wrapper">
+                                <div class="hq-general-settings-item-wrapper">
+                                    <div class="hq-general-settings-item-wrapper">
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Disable safari redirect</h4>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="checkbox"
+                                                       name="<?php echo $this->settings->hq_disable_safari_functionality; ?>"
+                                                       value="true" <?php echo ($this->settings->getDisableSafari() === 'true') ? 'checked' : ''; ?>/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Support for reservation iFrame
+                                                    on homepage</h4>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="checkbox"
+                                                       name="<?php echo $this->settings->hq_integration_on_home; ?>"
+                                                       value="true" <?php echo ($this->settings->getSupportForHomeIntegration() === 'true') ? 'checked' : ''; ?>/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Fleet location coordinates
+                                                    field id</h4>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_location_coordinate_field; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getLocationCoordinateField()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Fleet location image field
+                                                    id</h4>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_location_image_field; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getLocationImageField()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Fleet location description
+                                                    field id</h4>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_location_description_field; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getLocationDescriptionField()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Fleet location address field
+                                                    id</h4>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_location_address_label_field; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getAddressLabelField()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Fleet location office hours
+                                                    field id</h4>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_location_office_hours_field; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getOfficeHoursSetting()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Fleet location vehicle brands
+                                                    field id</h4>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_location_brands_field; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getBrandsSetting()); ?>"/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="hq-general-settings-item-wrapper">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="hq-admin-help-section">
+                                <p>Need help? Please click <strong><a target="_blank" href="https://hqrentalsoftware.com/knowledgebase_category/website-integration/">here</a></strong> for more information on how to set up the HQ Rentals plugin.</p>
+                            </div>
+                            <input type="submit" name="save" value="Save" class="button button-primary button-large">
+                            <div class="hq-admin-warning-section">
+                                <p><strong>Note:</strong> Please save your settings first, then force the update of the settings. All previous data will be lost and the webiste will be updated with the recently saved settings.
+                                </p>
+                            </div>
                     </form>
                 </div>
-            </div>
-            <div class="">
-                <form method="post">
-                    <table class="form-table">
-                        <tbody>
-                        <tr>
-                            <th><label class="wp-heading-inline" id="title" for="title">Force Sync Update</label>
-                                <p style="text-align: justify;">
-                                    All the previous data will be deleted
-                                </p></th>
-                            <td>
-                                <input type="hidden" value="1" name="hq_force_update"/>
-                                <input type="submit" value="Force Update" name="save"
-                                       class="button button-primary button-large">
-
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
             </div>
             <?php
         }
         ?>
         <style>
-            .fw-brz-dismiss {
-                border-left-color: #d62c64 !important;
+            .hq-admin-warning-section{
+                max-width: 500px;
             }
-
+            .hq-admin-help-section, .hq-admin-help-section{
+                padding-top: 25px;
+                padding-bottom: 25px;
+            }
+            .hq-admin-warning-section p, .hq-admin-help-section p{
+                font-style: italic;
+            }
             .fw-brz-dismiss p:last-of-type a {
                 color: #fff;
                 font-size: 13px;
@@ -272,18 +335,6 @@ class HQRentalsAdminSettings
                 text-decoration: none;
                 display: inline-block;
                 transition: all 200ms linear;
-            }
-
-            .fw-brz__btn-install:hover {
-                background-color: #141923;
-                color: #fff;
-                border-color: #141923;
-                box-shadow: 0px 2px 0px 0px #141923;
-            }
-
-            .hq-warning-woo {
-                font-weight: bold;
-                color: red;
             }
         </style>
         <?php

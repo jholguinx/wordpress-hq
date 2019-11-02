@@ -149,14 +149,15 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $newRate = new HQRentalsModelsActiveRate();
                 $newRate->setActiveRateFromApi($this->id, $rate);
                 $this->rate[] = $newRate;
-            }
-        }
-
-        if(!empty($data->activeRates->price_intervals)){
-            foreach ($data->activeRates->price_intervals as $price){
-                $newPrice = new HQRentalsModelsPriceInterval();
-                $newPrice->setIntervalRateFromApi($price, $this->id);
-                $this->priceIntervals[] = $newPrice;
+                if(is_array($rate->price_intervals)){
+                    if(count($rate->price_intervals) > 0){
+                        foreach ($rate->price_intervals as $price){
+                            $newPrice = new HQRentalsModelsPriceInterval();
+                            $newPrice->setIntervalRateFromApi($price, $this->id);
+                            $this->priceIntervals[] = $newPrice;
+                        }
+                    }
+                }
             }
         }
         if(!empty($customFields->data)){

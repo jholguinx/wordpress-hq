@@ -13,6 +13,6 @@ class HQRentalsUpgrader{
     }
     public function upgradePlugin()
     {
-        $this->upgrader->upgrade('hq-wordpress');
+        return $this->upgrader->upgrade('hq-rental-software');
     }
 }

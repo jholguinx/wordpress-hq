@@ -35,17 +35,25 @@ class HQRentalsWebhooksManager{
     }
     public function firePluginUpgrade()
     {
-        $this->upgrader->upgradePlugin();
-        $data = $this->resolveResponse();
-        $response = new \WP_REST_Response($data);
-        $response->status = 200;
-        return $response;
+        $response = $this->upgrader->upgradePlugin();
+        if($response){
+            $data = $this->resolveResponse($response);
+            $response = new \WP_REST_Response($data);
+            $response->status = 200;
+            return $response;
+        }else{
+            $data = $this->resolveResponse($response);
+            $response = new \WP_REST_Response($data);
+            $response->status = 500;
+            return $response;
+        }
+
     }
-    public function resolveResponse(){
+    public function resolveResponse($data){
         return array(
             'message'   =>  'Successful Update',
             'status'    =>  200,
-            'data'      =>  [ ]
+            'data'      =>  empty($data) ? [] : $data
         );
     }
 }

@@ -33,6 +33,7 @@ class HQRentalsAssetsHandler
 	    if (static::$count === 1) {
 		    add_action('wp_enqueue_scripts', array( $this, 'registerPluginAssets' ), 10);
             add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
+            add_action('admin_enqueue_scripts', array($this, 'registerAdminAssets'), 20);
 	    }
     }
     public function registerPluginAssets()
@@ -99,5 +100,17 @@ class HQRentalsAssetsHandler
     public function loadKarzoomContactAssets()
     {
         wp_enqueue_script("hq-karzoom-contact-form-script");
+    }
+    public function registerAdminAssets()
+    {
+        wp_register_script('hq-admin-tooltip-js', plugin_dir_url(__FILE__) . 'js/tooltip.min.js', array(), $this->pluginVersion, true);
+        wp_register_script('hq-admin-poper-js', plugin_dir_url(__FILE__) . 'js/popper.js', array(), $this->pluginVersion, true);
+        wp_register_script('hq-admin-admin-js', plugin_dir_url(__FILE__) . 'js/admin.js', array(), $this->pluginVersion, true);
+    }
+    public function loadAssetsForAdmin()
+    {
+        wp_enqueue_script('hq-admin-poper-js');
+        wp_enqueue_script('hq-admin-tooltip-js');
+        wp_enqueue_script('hq-admin-admin-js');
     }
 }

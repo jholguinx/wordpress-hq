@@ -5,6 +5,7 @@ require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 require_once ABSPATH . 'wp-admin/includes/misc.php';
 require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader-skin.php';
 require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+require_once ABSPATH . 'wp-admin/includes/file.php';
 
 class HQRentalsUpgrader{
     public function __construct()

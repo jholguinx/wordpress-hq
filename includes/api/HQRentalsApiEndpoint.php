@@ -84,6 +84,13 @@ class HQRentalsApiEndpoint{
         );
         return 'https://maps.googleapis.com/maps/api/place/details/json?' . http_build_query($args);
     }
-
+    public function getWebsiteRegistrationEndpoint()
+    {
+        $args = array(
+            'site'      =>  get_site_url(),
+            'version'   => HQ_RENTALS_PLUGIN_VERSION
+        );
+        return $this->settings->getApiBaseUrl() . 'car-rental/websites/register?' . http_build_query($args);
+    }
 
 }

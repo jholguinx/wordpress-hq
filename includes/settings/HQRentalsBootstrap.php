@@ -1,7 +1,8 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsSettings;
-
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 
 class HQRentalsBootstrap
 {
@@ -74,8 +75,8 @@ class HQRentalsBootstrap
         if ($this->settings->noOfficeHoursSetting()) {
             $this->settings->saveOfficeHoursSetting($this->hq_location_description_default_value);
         }
-
         $this->resolveDefaultPages();
+        $this->notifyToSystemOnActivation();
     }
 
     public function resolveDefaultPages()
@@ -102,6 +103,11 @@ class HQRentalsBootstrap
         } else {
             update_post_meta($post_id, 'hq_wordpress_is_wordpress_page', '1' );
         }
+    }
+    public function notifyToSystemOnActivation()
+    {
+        $api = new HQRentalsApiConnector();
+        $response = $api->notifyOnActivation();
     }
 
 

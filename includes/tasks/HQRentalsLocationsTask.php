@@ -15,8 +15,7 @@ class HQRentalsLocationsTask
 
     public function refreshLocationsData()
     {
-        $res = $this->createLocationsData();
-        return $res;
+        return $this->createLocationsData();
     }
 
     public function createLocationsData()

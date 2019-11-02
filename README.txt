@@ -81,13 +81,9 @@ This button triggers the synchronization between your WordPress installation and
 
 = I’m having problems with the reservation workflow on Safari =
 
-Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe must be updated. You will need to add an A record in your DNS records where the value is the name of your tenant. For example, if your link is rentals.caagcrm.com, then the value for the A record needs to be “rentals” and the IP address will depend on your installation as listed below:
+Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe has to be updated. You will need to add a CNAME record in your DNS records where the value is the name of your tenant. For example, if your link is my-company.caagcrm.com or my-company.hqrentals.app the value for the CNAME record has to be “my-company”, and the value needs to be your link for example my-company.caagcrm.com
 
-America: 45.79.176.147
-Europe: 45.77.139.237
-Asia: 139.162.30.137
-
-Once you have created the A record on your domain, please create a support ticket inside the HQ application so our team can proceed with the update of the system.
+Once you have created the CNAME record on your domain, you will receive an SSL error. Please create a support ticket inside the HQ application so our team can proceed with the installation.
 
 = I need to make a custom integration using the system data =
 

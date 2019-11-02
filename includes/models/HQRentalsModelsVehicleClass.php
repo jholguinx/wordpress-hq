@@ -7,6 +7,7 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
+
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 {
     public static $custom_fields = [];
@@ -158,11 +159,11 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $this->priceIntervals[] = $newPrice;
             }
         }
-        foreach (static::$custom_fields as $custom_field) {
-            /*Minified Response*/
-            $this->{$this->metaCustomField . $custom_field} = $data->allData->{$custom_field};
+        if(!empty($customFields->data)){
+            foreach ($customFields->data as $custom_field) {
+                $this->{$this->metaCustomField . $custom_field->dbcolumn} = $data->{$custom_field->dbcolumn};
+            }
         }
-
     }
 
     /*
@@ -392,6 +393,16 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             return $this->labels[$this->locale->language];
         }
     }
+    public function getLabels(){
+        return $this->labels;
+    }
+    public function getDescriptions(){
+        return $this->descriptions;
+    }
+    public function getCustomFields()
+    {
+        return $this->customField;
+    }
 
     public function getShortDescription($forced_locale = null)
     {
@@ -452,6 +463,11 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getOrderMetaKey()
     {
         return $this->metaOrder;
+    }
+
+    public function getBrandIdMetaKey()
+    {
+        return $this->metaBrandId;
     }
 }
 

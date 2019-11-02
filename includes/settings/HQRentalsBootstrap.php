@@ -21,6 +21,10 @@ class HQRentalsBootstrap
     public $hq_cronjob_disable_option_default_value = 'false';
     public $hq_tenant_date_time_format = "Y-m-d H:i";
     public $hq_disable_safari_option_default_value = 'false';
+    public $hq_location_coordinate_default_value = '';
+    public $hq_location_image_default_value = '';
+    public $hq_location_description_default_value = '';
+    public $hq_location_default_field_value = '';
 
     public function __construct()
     {
@@ -52,6 +56,25 @@ class HQRentalsBootstrap
         if ($this->settings->noDisableSafariFunctionality()) {
             $this->settings->saveDisableSafariOption($this->hq_disable_safari_option_default_value);
         }
+        if ($this->settings->noLocationCoordinateSetting()) {
+            $this->settings->saveLocationCoordinateSetting($this->hq_location_coordinate_default_value);
+        }
+        if ($this->settings->noLocationImageSetting()) {
+            $this->settings->saveLocationImageSetting($this->hq_location_image_default_value);
+        }
+        if ($this->settings->noLocationDescriptionSetting()) {
+            $this->settings->saveLocationDescriptionSetting($this->hq_location_description_default_value);
+        }
+        if ($this->settings->noAddressLabelSetting()) {
+            $this->settings->saveAddressLabelSetting($this->hq_location_default_field_value);
+        }
+        if ($this->settings->noBrandsSetting()) {
+            $this->settings->saveBrandsSetting($this->hq_location_description_default_value);
+        }
+        if ($this->settings->noOfficeHoursSetting()) {
+            $this->settings->saveOfficeHoursSetting($this->hq_location_description_default_value);
+        }
+
         $this->resolveDefaultPages();
     }
 

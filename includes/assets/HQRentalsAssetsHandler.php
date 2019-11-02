@@ -33,6 +33,7 @@ class HQRentalsAssetsHandler
 	    if (static::$count === 1) {
 		    add_action('wp_enqueue_scripts', array( $this, 'registerPluginAssets' ), 10);
             add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
+            add_action('admin_enqueue_scripts', array($this, 'registerAdminAssets'), 20);
 	    }
     }
     public function registerPluginAssets()
@@ -49,6 +50,8 @@ class HQRentalsAssetsHandler
         wp_register_script( 'hq-submit-script', plugin_dir_url(__FILE__) . 'js/hq-submit.js', array(), $this->pluginVersion, true);
         wp_register_script( 'hq-dummy-script', plugin_dir_url(__FILE__) . 'js/hq-dummy.js', array(), $this->pluginVersion, true);
         wp_register_script( 'hq-workspot-sc-script', plugin_dir_url(__FILE__) . 'js/hq-workspot-map-shortcode.js', array(), $this->pluginVersion, true);
+        wp_register_script( 'hq-karzoom-form-script', plugin_dir_url(__FILE__) . 'js/hq-karzoom-booking-form.js', array(), $this->pluginVersion, true);
+        wp_register_script( 'hq-karzoom-contact-form-script', plugin_dir_url(__FILE__) . 'js/hq-karzoom-contact-form.js', array(), $this->pluginVersion, true);
         wp_enqueue_script('hq-dummy-script');
     }
     public function getIframeResizerAssets()
@@ -89,5 +92,25 @@ class HQRentalsAssetsHandler
         if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
             wp_localize_script('hq-dummy-script', $this->workspotLocationsDataName, $this->workspotQuery->getLocationsToFrontEnd());
         }
+    }
+    public function loadKarzoomFormAssets()
+    {
+        wp_enqueue_script("hq-karzoom-form-script");
+    }
+    public function loadKarzoomContactAssets()
+    {
+        wp_enqueue_script("hq-karzoom-contact-form-script");
+    }
+    public function registerAdminAssets()
+    {
+        wp_register_script('hq-admin-tooltip-js', plugin_dir_url(__FILE__) . 'js/tooltip.min.js', array(), $this->pluginVersion, true);
+        wp_register_script('hq-admin-poper-js', plugin_dir_url(__FILE__) . 'js/popper.js', array(), $this->pluginVersion, true);
+        wp_register_script('hq-admin-admin-js', plugin_dir_url(__FILE__) . 'js/admin.js', array(), $this->pluginVersion, true);
+    }
+    public function loadAssetsForAdmin()
+    {
+        wp_enqueue_script('hq-admin-poper-js');
+        wp_enqueue_script('hq-admin-tooltip-js');
+        wp_enqueue_script('hq-admin-admin-js');
     }
 }

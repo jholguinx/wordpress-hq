@@ -84,6 +84,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return $this->fillModelWithPosts($query->posts);
     }
 
+
     /**
      * Retrieve vehicle class by system id
      * @param $hqId
@@ -316,5 +317,84 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             $data[] = $class->id;
         }
         return $data;
+    }
+
+    public function getVehicleClassesByBrand($brandId)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->model->getBrandIdMetaKey(),
+                        'value' => $brandId,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return $this->fillModelWithPosts($query->posts);
+    }
+
+    public function vehiclesPublicInterface($brandId = null){
+        if(empty($brandId)){
+            $vehicles = $this->allVehicleClasses();
+        }else{
+            $vehicles = $this->getVehicleClassesByBrand($brandId);
+        }
+        return array_map( function($vehicle){
+                return $this->vehiclePublicInterface($vehicle);
+        }, $vehicles );
+    }
+    public function vehiclePublicInterface($vehicle){
+        return $this->parseObject(array(
+            'id',
+            'name',
+            'publicImageLink',
+            'order',
+            'labels' => array(
+                'property_name' => 'labels',
+                'values' => $vehicle->getLabels()
+            ),
+            'descriptions' => array(
+                'property_name' => 'descriptions',
+                'values' => $vehicle->getDescriptions()
+            ),
+            'custom_fields' => array(
+                'property_name' => 'custom_fields',
+                'values' => $vehicle->getCustomFields()
+            )
+        ), $vehicle);
+    }
+    public function vehiclesPublicInterfaceFiltered($brandId, $customField, $customFieldValue)
+    {
+        $vehicles = $this->getVehiclesByBrandAndCustomField($brandId, $customField, $customFieldValue);
+        return array_map(function($vehicle) use ($brandId) {
+            return $this->vehiclePublicInterface($vehicle);
+        }, $vehicles);
+    }
+    public function getVehiclesByBrandAndCustomField($brandId, $customField, $customFieldValue)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    'custom_field_clause' => array(
+                        'key' => $this->model->getCustomFieldMetaPrefix() . $customField,
+                        'value' => $customFieldValue,
+                        'compare' => '='
+                    ),
+                    'brand_clause' => array(
+                        'key' => $this->model->getBrandIdMetaKey(),
+                        'value' => $brandId,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return $this->fillModelWithPosts($query->posts);
     }
 }

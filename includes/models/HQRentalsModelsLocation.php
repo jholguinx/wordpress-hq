@@ -1,5 +1,6 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsModelsLocation extends HQRentalsBaseModel
 {
@@ -21,9 +22,13 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     protected $metaAirport = 'hq_wordpress_location_is_airport_meta';
     protected $metaOffice = 'hq_wordpress_location_is_office_meta';
     protected $metaCoordinates = 'hq_wordpress_location_coordinates_meta';
+    protected $metaImage = 'hq_wordpress_location_image_meta';
+    protected $metaDescription = 'hq_wordpress_location_description_meta';
+    protected $metaAddressLabel = 'hq_wordpress_location_address_label_meta';
+    protected $metaOfficeHours = 'hq_wordpress_location_office_hours_meta';
+    protected $metaBrands = 'hq_wordpress_location_brands_meta';
     protected $metaIsActive = 'hq_wordpress_location_is_active_meta';
     protected $metaOrder = 'hq_wordpress_location_order_meta';
-
     /*
      * Object Data to Display
      */
@@ -35,11 +40,17 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $coordinates = '';
     public $isActive = '';
     public $order = '';
+    public $image = '';
+    public $description = '';
+    public $addressLabel = '';
+    public $officeHours = '';
+    public $brands = [];
 
 
     public function __construct($post = null)
     {
         $this->post_id = '';
+        $this->settings = new HQRentalsSettings();
         $this->postArgs = array(
             'post_type'         =>  $this->locationsCustomPostName,
             'post_status'       =>  'publish',
@@ -94,6 +105,11 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->coordinates = $data->coordinates;
         $this->isActive = $data->active;
         $this->order = $data->order;
+        $this->image =$data->image;
+        $this->description = $data->description;
+        $this->officeHours = $data->officeHours;
+        $this->addressLabel = $data->addressLabel;
+        $this->brands = $data->brands;
     }
 
 
@@ -116,6 +132,11 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaCoordinates, $this->coordinates );
         hq_update_post_meta( $post_id, $this->metaIsActive, $this->isActive );
         hq_update_post_meta( $post_id, $this->metaOrder, $this->order );
+        hq_update_post_meta( $post_id, $this->metaImage, $this->image );
+        hq_update_post_meta( $post_id, $this->metaDescription, $this->description );
+        hq_update_post_meta( $post_id, $this->metaBrands, $this->brands );
+        hq_update_post_meta( $post_id, $this->metaOfficeHours, $this->officeHours );
+        hq_update_post_meta( $post_id, $this->metaAddressLabel, $this->addressLabel );
     }
 
     /*
@@ -154,14 +175,10 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     }
     public function set($data)
     {
-        if($this->filter->isPost($data)){
-
-        }else{}
-        //$metas =
     }
     public function setFromPost($post)
     {
-        foreach ($this->getAllMetaTags() as $property   =>   $metakey){
+        foreach ($this->getAllMetaTags() as $property => $metakey){
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
         }
     }
@@ -170,17 +187,43 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     {
         return array(
             'id'            =>  $this->metaId,
-            'brandId'       =>  $this->brandId,
+            'brandId'       =>  $this->metaBrandId,
             'name'          =>  $this->metaName,
             'isAirport'     =>  $this->metaAirport,
             'isOffice'      =>  $this->metaOffice,
             'coordinates'   =>  $this->metaCoordinates,
             'isActive'      =>  $this->metaIsActive,
-            'order'         =>  $this->metaOrder
+            'order'         =>  $this->metaOrder,
+            'image'         =>  $this->metaImage,
+            'description'   =>  $this->metaDescription,
+            'officeHours'   =>  $this->metaOfficeHours,
+            'addressLabel'  =>  $this->metaAddressLabel,
+            'brands'        =>  $this->metaBrands
         );
     }
     public function getMetaKeyFromBrandID()
     {
         return $this->metaBrandId;
+    }
+    public function getBrandId(){
+        return $this->brandId;
+    }
+    public function getOfficeHours($cssClass = "")
+    {
+        $html = '';
+        foreach (explode(PHP_EOL, $this->officeHours) as $hour){
+            $html .= '<p class="'. $cssClass .'" >' . $hour . '</p>';
+        }
+        return $html;
+    }
+    public function getBrands()
+    {
+        if(is_array($this->brands)){
+            $html = '';
+            foreach ($this->brands as $brand){
+                $html .= $brand . ' ';
+            }
+            return $html;
+        }
     }
 }

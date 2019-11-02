@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsTransformers;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 abstract class HQRentalsTransformersBase
 {
@@ -27,14 +28,41 @@ abstract class HQRentalsTransformersBase
         }
     }
 
-    public static function extractDataFromApiObject($properties, $apiObject, $nestedObject = null)
+    public static function extractDataFromApiObject($properties, $apiObject, $nestedObject = null, $isLocation = false)
     {
         $objectToReturn = new \stdClass();
+
         foreach ($properties as $property) {
             if (empty($nestedObject)) {
                 $objectToReturn->{$property} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$property});
             }
         }
+        if($isLocation){
+            HQRentalsTransformersBase::resolveCustomFieldsOnLocation($objectToReturn, $apiObject);
+        }
         return $objectToReturn;
+    }
+    public static function resolveCustomFieldsOnLocation($objectToReturn, $apiObject)
+    {
+        $setting = new HQRentalsSettings();
+        $coordinates = $setting->getLocationCoordinateField();
+        $image = $setting->getLocationImageField();
+        $description = $setting->getLocationDescriptionField();
+        $hours = $setting->getOfficeHoursSetting();
+        $addressLabel = $setting->getAddressLabelField();
+        $brands = $setting->getBrandsSetting();
+        HQRentalsTransformersBase::resolveSingleCustomField($coordinates, $objectToReturn, $apiObject, 'coordinates');
+        HQRentalsTransformersBase::resolveSingleCustomField($image, $objectToReturn, $apiObject, 'image');
+        HQRentalsTransformersBase::resolveSingleCustomField($description, $objectToReturn, $apiObject, 'description');
+        HQRentalsTransformersBase::resolveSingleCustomField($hours, $objectToReturn, $apiObject, 'officeHours');
+        HQRentalsTransformersBase::resolveSingleCustomField($addressLabel, $objectToReturn, $apiObject, 'addressLabel');
+        HQRentalsTransformersBase::resolveSingleCustomField($brands, $objectToReturn, $apiObject, 'brands');
+
+    }
+    public static function resolveSingleCustomField($settingField, $objectToReturn, $apiObject, $newPropertyName)
+    {
+        if(!empty($settingField)){
+            $objectToReturn->{$newPropertyName} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$settingField});
+        }
     }
 }

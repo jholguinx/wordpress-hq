@@ -49,10 +49,10 @@ class HQRentalsWebhooksManager{
         }
 
     }
-    public function resolveResponse($data){
+    public function resolveResponse($data, $status = 200, $message = ''){
         return array(
-            'message'   =>  'Successful Update',
-            'status'    =>  200,
+            'message'   =>  $message,
+            'status'    =>  $status,
             'data'      =>  empty($data) ? [] : $data
         );
     }

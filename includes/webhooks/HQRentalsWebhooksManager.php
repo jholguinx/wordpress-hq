@@ -37,12 +37,12 @@ class HQRentalsWebhooksManager{
     {
         $response = $this->upgrader->upgradePlugin();
         if($response){
-            $data = $this->resolveResponse($response);
+            $data = $this->resolveResponse($response, 200, "Update Complete");
             $response = new \WP_REST_Response($data);
             $response->status = 200;
             return $response;
         }else{
-            $data = $this->resolveResponse($response);
+            $data = $this->resolveResponse($response, 500, "Update Unsuccessful");
             $response = new \WP_REST_Response($data);
             $response->status = 500;
             return $response;

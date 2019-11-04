@@ -33,8 +33,10 @@ on this page.
 == Changelog ==
 
 = 1.4.0 =
-Removing support for normal api response on data sync
-Improvements on Settings
+Settings screen adjusted
+Support for custom fields
+Auto update of saved settings
+Removing support for regular API response on data sync
 
 = 1.3.4 =
 Fix buffering

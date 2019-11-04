@@ -71,7 +71,7 @@ class HQRentalsApiEndpoint{
         $args = array(
             'key'           =>  'AIzaSyAodJ3h4T6uXjUJZ0q8aLk9rEz21m_kWqE',
             'input'         =>  $input,
-            'components'    =>  'country:ve',
+            'components'    =>  'country:gbr',
             'lang'          =>  'en'
         );
         return 'https://maps.googleapis.com/maps/api/place/autocomplete/json?' . http_build_query($args);

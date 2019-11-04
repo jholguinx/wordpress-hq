@@ -38,7 +38,7 @@ class ApiConfigurationManager {
             params: {
                 place_id: place.place_id
             },
-            method: 'get',
+            method: 'get'
         };
     }
     getOnChangeLocationConfig(location){

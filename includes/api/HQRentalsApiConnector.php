@@ -1,9 +1,6 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsApi;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiEndpoint;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConfiguration;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiResponse as ApiResponse;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
@@ -19,9 +16,6 @@ class HQRentalsApiConnector{
         $this->resolver = new HQRentalsApiCallResolver();
         $this->settings = new HQRentalsSettings();
     }
-
-
-
     public function getHQRentalsAvailability($data)
     {
         $response = wp_remote_get($this->endpoints->getAvailabilityEndpoint(), $this->configuration->getBasicApiConfiguration($data));
@@ -34,11 +28,7 @@ class HQRentalsApiConnector{
     }
     public function getHQRentalsVehicleClasses()
     {
-        if($this->settings->getSupportForMinifiedResponse() == "true"){
-            $response = wp_remote_get( $this->endpoints->getVehicleClassesApiEndpoint(true), $this->configuration->getBasicApiConfiguration() );
-        }else{
-            $response = wp_remote_get( $this->endpoints->getVehicleClassesApiEndpoint(), $this->configuration->getBasicApiConfiguration() );
-        }
+        $response = wp_remote_get( $this->endpoints->getVehicleClassesApiEndpoint(), $this->configuration->getBasicApiConfiguration() );
         return $this->resolver->resolveApiCallVehicleClasses( $response );
     }
     public function getHQRentalsLocations()
@@ -91,6 +81,19 @@ class HQRentalsApiConnector{
         $response = wp_remote_get( $this->endpoints->getTenantsSettingsEndpoint(), $this->configuration->getBasicApiConfiguration() );
         return $this->resolver->resolveApiCallTenantsSettings( $response );
     }
-
-
+    public function getGooglePlacesOnAutocomplete($input)
+    {
+        $response = wp_remote_get( $this->endpoints->getGoogleAutocompleteEndpoint($input) );
+        return $this->resolver->resolveGoogleAutocomplete( $response );
+    }
+    public function getGooglePlaceDetailsData($placeId)
+    {
+        $response = wp_remote_get( $this->endpoints->getGooglePlaceDetailsEndpoint($placeId) );
+        return $this->resolver->resolveGooglePlaceDetails( $response );
+    }
+    public function notifyOnActivation()
+    {
+        $response = wp_remote_post( $this->endpoints->getWebsiteRegistrationEndpoint() );
+        return $this->resolver->resolveActivation($response);
+    }
 }

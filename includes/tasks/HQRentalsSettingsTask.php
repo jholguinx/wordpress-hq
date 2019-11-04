@@ -11,13 +11,16 @@ class HQRentalsSettingsTask{
     }
     public function refreshSettingsData()
     {
-        $this->syncSettingsData();
+        $response = $this->syncSettingsData();
+        return $response;
     }
     public function syncSettingsData()
     {
         $settings = $this->connector->getHQRentalsTenantsSettings();
         if($settings->success){
             $this->settings->saveTenantDatetimeOption($settings->data->date_format);
+            $this->settings->saveTenantLink($settings->data->tenant_link);
         }
+        return $settings;
     }
 }

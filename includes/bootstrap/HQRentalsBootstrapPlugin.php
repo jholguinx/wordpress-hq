@@ -11,6 +11,8 @@ use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesAries;
 use HQRentalsPlugin\Webhooks\HQRentalsWebhooksManager;
+use HQRentalsPlugin\Webhooks\HQRentalsWebsiteEndpoints;
+use HQRentalsPlugin\HQRentalsTemplates\HQRentalsTemplateHandler;
 
 class HQRentalsBootstrapPlugin
 {
@@ -25,9 +27,11 @@ class HQRentalsBootstrapPlugin
         $this->brandPostAdmin = new HQRentalsAdminBrandsPosts();
         $this->shortcoder = new HQRentalsShortcoder();
         $this->webhooks = new HQRentalsWebhooksManager();
+        $this->api = new HQRentalsWebsiteEndpoints();
         $this->posts = new HQRentalsCustomPostsHandler();
         $this->settingsAdmin = new HQRentalsAdminSettings();
         $this->ariesQueries = new HQRentalsQueriesAries();
         $this->actions = new HQRentalsActionsRedirects();
+        $this->templates = new HQRentalsTemplateHandler();
     }
 }

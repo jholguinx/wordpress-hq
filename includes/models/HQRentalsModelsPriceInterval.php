@@ -107,14 +107,6 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
         return $query->posts;
     }
 
-    public function set($data)
-    {
-        if ($this->filter->isPost($data)) {
-
-        } else {
-        }
-        //$metas =
-    }
 
     /***
      * Maps Class Properties with Posts Metas
@@ -179,6 +171,28 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
                'meta_key'   =>  $this->metaPrice,
                'orderby'    =>  'meta_value_num',
                'order'      =>  'ASC',
+           ),
+           array(
+               'meta_query' =>  array(
+                   array(
+                       'key'       =>  $this->metaVehicleIdClass,
+                       'value'     =>  $vehicleClassId,
+                       'compare'   =>  '='
+                   )
+               )
+           )
+       );
+       $query = new \WP_Query($args);
+       return $query->posts[0];
+    }
+    public function getHighestPriceInterval($vehicleClassId)
+    {
+       $args = array_merge(
+           $this->postArg,
+           array(
+               'meta_key'   =>  $this->metaPrice,
+               'orderby'    =>  'meta_value_num',
+               'order'      =>  'DESC',
            ),
            array(
                'meta_query' =>  array(

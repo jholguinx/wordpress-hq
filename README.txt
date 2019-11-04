@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.2.1
 Requires PHP: 5.6.0
-Stable tag: 1.3.4
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,17 +28,15 @@ should see this table; now just copy the “HTML shortcode reservations” and p
 where you would like to display the bookings process. The system will automatically resize the iFrame
 on this page.
 
-Step 5: Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe has to be updated. You will need to add an A record in your DNS records where the value is the name of your tenant. For example if your link is rentals.caagcrm.com the value for the A record has to be “rentals” and the IP address will be dependent on your installation:
-
-America: 45.79.176.147
-Europe: 45.77.139.237
-Asia: 139.162.35.27
-
-Once you have created the A record on your domain you will receive an SSL error. Please create a support ticket inside the HQ application so our team can proceed with the installation.
-
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.4.0 =
+Settings screen adjusted
+Support for custom fields
+Auto update of saved settings
+Removing support for regular API response on data sync
 
 = 1.3.4 =
 Fix buffering
@@ -89,13 +87,9 @@ This button triggers the synchronization between your WordPress installation and
 
 = I’m having problems with the reservation workflow on Safari =
 
-Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe must be updated. You will need to add an A record in your DNS records where the value is the name of your tenant. For example, if your link is rentals.caagcrm.com, then the value for the A record needs to be “rentals” and the IP address will depend on your installation as listed below:
+Due to an incompatibility with Safari and Opera browsers, the domain name of the iframe has to be updated. You will need to add a CNAME record in your DNS records where the value is the name of your tenant. For example, if your link is my-company.caagcrm.com or my-company.hqrentals.app the value for the CNAME record has to be “my-company”, and the value needs to be your link for example my-company.caagcrm.com
 
-America: 45.79.176.147
-Europe: 45.77.139.237
-Asia: 139.162.30.137
-
-Once you have created the A record on your domain, please create a support ticket inside the HQ application so our team can proceed with the update of the system.
+Once you have created the CNAME record on your domain, you will receive an SSL error. Please create a support ticket inside the HQ application so our team can proceed with the installation.
 
 = I need to make a custom integration using the system data =
 

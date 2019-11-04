@@ -15,7 +15,7 @@ class HQRentalsLocationsTask
 
     public function refreshLocationsData()
     {
-        $this->createLocationsData();
+        return $this->createLocationsData();
     }
 
     public function createLocationsData()
@@ -24,6 +24,7 @@ class HQRentalsLocationsTask
         if ($locations->success and !empty($locations->data)) {
         	$this->createLocations($locations->data);
         }
+        return $locations;
     }
 
 	protected function createLocations( $locations )

@@ -146,15 +146,6 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
         return $query->posts;
     }
 
-    public function set($data)
-    {
-        if ($this->filter->isPost($data)) {
-
-        } else {
-        }
-        //$metas =
-    }
-
     public function setFromPost($post)
     {
         foreach ($this->getAllMetaTags() as $property => $metakey) {

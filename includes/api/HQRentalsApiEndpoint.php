@@ -22,14 +22,9 @@ class HQRentalsApiEndpoint{
         return $this->settings->getApiBaseUrl() . 'fleets/brands';
     }
 
-    public function getVehicleClassesApiEndpoint($minified = null)
+    public function getVehicleClassesApiEndpoint()
     {
-        if($minified){
-            return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes?only_available_on_website=1&minified_response=1';
-        }else{
-            return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes?only_available_on_website=1';
-        }
-
+        return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes?only_available_on_website=1&minified_response=1';
     }
 
     public function getLocationsApiEndpoint()
@@ -71,4 +66,31 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'tenants/current';
     }
+    public function getGoogleAutocompleteEndpoint($input)
+    {
+        $args = array(
+            'key'           =>  'AIzaSyAodJ3h4T6uXjUJZ0q8aLk9rEz21m_kWqE',
+            'input'         =>  $input,
+            'components'    =>  'country:gbr',
+            'lang'          =>  'en'
+        );
+        return 'https://maps.googleapis.com/maps/api/place/autocomplete/json?' . http_build_query($args);
+    }
+    public function getGooglePlaceDetailsEndpoint($placeId)
+    {
+        $args = array(
+            'key'           =>  'AIzaSyAodJ3h4T6uXjUJZ0q8aLk9rEz21m_kWqE',
+            'place_id'         =>  $placeId,
+        );
+        return 'https://maps.googleapis.com/maps/api/place/details/json?' . http_build_query($args);
+    }
+    public function getWebsiteRegistrationEndpoint()
+    {
+        $args = array(
+            'site'      =>  get_site_url(),
+            'version'   => HQ_RENTALS_PLUGIN_VERSION
+        );
+        return $this->settings->getApiBaseUrl() . 'car-rental/websites/register?' . http_build_query($args);
+    }
+
 }

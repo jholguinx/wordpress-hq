@@ -30,6 +30,7 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
     public function allToFrontEnd()
     {
         $brandsPost = $this->model->all();
+        $queryLocation = new HQRentalsQueriesLocations();
         $data = [];
         foreach ($brandsPost as $post) {
             $brand = new HQRentalsModelsBrand($post);
@@ -37,6 +38,7 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
             $newData->id = $brand->id;
             $newData->name = $brand->name;
             $newData->iframePageURL = $brand->websiteLink;
+            $newData->locations = $queryLocation->getLocationsForBrandsFrontEnd($brand->id);
             $data[] = $newData;
         }
         return $data;
@@ -48,6 +50,55 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
             $data[] = new HQRentalsModelsBrand($post);
         }
         return $data;
+    }
+    public function brandsPublicInterface()
+    {
+        $brands = $this->getAllBrands();
+        return array_map(function($brand){
+            return $this->brandPublicInterface($brand);
+        }, $brands);
+    }
+    public function singleBrandPublicInterface($brandId){
+        $brand = $this->getBrand($brandId);
+        return $this->brandPublicInterface($brand);
+    }
+    public function brandPublicInterface($brand)
+    {
+        $queryLocation = new HQRentalsQueriesLocations();
+        return $this->parseObject( array(
+            'id',
+            'name',
+            'websiteLink',
+            'locations' => array(
+                'property_name' => 'locations',
+                'values' => $queryLocation->getLocationsForBrandsFrontEnd($brand->id)
+            ),
+            'makes' => array(
+                'property_name' => 'makes',
+                'values' => 'dadas'
+            ),
+            'vehicleClasses' => array(
+                'property_name' => 'classes',
+                'values' => 'classes'
+            )
+        ), $brand);
+    }
+    public function getBrand($brandId){
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->model->metaBrandId,
+                        'value' => $brandId,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        $brand = new HQRentalsModelsBrand($query->posts[0]);
+        return $brand;
     }
 
 }

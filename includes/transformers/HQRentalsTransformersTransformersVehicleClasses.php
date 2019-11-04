@@ -4,7 +4,7 @@ namespace HQRentalsPlugin\HQRentalsTransformers;
 
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
-class HQRentalsTransformersVehicleClasses{
+class HQRentalsTransformersTransformersVehicleClasses extends HQRentalsTransformersBase {
 
     public function __construct()
     {
@@ -13,7 +13,6 @@ class HQRentalsTransformersVehicleClasses{
 
     public function transformApiData($data)
     {
-        if($this->pluginSettings->getSupportForMinifiedResponse() == 'true'){
             $transformation = new \stdClass();
             $transformation->id = $data->id;
             $transformation->name = $data->name;
@@ -31,7 +30,10 @@ class HQRentalsTransformersVehicleClasses{
             $transformation->active_rates = $data->activeRates;
             $transformation->allData = $data;
             return $transformation;
-        }
-        return $data;
+        
+    }
+    public static function transformDataFromApi($apiData)
+    {
+
     }
 }

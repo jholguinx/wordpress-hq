@@ -17,8 +17,6 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
      * Custom Post Meta
      */
 
-    protected $metaId = 'hq_wordpress_active_rate_id_meta';
-    protected $metaSeasonId = 'hq_wordpress_active_rate_season_id_meta';
     protected $metaVehicleIdClass = 'hq_wordpress_active_rate_vehicle_class_id_meta';
     protected $metaBaseRate = 'hq_wordpress_active_rate_base_rate_meta';
     protected $metaMinuteRate = 'hq_wordpress_active_rate_minute_rate_meta';
@@ -31,8 +29,6 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     /*
      * Object Data to Display
      */
-    public $id = '';
-    public $seasonId = '';
     public $vehicleClassId = '';
     public $baseRate = '';
     public $minuteRate = '';
@@ -41,7 +37,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public $weeklyRate = '';
     public $monthlyRate = '';
 
-    public function __construct($vehicleClassID = null)
+    public function __construct($vehicleClassID = null, $allRates = null)
     {
         $this->post_id = '';
         $this->dataType = new HQRentalsDataFilter();
@@ -53,16 +49,14 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         if ($this->dataType->isPost($vehicleClassID)){
             $this->setFromPost($vehicleClassID);
         }else if(!empty($vehicleClassID)) {
-            $this->setFromVehicleClass($vehicleClassID);
+            $this->setFromVehicleClass($vehicleClassID, $allRates);
         }
     }
 
-    public function setActiveRateFromApi($data)
+    public function setActiveRateFromApi($vehicle_class_id, $data)
     {
-        $this->id = $data->id;
-        $this->seasonId = $data->season_id;
-        $this->vehicleClassId = $data->vehicle_class_id;
-        $this->baseRate = $data->base_rate;
+        $this->baseRate = $data->daily_rate;
+        $this->vehicleClassId = $vehicle_class_id;
         $this->minuteRate = $data->minute_rate;
         $this->hourlyRate = $data->hourly_rate;
         $this->dailyRate = $data->daily_rate;
@@ -72,6 +66,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
 
     public function create()
     {
+
         //ojo si da problemas con esot
         $this->postArg = array_merge(
             $this->postArg,
@@ -82,8 +77,6 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         );
         $post_id = wp_insert_post($this->postArg);
         $this->post_id = $post_id;
-        hq_update_post_meta($post_id, $this->metaId, $this->id);
-        hq_update_post_meta($post_id, $this->metaSeasonId, $this->seasonId);
         hq_update_post_meta($post_id, $this->metaVehicleIdClass, $this->vehicleClassId);
         hq_update_post_meta($post_id, $this->metaBaseRate, $this->baseRate);
         hq_update_post_meta($post_id, $this->metaMinuteRate, $this->minuteRate);
@@ -123,7 +116,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
             $this->postArg,
             array(
                 'order'     => 'ASC',
-                'orderby'   =>  'meta_value',
+                'orderby'   =>  'meta_value_num',
                 'meta_key'  =>  ( ! ( empty($order) ) ) ? $this->getOrderMetaForQuery($order) : $this->metaDailyRate
             )
         );
@@ -131,14 +124,6 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         return $query->posts;
     }
 
-    public function set($data)
-    {
-        if ($this->filter->isPost($data)) {
-
-        } else {
-        }
-        //$metas =
-    }
     public function setFromPost($post)
     {
         foreach ($this->getAllMetaTag() as $property => $metaKey){
@@ -153,8 +138,6 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function getAllMetaTag()
     {
         return array(
-            'id'                => $this->metaId,
-            'seasonId'          => $this->metaSeasonId,
             'vehicleClassId'    => $this->metaVehicleIdClass,
             'baseRate'          => $this->metaBaseRate,
             'minuteRate'        => $this->metaMinuteRate,
@@ -171,17 +154,17 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
             $this->postArg,
             array(
                 'meta_query'    => array(
-                        array(
-                            'key'       => $this->metaVehicleIdClass,
-                            'value'     => $vehicleClassID,
-                            'compare'   => '='
-                        )
+                    array(
+                        'key'       => $this->metaVehicleIdClass,
+                        'value'     => $vehicleClassID,
+                        'compare'   => '='
+                    )
                 )
             )
         );
     }
 
-    public function setFromVehicleClass($vehicleClassId)
+    public function setFromVehicleClass($vehicleClassId, $getAllRates = null)
     {
         $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
         $post = $query->posts[0];
@@ -189,11 +172,20 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
         }
     }
+    public function allRatesFromVehicleClass($vehicleClassId)
+    {
+        $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
+        $rates= [];
+        foreach ($query->posts as $postRate){
+            $rates[] = new HQRentalsModelsActiveRate($postRate);
+        }
+        return $rates;
+    }
 
 
     public function getFormattedBaseRate()
     {
-        return number_format((float) $this->baseRate, 2, '.', '');
+        return number_format((float) $this->baseRate->amount, 2, '.', '');
     }
     public function getFormattedBaseRateAsNumber()
     {
@@ -201,7 +193,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedMinuteRate()
     {
-        return number_format((float) $this->minuteRate, 2, '.', '');
+        return number_format((float) $this->minuteRate->amount, 2, '.', '');
     }
     public function getFormattedMinuteRateAsNumber()
     {
@@ -209,7 +201,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedHourlyRate()
     {
-        return number_format((float) $this->hourlyRate, 2, '.', '');
+        return number_format((float) $this->hourlyRate->amount, 2, '.', '');
     }
     public function getFormattedHourlyRateAsNumber()
     {
@@ -217,14 +209,14 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedDailyRate()
     {
-        return number_format((float) $this->dailyRate, 2, '.', '');
+        return number_format((float) $this->dailyRate->amount, 2, '.', '');
     }
     public function getFormattedDailyRateAsNumber(){
         return (float)$this->getFormattedDailyRate();
     }
     public function getFormattedWeeklyRate()
     {
-        return number_format((float) $this->weeklyRate, 2, '.', '');
+        return number_format((float) $this->weeklyRate->amount, 2, '.', '');
     }
     public function getFormattedWeeklyRateAsNumber()
     {
@@ -232,7 +224,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedMonthlyRate()
     {
-        return number_format((float) $this->monthlyRate, 2, '.', '');
+        return number_format((float) $this->monthlyRate->amount, 2, '.', '');
     }
     public function getFormattedMonthlyRateAsNumber()
     {

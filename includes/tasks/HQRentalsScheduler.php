@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
+use Exception;
 
 class HQRentalsScheduler
 {
@@ -34,24 +35,55 @@ class HQRentalsScheduler
 
     public function refreshHQData()
     {
-        //Should be some sort of validation -> return true is ok!!!
-        // we could add some try catch over here!!!
-        global $wpdb;
-        $site = get_site_url();
-        $dbPrefix = $wpdb->prefix;
-        $wpdb->get_results("delete from " . $dbPrefix . "posts where post_type like 'hqwp%';");
-        $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like 'hq_wordpress%';");
-
-        /*
-         * Load data into WP
-         * */
-        $this->settingsTask->refreshSettingsData();
-        $this->brandsTask->refreshBrandsData();
-        $this->locationsTask->refreshLocationsData();
-        $this->additionalChargesTask->refreshAdditionalChargesData();
-        $this->vehicleClassesTask->refreshVehicleClassesData();
-        if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
-            $this->workspot->refreshLocationsData();
+        try{
+            global $wpdb;
+            $site = get_site_url();
+            $dbPrefix = $wpdb->prefix;
+            $wpdb->get_results("delete from " . $dbPrefix . "posts where post_type like 'hqwp%';");
+            $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like 'hq_wordpress%';");
+            /*
+             * Load data into WP
+             */
+            $message = "There was an error, please check the settings of your HQ Rental Software account. Error message: \n";
+            $settings = $this->settingsTask->refreshSettingsData();
+            $brands = $this->brandsTask->refreshBrandsData();
+            $locations = $this->locationsTask->refreshLocationsData();
+            $addCharges = $this->additionalChargesTask->refreshAdditionalChargesData();
+            $vehicleClasses = $this->vehicleClassesTask->refreshVehicleClassesData();
+            if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
+               $workspot = $this->workspot->refreshLocationsData();
+            }
+            /*
+            if(!$settings->success){
+                $message .=  $settings->errors. " \n";
+                throw new Exception($message); 
+            }
+            if(!$brands->success){
+                $message .=  $brands->errors. " \n";
+                throw new Exception($message); 
+            }
+            if(!$locations->success){
+                $message .=  $locations->errors. " \n";
+                throw new Exception($message); 
+            }
+            if(!$addCharges->success){
+                $message .=  $addCharges->errors. " \n";
+                throw new Exception($message); 
+            }
+            if(!$vehicleClasses->success){
+                $message .=  $vehicleClasses->errors. " \n";
+                throw new Exception($message); 
+            }
+            if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
+                if($workspot[0]->success == false || $workspot[1]->success == false){
+                    $message .=  $workspot->errors. " \n";
+                    throw new Exception($message); 
+                }
+            }*/
+            return true;
+        }catch(Exception $e){
+            return $e->getMessage();
         }
+
     }
 }

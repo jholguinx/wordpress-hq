@@ -33,8 +33,8 @@ class HQBookingForm extends PureComponent{
             formAction: '',
             mapCenter:{
                 //Default Value
-                lat: 52.3742108,
-                lng: -1.5132913
+                lat: 53.4263838,
+                lng: -2.7877887
             },
             suggestions:[]
         };
@@ -138,6 +138,7 @@ class HQBookingForm extends PureComponent{
                 brand: value
             }
         });
+        this.controller.onSelectLocationOnMap(value, this, true);
     }
     resolveActionLinkWithBrandID(id){
         const selectedBrand = this.state.brands.find( brand => String(brand.id) === String(id) );
@@ -158,8 +159,6 @@ class HQBookingForm extends PureComponent{
                             <div className="inner_content">
                                 <div className="standard_wrapper">
                                     <h2 className="ppb_title hq-shortcode-map-title">{"Car Hire Where You Need It!"}</h2>
-                                    <div className="page_tagline hq-shortcode-map-subtitle">{"From as low as $10 per day with limited\n" +
-                                    "                                time offer discounts"}</div>
                                     <form className="car_search_form" method="POST" action={this.state.formAction} >
                                         <div className="car_search_wrapper">
                                             <div className="one themeborder hq-input-wrapper">
@@ -185,7 +184,7 @@ class HQBookingForm extends PureComponent{
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <Select
-                                                    placeholder="Brands"
+                                                    placeholder="Any Brands"
                                                     options={this.state.makes}
                                                     makes={true}
                                                     onChange={this.onChangeVehicleBrand.bind(this)}
@@ -194,7 +193,7 @@ class HQBookingForm extends PureComponent{
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <Select
-                                                    placeholder="Vehicle Classes"
+                                                    placeholder="Any Vehicle Classes"
                                                     options={this.state.vehicleClasses}
                                                     vehicleClass={true}
                                                     onChange={this.onChangeVehicleClass.bind(this)}
@@ -242,7 +241,7 @@ class HQBookingForm extends PureComponent{
                 <div className="one_half map-wrapper">
                     <div className="hq-map-wrapper">
                         <Map
-                            zoom={15}
+                            zoom={13}
                             initialCenter={this.state.mapCenter}
                             mapCenter={this.state.mapCenter}
                             locations={this.state.locations}

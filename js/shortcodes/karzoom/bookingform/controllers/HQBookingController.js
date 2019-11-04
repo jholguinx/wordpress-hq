@@ -56,9 +56,9 @@ class HQBookingController{
             }
         );
     }
-    onSelectLocationOnMap(location, app){
+    onSelectLocationOnMap(location, app, brand){
         this.connector.makeRequest(
-            this.config.getOnChangeLocationConfig(location),
+            this.config.getOnChangeLocationConfig(location, brand),
             response => {
                 const makes = Parser.parserMakes(response.data.data);
                 const classes = Parser.parseVehicles(response.data.data);

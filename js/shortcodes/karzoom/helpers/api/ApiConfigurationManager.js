@@ -41,10 +41,8 @@ class ApiConfigurationManager {
             method: 'get'
         };
     }
-    getOnChangeLocationConfig(location){
-        const {
-            brand_id
-        } = location;
+    getOnChangeLocationConfig(location,brand){
+        const brand_id = (brand) ? location : location.brand_id;
         return {
             url: this.endpoints.getTypesAndVehiclesEndpoint(),
             method: 'get',

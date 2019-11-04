@@ -222,8 +222,8 @@ function (_PureComponent) {
       formAction: '',
       mapCenter: {
         //Default Value
-        lat: 52.3742108,
-        lng: -1.5132913
+        lat: 53.4263838,
+        lng: -2.7877887
       },
       suggestions: []
     };
@@ -351,6 +351,7 @@ function (_PureComponent) {
           brand: value
         })
       });
+      this.controller.onSelectLocationOnMap(value, this, true);
     }
   }, {
     key: "resolveActionLinkWithBrandID",
@@ -390,9 +391,7 @@ function (_PureComponent) {
         className: "standard_wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "ppb_title hq-shortcode-map-title"
-      }, "Car Hire Where You Need It!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "page_tagline hq-shortcode-map-subtitle"
-      }, "From as low as $10 per day with limited\n" + "                                time offer discounts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "Car Hire Where You Need It!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "car_search_form",
         method: "POST",
         action: this.state.formAction
@@ -420,7 +419,7 @@ function (_PureComponent) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one themeborder hq-input-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        placeholder: "Brands",
+        placeholder: "Any Brands",
         options: this.state.makes,
         makes: true,
         onChange: this.onChangeVehicleBrand.bind(this),
@@ -428,7 +427,7 @@ function (_PureComponent) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one themeborder hq-input-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        placeholder: "Vehicle Classes",
+        placeholder: "Any Vehicle Classes",
         options: this.state.vehicleClasses,
         vehicleClass: true,
         onChange: this.onChangeVehicleClass.bind(this),
@@ -467,7 +466,7 @@ function (_PureComponent) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hq-map-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_maps_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        zoom: 15,
+        zoom: 13,
         initialCenter: this.state.mapCenter,
         mapCenter: this.state.mapCenter,
         locations: this.state.locations,
@@ -572,8 +571,8 @@ function () {
     }
   }, {
     key: "onSelectLocationOnMap",
-    value: function onSelectLocationOnMap(location, app) {
-      this.connector.makeRequest(this.config.getOnChangeLocationConfig(location), function (response) {
+    value: function onSelectLocationOnMap(location, app, brand) {
+      this.connector.makeRequest(this.config.getOnChangeLocationConfig(location, brand), function (response) {
         var makes = _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parserMakes(response.data.data);
         var classes = _helpers_api_Parser__WEBPACK_IMPORTED_MODULE_2__["default"].parseVehicles(response.data.data);
         app.setState({
@@ -1292,8 +1291,8 @@ function () {
     }
   }, {
     key: "getOnChangeLocationConfig",
-    value: function getOnChangeLocationConfig(location) {
-      var brand_id = location.brand_id;
+    value: function getOnChangeLocationConfig(location, brand) {
+      var brand_id = brand ? location : location.brand_id;
       return {
         url: this.endpoints.getTypesAndVehiclesEndpoint(),
         method: 'get',
@@ -77033,7 +77032,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\karzoom\wp-content\plugins\hq-wordpress\js\shortcodes\karzoom\App.js */"./js/shortcodes/karzoom/App.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\karzoom\wp-content\plugins\hq-rental-software\js\shortcodes\karzoom\App.js */"./js/shortcodes/karzoom/App.js");
 
 
 /***/ })

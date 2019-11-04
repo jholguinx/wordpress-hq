@@ -104,7 +104,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\karzoom\wp-content\plugins\hq-wordpress\js\shortcodes\karzoom\AppForm.js */"./js/shortcodes/karzoom/AppForm.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\karzoom\wp-content\plugins\hq-rental-software\js\shortcodes\karzoom\AppForm.js */"./js/shortcodes/karzoom/AppForm.js");
 
 
 /***/ })

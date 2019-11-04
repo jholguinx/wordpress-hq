@@ -164,7 +164,7 @@ class HQBookingForm extends PureComponent{
                                             <div className="one themeborder hq-input-wrapper">
                                                 <SuggestionInput
                                                     id="hq-user-location"
-                                                    placeholder="Your Address"
+                                                    placeholder="Enter Town, City or Postcode"
                                                     suggestions={this.state.suggestions}
                                                     labelProperty="name"
                                                     onChangeInput={this.onChangeSuggestionInput.bind(this)}

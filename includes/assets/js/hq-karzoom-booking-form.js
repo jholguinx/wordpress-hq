@@ -401,7 +401,7 @@ function (_PureComponent) {
         className: "one themeborder hq-input-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_SuggestionInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
         id: "hq-user-location",
-        placeholder: "Your Address",
+        placeholder: "Enter Town, City or Postcode",
         suggestions: this.state.suggestions,
         labelProperty: "name",
         onChangeInput: this.onChangeSuggestionInput.bind(this),

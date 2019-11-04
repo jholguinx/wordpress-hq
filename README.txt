@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.2.1
 Requires PHP: 5.6.0
-Stable tag: 1.3.5
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,10 @@ on this page.
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.4.0 =
+Removing support for normal api response on data sync
+Improvements on Settings
 
 = 1.3.4 =
 Fix buffering

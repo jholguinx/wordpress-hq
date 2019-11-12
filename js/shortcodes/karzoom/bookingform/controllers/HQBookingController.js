@@ -66,9 +66,7 @@ class HQBookingController{
                     makes: makes,
                     vehicleClasses: classes,
                     form: {
-                        ...app.state.form,
-                        make: makes[0],
-                        vehicleClass: classes[0].id
+                        ...app.state.form
                     }
                 });
             },

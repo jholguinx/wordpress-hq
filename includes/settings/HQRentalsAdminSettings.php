@@ -109,7 +109,7 @@ class HQRentalsAdminSettings
                                 display: flex;
                                 flex: 1;
                                 align-items: center;
-                                justify-content: flex-start;
+                                justify-content: space-between;
                             }
 
                             .small {
@@ -193,7 +193,7 @@ class HQRentalsAdminSettings
                                     </div>
                                     <div class="hq-general-settings-item">
                                         <div class="hq-general-label-wrapper hq-dates">
-                                            <h4 class="wp-heading-inline" for="title">API tenant region</h4>
+                                            <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
                                             <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
                                                                                                                                         <p>For xxx.hqrentals.app, your region is in America 2</p>
                                                                                                                                         <p>For xxx.west.hqrentals.app, your region is in America West</p>

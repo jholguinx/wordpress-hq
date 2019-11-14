@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import Select from "../components/inputs/Select";
-import Map from '../components/maps/Map'
+import Map from '../components/maps/Map';
 import HQBookingController from "./controllers/HQBookingController";
 import SuggestionInput from "../components/inputs/SuggestionInput";
-import TextInput from '../components/inputs/TextInput';
 import Hidden from "../components/inputs/Hidden";
 import DatesPicker from "../components/inputs/DatesPicker";
 import moment from 'moment';
 import { APP_DATE_FORMAT } from "../App";
-
+import GEoLocationHelper from '../helpers/utils/GeoLocationHelper';
 class HQBookingForm extends PureComponent{
     constructor(props){
         super(props);
@@ -36,29 +35,18 @@ class HQBookingForm extends PureComponent{
                 lat: 53.4263838,
                 lng: -2.7877887
             },
-            suggestions:[]
+            suggestions:[],
+            selectedLocationOnMap: '',
+            enabledLocationTracking: false
         };
     }
-    componentDidMount(){
+    componentWillMount(){
         this.controller.componentInit(this);
-        this.controller.getLocation( (position) => {
-            const { coords } = position;
-            const { latitude, longitude } = coords;
-            this.setState({
-                mapCenter: {
-                    lat: latitude,
-                    lng: longitude
-                }
-            });
-        },
-            // Do Nothing
-        );
-        const now = moment().format(APP_DATE_FORMAT);
         this.setState({
             form: {
                 ...this.state.form,
-                pickupDate: now,
-                returnDate: now,
+                pickupDate: moment().add(2,'days').add(1, 'hours').format(APP_DATE_FORMAT),
+                returnDate: moment().add(9,'days').add(1, 'hours').format(APP_DATE_FORMAT)
             },
             backgroundStyle: {
                 backgroundImage: 'url(' + HQMapFormShortcode.backgroundImageURL + ')'
@@ -75,16 +63,21 @@ class HQBookingForm extends PureComponent{
         this.setState({ suggestions: [] });
     }
     onSelectLocationOnMap(location){
-        this.controller.onSelectLocationOnMap(location, this);
-        this.setState({
-            formAction: this.resolveActionLink(location),
-            form:{
-                ...this.state.form,
-                pickupLocation: location.id,
-                returnLocation: location.id,
-                brand: location.brand_id
-            }
-        });
+        if(String(location.id) !== this.state.selectedLocationOnMap){
+            this.controller.onSelectLocationOnMap(location, this);
+            this.setState({
+                formAction: this.resolveActionLink(location),
+                form:{
+                    ...this.state.form,
+                    pickupLocation: location.id,
+                    returnLocation: location.id,
+                    brand: location.brand_id,
+                    make: "",
+                    vehicleClass:'',
+                },
+                selectedLocationOnMap: location.id
+            });
+        }
     }
     resolveActionLink(location){
         const selectedBrand = this.state.brands.filter( brand => String(brand.id) === location.brand_id )[0];
@@ -135,8 +128,15 @@ class HQBookingForm extends PureComponent{
                 ...this.state.form,
                 pickupLocation: this.resolveLocationIdOnBrands(value),
                 returnLocation: this.resolveLocationIdOnBrands(value),
-                brand: value
+                brand: value,
+                make: "",
+                vehicleClass:'',
             }
+        });
+        const location = this.getLocationFromBrandId(value);
+        this.setState({
+            mapCenter: location.coordinates,
+            selectedLocationOnMap: location.id
         });
         this.controller.onSelectLocationOnMap(value, this, true);
     }
@@ -149,17 +149,23 @@ class HQBookingForm extends PureComponent{
         const selectedLocation = selectedBrand.locations[0];
         return selectedLocation.id;
     }
+    getLocationFromBrandId(brandId){
+        return this.state.locations.find( location => String(location.brand_id) === String(brandId) );
+    }
+    onSubmit(){
+
+    }
     render(){
         return(
             <div className="one" id="hq-map-shortcode" style={this.state.backgroundStyle}>
-                <div className="one_half">
+                <div className="one_half hq-form-column-wrapper">
                     <div className="withsmallpadding ppb_car_search_background parallax withbg">
                         <div className="overlay_background" />
                         <div className="center_wrapper">
                             <div className="inner_content">
                                 <div className="standard_wrapper">
                                     <h2 className="ppb_title hq-shortcode-map-title">{"Car Hire Where You Need It!"}</h2>
-                                    <form className="car_search_form" method="POST" action={this.state.formAction} >
+                                    <form className="car_search_form" method="POST" action={this.state.formAction} onSubmit={this.onSubmit.bind(this)}>
                                         <div className="car_search_wrapper">
                                             <div className="one themeborder hq-input-wrapper">
                                                 <SuggestionInput
@@ -203,13 +209,17 @@ class HQBookingForm extends PureComponent{
                                             <div className="one themeborder hq-input-wrapper">
                                                 <DatesPicker
                                                     placeholder="Pickup Date"
+                                                    pickup={true}
                                                     onChange={this.onChangePickupDate.bind(this)}
+                                                    value={this.state.form.pickupDate}
                                                 />
                                             </div>
                                             <div className="one themeborder hq-input-wrapper">
                                                 <DatesPicker
                                                     placeholder="Return Date"
+                                                    pickup={false}
                                                     onChange={this.onChangeReturnDate.bind(this)}
+                                                    value={this.state.form.returnDate}
                                                 />
                                             </div>
                                             <div className="one_fourth last themeborder">
@@ -238,7 +248,7 @@ class HQBookingForm extends PureComponent{
                         </div>
                     </div>
                 </div>
-                <div className="one_half map-wrapper">
+                <div className="one_half map-wrapper hq-map-column-wrapper">
                     <div className="hq-map-wrapper">
                         <Map
                             zoom={13}

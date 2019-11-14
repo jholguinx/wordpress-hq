@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Map,GoogleApiWrapper, Marker} from 'google-maps-react';
 import { mapStyles as styles } from './styles';
-import icon from '../../assets/pin.png';
 
 export class MapContainer extends Component {
     constructor(props){
@@ -28,11 +27,6 @@ export class MapContainer extends Component {
                         key={index}
                         onClick={this.onPressMarker.bind(this, location)}
                         position={location.coordinates}
-                        icon={{
-                            url: ( (String(this.state.selectedMarker.id) === String(location.id)) ? "/wp-content/uploads/2019/10/pin-selected.png" : "/wp-content/uploads/2019/10/pin-normal.png" ),
-                            anchor: new google.maps.Point(32,32),
-                            scaledSize: new google.maps.Size(64,64)
-                        }}
                     />
                 }
             }

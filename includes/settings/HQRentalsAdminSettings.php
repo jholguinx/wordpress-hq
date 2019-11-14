@@ -67,7 +67,7 @@ class HQRentalsAdminSettings
 
             <div class="wrap">
                 <div id="wrap">
-                    <h1>HQ Rentals Setup</h1>
+                    <h1 class="hq-admin-h1">HQ Rentals Setup</h1>
                     <form action="" method="post">
 
                         <style>
@@ -75,7 +75,7 @@ class HQRentalsAdminSettings
                                 display: flex;
                                 flex: 1;
                                 flex-direction: row;
-                                width: 80%;
+                                width: 90%;
                             }
 
                             .hq-general-settings-item-wrapper {
@@ -109,7 +109,7 @@ class HQRentalsAdminSettings
                                 display: flex;
                                 flex: 1;
                                 align-items: center;
-                                justify-content: flex-start;
+                                justify-content: space-between;
                             }
 
                             .small {
@@ -135,7 +135,7 @@ class HQRentalsAdminSettings
                         <script src="https://unpkg.com/popper.js@1"></script>
                         <script src="https://unpkg.com/tippy.js@5"></script>
                         <div class="hq-general-settings-section-wrapper">
-                            <h3>General Settings</h3>
+                            <h3 class="hq-admin-h3">General Settings</h3>
                             <div class="hq-general-settings-wrapper">
                                 <div class="hq-general-settings-item-wrapper hq-tokens-rows">
                                     <div class="hq-general-settings-item">
@@ -193,7 +193,7 @@ class HQRentalsAdminSettings
                                     </div>
                                     <div class="hq-general-settings-item">
                                         <div class="hq-general-label-wrapper hq-dates">
-                                            <h4 class="wp-heading-inline" for="title">API tenant region</h4>
+                                            <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
                                             <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
                                                                                                                                         <p>For xxx.hqrentals.app, your region is in America 2</p>
                                                                                                                                         <p>For xxx.west.hqrentals.app, your region is in America West</p>
@@ -225,7 +225,7 @@ class HQRentalsAdminSettings
                             </div>
                         </div>
                         <div class="hq-advanced-section">
-                            <h3>Advanced Development Settings</h3>
+                            <h3 class="hq-admin-h3">Advanced Development Settings</h3>
                             <div class="hq-general-settings-wrapper">
                                 <div class="hq-general-settings-item-wrapper">
                                     <div class="hq-general-settings-item-wrapper">
@@ -378,6 +378,9 @@ class HQRentalsAdminSettings
                 text-decoration: none;
                 display: inline-block;
                 transition: all 200ms linear;
+            }
+            .wp-heading-inline,.hq-admin-h1, .hq-admin-h3{
+                text-transform: uppercase;
             }
         </style>
         <script>

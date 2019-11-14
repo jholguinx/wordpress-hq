@@ -32,7 +32,7 @@ on this page.
 
 == Changelog ==
 
-= 1.4.0 =
+= 1.4.1 =
 Settings screen adjusted
 Fixes on clients shortcodes
 

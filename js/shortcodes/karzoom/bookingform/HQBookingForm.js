@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import Select from "../components/inputs/Select";
-import Map from '../components/maps/Map'
+import Map from '../components/maps/Map';
 import HQBookingController from "./controllers/HQBookingController";
 import SuggestionInput from "../components/inputs/SuggestionInput";
-import TextInput from '../components/inputs/TextInput';
 import Hidden from "../components/inputs/Hidden";
 import DatesPicker from "../components/inputs/DatesPicker";
 import moment from 'moment';
 import { APP_DATE_FORMAT } from "../App";
-
+import GEoLocationHelper from '../helpers/utils/GeoLocationHelper';
 class HQBookingForm extends PureComponent{
     constructor(props){
         super(props);
@@ -37,24 +36,12 @@ class HQBookingForm extends PureComponent{
                 lng: -2.7877887
             },
             suggestions:[],
-            selectedLocationOnMap: ''
+            selectedLocationOnMap: '',
+            enabledLocationTracking: false
         };
     }
-    componentDidMount(){
+    componentWillMount(){
         this.controller.componentInit(this);
-        this.controller.getLocation( (position) => {
-            const { coords } = position;
-            const { latitude, longitude } = coords;
-            this.setState({
-                mapCenter: {
-                    lat: latitude,
-                    lng: longitude
-                }
-            });
-        },
-            // Do Nothing
-        );
-
         this.setState({
             form: {
                 ...this.state.form,

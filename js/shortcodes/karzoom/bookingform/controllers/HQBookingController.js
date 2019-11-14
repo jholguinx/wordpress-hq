@@ -1,7 +1,7 @@
 import ApiConnector from "../../helpers/api/ApiConnector";
 import ApiConfigurationManager from "../../helpers/api/ApiConfigurationManager";
 import Parser from "../../helpers/api/Parser";
-
+import GeoLocationHelper from '../../helpers/utils/GeoLocationHelper';
 class HQBookingController{
     constructor() {
         this.connector = new ApiConnector();
@@ -13,10 +13,24 @@ class HQBookingController{
             this.config.getInitConfig(),
             response => {
                 if(response.data.success){
+                    let brands = Parser.parseBrands(response.data.data.brands);
                     app.setState({
-                        brands: Parser.parseBrands(response.data.data.brands),
-                        locations: Parser.parseLocations(response.data.data.locations)
+                        locations: Parser.parseLocations(response.data.data.locations),
+                        brands: brands
                     });
+                    this.getLocation( (position) => {
+                        const { coords } = position;
+                        const { latitude, longitude } = coords;
+                        app.setState({
+                            mapCenter: {
+                                lat: latitude,
+                                lng: longitude
+                            },
+                            enabledLocationTracking: true,
+                            brands: this.sortBrandsByUserLocation(coords, brands)
+                        });
+                    }, (error) => console.log('no navigator')
+                );
                 }else{
                     app.setState({ errors: 'there was an issue' });
                 }
@@ -85,6 +99,21 @@ class HQBookingController{
             errors => {
             }
         );
+    }
+    sortBrandsByUserLocation(userLocation, brands){
+        return brands.sort((brandA, brandB) => {
+            const locationA = brandA.locations[0].coordinates;
+            const locationB = brandB.locations[0].coordinates;
+            const userDistanceA = GeoLocationHelper.getDistanceBetweenPoints(userLocation,locationA);
+            const userDistanceB = GeoLocationHelper.getDistanceBetweenPoints(userLocation,locationB);
+            if(userDistanceA < userDistanceB){
+                return -1;
+            }
+            if(userDistanceA > userDistanceB){
+                return 1;
+            }
+            return 0;
+        });
     }
 }
 export default HQBookingController;

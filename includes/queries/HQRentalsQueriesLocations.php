@@ -66,6 +66,7 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
             $newObject= new \stdClass();
             $newObject->id = $location->id;
             $newObject->name = $location->name;
+            $newObject->coordinates = $location->coordinates;
             return $newObject;
         }, $location);
     }

@@ -2,9 +2,11 @@
 
 export const mapStyles = {
     mapComponentStyles : {
-        width: '51%',
-        height: '100%',
+        width: '40%',
+        height: '75%',
+        marginTop: '3%',
         position: 'relative',
-        minHeight: 500
+        minHeight: 500,
+        borderRadius: 10
     }
 };

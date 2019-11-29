@@ -42,6 +42,7 @@ class HQBookingForm extends PureComponent{
     }
     componentWillMount(){
         this.controller.componentInit(this);
+        const image = (HQMapFormShortcode.backgroundImageURL) ? HQMapFormShortcode.backgroundImageURL : "";
         this.setState({
             form: {
                 ...this.state.form,
@@ -49,7 +50,7 @@ class HQBookingForm extends PureComponent{
                 returnDate: moment().add(9,'days').add(1, 'hours').format(APP_DATE_FORMAT)
             },
             backgroundStyle: {
-                backgroundImage: 'url(' + HQMapFormShortcode.backgroundImageURL + ')'
+                backgroundImage: 'url(' + image + ')'
             }
         });
     }
@@ -157,106 +158,109 @@ class HQBookingForm extends PureComponent{
     }
     render(){
         return(
-            <div className="one" id="hq-map-shortcode" style={this.state.backgroundStyle}>
-                <div className="one_half hq-form-column-wrapper">
-                    <div className="withsmallpadding ppb_car_search_background parallax withbg">
-                        <div className="overlay_background" />
-                        <div className="center_wrapper">
-                            <div className="inner_content">
-                                <div className="standard_wrapper">
-                                    <h2 className="ppb_title hq-shortcode-map-title">{"Car Hire Where You Need It!"}</h2>
-                                    <form className="car_search_form" method="POST" action={this.state.formAction} onSubmit={this.onSubmit.bind(this)}>
-                                        <div className="car_search_wrapper">
-                                            <div className="one themeborder hq-input-wrapper">
-                                                <SuggestionInput
-                                                    id="hq-user-location"
-                                                    placeholder="Enter Town, City or Postcode"
-                                                    suggestions={this.state.suggestions}
-                                                    labelProperty="name"
-                                                    onChangeInput={this.onChangeSuggestionInput.bind(this)}
-                                                    value={this.state.suggestionInput}
-                                                    onClickSuggestion={this.onClickOnSuggestion.bind(this)}
-                                                    clearSuggestions={this.clearSuggestions.bind(this)}
-                                                />
+            <div className="one" id="hq-map-shortcode" >
+                <div id="hq-map-image-background-placeholder" style={this.state.backgroundStyle}></div>
+                <div className="hq-form-inner-wrapper">
+                    <div className="one_half hq-form-column-wrapper">
+                        <div className="withsmallpadding ppb_car_search_background parallax withbg">
+                            <div className="overlay_background" />
+                            <div className="center_wrapper">
+                                <div className="inner_content">
+                                    <div className="standard_wrapper">
+                                        <h2 className="ppb_title hq-shortcode-map-title">{"Car Hire Where You Need It!"}</h2>
+                                        <form className="car_search_form" method="POST" action={this.state.formAction} onSubmit={this.onSubmit.bind(this)}>
+                                            <div className="car_search_wrapper">
+                                                <div className="one themeborder hq-input-wrapper">
+                                                    <SuggestionInput
+                                                        id="hq-user-location"
+                                                        placeholder="Enter Town, City or Postcode"
+                                                        suggestions={this.state.suggestions}
+                                                        labelProperty="name"
+                                                        onChangeInput={this.onChangeSuggestionInput.bind(this)}
+                                                        value={this.state.suggestionInput}
+                                                        onClickSuggestion={this.onClickOnSuggestion.bind(this)}
+                                                        clearSuggestions={this.clearSuggestions.bind(this)}
+                                                    />
+                                                </div>
+                                                <div className="one themeborder hq-input-wrapper">
+                                                    <Select
+                                                        placeholder="Select Pick-up Location"
+                                                        options={this.state.brands}
+                                                        branches={true}
+                                                        onChange={this.onChangeBranch.bind(this)}
+                                                        value={this.state.form.brand}
+                                                    />
+                                                </div>
+                                                <div className="one themeborder hq-input-wrapper">
+                                                    <Select
+                                                        placeholder="Any Brands"
+                                                        options={this.state.makes}
+                                                        makes={true}
+                                                        onChange={this.onChangeVehicleBrand.bind(this)}
+                                                        value={this.state.form.make}
+                                                    />
+                                                </div>
+                                                <div className="one themeborder hq-input-wrapper">
+                                                    <Select
+                                                        placeholder="Any Vehicle Classes"
+                                                        options={this.state.vehicleClasses}
+                                                        vehicleClass={true}
+                                                        onChange={this.onChangeVehicleClass.bind(this)}
+                                                        value={this.state.form.vehicleClass}
+                                                    />
+                                                </div>
+                                                <div className="one themeborder hq-input-wrapper">
+                                                    <DatesPicker
+                                                        placeholder="Pickup Date"
+                                                        pickup={true}
+                                                        onChange={this.onChangePickupDate.bind(this)}
+                                                        value={this.state.form.pickupDate}
+                                                    />
+                                                </div>
+                                                <div className="one themeborder hq-input-wrapper">
+                                                    <DatesPicker
+                                                        placeholder="Return Date"
+                                                        pickup={false}
+                                                        onChange={this.onChangeReturnDate.bind(this)}
+                                                        value={this.state.form.returnDate}
+                                                    />
+                                                </div>
+                                                <div className="one_fourth last themeborder">
+                                                    <Hidden
+                                                        name="pick_up_location"
+                                                        value={this.state.form.pickupLocation}
+                                                    />
+                                                    <Hidden
+                                                        name="return_location"
+                                                        value={this.state.form.returnLocation}
+                                                    />
+                                                    <Hidden
+                                                        name="pick_up_date"
+                                                        value={this.state.form.pickupDate}
+                                                    />
+                                                    <Hidden
+                                                        name="return_date"
+                                                        value={this.state.form.returnDate}
+                                                    />
+                                                    <input id="car_search_btn" type="submit" className="button" value="Search" />
+                                                </div>
                                             </div>
-                                            <div className="one themeborder hq-input-wrapper">
-                                                <Select
-                                                    placeholder="Select Pick-up Location"
-                                                    options={this.state.brands}
-                                                    branches={true}
-                                                    onChange={this.onChangeBranch.bind(this)}
-                                                    value={this.state.form.brand}
-                                                />
-                                            </div>
-                                            <div className="one themeborder hq-input-wrapper">
-                                                <Select
-                                                    placeholder="Any Brands"
-                                                    options={this.state.makes}
-                                                    makes={true}
-                                                    onChange={this.onChangeVehicleBrand.bind(this)}
-                                                    value={this.state.form.make}
-                                                />
-                                            </div>
-                                            <div className="one themeborder hq-input-wrapper">
-                                                <Select
-                                                    placeholder="Any Vehicle Classes"
-                                                    options={this.state.vehicleClasses}
-                                                    vehicleClass={true}
-                                                    onChange={this.onChangeVehicleClass.bind(this)}
-                                                    value={this.state.form.vehicleClass}
-                                                />
-                                            </div>
-                                            <div className="one themeborder hq-input-wrapper">
-                                                <DatesPicker
-                                                    placeholder="Pickup Date"
-                                                    pickup={true}
-                                                    onChange={this.onChangePickupDate.bind(this)}
-                                                    value={this.state.form.pickupDate}
-                                                />
-                                            </div>
-                                            <div className="one themeborder hq-input-wrapper">
-                                                <DatesPicker
-                                                    placeholder="Return Date"
-                                                    pickup={false}
-                                                    onChange={this.onChangeReturnDate.bind(this)}
-                                                    value={this.state.form.returnDate}
-                                                />
-                                            </div>
-                                            <div className="one_fourth last themeborder">
-                                                <Hidden
-                                                    name="pick_up_location"
-                                                    value={this.state.form.pickupLocation}
-                                                />
-                                                <Hidden
-                                                    name="return_location"
-                                                    value={this.state.form.returnLocation}
-                                                />
-                                                <Hidden
-                                                    name="pick_up_date"
-                                                    value={this.state.form.pickupDate}
-                                                />
-                                                <Hidden
-                                                    name="return_date"
-                                                    value={this.state.form.returnDate}
-                                                />
-                                                <input id="car_search_btn" type="submit" className="button" value="Search" />
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="one_half map-wrapper hq-map-column-wrapper">
-                    <div className="hq-map-wrapper">
-                        <Map
-                            zoom={13}
-                            initialCenter={this.state.mapCenter}
-                            mapCenter={this.state.mapCenter}
-                            locations={this.state.locations}
-                            onPressMarker={this.onSelectLocationOnMap.bind(this)}
-                        />
+                    <div className="one_half map-wrapper hq-map-column-wrapper">
+                        <div className="hq-map-wrapper">
+                            <Map
+                                zoom={13}
+                                initialCenter={this.state.mapCenter}
+                                mapCenter={this.state.mapCenter}
+                                locations={this.state.locations}
+                                onPressMarker={this.onSelectLocationOnMap.bind(this)}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

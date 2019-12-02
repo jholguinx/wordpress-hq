@@ -322,6 +322,10 @@ class HQBookingForm extends PureComponent{
                                                         name="return_date"
                                                         value={this.state.form.returnDate}
                                                     />
+                                                    <Hidden
+                                                        name="vehicle_class_id"
+                                                        value={this.state.form.vehicleClass}
+                                                    />
                                                     <input id="car_search_btn" type="submit" className="button" value="Search" />
                                                 </div>
                                             </div>

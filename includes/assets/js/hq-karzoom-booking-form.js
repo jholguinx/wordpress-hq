@@ -561,6 +561,9 @@ function (_PureComponent) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
         name: "return_date",
         value: this.state.form.returnDate
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: "vehicle_class_id",
+        value: this.state.form.vehicleClass
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "car_search_btn",
         type: "submit",

@@ -4,15 +4,16 @@ import Map from '../components/maps/Map';
 import HQBookingController from "./controllers/HQBookingController";
 import SuggestionInput from "../components/inputs/SuggestionInput";
 import Hidden from "../components/inputs/Hidden";
-import DatesPicker from "../components/inputs/DatesPicker";
+import DatePicker from "../components/inputs/DatePicker";
 import moment from 'moment';
 import { APP_DATE_FORMAT } from "../App";
-import GEoLocationHelper from '../helpers/utils/GeoLocationHelper';
+import business from 'moment-business';
 class HQBookingForm extends PureComponent{
     constructor(props){
         super(props);
         this.controller = new HQBookingController();
         this.state = {
+            x : 5, // time interval
             suggestionInput: '',
             brands:[],
             locations: [],
@@ -20,6 +21,8 @@ class HQBookingForm extends PureComponent{
             vehicleClasses: [],
             errors: '',
             backgroundStyle: {},
+            pickupTimeOptions: [],
+            returnTimeOptions: [],
             form: {
                 brand:'',
                 vehicleClass:'',
@@ -51,7 +54,9 @@ class HQBookingForm extends PureComponent{
             },
             backgroundStyle: {
                 backgroundImage: 'url(' + image + ')'
-            }
+            },
+            pickupTimeOptions: this.getTimeOptions(480, 18),
+            returnTimeOptions: this.getTimeOptions(480, 18)
         });
     }
     onChangeSuggestionInput(value){
@@ -62,6 +67,20 @@ class HQBookingForm extends PureComponent{
     }
     clearSuggestions(){
         this.setState({ suggestions: [] });
+    }
+    getTimeOptions(startTime, endTimeHour){
+        //loop to increment the time and push results in array
+        let times = [];
+        let x = 30; //minutes interval
+        let tt = startTime; // start time
+        let ap = ['am', 'pm']; // AM-PM
+        for (var i=0; tt<= endTimeHour*60; i++) {
+            var hh = Math.floor(tt/60); // getting hours of day in 0-24 format
+            var mm = (tt%60); // getting minutes of the hour in 0-55 format
+            times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh/12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+            tt = tt + x;
+        }
+        return times;
     }
     onSelectLocationOnMap(location){
         if(String(location.id) !== this.state.selectedLocationOnMap){
@@ -85,21 +104,38 @@ class HQBookingForm extends PureComponent{
         return selectedBrand.websiteLink;
     }
     onChangePickupDate(date){
-        const parseDate = moment(date).format(APP_DATE_FORMAT);
+        const data = moment(date);
+        let newTimes = this.getTimeOptions(480, 18);
+        if(data.day() === 0){
+            newTimes = this.getTimeOptions(600, 16);
+        }
+        if(data.day() === 6){
+            newTimes = this.getTimeOptions(540, 17);
+        }
         this.setState({
             form: {
                 ...this.state.form,
-                pickupDate: parseDate
-            }
+                pickupDate: data.format(APP_DATE_FORMAT),
+            },
+            pickupTimeOptions: newTimes
         });
+
     }
     onChangeReturnDate(date){
-        const parseDate = moment(date).format(APP_DATE_FORMAT);
+        const data = moment(date);
+        let newTimes = this.getTimeOptions(480, 18);
+        if(data.day() === 0){
+            newTimes = this.getTimeOptions(600, 16);
+        }
+        if(data.day() === 6){
+            newTimes = this.getTimeOptions(540, 17);
+        }
         this.setState({
             form: {
                 ...this.state.form,
-                returnDate: parseDate
-            }
+                returnDate: data.format(APP_DATE_FORMAT),
+            },
+            returnTimeOptions: newTimes
         });
     }
     onChangeVehicleBrand(event){
@@ -132,6 +168,8 @@ class HQBookingForm extends PureComponent{
                 brand: value,
                 make: "",
                 vehicleClass:'',
+                pick_up_time: '',
+                return_time: ''
             }
         });
         const location = this.getLocationFromBrandId(value);
@@ -155,6 +193,24 @@ class HQBookingForm extends PureComponent{
     }
     onSubmit(){
 
+    }
+    onChangePickupTime(event){
+        const { value } = event.target;
+        this.setState({
+            form: {
+                ...this.state.form,
+                pick_up_time: value
+            }
+        });
+    }
+    onChangeReturnTime(event){
+        const { value } = event.target;
+        this.setState({
+            form: {
+                ...this.state.form,
+                return_time: value
+            }
+        });
     }
     render(){
         return(
@@ -209,21 +265,45 @@ class HQBookingForm extends PureComponent{
                                                         value={this.state.form.vehicleClass}
                                                     />
                                                 </div>
-                                                <div className="one themeborder hq-input-wrapper">
-                                                    <DatesPicker
-                                                        placeholder="Pickup Date"
-                                                        pickup={true}
-                                                        onChange={this.onChangePickupDate.bind(this)}
-                                                        value={this.state.form.pickupDate}
-                                                    />
+                                                <div className="one themeborder hq-input-wrapper hq-dates-wrapper">
+                                                    <div className="hq-dates-inner-wrapper">
+                                                        <DatePicker
+                                                            placeholder="Pickup Date"
+                                                            pickup={true}
+                                                            onChange={this.onChangePickupDate.bind(this)}
+                                                            value={this.state.form.pickupDate}
+                                                        />
+                                                    </div>
+                                                    <div className="hq-dates-inner-wrapper">
+                                                        <Select
+                                                            placeholder="Pickup Time"
+                                                            options={this.state.pickupTimeOptions}
+                                                            makes={true}
+                                                            onChange={this.onChangePickupTime.bind(this)}
+                                                            value={this.state.form.pick_up_time}
+                                                            labelProperty="time"
+                                                            time={true}
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <div className="one themeborder hq-input-wrapper">
-                                                    <DatesPicker
-                                                        placeholder="Return Date"
-                                                        pickup={false}
-                                                        onChange={this.onChangeReturnDate.bind(this)}
-                                                        value={this.state.form.returnDate}
-                                                    />
+                                                <div className="one themeborder hq-input-wrapper hq-dates-wrapper">
+                                                    <div className="hq-dates-inner-wrapper">
+                                                        <DatePicker
+                                                            placeholder="Return Date"
+                                                            pickup={false}
+                                                            onChange={this.onChangeReturnDate.bind(this)}
+                                                            value={this.state.form.returnDate}
+                                                        />
+                                                    </div>
+                                                    <div className="hq-dates-inner-wrapper">
+                                                        <Select
+                                                            placeholder="Return Time"
+                                                            options={this.state.returnTimeOptions}
+                                                            makes={true}
+                                                            onChange={this.onChangeReturnTime.bind(this)}
+                                                            value={this.state.form.return_time}
+                                                        />
+                                                    </div>
                                                 </div>
                                                 <div className="one_fourth last themeborder">
                                                     <Hidden

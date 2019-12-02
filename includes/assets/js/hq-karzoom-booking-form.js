@@ -90,12 +90,13 @@
 /*!**************************************!*\
   !*** ./js/shortcodes/karzoom/App.js ***!
   \**************************************/
-/*! exports provided: APP_DATE_FORMAT, APP_TIME_FORMAT */
+/*! exports provided: APP_DATE_FORMAT, APP_DATE_ONLY_FORMAT, APP_TIME_FORMAT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_DATE_FORMAT", function() { return APP_DATE_FORMAT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_DATE_ONLY_FORMAT", function() { return APP_DATE_ONLY_FORMAT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_TIME_FORMAT", function() { return APP_TIME_FORMAT; });
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_0__);
@@ -114,6 +115,7 @@ __webpack_require__.r(__webpack_exports__);
 moment__WEBPACK_IMPORTED_MODULE_3___default.a.locale('en');
 react_widgets_moment__WEBPACK_IMPORTED_MODULE_4___default()();
 var APP_DATE_FORMAT = "DD-MM-YYYY HH:mm";
+var APP_DATE_ONLY_FORMAT = "DD-MM-YYYY";
 var APP_TIME_FORMAT = "HH:mm";
 /*
  *  Components
@@ -139,11 +141,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_HQBookingController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controllers/HQBookingController */ "./js/shortcodes/karzoom/bookingform/controllers/HQBookingController.js");
 /* harmony import */ var _components_inputs_SuggestionInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/inputs/SuggestionInput */ "./js/shortcodes/karzoom/components/inputs/SuggestionInput.js");
 /* harmony import */ var _components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/inputs/Hidden */ "./js/shortcodes/karzoom/components/inputs/Hidden.js");
-/* harmony import */ var _components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/inputs/DatesPicker */ "./js/shortcodes/karzoom/components/inputs/DatesPicker.js");
+/* harmony import */ var _components_inputs_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/inputs/DatePicker */ "./js/shortcodes/karzoom/components/inputs/DatePicker.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../App */ "./js/shortcodes/karzoom/App.js");
-/* harmony import */ var _helpers_utils_GeoLocationHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../helpers/utils/GeoLocationHelper */ "./js/shortcodes/karzoom/helpers/utils/GeoLocationHelper.js");
+/* harmony import */ var moment_business__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! moment-business */ "./node_modules/moment-business/dist/moment-business.js");
+/* harmony import */ var moment_business__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment_business__WEBPACK_IMPORTED_MODULE_9__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -192,6 +195,8 @@ function (_PureComponent) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HQBookingForm).call(this, props));
     _this.controller = new _controllers_HQBookingController__WEBPACK_IMPORTED_MODULE_3__["default"]();
     _this.state = {
+      x: 5,
+      // time interval
       suggestionInput: '',
       brands: [],
       locations: [],
@@ -199,6 +204,8 @@ function (_PureComponent) {
       vehicleClasses: [],
       errors: '',
       backgroundStyle: {},
+      pickupTimeOptions: [],
+      returnTimeOptions: [],
       form: {
         brand: '',
         vehicleClass: '',
@@ -233,7 +240,9 @@ function (_PureComponent) {
         }),
         backgroundStyle: {
           backgroundImage: 'url(' + image + ')'
-        }
+        },
+        pickupTimeOptions: this.getTimeOptions(480, 18),
+        returnTimeOptions: this.getTimeOptions(480, 18)
       });
     }
   }, {
@@ -252,6 +261,29 @@ function (_PureComponent) {
       this.setState({
         suggestions: []
       });
+    }
+  }, {
+    key: "getTimeOptions",
+    value: function getTimeOptions(startTime, endTimeHour) {
+      //loop to increment the time and push results in array
+      var times = [];
+      var x = 30; //minutes interval
+
+      var tt = startTime; // start time
+
+      var ap = ['am', 'pm']; // AM-PM
+
+      for (var i = 0; tt <= endTimeHour * 60; i++) {
+        var hh = Math.floor(tt / 60); // getting hours of day in 0-24 format
+
+        var mm = tt % 60; // getting minutes of the hour in 0-55 format
+
+        times[i] = ("0" + hh % 12).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh / 12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+
+        tt = tt + x;
+      }
+
+      return times;
     }
   }, {
     key: "onSelectLocationOnMap",
@@ -282,21 +314,43 @@ function (_PureComponent) {
   }, {
     key: "onChangePickupDate",
     value: function onChangePickupDate(date) {
-      var parseDate = moment__WEBPACK_IMPORTED_MODULE_7___default()(date).format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"]);
+      var data = moment__WEBPACK_IMPORTED_MODULE_7___default()(date);
+      var newTimes = this.getTimeOptions(480, 18);
+
+      if (data.day() === 0) {
+        newTimes = this.getTimeOptions(600, 16);
+      }
+
+      if (data.day() === 6) {
+        newTimes = this.getTimeOptions(540, 17);
+      }
+
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          pickupDate: parseDate
-        })
+          pickupDate: data.format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"])
+        }),
+        pickupTimeOptions: newTimes
       });
     }
   }, {
     key: "onChangeReturnDate",
     value: function onChangeReturnDate(date) {
-      var parseDate = moment__WEBPACK_IMPORTED_MODULE_7___default()(date).format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"]);
+      var data = moment__WEBPACK_IMPORTED_MODULE_7___default()(date);
+      var newTimes = this.getTimeOptions(480, 18);
+
+      if (data.day() === 0) {
+        newTimes = this.getTimeOptions(600, 16);
+      }
+
+      if (data.day() === 6) {
+        newTimes = this.getTimeOptions(540, 17);
+      }
+
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          returnDate: parseDate
-        })
+          returnDate: data.format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"])
+        }),
+        returnTimeOptions: newTimes
       });
     }
   }, {
@@ -331,7 +385,9 @@ function (_PureComponent) {
           returnLocation: this.resolveLocationIdOnBrands(value),
           brand: value,
           make: "",
-          vehicleClass: ''
+          vehicleClass: '',
+          pick_up_time: '',
+          return_time: ''
         })
       });
       var location = this.getLocationFromBrandId(value);
@@ -368,6 +424,26 @@ function (_PureComponent) {
   }, {
     key: "onSubmit",
     value: function onSubmit() {}
+  }, {
+    key: "onChangePickupTime",
+    value: function onChangePickupTime(event) {
+      var value = event.target.value;
+      this.setState({
+        form: _objectSpread({}, this.state.form, {
+          pick_up_time: value
+        })
+      });
+    }
+  }, {
+    key: "onChangeReturnTime",
+    value: function onChangeReturnTime(event) {
+      var value = event.target.value;
+      this.setState({
+        form: _objectSpread({}, this.state.form, {
+          return_time: value
+        })
+      });
+    }
   }, {
     key: "render",
     value: function render() {
@@ -436,20 +512,42 @@ function (_PureComponent) {
         onChange: this.onChangeVehicleClass.bind(this),
         value: this.state.form.vehicleClass
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder hq-input-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        className: "one themeborder hq-input-wrapper hq-dates-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hq-dates-inner-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatePicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
         placeholder: "Pickup Date",
         pickup: true,
         onChange: this.onChangePickupDate.bind(this),
         value: this.state.form.pickupDate
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder hq-input-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatesPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        className: "hq-dates-inner-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        placeholder: "Pickup Time",
+        options: this.state.pickupTimeOptions,
+        makes: true,
+        onChange: this.onChangePickupTime.bind(this),
+        value: this.state.form.pick_up_time,
+        labelProperty: "time",
+        time: true
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "one themeborder hq-input-wrapper hq-dates-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hq-dates-inner-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatePicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
         placeholder: "Return Date",
         pickup: false,
         onChange: this.onChangeReturnDate.bind(this),
         value: this.state.form.returnDate
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hq-dates-inner-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        placeholder: "Return Time",
+        options: this.state.returnTimeOptions,
+        makes: true,
+        onChange: this.onChangeReturnTime.bind(this),
+        value: this.state.form.return_time
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "one_fourth last themeborder"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
         name: "pick_up_location",
@@ -650,10 +748,10 @@ function () {
 
 /***/ }),
 
-/***/ "./js/shortcodes/karzoom/components/inputs/DatesPicker.js":
-/*!****************************************************************!*\
-  !*** ./js/shortcodes/karzoom/components/inputs/DatesPicker.js ***!
-  \****************************************************************/
+/***/ "./js/shortcodes/karzoom/components/inputs/DatePicker.js":
+/*!***************************************************************!*\
+  !*** ./js/shortcodes/karzoom/components/inputs/DatePicker.js ***!
+  \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -666,8 +764,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../App */ "./js/shortcodes/karzoom/App.js");
-/* harmony import */ var moment_business__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment-business */ "./node_modules/moment-business/dist/moment-business.js");
-/* harmony import */ var moment_business__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment_business__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -695,7 +791,6 @@ var styles = __webpack_require__(/*! ../../../../../node_modules/react-widgets/d
 var fonts = __webpack_require__(/*! ../../../../../node_modules/react-widgets/dist/fonts/rw-widgets.ttf */ "./node_modules/react-widgets/dist/fonts/rw-widgets.ttf");
 
 var fontsTwo = __webpack_require__(/*! ../../../../../node_modules/react-widgets/dist/fonts/rw-widgets.woff */ "./node_modules/react-widgets/dist/fonts/rw-widgets.woff");
-
 
  //https://jquense.github.io/react-widgets/api/DateTimePicker/
 
@@ -728,57 +823,17 @@ function (_Component) {
       });
     }
   }, {
-    key: "onChangeTime",
-    value: function onChangeTime(time) {
-      var parseDate = moment__WEBPACK_IMPORTED_MODULE_2___default()(time);
-      this.props.onChange(time);
-      /*
-      if(this.isOfficeHour(parseDate)){
-      }else{
-      alert("This office is not open at this hour. Please Select another time.");
-      }*/
-    }
-  }, {
-    key: "isOfficeHour",
-    value: function isOfficeHour(momentDate) {
-      var selectedTime = moment__WEBPACK_IMPORTED_MODULE_2___default()(momentDate, _App__WEBPACK_IMPORTED_MODULE_3__["APP_TIME_FORMAT"]);
-
-      if (moment_business__WEBPACK_IMPORTED_MODULE_4___default.a.isWeekDay(momentDate)) {
-        var beforeTime = moment__WEBPACK_IMPORTED_MODULE_2___default()("08:00", _App__WEBPACK_IMPORTED_MODULE_3__["APP_TIME_FORMAT"]);
-        var afterTime = moment__WEBPACK_IMPORTED_MODULE_2___default()("18:00", _App__WEBPACK_IMPORTED_MODULE_3__["APP_TIME_FORMAT"]);
-
-        if (selectedTime.isBetween(beforeTime, afterTime)) {
-          return true;
-        }
-
-        return false;
-      } else if (moment_business__WEBPACK_IMPORTED_MODULE_4___default.a.isWeekendDay(momentDate)) {
-        var _beforeTime = moment__WEBPACK_IMPORTED_MODULE_2___default()("09:00", _App__WEBPACK_IMPORTED_MODULE_3__["APP_TIME_FORMAT"]);
-
-        var _afterTime = moment__WEBPACK_IMPORTED_MODULE_2___default()("17:00", _App__WEBPACK_IMPORTED_MODULE_3__["APP_TIME_FORMAT"]);
-
-        if (selectedTime.isBetween(_beforeTime, _afterTime)) {
-          return true;
-        }
-
-        return false;
-      } else {
-        return false;
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_widgets__WEBPACK_IMPORTED_MODULE_1__["DateTimePicker"], {
-        onChange: this.onChangeTime.bind(this),
-        value: moment__WEBPACK_IMPORTED_MODULE_2___default()(this.props.value, _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_FORMAT"]).toDate(),
+        onChange: this.props.onChange,
+        value: moment__WEBPACK_IMPORTED_MODULE_2___default()(this.props.value, _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"]).toDate(),
         defaultValue: this.props.pickup ? moment__WEBPACK_IMPORTED_MODULE_2___default()().add(2, 'days').add(1, 'hours').toDate() : moment__WEBPACK_IMPORTED_MODULE_2___default()().add(9, 'days').toDate(),
-        format: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_FORMAT"],
-        timeFormat: _App__WEBPACK_IMPORTED_MODULE_3__["APP_TIME_FORMAT"],
-        parse: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_FORMAT"],
+        format: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"],
+        parse: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"],
         min: moment__WEBPACK_IMPORTED_MODULE_2___default()().add(2, 'days').toDate(),
         placeholder: "Select Date",
-        time: true
+        time: false
       });
     }
   }]);
@@ -918,6 +973,13 @@ function (_PureComponent) {
             value: option.id
           }, option.locations[0].name);
         });
+      } else if (this.props.time) {
+        return this.props.options.map(function (option, index) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            key: index,
+            value: option
+          }, option);
+        });
       } else {
         return this.props.options.map(function (option, index) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -930,7 +992,9 @@ function (_PureComponent) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "hq-select-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: this.props.id,
         name: this.props.name,
         placeholder: this.props.placeholder,

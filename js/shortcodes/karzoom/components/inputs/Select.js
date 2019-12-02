@@ -9,16 +9,17 @@ class Select extends PureComponent{
             return this.props.options.map((option,  index) => <option key={index} value={option.id}>{option.name}</option>);
         }else if(this.props.makes){
             return this.props.options.map((option,  index) => <option key={index} value={option}>{option}</option>);
-        }else if(this.props.branches){
-            return this.props.options.map((option,  index) => <option key={index} value={option.id}>{option.locations[0].name}</option>);
+        }else if(this.props.branches) {
+            return this.props.options.map((option, index) => <option key={index} value={option.id}>{option.locations[0].name}</option>);
+        }else if(this.props.time){
+                return this.props.options.map((option,  index) => <option key={index} value={option}>{option}</option>);
         }else{
             return this.props.options.map((option,  index) => <option key={index} value={option.value}>{option[this.props.labelProperty]}</option>);
         }
-
     }
     render(){
         return(
-            <div>
+            <div className="hq-select-wrapper">
                 <select
                     id={this.props.id}
                     name={this.props.name}

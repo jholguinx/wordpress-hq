@@ -16,7 +16,7 @@ class HQRentalsKarzoomBookingForm
         $this->assets->loadKarzoomFormAssets();
         $atts = shortcode_atts(
             array(
-                'background_url'   => ' ',
+                'background_url'   => '',
             ), $atts
         );
         $dataToJS = array(

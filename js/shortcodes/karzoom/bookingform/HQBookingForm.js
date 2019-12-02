@@ -6,7 +6,7 @@ import SuggestionInput from "../components/inputs/SuggestionInput";
 import Hidden from "../components/inputs/Hidden";
 import DatePicker from "../components/inputs/DatePicker";
 import moment from 'moment';
-import { APP_DATE_FORMAT } from "../App";
+import { APP_DATE_ONLY_FORMAT } from "../App";
 import business from 'moment-business';
 class HQBookingForm extends PureComponent{
     constructor(props){
@@ -29,6 +29,8 @@ class HQBookingForm extends PureComponent{
                 make:'',
                 pickupDate: '',
                 returnDate: '',
+                pickupTime: '',
+                returnTime: '',
                 pickupLocation: '',
                 returnLocation: ''
             },
@@ -49,8 +51,8 @@ class HQBookingForm extends PureComponent{
         this.setState({
             form: {
                 ...this.state.form,
-                pickupDate: moment().add(2,'days').add(1, 'hours').format(APP_DATE_FORMAT),
-                returnDate: moment().add(9,'days').add(1, 'hours').format(APP_DATE_FORMAT)
+                pickupDate: moment().add(2,'days').format(APP_DATE_ONLY_FORMAT),
+                returnDate: moment().add(9,'days').format(APP_DATE_ONLY_FORMAT)
             },
             backgroundStyle: {
                 backgroundImage: 'url(' + image + ')'
@@ -115,7 +117,8 @@ class HQBookingForm extends PureComponent{
         this.setState({
             form: {
                 ...this.state.form,
-                pickupDate: data.format(APP_DATE_FORMAT),
+                pickupDate: data.format(APP_DATE_ONLY_FORMAT),
+                returnDate: data.add(7, 'days').format(APP_DATE_ONLY_FORMAT)
             },
             pickupTimeOptions: newTimes
         });
@@ -133,7 +136,7 @@ class HQBookingForm extends PureComponent{
         this.setState({
             form: {
                 ...this.state.form,
-                returnDate: data.format(APP_DATE_FORMAT),
+                returnDate: data.format(APP_DATE_ONLY_FORMAT),
             },
             returnTimeOptions: newTimes
         });
@@ -199,7 +202,8 @@ class HQBookingForm extends PureComponent{
         this.setState({
             form: {
                 ...this.state.form,
-                pick_up_time: value
+                pickupTime: value,
+                returnTime: value
             }
         });
     }
@@ -208,7 +212,7 @@ class HQBookingForm extends PureComponent{
         this.setState({
             form: {
                 ...this.state.form,
-                return_time: value
+                returnTime: value
             }
         });
     }
@@ -280,7 +284,7 @@ class HQBookingForm extends PureComponent{
                                                             options={this.state.pickupTimeOptions}
                                                             makes={true}
                                                             onChange={this.onChangePickupTime.bind(this)}
-                                                            value={this.state.form.pick_up_time}
+                                                            value={this.state.form.pickupTime}
                                                             labelProperty="time"
                                                             time={true}
                                                         />
@@ -301,11 +305,11 @@ class HQBookingForm extends PureComponent{
                                                             options={this.state.returnTimeOptions}
                                                             makes={true}
                                                             onChange={this.onChangeReturnTime.bind(this)}
-                                                            value={this.state.form.return_time}
+                                                            value={this.state.form.returnTime}
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="one_fourth last themeborder">
+                                                <div id="hq-hidden-fields-wrapper" className="one_fourth last themeborder">
                                                     <Hidden
                                                         name="pick_up_location"
                                                         value={this.state.form.pickupLocation}
@@ -319,8 +323,16 @@ class HQBookingForm extends PureComponent{
                                                         value={this.state.form.pickupDate}
                                                     />
                                                     <Hidden
+                                                        name="pick_up_time"
+                                                        value={this.state.form.pickupTime}
+                                                    />
+                                                    <Hidden
                                                         name="return_date"
                                                         value={this.state.form.returnDate}
+                                                    />
+                                                    <Hidden
+                                                        name="return_time"
+                                                        value={this.state.form.returnTime}
                                                     />
                                                     <Hidden
                                                         name="vehicle_class_id"

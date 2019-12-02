@@ -212,6 +212,8 @@ function (_PureComponent) {
         make: '',
         pickupDate: '',
         returnDate: '',
+        pickupTime: '',
+        returnTime: '',
         pickupLocation: '',
         returnLocation: ''
       },
@@ -235,8 +237,8 @@ function (_PureComponent) {
       var image = HQMapFormShortcode.backgroundImageURL ? HQMapFormShortcode.backgroundImageURL : "";
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          pickupDate: moment__WEBPACK_IMPORTED_MODULE_7___default()().add(2, 'days').add(1, 'hours').format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"]),
-          returnDate: moment__WEBPACK_IMPORTED_MODULE_7___default()().add(9, 'days').add(1, 'hours').format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"])
+          pickupDate: moment__WEBPACK_IMPORTED_MODULE_7___default()().add(2, 'days').format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_ONLY_FORMAT"]),
+          returnDate: moment__WEBPACK_IMPORTED_MODULE_7___default()().add(9, 'days').format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_ONLY_FORMAT"])
         }),
         backgroundStyle: {
           backgroundImage: 'url(' + image + ')'
@@ -327,7 +329,8 @@ function (_PureComponent) {
 
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          pickupDate: data.format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"])
+          pickupDate: data.format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_ONLY_FORMAT"]),
+          returnDate: data.add(7, 'days').format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_ONLY_FORMAT"])
         }),
         pickupTimeOptions: newTimes
       });
@@ -348,7 +351,7 @@ function (_PureComponent) {
 
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          returnDate: data.format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_FORMAT"])
+          returnDate: data.format(_App__WEBPACK_IMPORTED_MODULE_8__["APP_DATE_ONLY_FORMAT"])
         }),
         returnTimeOptions: newTimes
       });
@@ -430,7 +433,8 @@ function (_PureComponent) {
       var value = event.target.value;
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          pick_up_time: value
+          pickupTime: value,
+          returnTime: value
         })
       });
     }
@@ -440,7 +444,7 @@ function (_PureComponent) {
       var value = event.target.value;
       this.setState({
         form: _objectSpread({}, this.state.form, {
-          return_time: value
+          returnTime: value
         })
       });
     }
@@ -527,7 +531,7 @@ function (_PureComponent) {
         options: this.state.pickupTimeOptions,
         makes: true,
         onChange: this.onChangePickupTime.bind(this),
-        value: this.state.form.pick_up_time,
+        value: this.state.form.pickupTime,
         labelProperty: "time",
         time: true
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -546,8 +550,9 @@ function (_PureComponent) {
         options: this.state.returnTimeOptions,
         makes: true,
         onChange: this.onChangeReturnTime.bind(this),
-        value: this.state.form.return_time
+        value: this.state.form.returnTime
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "hq-hidden-fields-wrapper",
         className: "one_fourth last themeborder"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
         name: "pick_up_location",
@@ -559,8 +564,14 @@ function (_PureComponent) {
         name: "pick_up_date",
         value: this.state.form.pickupDate
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: "pick_up_time",
+        value: this.state.form.pickupTime
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
         name: "return_date",
         value: this.state.form.returnDate
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: "return_time",
+        value: this.state.form.returnTime
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
         name: "vehicle_class_id",
         value: this.state.form.vehicleClass
@@ -1293,13 +1304,14 @@ function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapStyles", function() { return mapStyles; });
+var height = window.innerHeight;
 var mapStyles = {
   mapComponentStyles: {
     width: '40%',
-    height: '75%',
+    height: '60%',
     marginTop: '3%',
     position: 'relative',
-    minHeight: 500,
+    //        minHeight: parseInt(height * 0.70),
     borderRadius: 10
   }
 };

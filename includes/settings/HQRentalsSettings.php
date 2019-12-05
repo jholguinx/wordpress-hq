@@ -34,6 +34,8 @@ class HQRentalsSettings
     public $hq_location_address_label_field = 'hq_location_address_label_field';
     public $hq_location_brands_field = 'hq_location_brands_field';
     public $hq_location_office_hours_field = 'hq_location_office_hours_field';
+    public $hq_replace_url_on_brand_option = 'hq_replace_url_on_brand_option';
+    public $hq_url_to_replace_on_brands_option = 'hq_url_to_replace_on_brands_option';
 
     public function __construct()
     {
@@ -46,7 +48,7 @@ class HQRentalsSettings
      */
     public function getApiUserToken()
     {
-        $option = get_option($this->api_user_token);
+        $option = get_option($this->api_user_token, "");
         if ($this->newAuthSchemeEnabled()) {
             if(!empty($option)){
                 return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
@@ -373,6 +375,36 @@ class HQRentalsSettings
 
 
 
+
+
+    public function noReplaceBaseURLOnBrandsSetting(){
+        return empty(get_option($this->hq_replace_url_on_brand_option));
+    }
+    public function saveReplaceBaseURLOnBrandsSetting($data)
+    {
+        return update_option($this->hq_replace_url_on_brand_option, $data);
+    }
+    public function getReplaceBaseURLOnBrandsSetting()
+    {
+        return get_option($this->hq_replace_url_on_brand_option, '');
+    }
+    public function noBrandURLToReplaceSetting(){
+        return empty(get_option($this->hq_url_to_replace_on_brands_option));
+    }
+    public function saveBrandURLToReplaceSetting($data)
+    {
+        return update_option($this->hq_url_to_replace_on_brands_option, $data);
+    }
+    public function getBrandURLToReplaceSetting()
+    {
+        return get_option($this->hq_url_to_replace_on_brands_option, '');
+    }
+
+
+
+
+
+
     /***
      * Save Settings on Database
      * @param $postDataFromSettings
@@ -406,6 +438,9 @@ class HQRentalsSettings
         }
         if (empty($postDataFromSettings[$this->hq_disable_safari_functionality])) {
             update_option($this->hq_disable_safari_functionality, "false");
+        }
+        if (empty($postDataFromSettings[$this->hq_replace_url_on_brand_option])) {
+            update_option($this->hq_replace_url_on_brand_option, "false");
         }
         /*Refresh data on save */
         $worker = new HQRentalsCronJob();

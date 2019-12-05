@@ -254,8 +254,8 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
-                                                <h4 class="wp-heading-inline" for="title">Enable Base URL Replacement on Brands</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Enabling this option will make the replacement of the system url with the option below"></span>
+                                                <h4 class="wp-heading-inline" for="title">Enable change of branch url</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This option will enable you to change the base url for the public links of the reservation process."></span>
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="checkbox"
@@ -343,8 +343,8 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
-                                                <h4 class="wp-heading-inline" for="title">URl to replace on brands</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="URL Replacement string"></span>
+                                                <h4 class="wp-heading-inline" for="title">Domain to replace in the public reservation process</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This domain will be used to replace the system url in public reservation processes"></span>
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="text"

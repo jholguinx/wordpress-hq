@@ -75,6 +75,12 @@ class HQRentalsBootstrap
         if ($this->settings->noOfficeHoursSetting()) {
             $this->settings->saveOfficeHoursSetting($this->hq_location_description_default_value);
         }
+        if($this->settings->noBrandURLToReplaceSetting()){
+            $this->settings->saveBrandURLToReplaceSetting($this->hq_location_default_field_value);
+        }
+        if($this->settings->noReplaceBaseURLOnBrandsSetting()){
+            $this->settings->saveReplaceBaseURLOnBrandsSetting($this->hq_integration_on_home_default_value);
+        }
         $this->resolveDefaultPages();
         $this->notifyToSystemOnActivation();
     }

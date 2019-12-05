@@ -254,6 +254,17 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Enable change of branch url</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This option will enable you to change the base url for the public links of the reservation process."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="checkbox"
+                                                       name="<?php echo $this->settings->hq_replace_url_on_brand_option; ?>"
+                                                       value="true" <?php echo ($this->settings->getReplaceBaseURLOnBrandsSetting() === 'true') ? 'checked' : ''; ?>/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">Fleet location coordinates
                                                     field id</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
@@ -330,7 +341,18 @@ class HQRentalsAdminSettings
                                                        value="<?php echo esc_attr($this->settings->getBrandsSetting()); ?>"/>
                                             </div>
                                         </div>
-
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Domain to replace in the public reservation process</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This domain will be used to replace the system url in public reservation processes"></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input hq-admin-text-input-medium"
+                                                       name="<?php echo $this->settings->hq_url_to_replace_on_brands_option; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getBrandURLToReplaceSetting()); ?>"/>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="hq-general-settings-item-wrapper">
                                     </div>
@@ -382,6 +404,10 @@ class HQRentalsAdminSettings
             .wp-heading-inline,.hq-admin-h1, .hq-admin-h3{
                 text-transform: uppercase;
             }
+            .hq-admin-text-input-medium{
+                max-width: 300px;
+            }
+
         </style>
         <script>
             (function($){

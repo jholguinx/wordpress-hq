@@ -1,18 +1,22 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsActions;
-require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-require_once ABSPATH . 'wp-admin/includes/misc.php';
-require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader-skin.php';
-require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
-require_once ABSPATH . 'wp-admin/includes/file.php';
 
 class HQRentalsUpgrader{
 
     protected $pluginName = 'hq-rental-software/hq-wordpress.php';
 
+    protected $dependencies = array(
+        ABSPATH . 'wp-admin/includes/class-wp-upgrader.php',
+        ABSPATH . 'wp-admin/includes/misc.php',
+        ABSPATH . 'wp-admin/includes/class-wp-upgrader-skin.php',
+        ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php',
+        ABSPATH . 'wp-admin/includes/file.php'
+    );
+
     public function __construct()
     {
+        $this->requireDependencies();
         $this->upgrader = new \Plugin_Upgrader();
     }
     public function upgradePlugin()
@@ -36,5 +40,13 @@ class HQRentalsUpgrader{
         }
 
         return null;
+    }
+    protected function requireDependencies()
+    {
+        foreach ($this->dependencies as $file){
+            if(file_exists($file)){
+                require_once($file);
+            }
+        }
     }
 }

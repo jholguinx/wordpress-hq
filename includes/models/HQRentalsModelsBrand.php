@@ -2,6 +2,7 @@
 namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsModelsBrand extends HQRentalsBaseModel{
 
@@ -95,6 +96,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
             )
         );
         $this->filter = new HQRentalsDataFilter();
+        $this->settings = new HQRentalsSettings();
         if(! empty( $post ) ){
             $this->setBrandFromPost($post);
         }
@@ -111,14 +113,26 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->name = $data->name;
         $this->taxLabel = $data->tax_label;
         $this->websiteLink = $data->website_link;
-        $this->publicReservationsLinkFull = $data->public_reservations_link_full;
-        $this->publicPackagesLinkFull = $data->public_packages_link_full;
-        $this->publicReservationsFirstStepLink = $data->public_reservations_link_first_step;
-        $this->publicPackagesFirstStepLink = $data->public_packages_link_first_step;
-        $this->publicReservationPackagesFirstStepLink = $data->public_reservations_packages_link_first_step;
-        $this->myReservationsLink = $data->my_reservations_link;
-        $this->myPackagesReservationsLink = $data->my_package_reservations_link;
-        $this->publicCalendarLink = $baseUrlForCalendar[0] . 'calendar?brand_id=' . $data->uuid;
+        if($this->settings->getReplaceBaseURLOnBrandsSetting() === "true"){
+            $urlReplacement = $this->settings->getBrandURLToReplaceSetting();
+            $this->publicReservationsLinkFull = $this->resolveBrandURL($data->public_reservations_link_full, $urlReplacement);
+            $this->publicPackagesLinkFull = $this->resolveBrandURL($data->public_packages_link_full, $urlReplacement);
+            $this->publicReservationsFirstStepLink = $this->resolveBrandURL($data->public_reservations_link_first_step, $urlReplacement);
+            $this->publicPackagesFirstStepLink = $this->resolveBrandURL($data->public_packages_link_first_step, $urlReplacement);
+            $this->publicReservationPackagesFirstStepLink = $this->resolveBrandURL($data->public_reservations_packages_link_first_step, $urlReplacement);
+            $this->myReservationsLink = $this->resolveBrandURL($data->my_reservations_link, $urlReplacement);
+            $this->myPackagesReservationsLink = $this->resolveBrandURL( $data->my_package_reservations_link, $urlReplacement);
+            $this->publicCalendarLink = $this->resolveBrandURL($baseUrlForCalendar[0] . 'calendar?brand_id=' . $data->uuid, $urlReplacement);
+        }else{
+            $this->publicReservationsLinkFull = $data->public_reservations_link_full;
+            $this->publicPackagesLinkFull = $data->public_packages_link_full;
+            $this->publicReservationsFirstStepLink = $data->public_reservations_link_first_step;
+            $this->publicPackagesFirstStepLink = $data->public_packages_link_first_step;
+            $this->publicReservationPackagesFirstStepLink = $data->public_reservations_packages_link_first_step;
+            $this->myReservationsLink = $data->my_reservations_link;
+            $this->myPackagesReservationsLink = $data->my_package_reservations_link;
+            $this->publicCalendarLink = $baseUrlForCalendar[0] . 'calendar?brand_id=' . $data->uuid;
+        }
     }
 
     /*
@@ -173,6 +187,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->name = get_post_meta( $brandPost->ID, $this->metaName, true);
         $this->taxLabel = get_post_meta($brandPost->ID, $this->metaTaxLabel, true);
         $this->websiteLink = get_post_meta($brandPost->ID, $this->metaWebsiteLink, true);
+
         $this->publicReservationsLinkFull = get_post_meta( $brandPost->ID, $this->metaPublicReservationsLinkFull, true );
         $this->publicPackagesLinkFull = get_post_meta( $brandPost->ID, $this->metaPublicPackagesLinkFull, true );
         $this->publicReservationsFirstStepLink = get_post_meta( $brandPost->ID, $this->metaPublicReservationsFirstStepLink, true );
@@ -223,5 +238,11 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         );
         $query = new \WP_Query( $args );
         return $this->setBrandFromPost($query->posts[0]);
+    }
+    protected function resolveBrandURL($url, $replacement)
+    {
+        $url_info = parse_url($url);
+        $baseURL = $url_info["host"];
+        return str_replace($baseURL, $replacement, $url);
     }
 }

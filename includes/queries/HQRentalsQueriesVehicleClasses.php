@@ -247,7 +247,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
     }
 
     /**
-     * Retrieve a single class filter by custom field and based on proce intervals
+     * Retrieve a single class filter by custom field and based on price intervals
      * @param $dbColumn
      * @param $value
      * @return array|HQRentalsModelsVehicleClass

@@ -38,8 +38,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function allVehicleClassesByOrder()
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'order'     =>  'ASC',
                 'orderby'   =>  'meta_value_num',
@@ -68,8 +67,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
 
     public function getVehicleClassFilterByCustomField($dbColumn, $value)
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'meta_query' => array(
                     array(
@@ -92,8 +90,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function getVehicleClassBySystemId($hqId)
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'meta_query' => array(
                     array(
@@ -178,8 +175,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function getClassFromCustomField($dbColumn, $value)
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'meta_query' => array(
                     array(
@@ -195,8 +191,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
     }
     public function getClassesFilterByCustomField($dbColumn, $value)
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'meta_query' => array(
                     array(
@@ -219,8 +214,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function getCheapestClassFromCustomFieldValue($dbColumn, $value)
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'meta_query' => array(
                     array(
@@ -254,8 +248,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function getCheapestClassFromCustomFieldValueAndPriceInterval($dbColumn, $value)
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'meta_query' => array(
                     array(
@@ -321,8 +314,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
 
     public function getVehicleClassesByBrand($brandId)
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'meta_query' => array(
                     array(
@@ -376,8 +368,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
     }
     public function getVehiclesByBrandAndCustomField($brandId, $customField, $customFieldValue)
     {
-        $args = array_merge(
-            $this->model->postArgs,
+        $args = $this->resolveQueryArray(
             array(
                 'meta_query' => array(
                     'relation' => 'AND',
@@ -396,5 +387,12 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         );
         $query = new \WP_Query($args);
         return $this->fillModelWithPosts($query->posts);
+    }
+    protected function resolveQueryArray(array $metaQueryArray)
+    {
+        return array_merge(
+            $this->model->postArgs,
+            $metaQueryArray
+        );
     }
 }

@@ -195,7 +195,12 @@ class HQRentalsSettings
      */
     public function saveApiUserToken($token)
     {
-        return update_option($this->api_user_token, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($token)));
+        if(empty($token)){
+            return update_option($this->api_user_token, "");
+        }else{
+            return update_option($this->api_user_token, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($token)));
+        }
+
     }
 
     /**
@@ -215,7 +220,12 @@ class HQRentalsSettings
      */
     public function saveApiTenantToken($token)
     {
-        return update_option($this->api_tenant_token, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($token)));
+        if(empty($token)){
+            return update_option($this->api_tenant_token, "");
+        }else{
+            return update_option($this->api_tenant_token, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($token)));
+        }
+
     }
 
     /**

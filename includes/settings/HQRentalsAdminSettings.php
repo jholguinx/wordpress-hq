@@ -254,6 +254,17 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Disable Data Syncronization</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Support for reservations iframe on the home page  - this should be applied in case that you are placing the reservation process on the home page."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="checkbox"
+                                                       name="<?php echo $this->settings->hq_disable_cronjob_option; ?>"
+                                                       value="true" <?php echo ($this->settings->getDisableCronjobOption() === 'true') ? 'checked' : ''; ?>/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">Enable change of branch url</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This option will enable you to change the base url for the public links of the reservation process."></span>
                                             </div>

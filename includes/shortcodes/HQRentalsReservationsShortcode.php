@@ -36,6 +36,9 @@ class HQRentalsReservationsShortcode
         $brand = new HQRentalsModelsBrand();
         $brand->findBySystemId($atts['id']);
         $this->assets->getIframeResizerAssets();
+        if($atts['autoscroll'] == 'true'){
+            $this->assets->loadScrollScript();
+        }
         try {
             if ($post_data['pick_up_date']) {
                 if ($post_data['pick_up_time']) {
@@ -67,9 +70,6 @@ class HQRentalsReservationsShortcode
                         src="<?php echo esc_url($brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>" scrolling="no"></iframe>
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
-                if($atts['autoscroll'] == 'true'){
-                    $this->assets->loadScrollScript();
-                }
             } else {
                 if(!empty($_GET)){
                     $getData = $this->frontHelper->sanitizeTextInputs($_GET);

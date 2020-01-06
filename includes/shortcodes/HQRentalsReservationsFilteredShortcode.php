@@ -32,6 +32,7 @@ class HQRentalsReservationsFilteredShortcode
                 'id' => '1',
                 'forced_locale' => 'en',
                 'new' => 'true',
+                'autoscroll'        =>  'true'
             )
             , $atts, 'hq_rentals_reservations');
         $post_data = $_POST;
@@ -70,6 +71,9 @@ class HQRentalsReservationsFilteredShortcode
                         src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>" scrolling="no"></iframe>
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
+                if($atts['autoscroll'] == 'true'){
+                    $this->assets->loadScrollScript();
+                }
             } else {
                 ?>
                 <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>"

@@ -27,6 +27,7 @@ class HQRentalsReservationsShortcode
                 'id' => '1',
                 'forced_locale' => 'en',
                 'new' => 'true',
+                'autoscroll' => 'true'
             )
                 , $atts, 'hq_rentals_reservations');
         ob_start();
@@ -66,6 +67,9 @@ class HQRentalsReservationsShortcode
                         src="<?php echo esc_url($brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>" scrolling="no"></iframe>
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
+                if($atts['autoscroll'] == 'true'){
+                    $this->assets->loadScrollScript();
+                }
             } else {
                 if(!empty($_GET)){
                     $getData = $this->frontHelper->sanitizeTextInputs($_GET);

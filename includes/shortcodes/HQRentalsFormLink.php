@@ -16,11 +16,15 @@ class HQRentalsFormLink
         $atts = shortcode_atts(
                 array(
                     'url'               => '',
-                    'forced_locale'     =>  'en'
+                    'forced_locale'     =>  'en',
+                    'autoscroll'        =>  'true'
                 ), $atts
             );
         $langParams = '&forced_locale=' . $atts['forced_locale'];
         $this->assets->getIframeResizerAssets();
+        if($atts['autoscroll'] == 'true'){
+            $this->assets->loadScrollScript();
+        }
         if(!empty($_POST['hq-integration'])){
             $post_data = $_POST;
             $post_data = $this->helper->sanitizeTextInputs($post_data);

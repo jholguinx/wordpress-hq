@@ -3,17 +3,17 @@ namespace HQRentalsPlugin\HQRentalsShortcodes;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 
-class HQRentalsKarzoomBookingForm
+class HQRentalsMapBookingForm
 {
     public function __construct()
     {
         $this->assets = new HQRentalsAssetsHandler();
         $this->helper = new HQRentalsFrontHelper();
-        add_shortcode('hq_rentals_karzoom_booking_form' , array ($this, 'shortcode'));
+        add_shortcode('hq_rentals_map_booking_form' , array ($this, 'shortcode'));
     }
     public function shortcode( $atts = [] )
     {
-        $this->assets->loadKarzoomFormAssets();
+        $this->assets->loadMapFormAssets();
         $atts = shortcode_atts(
             array(
                 'background_url'   => '',
@@ -23,9 +23,9 @@ class HQRentalsKarzoomBookingForm
             'backgroundImageURL'    => $atts['background_url'],
             'baseURL'               =>  get_site_url() . '/'
         );
-        wp_localize_script('hq-karzoom-form-script', 'HQMapFormShortcode', $dataToJS );
+        wp_localize_script('hq-map-form-script', 'HQMapFormShortcode', $dataToJS );
         ?>
-            <div id="hq-booking-form-karzoom"></div>
+            <div id="hq-map-booking-form"></div>
         <?php
     }
 }

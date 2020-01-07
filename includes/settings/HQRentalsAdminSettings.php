@@ -254,8 +254,8 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
-                                                <h4 class="wp-heading-inline" for="title">Disable Data Syncronization</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Support for reservations iframe on the home page  - this should be applied in case that you are placing the reservation process on the home page."></span>
+                                                <h4 class="wp-heading-inline" for="title">Disable Data Synchronization</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Select this option to stop data sychronization between HQ Rental Software and the website."></span>
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="checkbox"

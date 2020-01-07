@@ -55,12 +55,13 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-dummy-script');
     }
     public function getIframeResizerAssets()
-    {   
+    {
         wp_enqueue_script('hq-iframe-resizer-script');
         wp_enqueue_script( 'hq-resize-script');
         wp_enqueue_style('hq-wordpress-iframe-styles');
+    }
+    public function loadScrollScript(){
         wp_enqueue_script("hq-scroll-script");
-        
     }
 
     public function getFirstStepShortcodeAssets()

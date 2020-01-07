@@ -21,9 +21,13 @@ class HQRentalsAvailabilityCalendarShortcode
                 array(
                     'id'                =>  '1',
                     'forced_locale'     =>  'en',
-                    'vehicle_class_id'  =>  ''
+                    'vehicle_class_id'  =>  '',
+                    'autoscroll'        =>  'true'
                 ), $atts
             );
+        if($atts['autoscroll'] == 'true'){
+            $this->assets->loadScrollScript();
+        }
         $this->brand->findBySystemId($atts['id']);
         $url = $this->brand->publicCalendarLink;
         $lang = '&forced_locale=' . $atts['forced_locale'];

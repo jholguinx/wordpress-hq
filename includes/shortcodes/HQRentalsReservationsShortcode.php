@@ -27,6 +27,7 @@ class HQRentalsReservationsShortcode
                 'id' => '1',
                 'forced_locale' => 'en',
                 'new' => 'true',
+                'autoscroll' => 'true'
             )
                 , $atts, 'hq_rentals_reservations');
         ob_start();
@@ -35,6 +36,9 @@ class HQRentalsReservationsShortcode
         $brand = new HQRentalsModelsBrand();
         $brand->findBySystemId($atts['id']);
         $this->assets->getIframeResizerAssets();
+        if($atts['autoscroll'] == 'true'){
+            $this->assets->loadScrollScript();
+        }
         try {
             if ($post_data['pick_up_date']) {
                 if ($post_data['pick_up_time']) {

@@ -19,10 +19,14 @@ class HQRentalsMyReservationsShortcode
                 array(
                     'id'            => '1',
                     'forced_locale' => 'en',
+                    'autoscroll'        =>  'true'
                 ), $atts
             );
         $langParams = '&forced_locale=' . $atts['forced_locale'];
         $this->assetsHelper->getIframeResizerAssets();
+        if($atts['autoscroll'] == 'true'){
+            $this->assetsHelper->loadScrollScript();
+        }
         $this->brand->findBySystemId( $atts['id'] );
         return '<iframe id="hq-rental-iframe" src="' . esc_url( $this->brand->myReservationsLink .  $langParams ) . '" scrolling="no"></iframe>';
     }

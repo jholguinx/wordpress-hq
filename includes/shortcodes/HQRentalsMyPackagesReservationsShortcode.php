@@ -19,10 +19,14 @@ class HQRentalsMyPackagesReservationsShortcode
                 array(
                     'id' => '1',
                     'forced_locale' => 'en',
+                    'autoscroll'        =>  'true'
                 ), $atts
             );
         $langParams = '&forced_locale=' . $atts['forced_locale'];
         $this->assetsHelper->getIframeResizerAssets();
+        if($atts['autoscroll'] == 'true'){
+            $this->assets->loadScrollScript();
+        }
         $this->brand->findBySystemId( $atts['id'] );
         return '<iframe id="hq-rentals-integration-wrapper" src="' . esc_url($this->brand->myPackagesReservationsLink.  $langParams) . '" scrolling="no"></iframe>';
     }

@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.2.1
 Requires PHP: 5.6.0
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,8 +32,11 @@ on this page.
 
 == Changelog ==
 
-= 1.4.3 =
+= 1.4.4 =
 Option added to disable scroll on iframes
+
+= 1.4.3 =
+Typos
 
 = 1.4.2 =
 Adding support for change on public reservations urls

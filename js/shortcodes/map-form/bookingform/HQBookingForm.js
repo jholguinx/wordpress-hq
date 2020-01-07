@@ -35,10 +35,10 @@ class HQBookingForm extends PureComponent{
                 returnLocation: ''
             },
             formAction: '',
-            mapCenter:{
+            mapCenter: {
                 //Default Value
-                lat: 53.4263838,
-                lng: -2.7877887
+                lat: (HQMapFormShortcode.defaultLatitude) ? parseFloat(HQMapFormShortcode.defaultLatitude) : 53,
+                lng: (HQMapFormShortcode.defaultLongitude) ? parseFloat(HQMapFormShortcode.defaultLongitude) : -2
             },
             suggestions:[],
             selectedLocationOnMap: '',

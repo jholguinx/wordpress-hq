@@ -354,6 +354,30 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Default latitude for Map Shortcode</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="XXX"></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input hq-admin-text-input-small-medium"
+                                                       name="<?php echo $this->settings->hq_default_latitude_for_map_shortcode; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getDefaultLatitudeSetting()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Default longitude for Map Shortcode</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="XXX"></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input hq-admin-text-input-small-medium"
+                                                       name="<?php echo $this->settings->hq_default_longitude_for_map_shortcode; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getDefaultLongitudeSetting()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">Domain to replace in the public reservation process</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This domain will be used to replace the system url in public reservation processes"></span>
                                             </div>
@@ -417,6 +441,9 @@ class HQRentalsAdminSettings
             }
             .hq-admin-text-input-medium{
                 max-width: 300px;
+            }
+            .hq-admin-text-input-small-medium{
+                max-width: 120px;
             }
 
         </style>

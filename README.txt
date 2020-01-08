@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.2.1
 Requires PHP: 5.6.0
-Stable tag: 1.4.4
+Stable tag: 1.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,9 @@ on this page.
 
 == Changelog ==
 
+= 1.4.5 =
+Option to set default langitude and longitude on Form with Map Shortocode
+
 = 1.4.4 =
 Option added to disable scroll on iframes
 
@@ -56,24 +59,6 @@ Fix buffering
 
 = 1.3.3 =
 Fixes on README files
-
-= 1.3.2 =
-Remove buffer on Reservation Shortcode
-
-= 1.3.1 =
-Fixes on buffering
-
-= 1.3.0 =
-Adding buffer handler on Reservation Shortcode, update assets
-
-= 1.2.9 =
-Tenant datetime format added to the front-end assets under the name of hqRentalsTenantDatetimeFormat.
-Safari option on plugin settings
-
-== Upgrade Notice ==
-
-= 1.3.4 =
-Fix buffering
 
 == Screenshots ==
 

@@ -355,7 +355,7 @@ class HQRentalsAdminSettings
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">Default latitude for Map Shortcode</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="XXX"></span>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Place here the latitude of the location you would like for the map to set focus on in case the user denies location access."></span>
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="text"
@@ -367,7 +367,7 @@ class HQRentalsAdminSettings
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">Default longitude for Map Shortcode</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="XXX"></span>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Place here the longitude of the location you would like for the map to set focus on in case the user denies location access."></span>
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="text"

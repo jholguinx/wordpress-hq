@@ -11,8 +11,6 @@ class HQRentalsBootstrap
      * Plugin Option to be configured by users
      * The names of this option are on the Settings
      */
-    public $api_user_token_default_value = "";
-    public $api_tenant_token_default_value = "";
     public $woocommerce_hq_sync_default_value = false;
     public $hq_datetime_format_default_value = "Y-m-d H:i";
     public $front_end_datetime_format_default_value = "Y-m-d H:i";
@@ -22,10 +20,7 @@ class HQRentalsBootstrap
     public $hq_cronjob_disable_option_default_value = 'false';
     public $hq_tenant_date_time_format = "Y-m-d H:i";
     public $hq_disable_safari_option_default_value = 'false';
-    public $hq_location_coordinate_default_value = '';
-    public $hq_location_image_default_value = '';
-    public $hq_location_description_default_value = '';
-    public $hq_location_default_field_value = '';
+    public $hq_default_value_for_string = '';
 
     public function __construct()
     {
@@ -35,8 +30,8 @@ class HQRentalsBootstrap
     public function onPluginActivation()
     {
         if ($this->settings->thereAreSomeSettingMissing()) {
-            $this->settings->saveApiTenantToken($this->api_tenant_token_default_value);
-            $this->settings->saveApiUserToken($this->api_user_token_default_value);
+            $this->settings->saveApiTenantToken($this->hq_default_value_for_string);
+            $this->settings->saveApiUserToken($this->hq_default_value_for_string);
             $this->settings->saveHQDatetimeFormat($this->hq_datetime_format_default_value);
             $this->settings->saveFrontEndDateTimeFormat($this->front_end_datetime_format_default_value);
             $this->settings->saveApiBaseUrl($this->api_base_url_default_value);
@@ -58,28 +53,34 @@ class HQRentalsBootstrap
             $this->settings->saveDisableSafariOption($this->hq_disable_safari_option_default_value);
         }
         if ($this->settings->noLocationCoordinateSetting()) {
-            $this->settings->saveLocationCoordinateSetting($this->hq_location_coordinate_default_value);
+            $this->settings->saveLocationCoordinateSetting($this->hq_default_value_for_string);
         }
         if ($this->settings->noLocationImageSetting()) {
-            $this->settings->saveLocationImageSetting($this->hq_location_image_default_value);
+            $this->settings->saveLocationImageSetting($this->hq_default_value_for_string);
         }
         if ($this->settings->noLocationDescriptionSetting()) {
-            $this->settings->saveLocationDescriptionSetting($this->hq_location_description_default_value);
+            $this->settings->saveLocationDescriptionSetting($this->hq_default_value_for_string);
         }
         if ($this->settings->noAddressLabelSetting()) {
-            $this->settings->saveAddressLabelSetting($this->hq_location_default_field_value);
+            $this->settings->saveAddressLabelSetting($this->hq_default_value_for_string);
         }
         if ($this->settings->noBrandsSetting()) {
-            $this->settings->saveBrandsSetting($this->hq_location_description_default_value);
+            $this->settings->saveBrandsSetting($this->hq_default_value_for_string);
         }
         if ($this->settings->noOfficeHoursSetting()) {
-            $this->settings->saveOfficeHoursSetting($this->hq_location_description_default_value);
+            $this->settings->saveOfficeHoursSetting($this->hq_default_value_for_string);
         }
         if($this->settings->noBrandURLToReplaceSetting()){
-            $this->settings->saveBrandURLToReplaceSetting($this->hq_location_default_field_value);
+            $this->settings->saveBrandURLToReplaceSetting($this->hq_default_value_for_string);
         }
         if($this->settings->noReplaceBaseURLOnBrandsSetting()){
             $this->settings->saveReplaceBaseURLOnBrandsSetting($this->hq_integration_on_home_default_value);
+        }
+        if($this->settings->noDefaultLatitudeSetting()){
+            $this->settings->setDefaultLatitudeSetting($this->hq_default_value_for_string);
+        }
+        if($this->settings->noDefaultLongitudeSetting()){
+            $this->settings->setDefaultLongitudeSetting($this->hq_default_value_for_string);
         }
         $this->resolveDefaultPages();
         $this->notifyToSystemOnActivation();

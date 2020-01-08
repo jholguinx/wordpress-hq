@@ -13,6 +13,6 @@ export const APP_TIME_FORMAT = "HH:mm";
  */
 ReactDOM.render(
 <HQBookingForm />,
-    document.getElementById("hq-booking-form-karzoom")
+    document.getElementById("hq-map-booking-form")
 );
 

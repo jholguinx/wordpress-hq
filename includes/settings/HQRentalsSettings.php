@@ -36,6 +36,8 @@ class HQRentalsSettings
     public $hq_location_office_hours_field = 'hq_location_office_hours_field';
     public $hq_replace_url_on_brand_option = 'hq_replace_url_on_brand_option';
     public $hq_url_to_replace_on_brands_option = 'hq_url_to_replace_on_brands_option';
+    public $hq_default_latitude_for_map_shortcode = 'hq_default_latitude_for_map_shortcode';
+    public $hq_default_longitude_for_map_shortcode = 'hq_default_longitude_for_map_shortcode';
 
     public function __construct()
     {
@@ -410,6 +412,37 @@ class HQRentalsSettings
         return get_option($this->hq_url_to_replace_on_brands_option, '');
     }
 
+    /*
+     * Latitude setting
+     * */
+    public function noDefaultLatitudeSetting()
+    {
+        return empty(get_option($this->hq_default_latitude_for_map_shortcode));
+    }
+    public function getDefaultLatitudeSetting()
+    {
+        return get_option($this->hq_default_latitude_for_map_shortcode, "");
+    }
+    public function setDefaultLatitudeSetting($data)
+    {
+        return update_option($this->hq_default_latitude_for_map_shortcode, $data);
+    }
+
+    /*
+     * Longitude setting
+     * */
+    public function noDefaultLongitudeSetting()
+    {
+        return empty(get_option($this->hq_default_longitude_for_map_shortcode));
+    }
+    public function getDefaultLongitudeSetting()
+    {
+        return get_option($this->hq_default_longitude_for_map_shortcode, "");
+    }
+    public function setDefaultLongitudeSetting($data)
+    {
+        return update_option($this->hq_default_longitude_for_map_shortcode, $data);
+    }
 
 
 
@@ -503,7 +536,7 @@ class HQRentalsSettings
     {
         return empty(get_option($this->hq_disable_safari_functionality));
     }
-    
+
     /**
      * Check if new Auth Scheme is enabled
      * @return bool

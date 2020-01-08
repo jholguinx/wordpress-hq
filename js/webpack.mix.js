@@ -10,7 +10,7 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+mix.setPublicPath('../');
 mix.webpackConfig({
     resolve: {
         alias: {
@@ -30,5 +30,5 @@ mix.webpackConfig({
         ]
     }
 });
-mix.react('js/shortcodes/karzoom/App.js', 'includes/assets/js/hq-karzoom-booking-form.js');
-mix.react('js/shortcodes/karzoom/AppForm.js', 'includes/assets/js/hq-karzoom-contact-form.js');
+mix.react('shortcodes/map-form/App.js', 'includes/assets/js/hq-map-booking-form.js');
+mix.react('shortcodes/map-form/AppForm.js', 'includes/assets/js/hq-map-contact-form.js');

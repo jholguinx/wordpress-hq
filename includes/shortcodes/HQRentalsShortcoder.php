@@ -22,6 +22,6 @@ class HQRentalsShortcoder
         $this->systemAssetsShortcode = new HQRentalsSystemAssets();
         $this->calendarShortcode = new HQRentalsAvailabilityCalendarShortcode();
         $this->mapShortcode = new HQRentalsMapShortcode();
-        $this->karzoomMapBookForm = new HQRentalsKarzoomBookingForm();
+        $this->karzoomMapBookForm = new HQRentalsMapBookingForm();
     }
 }

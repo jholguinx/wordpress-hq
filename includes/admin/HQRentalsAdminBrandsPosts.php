@@ -42,6 +42,7 @@ class HQRentalsAdminBrandsPosts
                 break;
             default:
                 echo '';
+                break;
         }
     }
 }

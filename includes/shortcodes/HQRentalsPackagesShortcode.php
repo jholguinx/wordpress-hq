@@ -13,7 +13,6 @@ class HQRentalsPackagesShortcode
     }
     public function packagesShortcode( $atts = [] )
     {
-        global $is_safari;
         $atts = shortcode_atts(
                 array(
                     'id' => '1',

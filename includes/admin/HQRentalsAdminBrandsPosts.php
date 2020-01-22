@@ -41,6 +41,7 @@ class HQRentalsAdminBrandsPosts
                 break;
             case('snippets'):
                 $this->resolveSnippets($currentBrand);
+                break;
             default:
                 echo '';
                 break;
@@ -78,21 +79,49 @@ class HQRentalsAdminBrandsPosts
     }
     public function resolveSnippets($brand)
     {
+        ob_start();
         ?>
         <div>
             <div class="theme-actions">
-                <a class="button button-primary customize load-customize hide-if-no-customize" href="">Reservations</a>
+                <a
+                    id="hq-snippet-reservation-button"
+                    class="hq-snippets"
+                    data-brand="<?php echo $brand->id; ?>"
+                    data-snippet="reservation"
+                    data-tippy-content="Click to copy"
+                    >Reservations</a>
             </div>
             <div class="theme-actions">
-                <a class="button button-primary customize load-customize hide-if-no-customize" href="">Quotes</a>
+                <a
+                    id="hq-snippet-reservation-button"
+                    class="hq-snippets"
+                    data-brand="<?php echo $brand->id; ?>"
+                    data-snippet="package"
+                    data-tippy-content="Click to copy"
+                >Packages Quotes</a>
             </div>
             <div class="theme-actions">
-                <a class="button button-primary customize load-customize hide-if-no-customize" href="">Packages Quotes</a>
+                <a
+                    id="hq-snippet-reservation-button"
+                    class="hq-snippets"
+                    data-brand="<?php echo $brand->id; ?>"
+                    data-snippet="payment"
+                    data-tippy-content="Click to copy"
+                >Payment Requests</a>
             </div>
             <div class="theme-actions">
-                <a class="button button-primary customize load-customize hide-if-no-customize" href="">Payment Requests</a>
+                <a
+                    id="hq-snippet-reservation-button"
+                    class="hq-snippets"
+                    data-brand="<?php echo $brand->id; ?>"
+                    data-snippet="quote"
+                    data-tippy-content="Click to copy"
+                >Quote</a>
             </div>
         </div>
         <?php
+        $content = ob_get_contents();
+        ob_end_clean();
+        echo $content;
     }
 }

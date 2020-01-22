@@ -28,6 +28,10 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     protected $metaMyReservationsLink = 'hq_wordpress_brand_my_reservation_link';
     protected $metaMyPackagesReservationsLink = 'hq_wordpress_brand_my_packages_reservation_link';
     protected $metaPublicCalendarLink = 'hq_wordpress_brand_public_calendar_link';
+    protected $metaIntegrationSnippetsReservations = 'hq_wordpress_brand_integration_snippets_reservations';
+    protected $metaIntegrationSnippetsQuotes = 'hq_wordpress_brand_integration_snippets_quotes';
+    protected $metaIntegrationSnippetsPackageQuotes = 'hq_wordpress_brand_integration_snippets_packages_quotes';
+    protected $metaIntegrationSnippetsPaymentRequest = 'hq_wordpress_brand_integration_snippets_payment_requests';
 
     /*
      * Object Data to Display
@@ -45,6 +49,10 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     public $myPackagesReservationsLink = '';
     public $publicCalendarLink = '';
     public $metaBrandId = 'hq_wordpress_brand_id_meta';
+    public $snippetReservations = '';
+    public $snippetQuotes = '';
+    public $snippetPackageQuote = '';
+    public $snippetPaymentRequest = '';
 
     /*
      * Constructor
@@ -113,6 +121,11 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->name = $data->name;
         $this->taxLabel = $data->tax_label;
         $this->websiteLink = $data->website_link;
+        $snippetData = (array) $data->integration_snippets;
+        $this->snippetReservations = htmlspecialchars($snippetData['reservations']);
+        $this->snippetQuotes = htmlspecialchars($snippetData['quotes']);
+        $this->snippetPackageQuote = htmlspecialchars($snippetData['package-quotes']);
+        $this->snippetPaymentRequest = htmlspecialchars($snippetData['payment-request']);
         if($this->settings->getReplaceBaseURLOnBrandsSetting() === "true"){
             $urlReplacement = $this->settings->getBrandURLToReplaceSetting();
             $this->publicReservationsLinkFull = $this->resolveBrandURL($data->public_reservations_link_full, $urlReplacement);
@@ -159,6 +172,10 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         hq_update_post_meta( $post_id, $this->metaMyReservationsLink, $this->myReservationsLink );
         hq_update_post_meta( $post_id, $this->metaMyPackagesReservationsLink, $this->myPackagesReservationsLink );
         hq_update_post_meta( $post_id, $this->metaPublicCalendarLink, $this->publicCalendarLink );
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsReservations, $this->snippetReservations );
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsQuotes, $this->snippetQuotes);
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPackageQuotes, $this->snippetPackageQuote );
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPaymentRequest, $this->snippetPaymentRequest );
     }
 
     /*
@@ -183,19 +200,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     }
     public function setBrandFromPost($brandPost)
     {
-        $this->id = get_post_meta($brandPost->ID, $this->metaId, true);
-        $this->name = get_post_meta( $brandPost->ID, $this->metaName, true);
-        $this->taxLabel = get_post_meta($brandPost->ID, $this->metaTaxLabel, true);
-        $this->websiteLink = get_post_meta($brandPost->ID, $this->metaWebsiteLink, true);
-
-        $this->publicReservationsLinkFull = get_post_meta( $brandPost->ID, $this->metaPublicReservationsLinkFull, true );
-        $this->publicPackagesLinkFull = get_post_meta( $brandPost->ID, $this->metaPublicPackagesLinkFull, true );
-        $this->publicReservationsFirstStepLink = get_post_meta( $brandPost->ID, $this->metaPublicReservationsFirstStepLink, true );
-        $this->publicPackagesFirstStepLink = get_post_meta($brandPost->ID, $this->metaPublicPackagesFirstStepLink, true );
-        $this->publicReservationPackagesFirstStepLink = get_post_meta( $brandPost->ID, $this->metaPublicReservationPackagesFirstStepLink, true );
-        $this->myReservationsLink = get_post_meta( $brandPost->ID, $this->metaMyReservationsLink, true );
-        $this->myPackagesReservationsLink = get_post_meta(  $brandPost->ID, $this->metaMyPackagesReservationsLink, true );
-        $this->publicCalendarLink = get_post_meta( $brandPost->ID, $this->metaPublicCalendarLink, true );
+        $this->setBrandFromPostId($brandPost->ID);
     }
 
     public function setBrandFromPostId($id)
@@ -211,6 +216,11 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->publicReservationPackagesFirstStepLink = get_post_meta( $id, $this->metaPublicReservationPackagesFirstStepLink, true );
         $this->myReservationsLink = get_post_meta( $id, $this->metaMyReservationsLink, true );
         $this->myPackagesReservationsLink = get_post_meta(  $id, $this->metaMyPackagesReservationsLink, true );
+        $this->publicCalendarLink = get_post_meta( $id, $this->metaPublicCalendarLink, true );
+        $this->snippetReservations = htmlspecialchars_decode(get_post_meta( $id, $this->metaIntegrationSnippetsReservations, true ));
+        $this->snippetQuotes = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsQuotes, true ) );
+        $this->snippetPackageQuote = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPackageQuotes, true ) );
+        $this->snippetPaymentRequest = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPaymentRequest, true ));
     }
 
     public function first()

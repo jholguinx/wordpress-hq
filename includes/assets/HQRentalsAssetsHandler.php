@@ -104,14 +104,16 @@ class HQRentalsAssetsHandler
     }
     public function registerAdminAssets()
     {
-        wp_register_script('hq-admin-tooltip-js', plugin_dir_url(__FILE__) . 'js/tooltip.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
-        wp_register_script('hq-admin-poper-js', plugin_dir_url(__FILE__) . 'js/popper.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_style('hq-admin-settings-styles', plugin_dir_url(__FILE__) . 'css/hq-admin.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_script('hq-admin-tippy-js', plugin_dir_url(__FILE__) . 'js/tippy.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-admin-popper-js', plugin_dir_url(__FILE__) . 'js/popper.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-admin-admin-js', plugin_dir_url(__FILE__) . 'js/admin.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
     }
-    public function loadAssetsForAdmin()
+    public function loadAssetsForAdminSettingPage()
     {
-        wp_enqueue_script('hq-admin-poper-js');
-        wp_enqueue_script('hq-admin-tooltip-js');
+        wp_enqueue_style('hq-admin-settings-styles');
+        wp_enqueue_script('hq-admin-popper-js');
+        wp_enqueue_script('hq-admin-tippy-js');
         wp_enqueue_script('hq-admin-admin-js');
     }
 }

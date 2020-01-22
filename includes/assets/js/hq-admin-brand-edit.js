@@ -9,9 +9,9 @@ document.querySelectorAll('#hq-snippet-reservation-button').forEach(item => {
                 navigator.clipboard.writeText(code).then(function() {
                     // feedback
                     //copied
-                    alert('Snippet Copied!!!');
+                    alert('Snippet copied.');
                 }, function() {
-                    alert("There was an issue copying the snippet. Please get in contact with out support team");
+                    alert("There was an issue copying the snippet. Please get in touch with our support team.");
                 });
             }
         });

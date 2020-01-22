@@ -98,7 +98,7 @@ class HQRentalsAdminBrandsPosts
                     data-brand="<?php echo $brand->id; ?>"
                     data-snippet="package"
                     data-tippy-content="Click to copy"
-                >Packages Quotes</a>
+                >Package Quotes</a>
             </div>
             <div class="theme-actions">
                 <a
@@ -116,7 +116,7 @@ class HQRentalsAdminBrandsPosts
                     data-brand="<?php echo $brand->id; ?>"
                     data-snippet="quote"
                     data-tippy-content="Click to copy"
-                >Quote</a>
+                >Quotes</a>
             </div>
         </div>
         <?php

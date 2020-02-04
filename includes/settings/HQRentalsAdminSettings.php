@@ -62,78 +62,12 @@ class HQRentalsAdminSettings
             <?php endif; ?>
             <?php
         } else {
+            $this->assets->loadAssetsForAdminSettingPage();
             ?>
-
-
             <div class="wrap">
                 <div id="wrap">
                     <h1 class="hq-admin-h1">HQ Rentals Setup</h1>
                     <form action="" method="post">
-
-                        <style>
-                            .hq-general-settings-wrapper {
-                                display: flex;
-                                flex: 1;
-                                flex-direction: row;
-                                width: 90%;
-                            }
-
-                            .hq-general-settings-item-wrapper {
-                                display: flex;
-                                flex: 1;
-                                flex-direction: column;
-                                padding-right: 50px;
-                            }
-
-                            .hq-general-settings-item {
-                                display: flex;
-                                flex-direction: row;
-                            }
-
-                            .hq-admin-text-input, .hq-admin-select-input {
-                                height: 35px !important;
-                                width: 100%;
-                                border-radius: 5px;
-                            }
-                            .hq-admin-select-input{
-                                max-width: 150px;
-                            }
-                            .hq-general-input-wrapper {
-                                display: flex;
-                                flex: 3;
-                                align-items: center;
-                                justify-content: flex-start;
-                            }
-
-                            .hq-general-label-wrapper {
-                                display: flex;
-                                flex: 1;
-                                align-items: center;
-                                justify-content: space-between;
-                            }
-
-                            .small {
-                                max-width: 50px;
-                            }
-                            .tokens{
-                                flex: 4;
-                            }
-                            #hq-tooltip-user-token, #hq-tooltip-tenant-token{
-                                padding-left: 10px;
-                                padding-right: 10px;
-                            }
-                            .hq-tokens-rows{
-                                justify-content: flex-start;
-                            }
-                            .hq-dates{
-                                flex:  35 !important;
-                            }
-                            .hq-dates-input{
-                                flex:  65 !important;
-                            }
-                        </style>
-                        <script src="https://unpkg.com/popper.js@1"></script>
-                        <script src="https://unpkg.com/tippy.js@5"></script>
                         <div class="hq-general-settings-section-wrapper">
                             <h3 class="hq-admin-h3">General Settings</h3>
                             <div class="hq-general-settings-wrapper">
@@ -211,6 +145,9 @@ class HQRentalsAdminSettings
                                                 </option>
                                                 <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
                                                     America West
+                                                </option>
+                                                <option value="https://api-america-miami.caagcrm.com/api-america-miami/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-miami.caagcrm.com/api-america-miami/') ? 'selected="selected"' : ''; ?>>
+                                                    America Miami
                                                 </option>
                                                 <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
                                                     Europe
@@ -405,54 +342,5 @@ class HQRentalsAdminSettings
             </div>
             <?php
         }
-        ?>
-        <style>
-            .hq-admin-warning-section {
-                max-width: 500px;
-            }
-
-            .hq-admin-help-section, .hq-admin-help-section {
-                padding-top: 25px;
-                padding-bottom: 25px;
-            }
-
-            .hq-admin-warning-section p, .hq-admin-help-section p {
-                font-style: italic;
-            }
-
-            .fw-brz-dismiss p:last-of-type a {
-                color: #fff;
-                font-size: 13px;
-                line-height: 1;
-                background-color: #d62c64;
-                box-shadow: 0px 2px 0px 0px #981e46;
-                padding: 11px 27px 12px;
-                border: 1px solid #d62c64;
-                border-bottom: 0;
-                border-radius: 3px;
-                text-shadow: none;
-                height: auto;
-                text-decoration: none;
-                display: inline-block;
-                transition: all 200ms linear;
-            }
-            .wp-heading-inline,.hq-admin-h1, .hq-admin-h3{
-                text-transform: uppercase;
-            }
-            .hq-admin-text-input-medium{
-                max-width: 300px;
-            }
-            .hq-admin-text-input-small-medium{
-                max-width: 120px;
-            }
-
-        </style>
-        <script>
-            (function($){
-                tippy('#hq-tooltip-tenant-token');
-            })(jQuery);
-        </script>
-        <?php
-
     }
 }

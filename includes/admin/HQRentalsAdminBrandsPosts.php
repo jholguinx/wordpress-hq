@@ -16,13 +16,12 @@ class HQRentalsAdminBrandsPosts
     public function addNewColumnsOnBrandAdminScreen($defaults)
     {
         return array(
-            'cb'                        => '<input type="checkbox" />',
             'title'                     => 'Title',
             'reservation_shortcode'     => 'Reservation Shortcode',
             'my_reservation_shortcode'  => 'My Reservation Shortcode',
             'vehicle_class_calendar'    => 'Vehicle Class Calendar',
+            'snippets'                  => 'Snippets',
             'date'                      => 'Date',
-
         );
     }
 
@@ -32,17 +31,97 @@ class HQRentalsAdminBrandsPosts
         $currentBrand->setBrandFromPostId($postId);
         switch ($columnName) {
             case('reservation_shortcode'):
-                echo '[hq_rentals_reservations id=' . $currentBrand->id . ']';
+                $this->resolveReservationShortcode($currentBrand);
                 break;
             case('my_reservation_shortcode'):
-                echo '[hq_rentals_my_reservations id=' . $currentBrand->id . ']';
+                $this->resolveMyReservationsShortcode($currentBrand);
                 break;
             case('vehicle_class_calendar'):
-                echo '[hq_rentals_vehicle_calendar id=' . $currentBrand->id . ']';
+                $this->resolveCalendarShortcode($currentBrand);
+                break;
+            case('snippets'):
+                $this->resolveSnippets($currentBrand);
                 break;
             default:
                 echo '';
                 break;
         }
+    }
+    public function resolveReservationShortcode($brand)
+    {
+        ?>
+            <div>
+                <code>
+                <?php echo '[hq_rentals_reservations id=' . $brand->id . ']'; ?>
+                </code>
+            </div>
+        <?php
+    }
+    public function resolveMyReservationsShortcode($brand)
+    {
+        ?>
+        <div>
+            <code>
+                <?php echo '[hq_rentals_my_reservations id=' . $brand->id . ']'; ?>
+            </code>
+        </div>
+        <?php
+    }
+    public function resolveCalendarShortcode($brand)
+    {
+        ?>
+        <div>
+            <code>
+                <?php echo '[hq_rentals_vehicle_calendar id=' . $brand->id . ']'; ?>
+            </code>
+        </div>
+        <?php
+    }
+    public function resolveSnippets($brand)
+    {
+        ob_start();
+        ?>
+        <div>
+            <div class="theme-actions">
+                <a
+                    id="hq-snippet-reservation-button"
+                    class="hq-snippets"
+                    data-brand="<?php echo $brand->id; ?>"
+                    data-snippet="reservation"
+                    data-tippy-content="Click to copy"
+                    >Reservations</a>
+            </div>
+            <div class="theme-actions">
+                <a
+                    id="hq-snippet-reservation-button"
+                    class="hq-snippets"
+                    data-brand="<?php echo $brand->id; ?>"
+                    data-snippet="package"
+                    data-tippy-content="Click to copy"
+                >Package Quotes</a>
+            </div>
+            <div class="theme-actions">
+                <a
+                    id="hq-snippet-reservation-button"
+                    class="hq-snippets"
+                    data-brand="<?php echo $brand->id; ?>"
+                    data-snippet="payment"
+                    data-tippy-content="Click to copy"
+                >Payment Requests</a>
+            </div>
+            <div class="theme-actions">
+                <a
+                    id="hq-snippet-reservation-button"
+                    class="hq-snippets"
+                    data-brand="<?php echo $brand->id; ?>"
+                    data-snippet="quote"
+                    data-tippy-content="Click to copy"
+                >Quotes</a>
+            </div>
+        </div>
+        <?php
+        $content = ob_get_contents();
+        ob_end_clean();
+        echo $content;
     }
 }

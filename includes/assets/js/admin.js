@@ -1,3 +1,3 @@
 (function($){
-    tippy('b#q-tooltip-tenant-token');
+    tippy('#hq-tooltip-tenant-token');
 })(jQuery);

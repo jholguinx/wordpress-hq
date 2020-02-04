@@ -15,7 +15,8 @@ class HQRentalsTransformersBrands extends HQRentalsTransformersBase
         'public_packages_link_first_step',
         'public_reservations_packages_link_first_step',
         'my_reservations_link',
-        'my_package_reservations_link'
+        'my_package_reservations_link',
+        'integration_snippets'
     ];
 
     public static function transformDataFromApi($apiData)

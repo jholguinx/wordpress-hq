@@ -34,6 +34,7 @@ class HQRentalsAssetsHandler
 		    add_action('wp_enqueue_scripts', array( $this, 'registerPluginAssets' ), 10);
             add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
             add_action('admin_enqueue_scripts', array($this, 'registerAdminAssets'), 20);
+            add_action('admin_enqueue_scripts', array($this, 'adminSectionAssetResolver'), 50);
 	    }
     }
     public function registerPluginAssets()
@@ -104,14 +105,42 @@ class HQRentalsAssetsHandler
     }
     public function registerAdminAssets()
     {
-        wp_register_script('hq-admin-tooltip-js', plugin_dir_url(__FILE__) . 'js/tooltip.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
-        wp_register_script('hq-admin-poper-js', plugin_dir_url(__FILE__) . 'js/popper.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
-        wp_register_script('hq-admin-admin-js', plugin_dir_url(__FILE__) . 'js/admin.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        /*Setting Screen*/
+        wp_register_style('hq-admin-settings-styles', plugin_dir_url(__FILE__) . 'css/hq-admin.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_script('hq-admin-tippy-js', plugin_dir_url(__FILE__) . 'js/tippy.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-admin-popper-js', plugin_dir_url(__FILE__) . 'js/popper.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-admin-admin-js', plugin_dir_url(__FILE__) . 'js/admin.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        /*Brand Edit Screen*/
+        wp_register_script('hq-admin-brand-edit-js', plugin_dir_url(__FILE__) . 'js/hq-admin-brand-edit.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_style('hq-admin-brand-css', plugin_dir_url(__FILE__) . 'css/hq-brand.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
     }
-    public function loadAssetsForAdmin()
+    public function loadAssetsForAdminSettingPage()
     {
-        wp_enqueue_script('hq-admin-poper-js');
-        wp_enqueue_script('hq-admin-tooltip-js');
+        wp_enqueue_style('hq-admin-settings-styles');
+        wp_enqueue_script('hq-admin-popper-js');
+        wp_enqueue_script('hq-admin-tippy-js');
         wp_enqueue_script('hq-admin-admin-js');
+
+    }
+    public function adminSectionAssetResolver($hook)
+    {
+        if($hook == 'edit.php'){
+            if($_GET['post_type'] == 'hqwp_brands'){
+                $query = new HQRentalsQueriesBrands();
+                $brands = $query->getAllBrands();
+                $data = [];
+                foreach ($brands as $brand){
+                    $data[$brand->id]['reservation'] = $brand->snippetReservations;
+                    $data[$brand->id]['quote'] = $brand->snippetQuotes;
+                    $data[$brand->id]['package'] = $brand->snippetPackageQuote;
+                    $data[$brand->id]['payment'] = $brand->snippetPaymentRequest;
+                }
+                wp_enqueue_style('hq-admin-brand-css');
+                wp_enqueue_script('hq-admin-popper-js');
+                wp_enqueue_script('hq-admin-tippy-js');
+                wp_enqueue_script('hq-admin-brand-edit-js');
+                wp_localize_script('hq-admin-brand-edit-js', 'hqBrandSnippets', $data);
+            }
+        }
     }
 }

@@ -108,8 +108,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
      */
     public function setVehicleClassFromApi($data, $customFields = null)
     {
-       
-        $this->id = $data->id;  
+
+        $this->id = $data->id;
         $this->brandId = $data->brand->id;
         $this->name = $data->name;
         $this->order = $data->order;
@@ -130,7 +130,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $this->descriptions[$key] = $description;
             }
         }
-        
+
         if(!empty($data->images)){
             foreach ($data->images as $image) {
                 $newImage = new HQRentalsModelsVehicleClassImage();
@@ -138,7 +138,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $this->images[] = $newImage;
             }
         }
-        
+
         foreach ($data->features as $feature) {
             $newFeature = new HQRentalsModelsFeature();
             $newFeature->setFeatureFromApi($this->id, $feature);
@@ -469,6 +469,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getBrandIdMetaKey()
     {
         return $this->metaBrandId;
+    }
+    public function getFeatureImage($size = '500')
+    {
+        return $this->publicImageLink . '?size=' . $size;
     }
 }
 

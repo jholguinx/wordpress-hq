@@ -3,7 +3,6 @@
  * Dynamically loads the class attempting to be instantiated elsewhere in the
  * plugin.
  *
- * @package Tutsplus_Namespace_Demo\Inc
  */
 
 spl_autoload_register( 'hq_wordpress_autoloader' );

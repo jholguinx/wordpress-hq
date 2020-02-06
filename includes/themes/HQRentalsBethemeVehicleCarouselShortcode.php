@@ -41,8 +41,8 @@ class HQRentalsBethemeVehicleCarouselShortcode{
             </div>
         <style>
             .car-rental-item-image{
-                min-height: 350px;
-                min-width: 350px;
+                min-height: 250px;
+                min-width: 250px;
             }
             .hq-slide-image{
                 min-height: 100px;

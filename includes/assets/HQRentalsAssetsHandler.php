@@ -33,6 +33,7 @@ class HQRentalsAssetsHandler
 	    if (static::$count === 1) {
 		    add_action('wp_enqueue_scripts', array( $this, 'registerPluginAssets' ), 10);
             add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
+            add_action('wp_enqueue_scripts', array($this, 'shortcodesRegistration'), 30);
             add_action('admin_enqueue_scripts', array($this, 'registerAdminAssets'), 20);
             add_action('admin_enqueue_scripts', array($this, 'adminSectionAssetResolver'), 50);
 	    }
@@ -142,5 +143,16 @@ class HQRentalsAssetsHandler
                 wp_localize_script('hq-admin-brand-edit-js', 'hqBrandSnippets', $data);
             }
         }
+    }
+    public function shortcodesRegistration()
+    {
+        wp_register_style('hq-fancy-box-css', plugin_dir_url(__FILE__) . 'css/jquery.fancybox.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-betheme-sc-vehicle-grid-styles', plugin_dir_url(__FILE__) . 'css/style.betheme.blue.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-owl-carousel-css', plugin_dir_url(__FILE__) . 'css/owl.carousel.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_script( 'hq-fancy-box-js', plugin_dir_url(__FILE__) . 'js/jquery.fancybox.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-owl-carousel-js', plugin_dir_url(__FILE__) . 'js/owl.carousel.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        /*Inits*/
+        wp_register_script('hq-betheme-vehicle-grid-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-grid.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-betheme-vehicle-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
     }
 }

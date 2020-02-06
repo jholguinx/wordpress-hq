@@ -6,7 +6,8 @@ class HQRentalsBethemeShortcoder{
 
     public function __construct()
     {
-        $this->vehicleCarousel = new HQRentalsBethemeVehicleGridShortcode();
+        $this->vehicleGrid = new HQRentalsBethemeVehicleGridShortcode();
+        $this->vehicleCarousel = new HQRentalsBethemeVehicleCarouselShortcode();
     }
 
 }

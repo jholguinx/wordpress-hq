@@ -472,7 +472,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     }
     public function getFeatureImage($size = '500')
     {
-        return $this->publicImageLink . '?size=' . $size;
+        return  str_replace('size=1000', 'size=' . $size, $this->publicImageLink);
     }
 }
 

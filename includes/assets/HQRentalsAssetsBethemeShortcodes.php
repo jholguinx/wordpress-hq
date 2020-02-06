@@ -10,4 +10,10 @@ class HQRentalsAssetsBethemeShortcodes{
         wp_enqueue_script('hq-fancy-box-js');
         wp_enqueue_script('hq-betheme-vehicle-grid-js');
     }
+    public function loadVehicleCarouselAssets()
+    {
+        wp_enqueue_style('hq-owl-carousel-css');
+        wp_enqueue_script('hq-owl-carousel-js');
+        wp_enqueue_script('hq-betheme-vehicle-carousel-js');
+    }
 }

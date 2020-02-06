@@ -11,9 +11,14 @@ class HQRentalsBethemeVehicleGridShortcode{
         $this->assets = new HQRentalsAssetsBethemeShortcodes();
         add_shortcode('hq_rentals_betheme_vehicles_grid' , array ($this, 'renderShortcode'));
     }
-    public function renderShortcode()
+    public function renderShortcode($atts = [])
     {
         $this->assets->loadVehicleGridAssets();
+        $atts = shortcode_atts(
+            array(
+                'rent_button_url' => '',
+            )
+            , $atts, 'hq_rentals_betheme_vehicles_grid');
         ?>
         <div class="column mcb-column one column_fancy_heading ">
             <div class="fancy_heading fancy_heading_icon">
@@ -43,7 +48,7 @@ class HQRentalsBethemeVehicleGridShortcode{
                                     </ul>
                                     <div class="car-rental-buttons">
                                         <div class="car-rental-single-button">
-                                            <a href="https://www.axis-cr.com/car/mitsubishi-montero-sport/" title="Rent">Rent</a> </div>
+                                            <a href="<?php echo $atts['rent_button_url']; ?>" title="Rent">Rent</a> </div>
                                     </div>
                                 </div>
                             </div>

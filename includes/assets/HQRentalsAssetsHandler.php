@@ -149,6 +149,7 @@ class HQRentalsAssetsHandler
         wp_register_style('hq-fancy-box-css', plugin_dir_url(__FILE__) . 'css/jquery.fancybox.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-betheme-sc-vehicle-grid-styles', plugin_dir_url(__FILE__) . 'css/style.betheme.blue.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-owl-carousel-css', plugin_dir_url(__FILE__) . 'css/owl.carousel.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-owl-carousel-theme-css', plugin_dir_url(__FILE__) . 'css/owl.theme.default.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_script( 'hq-fancy-box-js', plugin_dir_url(__FILE__) . 'js/jquery.fancybox.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-owl-carousel-js', plugin_dir_url(__FILE__) . 'js/owl.carousel.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         /*Inits*/

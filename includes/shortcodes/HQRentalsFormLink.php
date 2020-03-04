@@ -20,7 +20,7 @@ class HQRentalsFormLink
                     'autoscroll'        =>  'true'
                 ), $atts
             );
-        $langParams = '&forced_locale=' . $atts['forced_locale'];
+        $langParams = '?forced_locale=' . $atts['forced_locale'];
         $this->assets->getIframeResizerAssets();
         if($atts['autoscroll'] == 'true'){
             $this->assets->loadScrollScript();

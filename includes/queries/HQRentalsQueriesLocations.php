@@ -22,10 +22,7 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
         $data = [];
         foreach ( $locationsPost as $post ){
             $location = new HQRentalsModelsLocation($post);
-            $newData = new \stdClass(  );
-            $newData->id = $location->id;
-            $newData->name = $location->name;
-            $data[] = $newData;
+            $data[] = $this->locationPublicInterface($location);
         }
         return $data;
     }
@@ -87,6 +84,18 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
                 'property_name' => 'brand_id',
                 'values' => $location->getBrandId()
             ),
+            'address' => array(
+                'property_name' => 'address',
+                'values' => $location->getCustomFieldForAddress()
+            ),
+            'office_hours' => array(
+                'property_name' => 'office_hours',
+                'values' => $location->getCustomFieldForOfficeHours()
+            ),
+            'phone' => array(
+                'property_name' => 'phone',
+                'values' => $location->getCustomFieldForPhone()
+            )
 
         ), $location);
     }

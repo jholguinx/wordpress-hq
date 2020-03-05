@@ -33,6 +33,8 @@ class HQRentalsSettings
     public $hq_location_description_field = 'hq_location_description_field';
     public $hq_location_address_label_field = 'hq_location_address_label_field';
     public $hq_location_brands_field = 'hq_location_brands_field';
+    public $hq_location_phone_field = 'hq_location_phone_field';
+    public $hq_location_address_field = 'hq_location_address_field';
     public $hq_location_office_hours_field = 'hq_location_office_hours_field';
     public $hq_replace_url_on_brand_option = 'hq_replace_url_on_brand_option';
     public $hq_url_to_replace_on_brands_option = 'hq_url_to_replace_on_brands_option';
@@ -383,6 +385,30 @@ class HQRentalsSettings
     public function getBrandsSetting()
     {
         return get_option($this->hq_location_brands_field, '');
+    }
+
+
+    public function noPhoneSetting(){
+        return empty(get_option($this->hq_location_phone_field));
+    }
+    public function savePhoneSetting($data)
+    {
+        return update_option($this->hq_location_phone_field, $data);
+    }
+    public function getPhoneSetting()
+    {
+        return get_option($this->hq_location_phone_field, '');
+    }
+    public function noAddressSetting(){
+        return empty(get_option($this->hq_location_address_field));
+    }
+    public function saveAddressSetting($data)
+    {
+        return update_option($this->hq_location_address_field, $data);
+    }
+    public function getAddressSetting()
+    {
+        return get_option($this->hq_location_address_field, '');
     }
 
 

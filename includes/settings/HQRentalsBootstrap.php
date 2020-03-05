@@ -64,6 +64,12 @@ class HQRentalsBootstrap
         if ($this->settings->noAddressLabelSetting()) {
             $this->settings->saveAddressLabelSetting($this->hq_default_value_for_string);
         }
+        if ($this->settings->noPhoneSetting()) {
+            $this->settings->saveAddressLabelSetting($this->hq_default_value_for_string);
+        }
+        if ($this->settings->noAddressSetting()) {
+            $this->settings->saveAddressLabelSetting($this->hq_default_value_for_string);
+        }
         if ($this->settings->noBrandsSetting()) {
             $this->settings->saveBrandsSetting($this->hq_default_value_for_string);
         }

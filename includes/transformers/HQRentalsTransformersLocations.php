@@ -13,9 +13,11 @@ class HQRentalsTransformersLocations extends HQRentalsTransformersBase
         'is_office',
         'coordinates',
         'active',
-        'order'
+        'order',
+        'address',
+        'phone'
     ];
-    
+
     public static function transformDataFromApi($apiData)
     {
         return HQRentalsTransformersLocations::resolveArrayOfObjects($apiData, function($apiSingleLocation) {

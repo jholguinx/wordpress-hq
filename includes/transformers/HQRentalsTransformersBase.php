@@ -51,13 +51,16 @@ abstract class HQRentalsTransformersBase
         $hours = $setting->getOfficeHoursSetting();
         $addressLabel = $setting->getAddressLabelField();
         $brands = $setting->getBrandsSetting();
+        $phone = $setting->getPhoneSetting();
+        $address = $setting->getAddressSetting();
         HQRentalsTransformersBase::resolveSingleCustomField($coordinates, $objectToReturn, $apiObject, 'coordinates');
         HQRentalsTransformersBase::resolveSingleCustomField($image, $objectToReturn, $apiObject, 'image');
         HQRentalsTransformersBase::resolveSingleCustomField($description, $objectToReturn, $apiObject, 'description');
         HQRentalsTransformersBase::resolveSingleCustomField($hours, $objectToReturn, $apiObject, 'officeHours');
         HQRentalsTransformersBase::resolveSingleCustomField($addressLabel, $objectToReturn, $apiObject, 'addressLabel');
         HQRentalsTransformersBase::resolveSingleCustomField($brands, $objectToReturn, $apiObject, 'brands');
-
+        HQRentalsTransformersBase::resolveSingleCustomField($address, $objectToReturn, $apiObject, 'address');
+        HQRentalsTransformersBase::resolveSingleCustomField($phone, $objectToReturn, $apiObject, 'phone');
     }
     public static function resolveSingleCustomField($settingField, $objectToReturn, $apiObject, $newPropertyName)
     {

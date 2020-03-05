@@ -267,13 +267,37 @@ class HQRentalsAdminSettings
                                             <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">Fleet location office hours
                                                     field id</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search" data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="text"
                                                        class="hq-admin-text-input small"
                                                        name="<?php echo $this->settings->hq_location_office_hours_field; ?>"
                                                        value="<?php echo esc_attr($this->settings->getOfficeHoursSetting()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Fleet location address field id</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search" data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_location_address_field; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getAddressSetting()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Fleet location phone number field id</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search" data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_location_phone_field; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getPhoneSetting()); ?>"/>
                                             </div>
                                         </div>
                                         <div class="hq-general-settings-item">

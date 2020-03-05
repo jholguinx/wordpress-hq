@@ -18,9 +18,7 @@ class HQRentalsAssetsHandler
     protected $frontDateFormatFrontName = 'hqRentalsFrontEndDateformat';
     protected $systemDateFormatFrontName = 'hqRentalsSystemDateformat';
     protected $workspotLocationsDataName = 'hqWorkspotLocations';
-    protected $workspotLocationDataForShortcodeName = 'hqWorkspotLocationsShortcodes';
     protected $tenantDatetimeFormatFrontName = 'hqRentalsTenantDatetimeFormat';
-    protected $pluginVersion = '1.3.4';
 
     public function __construct()
     {

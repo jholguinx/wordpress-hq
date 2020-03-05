@@ -26,6 +26,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     protected $metaDescription = 'hq_wordpress_location_description_meta';
     protected $metaAddressLabel = 'hq_wordpress_location_address_label_meta';
     protected $metaOfficeHours = 'hq_wordpress_location_office_hours_meta';
+    protected $metaAddress = 'hq_wordpress_location_address_meta';
+    protected $metaPhone = 'hq_wordpress_location_phone_meta';
     protected $metaBrands = 'hq_wordpress_location_brands_meta';
     protected $metaIsActive = 'hq_wordpress_location_is_active_meta';
     protected $metaOrder = 'hq_wordpress_location_order_meta';
@@ -45,6 +47,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $addressLabel = '';
     public $officeHours = '';
     public $brands = [];
+    public $address = '';
+    public $phone = '';
 
 
     public function __construct($post = null)
@@ -110,6 +114,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->officeHours = $data->officeHours;
         $this->addressLabel = $data->addressLabel;
         $this->brands = $data->brands;
+        $this->phone = $data->phone;
+        $this->address = $data->address;
     }
 
 
@@ -137,6 +143,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaBrands, $this->brands );
         hq_update_post_meta( $post_id, $this->metaOfficeHours, $this->officeHours );
         hq_update_post_meta( $post_id, $this->metaAddressLabel, $this->addressLabel );
+        hq_update_post_meta( $post_id, $this->metaAddress, $this->address );
+        hq_update_post_meta( $post_id, $this->metaPhone, $this->phone );
     }
 
     /*
@@ -198,7 +206,9 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'description'   =>  $this->metaDescription,
             'officeHours'   =>  $this->metaOfficeHours,
             'addressLabel'  =>  $this->metaAddressLabel,
-            'brands'        =>  $this->metaBrands
+            'brands'        =>  $this->metaBrands,
+            'address'       =>  $this->metaAddress,
+            'phone'         =>  $this->metaPhone
         );
     }
     public function getMetaKeyFromBrandID()
@@ -226,4 +236,17 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             return $html;
         }
     }
+    public function getCustomFieldForAddress()
+    {
+        return $this->address;
+    }
+    public function getCustomFieldForOfficeHours()
+    {
+        return $this->officeHours;
+    }
+    public function getCustomFieldForPhone()
+    {
+        return $this->phone;
+    }
+
 }

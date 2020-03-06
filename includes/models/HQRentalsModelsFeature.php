@@ -64,6 +64,7 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaVehicleClassId, $this->vehicleClassId);
         hq_update_post_meta($post_id, $this->metaLabel, $this->label);
         hq_update_post_meta($post_id, $this->metaIcon, $this->icon);
+        hq_update_post_meta($post_id, $this->metaLabelForWebsite, $this->label_for_website);
     }
 
     public function find($caag_id)
@@ -101,5 +102,11 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     {
         return HQRentalsFrontHelper::resolveFontAwesomeIcon($this->icon);
     }
-
+    public function getLabelForWebsite( $override = false, $lang = 'en' )
+    {
+        if($override){
+            return $this->label_for_website;
+        }
+        return $this->label_for_website->{explode('_',get_locale())[0]};
+    }
 }

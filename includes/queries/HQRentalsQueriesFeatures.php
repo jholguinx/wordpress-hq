@@ -14,8 +14,10 @@ class HQRentalsQueriesFeatures
         $args = array_merge(
             $this->model->postArgs,
             array(
-                'order'             =>  'DESC',
                 'posts_per_page'    =>   -1,
+                'order'     =>  'ASC',
+                'orderby'   =>  'meta_value_num',
+                'meta_key'  =>  $this->model->getOrderMetaKey(),
                 'meta_query'        =>  array(
                     array(
                         'key'       =>  $this->model->metaClassId,

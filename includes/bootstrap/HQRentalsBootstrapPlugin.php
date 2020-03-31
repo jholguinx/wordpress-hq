@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsBootstrap;
 
 use HQRentalsPlugin\HQRentalsActions\HQRentalsActionsRedirects;
+use HQRentalsPlugin\HQRentalsActions\HQRentalsAjaxHandler;
 use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
@@ -35,5 +36,6 @@ class HQRentalsBootstrapPlugin
         $this->ariesQueries = new HQRentalsQueriesAries();
         $this->actions = new HQRentalsActionsRedirects();
         $this->templates = new HQRentalsTemplateHandler();
+        $this->ajaxHandler = new HQRentalsAjaxHandler();
     }
 }

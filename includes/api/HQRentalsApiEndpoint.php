@@ -92,5 +92,8 @@ class HQRentalsApiEndpoint{
         );
         return $this->settings->getApiBaseUrl() . 'car-rental/websites/register?' . http_build_query($args);
     }
+    public function getAuthEndpoint(){
+        return $this->settings->getApiBaseUrl() . 'auth';
+    }
 
 }

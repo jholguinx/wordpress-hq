@@ -82,7 +82,7 @@ class HQRentalsAdminSettings
                                                    type="text"
                                                    name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
                                                    value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
-                                                   id="title"
+                                                   id="hq-api-tenant-token"
                                                    spellcheck="true" autocomplete="off">
                                         </div>
                                     </div>
@@ -96,7 +96,71 @@ class HQRentalsAdminSettings
                                                    type="text"
                                                    name="<?php echo esc_attr($this->settings->api_user_token); ?>"
                                                    value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
+                                                   id="hq-api-user-token"
                                                    spellcheck="true" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <style>
+                                        #hq-login-form-wrapper{
+                                            display: none;
+                                        }
+                                        .hq-loader{
+                                            display: none;
+                                            padding-top: 10px;
+                                            padding-bottom: 10px;
+                                        }
+                                        .hq-loader-inner-wrapper{
+                                            display: flex;
+                                            flex: 1;
+                                            justify-content: center;
+                                            align-content: center;
+                                        }
+                                        .hq-submit-login-button-wrapper{
+                                            display: flex;
+                                            flex: 1;
+                                            justify-content: flex-end;
+                                            align-content: center;
+                                        }
+                                    </style>
+                                    <div class="hq-login-wrapper">
+                                        <div style="flex:1; display: flex; justify-content: flex-end;">
+                                            <button id="hq-login-trigger" type="button" name="save" value="Save" class="button button-primary button-large">Fill with Credentials</button>
+                                        </div>
+                                        <div id="hq-login-form-wrapper">
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper">
+                                                    <h4 class="wp-heading-inline" for="title">Email</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper tokens">
+                                                    <input class="hq-admin-text-input"
+                                                           type="text"
+                                                           name="hq-email"
+                                                           id="hq-email"
+                                                           spellcheck="true" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper">
+                                                    <h4 class="wp-heading-inline" for="title">Password</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper tokens">
+                                                    <input class="hq-admin-text-input"
+                                                           type="text"
+                                                           name="hq-password"
+                                                           id="hq-password"
+                                                           spellcheck="true" autocomplete="off" />
+                                                </div>
+                                            </div>
+                                            <div class="hq-loader">
+                                                <div class="hq-loader-inner-wrapper">
+                                                    <img src="<?php echo plugins_url('hq-rental-software/includes/assets/img/spinner.gif'); ?>" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="hq-submit-login-button-wrapper">
+                                                <button id="hq-submit-login-button" type="button" name="save" value="Save" class="button button-primary button-large">Login</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

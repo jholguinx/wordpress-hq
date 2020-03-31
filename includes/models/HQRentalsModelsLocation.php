@@ -31,7 +31,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     protected $metaBrands = 'hq_wordpress_location_brands_meta';
     protected $metaIsActive = 'hq_wordpress_location_is_active_meta';
     protected $metaOrder = 'hq_wordpress_location_order_meta';
-    protected $metaLabel = 'hq_wordpress_location_labels_meta';
+    protected $metaLabelForWebsites = 'hq_wordpress_location_labels_meta';
     /*
      * Object Data to Display
      */
@@ -50,7 +50,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $brands = [];
     public $address = '';
     public $phone = '';
-    public $labels = [];
+    public $labelsForWebsite = [];
 
 
     public function __construct($post = null)
@@ -118,6 +118,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->brands = $data->brands;
         $this->phone = $data->phone;
         $this->address = $data->address;
+        $this->labelsForWebsite = $data->label_for_website;
     }
 
 
@@ -147,6 +148,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaAddressLabel, $this->addressLabel );
         hq_update_post_meta( $post_id, $this->metaAddress, $this->address );
         hq_update_post_meta( $post_id, $this->metaPhone, $this->phone );
+        hq_update_post_meta($post_id, $this->metaLabelForWebsites, $this->labelsForWebsite);
     }
 
     /*
@@ -210,7 +212,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'addressLabel'  =>  $this->metaAddressLabel,
             'brands'        =>  $this->metaBrands,
             'address'       =>  $this->metaAddress,
-            'phone'         =>  $this->metaPhone
+            'phone'         =>  $this->metaPhone,
+            'labelsForWebsite' => $this->metaLabelForWebsites
         );
     }
     public function getMetaKeyFromBrandID()
@@ -250,5 +253,11 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     {
         return $this->phone;
     }
-
+    public function getLabelForWebsite( $override = false, $lang = 'en' )
+    {
+        if($override){
+            return $this->labelsForWebsite[$lang];
+        }
+        return $this->labelsForWebsite->{explode('_',get_locale())[0]};
+    }
 }

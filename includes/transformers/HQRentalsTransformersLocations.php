@@ -15,7 +15,8 @@ class HQRentalsTransformersLocations extends HQRentalsTransformersBase
         'active',
         'order',
         'address',
-        'phone'
+        'phone',
+        'label_for_website'
     ];
 
     public static function transformDataFromApi($apiData)

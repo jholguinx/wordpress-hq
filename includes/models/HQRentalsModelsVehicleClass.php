@@ -344,7 +344,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         return $rateModel->allRatesFromVehicleClass($this->id);
     }
 
-    public function getPriceIntervals(){
+    public function getPriceIntervals()
+    {
         $prices = new HQRentalsModelsPriceInterval();
         $data= [];
         foreach ($prices->getIntervalPricesByVehicleId( $this->id ) as $pricePost){

@@ -31,6 +31,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     protected $metaBrands = 'hq_wordpress_location_brands_meta';
     protected $metaIsActive = 'hq_wordpress_location_is_active_meta';
     protected $metaOrder = 'hq_wordpress_location_order_meta';
+    protected $metaLabel = 'hq_wordpress_location_labels_meta';
     /*
      * Object Data to Display
      */
@@ -49,6 +50,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $brands = [];
     public $address = '';
     public $phone = '';
+    public $labels = [];
 
 
     public function __construct($post = null)

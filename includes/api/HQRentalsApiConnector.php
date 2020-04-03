@@ -96,4 +96,13 @@ class HQRentalsApiConnector{
         $response = wp_remote_post( $this->endpoints->getWebsiteRegistrationEndpoint() );
         return $this->resolver->resolveActivation($response);
     }
+    public function login($email, $password)
+    {
+        $data = array(
+            'email' =>  $email,
+            'password' => $password
+        );
+        $response = wp_remote_post($this->endpoints->getAuthEndpoint(), $this->configuration->getBasicApiConfiguration($data));
+        return $this->resolver->resolveApiCallForAuth($response);
+    }
 }

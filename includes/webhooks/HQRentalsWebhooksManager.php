@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\Webhooks;
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsUpgrader;
 
@@ -10,6 +11,7 @@ class HQRentalsWebhooksManager{
     {
         $this->scheduler = new HQRentalsScheduler();
         $this->upgrader = new HQRentalsUpgrader();
+        $this->connector = new HQRentalsApiConnector();
         add_action( 'rest_api_init', array($this, 'setCustomAPIRoutes') );
     }
     public function setCustomApiRoutes(){
@@ -23,6 +25,10 @@ class HQRentalsWebhooksManager{
             'methods' => 'POST',
             'callback' => array ($this, 'firePluginUpgrade'),
         ) );
+        register_rest_route('hqrentals', '/plugin/auth' , array(
+            'methods' => 'GET',
+            'callback' => array ($this, 'loginUser'),
+        ));
     }
     public function fireUpdate(\WP_REST_Request $request)
     {
@@ -49,11 +55,18 @@ class HQRentalsWebhooksManager{
         }
 
     }
-    public function resolveResponse($data, $status = 200, $message = ''){
+    public function resolveResponse($data, $status = 200, $message = '')
+    {
         return array(
             'message'   =>  $message,
             'status'    =>  $status,
             'data'      =>  empty($data) ? [] : $data
         );
+    }
+    public function loginUser($data)
+    {
+        $email = $_GET['email'];
+        $password = $_GET['password'];
+        return $this->connector->login($email, $password);
     }
 }

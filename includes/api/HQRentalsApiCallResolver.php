@@ -221,5 +221,12 @@ class HQRentalsApiCallResolver
             return new HQRentalsApiResponse(null, true, json_decode($response['body']));
         }
     }
-
+    public function resolveApiCallForAuth($response)
+    {
+        if (is_wp_error($response)) {
+            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null);
+        } else {
+            return new HQRentalsApiResponse(null, true, json_decode($response['body']));
+        }
+    }
 }

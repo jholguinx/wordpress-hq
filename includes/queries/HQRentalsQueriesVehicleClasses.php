@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsQueries;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsCacheHandler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 
 
@@ -15,6 +16,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
     {
         $this->model = new HQRentalsModelsVehicleClass();
         $this->rateQuery = new HQRentalsQueriesActiveRates();
+        $this->cache = new HQRentalsCacheHandler();
     }
 
 
@@ -28,7 +30,14 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         /*
          * By Default the vehicles classes should be order by price
          * */
-        $data = [];
+        $cacheData = $this->cache->getVehicleClassesFromCache();
+        if($cacheData){
+            return $cacheData;
+        }
+        return $this->allVehiclesForCache();
+    }
+    public function allVehiclesForCache()
+    {
         return $this->allVehicleClassesByOrder();
     }
 

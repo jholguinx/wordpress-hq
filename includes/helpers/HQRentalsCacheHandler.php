@@ -1,42 +1,31 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsHelpers;
-require_once ABSPATH . 'wp-includes/class-wp-object-cache.php';
+require_once ABSPATH . WPINC .'/class-wp-object-cache.php';
 
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
-
-class HQRentalsCacheHandler extends \WP_Object_Cache
+class HQRentalsCacheHandler
 {
     private static $vehiclesQueryKey = 'hq_vehicles_classes_cache';
-    private static $cacheExpiration = 1 * 3600;
-    private static $cacheGroup = 'hq_rentals_plugins_group';
-
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->vehiclesQuery = new HQRentalsQueriesVehicleClasses();
-    }
+    private static $cacheExpiration = 120;
+    private static $cacheGroup = 'default';
 
     public function addDataToCache($key, $data)
     {
-        $this->add($key, $data, HQRentalsCacheHandler::$cacheGroup, HQRentalsCacheHandler::$cacheExpiration);
+        return set_transient($key, $data, HQRentalsCacheHandler::$cacheExpiration);
     }
     public function addVehiclesClassesToCache()
     {
-        $this->addDataToCache(HQRentalsCacheHandler::$vehiclesQueryKey, $this->vehiclesQuery->allVehicleClasses());
+        $query = new HQRentalsCacheableData();
+        return $this->addDataToCache(HQRentalsCacheHandler::$vehiclesQueryKey, $query->vehicleCacheData());
     }
-    public function existsKeyOnCache($key)
-    {
-        return $this->_exists($key, HQRentalsCacheHandler::$cacheGroup);
-    }
-    public function existsVehicleClassOnCache()
-    {
-        return $this->existsKeyOnCache(HQRentalsCacheHandler::$vehiclesQueryKey);
-    }
+
     public function getDataFromCache($key)
     {
-        return $this->get($key, HQRentalsCacheHandler::$cacheGroup);
+        $cacheData = get_transient($key);
+        if($cacheData){
+            return $cacheData;
+        }
+        return false;
     }
     public function getVehicleClassesFromCache()
     {

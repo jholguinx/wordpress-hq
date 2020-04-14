@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsTasks;
 
 use Exception;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsCacheHandler;
 
 class HQRentalsScheduler
 {
@@ -31,11 +32,13 @@ class HQRentalsScheduler
         $this->additionalChargesTask = new HQRentalsAdditionalChargesTask();
         $this->settingsTask = new HQRentalsSettingsTask();
         $this->workspot = new HQRentalsLocationsWorkspotTask();
+        $this->cache = new HQRentalsCacheHandler();
     }
 
     public function refreshHQData()
     {
         try{
+            $this->cache->addVehiclesClassesToCache();
             global $wpdb;
             $site = get_site_url();
             $dbPrefix = $wpdb->prefix;

@@ -102,7 +102,7 @@ class HQRentalsApiConnector{
             'email' =>  $email,
             'password' => $password
         );
-        $response = wp_remote_post($this->endpoints->getAuthEndpoint(), $this->configuration->getBasicApiConfiguration($data));
+        $response = wp_remote_post($this->endpoints->getAuthEndpoint(), $this->configuration->authApiConfiguration($data));
         return $this->resolver->resolveApiCallForAuth($response);
     }
 }

@@ -11,7 +11,13 @@ class HQRentalsApiConfiguration
         $this->endpoints = new HQRentalsApiEndpoint();
         $this->normalTimeout = 20;
     }
-
+    public function authApiConfiguration($data)
+    {
+        return array(
+            'body'      =>  $data,
+            'timeout'   =>  10
+        );
+    }
     public function getBasicApiConfiguration( $data = null )
     {
         if($data){

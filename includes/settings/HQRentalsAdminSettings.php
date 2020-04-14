@@ -147,7 +147,7 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-input-wrapper tokens">
                                                     <input class="hq-admin-text-input"
-                                                           type="text"
+                                                           type="password"
                                                            name="hq-password"
                                                            id="hq-password"
                                                            spellcheck="true" autocomplete="off" />

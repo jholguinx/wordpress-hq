@@ -27,11 +27,9 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function allVehicleClasses($order = null)
     {
-        /*
-         * By Default the vehicles classes should be order by price
-         * */
         $cacheData = $this->cache->getVehicleClassesFromCache();
         if($cacheData){
+            /* Return data if Cache*/
             return $cacheData;
         }
         return $this->allVehiclesForCache();

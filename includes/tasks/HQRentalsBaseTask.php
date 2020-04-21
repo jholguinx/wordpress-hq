@@ -14,6 +14,4 @@ abstract class HQRentalsBaseTask{
 
     /*Populate WP Database*/
     public abstract function setDataOnWP();
-
-
 }

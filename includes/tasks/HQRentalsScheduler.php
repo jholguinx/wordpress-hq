@@ -41,23 +41,20 @@ class HQRentalsScheduler
     {
         $this->cache->addVehiclesClassesToCache();
         try{
+            if($this->isWorkspotWebsite()){
+                $workspot = $this->workspot->refreshLocationsData();
+            }
             $this->settingsTask->tryToRefreshSettingsData();
             $this->brandsTask->tryToRefreshSettingsData();
-            /*Validalte all response and proceed to set data on D*/
+            $this->locationsTask->tryToRefreshSettingsData();
+            $this->additionalChargesTask->tryToRefreshSettingsData();
+            $this->vehicleClassesTask->tryToRefreshSettingsData();
+
             if($this->allResponseAreOK()){
                 $this->deleteHQData();
                 $this->refreshAllDataOnDatabase();
             }else{
                 $error = $this->getErrorOnSync();
-            }
-
-
-            //$brands = $this->brandsTask->refreshBrandsData();
-            $locations = $this->locationsTask->refreshLocationsData();
-            $addCharges = $this->additionalChargesTask->refreshAdditionalChargesData();
-            $vehicleClasses = $this->vehicleClassesTask->refreshVehicleClassesData();
-            if($this->isWorkspotWebsite()){
-                $workspot = $this->workspot->refreshLocationsData();
             }
             return true;
         }catch(Exception $e){
@@ -78,18 +75,24 @@ class HQRentalsScheduler
     }
     public function allResponseAreOK()
     {
-        /*Add alls*/
         return $this->settingsTask->dataWasRetrieved() and
-            $this->brandsTask->dataWasRetrieved();
+            $this->brandsTask->dataWasRetrieved() and
+            $this->locationsTask->dataWasRetrieved() and
+            $this->additionalChargesTask->dataWasRetrieved() and
+            $this->vehicleClassesTask->dataWasRetrieved();
     }
 
     public function refreshAllDataOnDatabase()
     {
         $this->settingsTask->setDataOnWP();
         $this->brandsTask->setDataOnWP();
+        $this->locationsTask->setDataOnWP();
+        $this->additionalChargesTask->setDataOnWP();
+        $this->vehicleClassesTask->setDataOnWP();
     }
-    public function getErrorOnSync(){
-        return "rerer";
+    public function getErrorOnSync()
+    {
+        
     }
 
 }

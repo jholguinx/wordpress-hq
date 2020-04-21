@@ -47,14 +47,10 @@ class HQRentalsAdminSettings
                 <div class="wrap">
                     <div class="message updated"><p>The Setting were Successfully Saved!</p></div>
                 </div>
-            <?php elseif (isset($_POST['forcing_update']) && $_POST['forcing_update'] == 'success'): ?>
-                <div class="wrap">
-                    <div class="message updated"><p>All data was saved</p></div>
-                </div>
-            <?php elseif (isset($_POST['forcing_update']) && $_POST['forcing_update'] != 'success'): ?>
-                <div class="wrap">
-                    <div class="notice notice-error"><p><?php echo $_POST['forcing_update']; ?></p></div>
-                </div>
+            <?php elseif (isset($_POST['success']) && $_POST['success'] == 'error'): ?>
+                    <div class="wrap">
+                        <div class="notice notice-error"><p><?php echo $_POST['error_message']; ?></p></div>
+                    </div>
             <?php else: ?>
                 <div class="wrap">
                     <div class="message updated"><p>The was something wrong</p></div>

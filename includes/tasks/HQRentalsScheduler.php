@@ -53,8 +53,11 @@ class HQRentalsScheduler
             if($this->allResponseAreOK()){
                 $this->deleteHQData();
                 $this->refreshAllDataOnDatabase();
+                $_POST['success'] = 'success';
             }else{
                 $error = $this->getErrorOnSync();
+                $_POST['success'] = 'error';
+                $_POST['error_message'] = $error;
             }
         }catch(Exception $e){
             return $e->getMessage();

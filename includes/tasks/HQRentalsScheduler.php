@@ -23,6 +23,7 @@ class HQRentalsScheduler
      * @var HQRentalsAdditionalChargesTask
      */
     protected $additionalChargesTask;
+    protected $siteURL = '';
 
     public function __construct()
     {
@@ -33,60 +34,62 @@ class HQRentalsScheduler
         $this->settingsTask = new HQRentalsSettingsTask();
         $this->workspot = new HQRentalsLocationsWorkspotTask();
         $this->cache = new HQRentalsCacheHandler();
+        $this->siteURL = get_site_url();
     }
 
     public function refreshHQData()
     {
+        $this->cache->addVehiclesClassesToCache();
         try{
-            $this->cache->addVehiclesClassesToCache();
-            global $wpdb;
-            $site = get_site_url();
-            $dbPrefix = $wpdb->prefix;
-            $wpdb->get_results("delete from " . $dbPrefix . "posts where post_type like 'hqwp%';");
-            $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like 'hq_wordpress%';");
-            /*
-             * Load data into WP
-             */
-            $message = "There was an error, please check the settings of your HQ Rental Software account. Error message: \n";
-            $settings = $this->settingsTask->refreshSettingsData();
-            $brands = $this->brandsTask->refreshBrandsData();
+            $this->settingsTask->tryToRefreshSettingsData();
+            $this->brandsTask->tryToRefreshSettingsData();
+            /*Validalte all response and proceed to set data on D*/
+            if($this->allResponseAreOK()){
+                $this->deleteHQData();
+                $this->refreshAllDataOnDatabase();
+            }else{
+                $error = $this->getErrorOnSync();
+            }
+
+
+            //$brands = $this->brandsTask->refreshBrandsData();
             $locations = $this->locationsTask->refreshLocationsData();
             $addCharges = $this->additionalChargesTask->refreshAdditionalChargesData();
             $vehicleClasses = $this->vehicleClassesTask->refreshVehicleClassesData();
-            if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
-               $workspot = $this->workspot->refreshLocationsData();
+            if($this->isWorkspotWebsite()){
+                $workspot = $this->workspot->refreshLocationsData();
             }
-            /*
-            if(!$settings->success){
-                $message .=  $settings->errors. " \n";
-                throw new Exception($message); 
-            }
-            if(!$brands->success){
-                $message .=  $brands->errors. " \n";
-                throw new Exception($message); 
-            }
-            if(!$locations->success){
-                $message .=  $locations->errors. " \n";
-                throw new Exception($message); 
-            }
-            if(!$addCharges->success){
-                $message .=  $addCharges->errors. " \n";
-                throw new Exception($message); 
-            }
-            if(!$vehicleClasses->success){
-                $message .=  $vehicleClasses->errors. " \n";
-                throw new Exception($message); 
-            }
-            if($site == 'http://workspot.test' or $site == 'https://workspot.nu'){
-                if($workspot[0]->success == false || $workspot[1]->success == false){
-                    $message .=  $workspot->errors. " \n";
-                    throw new Exception($message); 
-                }
-            }*/
             return true;
         }catch(Exception $e){
             return $e->getMessage();
         }
-
     }
+    public function deleteHQData()
+    {
+        global $wpdb;
+        $dbPrefix = $wpdb->prefix;
+        $wpdb->get_results("delete from " . $dbPrefix . "posts where post_type like 'hqwp%';");
+        $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like 'hq_wordpress%';");
+    }
+
+    public function isWorkspotWebsite()
+    {
+        return $this->siteURL == 'http://workspot.test' or $this->siteURL == 'https://workspot.nu';
+    }
+    public function allResponseAreOK()
+    {
+        /*Add alls*/
+        return $this->settingsTask->dataWasRetrieved() and
+            $this->brandsTask->dataWasRetrieved();
+    }
+
+    public function refreshAllDataOnDatabase()
+    {
+        $this->settingsTask->setDataOnWP();
+        $this->brandsTask->setDataOnWP();
+    }
+    public function getErrorOnSync(){
+        return "rerer";
+    }
+
 }

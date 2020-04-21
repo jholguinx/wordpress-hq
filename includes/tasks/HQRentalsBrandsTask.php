@@ -5,31 +5,28 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand as HQBrand;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 
-class HQRentalsBrandsTask{
-	public function __construct() {
-		$this->connector = new Connector();
-	}
-
-	public function refreshBrandsData()
+class HQRentalsBrandsTask extends HQRentalsBaseTask
+{
+    public function __construct()
     {
-		return $this->createBrandsData();
-	}
-
-	public function createBrandsData()
+        $this->connector = new Connector();
+    }
+    public function tryToRefreshSettingsData()
     {
-		$brands = $this->connector->getHQRentalsBrands();
-		if ( $brands->success and !empty($brands->data)) {
-			$this->createBrands( $brands->data );
-		}
-		return $brands;
-	}
-
-	protected function createBrands( $brands )
+        $this->response = $this->connector->getHQRentalsBrands();
+    }
+    public function setDataOnWP()
     {
-		foreach ( $brands as $brand ) {
-			$newBrand = new HQBrand();
-			$newBrand->setBrandFromApi( $brand );
-			$newBrand->create();
-		}
-	}
+        if ( $this->response->success and !empty($this->response->data)) {
+            foreach ( $this->response->data as $brand ) {
+                $newBrand = new HQBrand();
+                $newBrand->setBrandFromApi( $brand );
+                $newBrand->create();
+            }
+        }
+    }
+    public function dataWasRetrieved()
+    {
+        return $this->response->success;
+    }
 }

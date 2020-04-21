@@ -3,24 +3,26 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
-class HQRentalsSettingsTask{
+class HQRentalsSettingsTask extends HQRentalsBaseTask{
+
     public function __construct()
     {
         $this->connector = new Connector();
         $this->settings = new HQRentalsSettings();
     }
-    public function refreshSettingsData()
+    public function tryToRefreshSettingsData()
     {
-        $response = $this->syncSettingsData();
-        return $response;
+        $this->response = $this->connector->getHQRentalsTenantsSettings();
     }
-    public function syncSettingsData()
+    public function dataWasRetrieved()
     {
-        $settings = $this->connector->getHQRentalsTenantsSettings();
-        if($settings->success){
-            $this->settings->saveTenantDatetimeOption($settings->data->date_format);
-            $this->settings->saveTenantLink($settings->data->tenant_link);
+        return $this->response->success;
+    }
+    public function setDataOnWP()
+    {
+        if($this->response->success){
+            $this->settings->saveTenantDatetimeOption($this->response->data->date_format);
+            $this->settings->saveTenantLink($this->response->data->tenant_link);
         }
-        return $settings;
     }
 }

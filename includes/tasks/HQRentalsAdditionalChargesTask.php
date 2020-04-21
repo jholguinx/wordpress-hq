@@ -33,4 +33,8 @@ class HQRentalsAdditionalChargesTask extends HQRentalsBaseTask {
             }
         }
     }
+    public function getError()
+    {
+        return $this->response->error;
+    }
 }

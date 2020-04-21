@@ -23,7 +23,7 @@ class HQRentalsScheduler
      * @var HQRentalsAdditionalChargesTask
      */
     protected $additionalChargesTask;
-    protected $siteURL = '';
+    protected $siteURL;
 
     public function __construct()
     {
@@ -56,7 +56,6 @@ class HQRentalsScheduler
             }else{
                 $error = $this->getErrorOnSync();
             }
-            return true;
         }catch(Exception $e){
             return $e->getMessage();
         }
@@ -92,7 +91,21 @@ class HQRentalsScheduler
     }
     public function getErrorOnSync()
     {
-        
+        if($this->settingsTask->getError()){
+            return $this->settingsTask->getError();
+        }
+        if($this->brandsTask->getError()){
+            return $this->brandsTask->getError();
+        }
+        if($this->locationsTask->getError()){
+            return $this->locationsTask->getError();
+        }
+        if($this->additionalChargesTask->getError()){
+            return $this->additionalChargesTask->getError();
+        }
+        if($this->vehicleClassesTask->getError()){
+            return $this->vehicleClassesTask->getError();
+        }
+        return "";
     }
-
 }

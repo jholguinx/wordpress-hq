@@ -25,4 +25,9 @@ class HQRentalsSettingsTask extends HQRentalsBaseTask{
             $this->settings->saveTenantLink($this->response->data->tenant_link);
         }
     }
+    public function getError()
+    {
+        return $this->response->error;
+    }
+
 }

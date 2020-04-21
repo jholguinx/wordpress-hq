@@ -39,4 +39,8 @@ class HQRentalsVehicleClassesTask extends HQRentalsBaseTask {
             }
         }
     }
+    public function getError()
+    {
+        return $this->response->error;
+    }
 }

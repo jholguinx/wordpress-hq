@@ -2,7 +2,7 @@
 namespace HQRentalsPlugin\HQRentalsQueries;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsFeature;
 
-class HQRentalsQueriesFeatures
+class HQRentalsQueriesFeatures extends HQRentalsQueriesBaseClass
 {
     public function __construct()
     {
@@ -33,4 +33,33 @@ class HQRentalsQueriesFeatures
         }
         return $data;
     }
+    public function fillModelWithPosts($posts)
+    {
+        // TODO: Implement fillModelWithPosts() method.
+    }
+    public function allToFrontEnd()
+    {
+        // TODO: Implement allToFrontEnd() method.
+    }
+    public function getAllMetaKey()
+    {
+        // TODO: Implement getAllMetaKey() method.
+    }
+
+    public function featurePublicInterface($feature)
+    {
+        return $this->parseObject(array(
+            'label',
+            'icon'
+        ), $feature);
+    }
+
+    public function featuresPublicInterface($features)
+    {
+        return array_map(function($feature){
+            return $this->featurePublicInterface($feature);
+        }, $features);
+    }
+
+
 }

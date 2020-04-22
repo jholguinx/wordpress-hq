@@ -261,4 +261,10 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
                 break;
         }
     }
+    public function ratePublicInterface()
+    {
+        $data = new \stdClass();
+        $data->dailyRate = $this->getFormattedDailyRate();
+        return $data;
+    }
 }

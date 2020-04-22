@@ -6,33 +6,41 @@ use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation as HQLocation;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsFrontEnd as HQFrontEnd;
 
-class HQRentalsLocationsTask
+class HQRentalsLocationsTask extends HQRentalsBaseTask
 {
     public function __construct()
     {
         $this->connector = new Connector();
     }
 
-    public function refreshLocationsData()
+    /*Get data from api and set response*/
+    public function tryToRefreshSettingsData()
     {
-        return $this->createLocationsData();
+        $this->response = $this->connector->getHQRentalsLocations();
     }
 
-    public function createLocationsData()
+
+    public function dataWasRetrieved()
     {
-        $locations = $this->connector->getHQRentalsLocations();
-        if ($locations->success and !empty($locations->data)) {
-        	$this->createLocations($locations->data);
+        return $this->response->success;
+    }
+
+    public function setDataOnWP()
+    {
+        if ($this->response->success and !empty($this->response->data)) {
+            foreach ($this->response->data as $location) {
+                $newLocation = new HQLocation();
+                $newLocation->setLocationFromApi($location);
+                $newLocation->create();
+            }
         }
-        return $locations;
     }
-
-	protected function createLocations( $locations )
+    public function getError()
     {
-		foreach ($locations as $location) {
-			$newLocation = new HQLocation();
-			$newLocation->setLocationFromApi($location);
-			$newLocation->create();
-		}
-	}
+        return $this->response->error;
+    }
+    public function getResponse()
+    {
+        return $this->response;
+    }
 }

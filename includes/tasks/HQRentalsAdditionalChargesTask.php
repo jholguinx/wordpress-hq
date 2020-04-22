@@ -5,30 +5,40 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsAdditionalCharge as HQCharge;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 
-class HQRentalsAdditionalChargesTask{
+class HQRentalsAdditionalChargesTask extends HQRentalsBaseTask {
 	public function __construct() {
 		$this->connector = new Connector();
 	}
 
-	public function refreshAdditionalChargesData() {
-		$res = $this->createAdditionalChargesData();
-		return $res;
-	}
+    /*Get data from api and set response*/
+    public function tryToRefreshSettingsData()
+    {
+        $this->response = $this->connector->getHQRentalsAdditionalCharges();
+    }
 
-	public function createAdditionalChargesData() {
-		$charges = $this->connector->getHQRentalsAdditionalCharges();
-		if ( $charges->success and !empty($charges->data)) {
-			$this->createAdditionalCharges( $charges->data );
-			//$this->createAllAdditionalChargesForFrontend( $charges->data );
-		}
-		return $charges;
-	}
+    /*Validate that the response have no errors*/
+    public function dataWasRetrieved()
+    {
+        return $this->response->success;
+    }
 
-	protected function createAdditionalCharges( $additionalCharges ) {
-		foreach ( $additionalCharges as $additionalCharge ) {
-			$newCharge = new HQCharge();
-			$newCharge->setAdditionalChargeFromApi( $additionalCharge );
-			$newCharge->create();
-		}
-	}
+    /*Populate WP Database*/
+    public function setDataOnWP()
+    {
+        if ( $this->response->success and !empty($this->response->data)) {
+            foreach ( $this->response->data as $additionalCharge ) {
+                $newCharge = new HQCharge();
+                $newCharge->setAdditionalChargeFromApi( $additionalCharge );
+                $newCharge->create();
+            }
+        }
+    }
+    public function getError()
+    {
+        return $this->response->error;
+    }
+    public function getResponse()
+    {
+        return $this->response;
+    }
 }

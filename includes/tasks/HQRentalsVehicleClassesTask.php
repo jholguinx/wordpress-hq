@@ -6,36 +6,45 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass as HQVehicleClas
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersTransformersVehicleClasses;
 
-class HQRentalsVehicleClassesTask{
+class HQRentalsVehicleClassesTask extends HQRentalsBaseTask {
 
     public function __construct() {
 		$this->connector = new Connector();
 		$this->transformer = new HQRentalsTransformersTransformersVehicleClasses();
 	}
 
-	public function refreshVehicleClassesData() {
-		return $this->createVehicleClassesData();
-	}
+    public function tryToRefreshSettingsData()
+    {
+        $this->response = $this->connector->getHQRentalsVehicleClasses();
+    }
 
-	public function createVehicleClassesData() {
-		$vehicleClasses = $this->connector->getHQRentalsVehicleClasses();
-		$customFields   = $this->connector->getHQVehicleClassCustomFields();
-		if ( $customFields->success ) {
-			foreach ( $customFields->data as $field ) {
-				HQVehicleClass::$custom_fields[] = $field->dbcolumn;
-			}
-		}
-		if ( $vehicleClasses->success and !empty($vehicleClasses->data)) {
-			$this->createVehicleClasses( $vehicleClasses->data, $customFields );
-		}
-		return $vehicleClasses;
-	}
+    public function dataWasRetrieved()
+    {
+        return $this->response->success;
+    }
 
-	protected function createVehicleClasses( $vehicleClasses, $customFields ) {
-		foreach ( $vehicleClasses as $vehicle_class ) {
-			$newVehicleClass = new HQVehicleClass();
-			$newVehicleClass->setVehicleClassFromApi( $vehicle_class, $customFields );
-			$newVehicleClass->create();
-		}
-	}
+    public function setDataOnWP()
+    {
+        $customFields = $this->connector->getHQVehicleClassCustomFields();
+        if ( $customFields->success ) {
+            foreach ( $customFields->data as $field ) {
+                HQVehicleClass::$custom_fields[] = $field->dbcolumn;
+            }
+        }
+        if ( $this->response->success and !empty($this->response->data)) {
+            foreach ( $this->response->data as $vehicle_class ) {
+                $newVehicleClass = new HQVehicleClass();
+                $newVehicleClass->setVehicleClassFromApi( $vehicle_class, $customFields );
+                $newVehicleClass->create();
+            }
+        }
+    }
+    public function getError()
+    {
+        return $this->response->error;
+    }
+    public function getResponse()
+    {
+        return $this->response;
+    }
 }

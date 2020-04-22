@@ -514,7 +514,6 @@ class HQRentalsSettings
         /*Refresh data on save */
         $worker = new HQRentalsCronJob();
         $worker->refreshAllData();
-        $_POST['success'] = 'success';
     }
 
     /***

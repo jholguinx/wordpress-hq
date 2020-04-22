@@ -56,13 +56,13 @@ class HQRentalsScheduler
                 $_POST['success'] = 'success';
             }else{
                 $error = $this->getErrorOnSync();
-                $_POST['success'] = 'error';
-                $_POST['error_message'] = $error;
+                $this->setErrorMessage($error);
             }
         }catch(Exception $e){
             return $e->getMessage();
         }
     }
+
     public function deleteHQData()
     {
         global $wpdb;
@@ -110,5 +110,10 @@ class HQRentalsScheduler
             return $this->vehicleClassesTask->getError();
         }
         return "";
+    }
+    public function setErrorMessage($error)
+    {
+        $_POST['success'] = 'error';
+        $_POST['error_message'] = $error;
     }
 }

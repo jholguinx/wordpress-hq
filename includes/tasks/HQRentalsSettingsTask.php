@@ -27,7 +27,10 @@ class HQRentalsSettingsTask extends HQRentalsBaseTask{
     }
     public function getError()
     {
-        return $this->response->error;
+        return $this->response->errors;
     }
-
+    public function getResponse()
+    {
+        return $this->response;
+    }
 }

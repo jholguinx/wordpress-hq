@@ -49,7 +49,7 @@ class HQRentalsAdminSettings
                 </div>
             <?php elseif (isset($_POST['success']) && $_POST['success'] == 'error'): ?>
                     <div class="wrap">
-                        <div class="notice notice-error"><p><?php echo $_POST['error_message']; ?></p></div>
+                        <div class="notice notice-error"><p>Error Processing the information: <?php echo $_POST['error_message']; ?></p></div>
                     </div>
             <?php else: ?>
                 <div class="wrap">

@@ -33,4 +33,8 @@ class HQRentalsBrandsTask extends HQRentalsBaseTask
     {
         return $this->response->error;
     }
+    public function getResponse()
+    {
+        return $this->response;
+    }
 }

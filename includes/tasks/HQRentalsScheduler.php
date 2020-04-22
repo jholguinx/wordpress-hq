@@ -49,7 +49,6 @@ class HQRentalsScheduler
             $this->locationsTask->tryToRefreshSettingsData();
             $this->additionalChargesTask->tryToRefreshSettingsData();
             $this->vehicleClassesTask->tryToRefreshSettingsData();
-
             if($this->allResponseAreOK()){
                 $this->deleteHQData();
                 $this->refreshAllDataOnDatabase();

@@ -16,4 +16,6 @@ abstract class HQRentalsBaseTask{
     public abstract function setDataOnWP();
 
     public abstract function getError();
+
+    public abstract function getResponse();
 }

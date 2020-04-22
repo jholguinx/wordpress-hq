@@ -363,7 +363,15 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             'custom_fields' => array(
                 'property_name' => 'custom_fields',
                 'values' => $vehicle->getCustomFields()
-            )
+            ),
+            'features' => array(
+                'property_name' => 'features',
+                'values' => $vehicle->getFeaturesPublicInterface()
+             ),
+            'rate' => array(
+                'property_name' => 'rate',
+                'values' => $vehicle->getRatePublicInterface()
+            ),
         ), $vehicle);
     }
     public function vehiclesPublicInterfaceFiltered($brandId, $customField, $customFieldValue)

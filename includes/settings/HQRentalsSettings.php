@@ -423,7 +423,7 @@ class HQRentalsSettings
     {
         return get_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, 'false');
     }
-    public function isDescreasingRateOrderActive()
+    public function isDecreasingRateOrderActive()
     {
         return $this->getDecreasingRateOrder() === 'true';
     }

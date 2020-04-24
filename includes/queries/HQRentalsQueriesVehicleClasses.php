@@ -4,7 +4,7 @@ namespace HQRentalsPlugin\HQRentalsQueries;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsCacheHandler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
-
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
 class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
@@ -17,6 +17,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         $this->model = new HQRentalsModelsVehicleClass();
         $this->rateQuery = new HQRentalsQueriesActiveRates();
         $this->cache = new HQRentalsCacheHandler();
+        $this->settings = new HQRentalsSettings();
     }
 
 
@@ -32,11 +33,27 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             /* Return data if Cache*/
             return $cacheData;
         }
-        return $this->allVehiclesForCache();
+        return $this->allVehiclesByRate();
     }
     public function allVehiclesForCache()
     {
-        return $this->allVehicleClassesByOrder();
+        return $this->allVehiclesByRate();
+    }
+    public function allVehiclesByRate()
+    {
+        $vehicles = $this->allVehiclesForCache();
+        $option = $this->settings->isDecreasingRateOrderActive();
+        if(is_array($vehicles)){
+            usort($vehicles, function($oneVehicle, $otherVehicle) use ($option) {
+                if($option){
+                    return $oneVehicle->rate()->getFormattedDailyRateAsNumber() < $otherVehicle->rate()->getFormattedDailyRateAsNumber();
+                }else{
+                    return $oneVehicle->rate()->getFormattedDailyRateAsNumber() > $otherVehicle->rate()->getFormattedDailyRateAsNumber();
+                }
+            });
+        }
+        return $vehicles;
+
     }
 
     /**

@@ -4,13 +4,12 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass as HQVehicleClass;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
-use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersTransformersVehicleClasses;
+
 
 class HQRentalsVehicleClassesTask extends HQRentalsBaseTask {
 
     public function __construct() {
 		$this->connector = new Connector();
-		$this->transformer = new HQRentalsTransformersTransformersVehicleClasses();
 	}
 
     public function tryToRefreshSettingsData()

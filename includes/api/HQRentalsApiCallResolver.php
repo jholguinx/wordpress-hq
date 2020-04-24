@@ -6,7 +6,6 @@ namespace HQRentalsPlugin\HQRentalsApi;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersGoogle;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersLocations;
-use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersTransformersVehicleClasses;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersSettings;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersBrands;
 

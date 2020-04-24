@@ -273,6 +273,17 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Show Rates From Highest To Lowest</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search" data-tippy-content="Show Rates From Highest To Lowest."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="checkbox"
+                                                       name="<?php echo $this->settings->hq_enable_decreasing_rate_order_on_vehicles_query; ?>"
+                                                       value="true" <?php echo ($this->settings->getDecreasingRateOrder() === 'true') ? 'checked' : ''; ?> />
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">Fleet location coordinates
                                                     field id</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>

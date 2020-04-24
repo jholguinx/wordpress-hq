@@ -25,6 +25,7 @@ class HQRentalsSettings
     public $new_auth_scheme = 'hq_wordpress_new_auth_scheme_enabled';
     public $hq_integration_on_home = 'hq_wordpress_home_integration_enabled';
     public $hq_disable_cronjob_option = 'hq_wordpress_disable_cronjob_option';
+    public $hq_enable_decreasing_rate_order_on_vehicles_query = 'hq_enable_decreasing_rate_order_on_vehicles_query';
     public $hq_tenant_datetime_format = 'hq_wordpress_tenant_datetime_format';
     public $hq_tenant_link = 'hq_wordpress_tenant_link';
     public $hq_disable_safari_functionality = 'hq_disable_safari_functionality';
@@ -411,9 +412,21 @@ class HQRentalsSettings
         return get_option($this->hq_location_address_field, '');
     }
 
-
-
-
+    public function noDecreasingRateOrder(){
+        return empty(get_option($this->hq_enable_decreasing_rate_order_on_vehicles_query));
+    }
+    public function saveDecreasingRateOrder($data)
+    {
+        return update_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, $data);
+    }
+    public function getDecreasingRateOrder()
+    {
+        return get_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, 'false');
+    }
+    public function isDescreasingRateOrderActive()
+    {
+        return $this->getDecreasingRateOrder() === 'true';
+    }
 
     public function noReplaceBaseURLOnBrandsSetting(){
         return empty(get_option($this->hq_replace_url_on_brand_option));
@@ -510,6 +523,9 @@ class HQRentalsSettings
         }
         if (empty($postDataFromSettings[$this->hq_replace_url_on_brand_option])) {
             update_option($this->hq_replace_url_on_brand_option, "false");
+        }
+        if(empty($postDataFromSettings[$this->hq_enable_decreasing_rate_order_on_vehicles_query])){
+            update_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, "false");
         }
         /*Refresh data on save */
         $worker = new HQRentalsCronJob();

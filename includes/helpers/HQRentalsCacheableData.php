@@ -10,6 +10,6 @@ class HQRentalsCacheableData{
 
     public function vehicleCacheData()
     {
-        return $this->query->allVehiclesForCache();
+        return $this->query->allVehiclesByRate();
     }
 }

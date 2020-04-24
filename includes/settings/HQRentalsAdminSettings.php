@@ -37,11 +37,7 @@ class HQRentalsAdminSettings
     {
 
         if (!empty($_POST)) {
-            if (isset($_POST['hq_force_update'])) {
-                $this->settings->forceSyncOnHQData();
-            } else {
-                $this->settings->updateSettings($_POST);
-            }
+            $this->settings->updateSettings($_POST);
             ?>
             <?php if (isset($_POST['success']) && $_POST['success'] == 'success'): ?>
                 <div class="wrap">

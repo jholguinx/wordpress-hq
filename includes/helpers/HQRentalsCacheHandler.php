@@ -5,7 +5,7 @@ namespace HQRentalsPlugin\HQRentalsHelpers;
 class HQRentalsCacheHandler
 {
     private static $vehiclesQueryKey = 'hq_vehicles_classes_cache';
-    private static $cacheExpiration = 120;
+    private static $cacheExpiration = 60;
 
     public function addDataToCache($key, $data)
     {

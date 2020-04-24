@@ -35,13 +35,15 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         }
         return $this->allVehiclesByRate();
     }
-    public function allVehiclesForCache()
+    public function allVehiclesWithoutOrder()
     {
-        return $this->allVehiclesByRate();
+        $args = $this->model->postArgs;
+        $query = new \WP_Query($args);
+        return $this->fillModelWithPosts($query->posts);
     }
     public function allVehiclesByRate()
     {
-        $vehicles = $this->allVehiclesForCache();
+        $vehicles = $this->allVehiclesWithoutOrder();
         $option = $this->settings->isDecreasingRateOrderActive();
         if(is_array($vehicles)){
             usort($vehicles, function($oneVehicle, $otherVehicle) use ($option) {

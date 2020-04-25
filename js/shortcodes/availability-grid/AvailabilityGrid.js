@@ -3,6 +3,7 @@ import AvailabilityGridController from "../../controllers/AvailabilityGridContro
 import VehicleCard from "../../components/cards/VehicleCard";
 import DisplayValidator from "../../helpers/render/DisplayValidator";
 import DateHelper from "../../helpers/dates/DateHelper";
+import DateRangePicker from "../../components/datepickers/DateRangePicker";
 
 class AvailabilityGrid extends PureComponent{
     constructor(props) {
@@ -13,7 +14,7 @@ class AvailabilityGrid extends PureComponent{
             endDate: DateHelper.daysFromNow(1),
             brandId: ''
         };
-        this.controller = new AvailabilityGridController(this, this.state.startDate, this.state.endDate, this.state.brandId);
+        this.controller = new AvailabilityGridController(this);
     }
     componentDidMount() {
         this.controller.componentInit( );
@@ -24,28 +25,29 @@ class AvailabilityGrid extends PureComponent{
             this.state.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle} /> )
             );
     }
-
+    onChangeDates( event ){
+        console.log(event);
+        this.controller.onChangeDates( event );
+    }
     render() {
         return(
-            <section className="elementor-element elementor-element-de4707d elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="de4707d" data-element_type="section" id="vehicles" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+            <section className="vehicle-availability-wrapper">
                 <div className="elementor-container elementor-column-gap-default">
                     <div className="elementor-row">
                         <div className="elementor-element elementor-element-73c22157 elementor-column elementor-col-100 elementor-top-column" data-id="73c22157" data-element_type="column">
                             <div className="elementor-column-wrap  elementor-element-populated">
                                 <div className="elementor-widget-wrap">
-                                    <div className="elementor-element elementor-element-5d8a5dd3 elementor-widget__width-auto elementor-absolute elementor-widget elementor-widget-image" data-id="5d8a5dd3" data-element_type="widget" data-settings="{&quot;_position&quot;:&quot;absolute&quot;}" data-widget_type="image.default">
-                                        <div className="elementor-widget-container">
-                                            <div className="elementor-image">
-                                                <img width={399} height={372} src="https://smartwheelscuracao.com/wp-content/uploads/2020/04/blob-png.png" className="attachment-large size-large" alt="" srcSet="https://smartwheelscuracao.com/wp-content/uploads/2020/04/blob-png.png 399w, https://smartwheelscuracao.com/wp-content/uploads/2020/04/blob-png-300x280.png 300w" sizes="(max-width: 399px) 100vw, 399px" />											</div>
-                                        </div>
-                                    </div>
                                     <div className="elementor-element elementor-element-79fe0180 elementor-widget elementor-widget-heading" data-id="79fe0180" data-element_type="widget" data-widget_type="heading.default">
                                         <div className="elementor-widget-container">
                                             <h2 className="elementor-heading-title elementor-size-default">It's time to reinvent wheels</h2>		</div>
                                     </div>
+                                    <DateRangePicker
+                                        onChange={this.onChangeDates.bind(this)}
+                                    />
                                     <div className="elementor-element elementor-element-61ac6e7 elementor-widget elementor-widget-shortcode" data-id="61ac6e7" data-element_type="widget" data-widget_type="shortcode.default">
                                         <div className="elementor-widget-container">
-                                            <div className="elementor-shortcode">    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossOrigin="anonymous" />
+                                            <div className="elementor-shortcode">
+                                                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossOrigin="anonymous" />
                                                 <div className="elementor-element elementor-widget elementor-widget-html" data-id="dc690b3" data-element_type="widget" data-widget_type="html.default">
                                                     <div className="elementor-widget-container">
                                                         {/* Structure */}

@@ -10,7 +10,7 @@ class VehicleCard extends PureComponent {
             <div className="vehicle-card hover-y">
                 {/* Single Card */}
                 <img className="img-response"
-                     src="https://files.miami.hqrentals.app/tenants/28c1919d-7400-4b39-a60d-879f62e4920b/files/693d6613-fe53-413b-9711-7d9a05a697ee/redirect/1587431615/timestamp?size=500"/>
+                     src={this.props.vehicle.vehicle_class.public_image_link}/>
                 <h3>Kia Picanto - Automatic</h3>
                 <ul className="no-bulls">
                     <li>

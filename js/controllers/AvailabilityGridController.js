@@ -1,19 +1,14 @@
 import BaseController from "./BaseController";
 
 class AvailabilityGridController extends BaseController{
-    constructor(app, startDate, endDate, brandId) {
+    constructor(app) {
         super();
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.brandId = brandId;
         this.app = app;
     }
     componentInit( app ){
-        console.log(this.availabilityData());
         this.connector.makeRequest(
             this.availabilityData(),
             response => {
-                console.log(response);
                 if(response.data.success){
                     this.onSuccess(response);
                 }else{
@@ -25,6 +20,9 @@ class AvailabilityGridController extends BaseController{
             }
         );
     }
+    onChangeDates(dateRange){
+
+    }
     onSuccess(response){
         this.app.setState({ vehicles: response.data.data });
     }
@@ -32,7 +30,7 @@ class AvailabilityGridController extends BaseController{
 
     }
     availabilityData(){
-        return this.apiConfig.getAvailabilityConfig(this.startDate, this.endDate, this.brandId);
+        return this.apiConfig.getAvailabilityConfig(this.app.state.startDate, this.app.state.endDate, this.app.state.brandId);
     }
 }
 export default AvailabilityGridController;

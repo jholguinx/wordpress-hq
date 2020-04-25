@@ -8,6 +8,7 @@ class DateRangePicker extends PureComponent{
     render() {
         return <SuitePicker
                     onChange={this.props.onChange}
+                    value={this.props.value}
                 />;
     }
 }

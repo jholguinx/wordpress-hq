@@ -4,7 +4,8 @@ import VehicleCard from "../../components/cards/VehicleCard";
 import DisplayValidator from "../../helpers/render/DisplayValidator";
 import DateHelper from "../../helpers/dates/DateHelper";
 import DateRangePicker from "../../components/datepickers/DateRangePicker";
-
+import Loader from '../../components/loaders/Loader';
+import { Grid, Row, Col } from 'rsuite';
 class AvailabilityGrid extends PureComponent{
     constructor(props) {
         super(props);
@@ -13,7 +14,7 @@ class AvailabilityGrid extends PureComponent{
             startDate: DateHelper.nowForSystem(),
             endDate: DateHelper.daysFromNow(1),
             brandId: '',
-            dateRage
+            dateRange: [DateHelper.nowDate(), DateHelper.daysFromNowDate(1)]
         };
         this.controller = new AvailabilityGridController(this);
     }
@@ -43,6 +44,7 @@ class AvailabilityGrid extends PureComponent{
                                     </div>
                                     <DateRangePicker
                                         onChange={this.onChangeDates.bind(this)}
+                                        value={this.state.dateRange}
                                     />
                                     <div className="elementor-element elementor-element-61ac6e7 elementor-widget elementor-widget-shortcode" data-id="61ac6e7" data-element_type="widget" data-widget_type="shortcode.default">
                                         <div className="elementor-widget-container">

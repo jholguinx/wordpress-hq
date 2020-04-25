@@ -7,7 +7,6 @@ import Hidden from "../components/inputs/Hidden";
 import DatePicker from "../components/inputs/DatePicker";
 import moment from 'moment';
 import { APP_DATE_ONLY_FORMAT } from "../App";
-import business from 'moment-business';
 class HQBookingForm extends PureComponent{
     constructor(props){
         super(props);

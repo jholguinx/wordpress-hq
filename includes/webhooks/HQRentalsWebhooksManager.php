@@ -1,6 +1,6 @@
 <?php
 
-namespace HQRentalsPlugin\Webhooks;
+namespace HQRentalsPlugin\HQRentalsWebhooks;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsUpgrader;

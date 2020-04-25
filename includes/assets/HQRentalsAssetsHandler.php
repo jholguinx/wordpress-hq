@@ -52,6 +52,7 @@ class HQRentalsAssetsHandler
         wp_register_script( 'hq-workspot-sc-script', plugin_dir_url(__FILE__) . 'js/hq-workspot-map-shortcode.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script( 'hq-map-form-script', plugin_dir_url(__FILE__) . 'js/hq-map-booking-form.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script( 'hq-map-contact-form-script', plugin_dir_url(__FILE__) . 'js/hq-map-contact-form.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script( 'hq-availability-grip-script', plugin_dir_url(__FILE__) . 'js/hq-availability-grid.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_enqueue_script('hq-dummy-script');
     }
     public function getIframeResizerAssets()
@@ -155,5 +156,9 @@ class HQRentalsAssetsHandler
         /*Inits*/
         wp_register_script('hq-betheme-vehicle-grid-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-grid.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-betheme-vehicle-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+    }
+    public function loadAssetsForAvailabilityGrid()
+    {
+        wp_enqueue_script('hq-availability-grip-script');
     }
 }

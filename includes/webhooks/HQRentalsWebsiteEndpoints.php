@@ -1,10 +1,11 @@
 <?php
 
-namespace HQRentalsPlugin\Webhooks;
+namespace HQRentalsPlugin\HQRentalsWebhooks;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
+use Unirest\Exception;
 
 class HQRentalsWebsiteEndpoints{
 
@@ -37,6 +38,10 @@ class HQRentalsWebsiteEndpoints{
         register_rest_route( 'hqrentals', '/google/place', array(
             'methods' => 'GET',
             'callback' => array ($this, 'googlePlace'),
+        ));
+        register_rest_route( 'hqrentals', '/shortcodes/availability', array(
+            'methods' => 'GET',
+            'callback' => array ($this, 'availability'),
         ));
     }
     public function brand()
@@ -151,7 +156,15 @@ class HQRentalsWebsiteEndpoints{
         }catch (Exception $e){
             return $this->resolveResponse($e, false);
         }
-
+    }
+    public function availability()
+    {
+        try{
+            $connector = new HQRentalsApiConnector();
+            return $connector->getHQRentalsAvailability( HQRentalsApiClientAdapter::adaptDataForAvailability( $_GET ) );
+        }catch (Exception $e){
+            return $this->resolveResponse($e, false);
+        }
 
     }
 }

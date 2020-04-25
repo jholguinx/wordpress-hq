@@ -42,6 +42,10 @@ class HQRentalsAssetsHandler
         wp_register_style('hq-wordpress-workspot-styles', plugin_dir_url(__FILE__) . 'css/hq-workspot-styles.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-availability-grip-styles', plugin_dir_url(__FILE__) . 'css/availability-grid.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-openlayer-styles', plugin_dir_url(__FILE__) . 'css/ol.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style( 'r-suite-default-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style( 'r-suite-dark-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style( 'r-suite-dark-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark-rtl.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style( 'r-suite-default-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default-rtl.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_script( 'hq-iframe-resizer-script', plugin_dir_url(__FILE__) . 'js/iframeResizer.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script( 'hq-moment', plugin_dir_url(__FILE__) . 'js/moment.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script( 'hq-wordpress-openlayer-js', plugin_dir_url(__FILE__) . 'js/ol.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
@@ -160,7 +164,9 @@ class HQRentalsAssetsHandler
     }
     public function loadAssetsForAvailabilityGrid()
     {
-        wp_enqueue_script('hq-availability-grip-script');
         wp_enqueue_style('hq-availability-grip-styles');
+        wp_enqueue_style('r-suite-default-style');
+        wp_enqueue_script('hq-availability-grip-script');
+
     }
 }

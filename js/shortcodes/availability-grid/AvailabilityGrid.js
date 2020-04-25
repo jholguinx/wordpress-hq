@@ -12,7 +12,8 @@ class AvailabilityGrid extends PureComponent{
             vehicles: [],
             startDate: DateHelper.nowForSystem(),
             endDate: DateHelper.daysFromNow(1),
-            brandId: ''
+            brandId: '',
+            dateRage
         };
         this.controller = new AvailabilityGridController(this);
     }
@@ -26,7 +27,6 @@ class AvailabilityGrid extends PureComponent{
             );
     }
     onChangeDates( event ){
-        console.log(event);
         this.controller.onChangeDates( event );
     }
     render() {

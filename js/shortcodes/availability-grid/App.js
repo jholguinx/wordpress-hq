@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import AvailabilityGrid from "./AvailabilityGrid";
-import '../../rsuite/styles';
 /*
  *  Components
  */

@@ -7,6 +7,7 @@ class DateRangePicker extends PureComponent{
     }
     render() {
         return <SuitePicker
+                    style={{ minWidth: 230 }}
                     onChange={this.props.onChange}
                     value={this.props.value}
                 />;

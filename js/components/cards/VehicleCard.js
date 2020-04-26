@@ -6,6 +6,10 @@ class VehicleCard extends PureComponent {
         super(props);
     }
     render() {
+        const {
+            name,
+            public_image_link
+        } = this.props.vehicle.vehicle_class;
         return (
             <Col
                 xs={24}
@@ -16,8 +20,8 @@ class VehicleCard extends PureComponent {
                 <div className="vehicle-card hover-y">
                     {/* Single Card */}
                     <img className="img-response"
-                         src={this.props.vehicle.vehicle_class.public_image_link}/>
-                    <h3>Kia Picanto - Automatic</h3>
+                         src={public_image_link}/>
+                    <h3>{name}</h3>
                     <ul className="no-bulls">
                         <li>
                             <span><i aria-hidden="true" className="far fa-snowflake"/> </span>

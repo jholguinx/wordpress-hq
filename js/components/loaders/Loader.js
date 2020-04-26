@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Loader as SuiteLoader } from 'rsuite';
-
+import { normalLoaderStyles as styles } from './styles';
 class Loader extends PureComponent{
     constructor() {
         super();
@@ -8,7 +8,7 @@ class Loader extends PureComponent{
     render() {
         return(
             <SuiteLoader
-                style={{ marginTop: 20, marginBottom: 20,position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                style={styles.loader}
                 backdrop={false}
                 center={true}
                 size="md"

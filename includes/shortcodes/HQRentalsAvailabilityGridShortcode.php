@@ -15,8 +15,10 @@ class HQRentalsAvailabilityGridShortcode
             array(
             ), $atts
         );
-
         ?>
+        <script>
+            var baseUrl = "<?php echo get_site_url() . '/'; ?>";
+        </script>
         <div id="hq-availability-grid"></div>
         <?php
         $this->assets->loadAssetsForAvailabilityGrid();

@@ -12,7 +12,7 @@ class ApiConfigurationManager {
     }
     getAvailabilityConfig(startDate, endDate, brandId){
         return {
-            url: ApiEndpointHandler.endpoints.availabilityEndpoint,
+            url: ApiEndpointHandler.getAvailabilityEndpoint(),
             method: 'get',
             params: BaseAdapter.parseDataForAvailability(startDate, endDate, brandId)
         };

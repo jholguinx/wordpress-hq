@@ -76,12 +76,8 @@ class AvailabilityGrid extends PureComponent{
                                                 <div className="elementor-element elementor-widget elementor-widget-html" data-id="dc690b3" data-element_type="widget" data-widget_type="html.default">
                                                     <div className="elementor-widget-container">
                                                         {this.renderVehiclesContent()}
-                                                        <div className="filter-div">
-                                                            <a className="small-cta" id="hq-smart-load-more-button">load more +</a>
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                <style dangerouslySetInnerHTML={{__html: "\n        .small-cta{\n            cursor: pointer;\n        }\n        .img-response{\n            min-height: 155px;\n        }\n    " }} />
                                             </div>
                                         </div>
                                     </div>

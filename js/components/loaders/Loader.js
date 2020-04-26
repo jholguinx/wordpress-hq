@@ -8,6 +8,7 @@ class Loader extends PureComponent{
     render() {
         return(
             <SuiteLoader
+                style={{ marginTop: 20, marginBottom: 20,position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                 backdrop={false}
                 center={true}
                 size="md"

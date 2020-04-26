@@ -7,8 +7,7 @@ class AvailabilityGridController extends BaseController{
         this.state = app.state;
     }
     changeStateOfLoader(){
-        console.log('change');
-        //this.app.setState({ isLoading: ! this.state.isLoading });
+        this.app.setState({ isLoading: ! this.app.state.isLoading });
     }
     componentRefreshData( ){
         this.changeStateOfLoader();

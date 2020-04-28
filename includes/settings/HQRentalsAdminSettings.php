@@ -122,7 +122,6 @@ class HQRentalsAdminSettings
                                             <div class="hq-general-settings-item">
                                                 <div class="hq-general-label-wrapper">
                                                     <h4 class="wp-heading-inline" for="title">Email</h4>
-                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
                                                 </div>
                                                 <div class="hq-general-input-wrapper tokens">
                                                     <input class="hq-admin-text-input"
@@ -135,7 +134,6 @@ class HQRentalsAdminSettings
                                             <div class="hq-general-settings-item">
                                                 <div class="hq-general-label-wrapper">
                                                     <h4 class="wp-heading-inline" for="title">Password</h4>
-                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
                                                 </div>
                                                 <div class="hq-general-input-wrapper tokens">
                                                     <input class="hq-admin-text-input"

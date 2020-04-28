@@ -54,6 +54,7 @@ class HQRentalsScheduler
                 $_POST['success'] = 'success';
             }else{
                 $error = $this->getErrorOnSync();
+                $error = "There was an issue with your request. Please verify tokens and region.";
                 $this->setErrorMessage($error);
             }
         }catch(Exception $e){

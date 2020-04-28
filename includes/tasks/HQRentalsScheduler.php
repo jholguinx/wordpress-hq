@@ -39,28 +39,25 @@ class HQRentalsScheduler
 
     public function refreshHQData()
     {
-        $cache = $this->cache->addVehiclesClassesToCache();
-        if($cache){
-            try{
-                if($this->isWorkspotWebsite()){
-                    $workspot = $this->workspot->refreshLocationsData();
-                }
-                $this->settingsTask->tryToRefreshSettingsData();
-                $this->brandsTask->tryToRefreshSettingsData();
-                $this->locationsTask->tryToRefreshSettingsData();
-                $this->additionalChargesTask->tryToRefreshSettingsData();
-                $this->vehicleClassesTask->tryToRefreshSettingsData();
-                if($this->allResponseAreOK()){
-                    $this->deleteHQData();
-                    $this->refreshAllDataOnDatabase();
-                    $_POST['success'] = 'success';
-                }else{
-                    $error = $this->getErrorOnSync();
-                    $this->setErrorMessage($error);
-                }
-            }catch(Exception $e){
-                return $e->getMessage();
+        try{
+            if($this->isWorkspotWebsite()){
+                $workspot = $this->workspot->refreshLocationsData();
             }
+            $this->settingsTask->tryToRefreshSettingsData();
+            $this->brandsTask->tryToRefreshSettingsData();
+            $this->locationsTask->tryToRefreshSettingsData();
+            $this->additionalChargesTask->tryToRefreshSettingsData();
+            $this->vehicleClassesTask->tryToRefreshSettingsData();
+            if($this->allResponseAreOK()){
+                $this->deleteHQData();
+                $this->refreshAllDataOnDatabase();
+                $_POST['success'] = 'success';
+            }else{
+                $error = $this->getErrorOnSync();
+                $this->setErrorMessage($error);
+            }
+        }catch(Exception $e){
+            $this->setErrorMessage($e->getMessage());
         }
     }
 

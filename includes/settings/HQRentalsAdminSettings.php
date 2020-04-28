@@ -41,7 +41,7 @@ class HQRentalsAdminSettings
             ?>
             <?php if (isset($_POST['success']) && $_POST['success'] == 'success'): ?>
                 <div class="wrap">
-                    <div class="message updated"><p>The Setting were Successfully Saved!</p></div>
+                    <div class="message updated"><p>The settings were saved successfully.</p></div>
                 </div>
             <?php elseif (isset($_POST['success']) && $_POST['success'] == 'error'): ?>
                     <div class="wrap">
@@ -49,7 +49,7 @@ class HQRentalsAdminSettings
                     </div>
             <?php else: ?>
                 <div class="wrap">
-                    <div class="message updated"><p>The was something wrong</p></div>
+                    <div class="message updated"><p>There was an issue with your request.</p></div>
                 </div>
             <?php endif; ?>
             <?php
@@ -116,7 +116,7 @@ class HQRentalsAdminSettings
                                     </style>
                                     <div class="hq-login-wrapper">
                                         <div style="flex:1; display: flex; justify-content: flex-end;">
-                                            <button id="hq-login-trigger" type="button" name="save" value="Save" class="button button-primary button-large">Fill with Credentials</button>
+                                            <button id="hq-login-trigger" type="button" name="save" value="Save" class="button button-primary button-large">LOGIN TO SETUP API TOKENS</button>
                                         </div>
                                         <div id="hq-login-form-wrapper">
                                             <div class="hq-general-settings-item">
@@ -151,7 +151,7 @@ class HQRentalsAdminSettings
                                                 </div>
                                             </div>
                                             <div class="hq-submit-login-button-wrapper">
-                                                <button id="hq-submit-login-button" type="button" name="save" value="Save" class="button button-primary button-large">Login</button>
+                                                <button id="hq-submit-login-button" type="button" name="save" value="Save" class="button button-primary button-large">LOGIN</button>
                                             </div>
                                         </div>
                                     </div>
@@ -269,8 +269,8 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
-                                                <h4 class="wp-heading-inline" for="title">Show Rates From Highest To Lowest</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search" data-tippy-content="Show Rates From Highest To Lowest."></span>
+                                                <h4 class="wp-heading-inline" for="title">ORDER VEHICLE CLASSES ON WIDGET WITH RATES FROM HIGHEST TO LOWEST</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search" data-tippy-content="This option will display the vehicles with rates in the vehicle widget from highest to lowest instead of the default ascending order."></span>
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="checkbox"
@@ -427,7 +427,7 @@ class HQRentalsAdminSettings
                                                                       href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
                                     more information on how to set up the HQ Rentals plugin.</p>
                             </div>
-                            <input type="submit" name="save" value="Save" class="button button-primary button-large">
+                            <input type="submit" name="save" value="SAVE" class="button button-primary button-large">
                     </form>
                 </div>
             </div>

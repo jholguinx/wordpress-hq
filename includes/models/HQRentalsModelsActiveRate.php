@@ -181,11 +181,19 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         }
         return $rates;
     }
+    public function formatRateForDisplay($rate)
+    {
+        if($rate and $rate !== "0.00"){
 
+            return number_format((float) $rate, 2, '.', '');
+        }else{
+            return '';
+        }
+    }
 
     public function getFormattedBaseRate()
     {
-        return number_format((float) $this->baseRate->amount, 2, '.', '');
+        return $this->formatRateForDisplay($this->baseRate->amount);
     }
     public function getFormattedBaseRateAsNumber()
     {
@@ -193,7 +201,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedMinuteRate()
     {
-        return number_format((float) $this->minuteRate->amount, 2, '.', '');
+        return $this->formatRateForDisplay($this->minuteRate->amount);
     }
     public function getFormattedMinuteRateAsNumber()
     {
@@ -201,7 +209,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedHourlyRate()
     {
-        return number_format((float) $this->hourlyRate->amount, 2, '.', '');
+        return $this->formatRateForDisplay($this->hourlyRate->amount);
     }
     public function getFormattedHourlyRateAsNumber()
     {
@@ -209,14 +217,14 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedDailyRate()
     {
-        return number_format((float) $this->dailyRate->amount, 2, '.', '');
+        return $this->formatRateForDisplay($this->dailyRate->amount);
     }
     public function getFormattedDailyRateAsNumber(){
         return (float)$this->getFormattedDailyRate();
     }
     public function getFormattedWeeklyRate()
     {
-        return number_format((float) $this->weeklyRate->amount, 2, '.', '');
+        return $this->formatRateForDisplay($this->weeklyRate->amount);
     }
     public function getFormattedWeeklyRateAsNumber()
     {
@@ -224,7 +232,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     }
     public function getFormattedMonthlyRate()
     {
-        return number_format((float) $this->monthlyRate->amount, 2, '.', '');
+        return $this->formatRateForDisplay($this->monthlyRate->amount);
     }
     public function getFormattedMonthlyRateAsNumber()
     {
@@ -252,5 +260,11 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
                 return $this->metaDailyRate;
                 break;
         }
+    }
+    public function ratePublicInterface()
+    {
+        $data = new \stdClass();
+        $data->dailyRate = $this->getFormattedDailyRate();
+        return $data;
     }
 }

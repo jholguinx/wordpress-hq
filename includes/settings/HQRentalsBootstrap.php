@@ -52,6 +52,9 @@ class HQRentalsBootstrap
         if ($this->settings->noDisableSafariFunctionality()) {
             $this->settings->saveDisableSafariOption($this->hq_disable_safari_option_default_value);
         }
+        if ($this->settings->noDecreasingRateOrder()) {
+            $this->settings->saveDecreasingRateOrder('false');
+        }
         if ($this->settings->noLocationCoordinateSetting()) {
             $this->settings->saveLocationCoordinateSetting($this->hq_default_value_for_string);
         }

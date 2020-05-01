@@ -2,8 +2,9 @@
 
 namespace HQRentalsPlugin\HQRentalsQueries;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsCacheHandler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
-
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
 class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
@@ -15,6 +16,8 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
     {
         $this->model = new HQRentalsModelsVehicleClass();
         $this->rateQuery = new HQRentalsQueriesActiveRates();
+        $this->cache = new HQRentalsCacheHandler();
+        $this->settings = new HQRentalsSettings();
     }
 
 
@@ -25,11 +28,34 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      */
     public function allVehicleClasses($order = null)
     {
-        /*
-         * By Default the vehicles classes should be order by price
-         * */
-        $data = [];
-        return $this->allVehicleClassesByOrder();
+        $cacheData = $this->cache->getVehicleClassesFromCache();
+        if($cacheData){
+            /* Return data if Cache*/
+            return $cacheData;
+        }
+        return $this->allVehiclesByRate();
+    }
+    public function allVehiclesWithoutOrder()
+    {
+        $args = $this->model->postArgs;
+        $query = new \WP_Query($args);
+        return $this->fillModelWithPosts($query->posts);
+    }
+    public function allVehiclesByRate()
+    {
+        $vehicles = $this->allVehiclesWithoutOrder();
+        $option = $this->settings->isDecreasingRateOrderActive();
+        if(is_array($vehicles)){
+            usort($vehicles, function($oneVehicle, $otherVehicle) use ($option) {
+                if($option){
+                    return $oneVehicle->rate()->getFormattedDailyRateAsNumber() < $otherVehicle->rate()->getFormattedDailyRateAsNumber();
+                }else{
+                    return $oneVehicle->rate()->getFormattedDailyRateAsNumber() > $otherVehicle->rate()->getFormattedDailyRateAsNumber();
+                }
+            });
+        }
+        return $vehicles;
+
     }
 
     /**
@@ -345,6 +371,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             'name',
             'publicImageLink',
             'order',
+            'brandId',
             'labels' => array(
                 'property_name' => 'labels',
                 'values' => $vehicle->getLabels()
@@ -356,7 +383,15 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             'custom_fields' => array(
                 'property_name' => 'custom_fields',
                 'values' => $vehicle->getCustomFields()
-            )
+            ),
+            'features' => array(
+                'property_name' => 'features',
+                'values' => $vehicle->getFeaturesPublicInterface()
+             ),
+            'rate' => array(
+                'property_name' => 'rate',
+                'values' => $vehicle->getRatePublicInterface()
+            ),
         ), $vehicle);
     }
     public function vehiclesPublicInterfaceFiltered($brandId, $customField, $customFieldValue)

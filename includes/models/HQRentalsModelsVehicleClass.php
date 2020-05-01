@@ -8,6 +8,7 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
 
+
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 {
     public static $custom_fields = [];
@@ -474,6 +475,16 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getFeatureImage($size = '500')
     {
         return  str_replace('size=1000', 'size=' . $size, $this->publicImageLink);
+    }
+    public function getFeaturesPublicInterface()
+    {
+        $queryFeatures = new HQRentalsQueriesFeatures();
+        return $queryFeatures->featuresPublicInterface($this->features());
+    }
+    public function getRatePublicInterface()
+    {
+        $rate = $this->rate();
+        return $rate->ratePublicInterface();
     }
 }
 

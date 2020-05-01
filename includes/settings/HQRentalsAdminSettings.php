@@ -37,27 +37,19 @@ class HQRentalsAdminSettings
     {
 
         if (!empty($_POST)) {
-            if (isset($_POST['hq_force_update'])) {
-                $this->settings->forceSyncOnHQData();
-            } else {
-                $this->settings->updateSettings($_POST);
-            }
+            $this->settings->updateSettings($_POST);
             ?>
             <?php if (isset($_POST['success']) && $_POST['success'] == 'success'): ?>
                 <div class="wrap">
-                    <div class="message updated"><p>The Setting were Successfully Saved!</p></div>
+                    <div class="message updated"><p>The settings were saved successfully.</p></div>
                 </div>
-            <?php elseif (isset($_POST['forcing_update']) && $_POST['forcing_update'] == 'success'): ?>
-                <div class="wrap">
-                    <div class="message updated"><p>All data was saved</p></div>
-                </div>
-            <?php elseif (isset($_POST['forcing_update']) && $_POST['forcing_update'] != 'success'): ?>
-                <div class="wrap">
-                    <div class="notice notice-error"><p><?php echo $_POST['forcing_update']; ?></p></div>
-                </div>
+            <?php elseif (isset($_POST['success']) && $_POST['success'] == 'error'): ?>
+                    <div class="wrap">
+                        <div class="notice notice-error"><p>Error Processing the information: <?php echo $_POST['error_message']; ?></p></div>
+                    </div>
             <?php else: ?>
                 <div class="wrap">
-                    <div class="message updated"><p>The was something wrong</p></div>
+                    <div class="message updated"><p>There was an issue with your request.</p></div>
                 </div>
             <?php endif; ?>
             <?php
@@ -124,13 +116,12 @@ class HQRentalsAdminSettings
                                     </style>
                                     <div class="hq-login-wrapper">
                                         <div style="flex:1; display: flex; justify-content: flex-end;">
-                                            <button id="hq-login-trigger" type="button" name="save" value="Save" class="button button-primary button-large">Fill with Credentials</button>
+                                            <button id="hq-login-trigger" type="button" name="save" value="Save" class="button button-primary button-large">LOGIN TO SETUP API TOKENS</button>
                                         </div>
                                         <div id="hq-login-form-wrapper">
                                             <div class="hq-general-settings-item">
                                                 <div class="hq-general-label-wrapper">
                                                     <h4 class="wp-heading-inline" for="title">Email</h4>
-                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
                                                 </div>
                                                 <div class="hq-general-input-wrapper tokens">
                                                     <input class="hq-admin-text-input"
@@ -143,11 +134,10 @@ class HQRentalsAdminSettings
                                             <div class="hq-general-settings-item">
                                                 <div class="hq-general-label-wrapper">
                                                     <h4 class="wp-heading-inline" for="title">Password</h4>
-                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
                                                 </div>
                                                 <div class="hq-general-input-wrapper tokens">
                                                     <input class="hq-admin-text-input"
-                                                           type="text"
+                                                           type="password"
                                                            name="hq-password"
                                                            id="hq-password"
                                                            spellcheck="true" autocomplete="off" />
@@ -159,7 +149,7 @@ class HQRentalsAdminSettings
                                                 </div>
                                             </div>
                                             <div class="hq-submit-login-button-wrapper">
-                                                <button id="hq-submit-login-button" type="button" name="save" value="Save" class="button button-primary button-large">Login</button>
+                                                <button id="hq-submit-login-button" type="button" name="save" value="Save" class="button button-primary button-large">LOGIN</button>
                                             </div>
                                         </div>
                                     </div>
@@ -273,6 +263,17 @@ class HQRentalsAdminSettings
                                                 <input type="checkbox"
                                                        name="<?php echo $this->settings->hq_replace_url_on_brand_option; ?>"
                                                        value="true" <?php echo ($this->settings->getReplaceBaseURLOnBrandsSetting() === 'true') ? 'checked' : ''; ?>/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">ORDER VEHICLE CLASSES ON WIDGET WITH RATES FROM HIGHEST TO LOWEST</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search" data-tippy-content="This option will display the vehicles with rates in the vehicle widget from highest to lowest instead of the default ascending order."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="checkbox"
+                                                       name="<?php echo $this->settings->hq_enable_decreasing_rate_order_on_vehicles_query; ?>"
+                                                       value="true" <?php echo ($this->settings->getDecreasingRateOrder() === 'true') ? 'checked' : ''; ?> />
                                             </div>
                                         </div>
                                         <div class="hq-general-settings-item">
@@ -424,7 +425,7 @@ class HQRentalsAdminSettings
                                                                       href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
                                     more information on how to set up the HQ Rentals plugin.</p>
                             </div>
-                            <input type="submit" name="save" value="Save" class="button button-primary button-large">
+                            <input type="submit" name="save" value="SAVE" class="button button-primary button-large">
                     </form>
                 </div>
             </div>

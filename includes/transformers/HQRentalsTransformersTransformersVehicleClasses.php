@@ -4,7 +4,7 @@ namespace HQRentalsPlugin\HQRentalsTransformers;
 
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
-class HQRentalsTransformersTransformersVehicleClasses extends HQRentalsTransformersBase {
+class HQRentalsTransformersVehicleClasses extends HQRentalsTransformersBase {
 
     public function __construct()
     {

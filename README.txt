@@ -3,9 +3,9 @@ Contributors: faggioni
 Donate link: https://hqrentalsoftware.com
 Tags: hqrentalsoftware
 Requires at least: 4.9.0
-Tested up to: 7.2.19
+Tested up to: 5.4.0
 Requires PHP: 5.6.0
-Stable tag: 1.4.15
+Stable tag: 1.4.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,11 @@ on this page.
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.4.16 =
+Option to automatically setup API tokens using HQ Rental Software login credentials.
+Vehicle class rates on the vehicle widget now show from lowest to highest by default, and you have the option to change this to a descending order from the plugin settings.
+
 
 = 1.4.15 =
 Support for Locations  labels

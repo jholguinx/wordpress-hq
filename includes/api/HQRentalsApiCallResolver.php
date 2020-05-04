@@ -57,7 +57,7 @@ class HQRentalsApiCallResolver
      */
     public function resolveApiCallAvailability($response)
     {
-        if (is_wp_error($response)) {
+        if ($this->isErrorOnApiInteraction($response)) {
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
             return new HQRentalsApiResponse(null, true, json_decode($response['body']));

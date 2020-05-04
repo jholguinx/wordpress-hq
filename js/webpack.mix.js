@@ -32,3 +32,4 @@ mix.webpackConfig({
 });
 mix.react('shortcodes/map-form/App.js', 'includes/assets/js/hq-map-booking-form.js');
 mix.react('shortcodes/map-form/AppForm.js', 'includes/assets/js/hq-map-contact-form.js');
+mix.react('shortcodes/availability-grid/App.js', 'includes/assets/js/hq-availability-grid.js');

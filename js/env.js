@@ -1,0 +1,1 @@
+export const SYSTEM_API_DATE_FORMAT = "YYYY-MM-DD HH:mm";

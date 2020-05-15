@@ -17,17 +17,22 @@ class AvailabilityGrid extends PureComponent{
             endDate: DateHelper.daysFromNow(1),
             brandId: '',
             dateRange: [DateHelper.nowDate(), DateHelper.daysFromNowDate(1)],
-            isLoading: false
+            isLoading: false,
+            title: '',
+            websiteBaseURL: '',
+            integrationURL:''
         };
         this.controller = new AvailabilityGridController(this);
     }
     componentDidMount() {
         this.controller.componentRefreshData( );
+        this.controller.initState();
     }
+
     renderVehicles(){
         return DisplayValidator.validateArrayAndDisplay(
             this.state.vehiclesPerRow,
-            this.state.vehiclesPerRow.map( (vehicleRow, index) => <VehiclesRow key={index} vehicles={vehicleRow} /> )
+            this.state.vehiclesPerRow.map( (vehicleRow, index) => <VehiclesRow key={index} vehicles={vehicleRow} baseURL={this.state.websiteBaseURL + this.state.integrationURL} /> )
             );
     }
     onChangeDates( dateRangeValues ){
@@ -55,8 +60,8 @@ class AvailabilityGrid extends PureComponent{
                             <div className="elementor-column-wrap  elementor-element-populated">
                                 <div className="elementor-widget-wrap">
                                     <div className="elementor-element elementor-element-79fe0180 elementor-widget elementor-widget-heading" data-id="79fe0180" data-element_type="widget" data-widget_type="heading.default">
-                                        <div className="elementor-widget-container">
-                                            <h2 className="elementor-heading-title elementor-size-default">It's time to reinvent wheels</h2>		</div>
+                                        <div className="elementor-widget-container vehicle-availability-title-wrapper">
+                                            <h2 className="elementor-heading-title elementor-size-default">{this.state.title}</h2></div>
                                     </div>
                                     <Grid fluid>
                                         <Row className="show-grid">

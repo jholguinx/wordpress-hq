@@ -1,4 +1,5 @@
 import BaseController from "./BaseController";
+import AvailabilityAdapter from "../adapters/AvailabilityAdapter";
 
 class AvailabilityGridController extends BaseController{
     constructor(app) {
@@ -8,6 +9,13 @@ class AvailabilityGridController extends BaseController{
     }
     changeStateOfLoader(){
         this.app.setState({ isLoading: ! this.app.state.isLoading });
+    }
+    initState(){
+        this.app.setState({
+            title: availabilityGridTitle,
+            integrationURL: availabilityGridIntegrationPage,
+            websiteBaseURL : baseUrl
+        })
     }
     componentRefreshData( ){
         this.changeStateOfLoader();
@@ -31,7 +39,7 @@ class AvailabilityGridController extends BaseController{
 
     }
     onSuccess(response){
-        this.app.setState({ vehiclesPerRow: this.arrayHelper.chunck(response.data.data) });
+        this.app.setState({ vehiclesPerRow: AvailabilityAdapter.adaptAvailabilityResponseForComponent(response.data.data) });
         this.changeStateOfLoader();
     }
     onError(apiResponse, app){

@@ -72313,7 +72313,9 @@ var APP_TIME_FORMAT = "HH:mm";
  *  Components
  */
 
-react_dom__WEBPACK_IMPORTED_MODULE_0___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_bookingform_HQBookingForm__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById("hq-map-booking-form"));
+react_dom__WEBPACK_IMPORTED_MODULE_0___default.a.render(
+/*#__PURE__*/
+react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_bookingform_HQBookingForm__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById("hq-map-booking-form"));
 
 /***/ }),
 
@@ -72640,146 +72642,231 @@ function (_PureComponent) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one",
-        id: "hq-map-shortcode"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "hq-map-image-background-placeholder",
-        style: this.state.backgroundStyle
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hq-form-inner-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one_half hq-form-column-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "withsmallpadding ppb_car_search_background parallax withbg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "overlay_background"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "center_wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "inner_content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "standard_wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "ppb_title hq-shortcode-map-title"
-      }, "Car Hire Where You Need It!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "car_search_form",
-        method: "POST",
-        action: this.state.formAction,
-        onSubmit: this.onSubmit.bind(this)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "car_search_wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder hq-input-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_SuggestionInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        id: "hq-user-location",
-        placeholder: "Enter Town, City or Postcode",
-        suggestions: this.state.suggestions,
-        labelProperty: "name",
-        onChangeInput: this.onChangeSuggestionInput.bind(this),
-        value: this.state.suggestionInput,
-        onClickSuggestion: this.onClickOnSuggestion.bind(this),
-        clearSuggestions: this.clearSuggestions.bind(this)
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder hq-input-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        placeholder: "Select Pick-up Location",
-        options: this.state.brands,
-        branches: true,
-        onChange: this.onChangeBranch.bind(this),
-        value: this.state.form.brand
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder hq-input-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        placeholder: "Any Brands",
-        options: this.state.makes,
-        makes: true,
-        onChange: this.onChangeVehicleBrand.bind(this),
-        value: this.state.form.make
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder hq-input-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        placeholder: "Any Vehicle Classes",
-        options: this.state.vehicleClasses,
-        vehicleClass: true,
-        onChange: this.onChangeVehicleClass.bind(this),
-        value: this.state.form.vehicleClass
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder hq-input-wrapper hq-dates-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hq-dates-inner-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatePicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        placeholder: "Pickup Date",
-        pickup: true,
-        onChange: this.onChangePickupDate.bind(this),
-        value: this.state.form.pickupDate
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hq-dates-inner-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        placeholder: "Pickup Time",
-        options: this.state.pickupTimeOptions,
-        makes: true,
-        onChange: this.onChangePickupTime.bind(this),
-        value: this.state.form.pickupTime,
-        labelProperty: "time",
-        time: true
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one themeborder hq-input-wrapper hq-dates-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hq-dates-inner-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatePicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        placeholder: "Return Date",
-        pickup: false,
-        onChange: this.onChangeReturnDate.bind(this),
-        value: this.state.form.returnDate
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hq-dates-inner-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        placeholder: "Return Time",
-        options: this.state.returnTimeOptions,
-        makes: true,
-        onChange: this.onChangeReturnTime.bind(this),
-        value: this.state.form.returnTime
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "hq-hidden-fields-wrapper",
-        className: "one_fourth last themeborder"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        name: "pick_up_location",
-        value: this.state.form.pickupLocation
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        name: "return_location",
-        value: this.state.form.returnLocation
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        name: "pick_up_date",
-        value: this.state.form.pickupDate
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        name: "pick_up_time",
-        value: this.state.form.pickupTime
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        name: "return_date",
-        value: this.state.form.returnDate
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        name: "return_time",
-        value: this.state.form.returnTime
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        name: "vehicle_class_id",
-        value: this.state.form.vehicleClass
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "car_search_btn",
-        type: "submit",
-        className: "button",
-        value: "Search"
-      }))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "one_half map-wrapper hq-map-column-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hq-map-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_maps_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        zoom: 13,
-        initialCenter: this.state.mapCenter,
-        mapCenter: this.state.mapCenter,
-        locations: this.state.locations,
-        onPressMarker: this.onSelectLocationOnMap.bind(this)
-      })))));
+      return (
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one",
+          id: "hq-map-shortcode"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "hq-map-image-background-placeholder",
+          style: this.state.backgroundStyle
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hq-form-inner-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one_half hq-form-column-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "withsmallpadding ppb_car_search_background parallax withbg"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "overlay_background"
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "center_wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "inner_content"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "standard_wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+          className: "ppb_title hq-shortcode-map-title"
+        }, "Car Hire Where You Need It!"),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          className: "car_search_form",
+          method: "POST",
+          action: this.state.formAction,
+          onSubmit: this.onSubmit.bind(this)
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "car_search_wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one themeborder hq-input-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_SuggestionInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          id: "hq-user-location",
+          placeholder: "Enter Town, City or Postcode",
+          suggestions: this.state.suggestions,
+          labelProperty: "name",
+          onChangeInput: this.onChangeSuggestionInput.bind(this),
+          value: this.state.suggestionInput,
+          onClickSuggestion: this.onClickOnSuggestion.bind(this),
+          clearSuggestions: this.clearSuggestions.bind(this)
+        })),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one themeborder hq-input-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          placeholder: "Select Pick-up Location",
+          options: this.state.brands,
+          branches: true,
+          onChange: this.onChangeBranch.bind(this),
+          value: this.state.form.brand
+        })),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one themeborder hq-input-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          placeholder: "Any Brands",
+          options: this.state.makes,
+          makes: true,
+          onChange: this.onChangeVehicleBrand.bind(this),
+          value: this.state.form.make
+        })),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one themeborder hq-input-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          placeholder: "Any Vehicle Classes",
+          options: this.state.vehicleClasses,
+          vehicleClass: true,
+          onChange: this.onChangeVehicleClass.bind(this),
+          value: this.state.form.vehicleClass
+        })),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one themeborder hq-input-wrapper hq-dates-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hq-dates-inner-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatePicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          placeholder: "Pickup Date",
+          pickup: true,
+          onChange: this.onChangePickupDate.bind(this),
+          value: this.state.form.pickupDate
+        })),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hq-dates-inner-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          placeholder: "Pickup Time",
+          options: this.state.pickupTimeOptions,
+          makes: true,
+          onChange: this.onChangePickupTime.bind(this),
+          value: this.state.form.pickupTime,
+          labelProperty: "time",
+          time: true
+        }))),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one themeborder hq-input-wrapper hq-dates-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hq-dates-inner-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_DatePicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          placeholder: "Return Date",
+          pickup: false,
+          onChange: this.onChangeReturnDate.bind(this),
+          value: this.state.form.returnDate
+        })),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hq-dates-inner-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          placeholder: "Return Time",
+          options: this.state.returnTimeOptions,
+          makes: true,
+          onChange: this.onChangeReturnTime.bind(this),
+          value: this.state.form.returnTime
+        }))),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "hq-hidden-fields-wrapper",
+          className: "one_fourth last themeborder"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          name: "pick_up_location",
+          value: this.state.form.pickupLocation
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          name: "return_location",
+          value: this.state.form.returnLocation
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          name: "pick_up_date",
+          value: this.state.form.pickupDate
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          name: "pick_up_time",
+          value: this.state.form.pickupTime
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          name: "return_date",
+          value: this.state.form.returnDate
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          name: "return_time",
+          value: this.state.form.returnTime
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_inputs_Hidden__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          name: "vehicle_class_id",
+          value: this.state.form.vehicleClass
+        }),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          id: "car_search_btn",
+          type: "submit",
+          className: "button",
+          value: "Search"
+        }))))))))),
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "one_half map-wrapper hq-map-column-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hq-map-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_maps_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          zoom: 13,
+          initialCenter: this.state.mapCenter,
+          mapCenter: this.state.mapCenter,
+          locations: this.state.locations,
+          onPressMarker: this.onSelectLocationOnMap.bind(this)
+        })))))
+      );
     }
   }]);
 
@@ -73028,16 +73115,19 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_widgets__WEBPACK_IMPORTED_MODULE_1__["DateTimePicker"], {
-        onChange: this.props.onChange,
-        value: moment__WEBPACK_IMPORTED_MODULE_2___default()(this.props.value, _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"]).toDate(),
-        defaultValue: this.props.pickup ? moment__WEBPACK_IMPORTED_MODULE_2___default()().add(2, 'days').add(1, 'hours').toDate() : moment__WEBPACK_IMPORTED_MODULE_2___default()().add(9, 'days').toDate(),
-        format: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"],
-        parse: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"],
-        min: moment__WEBPACK_IMPORTED_MODULE_2___default()().add(2, 'days').toDate(),
-        placeholder: "Select Date",
-        time: false
-      });
+      return (
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_widgets__WEBPACK_IMPORTED_MODULE_1__["DateTimePicker"], {
+          onChange: this.props.onChange,
+          value: moment__WEBPACK_IMPORTED_MODULE_2___default()(this.props.value, _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"]).toDate(),
+          defaultValue: this.props.pickup ? moment__WEBPACK_IMPORTED_MODULE_2___default()().add(2, 'days').add(1, 'hours').toDate() : moment__WEBPACK_IMPORTED_MODULE_2___default()().add(9, 'days').toDate(),
+          format: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"],
+          parse: _App__WEBPACK_IMPORTED_MODULE_3__["APP_DATE_ONLY_FORMAT"],
+          min: moment__WEBPACK_IMPORTED_MODULE_2___default()().add(2, 'days').toDate(),
+          placeholder: "Select Date",
+          time: false
+        })
+      );
     }
   }]);
 
@@ -73093,11 +73183,14 @@ function (_Component) {
   _createClass(Hidden, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "hidden",
-        name: this.props.name,
-        value: this.props.value
-      });
+      return (
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "hidden",
+          name: this.props.name,
+          value: this.props.value
+        })
+      );
     }
   }]);
 
@@ -73157,54 +73250,76 @@ function (_PureComponent) {
 
       if (this.props.vehicleClass) {
         return this.props.options.map(function (option, index) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            key: index,
-            value: option.id
-          }, option.name);
+          return (
+            /*#__PURE__*/
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: index,
+              value: option.id
+            }, option.name)
+          );
         });
       } else if (this.props.makes) {
         return this.props.options.map(function (option, index) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            key: index,
-            value: option
-          }, option);
+          return (
+            /*#__PURE__*/
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: index,
+              value: option
+            }, option)
+          );
         });
       } else if (this.props.branches) {
         return this.props.options.map(function (option, index) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            key: index,
-            value: option.id
-          }, option.locations[0].name);
+          return (
+            /*#__PURE__*/
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: index,
+              value: option.id
+            }, option.locations[0].name)
+          );
         });
       } else if (this.props.time) {
         return this.props.options.map(function (option, index) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            key: index,
-            value: option
-          }, option);
+          return (
+            /*#__PURE__*/
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: index,
+              value: option
+            }, option)
+          );
         });
       } else {
         return this.props.options.map(function (option, index) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-            key: index,
-            value: option.value
-          }, option[_this.props.labelProperty]);
+          return (
+            /*#__PURE__*/
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: index,
+              value: option.value
+            }, option[_this.props.labelProperty])
+          );
         });
       }
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "hq-select-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        id: this.props.id,
-        name: this.props.name,
-        placeholder: this.props.placeholder,
-        className: "hq-inputs-select",
-        onChange: this.props.onChange,
-        value: this.props.value
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.props.placeholder), this.renderOptions()));
+      return (
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "hq-select-wrapper"
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+          id: this.props.id,
+          name: this.props.name,
+          placeholder: this.props.placeholder,
+          className: "hq-inputs-select",
+          onChange: this.props.onChange,
+          value: this.props.value
+        },
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.props.placeholder), this.renderOptions()))
+      );
     }
   }]);
 
@@ -73334,9 +73449,14 @@ function (_Component) {
           isHighlighted = _ref2.isHighlighted;
 
       if (suggestion) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "hq-suggestion-wrapper"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, suggestion.description));
+        return (
+          /*#__PURE__*/
+          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "hq-suggestion-wrapper"
+          },
+          /*#__PURE__*/
+          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, suggestion.description))
+        );
       }
     }
   }, {
@@ -73353,17 +73473,20 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this),
-        onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this),
-        getSuggestionValue: this.getSuggestionValue.bind(this),
-        renderSuggestion: this.renderSuggestion.bind(this),
-        onSuggestionSelected: this.onSuggestionSelected.bind(this),
-        shouldRenderSuggestions: this.shouldRenderSuggestions.bind(this),
-        inputProps: this.state.inputProps,
-        suggestions: this.props.suggestions,
-        focusInputOnSuggestionClick: false
-      });
+      return (
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_1___default.a, {
+          onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this),
+          onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this),
+          getSuggestionValue: this.getSuggestionValue.bind(this),
+          renderSuggestion: this.renderSuggestion.bind(this),
+          onSuggestionSelected: this.onSuggestionSelected.bind(this),
+          shouldRenderSuggestions: this.shouldRenderSuggestions.bind(this),
+          inputProps: this.state.inputProps,
+          suggestions: this.props.suggestions,
+          focusInputOnSuggestionClick: false
+        })
+      );
     }
   }]);
 
@@ -73446,11 +73569,14 @@ function (_Component) {
 
       return this.props.locations.map(function (location, index) {
         if (location.coordinates.lng && location.coordinates.lat) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-            key: index,
-            onClick: _this2.onPressMarker.bind(_this2, location),
-            position: location.coordinates
-          });
+          return (
+            /*#__PURE__*/
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
+              key: index,
+              onClick: _this2.onPressMarker.bind(_this2, location),
+              position: location.coordinates
+            })
+          );
         }
       });
     }
@@ -73465,13 +73591,16 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
-        style: this.styles.mapComponentStyles,
-        google: this.props.google,
-        zoom: this.props.zoom,
-        center: this.props.mapCenter,
-        initialCenter: this.props.initialCenter
-      }, this.renderMarkers());
+      return (
+        /*#__PURE__*/
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
+          style: this.styles.mapComponentStyles,
+          google: this.props.google,
+          zoom: this.props.zoom,
+          center: this.props.mapCenter,
+          initialCenter: this.props.initialCenter
+        }, this.renderMarkers())
+      );
     }
   }]);
 

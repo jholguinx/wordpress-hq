@@ -11,7 +11,7 @@ class VehiclesRow extends PureComponent{
     renderVehicle(){
         return DisplayValidator.validateArrayAndDisplay(
             this.props.vehicles,
-            this.props.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle} vehicles={this.props.vehicles} /> )
+            this.props.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle} baseURL={this.props.baseURL} /> )
         )
     }
     render() {

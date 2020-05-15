@@ -7,6 +7,7 @@ class VehicleCard extends PureComponent {
     }
     render() {
         const {
+            id,
             name,
             public_image_link
         } = this.props.vehicle.vehicle_class;
@@ -38,7 +39,7 @@ class VehicleCard extends PureComponent {
                     </ul>
                     <div className="bottom-info">
                         <p><span>$40.00&nbsp;</span> / Day</p>
-                        <a className="small-cta" href="/cars-reservations/?vehicle_class_id=1">rent now</a>
+                        <a className="small-cta" href={this.props.baseURL + '?vehicle_class_id=' + id}>Rent Now</a>
                     </div>
                     {/* End Single Card */}
                 </div>

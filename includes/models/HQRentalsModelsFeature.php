@@ -118,4 +118,8 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     {
         return $this->metaOrder;
     }
+    public function getVehicleClassIdMetaKey()
+    {
+        return $this->metaVehicleClassId;
+    }
 }

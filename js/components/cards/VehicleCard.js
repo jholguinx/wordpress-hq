@@ -1,9 +1,27 @@
 import React, {PureComponent} from 'react';
 import {Col} from "rsuite";
+import DisplayValidator from "../../helpers/render/DisplayValidator";
 
 class VehicleCard extends PureComponent {
     constructor(props) {
         super(props);
+    }
+    renderFeatures(){
+        return DisplayValidator.validateArrayAndDisplay(
+            this.props.vehicle.vehicle_class.features,
+            this.props.vehicle.vehicle_class.features.map( (feature, index) =>
+                <li key={index}>
+                    <span><i aria-hidden="true" className={feature.icon} /> </span>
+                <span>{feature.label}</span>
+                </li>
+            ));
+    }
+    renderRate(){
+        if(this.props.vehicle.vehicle_class.rate.amount_for_display){
+            return <p><span>{this.props.vehicle.vehicle_class.rate.amount_for_display}&nbsp;</span> / Day</p>;
+        }else{
+            return <p/>;
+        }
     }
     render() {
         const {
@@ -24,21 +42,10 @@ class VehicleCard extends PureComponent {
                          src={public_image_link}/>
                     <h3>{name}</h3>
                     <ul className="no-bulls">
-                        <li>
-                            <span><i aria-hidden="true" className="far fa-snowflake"/> </span>
-                            <span>Airconditioning</span>
-                        </li>
-                        <li>
-                            <span><i aria-hidden="true" className="fas fa-broadcast-tower"/> </span>
-                            <span>Radio/CD Player</span>
-                        </li>
-                        <li>
-                            <span><i aria-hidden="true" className="fas fa-cog"/> </span>
-                            <span>Automatic Transmission</span>
-                        </li>
+                        {this.renderFeatures()}
                     </ul>
                     <div className="bottom-info">
-                        <p><span>$40.00&nbsp;</span> / Day</p>
+                        {this.renderRate()}
                         <a className="small-cta" href={this.props.baseURL + '?vehicle_class_id=' + id}>Rent Now</a>
                     </div>
                     {/* End Single Card */}

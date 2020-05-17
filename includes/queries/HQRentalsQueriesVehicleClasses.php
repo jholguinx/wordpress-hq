@@ -120,9 +120,9 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             array(
                 'meta_query' => array(
                     array(
-                        'key' => 'hq_wordpress_vehicle_class_id_meta',
-                        'value' => $hqId,
-                        'compare' => '='
+                        'key'       => 'hq_wordpress_vehicle_class_id_meta',
+                        'value'     => $hqId,
+                        'compare'   => '='
                     )
                 )
             )

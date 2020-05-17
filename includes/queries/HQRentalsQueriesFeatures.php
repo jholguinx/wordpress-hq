@@ -15,12 +15,12 @@ class HQRentalsQueriesFeatures extends HQRentalsQueriesBaseClass
             $this->model->postArgs,
             array(
                 'posts_per_page'    =>   -1,
-                'order'     =>  'ASC',
-                'orderby'   =>  'meta_value_num',
-                'meta_key'  =>  $this->model->getOrderMetaKey(),
+                'order'             =>  'ASC',
+                'orderby'           =>  'meta_value_num',
+                //'meta_key'          =>  $this->model->getOrderMetaKey(),
                 'meta_query'        =>  array(
                     array(
-                        'key'       =>  $this->model->metaClassId,
+                        'key'       =>  $this->model->getVehicleClassIdMetaKey(),
                         'value'     =>  $classId,
                         'compare'   =>  '='
                     )
@@ -54,7 +54,7 @@ class HQRentalsQueriesFeatures extends HQRentalsQueriesBaseClass
         ), $feature);
     }
 
-    public function featuresPublicInterface($features)
+    public function featuresPublicInterface($features = null)
     {
         return array_map(function($feature){
             return $this->featurePublicInterface($feature);

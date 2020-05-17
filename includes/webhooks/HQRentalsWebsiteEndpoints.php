@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsWebhooks;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
@@ -11,6 +12,8 @@ class HQRentalsWebsiteEndpoints{
 
     public function __construct()
     {
+        $this->featuresQuery = new HQRentalsQueriesFeatures();
+        $this->vehicleClassQuery = new HQRentalsQueriesVehicleClasses();
         add_action( 'rest_api_init', array($this, 'setEndpoints') );
     }
     public function setEndpoints(){
@@ -161,7 +164,17 @@ class HQRentalsWebsiteEndpoints{
     {
         try{
             $connector = new HQRentalsApiConnector();
-            return $connector->getHQRentalsAvailability( HQRentalsApiClientAdapter::adaptDataForAvailability( $_GET ) );
+            $response = $connector->getHQRentalsAvailability( HQRentalsApiClientAdapter::adaptDataForAvailability( $_GET ) );
+            if($response->success){
+                foreach ($response->data as $availableVehicle){
+                    $availableVehicle->vehicle_class = (object) array_merge(
+                        (array) $availableVehicle->vehicle_class,
+                        ['features' => $this->featuresQuery->featuresPublicInterface($this->featuresQuery->getVehicleClassFeatures($availableVehicle->vehicle_class->id))],
+                        ['rate' => $this->vehicleClassQuery->getVehicleClassBySystemId($availableVehicle->vehicle_class->id)->rate()->getDailyRateObject()]
+                    );
+                }
+            }
+            return $response;
         }catch (Exception $e){
             return $this->resolveResponse($e, false);
         }

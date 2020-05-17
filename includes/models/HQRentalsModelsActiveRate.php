@@ -267,4 +267,8 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $data->dailyRate = $this->getFormattedDailyRate();
         return $data;
     }
+    public function getDailyRateObject()
+    {
+        return $this->dailyRate;
+    }
 }

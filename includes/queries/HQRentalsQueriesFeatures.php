@@ -53,6 +53,18 @@ class HQRentalsQueriesFeatures extends HQRentalsQueriesBaseClass
             'icon'
         ), $feature);
     }
+    public function featuresPublicInterfaceWithLocale($features)
+    {
+        return array_map(function($feature){
+            return $this->parseObject(array(
+                array(
+                    'property_name'     => 'label',
+                    'values'            => $feature->getLabelForWebsite()
+                ),
+                'icon'
+            ), $feature);
+        },$features);
+    }
 
     public function featuresPublicInterface($features = null)
     {

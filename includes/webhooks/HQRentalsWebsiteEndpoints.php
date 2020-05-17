@@ -185,7 +185,7 @@ class HQRentalsWebsiteEndpoints
                 foreach ($response->data as $availableVehicle) {
                     $availableVehicle->vehicle_class = (object)array_merge(
                         (array)$availableVehicle->vehicle_class,
-                        ['features' => $this->featuresQuery->featuresPublicInterface($this->featuresQuery->getVehicleClassFeatures($availableVehicle->vehicle_class->id))],
+                        ['features' => $this->featuresQuery->featuresPublicInterfaceWithLocale($this->featuresQuery->getVehicleClassFeatures($availableVehicle->vehicle_class->id))],
                         ['rate' => $this->vehicleClassQuery->getVehicleClassBySystemId($availableVehicle->vehicle_class->id)->rate()->getDailyRateObject()],
                         ['brand' => $this->brandQuery->singleBrandPublicInterface($availableVehicle->vehicle_class->brand_id)]
                     );

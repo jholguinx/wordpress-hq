@@ -46,7 +46,7 @@ class VehicleCard extends PureComponent {
                     </ul>
                     <div className="bottom-info">
                         {this.renderRate()}
-                        <a className="small-cta" href={this.props.baseURL + '?vehicle_class_id=' + id}>Rent Now</a>
+                        <a className="small-cta" href={this.props.vehicle.vehicle_class.brand.websiteLink + '?vehicle_class_id=' + id}>Rent Now</a>
                     </div>
                     {/* End Single Card */}
                 </div>

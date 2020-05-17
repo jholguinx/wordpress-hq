@@ -7,6 +7,7 @@ export const normalLoaderStyles = {
         position: 'relative',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        color: '#4272A8',
     }
 }

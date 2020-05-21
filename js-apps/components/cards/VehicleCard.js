@@ -30,7 +30,7 @@ class VehicleCard extends PureComponent {
             public_image_link
         } = this.props.vehicle.vehicle_class;
         return (
-            <FlexboxGrid.Item
+            <Col
                 xs={24}
                 sm={24}
                 md={8}
@@ -50,7 +50,7 @@ class VehicleCard extends PureComponent {
                     </div>
                     {/* End Single Card */}
                 </div>
-            </FlexboxGrid.Item>
+            </Col>
         );
     }
 }

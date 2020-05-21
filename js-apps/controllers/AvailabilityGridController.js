@@ -41,7 +41,8 @@ class AvailabilityGridController extends BaseController{
     }
     onChangeBranch(brand){
         const { id } = brand;
-        this.app.setState({ brandId: id },() => {this.componentRefreshData();});
+        this.app.setState({ brandId: id });
+        setTimeout(this.componentRefreshData, 250);
     }
     onSuccess(response){
         this.app.setState({ vehiclesPerRow: AvailabilityAdapter.adaptAvailabilityResponseForComponent(response.data.data) });

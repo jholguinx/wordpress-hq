@@ -65,6 +65,16 @@ class AvailabilityGrid extends PureComponent{
             );
         }
     }
+    renderFilter(){
+        if(this.state.brands.length > 1){
+            return(
+                <VehicleFilter
+                    onPressBrandItem={this.onPressBrand.bind(this)}
+                    brands={this.state.brands}
+                />
+            );
+        }
+    }
     render() {
         return(
             <section className="vehicle-availability-wrapper">
@@ -77,10 +87,7 @@ class AvailabilityGrid extends PureComponent{
                                         <div className="elementor-widget-container vehicle-availability-title-wrapper">
                                             <h2 className="elementor-heading-title elementor-size-default">{this.state.title}</h2></div>
                                     </div>
-                                    <VehicleFilter
-                                        onPressBrandItem={this.onPressBrand.bind(this)}
-                                        brands={this.state.brands}
-                                    />
+                                    {this.renderFilter()}
                                     <Grid fluid>
                                         <Row className="show-grid">
                                             <Col md={6} mdOffset={18}>

@@ -16,8 +16,7 @@ class HQRentalsAvailabilityGridShortcode
     {
         $atts = shortcode_atts(
             array(
-                'title' => '',
-                'integration-page'  => ''
+                'title' => ''
             ), $atts);
         ?>
         <script>

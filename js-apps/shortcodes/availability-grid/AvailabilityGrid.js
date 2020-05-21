@@ -8,6 +8,7 @@ import Loader from '../../components/loaders/Loader';
 import { Grid, Row, Col } from 'rsuite';
 import PropTypes from 'prop-types';
 import VehiclesRow from '../../components/rows/VehiclesRow';
+import EmptyListMessage from "../../components/messages/EmptyListMessage";
 class AvailabilityGrid extends PureComponent{
     constructor(props) {
         super(props);
@@ -31,10 +32,19 @@ class AvailabilityGrid extends PureComponent{
     }
 
     renderVehicles(){
-        return DisplayValidator.validateArrayAndDisplay(
-            this.state.vehiclesPerRow,
-            this.state.vehiclesPerRow.map( (vehicleRow, index) => <VehiclesRow key={index} vehicles={vehicleRow} baseURL={this.state.websiteBaseURL + this.state.integrationURL} /> )
+        if(Array.isArray(this.state.vehiclesPerRow) && this.state.vehiclesPerRow.length > 0){
+            return DisplayValidator.validateArrayAndDisplay(
+                this.state.vehiclesPerRow,
+                this.state.vehiclesPerRow.map( (vehicleRow, index) => <VehiclesRow key={index} vehicles={vehicleRow} baseURL={this.state.websiteBaseURL + this.state.integrationURL} /> )
             );
+        }else{
+            return(
+                <EmptyListMessage
+                    message={"There are no units available."}
+                />
+            );
+        }
+
     }
     onChangeDates( dateRangeValues ){
         this.controller.onChangeDates( dateRangeValues );

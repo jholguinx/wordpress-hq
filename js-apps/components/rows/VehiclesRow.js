@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {Col, Grid, Row} from "rsuite";
+import { Grid, Row} from "rsuite";
 import VehicleCard from "../cards/VehicleCard";
 import DisplayValidator from "../../helpers/render/DisplayValidator";
 import PropTypes from 'prop-types';
@@ -9,10 +9,12 @@ class VehiclesRow extends PureComponent{
         super(props);
     }
     renderVehicle(){
-        return DisplayValidator.validateArrayAndDisplay(
-            this.props.vehicles,
-            this.props.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle} baseURL={this.props.baseURL} lenght={this.props.vehicles.length} /> )
-        );
+        if(Array.isArray(this.props.vehicles) && this.props.vehicles.length === 3){
+            return DisplayValidator.validateArrayAndDisplay(
+                this.props.vehicles,
+                this.props.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle} baseURL={this.props.baseURL} lenght={this.props.vehicles.length} /> )
+            );
+        }
     }
     render() {
         return(

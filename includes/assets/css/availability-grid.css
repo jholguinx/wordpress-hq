@@ -76,6 +76,7 @@
     justify-content:space-around;
     flex-wrap:wrap;
     margin-bottom: 40px;
+    flex-direction: column;
 }
 
 .filter-div {

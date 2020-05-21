@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import AvailabilityGridController from "../../controllers/AvailabilityGridController";
-import VehicleCard from "../../components/cards/VehicleCard";
+import VehicleFilter from '../../components/filters/VehicleFilter';
 import DisplayValidator from "../../helpers/render/DisplayValidator";
 import DateHelper from "../../helpers/dates/DateHelper";
 import DateRangePicker from "../../components/datepickers/DateRangePicker";
@@ -12,6 +12,7 @@ class AvailabilityGrid extends PureComponent{
     constructor(props) {
         super(props);
         this.state = {
+            brands : [],
             vehiclesPerRow: [],
             startDate: DateHelper.nowForSystem(),
             endDate: DateHelper.daysFromNow(1),
@@ -38,6 +39,9 @@ class AvailabilityGrid extends PureComponent{
     onChangeDates( dateRangeValues ){
         this.controller.onChangeDates( dateRangeValues );
     }
+    onPressBrand(brand){
+        this.controller.onChangeBranch(brand);
+    }
     renderVehiclesContent(){
         if(this.state.isLoading){
             return(<Loader />);
@@ -63,6 +67,10 @@ class AvailabilityGrid extends PureComponent{
                                         <div className="elementor-widget-container vehicle-availability-title-wrapper">
                                             <h2 className="elementor-heading-title elementor-size-default">{this.state.title}</h2></div>
                                     </div>
+                                    <VehicleFilter
+                                        onPressBrandItem={this.onPressBrand.bind(this)}
+                                        brands={this.state.brands}
+                                    />
                                     <Grid fluid>
                                         <Row className="show-grid">
                                             <Col md={6} mdOffset={18}>

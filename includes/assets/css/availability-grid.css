@@ -96,7 +96,7 @@
     background-color:#fff!important;
     border-radius:4px;
     box-shadow:0 5px 30px rgba(16,36,65,0.1);
-    margin:0 25px;
+    margin:0 12px;
     padding:9px 12px;
 }
 
@@ -104,7 +104,6 @@
     background-color:#fff;
     border-radius:10px;
     box-shadow:10px 10px 60px rgba(0,38,94,0.06), -10px -10px 60px rgba(0,38,94,0.06);
-    min-width:320px;
     transition:all .3s ease;
     padding:25px;
 }
@@ -160,6 +159,9 @@
     background-color:#d81e05!important;
 }
 .hq-availability-row-wrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -168,4 +170,11 @@
     flex:1;
     justify-content: center;
     align-items: center;
+}
+.hq-availability-filter-wrapper{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.rs-grid-container-fluid{
+    max-width: 100%;
 }

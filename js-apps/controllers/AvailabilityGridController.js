@@ -14,7 +14,8 @@ class AvailabilityGridController extends BaseController{
         this.app.setState({
             title: availabilityGridTitle,
             integrationURL: availabilityGridIntegrationPage,
-            websiteBaseURL : baseUrl
+            websiteBaseURL : baseUrl,
+            brands : hqRentalsBrands,
         })
     }
     componentRefreshData( ){
@@ -37,6 +38,11 @@ class AvailabilityGridController extends BaseController{
         this.app.setState({ dateRange : dateRange });
         this.componentRefreshData();
 
+    }
+    onChangeBranch(brand){
+        const { id } = brand;
+        this.app.setState({ brandId: id });
+        this.componentRefreshData();
     }
     onSuccess(response){
         this.app.setState({ vehiclesPerRow: AvailabilityAdapter.adaptAvailabilityResponseForComponent(response.data.data) });

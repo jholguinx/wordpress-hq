@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 
 class HQRentalsModelsFeature extends HQRentalsBaseModel
 {
@@ -34,6 +35,7 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     public function __construct($post = null)
     {
         $this->post_id = '';
+        $this->locale = new HQRentalsLocaleHelper();
         $this->postArgs = array(
             'post_type' => $this->featureVehicleClassPostName,
             'post_status' => 'publish',
@@ -111,6 +113,9 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     {
         if($override){
             return $this->label_for_website;
+        }
+        if($this->locale->language === "zh"){
+            return $this->label_for_website->{"zh-Hans"};
         }
         return $this->label_for_website->{explode('_',get_locale())[0]};
     }

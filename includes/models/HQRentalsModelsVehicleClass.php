@@ -393,6 +393,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         if (!empty($forcedLocale)) {
             return $this->labels[$forcedLocale];
         } else {
+            if($this->locale->language === "zh"){
+                return $this->labels["zh-Hans"];
+            }
             return $this->labels[$this->locale->language];
         }
     }

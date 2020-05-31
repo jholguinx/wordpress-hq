@@ -3,30 +3,30 @@
     var configPickup = {
         format: formatDate,
         closeOnDateSelect: true,
-        minDate: moment().add(1, 'days').format(formatDate),
-        defaultDate: moment().add(1, 'days').format(formatDate),
+        minDate: moment().format(formatDate),
         timepicker: true,
         step:30,
     };
     var configReturn = {
         format: formatDate,
         closeOnDateSelect: true,
-        minDate: moment().add(1, 'days').format(formatDate),
-        defaultDate: moment().add(8, 'days').format(formatDate),
+        minDate: moment().format(formatDate),
         timepicker: true,
         step:30,
     };
-    // Init datetimepickers
-    $('#hq_pick_up_date').datetimepicker(configPickup);
-    $('#hq_return_date').datetimepicker(configReturn);
+    jQuery('#hq_pick_up_date').datetimepicker(configPickup);
+    jQuery('#hq_return_date').datetimepicker(configReturn);
     // Custom locations inputs
-    $('select[name="pick_up_location"]').on('change', function() {
+    jQuery('select[name="pick_up_location"]').on('change', function() {
         var id = '#hq_pick_up_custom_location';
         fadeCustom(id,$(this));
     });
-    $('select[name="return_location"]').on('change', function() {
+    jQuery('select[name="return_location"]').on('change', function() {
         var id = '#hq_return_custom_location';
         fadeCustom(id,$(this));
+    });
+    jQuery("#hq_pick_up_location").on("change", function(){
+        jQuery("#hq_return_location").val(jQuery("#hq_pick_up_location").val());
     });
 })(jQuery);
 function fadeCustom(id, element){

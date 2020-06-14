@@ -103,6 +103,13 @@ class HQRentalsApiConnector{
             'password' => $password
         );
         $response = wp_remote_post($this->endpoints->getAuthEndpoint(), $this->configuration->authApiConfiguration($data));
-        return $this->resolver->resolveApiCallForAuth($response);
+        $cleanResponse = $this->resolver->resolveApiCallForAuth($response);
+        if($cleanResponse->data->success){
+            $link = $cleanResponse->data->data->tenants[0]->api_link;
+            if($link){
+                $this->settings->saveApiBaseUrl($link);
+            }
+        }
+        return $cleanResponse;
     }
 }

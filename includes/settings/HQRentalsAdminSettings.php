@@ -189,7 +189,9 @@ class HQRentalsAdminSettings
                                                                                                                                         <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
                                         </div>
                                         <div class="hq-general-input-wrapper hq-dates-input">
-                                            <select class="hq-admin-select-input "
+                                            <select
+                                                    id="hq-api-user-base-url"
+                                                    class="hq-admin-select-input "
                                                     name="<?php echo $this->settings->api_base_url; ?>">
                                                 <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
                                                     America

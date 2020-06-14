@@ -36,6 +36,7 @@ function login($){
         if(response.data.data.success === true){
             jQuery("#hq-api-user-token").val(response.data.data.data.user.api_token);
             jQuery("#hq-api-tenant-token").val(response.data.data.data.tenants[0].api_token);
+            jQuery("#hq-api-user-base-url").val(response.data.data.data.tenants[0].api_link);
         }else{
             alert(response.data.data.errors.error_message);
         }

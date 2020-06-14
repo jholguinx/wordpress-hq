@@ -128,7 +128,11 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             )
         );
         $query = new \WP_Query($args);
-        return new HQRentalsModelsVehicleClass($query->posts[0]);
+        if($query->posts[0]){
+            return new HQRentalsModelsVehicleClass($query->posts[0]);
+        }else{
+            return null;
+        }
     }
 
     /**

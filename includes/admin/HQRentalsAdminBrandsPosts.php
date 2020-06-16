@@ -16,11 +16,10 @@ class HQRentalsAdminBrandsPosts
     public function addNewColumnsOnBrandAdminScreen($defaults)
     {
         return array(
-            'title'                     => 'Title',
-            'reservation_shortcode'     => 'Reservation Shortcode',
-            'my_reservation_shortcode'  => 'My Reservation Shortcode',
+            'title'                     => 'Name',
+            'reservation_form_snippet'  => 'Reservation Form Snippet',
+            'reservation_snippet'       => 'Reservation Snippet',
             'vehicle_class_calendar'    => 'Vehicle Class Calendar',
-            'snippets'                  => 'Snippets',
             'date'                      => 'Date',
         );
     }
@@ -30,43 +29,39 @@ class HQRentalsAdminBrandsPosts
         $currentBrand = new HQRentalsModelsBrand();
         $currentBrand->setBrandFromPostId($postId);
         switch ($columnName) {
-            case('reservation_shortcode'):
-                $this->resolveReservationShortcode($currentBrand);
+            case('reservation_form_snippet'):
+                $this->resolveReservationFormSnippetShortcode($currentBrand);
                 break;
-            case('my_reservation_shortcode'):
-                $this->resolveMyReservationsShortcode($currentBrand);
+            case('reservation_snippet'):
+                $this->resolveReservationSnippetShortcode($currentBrand);
                 break;
             case('vehicle_class_calendar'):
                 $this->resolveCalendarShortcode($currentBrand);
-                break;
-            case('snippets'):
-                $this->resolveSnippets($currentBrand);
                 break;
             default:
                 echo '';
                 break;
         }
     }
-    public function resolveReservationShortcode($brand)
-    {
-        ?>
-            <div>
-                <code>
-                <?php echo '[hq_rentals_reservations id=' . $brand->id . ']'; ?>
-                </code>
-            </div>
-        <?php
-    }
-    public function resolveMyReservationsShortcode($brand)
+    public function resolveShortcode($shortcodeContent)
     {
         ?>
         <div>
             <code>
-                <?php echo '[hq_rentals_my_reservations id=' . $brand->id . ']'; ?>
+                <?php echo $shortcodeContent; ?>
             </code>
         </div>
         <?php
     }
+    public function resolveReservationFormSnippetShortcode($brand)
+    {
+        $this->resolveShortcode('[hq_rentals_reservation_form_snippet id=' . $brand->id . ']');
+    }
+    public function resolveReservationSnippetShortcode($brand)
+    {
+        $this->resolveShortcode('[hq_rentals_reservations_snippet id=' . $brand->id . ']');
+    }
+
     public function resolveCalendarShortcode($brand)
     {
         ?>

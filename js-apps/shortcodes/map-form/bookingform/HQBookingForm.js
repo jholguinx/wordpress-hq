@@ -51,7 +51,9 @@ class HQBookingForm extends PureComponent{
             form: {
                 ...this.state.form,
                 pickupDate: moment().add(2,'days').format(APP_DATE_ONLY_FORMAT),
-                returnDate: moment().add(9,'days').format(APP_DATE_ONLY_FORMAT)
+                returnDate: moment().add(9,'days').format(APP_DATE_ONLY_FORMAT),
+                pickupTime: '08:00am',
+                returnTime: '08:00am',
             },
             backgroundStyle: {
                 backgroundImage: 'url(' + image + ')'

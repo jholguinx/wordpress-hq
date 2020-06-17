@@ -23,7 +23,7 @@
     border-radius: 5px;
 }
 .hq-admin-select-input{
-    max-width: 150px;
+    width: 100%;
 }
 .hq-general-input-wrapper {
     display: flex;

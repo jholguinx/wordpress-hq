@@ -100,7 +100,7 @@ class HQRentalsApiConnector{
     {
         $data = array(
             'email' =>  $email,
-            'password' => $password
+            'password' => $password,
         );
         $response = wp_remote_post($this->endpoints->getAuthEndpoint(), $this->configuration->authApiConfiguration($data));
         $cleanResponse = $this->resolver->resolveApiCallForAuth($response);

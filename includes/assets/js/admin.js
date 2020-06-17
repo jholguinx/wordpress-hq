@@ -10,8 +10,7 @@
         try {
             login(jQuery);
         }catch (e) {
-            //.alert('error');
-            console.log(e);
+            alert(e);
         }
     });
 
@@ -36,14 +35,10 @@ function login($){
         if(response.data.data.success === true){
             var tenants = response.data.data.data.tenants;
             var user = response.data.data.data.user;
-            if(Array.isArray(tenants){
-                if(tenants.length > 1){
-                    
-                }else{
-                    jQuery("#hq-api-user-token").val(user.api_token);
-                    jQuery("#hq-api-tenant-token").val(tenants[0].api_token);
-                    jQuery("#hq-api-user-base-url").val(tenants[0].api_link);
-                }
+            if(Array.isArray(tenants)){
+                jQuery("#hq-api-user-token").val(user.api_token);
+                jQuery("#hq-api-tenant-token").val(tenants[0].api_token);
+                jQuery("#hq-api-user-base-url").val(tenants[0].api_link);
             }
         }else{
             alert(response.data.data.errors.error_message);

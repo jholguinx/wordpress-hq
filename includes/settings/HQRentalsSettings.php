@@ -615,4 +615,25 @@ class HQRentalsSettings
             $_POST['forcing_update'] = $res;
         }
     }
+    public function resolveSettingsOnAuth($response)
+    {
+        if($response->data->success){
+            $tenants = $response->data->data->tenants;
+            if(is_array($tenants)){
+                if(count($tenants) > 1){
+                }else{
+                    /*Resolve normal users*/
+                    $link = $response->data->data->tenants[0]->api_link;
+                    $userToken = $response->data->data->user->api_token;
+                    $tenantToken = $response->data->data->tenants[0]->api_token;
+                    if($link and $userToken and $tenants){
+                        $this->saveApiBaseUrl($link);
+                        $this->saveApiTenantToken($tenantToken);
+                        $this->saveApiUserToken($userToken);
+                    }
+
+                }
+            }
+        }
+    }
 }

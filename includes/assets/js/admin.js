@@ -34,9 +34,17 @@ function login($){
     }).then(function(response){
         jQuery(".hq-loader").slideUp();
         if(response.data.data.success === true){
-            jQuery("#hq-api-user-token").val(response.data.data.data.user.api_token);
-            jQuery("#hq-api-tenant-token").val(response.data.data.data.tenants[0].api_token);
-            jQuery("#hq-api-user-base-url").val(response.data.data.data.tenants[0].api_link);
+            var tenants = response.data.data.data.tenants;
+            var user = response.data.data.data.user;
+            if(Array.isArray(tenants){
+                if(tenants.length > 1){
+                    
+                }else{
+                    jQuery("#hq-api-user-token").val(user.api_token);
+                    jQuery("#hq-api-tenant-token").val(tenants[0].api_token);
+                    jQuery("#hq-api-user-base-url").val(tenants[0].api_link);
+                }
+            }
         }else{
             alert(response.data.data.errors.error_message);
         }

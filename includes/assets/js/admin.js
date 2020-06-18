@@ -39,6 +39,7 @@ function login($){
                 jQuery("#hq-api-user-token").val(user.api_token);
                 jQuery("#hq-api-tenant-token").val(tenants[0].api_token);
                 jQuery("#hq-api-user-base-url").val(tenants[0].api_link);
+                alert("success");
             }
         }else{
             alert(response.data.data.errors.error_message);

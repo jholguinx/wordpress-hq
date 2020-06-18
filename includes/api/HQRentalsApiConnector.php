@@ -14,7 +14,6 @@ class HQRentalsApiConnector{
         $this->endpoints = new HQRentalsApiEndpoint();
         $this->configuration = new HQRentalsApiConfiguration();
         $this->resolver = new HQRentalsApiCallResolver();
-        $this->settings = new HQRentalsSettings();
     }
     public function getHQRentalsAvailability($data)
     {
@@ -104,7 +103,8 @@ class HQRentalsApiConnector{
         );
         $response = wp_remote_post($this->endpoints->getAuthEndpoint(), $this->configuration->authApiConfiguration($data));
         $cleanResponse = $this->resolver->resolveApiCallForAuth($response);
-        $this->settings->resolveSettingsOnAuth($cleanResponse);
+        $settings = new HQRentalsSettings();
+        $settings->resolveSettingsOnAuth($cleanResponse);
         return $cleanResponse;
     }
 }

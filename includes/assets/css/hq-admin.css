@@ -19,7 +19,8 @@
 
 .hq-admin-text-input, .hq-admin-select-input {
     height: 35px !important;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
     border-radius: 5px;
 }
 .hq-admin-select-input{
@@ -40,7 +41,7 @@
 }
 
 .small {
-    max-width: 50px;
+    max-width: 50px !important;
 }
 .tokens{
     flex: 4;
@@ -65,6 +66,16 @@
 .hq-admin-help-section, .hq-admin-help-section {
     padding-top: 25px;
     padding-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hq-admin-select-input{
+    width: 100%;
+}
+.button-large{
+    width: 64px;
+    height: 32px;
 }
 
 .hq-admin-warning-section p, .hq-admin-help-section p {

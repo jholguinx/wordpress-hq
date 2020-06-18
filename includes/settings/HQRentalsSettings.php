@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsSettings;
 
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsEncryptionHandler;
@@ -627,8 +628,15 @@ class HQRentalsSettings
                     $this->saveApiBaseUrl($link);
                     $this->saveApiTenantToken($tenantToken);
                     $this->saveApiUserToken($userToken);
+                    $this->saveEncodedApiKey($tenantToken, $userToken);
                 }
             }
         }
+    }
+    public function isApiOkay()
+    {
+        $connector = new HQRentalsApiConnector();
+        $apiTestCall = $connector->getHQRentalsBrands();
+        return $apiTestCall->success;
     }
 }

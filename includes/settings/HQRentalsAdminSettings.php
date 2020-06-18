@@ -58,7 +58,21 @@ class HQRentalsAdminSettings
             ?>
             <div class="wrap">
                 <div id="wrap">
-                    <h1 class="hq-admin-h1">HQ Rentals Setup</h1>
+                    <div class="hq-title-wrapper">
+                        <div class="hq-title-item">
+                            <h1 class="hq-admin-h1">HQ Rentals Setup</h1>
+                        </div>
+                        <?php if($this->settings->isApiOkay()): ?>
+                            <div style="background-color: #28a745; border-radius: 10px; padding: 5px 10px; margin-left: 10px; border: 2px solid #28a745;">
+                                <h6 style="font-size: 16px; line-height: 20px; margin:0px; color: #fff;">Configured</h6>
+                            </div>
+                        <?php else: ?>
+                            <div style="background-color: #dc3545; border-radius: 10px; padding: 5px 10px; margin-left: 10px; border: 2px solid #dc3545;">
+                                <h6 style="font-size: 16px; line-height: 20px; margin:0px; color: #fff;">Not Configured</h6>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
                     <form action="" method="post">
                         <div class="hq-general-settings-section-wrapper">
                             <h3 class="hq-admin-h3">General Settings</h3>
@@ -147,6 +161,16 @@ class HQRentalsAdminSettings
                                                spellcheck="true" autocomplete="off">
                                     <?php endif; ?>
                                     <style>
+                                        .hq-admin-h1{
+                                            padding: 0px !important;
+                                        }
+                                        .hq-title-wrapper{
+                                            display: flex;
+                                            justify-content: flex-start;
+                                            align-items: center;
+                                        }
+                                        .hq-title-item{
+                                        }
                                         .hq-loader{
                                             display: none;
                                             padding-top: 10px;
@@ -228,6 +252,13 @@ class HQRentalsAdminSettings
                                         </div>
                                     </div>
                                     <?php endif; ?>
+                                    <div class="hq-admin-help-section">
+                                        <p>Need help? Please click <strong><a target="_blank"
+                                                                              href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
+                                            more information on how to set up the HQ Rentals plugin.</p>
+                                        <input style="max-width: 64px;" type="submit" name="save" value="SAVE" class="button button-primary button-large">
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -401,7 +432,7 @@ class HQRentalsAdminSettings
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="text"
-                                                       class="hq-admin-text-input hq-admin-text-input-small-medium"
+                                                       class="hq-admin-text-input hq-admin-text-input-small-medium small"
                                                        name="<?php echo $this->settings->hq_default_latitude_for_map_shortcode; ?>"
                                                        value="<?php echo esc_attr($this->settings->getDefaultLatitudeSetting()); ?>"/>
                                             </div>
@@ -413,7 +444,7 @@ class HQRentalsAdminSettings
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="text"
-                                                       class="hq-admin-text-input hq-admin-text-input-small-medium"
+                                                       class="hq-admin-text-input hq-admin-text-input-small-medium small"
                                                        name="<?php echo $this->settings->hq_default_longitude_for_map_shortcode; ?>"
                                                        value="<?php echo esc_attr($this->settings->getDefaultLongitudeSetting()); ?>"/>
                                             </div>
@@ -425,7 +456,7 @@ class HQRentalsAdminSettings
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="text"
-                                                       class="hq-admin-text-input hq-admin-text-input-medium"
+                                                       class="hq-admin-text-input hq-admin-text-input-medium small"
                                                        name="<?php echo $this->settings->hq_url_to_replace_on_brands_option; ?>"
                                                        value="<?php echo esc_attr($this->settings->getBrandURLToReplaceSetting()); ?>"/>
                                             </div>
@@ -436,12 +467,6 @@ class HQRentalsAdminSettings
                                 </div>
 
                             </div>
-                            <div class="hq-admin-help-section">
-                                <p>Need help? Please click <strong><a target="_blank"
-                                                                      href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
-                                    more information on how to set up the HQ Rentals plugin.</p>
-                            </div>
-                            <input type="submit" name="save" value="SAVE" class="button button-primary button-large">
                     </form>
                 </div>
             </div>

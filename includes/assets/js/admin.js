@@ -1,11 +1,5 @@
 (function($){
     tippy('#hq-tooltip-tenant-token');
-    /*
-    * Login
-    * */
-    $("#hq-login-trigger").on("click",function(){
-        $("#hq-login-form-wrapper").slideDown();
-    });
     $('#hq-submit-login-button').on('click', function(){
         try {
             login(jQuery);
@@ -18,6 +12,8 @@
 function login($){
     var email = $("#hq-email").val();
     var pass = $('#hq-password').val();
+    $('.hq-messages-box-success').slideUp();
+    $('.hq-messages-box-failed').slideUp();
     $(".hq-loader").slideDown();
     axios({
         url: hqWebsiteURL + '/wp-json/hqrentals/plugin/auth',
@@ -39,13 +35,13 @@ function login($){
                 jQuery("#hq-api-user-token").val(user.api_token);
                 jQuery("#hq-api-tenant-token").val(tenants[0].api_token);
                 jQuery("#hq-api-user-base-url").val(tenants[0].api_link);
-                alert("success");
+                $('.hq-messages-box-success').slideDown();
             }
         }else{
-            alert(response.data.data.errors.error_message);
+            $('.hq-messages-box-failed').slideDown();
         }
     }).catch( function(error) {
         jQuery(".hq-loader").slideUp();
-        alert("There was an issue with your request.");
+        $('.hq-messages-box-failed').slideDown();
     });
 }

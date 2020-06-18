@@ -139,6 +139,16 @@ class HQRentalsAdminSettings
                                                         <img src="<?php echo plugins_url('hq-rental-software/includes/assets/img/spinner.gif'); ?>" alt="">
                                                     </div>
                                                 </div>
+                                                <div class="hq-messages-box-success">
+                                                    <div class="alert alert-success" role="alert">
+                                                        The plugin has been successfully setup.
+                                                    </div>
+                                                </div>
+                                                <div class="hq-messages-box-failed">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        There was an issue, please review your login information.
+                                                    </div>
+                                                </div>
                                                 <div class="hq-submit-login-button-wrapper">
                                                     <button id="hq-submit-login-button" type="button" name="save" value="Save" class="button button-primary button-large">LOGIN</button>
                                                 </div>
@@ -160,35 +170,6 @@ class HQRentalsAdminSettings
                                                id="hq-api-user-base-url"
                                                spellcheck="true" autocomplete="off">
                                     <?php endif; ?>
-                                    <style>
-                                        .hq-admin-h1{
-                                            padding: 0px !important;
-                                        }
-                                        .hq-title-wrapper{
-                                            display: flex;
-                                            justify-content: flex-start;
-                                            align-items: center;
-                                        }
-                                        .hq-title-item{
-                                        }
-                                        .hq-loader{
-                                            display: none;
-                                            padding-top: 10px;
-                                            padding-bottom: 10px;
-                                        }
-                                        .hq-loader-inner-wrapper{
-                                            display: flex;
-                                            flex: 1;
-                                            justify-content: center;
-                                            align-content: center;
-                                        }
-                                        .hq-submit-login-button-wrapper{
-                                            display: flex;
-                                            flex: 1;
-                                            justify-content: flex-end;
-                                            align-content: center;
-                                        }
-                                    </style>
                                 </div>
                                 <div class="hq-general-settings-item-wrapper">
                                     <div class="hq-general-settings-item">

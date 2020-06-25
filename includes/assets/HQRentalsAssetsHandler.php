@@ -111,7 +111,7 @@ class HQRentalsAssetsHandler
         wp_localize_script('hq-dummy-script', $this->systemDateFormatFrontName, $this->settings->getHQDatetimeFormat());
         wp_localize_script('hq-dummy-script', $this->tenantDatetimeFormatFrontName, $this->settings->getTenantDatetimeFormat());
         wp_localize_script('hq-dummy-script', $this->site, $site . '/');
-        wp_localize_script('hq-dummy-script', $this->spinner, plugins_url('wordpress-hq/includes/assets/img/screen-spinner.gif'));
+        wp_localize_script('hq-dummy-script', $this->spinner, plugins_url('hq-rental-software/includes/assets/img/screen-spinner.gif'));
         /*
          * Just for Workspot
          * */

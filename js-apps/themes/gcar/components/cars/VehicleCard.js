@@ -11,7 +11,7 @@ class VehicleCard extends Component {
             <div id={"hq-vehicle-class-" + this.props.vehicle.id} className="element grid classic4_cols animated1">
                 <div
                     className="one_fourth gallery4 classic static filterable portfolio_type themeborder">
-                    <a className="car_image" href="http://drivve.test/car/bmw-3-series/">
+                    <a className="car_image" href={this.props.vehicle.permalink}>
                         <img
                             src={this.props.vehicle.publicImageLink}
                             alt={this.props.vehicle.name}
@@ -19,7 +19,7 @@ class VehicleCard extends Component {
                     </a>
                     <div className="portfolio_info_wrapper">
                         <div className="car_attribute_wrapper">
-                            <a className="car_link" href="http://drivve.test/car/bmw-3-series/">
+                            <a className="car_link" href={this.props.vehicle.permalink}>
                                 <h5>
                                     {this.props.vehicle.name}
                                 </h5>

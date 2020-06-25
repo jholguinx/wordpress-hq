@@ -4,6 +4,7 @@ import Loader from '../../../../components/loaders/Loader';
 import DisplayValidator from "../../../../helpers/render/DisplayValidator";
 import VehicleCard from "../../components/cars/VehicleCard";
 import Select from "../../components/inputs/Select";
+import SubmitButton from '../../components/buttons/SubmitButton'
 
 
 class HQVehicleFilter extends Component {
@@ -65,6 +66,10 @@ class HQVehicleFilter extends Component {
     onChangeField(field, newValue){
         this.controller.onChangeField(field, newValue);
     }
+    onSubmit(event){
+        event.preventDefault();
+        this.controller.onSubmitForm();
+    }
     render() {
 
         return (
@@ -73,8 +78,9 @@ class HQVehicleFilter extends Component {
                     <div className="standard_wrapper">
                         <div className="page_content_wrapper">
                             <div className="inner">
-                                <div style={{margin: 'auto', width: '100%'}}><h2 className="ppb_title" style={{}}>Browse
-                                    Our Cars</h2></div>
+                                <div style={{margin: 'auto', width: '100%'}}>
+                                    <h2 className="ppb_title">Browse Our Cars</h2>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,7 +89,7 @@ class HQVehicleFilter extends Component {
                     <div className="standard_wrapper">
                         <div className="page_content_wrapper">
                             <div className="inner">
-                                <form className="car_search_form" method="get">
+                                <form className="car_search_form" method="get" onSubmit={this.onSubmit.bind(this)}>
                                     <div className="car_search_wrapper">
                                         <div className="one_fourth themeborder">
                                             <select
@@ -98,8 +104,9 @@ class HQVehicleFilter extends Component {
                                         </div>
                                         {this.renderFilters()}
                                         <div className="one_fourth last themeborder">
-                                            <input id="car_search_btn" type="submit" className="button"
-                                                   defaultValue="Search" />
+                                            <SubmitButton
+                                                onPress={this.onSubmit.bind(this)}
+                                            />
                                         </div>
                                     </div>
                                 </form>

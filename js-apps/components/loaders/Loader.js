@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { Loader as SuiteLoader } from 'rsuite';
 import { normalLoaderStyles as styles } from './styles';
 class Loader extends PureComponent{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
     render() {
         return(

@@ -4,7 +4,8 @@ class ApiEndpointHandler{
     static baseURL = hqSite;
     static endpoints = {
         availabilityEndpoint : 'wp-json/hqrentals/shortcodes/availability/',
-        vehicleFormEndpoint : 'wp-json/hqrentals/shortcodes/vehicle-filter'
+        vehicleFormEndpoint : 'wp-json/hqrentals/shortcodes/vehicle-filter',
+        availabilityDates : 'wp-json/hqrentals/shortcodes/availability/dates'
 
     };
     static getAvailabilityEndpoint(){
@@ -12,6 +13,9 @@ class ApiEndpointHandler{
     }
     static getVehicleFormFilterEndpoint(){
         return ApiEndpointHandler.baseURL + ApiEndpointHandler.endpoints.vehicleFormEndpoint
+    }
+    static getAvailabilityDates(){
+        return ApiEndpointHandler.baseURL + ApiEndpointHandler.endpoints.availabilityDates
     }
 }
 export default ApiEndpointHandler;

@@ -55,6 +55,10 @@ class HQRentalsWebsiteEndpoints
             'methods' => 'GET',
             'callback' => array($this, 'vehicleFilter'),
         ));
+        register_rest_route('hqrentals', '/shortcodes/availability/dates', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'dates'),
+        ));
     }
 
     public function brand()
@@ -209,6 +213,22 @@ class HQRentalsWebsiteEndpoints
                 return $this->resolveResponse((object)[
                     'fields'    =>  $response->data->data[0]->columns[0],
                     'brands'    =>  $this->brandQuery->brandsPublicInterface(),
+                    'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterface(),
+                ], true);
+            }
+        }catch (Exception $e) {
+            return $this->resolveResponse($e, false);
+        }
+    }
+    public function dates()
+    {
+        try{
+            $connector = new HQRentalsApiConnector();
+            $response = $connector->getVehiclesAvailabilityDates($_GET);
+            var_dump($response);
+            die();
+            if($response->success){
+                return $this->resolveResponse((object)[
                     'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterface(),
                 ], true);
             }

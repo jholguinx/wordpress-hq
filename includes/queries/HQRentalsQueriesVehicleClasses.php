@@ -376,6 +376,10 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             'publicImageLink',
             'order',
             'brandId',
+            'permalink' => array(
+                'property_name' => 'permalink',
+                'values' => get_permalink($vehicle->postId)
+            ),
             'labels' => array(
                 'property_name' => 'labels',
                 'values' => $vehicle->getLabels()

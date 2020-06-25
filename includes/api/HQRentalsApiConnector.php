@@ -112,4 +112,9 @@ class HQRentalsApiConnector{
         $response = wp_remote_get( $this->endpoints->getVehicleClassFormEndpoint(), $this->configuration->getBasicApiConfiguration() );
         return $this->resolver->resolveVehicleForm($response);
     }
+    public function getVehiclesAvailabilityDates($data)
+    {
+        $response = wp_remote_post( $this->endpoints->getAvailabilityDatesEndpoint(), $this->configuration->getBasicApiConfiguration($data) );
+        return $this->resolver->resolveVehicleForm($response);
+    }
 }

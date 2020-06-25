@@ -17,6 +17,13 @@ class ApiConfigurationManager {
             params: BaseAdapter.parseDataForAvailability(startDate, endDate, brandId)
         };
     }
+    getAvailabilityDatesConfig(form){
+        return {
+            url: ApiEndpointHandler.getAvailabilityDates(),
+            method: 'get',
+            params: form
+        };
+    }
     getVehicleFormData(){
         return {
             url: ApiEndpointHandler.getVehicleFormFilterEndpoint(),

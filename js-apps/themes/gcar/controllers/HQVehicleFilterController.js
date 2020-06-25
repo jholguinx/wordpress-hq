@@ -64,12 +64,24 @@ class HQVehicleFilterController extends BaseController{
     getVehicleClassCustomFieldValue(fields){
         let value = '';
         fields.forEach((field) => {
-            value += field.id;
+            value += field.id + ',';
         });
+        
         return value;
     }
-    addCustomFieldsValues(form){
+    onSubmitForm(){
+        this.app.setState({
+            loading: true
+        });
+        this.connector.makeRequest(
+            this.apiConfig.getAvailabilityDatesConfig(this.app.state.form),
+            response => {
+                console.log(response);
+            },
+            error => {
 
+            }
+        )
     }
 }
 export default HQVehicleFilterController;

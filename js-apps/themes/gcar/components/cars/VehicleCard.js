@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
+import ArrayHelper from "../../../../helpers/generic/ArrayHelper";
 
 
 class VehicleCard extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
-
+    renderFeatures(){
+        return ArrayHelper.splice(this.props.vehicle.features, 2).map( ( feature, index ) => {
+            return(
+                <div key={index} className="one_fourth">
+                    <i className={feature.icon} />
+                </div>
+            );
+        })
+    }
     render() {
         return (
             <div id={"hq-vehicle-class-" + this.props.vehicle.id} className="element grid classic4_cols animated1">
@@ -24,23 +33,9 @@ class VehicleCard extends Component {
                                     {this.props.vehicle.name}
                                 </h5>
                             </a>
-                            <div className="car_attribute_rating">
-                                <div className="br-theme-fontawesome-stars-o">
-                                    <div className="br-widget"></div>
-                                </div>
-                                <div className="car_attribute_rating_count">4&nbsp;reviews</div>
-                            </div>
                             <div className="car_attribute_wrapper_icon">
-                                <div className="one_fourth">
-                                    <div className="car_attribute_icon ti-briefcase"/>
-                                    <div className="car_attribute_content">2
-                                    </div>
-                                </div>
-                                <div className="one_fourth">
-                                    <div className="car_attribute_icon ti-panel"/>
-                                    <div className="car_attribute_content">Auto
-                                    </div>
-                                </div>
+                                {this.renderFeatures()}
+
                             </div>
                             <br className="clear"/></div>
                         <div className="car_attribute_price">

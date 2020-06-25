@@ -33,6 +33,7 @@ class HQGCarVehicleFilterShortcode
                 width: 35% !important;
             }
         </style>
+        <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
         <div id="hq-gcar-vehicle-filter"></div>
         <?php
     }

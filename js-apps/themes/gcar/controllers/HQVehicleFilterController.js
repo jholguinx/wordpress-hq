@@ -20,11 +20,15 @@ class HQVehicleFilterController extends BaseController{
                         form: this.setFormValuesOnInit(response),
                     });
                 }else{
-
+                    this.app.setState({
+                        loading:false
+                    });
                 }
             },
             error => {
-                console.log('error');
+                this.app.setState({
+                    loading:false
+                });
             }
         )
     }
@@ -66,7 +70,7 @@ class HQVehicleFilterController extends BaseController{
         fields.forEach((field) => {
             value += field.id + ',';
         });
-        
+
         return value;
     }
     onSubmitForm(){
@@ -76,10 +80,21 @@ class HQVehicleFilterController extends BaseController{
         this.connector.makeRequest(
             this.apiConfig.getAvailabilityDatesConfig(this.app.state.form),
             response => {
-                console.log(response);
+                if(response.data.success){
+                    this.app.setState({
+                        vehicles: response.data.data.vehicles,
+                        loading:false
+                    });
+                }else{
+                    this.app.setState({
+                        loading:false
+                    });
+                }
             },
             error => {
-
+                this.app.setState({
+                    loading:false
+                });
             }
         )
     }

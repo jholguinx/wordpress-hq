@@ -5,6 +5,7 @@ import DisplayValidator from "../../../../helpers/render/DisplayValidator";
 import VehicleCard from "../../components/cars/VehicleCard";
 import Select from "../../components/inputs/Select";
 import SubmitButton from '../../components/buttons/SubmitButton'
+import EmptyListMessage from "../../components/messages/EmptyListMessage";
 
 
 class HQVehicleFilter extends Component {
@@ -49,10 +50,25 @@ class HQVehicleFilter extends Component {
         }
     }
     renderVehicles(){
-        return DisplayValidator.validateArrayAndDisplay(
-            this.state.vehicles,
-            this.state.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle}/>)
-        )
+        if(Array.isArray(this.state.vehicles)){
+            if(this.state.vehicles.length === 0){
+                return (
+                    <EmptyListMessage
+                        message={"There is no vehicles available that match this criteria."}
+                    />
+                )
+            }else{
+                return DisplayValidator.validateArrayAndDisplay(
+                    this.state.vehicles,
+                    this.state.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle}/>)
+                )
+            }
+        }else{
+            return DisplayValidator.validateArrayAndDisplay(
+                this.state.vehicles,
+                this.state.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle}/>)
+            )
+        }
     }
     renderBrandsOption(){
         return this.state.brands.map((brand,index) => <option key={index} value={brand.id}>{brand.name}</option>);

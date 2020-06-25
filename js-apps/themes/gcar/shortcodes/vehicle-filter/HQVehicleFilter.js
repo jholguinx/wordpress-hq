@@ -6,6 +6,7 @@ import VehicleCard from "../../components/cars/VehicleCard";
 import Select from "../../components/inputs/Select";
 import SubmitButton from '../../components/buttons/SubmitButton'
 import EmptyListMessage from "../../components/messages/EmptyListMessage";
+import ImageSpinner from "../../../../components/loaders/ImageSpinner";
 
 
 class HQVehicleFilter extends Component {
@@ -27,19 +28,16 @@ class HQVehicleFilter extends Component {
                 set_default_locations: 'true'
             },
             brands:[],
+            spinner: hqSpinner,
         }
     }
 
     componentDidMount() {
         this.controller.init();
     }
-
-    onPressSubmit() {
-        this.controller.onPressSubmit();
-    }
     renderContent(){
         if(this.state.loading){
-            return (<Loader />);
+            return (<ImageSpinner src={this.state.spinner} />);
         }else{
             return(
                 <div

@@ -1,19 +1,14 @@
 <?php
-/**
- * The main template file for display single post page.
- *
- * @package WordPress
- */
 global $post;
 
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 
+$vehicle = new HQRentalsModelsVehicleClass($post);
 $queryLocations = new HQRentalsQueriesLocations();
 $queryBrands = new HQRentalsQueriesBrands();
 $brand = $queryBrands->getBrand($vehicle->brandId);
-$vehicle = new HQRentalsModelsVehicleClass($post);
 $locations = $queryLocations->allLocations();
 get_header();
 include_once("templates/template-car-header.php");
@@ -68,11 +63,11 @@ include_once("templates/template-car-header.php");
 
                                 <p>
                                     <label for="">Pickup Date</label>
-                                    <input id="hq-pickup-date-input" class="hq-inputs" type="text" autocomplete="off" name="pick_up_date" placeholder="Select Date" required="required" />
+                                    <input id="hq-pickup-date-time-input" class="hq-inputs" type="text" autocomplete="off" name="pick_up_date" placeholder="Select Date" required="required" />
                                 </p>
                                 <p>
                                     <label for="">Return Date</label>
-                                    <input id="hq-return-date-input" class="hq-inputs" type="text" autocomplete="off" name="return_date" placeholder="Select Date" required="required" />
+                                    <input id="hq-return-date-time-input" class="hq-inputs" type="text" autocomplete="off" name="return_date" placeholder="Select Date" required="required" />
                                 </p>
                                 <input type="hidden" name="vehicle_class_id" value="<?php echo $vehicle->id; ?>">
                                 <input type="hidden" name="target_step" value="3">

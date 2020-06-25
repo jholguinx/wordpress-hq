@@ -24,8 +24,15 @@ class HQGCarVehicleFilterShortcode
             'baseURL' => get_site_url() . '/',
         );
         wp_localize_script('hq-gcar-vehicle-filter-js', 'HQGCarVehicleFilter', $dataToJS );
-
         ?>
+        <style>
+            .car_attribute_wrapper{
+                width: 65% !important;
+            }
+            .car_attribute_price{
+                width: 35% !important;
+            }
+        </style>
         <div id="hq-gcar-vehicle-filter"></div>
         <?php
     }

@@ -57,10 +57,13 @@ class HQVehicleFilter extends Component {
         return this.state.brands.map((brand,index) => <option key={index} value={brand.id}>{brand.name}</option>);
     }
     renderFilters(){
-        return this.state.fields.map( (field, index) => <Select key={index} field={field}/> );
+        return this.state.fields.map( (field, index) => <Select key={index} field={field} onChangeField={this.onChangeField.bind(this)}/> );
     }
     onChangeBrand(event){
         this.controller.onChangeBrand(event.target.value);
+    }
+    onChangeField(field, newValue){
+        this.controller.onChangeField(field, newValue);
     }
     render() {
 

@@ -17,16 +17,7 @@ class HQVehicleFilterController extends BaseController{
                         brands: response.data.data.brands,
                         vehicles: response.data.data.vehicles,
                         loading: false,
-                        form: {
-                            brand_id: response.data.data.brands[0].id,
-                            pick_up_time: '12:00',
-                            return_time: '12:00',
-                            pick_up_date: DateHelper.nowDateForSystem(),
-                            return_date: DateHelper.daysFromNowJustDate(1),
-                            //vehicle_class_custom_fields:346,xxx,yyy,zzz
-                            vehicle_class_custom_fields: [],
-                            set_default_locations: 'true'
-                        },
+                        form: this.setFormValuesOnInit(response),
                     });
                 }else{
 
@@ -44,6 +35,41 @@ class HQVehicleFilterController extends BaseController{
                 brand_id: newValue
             }
         })
+    }
+    onChangeField(field, value) {
+        let dataUpdate = {...this.app.state.form};
+        dataUpdate[field.form_name] = value;
+        this.app.setState({
+            form:dataUpdate
+        });
+    }
+
+    setFormValuesOnInit(response){
+        const fields = response.data.data.fields;
+        let data = {
+            brand_id: response.data.data.brands[0].id,
+            pick_up_time: '12:00',
+            return_time: '12:00',
+            pick_up_date: DateHelper.nowDateForSystem(),
+            return_date: DateHelper.daysFromNowJustDate(1),
+            //vehicle_class_custom_fields:346,xxx,yyy,zzz
+            vehicle_class_custom_fields: this.getVehicleClassCustomFieldValue(fields),
+            set_default_locations: 'true',
+        };
+        fields.forEach( field => {
+            data[field.form_name] = Object.entries(field.options)[0][0];
+        } )
+        return data;
+    }
+    getVehicleClassCustomFieldValue(fields){
+        let value = '';
+        fields.forEach((field) => {
+            value += field.id;
+        });
+        return value;
+    }
+    addCustomFieldsValues(form){
+
     }
 }
 export default HQVehicleFilterController;

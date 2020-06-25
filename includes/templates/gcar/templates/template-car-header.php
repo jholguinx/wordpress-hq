@@ -1,3 +1,4 @@
+<script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
 <div id="page_caption"
      class="hasbg"
      style="background-image:url(<?php echo $vehicle->publicImageLink; ?>);"

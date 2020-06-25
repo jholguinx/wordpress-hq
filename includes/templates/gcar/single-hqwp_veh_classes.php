@@ -19,11 +19,10 @@ include_once("templates/template-car-header.php");
         <div class="inner_wrapper">
             <div class="sidebar_content">
                 <h1><?php echo $vehicle->name; ?></h1>
-
                 <div class="single_car_attribute_wrapper themeborder">
-                    <?php foreach ($vehicle->features() as $feature): ?>
+                    <?php foreach (array_splice($vehicle->features(), 0, 3) as $feature): ?>
                         <div class="one_fourth">
-                            <div class="car_attribute_icon ti-user"></div>
+                            <i class="<?php echo $feature->icon; ?>"></i>
                             <div class="car_attribute_content">
                                 <?php echo $feature->getLabelForWebsite(); ?>
                             </div>
@@ -90,6 +89,9 @@ include_once("templates/template-car-header.php");
         }
         label{
             text-align: left;
+        }
+        i{
+            font-size: 24px;
         }
     </style>
 <?php get_footer(); ?>

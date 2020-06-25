@@ -15,6 +15,19 @@ class VehicleCard extends Component {
             );
         })
     }
+    renderPrice(){
+        if(this.props.vehicle.rate.dailyRateAmountForDisplay){
+            return(
+                <div className="car_attribute_price">
+                    <div className="car_attribute_price_day four_cols">
+                                <span
+                                    className="single_car_price">{this.props.vehicle.rate.dailyRateAmountForDisplay}</span>
+                        <span className="car_unit_day">Per Day</span>
+                    </div>
+                </div>
+            );
+        }
+    }
     render() {
         return (
             <div id={"hq-vehicle-class-" + this.props.vehicle.id} className="element grid classic4_cols animated1">
@@ -38,13 +51,7 @@ class VehicleCard extends Component {
 
                             </div>
                             <br className="clear"/></div>
-                        <div className="car_attribute_price">
-                            <div className="car_attribute_price_day four_cols">
-                                <span
-                                    className="single_car_price">{this.props.vehicle.rate.dailyRateAmountForDisplay}</span>
-                                <span className="car_unit_day">Per Day</span>
-                            </div>
-                        </div>
+                        {this.renderPrice()}
                         <br className="clear"/>
                     </div>
                 </div>

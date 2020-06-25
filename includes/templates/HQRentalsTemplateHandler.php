@@ -6,21 +6,33 @@ class HQRentalsTemplateHandler
 {
     public function __construct()
     {
-        add_filter('template_include', array($this, 'addingTemplates'));
+        add_filter('template_include', array($this, 'addingTemplatesPage'),1);
+        add_filter('template_include', array($this, 'addingTemplatesQuote'),2);
+        add_filter('template_include', array($this, 'addingTemplatesSingleGCar'),3);
     }
-
-    public function addingTemplates($defaultTemplate)
+    public function addingTemplatesPage($defaultTemplate)
     {
-        global $post;
         if (is_page('quotes')) {
             load_template(__DIR__ . '/page-quotes.php');
+        }else{
+            return $defaultTemplate;
         }
+    }
+    public function addingTemplatesQuote($defaultTemplate)
+    {
         if (is_page('payments')) {
             load_template(__DIR__ . '/page-payments.php');
+        }else{
+            return $defaultTemplate;
         }
+    }
+    public function addingTemplatesSingleGCar($defaultTemplate)
+    {
+        global $post;
         if($post->post_type === 'hqwp_veh_classes' and is_single()){
             load_template(dirname( __FILE__ ) . '/gcar/single-hqwp_veh_classes.php');
+        }else{
+            return $defaultTemplate;
         }
-        return $defaultTemplate;
     }
 }

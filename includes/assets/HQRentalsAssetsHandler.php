@@ -19,6 +19,7 @@ class HQRentalsAssetsHandler
     protected $systemDateFormatFrontName = 'hqRentalsSystemDateformat';
     protected $workspotLocationsDataName = 'hqWorkspotLocations';
     protected $tenantDatetimeFormatFrontName = 'hqRentalsTenantDatetimeFormat';
+    protected $site = 'hqSite';
 
     public function __construct()
     {
@@ -60,6 +61,7 @@ class HQRentalsAssetsHandler
         wp_register_script( 'hq-map-form-script', plugin_dir_url(__FILE__) . 'js/hq-map-booking-form.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script( 'hq-map-contact-form-script', plugin_dir_url(__FILE__) . 'js/hq-map-contact-form.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script( 'hq-availability-grip-script', plugin_dir_url(__FILE__) . 'js/hq-availability-grid.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script( 'hg-gcar-vehicle-filter-js', plugin_dir_url(__FILE__) . 'js/hq-gcar-vehicle-filter.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-reservation-form-setup', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_enqueue_script('hq-dummy-script');
     }
@@ -96,6 +98,7 @@ class HQRentalsAssetsHandler
 		wp_localize_script('hq-dummy-script', $this->frontDateFormatFrontName, $this->settings->getFrontEndDatetimeFormat());
 		wp_localize_script('hq-dummy-script', $this->systemDateFormatFrontName, $this->settings->getHQDatetimeFormat());
 		wp_localize_script( 'hq-dummy-script', $this->tenantDatetimeFormatFrontName, $this->settings->getTenantDatetimeFormat());
+        wp_localize_script( 'hq-dummy-script', $this->site, $site . '/');
 		/*
 		 * Just for Workspot
 		 * */
@@ -182,5 +185,9 @@ class HQRentalsAssetsHandler
             'HQFormatDate' => $this->settings->getFrontEndDatetimeFormat()
         );
         wp_localize_script('hq-reservation-form-setup', 'HQReservationFormData', $data);
+    }
+    public function gCarVehicleFilterAssets()
+    {
+        wp_enqueue_script('hg-gcar-vehicle-filter-js');
     }
 }

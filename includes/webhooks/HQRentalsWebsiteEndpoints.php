@@ -51,6 +51,10 @@ class HQRentalsWebsiteEndpoints
             'methods' => 'GET',
             'callback' => array($this, 'availability'),
         ));
+        register_rest_route('hqrentals', '/shortcodes/vehicle-filter', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'vehicleFilter'),
+        ));
     }
 
     public function brand()
@@ -195,6 +199,21 @@ class HQRentalsWebsiteEndpoints
         } catch (Exception $e) {
             return $this->resolveResponse($e, false);
         }
+    }
 
+    public function vehicleFilter(){
+        try{
+            $connector = new HQRentalsApiConnector();
+            $response = $connector->getVehicleClassesForm();
+            if($response->success){
+                return $this->resolveResponse((object)[
+                    'fields'    =>  $response->data->data[0]->columns[0],
+                    'brands'    =>  $this->brandQuery->brandsPublicInterface(),
+                    'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterface(),
+                ], true);
+            }
+        }catch (Exception $e) {
+            return $this->resolveResponse($e, false);
+        }
     }
 }

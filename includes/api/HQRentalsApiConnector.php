@@ -107,4 +107,9 @@ class HQRentalsApiConnector{
         $settings->resolveSettingsOnAuth($cleanResponse);
         return $cleanResponse;
     }
+    public function getVehicleClassesForm()
+    {
+        $response = wp_remote_get( $this->endpoints->getVehicleClassFormEndpoint(), $this->configuration->getBasicApiConfiguration() );
+        return $this->resolver->resolveVehicleForm($response);
+    }
 }

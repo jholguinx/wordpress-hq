@@ -148,6 +148,15 @@ class HQRentalsApiCallResolver
         }
     }
 
+    public function resolveVehicleForm($response)
+    {
+        if (is_wp_error($response)) {
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
+        } else {
+            return new HQRentalsApiResponse(null, true, json_decode($response['body']));
+        }
+    }
+
     /**
      * Resolve Locations Data from Workspot API
      * @param $response

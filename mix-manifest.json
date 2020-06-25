@@ -1,5 +1,6 @@
 {
     "/includes/assets/js/hq-availability-grid.js": "/includes/assets/js/hq-availability-grid.js",
+    "/includes/assets/js/hq-gcar-vehicle-filter.js": "/includes/assets/js/hq-gcar-vehicle-filter.js",
     "/includes/assets/js/hq-map-booking-form.js": "/includes/assets/js/hq-map-booking-form.js",
     "/includes/assets/js/hq-map-contact-form.js": "/includes/assets/js/hq-map-contact-form.js"
 }

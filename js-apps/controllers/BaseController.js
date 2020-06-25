@@ -4,10 +4,11 @@ import ArrayHelper from "../helpers/generic/ArrayHelper";
 
 
 class BaseController{
-    constructor() {
+    constructor(app) {
         this.connector = new ApiConnector();
         this.apiConfig = new ApiConfigurationManager();
         this.arrayHelper = new ArrayHelper();
+        this.app = app;
     }
 }
 export default BaseController;

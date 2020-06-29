@@ -88,9 +88,11 @@ class HQRentalsAdminSettings
                                     <h3 class="hq-admin-h3">General Settings</h3>
                                 </div>
                                 <div>
-                                    <button id="hq-login-toogle-button" type="button" class="handlediv" aria-expanded="true" style="display: flex;justify-content: center; align-items: center; margin-left: 20px">
-                                        <i id="hq-login-button-icon" class="fas <?php echo ($okAPI) ? 'fa-angle-down' : 'fa-angle-up'; ?>" aria-hidden="true"></i>
-                                    </button>
+                                    <?php if(!$_GET['dev']): ?>
+                                        <button id="hq-login-toogle-button" type="button" class="handlediv" aria-expanded="true" style="display: flex;justify-content: center; align-items: center; margin-left: 20px">
+                                            <i id="hq-login-button-icon" class="fas <?php echo ($okAPI) ? 'fa-angle-down' : 'fa-angle-up'; ?>" aria-hidden="true"></i>
+                                        </button>
+                                    <?php endif; ?>
                                     <?php if($okAPI): ?>
                                         <style>
                                             .hq-login-wrapper{

@@ -8,9 +8,19 @@
             alert(e);
         }
     });
+    jQuery('#hq-login-toogle-button').on('click', function(){
+        loginActive = !loginActive;
+        jQuery('.hq-login-wrapper').toggle(1000);
+        if(loginActive){
+            jQuery('#hq-login-button-icon').removeClass('fa-angle-down');
+            jQuery('#hq-login-button-icon').addClass('fa-angle-up');
+        }else{
+            jQuery('#hq-login-button-icon').removeClass('fa-angle-up');
+            jQuery('#hq-login-button-icon').addClass('fa-angle-down');
+        }
+    });
     jQuery('#hq-advanced-features-toogle-button').on('click', function(){
         advacedActive = !advacedActive;
-        jQuery('.hq-advanced-section').toggle(1000);
         if(advacedActive){
             jQuery('#hq-advanced-button-icon').removeClass('fa-angle-down');
             jQuery('#hq-advanced-button-icon').addClass('fa-angle-up');
@@ -18,9 +28,9 @@
             jQuery('#hq-advanced-button-icon').removeClass('fa-angle-up');
             jQuery('#hq-advanced-button-icon').addClass('fa-angle-down');
         }
+        jQuery('.hq-advanced-section').toggle(1000);
+
     });
-
-
 })(jQuery);
 function login($){
     var email = $("#hq-email").val();

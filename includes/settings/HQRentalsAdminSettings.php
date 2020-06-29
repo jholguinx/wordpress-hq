@@ -56,15 +56,19 @@ class HQRentalsAdminSettings
             <?php
         } else {
             $this->assets->loadAssetsForAdminSettingPage();
+            $okAPI  = $this->settings->isApiOkay();
             ?>
             <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
+            <script>
+                var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
+            </script>
             <div class="wrap">
                 <div id="wrap">
                     <div class="hq-title-wrapper">
                         <div class="hq-title-item">
                             <h1 class="hq-admin-h1">HQ Rentals Setup</h1>
                         </div>
-                        <?php if ($this->settings->isApiOkay()): ?>
+                        <?php if ($okAPI): ?>
                             <div style="background-color: #28a745; border-radius: 10px; padding: 5px 10px; margin-left: 10px; border: 2px solid #28a745;">
                                 <h6 style="font-size: 16px; line-height: 20px; margin:0px; color: #fff; text-transform: uppercase">
                                     Configured</h6>
@@ -79,7 +83,23 @@ class HQRentalsAdminSettings
 
                     <form action="" method="post">
                         <div class="hq-general-settings-section-wrapper">
-                            <h3 class="hq-admin-h3">General Settings</h3>
+                            <div style="max-width: 800px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center">
+                                <div>
+                                    <h3 class="hq-admin-h3">General Settings</h3>
+                                </div>
+                                <div>
+                                    <button id="hq-login-toogle-button" type="button" class="handlediv" aria-expanded="true" style="display: flex;justify-content: center; align-items: center; margin-left: 20px">
+                                        <i id="hq-login-button-icon" class="fas <?php echo ($okAPI) ? 'fa-angle-down' : 'fa-angle-up'; ?>" aria-hidden="true"></i>
+                                    </button>
+                                    <?php if($okAPI): ?>
+                                        <style>
+                                            .hq-login-wrapper{
+                                                display: none;
+                                            }
+                                        </style>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                             <div class="hq-general-settings-wrapper">
                                 <div class="hq-general-settings-item-wrapper hq-tokens-rows">
                                     <?php if ($_GET['dev']): ?>
@@ -161,7 +181,7 @@ class HQRentalsAdminSettings
                                                 <div class="hq-submit-login-button-wrapper">
                                                     <button id="hq-submit-login-button" type="button" name="save"
                                                             value="Save" class="button button-primary button-large">
-                                                        LOGIN
+                                                        <?php echo ($okAPI) ? 'UPDATE LOGIN' : 'LOGIN'; ?>
                                                     </button>
                                                 </div>
                                             </div>
@@ -551,18 +571,16 @@ class HQRentalsAdminSettings
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="hq-admin-help-section">
-                                        <p>Need help? Please click <strong><a target="_blank"
-                                                                              href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
-                                            more information on how to set up the HQ Rentals plugin.</p>
-                                        <input style="max-width: 64px; margin-left: 20px !important;" type="submit"
-                                               name="save" value="SAVE"
-                                               class="button button-primary button-large hq-admin-submit-button">
-                                    </div>
-                                    <div class="hq-general-settings-item-wrapper">
-                                    </div>
                                 </div>
-
+                            </div>
+                        </div>
+                            <div class="hq-admin-help-section">
+                                <p>Need help? Please click <strong><a target="_blank"
+                                                                      href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
+                                    more information on how to set up the HQ Rentals plugin.</p>
+                                <input style="max-width: 64px; margin-left: 20px !important;" type="submit"
+                                       name="save" value="SAVE"
+                                       class="button button-primary button-large hq-admin-submit-button">
                             </div>
                     </form>
                 </div>

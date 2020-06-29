@@ -42,6 +42,7 @@ class HQRentalsSettings
     public $hq_url_to_replace_on_brands_option = 'hq_url_to_replace_on_brands_option';
     public $hq_default_latitude_for_map_shortcode = 'hq_default_latitude_for_map_shortcode';
     public $hq_default_longitude_for_map_shortcode = 'hq_default_longitude_for_map_shortcode';
+    public $hq_auth_email = 'hq_auth_email';
 
     public function __construct()
     {
@@ -638,5 +639,13 @@ class HQRentalsSettings
         $connector = new HQRentalsApiConnector();
         $apiTestCall = $connector->getHQRentalsBrands();
         return $apiTestCall->success;
+    }
+    public function updateEmail($email)
+    {
+        update_option($this->hq_auth_email, $email);
+    }
+    public function getEmail()
+    {
+        return get_option($this->hq_auth_email, "");
     }
 }

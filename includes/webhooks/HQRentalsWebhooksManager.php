@@ -67,6 +67,8 @@ class HQRentalsWebhooksManager{
     {
         $email = $_GET['email'];
         $password = $_GET['password'];
-        return $this->connector->login($email, $password);
+        $result = $this->connector->login($email, $password);
+        $this->scheduler->refreshHQData();
+        return $result;
     }
 }

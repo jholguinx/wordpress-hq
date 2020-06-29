@@ -87,13 +87,15 @@ class HQVehicleFilterController extends BaseController{
                     });
                 }else{
                     this.app.setState({
-                        loading:false
+                        loading:false,
+                        vehicles: [],
                     });
                 }
             },
             error => {
                 this.app.setState({
-                    loading:false
+                    loading:false,
+                    vehicles: [],
                 });
             }
         )

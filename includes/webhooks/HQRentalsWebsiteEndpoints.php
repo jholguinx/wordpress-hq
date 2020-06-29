@@ -226,12 +226,16 @@ class HQRentalsWebsiteEndpoints
             $connector = new HQRentalsApiConnector();
             $response = $connector->getVehiclesAvailabilityDates($_GET);
             if($response->success){
-                return $this->resolveResponse((object)[
-                    'vehicles'  =>  array_map(function($vehicle){
-                        $vehicle = $this->vehicleClassQuery->getVehicleClassBySystemId($vehicle->vehicle_class_id);
-                        return $this->vehicleClassQuery->vehiclePublicInterface($vehicle);
-                    },$response->data->data->applicable_classes),
-                ], true);
+                if($response->data->data->applicable_classes){
+                    return $this->resolveResponse((object)[
+                        'vehicles'  =>  array_map(function($vehicle){
+                            $vehicle = $this->vehicleClassQuery->getVehicleClassBySystemId($vehicle->vehicle_class_id);
+                            return $this->vehicleClassQuery->vehiclePublicInterface($vehicle);
+                        },$response->data->data->applicable_classes),
+                    ], true);
+                }else{
+                    return [];
+                }
             }
         }catch (Exception $e) {
             return $this->resolveResponse($e, false);

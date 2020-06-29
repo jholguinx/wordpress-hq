@@ -105,6 +105,9 @@ class HQRentalsApiConnector{
         $cleanResponse = $this->resolver->resolveApiCallForAuth($response);
         $settings = new HQRentalsSettings();
         $settings->resolveSettingsOnAuth($cleanResponse);
+        if($cleanResponse->success){
+            $settings->updateEmail($email);
+        }
         return $cleanResponse;
     }
     public function getVehicleClassesForm()

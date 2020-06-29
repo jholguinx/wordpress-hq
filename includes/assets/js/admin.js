@@ -1,4 +1,5 @@
 (function($){
+    var advacedActive = false;
     tippy('#hq-tooltip-tenant-token');
     $('#hq-submit-login-button').on('click', function(){
         try {
@@ -7,6 +8,18 @@
             alert(e);
         }
     });
+    jQuery('#hq-advanced-features-toogle-button').on('click', function(){
+        advacedActive = !advacedActive;
+        jQuery('.hq-advanced-section').toggle(1000);
+        if(advacedActive){
+            jQuery('#hq-advanced-button-icon').removeClass('fa-angle-down');
+            jQuery('#hq-advanced-button-icon').addClass('fa-angle-up');
+        }else{
+            jQuery('#hq-advanced-button-icon').removeClass('fa-angle-up');
+            jQuery('#hq-advanced-button-icon').addClass('fa-angle-down');
+        }
+    });
+
 
 })(jQuery);
 function login($){

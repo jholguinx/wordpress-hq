@@ -62,7 +62,6 @@ class HQVehicleFilterController extends BaseController{
             return_date: DateHelper.daysFromNowJustDate(1),
             //vehicle_class_custom_fields:346,xxx,yyy,zzz
             vehicle_class_custom_fields: this.getVehicleClassCustomFieldValue(fields),
-            set_default_locations: 'true',
         };
         fields.forEach( field => {
             data[field.form_name] = Object.entries(field.options)[0][0];

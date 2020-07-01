@@ -113,7 +113,7 @@ class HQVehicleFilter extends Component {
                                                 id="location"
                                                 name="location"
                                                 onChange={this.onChangeLocation.bind(this)}
-                                                value={this.state.form.brand_id}
+                                                value={this.state.form.pick_up_location}
                                             >
                                             {this.renderLocationsOption()}
                                             </select>

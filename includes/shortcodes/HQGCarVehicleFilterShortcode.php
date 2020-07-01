@@ -41,6 +41,12 @@ class HQGCarVehicleFilterShortcode
                 justify-content: center;
                 align-items: center;
             }
+            .portfolio_filter_wrapper p{
+                padding-bottom:5.0em !important;
+            }
+            .spinner-wrapper img{
+                padding-bottom:5.0em !important;
+            }
         </style>
         <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
         <div id="hq-gcar-vehicle-filter"></div>

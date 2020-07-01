@@ -12,26 +12,30 @@
         loginActive = !loginActive;
         jQuery('.hq-login-wrapper').toggle(1000);
         if(loginActive){
-            jQuery('#hq-login-button-icon').removeClass('fa-angle-down');
-            jQuery('#hq-login-button-icon').addClass('fa-angle-up');
+            onAdvancedNotActive('#hq-login-button-icon');
         }else{
-            jQuery('#hq-login-button-icon').removeClass('fa-angle-up');
-            jQuery('#hq-login-button-icon').addClass('fa-angle-down');
+            onAdvancedActive('#hq-login-button-icon');
         }
     });
     jQuery('#hq-advanced-features-toogle-button').on('click', function(){
         advacedActive = !advacedActive;
         if(advacedActive){
-            jQuery('#hq-advanced-button-icon').removeClass('fa-angle-down');
-            jQuery('#hq-advanced-button-icon').addClass('fa-angle-up');
+            onAdvancedActive('#hq-advanced-button-icon');
         }else{
-            jQuery('#hq-advanced-button-icon').removeClass('fa-angle-up');
-            jQuery('#hq-advanced-button-icon').addClass('fa-angle-down');
+            onAdvancedNotActive('#hq-advanced-button-icon');
         }
         jQuery('.hq-advanced-section').toggle(1000);
 
     });
 })(jQuery);
+function onAdvancedActive(selector){
+    jQuery(selector).removeClass('fa-angle-down');
+    jQuery(selector).addClass('fa-angle-right');
+}
+function onAdvancedNotActive(selector){
+    jQuery(selector).removeClass('fa-angle-right');
+    jQuery(selector).addClass('fa-angle-down');
+}
 function login($){
     var email = $("#hq-email").val();
     var pass = $('#hq-password').val();
@@ -58,7 +62,12 @@ function login($){
                 jQuery("#hq-api-user-token").val(user.api_token);
                 jQuery("#hq-api-tenant-token").val(tenants[0].api_token);
                 jQuery("#hq-api-user-base-url").val(tenants[0].api_link);
-                $('.hq-messages-box-success').slideDown();
+                jQuery("#hq-not-connected-indicator").slideUp(400, function(){
+                    jQuery("#hq-connected-indicator").slideDown();
+                });
+                jQuery('.hq-messages-box-success').slideDown();
+                jQuery('.hq-login-wrapper').toggle(1000);
+                onAdvancedActive('#hq-advanced-button-icon');
             }
         }else{
             $('.hq-messages-box-failed').slideDown();

@@ -68,16 +68,23 @@ class HQRentalsAdminSettings
                         <div class="hq-title-item">
                             <h1 class="hq-admin-h1">HQ Rentals Setup</h1>
                         </div>
+                        <div></div>
                         <?php if ($okAPI): ?>
-                            <div style="background-color: #28a745; border-radius: 10px; padding: 5px 10px; margin-left: 10px; border: 2px solid #28a745;">
-                                <h6 style="font-size: 16px; line-height: 20px; margin:0px; color: #fff; text-transform: uppercase">
-                                    Configured</h6>
+                            <div id="hq-connected-indicator" style="background-color: #28a745; border: 2px solid #28a745;" class="hq-connected-sign">
+                                <h6 class="hq-connected-sign-text">CONNECTED</h6>
                             </div>
                         <?php else: ?>
-                            <div style="background-color: #dc3545; border-radius: 10px; padding: 5px 10px; margin-left: 10px; border: 2px solid #dc3545;">
-                                <h6 style="font-size: 16px; line-height: 20px; margin:0px; color: #fff; text-transform: uppercase">
-                                    Not Configured</h6>
+                            <div id="hq-not-connected-indicator" style="background-color: #dc3545; border: 2px solid #dc3545;" class="hq-connected-sign">
+                                <h6 class="hq-connected-sign-text">NOT CONNECTED</h6>
                             </div>
+                            <div id="hq-connected-indicator" style="background-color: #28a745; border: 2px solid #28a745;" class="hq-connected-sign">
+                                <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                            </div>
+                            <style>
+                                #hq-connected-indicator{
+                                    display: none;
+                                }
+                            </style>
                         <?php endif; ?>
                     </div>
 
@@ -89,8 +96,8 @@ class HQRentalsAdminSettings
                                 </div>
                                 <div>
                                     <?php if(!$_GET['dev']): ?>
-                                        <button id="hq-login-toogle-button" type="button" class="handlediv" aria-expanded="true" style="display: flex;justify-content: center; align-items: center; margin-left: 20px">
-                                            <i id="hq-login-button-icon" class="fas <?php echo ($okAPI) ? 'fa-angle-down' : 'fa-angle-up'; ?>" aria-hidden="true"></i>
+                                        <button id="hq-login-toogle-button"  class="hq-admin-toggle-button" type="button" aria-expanded="true">
+                                            <i id="hq-login-button-icon" class="fas <?php echo ($okAPI) ? 'fa-angle-down' : 'fa-angle-right'; ?>" aria-hidden="true"></i>
                                         </button>
                                     <?php endif; ?>
                                     <?php if($okAPI): ?>
@@ -157,7 +164,8 @@ class HQRentalsAdminSettings
                                                         <h4 class="wp-heading-inline" for="title">Password</h4>
                                                     </div>
                                                     <div class="hq-general-input-wrapper tokens">
-                                                        <input class="hq-admin-text-input"
+                                                        <input
+                                                               class="hq-admin-text-input"
                                                                type="password"
                                                                name="hq-password"
                                                                id="hq-password"
@@ -170,11 +178,6 @@ class HQRentalsAdminSettings
                                                              alt="">
                                                     </div>
                                                 </div>
-                                                <div class="hq-messages-box-success">
-                                                    <div class="alert alert-success" role="alert">
-                                                        The plugin has been successfully setup.
-                                                    </div>
-                                                </div>
                                                 <div class="hq-messages-box-failed">
                                                     <div class="alert alert-danger" role="alert">
                                                         There was an issue, please review your login information.
@@ -183,7 +186,7 @@ class HQRentalsAdminSettings
                                                 <div class="hq-submit-login-button-wrapper">
                                                     <button id="hq-submit-login-button" type="button" name="save"
                                                             value="Save" class="button button-primary button-large">
-                                                        <?php echo ($okAPI) ? 'UPDATE LOGIN' : 'LOGIN'; ?>
+                                                        AUTHENTICATE
                                                     </button>
                                                 </div>
                                             </div>
@@ -204,6 +207,11 @@ class HQRentalsAdminSettings
                                                 id="hq-api-user-base-url"
                                                 spellcheck="true" autocomplete="off">
                                     <?php endif; ?>
+                                    <div class="hq-messages-box-success">
+                                        <div class="alert alert-success" role="alert">
+                                            The plugin has been successfully setup.
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="hq-general-settings-item-wrapper">
                                     <?php if ($_GET['dev']): ?>
@@ -274,81 +282,20 @@ class HQRentalsAdminSettings
                                 </div>
                             </div>
                         </div>
-                        <div style="max-width: 800px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center">
+                        <div class="hq-advanced-feature-section-wrapper">
                             <div>
                                 <h3 class="hq-admin-h3">Advanced Development Settings</h3>
                             </div>
-
                             <div>
-                                <button id="hq-advanced-features-toogle-button" type="button" class="handlediv" aria-expanded="true" style="display: flex;justify-content: center; align-items: center;">
-
+                                <button id="hq-advanced-features-toogle-button" type="button" class="hq-admin-toggle-button" aria-expanded="true">
                                     <i id="hq-advanced-button-icon" class="fas fa-angle-down"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="hq-advanced-section">
                             <style>
-                                #hq-advanced-features-toogle-button{
-                                    width: 20px;
-                                    height: 20px;
-                                    margin-left: 20px;
-                                }
-                                #hq-advanced-features-toogle-button .toggle-indicator{
-                                    content: "\f142";
-                                    display: inline-block;
-                                    font: normal 20px/1 dashicons;
-                                    speak: none;
-                                    -webkit-font-smoothing: antialiased;
-                                    -moz-osx-font-smoothing: grayscale;
-                                    text-decoration: none!important;
-                                }
                                 .hq-advanced-section{
                                     display: none;
-                                }
-                                .postbox {
-                                    position: relative;
-                                    min-width: 255px;
-                                    border: 1px solid #ccd0d4;
-                                    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
-                                    background: #fff;
-                                }
-
-                                .postbox .handlediv {
-                                    float: right;
-                                    width: 36px;
-                                    height: 36px;
-                                    margin: 0;
-                                    padding: 0;
-                                    border: 0;
-                                    background: 0 0;
-                                    cursor: pointer;
-                                }
-
-                                .accordion-section-title:after, .handlediv, .item-edit, .postbox .handlediv.button-link, .toggle-indicator {
-                                    color: #72777c;
-                                }
-
-                                .screen-reader-text, .screen-reader-text span, .ui-helper-hidden-accessible {
-                                    border: 0;
-                                    clip: rect(1px, 1px, 1px, 1px);
-                                    -webkit-clip-path: inset(50%);
-                                    clip-path: inset(50%);
-                                    height: 1px;
-                                    margin: -1px;
-                                    overflow: hidden;
-                                    padding: 0;
-                                    position: absolute;
-                                    width: 1px;
-                                    word-wrap: normal !important;
-                                }
-                                .postbox .handlediv.button-link, .toggle-indicator {
-                                    color: #72777c;
-                                }
-                                button{
-                                    box-sizing: border-box;
-                                    font-family: inherit;
-                                    font-size: inherit;
-                                    font-weight: inherit;
                                 }
                             </style>
                             <div class="hq-general-settings-wrapper">

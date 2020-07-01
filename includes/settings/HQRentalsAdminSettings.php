@@ -522,15 +522,15 @@ class HQRentalsAdminSettings
                                     </div>
                                 </div>
                             </div>
-                        </div>
                             <div class="hq-admin-help-section">
-                                <p>Need help? Please click <strong><a target="_blank"
-                                                                      href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
-                                    more information on how to set up the HQ Rentals plugin.</p>
-                                <input style="max-width: 64px; margin-left: 20px !important;" type="submit"
+                                <input style="max-width: 64px;" type="submit"
                                        name="save" value="SAVE"
                                        class="button button-primary button-large hq-admin-submit-button">
+                                <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
+                                                                      href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
+                                    more information on how to set up the HQ Rentals plugin.</p>
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>

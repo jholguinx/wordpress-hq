@@ -17,6 +17,7 @@ class HQRentalsWebsiteEndpoints
         $this->featuresQuery = new HQRentalsQueriesFeatures();
         $this->vehicleClassQuery = new HQRentalsQueriesVehicleClasses();
         $this->brandQuery = new HQRentalsQueriesBrands();
+        $this->locationsQuery = new HQRentalsQueriesLocations();
         add_action('rest_api_init', array($this, 'setEndpoints'));
     }
 
@@ -214,6 +215,7 @@ class HQRentalsWebsiteEndpoints
                     'fields'    =>  $response->data->data[0]->columns[0],
                     'brands'    =>  $this->brandQuery->brandsPublicInterface(),
                     'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterface(),
+                    'locations' =>  $this->locationsQuery->locationsPublicInterface(),
                 ], true);
             }
         }catch (Exception $e) {

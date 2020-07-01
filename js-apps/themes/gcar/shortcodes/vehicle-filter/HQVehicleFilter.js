@@ -17,7 +17,10 @@ class HQVehicleFilter extends Component {
             loading: false,
             fields: [],
             vehicles: [],
+            locations: [],
             form: {
+                pick_up_location: '',
+                return_location: '',
                 brand_id: '',
                 pick_up_time: '',
                 return_time: '',
@@ -68,14 +71,14 @@ class HQVehicleFilter extends Component {
             )
         }
     }
-    renderBrandsOption(){
-        return this.state.brands.map((brand,index) => <option key={index} value={brand.id}>{brand.name}</option>);
+    renderLocationsOption(){
+        return this.state.locations.map((location,index) => <option key={index} value={location.id}>{location.name}</option>);
     }
     renderFilters(){
         return this.state.fields.map( (field, index) => <Select key={index} field={field} onChangeField={this.onChangeField.bind(this)}/> );
     }
-    onChangeBrand(event){
-        this.controller.onChangeBrand(event.target.value);
+    onChangeLocation(event){
+        this.controller.onChangeLocation(event.target.value);
     }
     onChangeField(field, newValue){
         this.controller.onChangeField(field, newValue);
@@ -107,12 +110,12 @@ class HQVehicleFilter extends Component {
                                     <div className="car_search_wrapper">
                                         <div className="one_fourth themeborder">
                                             <select
-                                                id="brand"
-                                                name="brand"
-                                                onChange={this.onChangeBrand.bind(this)}
+                                                id="location"
+                                                name="location"
+                                                onChange={this.onChangeLocation.bind(this)}
                                                 value={this.state.form.brand_id}
                                             >
-                                            {this.renderBrandsOption()}
+                                            {this.renderLocationsOption()}
                                             </select>
                                             <span className="ti-angle-down"/>
                                         </div>

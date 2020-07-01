@@ -32,6 +32,15 @@ class HQGCarVehicleFilterShortcode
             .car_attribute_price{
                 width: 35% !important;
             }
+            .car_attribute_price_day.four_cols .single_car_price{
+                font-size: 21px !important;
+            }
+            .feature-wrapper{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
         </style>
         <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
         <div id="hq-gcar-vehicle-filter"></div>

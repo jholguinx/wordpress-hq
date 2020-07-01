@@ -9,8 +9,10 @@ class VehicleCard extends Component {
     renderFeatures(){
         return ArrayHelper.splice(this.props.vehicle.features, 2).map( ( feature, index ) => {
             return(
-                <div key={index} className="one_fourth">
+                <div key={index} className="one_fourth feature-wrapper">
                     <i className={feature.icon} />
+                    <div className="car_attribute_content">{feature.label}
+                    </div>
                 </div>
             );
         })

@@ -18,6 +18,7 @@ class HQVehicleFilterController extends BaseController{
                         vehicles: response.data.data.vehicles,
                         loading: false,
                         form: this.setFormValuesOnInit(response),
+                        locations: response.data.data.locations
                     });
                 }else{
                     this.app.setState({
@@ -32,11 +33,12 @@ class HQVehicleFilterController extends BaseController{
             }
         )
     }
-    onChangeBrand(newValue){
+    onChangeLocation(newValue){
         this.app.setState({
             form: {
                 ...this.app.state.form,
-                brand_id: newValue
+                pick_up_location: newValue,
+                return_location: newValue
             }
         })
     }
@@ -54,6 +56,8 @@ class HQVehicleFilterController extends BaseController{
             brand_id: response.data.data.brands[0].id,
             pick_up_time: '12:00',
             return_time: '12:00',
+            pick_up_location: response.data.data.locations[0].id,
+            return_location: response.data.data.locations[0].id,
             pick_up_date: DateHelper.nowDateForSystem(),
             return_date: DateHelper.daysFromNowJustDate(1),
             //vehicle_class_custom_fields:346,xxx,yyy,zzz

@@ -4,24 +4,76 @@ global $post;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 
 $vehicle = new HQRentalsModelsVehicleClass($post);
 $queryLocations = new HQRentalsQueriesLocations();
 $queryBrands = new HQRentalsQueriesBrands();
+$queryVehicles = new HQRentalsQueriesVehicleClasses();
 $brand = $queryBrands->getBrand($vehicle->brandId);
 $locations = $queryLocations->allLocations();
+$similarCars = $queryVehicles->getVehicleClassFilterByCustomField('f268', $vehicle->getCustomField('f268'));
 get_header();
 include_once("templates/template-car-header.php");
 ?>
-    <div class="inner">
+    <style>
+        .hq-feature-wrapper{
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            width: 20% !important;
+        }
+        .single_car_attribute_wrapper .car_attribute_content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hq-feature-wrapper .car_attribute_content{
+            margin-left: 20px;
+        }
+        .feature-wrapper{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hq-inputs{
+            width: 100%;
+        }
+        label{
+            text-align: left;
+        }
+        i{
+            font-size: 24px;
+        }
+        .car_attribute_price_day.three_cols .single_car_price{
+            font-size: 30px !important;
+        }
+        .single_car_attribute_wrapper .fa,.single_car_attribute_wrapper .fas{
+            font-size: 30px !important;
+        }
+        .wrapper{
+            max-width: 1425px;
+            width: 100%;
+            box-sizing: border-box;
+            margin: auto;
+            padding: 0 90px;
+            height: 100%;
+        }
+        .inner{
+            padding-bottom: 50px;
+        }
+    </style>
+    <div id="vehicle-class-<?php echo $vehicle->id; ?>" class="inner">
 
         <!-- Begin main content -->
         <div class="inner_wrapper">
             <div class="sidebar_content">
                 <h1><?php echo $vehicle->name; ?></h1>
                 <div class="single_car_attribute_wrapper themeborder">
-                    <?php foreach (array_splice($vehicle->features(), 0, 3) as $feature): ?>
-                        <div class="one_fourth">
+                    <?php foreach (array_splice($vehicle->features(), 0, 4) as $feature): ?>
+                        <div class="one_fourth hq-feature-wrapper">
                             <i class="<?php echo $feature->icon; ?>"></i>
                             <div class="car_attribute_content">
                                 <?php echo $feature->getLabelForWebsite(); ?>
@@ -32,7 +84,10 @@ include_once("templates/template-car-header.php");
                 <br class="clear"/>
 
                 <div class="single_car_content">
-                    <?php $vehicle->getDescription(); ?>
+                    <?php echo $vehicle->getShortDescription(); ?>
+                </div>
+                <div class="single_car_departure_wrapper themeborder">
+                    <?php echo $vehicle->getDescription(); ?>
                 </div>
             </div>
 
@@ -81,17 +136,47 @@ include_once("templates/template-car-header.php");
 
         </div>
         <!-- End main content -->
+
     </div>
+
     </div>
-    <style>
-        .hq-inputs{
-            width: 100%;
-        }
-        label{
-            text-align: left;
-        }
-        i{
-            font-size: 24px;
-        }
-    </style>
+<?php if($similarCars): ?>
+    <div class="wrapper">
+        <div class="car_related" style="margin-top: 30px;">
+            <h3 class="sub_title">Similar cars</h3>
+            <div id="portfolio_filter_wrapper" class="gallery classic three_cols portfolio-content section content clearfix" data-columns="3">
+                <?php foreach(array_splice($similarCars, 0, 3) as $vehicle): ?>
+                    <div class="element grid classic3_cols">
+                        <div class="one_third gallery3 classic static filterable portfolio_type themeborder" data-id="post-246">
+                            <a class="car_image" href="http://drivve.co.za/wordpress/car/bmw-7-series/">
+                                <img src="<?php echo $vehicle->publicImageLink; ?>">
+                            </a>
+                            <div class="portfolio_info_wrapper">
+                                <div class="car_attribute_wrapper">
+                                    <a class="car_link" href="<?php echo get_permalink($vehicle->postId); ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
+                                    <div class="car_attribute_wrapper_icon">
+                                        <?php foreach(array_splice($vehicle->features(), 0 , 2) as $feature): ?>
+                                            <div class="one_fourth feature-wrapper">
+                                                <i class="<?php echo $feature->icon; ?>" aria-hidden="true"></i>
+                                                <div class="car_attribute_content"><?php echo $feature->getLabelForWebsite(); ?></div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div><br class="clear">
+                                </div>
+                                <div class="car_attribute_price">
+                                    <div class="car_attribute_price_day three_cols">
+                                        <span class="single_car_currency">R</span><span class="single_car_price"><?php echo $vehicle->rate()->getFormattedDailyRate(); ?></span>			        				<span class="car_unit_day">Per Day</span>
+                                    </div>
+                                </div>
+                                <br class="clear">
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+
 <?php get_footer(); ?>

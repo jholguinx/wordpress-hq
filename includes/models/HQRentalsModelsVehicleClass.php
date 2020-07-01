@@ -482,7 +482,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getFeaturesPublicInterface()
     {
         $queryFeatures = new HQRentalsQueriesFeatures();
-        return $queryFeatures->featuresPublicInterface($this->features());
+        return $queryFeatures->featuresPublicInterfaceWithLocale($this->features());
     }
     public function getRatePublicInterface()
     {

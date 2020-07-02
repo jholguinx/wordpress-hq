@@ -14,8 +14,13 @@ class HQRentalsApiConfiguration
     public function authApiConfiguration($data)
     {
         return array(
-            'body'      =>  $data,
-            'timeout'   =>  10
+            'body'      =>  array_merge(
+                $data,
+                array(
+                    'check_other_regions'   =>  'true'
+                )
+            ),
+            'timeout'   =>  30
         );
     }
     public function getBasicApiConfiguration( $data = null )
@@ -26,7 +31,7 @@ class HQRentalsApiConfiguration
                     'Authorization' => 'Basic ' . $this->settings->getApiEncodedToken()
                 ),
                 'body'      =>  $data,
-                'timeout'   =>  10
+                'timeout'   =>  20
             );
         }
         return array(

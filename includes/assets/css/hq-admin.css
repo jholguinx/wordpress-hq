@@ -19,11 +19,12 @@
 
 .hq-admin-text-input, .hq-admin-select-input {
     height: 35px !important;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
     border-radius: 5px;
 }
 .hq-admin-select-input{
-    max-width: 150px;
+    width: 100%;
 }
 .hq-general-input-wrapper {
     display: flex;
@@ -40,7 +41,7 @@
 }
 
 .small {
-    max-width: 50px;
+    max-width: 50px !important;
 }
 .tokens{
     flex: 4;
@@ -59,12 +60,22 @@
     flex:  65 !important;
 }
 .hq-admin-warning-section {
-    max-width: 500px;
+    max-width: 800px;
 }
 
 .hq-admin-help-section, .hq-admin-help-section {
     padding-top: 25px;
     padding-bottom: 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.hq-admin-select-input{
+    width: 100%;
+}
+.button-large{
+    width: 120px;
+    height: 32px;
 }
 
 .hq-admin-warning-section p, .hq-admin-help-section p {
@@ -95,4 +106,101 @@
 }
 .hq-admin-text-input-small-medium{
     max-width: 120px;
+}
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+.hq-admin-h1{
+    padding: 0px !important;
+}
+.hq-messages-box-success, .hq-messages-box-failed{
+    display: none;
+}
+.hq-messages-box-success{
+    margin-top: 20px;
+}
+.hq-title-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.hq-title-item{
+}
+.hq-loader{
+    display: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.hq-loader-inner-wrapper{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-content: center;
+}
+.hq-submit-login-button-wrapper{
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    align-content: center;
+}
+.hq-admin-submit-button{
+    margin-left: 20px;
+}
+.hq-admin-toggle-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    width: 20px;
+    height: 20px;
+}
+button{
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+.hq-advanced-feature-section-wrapper{
+    max-width: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.hq-connected-sign{
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+.hq-connected-sign-text{
+    font-size: 16px;
+    line-height: 20px;
+    margin:0px;
+    color: #fff;
+    text-transform: uppercase;
 }

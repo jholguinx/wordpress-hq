@@ -1,6 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsApi;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 
 class HQRentalsApiEndpoint{
     private static $authURL = 'https://api.caagcrm.com/api/auth?check_other_regions=true';
@@ -8,6 +9,7 @@ class HQRentalsApiEndpoint{
     public function __construct()
     {
         $this->settings = new HQRentalsSettings();
+
     }
 
     public function getAvailabilityEndpoint()
@@ -93,9 +95,19 @@ class HQRentalsApiEndpoint{
         );
         return $this->settings->getApiBaseUrl() . 'car-rental/websites/register?' . http_build_query($args);
     }
-    public function getAuthEndpoint(){
+    public function getAuthEndpoint()
+    {
         return HQRentalsApiEndpoint::$authURL;
     }
-
-
+    public function getVehicleClassFormEndpoint()
+    {
+        $query = new HQRentalsQueriesVehicleClasses();
+        $vehicles = $query->allVehicleClasses();
+        $vehicle = $vehicles[0];
+        return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes/'. $vehicle->id .'/form';
+    }
+    public function getAvailabilityDatesEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'car-rental/reservations/dates';
+    }
 }

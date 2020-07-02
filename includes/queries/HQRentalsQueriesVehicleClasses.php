@@ -120,15 +120,19 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             array(
                 'meta_query' => array(
                     array(
-                        'key' => 'hq_wordpress_vehicle_class_id_meta',
-                        'value' => $hqId,
-                        'compare' => '='
+                        'key'       => 'hq_wordpress_vehicle_class_id_meta',
+                        'value'     => $hqId,
+                        'compare'   => '='
                     )
                 )
             )
         );
         $query = new \WP_Query($args);
-        return new HQRentalsModelsVehicleClass($query->posts[0]);
+        if($query->posts[0]){
+            return new HQRentalsModelsVehicleClass($query->posts[0]);
+        }else{
+            return null;
+        }
     }
 
     /**
@@ -372,6 +376,10 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             'publicImageLink',
             'order',
             'brandId',
+            'permalink' => array(
+                'property_name' => 'permalink',
+                'values' => get_permalink($vehicle->postId)
+            ),
             'labels' => array(
                 'property_name' => 'labels',
                 'values' => $vehicle->getLabels()

@@ -97,8 +97,7 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
             )
         );
         $query = new \WP_Query($args);
-        $brand = new HQRentalsModelsBrand($query->posts[0]);
-        return $brand;
+        return new HQRentalsModelsBrand($query->posts[0]);
     }
 
 }

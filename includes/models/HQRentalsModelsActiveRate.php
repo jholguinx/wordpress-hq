@@ -219,6 +219,10 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     {
         return $this->formatRateForDisplay($this->dailyRate->amount);
     }
+    public function getDailyRateAmountForDisplay()
+    {
+        return $this->dailyRate->amount_for_display;
+    }
     public function getFormattedDailyRateAsNumber(){
         return (float)$this->getFormattedDailyRate();
     }
@@ -265,6 +269,11 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     {
         $data = new \stdClass();
         $data->dailyRate = $this->getFormattedDailyRate();
+        $data->dailyRateAmountForDisplay = $this->getDailyRateAmountForDisplay();
         return $data;
+    }
+    public function getDailyRateObject()
+    {
+        return $this->dailyRate;
     }
 }

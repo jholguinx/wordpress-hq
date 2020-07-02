@@ -1,15 +1,5 @@
 const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
 mix.setPublicPath('../');
 mix.webpackConfig({
     resolve: {
@@ -32,3 +22,5 @@ mix.webpackConfig({
 });
 mix.react('shortcodes/map-form/App.js', 'includes/assets/js/hq-map-booking-form.js');
 mix.react('shortcodes/map-form/AppForm.js', 'includes/assets/js/hq-map-contact-form.js');
+mix.react('shortcodes/availability-grid/App.js', 'includes/assets/js/hq-availability-grid.js');
+mix.react('themes/gcar/shortcodes/vehicle-filter/App.js', 'includes/assets/js/hq-gcar-vehicle-filter.js');

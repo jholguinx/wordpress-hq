@@ -29,6 +29,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     protected $metaMyPackagesReservationsLink = 'hq_wordpress_brand_my_packages_reservation_link';
     protected $metaPublicCalendarLink = 'hq_wordpress_brand_public_calendar_link';
     protected $metaIntegrationSnippetsReservations = 'hq_wordpress_brand_integration_snippets_reservations';
+    protected $metaIntegrationSnippetsReservationForm = 'hq_wordpress_brand_integration_snippets_reservation_form';
     protected $metaIntegrationSnippetsQuotes = 'hq_wordpress_brand_integration_snippets_quotes';
     protected $metaIntegrationSnippetsPackageQuotes = 'hq_wordpress_brand_integration_snippets_packages_quotes';
     protected $metaIntegrationSnippetsPaymentRequest = 'hq_wordpress_brand_integration_snippets_payment_requests';
@@ -50,6 +51,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     public $publicCalendarLink = '';
     public $metaBrandId = 'hq_wordpress_brand_id_meta';
     public $snippetReservations = '';
+    public $snippetReservationForm = '';
     public $snippetQuotes = '';
     public $snippetPackageQuote = '';
     public $snippetPaymentRequest = '';
@@ -123,6 +125,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->websiteLink = $data->website_link;
         $snippetData = (array) $data->integration_snippets;
         $this->snippetReservations = htmlspecialchars($snippetData['reservations']);
+        $this->snippetReservationForm = htmlspecialchars($snippetData['reservation-form']);
         $this->snippetQuotes = htmlspecialchars($snippetData['quotes']);
         $this->snippetPackageQuote = htmlspecialchars($snippetData['package-quotes']);
         $this->snippetPaymentRequest = htmlspecialchars($snippetData['payment-request']);
@@ -173,6 +176,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         hq_update_post_meta( $post_id, $this->metaMyPackagesReservationsLink, $this->myPackagesReservationsLink );
         hq_update_post_meta( $post_id, $this->metaPublicCalendarLink, $this->publicCalendarLink );
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsReservations, $this->snippetReservations );
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsReservationForm, $this->snippetReservationForm );
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsQuotes, $this->snippetQuotes);
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPackageQuotes, $this->snippetPackageQuote );
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPaymentRequest, $this->snippetPaymentRequest );
@@ -218,6 +222,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->myPackagesReservationsLink = get_post_meta(  $id, $this->metaMyPackagesReservationsLink, true );
         $this->publicCalendarLink = get_post_meta( $id, $this->metaPublicCalendarLink, true );
         $this->snippetReservations = htmlspecialchars_decode(get_post_meta( $id, $this->metaIntegrationSnippetsReservations, true ));
+        $this->snippetReservationForm = htmlspecialchars_decode(get_post_meta( $id, $this->metaIntegrationSnippetsReservationForm, true ));
         $this->snippetQuotes = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsQuotes, true ) );
         $this->snippetPackageQuote = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPackageQuotes, true ) );
         $this->snippetPaymentRequest = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPaymentRequest, true ));
@@ -254,5 +259,25 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $url_info = parse_url($url);
         $baseURL = $url_info["host"];
         return str_replace($baseURL, $replacement, $url);
+    }
+    public function getReservationSnippet()
+    {
+        return $this->snippetReservations;
+    }
+    public function getReservationFormSnippet()
+    {
+        return $this->snippetReservationForm;
+    }
+    public function getQuoteSnippet()
+    {
+        return $this->snippetQuotes;
+    }
+    public function getPackageSnippet()
+    {
+        return $this->snippetPackageQuote;
+    }
+    public function getPaymentRequestSnippet()
+    {
+        return $this->snippetPaymentRequest;
     }
 }

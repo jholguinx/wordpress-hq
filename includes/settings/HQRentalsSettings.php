@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsSettings;
 
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsEncryptionHandler;
@@ -41,6 +42,7 @@ class HQRentalsSettings
     public $hq_url_to_replace_on_brands_option = 'hq_url_to_replace_on_brands_option';
     public $hq_default_latitude_for_map_shortcode = 'hq_default_latitude_for_map_shortcode';
     public $hq_default_longitude_for_map_shortcode = 'hq_default_longitude_for_map_shortcode';
+    public $hq_auth_email = 'hq_auth_email';
 
     public function __construct()
     {
@@ -614,5 +616,36 @@ class HQRentalsSettings
         }else{
             $_POST['forcing_update'] = $res;
         }
+    }
+    public function resolveSettingsOnAuth($response)
+    {
+        if($response->data->success){
+            $tenants = $response->data->data->tenants;
+            if(is_array($tenants)){
+                $link = $response->data->data->tenants[0]->api_link;
+                $userToken = $response->data->data->user->api_token;
+                $tenantToken = $response->data->data->tenants[0]->api_token;
+                if($link and $userToken and $tenants){
+                    $this->saveApiBaseUrl($link);
+                    $this->saveApiTenantToken($tenantToken);
+                    $this->saveApiUserToken($userToken);
+                    $this->saveEncodedApiKey($tenantToken, $userToken);
+                }
+            }
+        }
+    }
+    public function isApiOkay()
+    {
+        $connector = new HQRentalsApiConnector();
+        $apiTestCall = $connector->getHQRentalsBrands();
+        return $apiTestCall->success;
+    }
+    public function updateEmail($email)
+    {
+        update_option($this->hq_auth_email, $email);
+    }
+    public function getEmail()
+    {
+        return get_option($this->hq_auth_email, "");
     }
 }

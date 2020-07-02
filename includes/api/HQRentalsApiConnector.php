@@ -14,7 +14,6 @@ class HQRentalsApiConnector{
         $this->endpoints = new HQRentalsApiEndpoint();
         $this->configuration = new HQRentalsApiConfiguration();
         $this->resolver = new HQRentalsApiCallResolver();
-        $this->settings = new HQRentalsSettings();
     }
     public function getHQRentalsAvailability($data)
     {
@@ -100,9 +99,25 @@ class HQRentalsApiConnector{
     {
         $data = array(
             'email' =>  $email,
-            'password' => $password
+            'password' => $password,
         );
         $response = wp_remote_post($this->endpoints->getAuthEndpoint(), $this->configuration->authApiConfiguration($data));
-        return $this->resolver->resolveApiCallForAuth($response);
+        $cleanResponse = $this->resolver->resolveApiCallForAuth($response);
+        $settings = new HQRentalsSettings();
+        $settings->resolveSettingsOnAuth($cleanResponse);
+        if($cleanResponse->success){
+            $settings->updateEmail($email);
+        }
+        return $cleanResponse;
+    }
+    public function getVehicleClassesForm()
+    {
+        $response = wp_remote_get( $this->endpoints->getVehicleClassFormEndpoint(), $this->configuration->getBasicApiConfiguration() );
+        return $this->resolver->resolveVehicleForm($response);
+    }
+    public function getVehiclesAvailabilityDates($data)
+    {
+        $response = wp_remote_post( $this->endpoints->getAvailabilityDatesEndpoint(), $this->configuration->getBasicApiConfiguration($data) );
+        return $this->resolver->resolveVehicleForm($response);
     }
 }

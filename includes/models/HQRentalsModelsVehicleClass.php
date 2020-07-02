@@ -393,6 +393,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         if (!empty($forcedLocale)) {
             return $this->labels[$forcedLocale];
         } else {
+            if($this->locale->language === "zh"){
+                return $this->labels["zh-Hans"];
+            }
             return $this->labels[$this->locale->language];
         }
     }
@@ -479,7 +482,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getFeaturesPublicInterface()
     {
         $queryFeatures = new HQRentalsQueriesFeatures();
-        return $queryFeatures->featuresPublicInterface($this->features());
+        return $queryFeatures->featuresPublicInterfaceWithLocale($this->features());
     }
     public function getRatePublicInterface()
     {

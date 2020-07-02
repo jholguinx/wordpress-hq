@@ -7,7 +7,6 @@ import Hidden from "../components/inputs/Hidden";
 import DatePicker from "../components/inputs/DatePicker";
 import moment from 'moment';
 import { APP_DATE_ONLY_FORMAT } from "../App";
-import business from 'moment-business';
 class HQBookingForm extends PureComponent{
     constructor(props){
         super(props);
@@ -52,7 +51,9 @@ class HQBookingForm extends PureComponent{
             form: {
                 ...this.state.form,
                 pickupDate: moment().add(2,'days').format(APP_DATE_ONLY_FORMAT),
-                returnDate: moment().add(9,'days').format(APP_DATE_ONLY_FORMAT)
+                returnDate: moment().add(9,'days').format(APP_DATE_ONLY_FORMAT),
+                pickupTime: '08:00am',
+                returnTime: '08:00am',
             },
             backgroundStyle: {
                 backgroundImage: 'url(' + image + ')'

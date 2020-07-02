@@ -23,5 +23,12 @@ class HQRentalsShortcoder
         $this->calendarShortcode = new HQRentalsAvailabilityCalendarShortcode();
         $this->mapShortcode = new HQRentalsMapShortcode();
         $this->karzoomMapBookForm = new HQRentalsMapBookingForm();
+        $this->availabilityGrid = new HQRentalsAvailabilityGridShortcode();
+        $this->reservationSnippet = new HQRentalsReservationsSnippetShortcode();
+        $this->reservationFormSnippet = new HQRentalsReservationFormSnippetShortcode();
+        $this->quoteSnippet = new HQRentalsQuoteSnippetShortcode();
+        $this->packageSnippet = new HQRentalsPackageSnippetShortcode();
+        $this->paymentSnippet = new HQRentalsPaymentSnippetShortcode();
+        $this->gCarVehicleFilterShortcode = new HQGCarVehicleFilterShortcode();
     }
 }

@@ -24,4 +24,5 @@ class HQRentalsQueriesActiveRates{
         }
         return $data;
     }
+
 }

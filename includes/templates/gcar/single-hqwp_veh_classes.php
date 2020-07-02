@@ -45,7 +45,7 @@ include_once("templates/template-car-header.php");
             text-align: left;
         }
         i{
-            font-size: 24px;
+            font-size: 24px !important;
         }
         .car_attribute_price_day.three_cols .single_car_price{
             font-size: 30px !important;

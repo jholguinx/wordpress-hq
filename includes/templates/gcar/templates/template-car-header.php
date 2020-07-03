@@ -13,10 +13,12 @@
         <div class="standard_wrapper">
             <?php if($vehicle->rate()->getDailyRateAmountForDisplay()): ?>
                 <div class="single_car_header_price">
-                <span id="single_car_price"><span
-                            class="single_car_price"><?php echo $vehicle->rate()->getDailyRateAmountForDisplay(); ?></span></span>
+                <span id="single_car_price">
+                    <span class="single_car_currency">R</span>
+                    <span
+                            class="single_car_price"><?php echo $vehicle->rate()->getFormattedDailyRate(); ?></span></span>
                     <span id="single_car_price_per_unit_change" class="single_car_price_per_unit">
-					<span id="single_car_unit">/ Per Day</span>
+					<span id="single_car_unit">Per Day</span>
 				</span>
                 </div>
             <?php endif; ?>

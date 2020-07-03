@@ -123,6 +123,7 @@ class HQVehicleFilter extends Component {
                                         <div className="one_fourth last themeborder">
                                             <SubmitButton
                                                 onPress={this.onSubmit.bind(this)}
+                                                textButton="Search"
                                             />
                                         </div>
                                     </div>

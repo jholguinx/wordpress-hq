@@ -48,7 +48,7 @@ include_once("templates/template-car-header.php");
             font-size: 24px !important;
         }
         .car_attribute_price_day.three_cols .single_car_price{
-            font-size: 30px !important;
+            font-size: 28px !important;
         }
         .single_car_attribute_wrapper .fa,.single_car_attribute_wrapper .fas{
             font-size: 30px !important;
@@ -129,6 +129,7 @@ include_once("templates/template-car-header.php");
                             </form>
                         </div>
                     </div>
+                    <a id="single_car_share_button" href="javascript:;" class="button ghost themeborder"><span class="ti-email"></span>Share this car</a>
                 </div>
                 <br class="clear"/>
                 <div class="sidebar_bottom"></div>
@@ -141,6 +142,7 @@ include_once("templates/template-car-header.php");
 
     </div>
 <?php if($similarCars): ?>
+    <?php $permalink = get_permalink($vehicle->postId); ?>
     <div class="wrapper">
         <div class="car_related" style="margin-top: 30px;">
             <h3 class="sub_title">Similar cars</h3>
@@ -148,12 +150,12 @@ include_once("templates/template-car-header.php");
                 <?php foreach(array_splice($similarCars, 0, 3) as $vehicle): ?>
                     <div class="element grid classic3_cols">
                         <div class="one_third gallery3 classic static filterable portfolio_type themeborder" data-id="post-246">
-                            <a class="car_image" href="http://drivve.co.za/wordpress/car/bmw-7-series/">
+                            <a class="car_image" href="<?php echo $permalink; ?>">
                                 <img src="<?php echo $vehicle->publicImageLink; ?>">
                             </a>
                             <div class="portfolio_info_wrapper">
                                 <div class="car_attribute_wrapper">
-                                    <a class="car_link" href="<?php echo get_permalink($vehicle->postId); ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
+                                    <a class="car_link" href="<?php echo $permalink; ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
                                     <div class="car_attribute_wrapper_icon">
                                         <?php foreach(array_splice($vehicle->features(), 0 , 2) as $feature): ?>
                                             <div class="one_fourth feature-wrapper">

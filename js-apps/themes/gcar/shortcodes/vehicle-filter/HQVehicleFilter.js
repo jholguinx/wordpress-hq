@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import HQVehicleFilterController from "../../controllers/HQVehicleFilterController";
-import Loader from '../../../../components/loaders/Loader';
 import DisplayValidator from "../../../../helpers/render/DisplayValidator";
 import VehicleCard from "../../components/cars/VehicleCard";
 import Select from "../../components/inputs/Select";

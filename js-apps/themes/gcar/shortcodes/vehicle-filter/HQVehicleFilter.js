@@ -43,7 +43,7 @@ class HQVehicleFilter extends Component {
         }else{
             return(
                 <div
-                    className="portfolio_filter_wrapper gallery classic four_cols" data-columns={4}>
+                    className="portfolio_filter_wrapper gallery classic three_cols" data-columns={3}>
                     { this.renderVehicles() }
                 </div>
             );

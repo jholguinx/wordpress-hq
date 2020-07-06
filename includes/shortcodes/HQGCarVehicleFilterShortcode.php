@@ -51,6 +51,13 @@ class HQGCarVehicleFilterShortcode
                 background: #6699cc !important;
                 border-color: #6699cc !important;
             }
+            .four_cols.gallery .element{
+                width: calc(33.33% - 22.5px) !important;
+            }
+            .four_cols.gallery .element:nth-child(3n){
+                float: right !important;
+                margin-right: 0 !important;
+            }
         </style>
         <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
         <div id="hq-gcar-vehicle-filter"></div>

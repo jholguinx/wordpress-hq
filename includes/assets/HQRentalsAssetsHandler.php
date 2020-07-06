@@ -51,6 +51,7 @@ class HQRentalsAssetsHandler
         wp_register_style('r-suite-dark-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark-rtl.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-datepicker-style', plugin_dir_url(__FILE__) . 'css/jquery.datetimepicker.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('r-suite-default-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default-rtl.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-map-form-style', plugin_dir_url(__FILE__) . 'css/hq-gcar-map.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_script('hq-iframe-resizer-script', plugin_dir_url(__FILE__) . 'js/iframeResizer.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-moment', plugin_dir_url(__FILE__) . 'js/moment.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-datepicker-js', plugin_dir_url(__FILE__) . 'js/jquery.datetimepicker.full.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
@@ -122,6 +123,7 @@ class HQRentalsAssetsHandler
 
     public function loadMapFormAssets()
     {
+        wp_enqueue_style('hq-map-form-style');
         wp_enqueue_script("hq-map-form-script");
     }
 

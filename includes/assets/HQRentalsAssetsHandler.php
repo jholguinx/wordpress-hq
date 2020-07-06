@@ -47,10 +47,10 @@ class HQRentalsAssetsHandler
         wp_register_style('hq-availability-grip-styles', plugin_dir_url(__FILE__) . 'css/availability-grid.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-openlayer-styles', plugin_dir_url(__FILE__) . 'css/ol.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('r-suite-default-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('r-suite-dark-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('r-suite-dark-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark-rtl.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('r-suite-dark-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('r-suite-dark-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark-rtl.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-datepicker-style', plugin_dir_url(__FILE__) . 'css/jquery.datetimepicker.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('r-suite-default-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default-rtl.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('r-suite-default-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default-rtl.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_script('hq-iframe-resizer-script', plugin_dir_url(__FILE__) . 'js/iframeResizer.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-moment', plugin_dir_url(__FILE__) . 'js/moment.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-datepicker-js', plugin_dir_url(__FILE__) . 'js/jquery.datetimepicker.full.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);

@@ -22,8 +22,9 @@ class VehicleCard extends Component {
             return(
                 <div className="car_attribute_price">
                     <div className="car_attribute_price_day four_cols">
+                                <span className="single_car_currency">R</span>
                                 <span
-                                    className="single_car_price">{this.props.vehicle.rate.dailyRateAmountForDisplay}</span>
+                                    className="single_car_price">{this.props.vehicle.rate.dailyRate}</span>
                         <span className="car_unit_day">Per Day</span>
                     </div>
                 </div>

@@ -70,6 +70,37 @@ include_once("templates/template-car-header.php");
             padding: 0 90px;
             height: 100%;
         }
+        @media only screen and (max-width: 960px) and (min-width: 768px){
+            .portfolio_info_wrapper{
+                display: flex;
+                flex: 1;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            .portfolio_info_wrapper div,#portfolio_filter_wrapper .car_attribute_wrapper, #portfolio_filter_wrapper .car_attribute_price{
+                width: 100% !important;
+            }
+            .wrapper {
+                width: 100%;
+                margin-top: 0;
+                padding: 0 30px 0 30px;
+                box-sizing: border-box;
+            }
+
+        }
+        @media only screen and (max-width: 1099px) and (min-width: 960px) {
+            .wrapper {
+                width: 100%;
+                margin-top: 0;
+                padding: 0 30px 0 30px;
+                box-sizing: border-box;
+            }
+
+            .car_attribute_price_day.three_cols .single_car_price {
+                font-size: 25px !important;
+            }
+        }
         @media only screen and (max-width: 767px){
             .wrapper {
                 width: 100%;

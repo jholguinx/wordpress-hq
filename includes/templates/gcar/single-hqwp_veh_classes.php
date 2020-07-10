@@ -44,11 +44,14 @@ include_once("templates/template-car-header.php");
         label{
             text-align: left;
         }
-        i{
-            font-size: 24px !important;
+        #portfolio_filter_wrapper .car_attribute_wrapper{
+            width: 60% !important;
+        }
+        #portfolio_filter_wrapper .car_attribute_price{
+            width: 40% !important;
         }
         .car_attribute_price_day.three_cols .single_car_price{
-            font-size: 28px !important;
+            font-size: 24px !important;
         }
         .single_car_attribute_wrapper .fa,.single_car_attribute_wrapper .fas{
             font-size: 30px !important;
@@ -63,6 +66,14 @@ include_once("templates/template-car-header.php");
         }
         .inner{
             padding-bottom: 50px;
+        }
+        #portfolio_filter_wrapper .car_unit_day{
+            margin-top: -10px !important;
+            font-size: 10px !important;
+        }
+        #portfolio_filter_wrapper .single_car_currency{
+            top: -7px !important;
+            font-size: 12px !important;
         }
     </style>
     <div id="vehicle-class-<?php echo $vehicle->id; ?>" class="inner">
@@ -155,7 +166,7 @@ include_once("templates/template-car-header.php");
                             </a>
                             <div class="portfolio_info_wrapper">
                                 <div class="car_attribute_wrapper">
-                                    <a class="car_link" href="<?php echo $permalink; ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
+                                    <a class="car_link" href="<?php echo $permalink; ?>"><h5><?php echo $vehicle->getLabel(); ?></h5></a>
                                     <div class="car_attribute_wrapper_icon">
                                         <?php foreach(array_splice($vehicle->features(), 0 , 2) as $feature): ?>
                                             <div class="one_fourth feature-wrapper">
@@ -166,8 +177,9 @@ include_once("templates/template-car-header.php");
                                     </div><br class="clear">
                                 </div>
                                 <div class="car_attribute_price">
-                                    <div class="car_attribute_price_day three_cols">
-                                        <span class="single_car_currency">R</span><span class="single_car_price"><?php echo $vehicle->rate()->getFormattedDailyRate(); ?></span>			        				<span class="car_unit_day">Per Day</span>
+                                    <div class="car_attribute_price_day four_cols">
+                                        <span class="single_car_currency">R</span><span class="single_car_price"><?php echo $vehicle->rate()->getFormattedDailyRate(); ?></span>
+                                        <span class="car_unit_day">Per Day</span>
                                     </div>
                                 </div>
                                 <br class="clear">

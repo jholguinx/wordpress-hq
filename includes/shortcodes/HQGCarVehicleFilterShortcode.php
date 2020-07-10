@@ -27,13 +27,10 @@ class HQGCarVehicleFilterShortcode
         ?>
         <style>
             .car_attribute_wrapper{
-                width: 65% !important;
+                width: 60% !important;
             }
             .car_attribute_price{
-                width: 35% !important;
-            }
-            .car_attribute_price_day.four_cols .single_car_price{
-                font-size: 21px !important;
+                width: 40% !important;
             }
             .feature-wrapper{
                 display: flex;

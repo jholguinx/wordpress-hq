@@ -17,6 +17,12 @@ get_header();
 include_once("templates/template-car-header.php");
 ?>
     <style>
+        #page_content_wrapper .inner .sidebar_content{
+            margin-top: 40px !important;
+        }
+        #page_caption{
+            margin-bottom: 0px !important;
+        }
         .hq-feature-wrapper{
             display: flex;
             flex: 1;
@@ -36,7 +42,7 @@ include_once("templates/template-car-header.php");
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
         }
         .hq-inputs{
             width: 100%;
@@ -51,7 +57,7 @@ include_once("templates/template-car-header.php");
             width: 40% !important;
         }
         .car_attribute_price_day.three_cols .single_car_price{
-            font-size: 24px !important;
+            font-size: 34px !important;
         }
         .single_car_attribute_wrapper .fa,.single_car_attribute_wrapper .fas{
             font-size: 30px !important;
@@ -64,24 +70,58 @@ include_once("templates/template-car-header.php");
             padding: 0 90px;
             height: 100%;
         }
-        .inner{
-            padding-bottom: 50px;
-        }
-        #portfolio_filter_wrapper .car_unit_day{
-            margin-top: -10px !important;
-            font-size: 10px !important;
-        }
-        #portfolio_filter_wrapper .single_car_currency{
-            top: -7px !important;
-            font-size: 12px !important;
-        }
+        @media only screen and (max-width: 767px){
+            .wrapper {
+                width: 100%;
+                margin-top: 0;
+                padding: 0 30px 0 30px;
+                box-sizing: border-box;
+            }
+            #portfolio_filter_wrapper .car_attribute_price, #portfolio_filter_wrapper .car_attribute_wrapper{
+                width:50% !important;
+            }
+            h4 {
+                font-size: 18px !important;
+            }
+            .single_car_attribute_wrapper .one_fourth, .single_car_attribute_wrapper .one_fourth.last {
+                width: 50% !important;
+                clear: none;
+                text-align: left;
+            }
+            .hq-feature-wrapper{
+                display: flex;
+                flex: 1;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            .single_car_attribute_wrapper .fa, .single_car_attribute_wrapper .fas {
+                line-height: 1.5;
+            }
+            .inner{
+                padding-bottom: 50px;
+            }
+            #portfolio_filter_wrapper .car_unit_day{
+                margin-top: -15px !important;
+                font-size: 11px !important;
+            }
+            #portfolio_filter_wrapper .single_car_currency{
+                top: -15px !important;
+            }
+            .car_attribute_price_day.four_cols .single_car_price{
+                font-size: 34px !important;
+            }
+            .hq-class-title{
+                font-size: 40px;
+                font-weight: 700;
+                line-height: 1.3;
+            }
     </style>
     <div id="vehicle-class-<?php echo $vehicle->id; ?>" class="inner">
 
         <!-- Begin main content -->
         <div class="inner_wrapper">
             <div class="sidebar_content">
-                <h1><?php echo $vehicle->name; ?></h1>
+                <h1 class="hq-class-title"><?php echo $vehicle->name; ?></h1>
                 <div class="single_car_attribute_wrapper themeborder">
                     <?php foreach (array_splice($vehicle->features(), 0, 4) as $feature): ?>
                         <div class="one_fourth hq-feature-wrapper">
@@ -105,7 +145,6 @@ include_once("templates/template-car-header.php");
             <div class="sidebar_wrapper">
                 <div class="sidebar_top"></div>
                 <div class="content">
-                    <div class="single_car_header_price"><span id="single_car_price_scroll"></span></div>
                     <div class="single_car_booking_wrapper themeborder book_instantly">
                         <div class="single_car_booking_woocommerce_wrapper">
                             <form action="<?php echo $brand->websiteLink; ?>" method="GET" autocomplete="off">
@@ -166,7 +205,7 @@ include_once("templates/template-car-header.php");
                             </a>
                             <div class="portfolio_info_wrapper">
                                 <div class="car_attribute_wrapper">
-                                    <a class="car_link" href="<?php echo $permalink; ?>"><h5><?php echo $vehicle->getLabel(); ?></h5></a>
+                                    <a class="car_link" href="<?php echo $permalink; ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
                                     <div class="car_attribute_wrapper_icon">
                                         <?php foreach(array_splice($vehicle->features(), 0 , 2) as $feature): ?>
                                             <div class="one_fourth feature-wrapper">
@@ -177,7 +216,7 @@ include_once("templates/template-car-header.php");
                                     </div><br class="clear">
                                 </div>
                                 <div class="car_attribute_price">
-                                    <div class="car_attribute_price_day four_cols">
+                                    <div class="car_attribute_price_day three_cols">
                                         <span class="single_car_currency">R</span><span class="single_car_price"><?php echo $vehicle->rate()->getFormattedDailyRate(); ?></span>
                                         <span class="car_unit_day">Per Day</span>
                                     </div>

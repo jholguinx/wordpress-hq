@@ -17,7 +17,7 @@ class HQRentalsQueryStringHelper
         } else {
             $query_string_passenger = '&vehicle_classes_filter=';
             $counter = 0;
-            $vehicleClassesIds = $this->queryVehicles->getVehiclesIdsFromCustomField($dbColumn, $vehicleClassFilterValue);
+            $vehicleClassesIds = $this->queryVehicles->getVehiclesIdsFromCustomField($dbColumn, str_replace('&', '&amp;', $vehicleClassFilterValue));
             foreach ($vehicleClassesIds as $id) {
                 $counter = $counter + 1;
                 if ($counter == count($vehicleClassesIds)) {

@@ -117,8 +117,6 @@ class HQRentalsApiConnector{
     }
     public function getVehiclesAvailabilityDates($data)
     {
-        var_dump($this->configuration->getBasicApiConfiguration($data));
-        die();
         $response = wp_remote_post( $this->endpoints->getAvailabilityDatesEndpoint(), $this->configuration->getBasicApiConfiguration($data) );
         return $this->resolver->resolveVehicleForm($response);
     }

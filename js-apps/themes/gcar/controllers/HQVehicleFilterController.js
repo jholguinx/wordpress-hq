@@ -40,7 +40,7 @@ class HQVehicleFilterController extends BaseController{
                 pick_up_location: newValue,
                 return_location: newValue
             }
-        })
+        });
     }
     onChangeField(field, value) {
         let dataUpdate = {...this.app.state.form};

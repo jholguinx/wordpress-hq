@@ -19,8 +19,8 @@ class HQVehicleFilter extends Component {
             vehicles: [],
             locations: [],
             form: {
-                pick_up_location: '',
-                return_location: '',
+                pick_up_location: '1',
+                return_location: '1',
                 brand_id: '1',
                 pick_up_time: '12:00',
                 return_time: '12:00',
@@ -28,7 +28,7 @@ class HQVehicleFilter extends Component {
                 return_date: DateHelper.daysFromNowJustDate(32),
                 //vehicle_class_custom_fields:346,xxx,yyy,zzz
                 vehicle_class_custom_fields: [],
-                set_default_locations: 'true'
+                //set_default_locations: 'true'
             },
             brands:[],
             spinner: hqSpinner,

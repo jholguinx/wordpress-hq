@@ -18,13 +18,13 @@ class VehicleCard extends Component {
         })
     }
     renderPrice(){
-        if(this.props.vehicle.rate.monthlyRate){
+        if(this.props.vehicle.rate.base_monthly_price.amount){
             return(
                 <div className="car_attribute_price">
                     <div className="car_attribute_price_day four_cols">
                                 <span className="single_car_currency">R</span>
                                 <span
-                                    className="single_car_price">{this.props.vehicle.rate.monthlyRate}</span>
+                                    className="single_car_price">{Number.parseFloat(this.props.vehicle.rate.base_monthly_price.amount).toFixed(0)}</span>
                         <span className="car_unit_day">Per Month</span>
                     </div>
                 </div>
@@ -32,21 +32,22 @@ class VehicleCard extends Component {
         }
     }
     render() {
+        console.log(this.props.vehicle);
         return (
             <div id={"hq-vehicle-class-" + this.props.vehicle.id} className="element grid classic4_cols animated1">
                 <div
                     className="one_fourth gallery4 classic static filterable portfolio_type themeborder">
                     <a className="car_image" href={this.props.vehicle.permalink}>
                         <img
-                            src={this.props.vehicle.publicImageLink}
-                            alt={this.props.vehicle.name}
+                            src={this.props.vehicle.image}
+                            alt={this.props.vehicle.label}
                         />
                     </a>
                     <div className="portfolio_info_wrapper">
                         <div className="car_attribute_wrapper">
                             <a className="car_link" href={this.props.vehicle.permalink}>
                                 <h5>
-                                    {this.props.vehicle.name}
+                                    {this.props.vehicle.label}
                                 </h5>
                             </a>
                             <div className="car_attribute_wrapper_icon">

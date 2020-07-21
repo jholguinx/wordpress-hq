@@ -69409,7 +69409,7 @@ function (_Component) {
   }, {
     key: "renderPrice",
     value: function renderPrice() {
-      if (this.props.vehicle.rate.monthlyRate) {
+      if (this.props.vehicle.rate.base_monthly_price.amount) {
         return (
           /*#__PURE__*/
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69426,7 +69426,7 @@ function (_Component) {
           /*#__PURE__*/
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             className: "single_car_price"
-          }, this.props.vehicle.rate.monthlyRate),
+          }, Number.parseFloat(this.props.vehicle.rate.base_monthly_price.amount).toFixed(0)),
           /*#__PURE__*/
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             className: "car_unit_day"
@@ -69437,6 +69437,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log(this.props.vehicle);
       return (
         /*#__PURE__*/
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69454,8 +69455,8 @@ function (_Component) {
         },
         /*#__PURE__*/
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.props.vehicle.publicImageLink,
-          alt: this.props.vehicle.name
+          src: this.props.vehicle.image,
+          alt: this.props.vehicle.label
         })),
         /*#__PURE__*/
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69471,7 +69472,7 @@ function (_Component) {
           href: this.props.vehicle.permalink
         },
         /*#__PURE__*/
-        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.vehicle.name)),
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.vehicle.label)),
         /*#__PURE__*/
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "car_attribute_wrapper_icon"
@@ -69901,16 +69902,16 @@ function (_Component) {
       vehicles: [],
       locations: [],
       form: {
-        pick_up_location: '',
-        return_location: '',
+        pick_up_location: '1',
+        return_location: '1',
         brand_id: '1',
         pick_up_time: '12:00',
         return_time: '12:00',
         pick_up_date: _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_8__["default"].nowDateForSystem(),
         return_date: _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_8__["default"].daysFromNowJustDate(32),
         //vehicle_class_custom_fields:346,xxx,yyy,zzz
-        vehicle_class_custom_fields: [],
-        set_default_locations: 'true'
+        vehicle_class_custom_fields: [] //set_default_locations: 'true'
+
       },
       brands: [],
       spinner: hqSpinner

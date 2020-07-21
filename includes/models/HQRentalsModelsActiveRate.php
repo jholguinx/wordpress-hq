@@ -184,7 +184,6 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function formatRateForDisplay($rate)
     {
         if($rate and $rate !== "0.00"){
-
             return number_format((float) $rate, 2, '.', '');
         }else{
             return '';

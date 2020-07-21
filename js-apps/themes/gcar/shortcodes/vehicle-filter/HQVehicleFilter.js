@@ -6,6 +6,7 @@ import Select from "../../components/inputs/Select";
 import SubmitButton from '../../components/buttons/SubmitButton'
 import EmptyListMessage from "../../components/messages/EmptyListMessage";
 import ImageSpinner from "../../../../components/loaders/ImageSpinner";
+import DateHelper from "../../../../helpers/dates/DateHelper";
 
 
 class HQVehicleFilter extends Component {
@@ -20,18 +21,18 @@ class HQVehicleFilter extends Component {
             form: {
                 pick_up_location: '',
                 return_location: '',
-                brand_id: '',
-                pick_up_time: '',
-                return_time: '',
-                pick_up_date: '',
-                return_date: '',
+                brand_id: '1',
+                pick_up_time: '12:00',
+                return_time: '12:00',
+                pick_up_date: DateHelper.nowDateForSystem(),
+                return_date: DateHelper.daysFromNowJustDate(32),
                 //vehicle_class_custom_fields:346,xxx,yyy,zzz
                 vehicle_class_custom_fields: [],
                 set_default_locations: 'true'
             },
             brands:[],
             spinner: hqSpinner,
-        }
+        };
     }
 
     componentDidMount() {

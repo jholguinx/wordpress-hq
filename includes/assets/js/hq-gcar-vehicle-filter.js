@@ -254,10 +254,11 @@ function () {
     }
   }, {
     key: "getVehicleFormData",
-    value: function getVehicleFormData() {
+    value: function getVehicleFormData(form) {
       return {
         url: _ApiEndpointHandler__WEBPACK_IMPORTED_MODULE_0__["default"].getVehicleFormFilterEndpoint(),
-        method: 'get'
+        method: 'get',
+        params: form
       };
     }
   }]);
@@ -69408,7 +69409,7 @@ function (_Component) {
   }, {
     key: "renderPrice",
     value: function renderPrice() {
-      if (this.props.vehicle.rate.dailyRate) {
+      if (this.props.vehicle.rate.monthlyRate) {
         return (
           /*#__PURE__*/
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -69425,11 +69426,11 @@ function (_Component) {
           /*#__PURE__*/
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             className: "single_car_price"
-          }, this.props.vehicle.rate.dailyRate),
+          }, this.props.vehicle.rate.monthlyRate),
           /*#__PURE__*/
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             className: "car_unit_day"
-          }, "Per Day")))
+          }, "Per Month")))
         );
       }
     }
@@ -69702,7 +69703,7 @@ function (_BaseController) {
       this.app.setState({
         loading: true
       });
-      this.connector.makeRequest(this.apiConfig.getVehicleFormData(), function (response) {
+      this.connector.makeRequest(this.apiConfig.getVehicleFormData(this.app.state.form), function (response) {
         if (response.data.success) {
           _this.app.setState({
             fields: response.data.data.fields,
@@ -69754,7 +69755,7 @@ function (_BaseController) {
         pick_up_location: response.data.data.locations[0].id,
         return_location: response.data.data.locations[0].id,
         pick_up_date: _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_1__["default"].nowDateForSystem(),
-        return_date: _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_1__["default"].daysFromNowJustDate(1),
+        return_date: _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_1__["default"].daysFromNowJustDate(32),
         //vehicle_class_custom_fields:346,xxx,yyy,zzz
         vehicle_class_custom_fields: this.getVehicleClassCustomFieldValue(fields)
       };
@@ -69853,6 +69854,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_buttons_SubmitButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/buttons/SubmitButton */ "./themes/gcar/components/buttons/SubmitButton.js");
 /* harmony import */ var _components_messages_EmptyListMessage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/messages/EmptyListMessage */ "./themes/gcar/components/messages/EmptyListMessage.js");
 /* harmony import */ var _components_loaders_ImageSpinner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/loaders/ImageSpinner */ "./components/loaders/ImageSpinner.js");
+/* harmony import */ var _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../helpers/dates/DateHelper */ "./helpers/dates/DateHelper.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69870,6 +69872,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -69900,11 +69903,11 @@ function (_Component) {
       form: {
         pick_up_location: '',
         return_location: '',
-        brand_id: '',
-        pick_up_time: '',
-        return_time: '',
-        pick_up_date: '',
-        return_date: '',
+        brand_id: '1',
+        pick_up_time: '12:00',
+        return_time: '12:00',
+        pick_up_date: _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_8__["default"].nowDateForSystem(),
+        return_date: _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_8__["default"].daysFromNowJustDate(32),
         //vehicle_class_custom_fields:346,xxx,yyy,zzz
         vehicle_class_custom_fields: [],
         set_default_locations: 'true'

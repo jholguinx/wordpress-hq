@@ -104,6 +104,7 @@ class HQRentalsApiEndpoint{
         $query = new HQRentalsQueriesVehicleClasses();
         $vehicles = $query->allVehicleClasses();
         $vehicle = $vehicles[0];
+        // fleets/vehicle-classes/form -> replace
         return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes/'. $vehicle->id .'/form';
     }
     public function getAvailabilityDatesEndpoint()

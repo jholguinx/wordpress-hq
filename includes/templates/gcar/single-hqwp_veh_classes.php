@@ -256,7 +256,7 @@ include_once("templates/template-car-header.php");
                                 <div class="car_attribute_price">
                                     <div class="car_attribute_price_day three_cols">
                                         <span class="single_car_currency">R</span><span class="single_car_price"><?php echo $vehicle->rate()->getFormattedDailyRate(); ?></span>
-                                        <span class="car_unit_day">Per Day</span>
+                                        <span class="car_unit_day">Per Month</span>
                                     </div>
                                 </div>
                                 <br class="clear">

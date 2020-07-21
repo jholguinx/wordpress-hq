@@ -101,51 +101,58 @@ include_once("templates/template-car-header.php");
                 font-size: 25px !important;
             }
         }
-        @media only screen and (max-width: 767px){
+        @media only screen and (max-width: 767px) {
             .wrapper {
                 width: 100%;
                 margin-top: 0;
                 padding: 0 30px 0 30px;
                 box-sizing: border-box;
             }
-            #portfolio_filter_wrapper .car_attribute_price, #portfolio_filter_wrapper .car_attribute_wrapper{
-                width:50% !important;
+
+            #portfolio_filter_wrapper .car_attribute_price, #portfolio_filter_wrapper .car_attribute_wrapper {
+                width: 50% !important;
             }
+
             h4 {
                 font-size: 18px !important;
             }
+
             .single_car_attribute_wrapper .one_fourth, .single_car_attribute_wrapper .one_fourth.last {
                 width: 50% !important;
                 clear: none;
                 text-align: left;
             }
-            .hq-feature-wrapper{
-                display: flex;
-                flex: 1;
-                align-items: center;
-                justify-content: flex-start;
-            }
-            .single_car_attribute_wrapper .fa, .single_car_attribute_wrapper .fas {
-                line-height: 1.5;
-            }
-            .inner{
-                padding-bottom: 50px;
-            }
-            #portfolio_filter_wrapper .car_unit_day{
-                margin-top: -15px !important;
-                font-size: 11px !important;
-            }
-            #portfolio_filter_wrapper .single_car_currency{
-                top: -15px !important;
-            }
-            .car_attribute_price_day.four_cols .single_car_price{
-                font-size: 34px !important;
-            }
-            .hq-class-title{
-                font-size: 40px;
-                font-weight: 700;
-                line-height: 1.3;
-            }
+        }
+        .hq-feature-wrapper {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .single_car_attribute_wrapper .fa, .single_car_attribute_wrapper .fas {
+            line-height: 1.5;
+        }
+
+        .inner{
+            padding-bottom: 50px;
+        }
+        #portfolio_filter_wrapper .car_unit_day{
+            margin-top: -15px !important;
+            font-size: 11px !important;
+        }
+        #portfolio_filter_wrapper .single_car_currency{
+            top: -15px !important;
+        }
+        .car_attribute_price_day.four_cols .single_car_price{
+            font-size: 34px !important;
+        }
+        .hq-class-title{
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
     </style>
     <div id="vehicle-class-<?php echo $vehicle->id; ?>" class="inner">
 

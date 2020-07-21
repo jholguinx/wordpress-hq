@@ -171,12 +171,11 @@ include_once("templates/template-car-header.php");
                     <?php endforeach; ?>
                 </div>
                 <br class="clear"/>
-
                 <div class="single_car_content">
-                    <?php echo $vehicle->getShortDescription(); ?>
+                    <?php echo $vehicle->getCustomField('f324'); ?>
                 </div>
                 <div class="single_car_departure_wrapper themeborder">
-                    <?php echo $vehicle->getDescription(); ?>
+                    <?php echo $vehicle->getCustomField('f325'); ?>
                 </div>
             </div>
 
@@ -255,7 +254,7 @@ include_once("templates/template-car-header.php");
                                 </div>
                                 <div class="car_attribute_price">
                                     <div class="car_attribute_price_day three_cols">
-                                        <span class="single_car_currency">R</span><span class="single_car_price"><?php echo $vehicle->rate()->getFormattedDailyRate(); ?></span>
+                                        <span class="single_car_currency">R</span><span class="single_car_price"><?php echo $vehicle->rate()->getFormattedMonthlyRate(0); ?></span>
                                         <span class="car_unit_day">Per Month</span>
                                     </div>
                                 </div>

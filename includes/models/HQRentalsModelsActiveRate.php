@@ -181,10 +181,10 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         }
         return $rates;
     }
-    public function formatRateForDisplay($rate)
+    public function formatRateForDisplay($rate, $decimals = 2)
     {
         if($rate and $rate !== "0.00"){
-            return number_format((float) $rate, 2, '.', '');
+            return number_format((float) $rate, $decimals, '.', '');
         }else{
             return '';
         }
@@ -237,9 +237,9 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     {
         return (float)$this->getFormattedWeeklyRate();
     }
-    public function getFormattedMonthlyRate()
+    public function getFormattedMonthlyRate($decimals)
     {
-        return $this->formatRateForDisplay($this->monthlyRate->amount);
+        return $this->formatRateForDisplay($this->monthlyRate->amount, $decimals);
     }
     public function getFormattedMonthlyRateAsNumber()
     {

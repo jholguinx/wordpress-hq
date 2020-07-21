@@ -30,7 +30,7 @@ class HQRentalsApiConfiguration
                 'headers'   =>  array(
                     'Authorization' => 'Basic ' . $this->settings->getApiEncodedToken()
                 ),
-                'body'      =>  $data,
+                'body'      =>  array_filter($data),
                 'timeout'   =>  20
             );
         }

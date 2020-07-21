@@ -9,7 +9,7 @@ class HQVehicleFilterController extends BaseController{
     init(){
         this.app.setState({ loading: true });
         this.connector.makeRequest(
-            this.apiConfig.getVehicleFormData(),
+            this.apiConfig.getVehicleFormData(this.app.state.form),
             response => {
                 if(response.data.success){
                     this.app.setState({
@@ -59,7 +59,7 @@ class HQVehicleFilterController extends BaseController{
             pick_up_location: response.data.data.locations[0].id,
             return_location: response.data.data.locations[0].id,
             pick_up_date: DateHelper.nowDateForSystem(),
-            return_date: DateHelper.daysFromNowJustDate(1),
+            return_date: DateHelper.daysFromNowJustDate(32),
             //vehicle_class_custom_fields:346,xxx,yyy,zzz
             vehicle_class_custom_fields: this.getVehicleClassCustomFieldValue(fields),
         };

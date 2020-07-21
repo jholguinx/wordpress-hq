@@ -205,16 +205,19 @@ class HQRentalsWebsiteEndpoints
             return $this->resolveResponse($e, false);
         }
     }
-
+    /*
+     * Filter Init
+     */
     public function vehicleFilter(){
         try{
             $connector = new HQRentalsApiConnector();
             $response = $connector->getVehicleClassesForm();
+            $responseAvailability = $connector->getVehiclesAvailabilityDates($_GET);
             if($response->success){
                 return $this->resolveResponse((object)[
-                    'fields'    =>  $response->data->data[0]->columns[0],
+                    'fields'    =>  $response->data[0]->columns[0],
                     'brands'    =>  $this->brandQuery->brandsPublicInterface(),
-                    'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterface(),
+                    'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($responseAvailability),
                     'locations' =>  $this->locationsQuery->locationsPublicInterface(),
                 ], true);
             }
@@ -222,6 +225,9 @@ class HQRentalsWebsiteEndpoints
             return $this->resolveResponse($e, false);
         }
     }
+    /*
+     * Dates
+     */
     public function dates()
     {
         try{

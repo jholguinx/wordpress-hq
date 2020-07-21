@@ -18,14 +18,14 @@ class VehicleCard extends Component {
         })
     }
     renderPrice(){
-        if(this.props.vehicle.rate.dailyRate){
+        if(this.props.vehicle.rate.monthlyRate){
             return(
                 <div className="car_attribute_price">
                     <div className="car_attribute_price_day four_cols">
                                 <span className="single_car_currency">R</span>
                                 <span
-                                    className="single_car_price">{this.props.vehicle.rate.dailyRate}</span>
-                        <span className="car_unit_day">Per Day</span>
+                                    className="single_car_price">{this.props.vehicle.rate.monthlyRate}</span>
+                        <span className="car_unit_day">Per Month</span>
                     </div>
                 </div>
             );

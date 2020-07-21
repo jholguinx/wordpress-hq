@@ -24,10 +24,11 @@ class ApiConfigurationManager {
             params: form
         };
     }
-    getVehicleFormData(){
+    getVehicleFormData(form){
         return {
             url: ApiEndpointHandler.getVehicleFormFilterEndpoint(),
             method: 'get',
+            params: form
         }
     }
 }

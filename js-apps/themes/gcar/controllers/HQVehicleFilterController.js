@@ -53,7 +53,6 @@ class HQVehicleFilterController extends BaseController{
     setFormValuesOnInit(response){
         const fields = response.data.data.fields;
         let data = {
-            brand_id: response.data.data.brands[0].id,
             pick_up_time: '12:00',
             return_time: '12:00',
             pick_up_location: response.data.data.locations[0].id,

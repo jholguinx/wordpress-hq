@@ -5,8 +5,11 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiDataResolver;
 
 $vehicle = new HQRentalsModelsVehicleClass($post);
+$vehicleFeatures = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f324'));
+$vehicleDescription = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f325'));
 $queryLocations = new HQRentalsQueriesLocations();
 $queryBrands = new HQRentalsQueriesBrands();
 $queryVehicles = new HQRentalsQueriesVehicleClasses();
@@ -15,6 +18,7 @@ $locations = $queryLocations->allLocations();
 $similarCars = $queryVehicles->getVehicleClassFilterByCustomField('f268', $vehicle->getCustomField('f268'));
 get_header();
 include_once("templates/template-car-header.php");
+
 ?>
     <style>
         #page_content_wrapper .inner .sidebar_content{
@@ -172,10 +176,10 @@ include_once("templates/template-car-header.php");
                 </div>
                 <br class="clear"/>
                 <div class="single_car_content">
-                    <?php echo $vehicle->getCustomField('f324'); ?>
+                    <?php echo $vehicleFeatures; ?>
                 </div>
                 <div class="single_car_departure_wrapper themeborder">
-                    <?php echo $vehicle->getCustomField('f325'); ?>
+                    <?php echo $vehicleDescription; ?>
                 </div>
             </div>
 

@@ -69750,7 +69750,6 @@ function (_BaseController) {
     value: function setFormValuesOnInit(response) {
       var fields = response.data.data.fields;
       var data = {
-        brand_id: response.data.data.brands[0].id,
         pick_up_time: '12:00',
         return_time: '12:00',
         pick_up_location: response.data.data.locations[0].id,
@@ -69904,7 +69903,7 @@ function (_Component) {
       form: {
         pick_up_location: '1',
         return_location: '1',
-        brand_id: '1',
+        //brand_id: '1',
         pick_up_time: '12:00',
         return_time: '12:00',
         pick_up_date: _helpers_dates_DateHelper__WEBPACK_IMPORTED_MODULE_8__["default"].nowDateForSystem(),
@@ -69952,7 +69951,7 @@ function (_Component) {
           return (
             /*#__PURE__*/
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_messages_EmptyListMessage__WEBPACK_IMPORTED_MODULE_6__["default"], {
-              message: "There is no vehicles available that match this criteria."
+              message: "There are no vehicles available that match this criteria."
             })
           );
         } else {

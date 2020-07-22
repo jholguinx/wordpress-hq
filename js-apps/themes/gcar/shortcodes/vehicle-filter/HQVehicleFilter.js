@@ -21,7 +21,7 @@ class HQVehicleFilter extends Component {
             form: {
                 pick_up_location: '1',
                 return_location: '1',
-                brand_id: '1',
+                //brand_id: '1',
                 pick_up_time: '12:00',
                 return_time: '12:00',
                 pick_up_date: DateHelper.nowDateForSystem(),
@@ -55,7 +55,7 @@ class HQVehicleFilter extends Component {
             if(this.state.vehicles.length === 0){
                 return (
                     <EmptyListMessage
-                        message={"There is no vehicles available that match this criteria."}
+                        message={"There are no vehicles available that match this criteria."}
                     />
                 )
             }else{

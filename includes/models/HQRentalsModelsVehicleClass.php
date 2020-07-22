@@ -434,7 +434,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 
     public function getCustomField($dbColumn)
     {
-
         return get_post_meta($this->postId, $this->metaCustomField . $dbColumn, true);
     }
 

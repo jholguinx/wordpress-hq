@@ -28,7 +28,7 @@ class HQVehicleFilter extends Component {
                 return_date: DateHelper.daysFromNowJustDate(32),
                 //vehicle_class_custom_fields:346,xxx,yyy,zzz
                 vehicle_class_custom_fields: [],
-                //set_default_locations: 'true'
+                set_default_locations: 'true'
             },
             brands:[],
             spinner: hqSpinner,

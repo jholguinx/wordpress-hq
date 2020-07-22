@@ -176,10 +176,10 @@ include_once("templates/template-car-header.php");
                 </div>
                 <br class="clear"/>
                 <div class="single_car_content">
-                    <?php echo $vehicleFeatures; ?>
+                    <?php echo $vehicleDescription; ?>
                 </div>
                 <div class="single_car_departure_wrapper themeborder">
-                    <?php echo $vehicleDescription; ?>
+                    <?php echo $vehicleFeatures; ?>
                 </div>
             </div>
 

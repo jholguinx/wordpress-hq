@@ -22,7 +22,7 @@ class ApiConfigurationManager {
         return {
             url: ApiEndpointHandler.getAvailabilityDates(),
             method: 'get',
-            params: form,
+            params: this.cleanDataBeforeCall(form),
             timeout: 30000
         };
     }
@@ -30,9 +30,18 @@ class ApiConfigurationManager {
         return {
             url: ApiEndpointHandler.getVehicleFormFilterEndpoint(),
             method: 'get',
-            params: form,
+            params: this.cleanDataBeforeCall(form),
             timeout: 30000
         };
+    }
+    cleanDataBeforeCall(form){
+        let data = {};
+        for (var propName in form) {
+            if(form[propName]){
+                data[propName] = form[propName];
+            }
+        }
+        return data;
     }
 }
 

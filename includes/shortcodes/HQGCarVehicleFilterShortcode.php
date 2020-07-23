@@ -226,6 +226,12 @@ class HQGCarVehicleFilterShortcode
                 font-weight: 700;
                 line-height: 1.3;
             }
+            .sidebar_content :not(.full_width) .car_attribute_wrapper_icon{
+                width: 100% !important;
+            }
+            .car_attribute_wrapper_icon .one_fourth{
+                width: 14% !important;
+            }
         </style>
         <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
         <div id="hq-gcar-vehicle-filter"></div>

@@ -221,6 +221,7 @@ class HQRentalsAssetsHandler
     {
         wp_enqueue_style('hq-datepicker-style');
         wp_enqueue_script('hq-datepicker-js');
+        wp_enqueue_script('hq-moment');
         wp_enqueue_script('hq-wordpress-dates-js');
     }
 }

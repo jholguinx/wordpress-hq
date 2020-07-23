@@ -63,14 +63,18 @@ class HQVehicleFilterController extends BaseController{
             vehicle_class_custom_fields: this.getVehicleClassCustomFieldValue(fields),
         };
         fields.forEach( field => {
-            data[field.form_name] = Object.entries(field.options)[0][0];
+            data[field.form_name] = Object.entries(field.options)[1][0];
         } )
         return data;
     }
     getVehicleClassCustomFieldValue(fields){
         let value = '';
-        fields.forEach((field) => {
-            value += field.id + ',';
+        fields.forEach((field, index) => {
+            if(index === fields.length - 1){
+                value += field.id;
+            }else{
+                value += field.id + ',';
+            }
         });
 
         return value;

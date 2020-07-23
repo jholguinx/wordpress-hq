@@ -222,7 +222,7 @@ class HQRentalsWebsiteEndpoints
                 ], true);
             }
         }catch (Exception $e) {
-            return $this->resolveResponse($e, false);
+            return $this->resolveResponse($e->getMessage(), false);
         }
     }
     /*
@@ -234,12 +234,9 @@ class HQRentalsWebsiteEndpoints
             $connector = new HQRentalsApiConnector();
             $response = $connector->getVehiclesAvailabilityDates($_GET);
             if($response->success){
-                if($response->data->data->applicable_classes){
+                if($response->data->applicable_classes){
                     return $this->resolveResponse((object)[
-                        'vehicles'  =>  array_map(function($vehicle){
-                            $vehicle = $this->vehicleClassQuery->getVehicleClassBySystemId($vehicle->vehicle_class_id);
-                            return $this->vehicleClassQuery->vehiclePublicInterface($vehicle);
-                        },$response->data->data->applicable_classes),
+                        'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($response),
                     ], true);
                 }else{
                     return [];

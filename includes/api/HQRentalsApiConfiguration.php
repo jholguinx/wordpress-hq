@@ -31,7 +31,7 @@ class HQRentalsApiConfiguration
                     'Authorization' => 'Basic ' . $this->settings->getApiEncodedToken()
                 ),
                 'body'      =>  array_filter($data),
-                'timeout'   =>  20
+                'timeout'   =>  30
             );
         }
         return array(

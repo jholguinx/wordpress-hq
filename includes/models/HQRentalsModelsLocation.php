@@ -168,9 +168,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $args = array_merge(
             $this->postArgs,
             array(
-                'meta_key'   =>  $this->metaOrder,
-                'orderby'    =>  'meta_value_num',
-                'order'      =>  'ASC',
+                'orderby'    =>  'ID',
             ),
             array(
                 'meta_query'    =>  array(

@@ -5,7 +5,13 @@ class Select extends Component {
         super(props);
     }
     renderOptions(){
-        return Object.entries(this.props.field.options).map((option,index) => <option key={index} value={option[0]}>{option[1]}</option>);
+        return Object.entries(this.props.field.options).map((option,index) => {
+            if(option[0]){
+                return(
+                    <option key={index} value={option[0]}>{option[1]}</option>
+                );
+            }
+        });
     }
     onChange(event){
         this.props.onChangeField(this.props.field, event.target.value);

@@ -14,22 +14,25 @@ class ApiConfigurationManager {
         return {
             url: ApiEndpointHandler.getAvailabilityEndpoint(),
             method: 'get',
-            params: BaseAdapter.parseDataForAvailability(startDate, endDate, brandId)
+            params: BaseAdapter.parseDataForAvailability(startDate, endDate, brandId),
+            timeout: 30000
         };
     }
     getAvailabilityDatesConfig(form){
         return {
             url: ApiEndpointHandler.getAvailabilityDates(),
             method: 'get',
-            params: form
+            params: form,
+            timeout: 30000
         };
     }
     getVehicleFormData(form){
         return {
             url: ApiEndpointHandler.getVehicleFormFilterEndpoint(),
             method: 'get',
-            params: form
-        }
+            params: form,
+            timeout: 30000
+        };
     }
 }
 

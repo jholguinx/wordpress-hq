@@ -32,7 +32,6 @@ class VehicleCard extends Component {
         }
     }
     render() {
-        console.log(this.props.vehicle);
         return (
             <div id={"hq-vehicle-class-" + this.props.vehicle.id} className="element grid classic4_cols animated1">
                 <div

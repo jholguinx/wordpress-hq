@@ -12,7 +12,7 @@ class HQRentalsCronJob
         add_filter('cron_schedules', array($this, 'addCustomScheduleTime'));
         add_action( 'refreshAllHQDataJob', array($this, 'refreshAllData') );
         if ( ! wp_next_scheduled( 'refreshAllHQDataJob' ) ) {
-            wp_schedule_event( time(), 'hqRefreshTime', 'refreshAllHQDataJob' );
+            wp_schedule_event( time(), 'hqRefreshTimeHalfAnHour', 'refreshAllHQDataJob' );
         }
 
     }
@@ -22,14 +22,19 @@ class HQRentalsCronJob
         /*
          * Disable by option on refresh data
          * */
+        /*
         if(!($this->pluginSettings->getDisableCronjobOption() == 'true')){
             $this->scheduler->refreshHQData();
-        }
+        }*/
     }
 
     public function addCustomScheduleTime($schedules)
     {
         $schedules['hqRefreshTime'] = array(
+            'interval' => 86400,
+            'display' => __('Once every half an hour')
+        );
+        $schedules['hqRefreshTimeHalfAnHour'] = array(
             'interval' => 1800,
             'display' => __('Once every half an hour')
         );

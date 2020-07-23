@@ -21,14 +21,13 @@ class HQVehicleFilter extends Component {
             form: {
                 pick_up_location: '1',
                 return_location: '1',
-                //brand_id: '1',
                 pick_up_time: '12:00',
                 return_time: '12:00',
                 pick_up_date: DateHelper.nowDateForSystem(),
                 return_date: DateHelper.daysFromNowJustDate(32),
                 //vehicle_class_custom_fields:346,xxx,yyy,zzz
-                vehicle_class_custom_fields: [],
-                set_default_locations: 'true'
+                vehicle_class_custom_fields: []
+                //set_default_locations: 'true'
             },
             brands:[],
             spinner: hqSpinner,
@@ -57,7 +56,7 @@ class HQVehicleFilter extends Component {
                     <EmptyListMessage
                         message={"There are no vehicles available that match this criteria."}
                     />
-                )
+                );
             }else{
                 return DisplayValidator.validateArrayAndDisplay(
                     this.state.vehicles,
@@ -65,10 +64,11 @@ class HQVehicleFilter extends Component {
                 )
             }
         }else{
-            return DisplayValidator.validateArrayAndDisplay(
-                this.state.vehicles,
-                this.state.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle}/>)
-            )
+            return (
+                <EmptyListMessage
+                    message={"There are no vehicles available that match this criteria."}
+                />
+            );
         }
     }
     renderLocationsOption(){

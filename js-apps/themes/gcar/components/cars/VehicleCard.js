@@ -7,7 +7,7 @@ class VehicleCard extends Component {
         super(props);
     }
     renderFeatures(){
-        return ArrayHelper.splice(this.props.vehicle.features, 2).map( ( feature, index ) => {
+        return ArrayHelper.splice(this.props.vehicle.features, 6).map( ( feature, index ) => {
             return(
                 <div key={index} className="one_fourth feature-wrapper">
                     <i className={feature.icon} />

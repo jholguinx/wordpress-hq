@@ -188,34 +188,48 @@ include_once("templates/template-car-header.php");
                 <div class="content">
                     <div class="single_car_booking_wrapper themeborder book_instantly">
                         <div class="single_car_booking_woocommerce_wrapper">
-                            <form action="<?php echo $brand->websiteLink; ?>" method="GET" autocomplete="off">
+                            <form action="<?php echo $brand->websiteLink; ?>" method="GET" autocomplete="off" id="hq-wiget-form">
                                 <p>
                                     <label for="">Pickup Location</label>
-                                    <select name="pick_up_location" required="required" autocomplete="off">
+                                    <select id="pick-up-location" name="pick_up_location" required="required" autocomplete="off">
                                         <?php foreach($locations as $location): ?>
                                             <option value="<?php echo $location->id; ?>"><?php echo $location->name; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </p>
-                                <p>
-                                    <label for="">Return Location</label>
-                                    <select name="return_location" required="required" autocomplete="off">
-                                        <?php foreach($locations as $location): ?>
-                                            <option value="<?php echo $location->id; ?>"><?php echo $location->name; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </p>
-
                                 <p>
                                     <label for="">Pickup Date</label>
                                     <input id="hq-pickup-date-time-input" class="hq-inputs" type="text" autocomplete="off" name="pick_up_date" placeholder="Select Date" required="required" />
                                 </p>
                                 <p>
-                                    <label for="">Return Date</label>
-                                    <input id="hq-return-date-time-input" class="hq-inputs" type="text" autocomplete="off" name="return_date" placeholder="Select Date" required="required" />
+                                    <label for="">Interval</label>
+                                    <select name="reservation_interval" id="reservation_interval">
+                                        <option value="2_month">2 Months</option>
+                                        <option value="3_month">3 Months</option>
+                                        <option value="4_month">4 Months</option>
+                                        <option value="5_month">5 Months</option>
+                                        <option value="6_month">6 Months</option>
+                                        <option value="7_month">7 Months</option>
+                                        <option value="8_month">8 Months</option>
+                                        <option value="9_month">9 Months</option>
+                                        <option value="10_month">10 Months</option>
+                                        <option value="11_month">11 Months</option>
+                                        <option value="12_month">12 Months</option>
+                                    </select>
                                 </p>
+                                <style>
+                                    #hq-wiget-form span{
+                                        opacity: 0.5;
+                                        line-height: 1;
+                                        color: #000;
+                                        position: relative;
+                                        top: 2px;
+                                    }
+                                </style>
                                 <input type="hidden" name="vehicle_class_id" value="<?php echo $vehicle->id; ?>">
                                 <input type="hidden" name="target_step" value="3">
+                                <input type="hidden" name="return_date" id="hq-return-date-time-input">
+                                <input type="hidden" name="return_location" id="return-location">
                                 <input class="hq-submit-button" type="submit" value="Reserve Now">
                             </form>
                         </div>
@@ -248,7 +262,7 @@ include_once("templates/template-car-header.php");
                                 <div class="car_attribute_wrapper">
                                     <a class="car_link" href="<?php echo $permalink; ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
                                     <div class="car_attribute_wrapper_icon">
-                                        <?php foreach(array_splice($vehicle->features(), 0 , 2) as $feature): ?>
+                                        <?php foreach(array_splice($vehicle->features(), 0 , 6) as $feature): ?>
                                             <div class="one_fourth feature-wrapper">
                                                 <i class="<?php echo $feature->icon; ?>" aria-hidden="true"></i>
                                                 <div class="car_attribute_content"><?php echo $feature->getLabelForWebsite(); ?></div>

@@ -1,7 +1,8 @@
-var momentFormat = 'DD-MM-YYYY HH:mm';
+var momentFormat = 'DD-MM-YYYY';
 jQuery(document).ready(function(){
     var configDateTimeConfig = {
-        format: hqRentalsTenantDatetimeFormat,
+        format: hqRentalsTenantDatetimeFormat.split(' ')[0],
+        timepicker:false,
     };
     updateReturnLocation()
     jQuery("#hq-pickup-date-time-input").datetimepicker(configDateTimeConfig);

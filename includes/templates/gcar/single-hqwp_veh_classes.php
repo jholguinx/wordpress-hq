@@ -10,6 +10,7 @@ use HQRentalsPlugin\HQRentalsApi\HQRentalsApiDataResolver;
 $vehicle = new HQRentalsModelsVehicleClass($post);
 $vehicleFeatures = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f324'));
 $vehicleDescription = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f325'));
+$hideSimilarCars = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f374'));
 $queryLocations = new HQRentalsQueriesLocations();
 $queryBrands = new HQRentalsQueriesBrands();
 $queryVehicles = new HQRentalsQueriesVehicleClasses();
@@ -215,6 +216,14 @@ include_once("templates/template-car-header.php");
                                     </select>
                                 </p>
                                 <p>
+                                    <label for="">Return Location</label>
+                                    <select id="return-location-select" name="return_location_select" required="required" autocomplete="off" disabled>
+                                        <?php foreach($locations as $location): ?>
+                                            <option value="<?php echo $location->id; ?>"><?php echo $location->name; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </p>
+                                <p>
                                     <label for="">Pickup Date</label>
                                     <input id="hq-pickup-date-time-input" class="hq-inputs" type="text" autocomplete="off" name="pick_up_date" placeholder="Select Date" required="required" />
                                 </p>
@@ -265,7 +274,7 @@ include_once("templates/template-car-header.php");
     </div>
 
     </div>
-<?php if($similarCars): ?>
+<?php if($similarCars and $hideSimilarCars !== 'Yes'): ?>
     <?php $permalink = get_permalink($vehicle->postId); ?>
     <div class="wrapper">
         <div class="car_related" style="margin-top: 30px;">

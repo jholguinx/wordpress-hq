@@ -22,10 +22,10 @@ class HQRentalsCronJob
         /*
          * Disable by option on refresh data
          * */
-        /*
+
         if(!($this->pluginSettings->getDisableCronjobOption() == 'true')){
             $this->scheduler->refreshHQData();
-        }*/
+        }
     }
 
     public function addCustomScheduleTime($schedules)

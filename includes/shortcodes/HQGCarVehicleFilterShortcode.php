@@ -26,20 +26,6 @@ class HQGCarVehicleFilterShortcode
         wp_localize_script('hq-gcar-vehicle-filter-js', 'HQGCarVehicleFilter', $dataToJS );
         ?>
         <style>
-            /*
-            .car_attribute_wrapper{
-                width: 60% !important;
-            }
-            .car_attribute_price{
-                width: 40% !important;
-            }
-            .feature-wrapper{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-            }
-           */
             .portfolio_filter_wrapper p{
                 padding-bottom:5.0em !important;
             }
@@ -232,6 +218,23 @@ class HQGCarVehicleFilterShortcode
             .car_attribute_wrapper_icon .one_fourth{
                 width: 14% !important;
             }
+            /*Features*/
+            .car_attribute_wrapper_icon{
+                flex:1;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 0px 20px 20px 20px;
+                margin-top: 0px !important;
+            }
+            .car_attribute_wrapper_icon .feature-wrapper{
+                margin-right: 15px;
+            }
+            .portfolio_info_wrapper{
+                padding-bottom: 0px !important;
+            }
+            /*End Features*/
         </style>
         <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
         <div id="hq-gcar-vehicle-filter"></div>

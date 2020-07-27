@@ -63,7 +63,7 @@ include_once("templates/template-car-header.php");
         .car_attribute_price_day.three_cols .single_car_price{
             font-size: 34px !important;
         }
-        .single_car_attribute_wrapper .fa,.single_car_attribute_wrapper .fas{
+        .single_car_attribute_wrapper .fa,.single_car_attribute_wrapper .fas , .single_car_attribute_wrapper .fab{
             font-size: 30px !important;
         }
         .wrapper{
@@ -134,7 +134,7 @@ include_once("templates/template-car-header.php");
             justify-content: flex-start;
         }
 
-        .single_car_attribute_wrapper .fa, .single_car_attribute_wrapper .fas {
+        .single_car_attribute_wrapper .fa, .single_car_attribute_wrapper .fas, .single_car_attribute_wrapper .fab {
             line-height: 1.5;
         }
 
@@ -156,6 +156,23 @@ include_once("templates/template-car-header.php");
             font-weight: 700;
             line-height: 1.3;
         }
+        /*Features*/
+        .car_attribute_wrapper_icon{
+            flex:1;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0px 20px 20px 20px;
+            margin-top: 0px !important;
+        }
+        .car_attribute_wrapper_icon .feature-wrapper{
+            margin-right: 15px;
+        }
+        .portfolio_info_wrapper{
+            padding-bottom: 0px !important;
+        }
+        /*End Features*/
 
     </style>
     <div id="vehicle-class-<?php echo $vehicle->id; ?>" class="inner">
@@ -176,10 +193,10 @@ include_once("templates/template-car-header.php");
                 </div>
                 <br class="clear"/>
                 <div class="single_car_content">
-                    <?php echo $vehicleDescription; ?>
+                    <?php echo html_entity_decode($vehicleFeatures); ?>
                 </div>
                 <div class="single_car_departure_wrapper themeborder">
-                    <?php echo $vehicleFeatures; ?>
+                    <?php echo html_entity_decode($vehicleDescription); ?>
                 </div>
             </div>
 
@@ -202,7 +219,7 @@ include_once("templates/template-car-header.php");
                                     <input id="hq-pickup-date-time-input" class="hq-inputs" type="text" autocomplete="off" name="pick_up_date" placeholder="Select Date" required="required" />
                                 </p>
                                 <p>
-                                    <label for="">Interval</label>
+                                    <label for="">Duration</label>
                                     <select name="reservation_interval" id="reservation_interval">
                                         <option value="2_month">2 Months</option>
                                         <option value="3_month">3 Months</option>
@@ -230,6 +247,8 @@ include_once("templates/template-car-header.php");
                                 <input type="hidden" name="target_step" value="3">
                                 <input type="hidden" name="return_date" id="hq-return-date-time-input">
                                 <input type="hidden" name="return_location" id="return-location">
+                                <input type="hidden" name="pick_up_time" value="12:00">
+                                <input type="hidden" name="return_time" value="12:00">
                                 <input class="hq-submit-button" type="submit" value="Reserve Now">
                             </form>
                         </div>
@@ -261,14 +280,7 @@ include_once("templates/template-car-header.php");
                             <div class="portfolio_info_wrapper">
                                 <div class="car_attribute_wrapper">
                                     <a class="car_link" href="<?php echo $permalink; ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
-                                    <div class="car_attribute_wrapper_icon">
-                                        <?php foreach(array_splice($vehicle->features(), 0 , 6) as $feature): ?>
-                                            <div class="one_fourth feature-wrapper">
-                                                <i class="<?php echo $feature->icon; ?>" aria-hidden="true"></i>
-                                                <div class="car_attribute_content"><?php echo $feature->getLabelForWebsite(); ?></div>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    </div><br class="clear">
+                                    <br class="clear">
                                 </div>
                                 <div class="car_attribute_price">
                                     <div class="car_attribute_price_day three_cols">
@@ -277,6 +289,14 @@ include_once("templates/template-car-header.php");
                                     </div>
                                 </div>
                                 <br class="clear">
+                            </div>
+                            <div class="car_attribute_wrapper_icon">
+                                <?php foreach(array_splice($vehicle->features(), 0 , 6) as $feature): ?>
+                                    <div class="feature-wrapper">
+                                        <i class="<?php echo $feature->icon; ?>" aria-hidden="true"></i>
+                                        <div class="car_attribute_content"><?php echo $feature->getLabelForWebsite(); ?></div>
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>

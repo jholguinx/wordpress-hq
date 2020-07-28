@@ -263,7 +263,7 @@ include_once("templates/template-car-header.php");
                                     }
                                 </style>
                                 <input type="hidden" name="vehicle_class_id" value="<?php echo $vehicle->id; ?>">
-                                <input type="hidden" name="target_step" value="3">
+                                <input type="hidden" name="target_step" value="4">
                                 <input type="hidden" name="return_date" id="hq-return-date-time-input">
                                 <input type="hidden" name="return_location" id="return-location">
                                 <input type="hidden" name="pick_up_time" value="12:00">

@@ -18,13 +18,13 @@ class VehicleCard extends Component {
         })
     }
     renderPrice(){
-        if(this.props.vehicle.rate.base_monthly_price.amount){
+        if(this.props.vehicle.price.base_price_with_taxes.amount){
             return(
                 <div className="car_attribute_price">
                     <div className="car_attribute_price_day four_cols">
                                 <span className="single_car_currency">R</span>
                                 <span
-                                    className="single_car_price">{Number.parseFloat(this.props.vehicle.rate.base_monthly_price.amount).toFixed(0)}</span>
+                                    className="single_car_price">{Number.parseFloat(this.props.vehicle.price.base_price_with_taxes.amount).toFixed(0)}</span>
                         <span className="car_unit_day">Per Month</span>
                     </div>
                 </div>

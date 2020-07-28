@@ -58,7 +58,7 @@ class HQVehicleFilterController extends BaseController{
             pick_up_location: response.data.data.locations[0].id,
             return_location: response.data.data.locations[0].id,
             pick_up_date: DateHelper.nowDateForSystem(),
-            return_date: DateHelper.daysFromNowJustDate(32),
+            return_date: DateHelper.daysFromNowJustDate(30),
             //vehicle_class_custom_fields:346,xxx,yyy,zzz
             vehicle_class_custom_fields: this.getVehicleClassCustomFieldValue(fields),
         };

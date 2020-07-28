@@ -456,6 +456,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         $model = $this->getVehicleClassBySystemId($vehicle->vehicle_class_id);
         $data->id = $vehicle->vehicle_class_id;
         $data->rate = ($vehicle->price->details) ? $vehicle->price->details[0] : null;
+        $data->price = ($vehicle->price) ? $vehicle->price : null;
         $data->permalink = get_permalink($model->postId);
         $data->features = $vehicle->vehicle_class->features;
         $data->label = $vehicle->vehicle_class->label;

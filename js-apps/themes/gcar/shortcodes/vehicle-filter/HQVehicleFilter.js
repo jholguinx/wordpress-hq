@@ -24,7 +24,7 @@ class HQVehicleFilter extends Component {
                 pick_up_time: '12:00',
                 return_time: '12:00',
                 pick_up_date: DateHelper.nowDateForSystem(),
-                return_date: DateHelper.daysFromNowJustDate(32),
+                return_date: DateHelper.daysFromNowJustDate(30),
                 //vehicle_class_custom_fields:346,xxx,yyy,zzz
                 vehicle_class_custom_fields: []
                 //set_default_locations: 'true'

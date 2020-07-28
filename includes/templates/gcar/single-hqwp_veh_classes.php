@@ -6,8 +6,10 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiDataResolver;
-
+use HQRentalsPlugin\HQRentalsApihelpers\HQRentalsApihelpersAvailability;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 $vehicle = new HQRentalsModelsVehicleClass($post);
+$helper = new HQRentalsFrontHelper();
 $vehicleFeatures = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f324'));
 $vehicleDescription = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f325'));
 $hideSimilarCars = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f374'));
@@ -17,6 +19,14 @@ $queryVehicles = new HQRentalsQueriesVehicleClasses();
 $brand = $queryBrands->getBrand($vehicle->brandId);
 $locations = $queryLocations->allLocations();
 $similarCars = $queryVehicles->getVehicleClassFilterByCustomField('f268', $vehicle->getCustomField('f268'));
+$availability = new HQRentalsApihelpersAvailability();
+$availabilityCars = $availability->getMonthlyAvailability($vehicle->id);
+if($availabilityCars->data['success']){
+    $cars = $availabilityCars->data['data']->vehicles;
+}else{
+    $cars = [];
+}
+$car = $helper->filterElementsBYId($cars, $vehicle->id);
 get_header();
 include_once("templates/template-car-header.php");
 
@@ -281,7 +291,7 @@ include_once("templates/template-car-header.php");
             <h3 class="sub_title">Similar cars</h3>
             <div id="portfolio_filter_wrapper" class="gallery classic three_cols portfolio-content section content clearfix" data-columns="3">
                 <?php foreach(array_splice($similarCars, 0, 3) as $vehicle): ?>
-                    <div class="element grid classic3_cols">
+                    <div id="vehicle-class-<?php echo $vehicle->id; ?>" class="element grid classic3_cols">
                         <div class="one_third gallery3 classic static filterable portfolio_type themeborder" data-id="post-246">
                             <a class="car_image" href="<?php echo $permalink; ?>">
                                 <img src="<?php echo $vehicle->publicImageLink; ?>">
@@ -291,9 +301,10 @@ include_once("templates/template-car-header.php");
                                     <a class="car_link" href="<?php echo $permalink; ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
                                     <br class="clear">
                                 </div>
+                                <?php $auxCar = $helper->filterElementsBYId($cars, $vehicle->id); ?>
                                 <div class="car_attribute_price">
                                     <div class="car_attribute_price_day three_cols">
-                                        <span class="single_car_currency">R</span><span class="single_car_price"><?php echo $vehicle->rate()->getFormattedMonthlyRate(0); ?></span>
+                                        <span class="single_car_currency">R</span><span class="single_car_price"><?php echo number_format((float) $auxCar->price->base_price_with_taxes->amount, 0, '.', ''); ?></span>
                                         <span class="car_unit_day">Per Month</span>
                                     </div>
                                 </div>

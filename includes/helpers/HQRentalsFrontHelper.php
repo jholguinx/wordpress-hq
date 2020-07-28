@@ -58,4 +58,10 @@ class HQRentalsFrontHelper
     {
         return $baseUrl . 'public/car-rental/all-payments/'. $paymentId . '/request/resolve';
     }
+    public function filterElementsBYId($array , $itemId)
+    {
+        return array_values(array_filter($array, function ($car) use ($itemId){
+            return (string)$car->id == (string)$itemId;
+        }))[0];
+    }
 }

@@ -28,4 +28,6 @@ function updateReturn(){
 }
 function updateReturnLocation(){
     jQuery("#return-location").val(jQuery("#pick-up-location").val());
+    jQuery("#return-location-select").val(jQuery("#pick-up-location").val());
+
 }

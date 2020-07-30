@@ -237,7 +237,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     {
         return (float)$this->getFormattedWeeklyRate();
     }
-    public function getFormattedMonthlyRate($decimals)
+    public function getFormattedMonthlyRate($decimals = 2)
     {
         return $this->formatRateForDisplay($this->monthlyRate->amount, $decimals);
     }

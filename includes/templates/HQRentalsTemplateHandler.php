@@ -12,8 +12,9 @@ class HQRentalsTemplateHandler
     public function addingTemplates($defaultTemplate)
     {
         global $post;
+        $theme = wp_get_theme();
         // add theme route
-        if($post->post_type === 'hqwp_veh_classes' and is_single()){
+        if($post->post_type === 'hqwp_veh_classes' and is_single() and $theme->stylesheet === 'grandcarrental'){
             $defaultTemplate = load_template(dirname( __FILE__ ) . '/gcar/single-hqwp_veh_classes.php');
 
         }else if (is_page('quotes')) {

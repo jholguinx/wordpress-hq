@@ -70,7 +70,8 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-reservation-form-setup', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_enqueue_script('hq-dummy-script');
         global $post;
-        if(is_single() and $post->post_type === 'hqwp_veh_classes'){
+        $theme = wp_get_theme();
+        if(is_single() and $post->post_type === 'hqwp_veh_classes' and $theme->stylesheet === 'grandcarrental'){
             $this->datePickersAssets();
         }
     }

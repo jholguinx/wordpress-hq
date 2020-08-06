@@ -438,4 +438,32 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             $metaQueryArray
         );
     }
+    public function vehiclesPublicInterfaceFromHQDatesApi($data){
+        if($data->success){
+            if(is_array($data->data->applicable_classes)){
+                return array_map(function($vehicle) {
+                    return $this->vehiclePublicInterfaceFromHQDatesApi($vehicle);
+                }, $data->data->applicable_classes);
+            }else{
+                return [];
+            }
+        }else{
+            return [];
+        }
+    }
+    public function vehiclePublicInterfaceFromHQDatesApi($vehicle){
+        $data = new \stdClass();
+        $model = $this->getVehicleClassBySystemId($vehicle->vehicle_class_id);
+        $data->id = $vehicle->vehicle_class_id;
+        $data->rate = ($vehicle->price->details) ? $vehicle->price->details[0] : null;
+        $data->price = ($vehicle->price) ? $vehicle->price : null;
+        $data->permalink = get_permalink($model->postId);
+        $data->features = $vehicle->vehicle_class->features;
+        $data->label = $vehicle->vehicle_class->label;
+        $data->short_description = $vehicle->vehicle_class->short_description;
+        $data->description = $vehicle->vehicle_class->description;
+        $data->image = $vehicle->vehicle_class->image;
+        $data->label = $vehicle->vehicle_class->label;
+        return $data;
+    }
 }

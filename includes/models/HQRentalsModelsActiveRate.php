@@ -181,11 +181,10 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         }
         return $rates;
     }
-    public function formatRateForDisplay($rate)
+    public function formatRateForDisplay($rate, $decimals = 2)
     {
         if($rate and $rate !== "0.00"){
-
-            return number_format((float) $rate, 2, '.', '');
+            return number_format((float) $rate, $decimals, '.', '');
         }else{
             return '';
         }
@@ -223,6 +222,10 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     {
         return $this->dailyRate->amount_for_display;
     }
+    public function getMonthlyRateAmountForDisplay()
+    {
+        return $this->monthlyRate->amount_for_display;
+    }
     public function getFormattedDailyRateAsNumber(){
         return (float)$this->getFormattedDailyRate();
     }
@@ -234,9 +237,9 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     {
         return (float)$this->getFormattedWeeklyRate();
     }
-    public function getFormattedMonthlyRate()
+    public function getFormattedMonthlyRate($decimals = 2)
     {
-        return $this->formatRateForDisplay($this->monthlyRate->amount);
+        return $this->formatRateForDisplay($this->monthlyRate->amount, $decimals);
     }
     public function getFormattedMonthlyRateAsNumber()
     {
@@ -270,6 +273,8 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $data = new \stdClass();
         $data->dailyRate = $this->getFormattedDailyRate();
         $data->dailyRateAmountForDisplay = $this->getDailyRateAmountForDisplay();
+        $data->monthlyRate = $this->getFormattedMonthlyRate();
+        $data->monthlyRateAmountForDisplay = $this->getMonthlyRateAmountForDisplay();
         return $data;
     }
     public function getDailyRateObject()

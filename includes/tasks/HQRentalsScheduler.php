@@ -43,7 +43,7 @@ class HQRentalsScheduler
             if($this->isWorkspotWebsite()){
                 $workspot = $this->workspot->refreshLocationsData();
             }
-            //$this->settingsTask->tryToRefreshSettingsData();
+            $this->settingsTask->tryToRefreshSettingsData();
             $this->brandsTask->tryToRefreshSettingsData();
             $this->locationsTask->tryToRefreshSettingsData();
             $this->additionalChargesTask->tryToRefreshSettingsData();
@@ -76,7 +76,7 @@ class HQRentalsScheduler
     }
     public function allResponseAreOK()
     {
-        return //$this->settingsTask->dataWasRetrieved() and
+        return $this->settingsTask->dataWasRetrieved() and
             $this->brandsTask->dataWasRetrieved() and
             $this->locationsTask->dataWasRetrieved() and
             $this->additionalChargesTask->dataWasRetrieved() and

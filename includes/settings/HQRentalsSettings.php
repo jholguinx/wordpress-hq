@@ -43,6 +43,7 @@ class HQRentalsSettings
     public $hq_default_latitude_for_map_shortcode = 'hq_default_latitude_for_map_shortcode';
     public $hq_default_longitude_for_map_shortcode = 'hq_default_longitude_for_map_shortcode';
     public $hq_auth_email = 'hq_auth_email';
+    public $hq_currency_symbol = 'hq_currency_symbol';
 
     public function __construct()
     {
@@ -647,5 +648,18 @@ class HQRentalsSettings
     public function getEmail()
     {
         return get_option($this->hq_auth_email, "");
+    }
+
+    public function noCurrencyIconOption()
+    {
+        return empty(get_option($this->hq_currency_symbol));
+    }
+    public function setCurrencyIconOption($icon)
+    {
+        return update_option($this->hq_currency_symbol, $icon);
+    }
+    public function getCurrencyIconOption()
+    {
+        return get_option($this->hq_currency_symbol, '');
     }
 }

@@ -44,7 +44,7 @@ class HQRentalsApiEndpoint{
     }
     public function getVehicleClassCustomFields()
     {
-        return $this->settings->getApiBaseUrl() . 'fields/?item_type=fleets.vehicle_classes';
+        return $this->settings->getApiBaseUrl() . 'fields/?item_type=fleets.vehicle_classes&limit=100';
     }
     public function getWorkspotLocationsEndpoint()
     {
@@ -104,6 +104,7 @@ class HQRentalsApiEndpoint{
         $query = new HQRentalsQueriesVehicleClasses();
         $vehicles = $query->allVehicleClasses();
         $vehicle = $vehicles[0];
+        // fleets/vehicle-classes/form -> replace
         return $this->settings->getApiBaseUrl() . 'fleets/vehicle-classes/'. $vehicle->id .'/form';
     }
     public function getAvailabilityDatesEndpoint()

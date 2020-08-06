@@ -9,13 +9,13 @@ class ApiEndpointHandler{
 
     };
     static getAvailabilityEndpoint(){
-        return ApiEndpointHandler.baseURL + ApiEndpointHandler.endpoints.availabilityEndpoint
+        return ApiEndpointHandler.baseURL + ApiEndpointHandler.endpoints.availabilityEndpoint;
     }
     static getVehicleFormFilterEndpoint(){
-        return ApiEndpointHandler.baseURL + ApiEndpointHandler.endpoints.vehicleFormEndpoint
+        return ApiEndpointHandler.baseURL + ApiEndpointHandler.endpoints.vehicleFormEndpoint;
     }
     static getAvailabilityDates(){
-        return ApiEndpointHandler.baseURL + ApiEndpointHandler.endpoints.availabilityDates
+        return ApiEndpointHandler.baseURL + ApiEndpointHandler.endpoints.availabilityDates;
     }
 }
 export default ApiEndpointHandler;

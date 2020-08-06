@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import HQVehicleFilterController from "../../controllers/HQVehicleFilterController";
-import Loader from '../../../../components/loaders/Loader';
 import DisplayValidator from "../../../../helpers/render/DisplayValidator";
 import VehicleCard from "../../components/cars/VehicleCard";
 import Select from "../../components/inputs/Select";
 import SubmitButton from '../../components/buttons/SubmitButton'
 import EmptyListMessage from "../../components/messages/EmptyListMessage";
 import ImageSpinner from "../../../../components/loaders/ImageSpinner";
+import DateHelper from "../../../../helpers/dates/DateHelper";
 
 
 class HQVehicleFilter extends Component {
@@ -19,20 +19,19 @@ class HQVehicleFilter extends Component {
             vehicles: [],
             locations: [],
             form: {
-                pick_up_location: '',
-                return_location: '',
-                brand_id: '',
-                pick_up_time: '',
-                return_time: '',
-                pick_up_date: '',
-                return_date: '',
+                pick_up_location: '1',
+                return_location: '1',
+                pick_up_time: '12:00',
+                return_time: '12:00',
+                pick_up_date: DateHelper.nowDateForSystem(),
+                return_date: DateHelper.daysFromNowJustDate(30),
                 //vehicle_class_custom_fields:346,xxx,yyy,zzz
-                vehicle_class_custom_fields: [],
-                set_default_locations: 'true'
+                vehicle_class_custom_fields: []
+                //set_default_locations: 'true'
             },
             brands:[],
             spinner: hqSpinner,
-        }
+        };
     }
 
     componentDidMount() {
@@ -44,7 +43,7 @@ class HQVehicleFilter extends Component {
         }else{
             return(
                 <div
-                    className="portfolio_filter_wrapper gallery classic four_cols" data-columns={4}>
+                    className="portfolio_filter_wrapper gallery classic three_cols" data-columns={3}>
                     { this.renderVehicles() }
                 </div>
             );
@@ -55,9 +54,9 @@ class HQVehicleFilter extends Component {
             if(this.state.vehicles.length === 0){
                 return (
                     <EmptyListMessage
-                        message={"There is no vehicles available that match this criteria."}
+                        message={"There are no vehicles available that match this criteria."}
                     />
-                )
+                );
             }else{
                 return DisplayValidator.validateArrayAndDisplay(
                     this.state.vehicles,
@@ -65,10 +64,11 @@ class HQVehicleFilter extends Component {
                 )
             }
         }else{
-            return DisplayValidator.validateArrayAndDisplay(
-                this.state.vehicles,
-                this.state.vehicles.map( (vehicle, index) => <VehicleCard key={index} vehicle={vehicle}/>)
-            )
+            return (
+                <EmptyListMessage
+                    message={"There are no vehicles available that match this criteria."}
+                />
+            );
         }
     }
     renderLocationsOption(){
@@ -123,6 +123,7 @@ class HQVehicleFilter extends Component {
                                         <div className="one_fourth last themeborder">
                                             <SubmitButton
                                                 onPress={this.onSubmit.bind(this)}
+                                                textButton="Search"
                                             />
                                         </div>
                                     </div>

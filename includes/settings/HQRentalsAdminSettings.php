@@ -367,6 +367,19 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">DEFAULT CURRENCY DISPLAY</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                      data-tippy-content="This will be the currency the displayed by default on the vehicle class grid, and the dedicated vehicle class pages."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input small"
+                                                       name="<?php echo $this->settings->hq_currency_symbol; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getCurrencyIconOption()); ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">Fleet location coordinates
                                                     field id</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"

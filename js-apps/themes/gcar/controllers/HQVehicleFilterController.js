@@ -9,7 +9,7 @@ class HQVehicleFilterController extends BaseController{
     init(){
         this.app.setState({ loading: true });
         this.connector.makeRequest(
-            this.apiConfig.getVehicleFormData(),
+            this.apiConfig.getVehicleFormData(this.app.state.form),
             response => {
                 if(response.data.success){
                     this.app.setState({
@@ -40,7 +40,7 @@ class HQVehicleFilterController extends BaseController{
                 pick_up_location: newValue,
                 return_location: newValue
             }
-        })
+        });
     }
     onChangeField(field, value) {
         let dataUpdate = {...this.app.state.form};
@@ -53,13 +53,12 @@ class HQVehicleFilterController extends BaseController{
     setFormValuesOnInit(response){
         const fields = response.data.data.fields;
         let data = {
-            brand_id: response.data.data.brands[0].id,
             pick_up_time: '12:00',
             return_time: '12:00',
             pick_up_location: response.data.data.locations[0].id,
             return_location: response.data.data.locations[0].id,
             pick_up_date: DateHelper.nowDateForSystem(),
-            return_date: DateHelper.daysFromNowJustDate(1),
+            return_date: DateHelper.daysFromNowJustDate(30),
             //vehicle_class_custom_fields:346,xxx,yyy,zzz
             vehicle_class_custom_fields: this.getVehicleClassCustomFieldValue(fields),
         };
@@ -70,8 +69,12 @@ class HQVehicleFilterController extends BaseController{
     }
     getVehicleClassCustomFieldValue(fields){
         let value = '';
-        fields.forEach((field) => {
-            value += field.id + ',';
+        fields.forEach((field, index) => {
+            if(index === fields.length - 1){
+                value += field.id;
+            }else{
+                value += field.id + ',';
+            }
         });
 
         return value;

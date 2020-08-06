@@ -9,7 +9,7 @@ class SubmitButton extends Component{
         return(
             <button id="car_search_btn" type="submit" className="button"
                    defaultValue="Search" style={{ width: '100%' }}>
-                {'Submit'}
+                {this.props.textButton}
             </button>
         );
     }

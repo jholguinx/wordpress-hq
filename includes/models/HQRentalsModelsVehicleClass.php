@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
@@ -436,6 +437,20 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return get_post_meta($this->postId, $this->metaCustomField . $dbColumn, true);
     }
+    public function getTranslatableCustomField($dbColumn, $forced_locale = null)
+    {
+        $field = $this->getCustomField($dbColumn);
+        if (!empty($forced_locale)) {
+            return $field[$forced_locale];
+        } else {
+            try {
+                $content = $field->{$this->locale->language};
+            }catch (\Exception $e){
+                $content = $field[$this->locale->language];
+            }
+            return ($content) ? $content : '';
+        }
+    }
 
     public function getCustomFieldMetaPrefix()
     {
@@ -489,5 +504,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $rate = $this->rate();
         return $rate->ratePublicInterface();
     }
+    public function getBrand(){
+        $queryBrand = new HQRentalsQueriesBrands();
+        return $queryBrand->getBrand($this->brandId);
+    }
+
 }
 

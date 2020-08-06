@@ -16,7 +16,7 @@ class Select extends Component {
                 <select name="sort_by" onChange={this.onChange.bind(this)}>
                     {this.renderOptions()}
                 </select>
-                <span className="ti-exchange-vertical"/>
+                <span className="ti-angle-down"/>
             </div>
         );
     }

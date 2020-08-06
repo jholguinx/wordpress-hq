@@ -47,10 +47,11 @@ class HQRentalsAssetsHandler
         wp_register_style('hq-availability-grip-styles', plugin_dir_url(__FILE__) . 'css/availability-grid.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-openlayer-styles', plugin_dir_url(__FILE__) . 'css/ol.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('r-suite-default-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('r-suite-dark-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('r-suite-dark-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark-rtl.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('r-suite-dark-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('r-suite-dark-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-dark-rtl.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-datepicker-style', plugin_dir_url(__FILE__) . 'css/jquery.datetimepicker.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('r-suite-default-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default-rtl.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('r-suite-default-rtl-style', plugin_dir_url(__FILE__) . 'css/rsuite/rsuite-default-rtl.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-map-form-style', plugin_dir_url(__FILE__) . 'css/hq-gcar-map.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_script('hq-iframe-resizer-script', plugin_dir_url(__FILE__) . 'js/iframeResizer.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-moment', plugin_dir_url(__FILE__) . 'js/moment.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-datepicker-js', plugin_dir_url(__FILE__) . 'js/jquery.datetimepicker.full.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
@@ -65,11 +66,12 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-map-form-script', plugin_dir_url(__FILE__) . 'js/hq-map-booking-form.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-map-contact-form-script', plugin_dir_url(__FILE__) . 'js/hq-map-contact-form.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-availability-grip-script', plugin_dir_url(__FILE__) . 'js/hq-availability-grid.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
-        wp_register_script('hg-gcar-vehicle-filter-js', plugin_dir_url(__FILE__) . 'js/hq-gcar-vehicle-filter.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hg-gcar-vehicle-filter-js', plugin_dir_url(__FILE__) . 'js/hq-gcar-vehicle-filter.js', array(), HQ_RENTALS_PLUGIN_VERSION . '1', true);
         wp_register_script('hq-reservation-form-setup', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_enqueue_script('hq-dummy-script');
         global $post;
-        if(is_single() and $post->post_type === 'hqwp_veh_classes'){
+        $theme = wp_get_theme();
+        if(is_single() and $post->post_type === 'hqwp_veh_classes' and $theme->stylesheet === 'grandcarrental'){
             $this->datePickersAssets();
         }
     }
@@ -122,6 +124,7 @@ class HQRentalsAssetsHandler
 
     public function loadMapFormAssets()
     {
+        wp_enqueue_style('hq-map-form-style');
         wp_enqueue_script("hq-map-form-script");
     }
 
@@ -219,6 +222,7 @@ class HQRentalsAssetsHandler
     {
         wp_enqueue_style('hq-datepicker-style');
         wp_enqueue_script('hq-datepicker-js');
+        wp_enqueue_script('hq-moment');
         wp_enqueue_script('hq-wordpress-dates-js');
     }
 }

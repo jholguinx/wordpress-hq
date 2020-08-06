@@ -205,35 +205,38 @@ class HQRentalsWebsiteEndpoints
             return $this->resolveResponse($e, false);
         }
     }
-
+    /*
+     * Filter Init
+     */
     public function vehicleFilter(){
         try{
             $connector = new HQRentalsApiConnector();
             $response = $connector->getVehicleClassesForm();
+            $responseAvailability = $connector->getVehiclesAvailabilityDates($_GET);
             if($response->success){
                 return $this->resolveResponse((object)[
-                    'fields'    =>  $response->data->data[0]->columns[0],
+                    'fields'    =>  $response->data[0]->columns[0],
                     'brands'    =>  $this->brandQuery->brandsPublicInterface(),
-                    'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterface(),
+                    'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($responseAvailability),
                     'locations' =>  $this->locationsQuery->locationsPublicInterface(),
                 ], true);
             }
         }catch (Exception $e) {
-            return $this->resolveResponse($e, false);
+            return $this->resolveResponse($e->getMessage(), false);
         }
     }
-    public function dates()
+    /*
+     * Dates
+     */
+    public function dates($data)
     {
         try{
             $connector = new HQRentalsApiConnector();
-            $response = $connector->getVehiclesAvailabilityDates($_GET);
+            $response = $connector->getVehiclesAvailabilityDates(($data) ? $data : $_GET);
             if($response->success){
-                if($response->data->data->applicable_classes){
+                if($response->data->applicable_classes){
                     return $this->resolveResponse((object)[
-                        'vehicles'  =>  array_map(function($vehicle){
-                            $vehicle = $this->vehicleClassQuery->getVehicleClassBySystemId($vehicle->vehicle_class_id);
-                            return $this->vehicleClassQuery->vehiclePublicInterface($vehicle);
-                        },$response->data->data->applicable_classes),
+                        'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($response),
                     ], true);
                 }else{
                     return [];

@@ -91,6 +91,9 @@ class HQRentalsBootstrap
         if($this->settings->noDefaultLongitudeSetting()){
             $this->settings->setDefaultLongitudeSetting($this->hq_default_value_for_string);
         }
+        if($this->settings->noCurrencyIconOption()){
+            $this->settings->setCurrencyIconOption($this->hq_default_value_for_string);
+        }
         $this->resolveDefaultPages();
         $this->notifyToSystemOnActivation();
     }

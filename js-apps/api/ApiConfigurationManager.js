@@ -14,21 +14,34 @@ class ApiConfigurationManager {
         return {
             url: ApiEndpointHandler.getAvailabilityEndpoint(),
             method: 'get',
-            params: BaseAdapter.parseDataForAvailability(startDate, endDate, brandId)
+            params: BaseAdapter.parseDataForAvailability(startDate, endDate, brandId),
+            timeout: 30000
         };
     }
     getAvailabilityDatesConfig(form){
         return {
             url: ApiEndpointHandler.getAvailabilityDates(),
             method: 'get',
-            params: form
+            params: this.cleanDataBeforeCall(form),
+            timeout: 30000
         };
     }
-    getVehicleFormData(){
+    getVehicleFormData(form){
         return {
             url: ApiEndpointHandler.getVehicleFormFilterEndpoint(),
             method: 'get',
+            params: this.cleanDataBeforeCall(form),
+            timeout: 30000
+        };
+    }
+    cleanDataBeforeCall(form){
+        let data = {};
+        for (var propName in form) {
+            if(form[propName]){
+                data[propName] = form[propName];
+            }
         }
+        return data;
     }
 }
 

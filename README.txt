@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.4.2
 Requires PHP: 5.6.0
-Stable tag: 1.4.17
+Stable tag: 1.4.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ If you experience any issues, please review your user and password and try again
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.4.18 =
+Support for Grand Car Theme
 
 = 1.4.17 =
 New setup method using HQ Rental software credentials to authenticate and connect the plugin.
@@ -71,31 +74,6 @@ Fixes
 
 = 1.4.5 =
 Option to set default langitude and longitude on Form with Map shortcode
-
-= 1.4.4 =
-Option added to disable scroll on iframes
-
-= 1.4.3 =
-Typos
-
-= 1.4.2 =
-Adding support for change on public reservations urls
-
-= 1.4.1 =
-Settings screen adjusted
-Fixes on clients shortcodes
-
-= 1.4.0 =
-Settings screen adjusted
-Support for custom fields
-Auto update of saved settings
-Removing support for regular API response on data sync
-
-= 1.3.4 =
-Fix buffering
-
-= 1.3.3 =
-Fixes on README files
 
 == Screenshots ==
 

@@ -228,7 +228,7 @@ class HQRentalsWebsiteEndpoints
     /*
      * Dates
      */
-    public function dates($data)
+    public function dates()
     {
         try{
             $connector = new HQRentalsApiConnector();

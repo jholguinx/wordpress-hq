@@ -236,7 +236,7 @@ class HQGCarVehicleFilterShortcode
             }
             /*End Features*/
         </style>
-        <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://caag.caagcrm.com/assets/font-awesome">
         <div id="hq-gcar-vehicle-filter"></div>
         <?php
     }

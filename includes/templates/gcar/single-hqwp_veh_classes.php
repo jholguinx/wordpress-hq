@@ -311,7 +311,7 @@ include_once("templates/template-car-header.php");
                                 <br class="clear">
                             </div>
                             <div class="car_attribute_wrapper_icon">
-                                <?php foreach($vehicle->features() as $feature): ?>
+                                <?php foreach(array_splice($vehicle->features(), 0 , 6) as $feature): ?>
                                     <div class="feature-wrapper">
                                         <i class="<?php echo $feature->icon; ?>" aria-hidden="true"></i>
                                         <div class="car_attribute_content"><?php echo $feature->getLabelForWebsite(); ?></div>

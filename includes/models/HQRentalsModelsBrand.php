@@ -68,7 +68,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->postArgs = array(
             'post_type'         =>  $this->brandsCustomPostName,
             'post_status'       =>  'publish',
-            'posts_per_page'    =>  -1
+            'posts_per_page'    =>  -1,
+            'order'             =>  'ASC'
         );
         $this->labels = array(
             'name'               => _x( 'Brands', 'post type general name', 'your-plugin-textdomain' ),

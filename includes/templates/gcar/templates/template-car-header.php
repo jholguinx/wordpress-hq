@@ -1,7 +1,7 @@
 <?php
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiDataResolver;
 ?>
-<script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://caag.caagcrm.com/assets/font-awesome">
 <div id="page_caption"
      class="hasbg"
      style="background-image:url(<?php echo HQRentalsApiDataResolver::resolveImage($vehicle->getCustomField('f294')); ?>);"

@@ -5,32 +5,34 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.4.2
 Requires PHP: 5.6.0
-Stable tag: 1.4.17
+Stable tag: 1.4.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-This plugin is for HQ Rental Software clients that would like to enable online bookings on their website. Once you install this your customers will be able to make reservations which will show on your HQ account, and you can receive internal notifications when an online booking is made. You can also set up online payments on your HQ account, so that the payment step is enabled for online bookings. This way your customers can process online payments for their reservations.
+The HQ Rental Software plugin allows you to easily set up the reservation process on your website. Once you install the plugin, connect it to your HQ account, and set up your reservations page, your customers will be able to make reservations which will show on your HQ account. The plugin also lets you quickly set up a standard booking form, and the vehicle availability calendar on your website in just a few simple steps.
 
 == Installation ==
 
-Once you add the plugin please follow the following steps:
+After you add the plugin to your website, please follow the steps below to complete connection with your HQ account.
 
-Step 1: Go to your HQ Rental Software to generate API tokens for your tenant and user. You can find the Tenant Token inside the system under Settings > Integrations. Click on the “Generate new token” button.For User Token, you can find it under the User Management category > Users by clicking on the user that you would like to use to manage.
+Step 1: On your website’s WordPress admin dashboard navigate settings for HQ Rentals.
 
-Step 2: Once you have generated the tokens by completing the previous step, you can set up the credentials to connect to the system. In WordPress go to Settings > HQ Rentals. Paste the tokens in the corresponding fields labeled Tenant Token and User Token.
+Step 2: Under the General Settings section enter your HQ Rental Software user account email and password.
 
-Step 3: Select the API Region that you are in. Note: To find out which API region you are currently on, check your URL. If you have xxx.caagcrm.com or xxx.hqrentals.app, your region is in America. For Europe, it would be xxx.hqrentals.eu and for Asia, it would be xxx.hqrentals.asia.
+Step 3: Press the Authenticate button - That’s it, you’re all set!
 
-Step 4: Once you have copied both tokens you will see HQ Rentals inside the WordPress menu and you
-should see this table; now just copy the “HTML shortcode reservations” and paste that on the page
-where you would like to display the bookings process. The system will automatically resize the iFrame
-on this page.
+You can now use the features of the plugin to set up the reservation process and more. For information on this setup, please go to our Website Integrations section on our Knowledge Base.
+
+If you experience any issues, please review your user and password and try again. If you are unable to authenticate your user information and fail to connect the plugin, please contact our support team via your HQ Rental Software account and we’ll happily assist you.
 
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.4.18 =
+Support for Grand Car Theme
 
 = 1.4.17 =
 New setup method using HQ Rental software credentials to authenticate and connect the plugin.
@@ -72,31 +74,6 @@ Fixes
 
 = 1.4.5 =
 Option to set default langitude and longitude on Form with Map shortcode
-
-= 1.4.4 =
-Option added to disable scroll on iframes
-
-= 1.4.3 =
-Typos
-
-= 1.4.2 =
-Adding support for change on public reservations urls
-
-= 1.4.1 =
-Settings screen adjusted
-Fixes on clients shortcodes
-
-= 1.4.0 =
-Settings screen adjusted
-Support for custom fields
-Auto update of saved settings
-Removing support for regular API response on data sync
-
-= 1.3.4 =
-Fix buffering
-
-= 1.3.3 =
-Fixes on README files
 
 == Screenshots ==
 

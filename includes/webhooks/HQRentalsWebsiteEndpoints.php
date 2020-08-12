@@ -228,11 +228,11 @@ class HQRentalsWebsiteEndpoints
     /*
      * Dates
      */
-    public function dates($data)
+    public function dates()
     {
         try{
             $connector = new HQRentalsApiConnector();
-            $response = $connector->getVehiclesAvailabilityDates(($data) ? $data : $_GET);
+            $response = $connector->getVehiclesAvailabilityDates($_GET);
             if($response->success){
                 if($response->data->applicable_classes){
                     return $this->resolveResponse((object)[

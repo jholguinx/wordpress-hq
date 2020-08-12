@@ -193,7 +193,7 @@ include_once("templates/template-car-header.php");
             <div class="sidebar_content">
                 <h1 class="hq-class-title"><?php echo $vehicle->name; ?></h1>
                 <div class="single_car_attribute_wrapper themeborder">
-                    <?php foreach (array_splice($vehicle->features(), 0, 4) as $feature): ?>
+                    <?php foreach ($vehicle->features() as $feature): ?>
                         <div class="one_fourth hq-feature-wrapper">
                             <i class="<?php echo $feature->icon; ?>"></i>
                             <div class="car_attribute_content">

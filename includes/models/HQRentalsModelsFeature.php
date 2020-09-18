@@ -119,6 +119,9 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
         }
         return $this->label_for_website->{explode('_',get_locale())[0]};
     }
+    public function getLabelsForWebsite(){
+        return $this->label_for_website;
+    }
     public function getOrderMetaKey()
     {
         return $this->metaOrder;

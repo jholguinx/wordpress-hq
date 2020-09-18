@@ -59,7 +59,7 @@ class HQRentalsQueriesFeatures extends HQRentalsQueriesBaseClass
             return $this->parseObject(array(
                 array(
                     'property_name'     => 'label',
-                    'values'            => $feature->getLabelForWebsite()
+                    'values'            => $feature->getLabelsForWebsite()
                 ),
                 'icon'
             ), $feature);

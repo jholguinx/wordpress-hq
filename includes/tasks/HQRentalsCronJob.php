@@ -12,7 +12,7 @@ class HQRentalsCronJob
         add_filter('cron_schedules', array($this, 'addCustomScheduleTime'));
         add_action( 'refreshAllHQDataJob', array($this, 'refreshAllData') );
         if ( ! wp_next_scheduled( 'refreshAllHQDataJob' ) ) {
-            wp_schedule_event( time(), 'hqRefreshTimeHalfAnHour', 'refreshAllHQDataJob' );
+            wp_schedule_event( time(), 'daily', 'refreshAllHQDataJob' );
         }
 
     }

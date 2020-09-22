@@ -34,6 +34,10 @@ class HQRentalsApiEndpoint{
     {
         return $this->settings->getApiBaseUrl() . 'fleets/locations';
     }
+    public function getVehicleTypesEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'fleets/vehicle-types';
+    }
     public function getAdditionalChargesEndpoint()
     {
         return $this->settings->getApiBaseUrl() . 'fleets/additional-charges';
@@ -44,7 +48,7 @@ class HQRentalsApiEndpoint{
     }
     public function getVehicleClassCustomFields()
     {
-        return $this->settings->getApiBaseUrl() . 'fields/?item_type=fleets.vehicle_classes&limit=100';
+        return $this->settings->getApiBaseUrl() . 'fields?item_type=fleets.vehicle_classes&limit=100';
     }
     public function getWorkspotLocationsEndpoint()
     {

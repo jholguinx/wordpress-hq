@@ -52,12 +52,10 @@ function login($) {
         },
         dataType: 'json',
         success: function (response) {
-            console.log(response);
             jQuery(".hq-loader").slideUp();
             if (response.data.success) {
                 var tenants = response.data.data.tenants;
                 var user = response.data.data.user;
-                console.log(tenants, user);
                 if (Array.isArray(tenants)) {
                     jQuery("#hq-api-user-token").val(user.api_token);
                     jQuery("#hq-api-tenant-token").val(tenants[0].api_token);

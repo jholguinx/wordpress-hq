@@ -247,10 +247,10 @@ class HQRentalsAdminSettings
                                                 <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                       data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
-                                                                                                                                        <p>For xxx.hqrentals.app, your region is in America 2</p>
-                                                                                                                                        <p>For xxx.west.hqrentals.app, your region is in America West</p>
-                                                                                                                                        <p>For  xxx.hqrentals.eu, your region is Europe</p>
-                                                                                                                                        <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
+                                                                        <p>For xxx.hqrentals.app, your region is in America 2</p>
+                                                                        <p>For xxx.west.hqrentals.app, your region is in America West</p>
+                                                                        <p>For xxx.hqrentals.eu, your region is Europe</p>
+                                                                        <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
                                             </div>
                                             <div class="hq-general-input-wrapper hq-dates-input">
                                                 <select

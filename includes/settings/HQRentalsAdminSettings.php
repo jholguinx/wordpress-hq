@@ -263,6 +263,9 @@ class HQRentalsAdminSettings
                                                     <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
                                                         America 2
                                                     </option>
+                                                    <option value="https://api-america-3.caagcrm.com/api-america-3/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-3.caagcrm.com/api-america-3/') ? 'selected="selected"' : ''; ?>>
+                                                        America 3
+                                                    </option>
                                                     <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
                                                         America West
                                                     </option>

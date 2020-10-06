@@ -247,10 +247,10 @@ class HQRentalsAdminSettings
                                                 <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                       data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
-                                                                                                                                        <p>For xxx.hqrentals.app, your region is in America 2</p>
-                                                                                                                                        <p>For xxx.west.hqrentals.app, your region is in America West</p>
-                                                                                                                                        <p>For  xxx.hqrentals.eu, your region is Europe</p>
-                                                                                                                                        <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
+                                                                        <p>For xxx.hqrentals.app, your region is in America 2</p>
+                                                                        <p>For xxx.west.hqrentals.app, your region is in America West</p>
+                                                                        <p>For xxx.hqrentals.eu, your region is Europe</p>
+                                                                        <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
                                             </div>
                                             <div class="hq-general-input-wrapper hq-dates-input">
                                                 <select
@@ -262,6 +262,9 @@ class HQRentalsAdminSettings
                                                     </option>
                                                     <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
                                                         America 2
+                                                    </option>
+                                                    <option value="https://api-america-3.caagcrm.com/api-america-3/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-3.caagcrm.com/api-america-3/') ? 'selected="selected"' : ''; ?>>
+                                                        America 3
                                                     </option>
                                                     <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
                                                         America West

@@ -166,7 +166,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $types = ['minute_rate', 'hourly_rate', 'daily_rate', 'weekly_rate', 'monthly_rate'];
                 foreach ($types as $type) {
                     if (isset($data->activeRates[0]->{$type})) {
-                        $this->rates[$type] = $data->activeRates[0]->{$type}->amount_for_display;
+                        $rate = $data->activeRates[0]->{$type};
+                        $this->rates[$type] = $rate->amount_for_display;
+                        $this->rates[$type.'_no_format'] = $rate->amount;
+                        $this->rates[$type.'_no_decimals'] = $rate->currency_icon.round($rate->amount, 0);
                     }
                 }
             }

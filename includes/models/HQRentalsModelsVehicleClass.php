@@ -32,6 +32,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     protected $metaLabelForWebsite = 'hq_wordpress_vehicle_class_label_for_website_meta';
     protected $metashortDescriptionForWebiste = 'hq_wordpress_vehicle_class_short_description_meta';
     protected $metaDescriptionForWebiste = 'hq_wordpress_vehicle_class_description_for_webiste_meta';
+    protected $metaForRate = 'hq_wordpress_vehicle_class_rate_meta';
     protected $metaCustomField = 'hq_wordpress_vehicle_class_custom_field_';
     /*
      * Object Data to Display
@@ -52,6 +53,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $customField = [];
     public $permalink = '';
     public $priceIntervals = [];
+    public $rates = [];
 
     public function __construct($post = null)
     {
@@ -110,7 +112,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
      */
     public function setVehicleClassFromApi($data, $customFields = null)
     {
-
         $this->id = $data->id;
         $this->brandId = $data->brand->id;
         $this->name = $data->name;
@@ -161,6 +162,17 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                     }
                 }
             }
+            if (isset($data->activeRates[0])) {
+                $types = ['minute_rate', 'hourly_rate', 'daily_rate', 'weekly_rate', 'monthly_rate'];
+                foreach ($types as $type) {
+                    if (isset($data->activeRates[0]->{$type})) {
+                        $rate = $data->activeRates[0]->{$type};
+                        $this->rates[$type] = $rate->amount_for_display;
+                        $this->rates[$type.'_no_format'] = $rate->amount;
+                        $this->rates[$type.'_no_decimals'] = $rate->currency_icon.round($rate->amount, 0);
+                    }
+                }
+            }
         }
         if(!empty($customFields->data)){
             foreach ($customFields->data as $custom_field) {
@@ -174,7 +186,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
      */
     public function create()
     {
-
         $this->postArgs = array_merge(
             $this->postArgs,
             [
@@ -190,7 +201,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaName, $this->name);
         hq_update_post_meta($post_id, $this->metaOrder, $this->order);
         hq_update_post_meta($post_id, $this->metaAvailableOnWebsite, $this->availableOnWebsite);
-
         hq_update_post_meta($post_id, $this->metaPublicImageLink, $this->publicImageLink);
         foreach ($this->labels as $key => $value) {
             hq_update_post_meta($post_id, $this->metaLabelForWebsite . '_' . $key, $value);
@@ -200,6 +210,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
         foreach ($this->descriptions as $key => $value) {
             hq_update_post_meta($post_id, $this->metaDescriptionForWebiste . '_' . $key, $value);
+        }
+        foreach ($this->rates as $key => $value) {
+            hq_update_post_meta($post_id, $this->metaForRate . '_' . $key, $value);
         }
         foreach ($this->features as $feature) {
             $feature->create();
@@ -242,6 +255,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
+
         return $query->posts;
     }
 

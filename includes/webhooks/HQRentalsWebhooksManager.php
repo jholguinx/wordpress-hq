@@ -34,9 +34,9 @@ class HQRentalsWebhooksManager{
     {
         //Should be validated -> add Success params to the response
         $this->scheduler->refreshHQData();
-        $data = $this->resolveResponse();
-        $response = new \WP_REST_Response($data);
+        $response = new \WP_REST_Response();
         $response->status = 200;
+
         return $response;
     }
     public function firePluginUpgrade()

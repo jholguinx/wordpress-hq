@@ -35,6 +35,12 @@ class HQRentalsApiConnector{
         $response = wp_remote_get($this->endpoints->getLocationsApiEndpoint(), $this->configuration->getBasicApiConfiguration());
         return $this->resolver->resolveApiCallLocations( $response );
     }
+    public function getHQRentalsVehicleTypes()
+    {
+        $response = wp_remote_get($this->endpoints->getVehicleTypesEndpoint(), $this->configuration->getBasicApiConfiguration());
+
+        return json_decode($response['body'])->fleets_vehicle_types;
+    }
     public function getHQRentalsAdditionalCharges()
     {
         $response = wp_remote_get( $this->endpoints->getAdditionalChargesEndpoint(), $this->configuration->getBasicApiConfiguration() );

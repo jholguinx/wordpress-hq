@@ -20,6 +20,10 @@ class HQRentalsScheduler
      */
     protected $vehicleClassesTask;
     /**
+     * @var HQRentalsVehicleTypesTask
+     */
+    protected $vehicleTypesTask;
+    /**
      * @var HQRentalsAdditionalChargesTask
      */
     protected $additionalChargesTask;
@@ -30,6 +34,7 @@ class HQRentalsScheduler
         $this->brandsTask = new HQRentalsBrandsTask();
         $this->locationsTask = new HQRentalsLocationsTask();
         $this->vehicleClassesTask = new HQRentalsVehicleClassesTask();
+        $this->vehicleTypesTask = new HQRentalsVehicleTypesTask();
         $this->additionalChargesTask = new HQRentalsAdditionalChargesTask();
         $this->settingsTask = new HQRentalsSettingsTask();
         $this->workspot = new HQRentalsLocationsWorkspotTask();
@@ -48,6 +53,7 @@ class HQRentalsScheduler
             $this->locationsTask->tryToRefreshSettingsData();
             $this->additionalChargesTask->tryToRefreshSettingsData();
             $this->vehicleClassesTask->tryToRefreshSettingsData();
+            $this->vehicleTypesTask->tryToRefreshSettingsData();
             if($this->allResponseAreOK()){
                 $this->deleteHQData();
                 $this->refreshAllDataOnDatabase();
@@ -80,6 +86,7 @@ class HQRentalsScheduler
             $this->brandsTask->dataWasRetrieved() and
             $this->locationsTask->dataWasRetrieved() and
             $this->additionalChargesTask->dataWasRetrieved() and
+            $this->vehicleTypesTask->dataWasRetrieved() and
             $this->vehicleClassesTask->dataWasRetrieved();
     }
 
@@ -90,6 +97,7 @@ class HQRentalsScheduler
         $this->brandsTask->setDataOnWP();
         $this->locationsTask->setDataOnWP();
         $this->additionalChargesTask->setDataOnWP();
+        $this->vehicleTypesTask->setDataOnWP();
     }
     public function getErrorOnSync()
     {

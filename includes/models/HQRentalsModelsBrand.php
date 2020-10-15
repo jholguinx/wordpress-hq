@@ -290,4 +290,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     {
         return $this->uuid;
     }
+    public function getUUIDMetaKey()
+    {
+        return $this->metaUUID;
+    }
 }

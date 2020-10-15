@@ -99,5 +99,22 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
         $query = new \WP_Query($args);
         return new HQRentalsModelsBrand($query->posts[0]);
     }
+    public function getBrandByUUID($uuid)
+    {
+        $args = array_merge(
+            $this->model->postArgs,
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->model->getUUIDMetaKey(),
+                        'value' => $uuid,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return new HQRentalsModelsBrand($query->posts[0]);
+    }
 
 }

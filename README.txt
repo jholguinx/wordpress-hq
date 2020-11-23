@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.4.2
 Requires PHP: 5.6.0
-Stable tag: 1.4.21
+Stable tag: 1.4.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,11 +17,11 @@ The HQ Rental Software plugin allows you to easily set up the reservation proces
 
 After you add the plugin to your website, please follow the steps below to complete connection with your HQ account.
 
-Step 1: On your website’s WordPress admin dashboard navigate settings for HQ Rentals.
+Step 1 - On your website’s WordPress admin dashboard navigate settings for HQ Rentals.
 
-Step 2: Under the General Settings section enter your HQ Rental Software user account email and password.
+Step 2 - Under the General Settings section enter your HQ Rental Software user account email and password.
 
-Step 3: Press the Authenticate button - That’s it, you’re all set!
+Step 3 - Press the Authenticate button - That’s it, you’re all set!
 
 You can now use the features of the plugin to set up the reservation process and more. For information on this setup, please go to our Website Integrations section on our Knowledge Base.
 
@@ -43,47 +43,6 @@ Small fixes on settings
 = 1.4.18 =
 Support for Grand Car Theme
 
-= 1.4.17 =
-New setup method using HQ Rental software credentials to authenticate and connect the plugin.
-Internal fixes.
-Improved settings screen.
-
-= 1.4.16 =
-Option to automatically setup API tokens using HQ Rental Software login credentials.
-Vehicle class rates on the vehicle widget now show from lowest to highest by default, and you have the option to change this to a descending order from the plugin settings.
-
-
-= 1.4.15 =
-Support for Locations  labels
-Support for authentication on token settings
-
-= 1.4.14 =
-Support features order
-
-= 1.4.13 =
-Support features labels
-
-= 1.4.12 =
-Fix on version number
-
-= 1.4.11 =
-Custom fields on locations
-
-= 1.4.10 =
-Fixes on Betheme shortcode
-
-= 1.4.9 =
-Shortcode added for Betheme
-
-= 1.4.7 =
-Fixes on Advanced shortcode
-
-= 1.4.6 =
-Fixes
-
-= 1.4.5 =
-Option to set default langitude and longitude on Form with Map shortcode
-
 == Screenshots ==
 
 1. Set up the credentials to connect to the system. In WordPress go to Settings > HQ Rentals.
@@ -95,17 +54,9 @@ Option to set default langitude and longitude on Form with Map shortcode
 
 == Frequently Asked Questions ==
 
-= How can I setup the plugin? =
+= How can I set up the plugin? =
 
-The setup its straightforward, you can find this under the Installation tab at this page or go to https://docs.hqrentalsoftware.com/knowledgebase/wordpress-plugin/ and go through the steps.
-
-= I received an error on the setup screen =
-
-Please make sure you select the right API Region depending on your installation. If your system link ends in caagcrm you should select America. In case your system link ends in hqrentals.eu, you should select Europe. Finally, if it ends in hqrentals.asia, please select Asia.
-
-= What does the Force Update button do? =
-
-This button triggers the synchronization between your WordPress installation and the system. This will refresh all the current system data on your WordPress website.
+The setup it's straightforward, you can find this under the Installation tab at this page or go to https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ and go through the steps.
 
 = I’m having problems with the reservation workflow on Safari =
 

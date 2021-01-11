@@ -57,7 +57,7 @@ class HQRentalsAdminSettings
         } else {
             $this->assets->loadAssetsForAdminSettingPage();
             $okAPI  = $this->settings->isApiOkay();
-            $this->assets->getHQFontAwesome();
+            HQRentalsAssetsHandler::getHQFontAwesome();
             ?>
             <script>
                 var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;

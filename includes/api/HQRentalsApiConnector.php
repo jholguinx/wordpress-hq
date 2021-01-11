@@ -109,10 +109,10 @@ class HQRentalsApiConnector{
         );
         $response = wp_remote_post($this->endpoints->getAuthEndpoint(), $this->configuration->authApiConfiguration($data));
         $cleanResponse = $this->resolver->resolveApiCallForAuth($response);
-        $settings = new HQRentalsSettings();
-        $settings->resolveSettingsOnAuth($cleanResponse);
         if($cleanResponse->success){
+            $settings = new HQRentalsSettings();
             $settings->updateEmail($email);
+            $settings->resolveSettingsOnAuth($cleanResponse);
         }
         return $cleanResponse;
     }

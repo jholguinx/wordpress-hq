@@ -223,4 +223,8 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-moment');
         wp_enqueue_script('hq-wordpress-dates-js');
     }
+    public function getHQFontAwesome()
+    {
+        echo '<link rel="stylesheet" href="https://caag.caagcrm.com/assets/font-awesome">';
+    }
 }

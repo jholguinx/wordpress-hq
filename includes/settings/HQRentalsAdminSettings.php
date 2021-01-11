@@ -57,8 +57,8 @@ class HQRentalsAdminSettings
         } else {
             $this->assets->loadAssetsForAdminSettingPage();
             $okAPI  = $this->settings->isApiOkay();
+            $this->assets->getHQFontAwesome();
             ?>
-            <script src="https://kit.fontawesome.com/d2b6c51265.js" crossorigin="anonymous"></script>
             <script>
                 var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
             </script>

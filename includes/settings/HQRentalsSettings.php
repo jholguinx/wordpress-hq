@@ -57,19 +57,10 @@ class HQRentalsSettings
     public function getApiUserToken()
     {
         $option = get_option($this->api_user_token, "");
-        if ($this->newAuthSchemeEnabled()) {
-            if(!empty($option)){
-                return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
-            }else{
-                return '';
-            }
-        } else {
-            if(!empty($option)){
-                return get_option($this->api_user_token);
-            }else{
-                return '';
-            }
-
+        if(!empty($option)){
+            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
+        }else{
+            return '';
         }
     }
 
@@ -79,10 +70,11 @@ class HQRentalsSettings
      */
     public function getApiTenantToken()
     {
-        if ($this->newAuthSchemeEnabled()) {
+        $option = get_option($this->api_tenant_token, "");
+        if(!empty($option)){
             return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token));
-        } else {
-            return get_option($this->api_tenant_token);
+        }else{
+            return '';
         }
     }
 
@@ -92,11 +84,7 @@ class HQRentalsSettings
      */
     public function getApiUserTokenForWorkspotLocation()
     {
-        if ($this->newAuthSchemeEnabled()) {
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token_workspot_gebouw_location));
-        } else {
-            return get_option($this->api_user_token_workspot_gebouw_location);
-        }
+        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token_workspot_gebouw_location));
     }
 
     /**
@@ -105,11 +93,7 @@ class HQRentalsSettings
      */
     public function getApiTenantTokenForWorkspotLocation()
     {
-        if ($this->newAuthSchemeEnabled()) {
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token_workspot_gebouw_location));
-        } else {
-            return get_option($this->api_tenant_token_workspot_gebouw_location);
-        }
+        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token_workspot_gebouw_location));
     }
 
     /**
@@ -118,11 +102,7 @@ class HQRentalsSettings
      */
     public function getApiEncodedToken()
     {
-        if ($this->newAuthSchemeEnabled()) {
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token));
-        } else {
-            return get_option($this->api_encoded_token);
-        }
+        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token));
     }
 
     /**
@@ -131,11 +111,7 @@ class HQRentalsSettings
      */
     public function getEncodedApiKeyForWorkspotLocation()
     {
-        if ($this->newAuthSchemeEnabled()) {
-            return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token_workspot_gebouw_location));
-        } else {
-            return get_option($this->api_encoded_token_workspot_gebouw_location);
-        }
+        return HQRentalsEncryptionHandler::decrypt(get_option($this->api_encoded_token_workspot_gebouw_location));
     }
 
     /**
@@ -623,9 +599,11 @@ class HQRentalsSettings
         if($response->data->success){
             $tenants = $response->data->data->tenants;
             if(is_array($tenants)){
-                $link = $response->data->data->tenants[0]->api_link;
-                $userToken = $response->data->data->user->api_token;
-                $tenantToken = $response->data->data->tenants[0]->api_token;
+                $first = $response->data->data->tenants[0];
+                $user = $response->data->data->user;
+                $link = $first->api_link;
+                $userToken = $user->api_token;
+                $tenantToken = $first->api_token;
                 if($link and $userToken and $tenants){
                     $this->saveApiBaseUrl($link);
                     $this->saveApiTenantToken($tenantToken);

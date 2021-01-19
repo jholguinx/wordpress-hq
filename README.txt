@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 4.9.0
 Tested up to: 5.4.2
 Requires PHP: 5.6.0
-Stable tag: 1.4.24
+Stable tag: 1.4.25
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,10 @@ If you experience any issues, please review your user and password and try again
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.4.25 =
+
+Fix to solve authentication issues when connecting plugin to HQ tenant account.
 
 = 1.4.23 =
 Screenshots update

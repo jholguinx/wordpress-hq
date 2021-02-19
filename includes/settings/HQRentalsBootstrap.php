@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
+use HQRentalsPlugin\HQRentalsDb\HQRentalsDbBootstrapper;
 
 class HQRentalsBootstrap
 {
@@ -25,6 +26,7 @@ class HQRentalsBootstrap
     public function __construct()
     {
         $this->settings = new HQRentalsSettings();
+        $this->dbBootstrap = new HQRentalsDbBootstrapper();
     }
 
     public function onPluginActivation()
@@ -96,6 +98,7 @@ class HQRentalsBootstrap
         }
         $this->resolveDefaultPages();
         $this->notifyToSystemOnActivation();
+        $this->dbBootstrap->createTablesOnInit();
     }
 
     public function resolveDefaultPages()

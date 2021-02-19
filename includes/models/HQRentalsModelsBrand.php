@@ -11,6 +11,57 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
      */
     public $brandsCustomPostName = 'hqwp_brands';
     public $brandsCustomPostSlug = 'brands';
+    private $tableName = 'hq_brands';
+    private $columns = array(
+        array(
+            'column_name' => 'id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'name',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'location_fee',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'tax_label',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'website_link',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'uuid',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'reservation_form_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'reservations_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'quote_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'package_quotes_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'payment_requests_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'calendar_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+    );
 
     /*
      * HQ Rentals Brand Data
@@ -293,5 +344,12 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     public function getUUIDMetaKey()
     {
         return $this->metaUUID;
+    }
+    public function getDataToCreateTable() : array
+    {
+        return array(
+            'table_name' => $this->tableName,
+            'table_columns' => $this->columns
+        );
     }
 }

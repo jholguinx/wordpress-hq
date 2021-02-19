@@ -18,6 +18,53 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
      */
     public $vehicleClassesCustomPostName = 'hqwp_veh_classes';
     public $vehicleClassesCustomPostSlug = 'vehicle-classes';
+    private $tableName = 'hq_vehicle_classes';
+    private $columns = array(
+        array(
+            'column_name' => 'id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'name',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'public_image_link',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'vehicle_class_order',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'brand_id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'label_for_website',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'short_description_for_website',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'description_for_website',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'images',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'active_rates',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'features',
+            'column_data_type' => 'varchar(255)'
+        ),
+    );
     /*
      * HQ Rentals Vehicle Classes Data
      * Custom Post Metas
@@ -522,6 +569,12 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $queryBrand = new HQRentalsQueriesBrands();
         return $queryBrand->getBrand($this->brandId);
     }
-
+    public function getDataToCreateTable()
+    {
+        return array(
+            'table_name' => $this->tableName,
+            'table_columns' => $this->columns
+        );
+    }
 }
 

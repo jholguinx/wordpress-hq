@@ -10,6 +10,65 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
      */
     public $locationsCustomPostName = 'hqwp_locations';
     public $locationsCustomPostSlug = 'locations';
+    private $tableName = 'hq_locations';
+    private $columns = array(
+        array(
+            'column_name' => 'id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'name',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'brand_id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'is_airport',
+            'column_data_type' => 'tinyint(1)'
+        ),
+        array(
+            'column_name' => 'coordinates',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'active',
+            'column_data_type' => 'tinyint(1)'
+        ),
+        array(
+            'column_name' => 'location_order',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'address',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'open_hours',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'label_for_website',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'all_map_coordinate',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'pick_up_allowed',
+            'column_data_type' => 'tinyint(1)'
+        ),
+        array(
+            'column_name' => 'return_allowed',
+            'column_data_type' => 'tinyint(1)'
+        ),
+        array(
+            'column_name' => 'label_for_website_translated',
+            'column_data_type' => 'varchar(255)'
+        ),
+    );
 
     /*
      * HQ Rentals Location Data
@@ -257,5 +316,12 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             return $this->labelsForWebsite[$lang];
         }
         return $this->labelsForWebsite->{explode('_',get_locale())[0]};
+    }
+    public function getDataToCreateTable() : array
+    {
+        return array(
+            'table_name' => $this->tableName,
+            'table_columns' => $this->columns
+        );
     }
 }

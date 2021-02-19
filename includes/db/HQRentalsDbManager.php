@@ -69,23 +69,26 @@ class HQRentalsDbManager{
             $data = $this->resolveQuery(
                 true,
                 null,
-                null
+                null,
+                $query
             );
         }else{
             $data = $this->resolveQuery(
                 false,
                 null,
-                'Error on Query'
+                'Error on Query',
+                $query
             );
         }
         return $data;
     }
-    private function resolveQuery($success, $data, $errors) : \stdClass
+    private function resolveQuery($success, $datas, $errors, $query) : \stdClass
     {
         $data = new \stdClass();
         $data->success = $success;
-        $data->data = $data;
+        $data->data = $datas;
         $data->errors = $errors;
+        $data->query = $query;
         return $data;
     }
 }

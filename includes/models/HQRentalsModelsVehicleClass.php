@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 
+use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
@@ -149,6 +150,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 'create_posts' => 'do_not_allow',
             ],
         ];
+        $this->db = new HQRentalsDbManager();
         if (!empty($post)) {
             $this->setFromPost($post);
         }
@@ -574,6 +576,32 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         return array(
             'table_name' => $this->tableName,
             'table_columns' => $this->columns
+        );
+    }
+    public function saveOrUpdate() : void
+    {
+        $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
+        if($result->success){
+            $resultUpdate = $this->db->updateIntoTable($this->tableName,$this->parseDataToSaveOnDB(), 'id=' . $this->id);
+        }else{
+            $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB() );
+        }
+    }
+
+    private function parseDataToSaveOnDB() : array
+    {
+        return array(
+            'id'                            =>  $this->id,
+            'name'                          =>  $this->name,
+            'brand_id'                      =>  $this->brandId,
+            'public_image_link'             =>  $this->publicImageLink,
+            'vehicle_class_order'           =>  $this->order,
+            'label_for_website'             =>  implode($this->labels),
+            'short_description_for_website' =>  implode($this->shortDescriptions),
+            'description_for_website'       =>  implode($this->descriptions),
+            'images'                        =>  $this->images,
+            'active_rates'                  =>  '',
+            'features'                      =>  ''
         );
     }
 }

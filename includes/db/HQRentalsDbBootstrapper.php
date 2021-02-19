@@ -23,6 +23,6 @@ class HQRentalsDbBootstrapper{
         $brandTable = $this->db->createTable( $brandData['table_name'], $brandData['table_columns'] );
         $locationTable = $this->db->createTable( $locationData['table_name'], $locationData['table_columns'] );
         $vehicleTable = $this->db->createTable( $vehiclesData['table_name'], $vehiclesData['table_columns'] );
-        dd($vehicleTable);
+        // add validation for process completed
     }
 }

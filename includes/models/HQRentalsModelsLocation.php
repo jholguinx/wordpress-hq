@@ -1,5 +1,6 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
+use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsModelsLocation extends HQRentalsBaseModel
@@ -156,6 +157,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
                 'create_posts' => 'do_not_allow'
             )
         );
+        $this->db = new HQRentalsDbManager();
         if(!empty($post)){
             $this->setFromPost($post);
         }
@@ -322,6 +324,36 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         return array(
             'table_name' => $this->tableName,
             'table_columns' => $this->columns
+        );
+    }
+
+    public function saveOrUpdate() : void
+    {
+        $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
+        if($result->success){
+            $resultUpdate = $this->db->updateIntoTable($this->tableName,$this->parseDataToSaveOnDB(), 'id=' . $this->id);
+        }else{
+            $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB() );
+        }
+    }
+
+    private function parseDataToSaveOnDB() : array
+    {
+        return array(
+            'id'                            =>  $this->id,
+            'name'                          =>  $this->name,
+            'brand_id'                      =>  $this->brandId,
+            'is_airport'                    =>  $this->isAirport,
+            'coordinates'                   =>  $this->coordinates,
+            'active'                        =>  $this->isActive,
+            'location_order'                =>  $this->order,
+            'address'                       =>  $this->address,
+            'open_hours'                    =>  '',
+            'label_for_website'             =>  $this->labelsForWebsite,
+            'all_map_coordinate'            =>  '',
+            'pick_up_allowed'               =>  1,
+            'return_allowed'                =>  1,
+            'label_for_website_translated'  =>  ''
         );
     }
 }

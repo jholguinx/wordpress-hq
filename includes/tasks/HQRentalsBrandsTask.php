@@ -22,6 +22,7 @@ class HQRentalsBrandsTask extends HQRentalsBaseTask
                 $newBrand = new HQBrand();
                 $newBrand->setBrandFromApi( $brand );
                 $newBrand->create();
+                $newBrand->saveOrUpdate();
             }
         }
     }

@@ -35,6 +35,7 @@ class HQRentalsVehicleClassesTask extends HQRentalsBaseTask {
                 $newVehicleClass = new HQVehicleClass();
                 $newVehicleClass->setVehicleClassFromApi( $vehicle_class, $customFields );
                 $newVehicleClass->create();
+                $newVehicleClass->saveOrUpdate();
             }
         }
     }

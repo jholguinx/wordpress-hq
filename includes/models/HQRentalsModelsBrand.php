@@ -1,6 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsModels;
 
+use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
@@ -164,6 +165,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         if(! empty( $post ) ){
             $this->setBrandFromPost($post);
         }
+        $this->db = new HQRentalsDbManager();
     }
 
 
@@ -350,6 +352,33 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         return array(
             'table_name' => $this->tableName,
             'table_columns' => $this->columns
+        );
+    }
+
+    public function saveOrUpdate() : void
+    {
+        $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
+        if($result->success){
+            $resultUpdate = $this->db->updateIntoTable($this->tableName,$this->parseDataToSaveOnDB(), 'id=' . $this->id);
+        }else{
+            $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB() );
+        }
+    }
+
+    private function parseDataToSaveOnDB() : array
+    {
+        return array(
+            'id' => $this->id,
+            'name'  =>  $this->name,
+            'location_fee' => '',
+            'tax_label'     =>  $this->taxLabel,
+            'website_link'  =>  $this->websiteLink,
+            'uuid'          =>  $this->uuid,
+            'reservation_form_snippet'      =>  $this->snippetReservationForm,
+            'reservations_snippet'          =>  $this->snippetReservations,
+            'quote_snippet'                 =>  $this->snippetQuotes,
+            'package_quotes_snippet'        =>  $this->snippetPackageQuote,
+            'payment_requests_snippet'      =>  $this->snippetPaymentRequest,
         );
     }
 }

@@ -596,10 +596,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'brand_id'                      =>  $this->brandId,
             'public_image_link'             =>  $this->publicImageLink,
             'vehicle_class_order'           =>  $this->order,
-            'label_for_website'             =>  implode($this->labels),
-            'short_description_for_website' =>  implode($this->shortDescriptions),
-            'description_for_website'       =>  implode($this->descriptions),
-            'images'                        =>  $this->images,
+            'label_for_website'             =>  '',
+            'short_description_for_website' =>  '',
+            'description_for_website'       =>  '',
+            'images'                        =>  '',
             'active_rates'                  =>  '',
             'features'                      =>  ''
         );

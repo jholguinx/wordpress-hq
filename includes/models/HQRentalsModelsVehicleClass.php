@@ -43,27 +43,27 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         ),
         array(
             'column_name' => 'label_for_website',
-            'column_data_type' => 'varchar(255)'
+            'column_data_type' => 'LONGTEXT'
         ),
         array(
             'column_name' => 'short_description_for_website',
-            'column_data_type' => 'varchar(255)'
+            'column_data_type' => 'LONGTEXT'
         ),
         array(
             'column_name' => 'description_for_website',
-            'column_data_type' => 'varchar(255)'
+            'column_data_type' => 'LONGTEXT'
         ),
         array(
             'column_name' => 'images',
-            'column_data_type' => 'varchar(255)'
+            'column_data_type' => 'LONGTEXT'
         ),
         array(
             'column_name' => 'active_rates',
-            'column_data_type' => 'varchar(255)'
+            'column_data_type' => 'LONGTEXT'
         ),
         array(
             'column_name' => 'features',
-            'column_data_type' => 'varchar(255)'
+            'column_data_type' => 'LONGTEXT'
         ),
     );
     /*
@@ -102,6 +102,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $permalink = '';
     public $priceIntervals = [];
     public $rates = [];
+    public $imageForDB = '';
+    public $activeRateDB = '';
+    public $featuresDB = '';
 
     public function __construct($post = null)
     {
@@ -166,6 +169,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->name = $data->name;
         $this->order = $data->order;
         $this->publicImageLink = $data->public_image_link;
+        $this->imageForDB = '';
+        $this->activeRateDB = '';
+        $this->featuresDB = '';
         if(!empty($data->label_for_website)){
             foreach ($data->label_for_website as $key => $label) {
                 $this->labels[$key] = $label;
@@ -596,12 +602,12 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'brand_id'                      =>  $this->brandId,
             'public_image_link'             =>  $this->publicImageLink,
             'vehicle_class_order'           =>  $this->order,
-            'label_for_website'             =>  '',
-            'short_description_for_website' =>  '',
-            'description_for_website'       =>  '',
-            'images'                        =>  '',
-            'active_rates'                  =>  '',
-            'features'                      =>  ''
+            'label_for_website'             =>  json_encode($this->labels),
+            'short_description_for_website' =>  json_encode($this->shortDescriptions),
+            'description_for_website'       =>  json_encode($this->descriptions),
+            'images'                        =>  json_encode($this->images),
+            'active_rates'                  =>  json_encode($this->rate),
+            'features'                      =>  json_encode($this->features)
         );
     }
 }

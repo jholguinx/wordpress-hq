@@ -359,9 +359,9 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     {
         $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
         if($result->success){
-            $resultUpdate = $this->db->updateIntoTable($this->tableName,$this->parseDataToSaveOnDB(), 'id=' . $this->id);
+            $resultUpdate = $this->db->updateIntoTable( $this->tableName,$this->parseDataToSaveOnDB(), 'id=' . $this->id);
         }else{
-            $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB() );
+            $resultInsert = $this->db->insertIntoTable( $this->tableName, $this->parseDataToSaveOnDB() );
         }
     }
 

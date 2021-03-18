@@ -51,6 +51,7 @@ class HQRentalsScheduler
             $this->settingsTask->tryToRefreshSettingsData();
             $this->brandsTask->tryToRefreshSettingsData();
             $this->locationsTask->tryToRefreshSettingsData();
+            // additional charges -> not update
             $this->additionalChargesTask->tryToRefreshSettingsData();
             $this->vehicleClassesTask->tryToRefreshSettingsData();
             $this->vehicleTypesTask->tryToRefreshSettingsData();

@@ -2,10 +2,10 @@
 Contributors: faggioni
 Donate link: https://hqrentalsoftware.com
 Tags: hqrentalsoftware
-Requires at least: 4.9.0
-Tested up to: 5.6.2
+Requires at least: 5.0.11
+Tested up to: 5.7
 Requires PHP: 5.6.3
-Stable tag: 1.4.25
+Stable tag: 1.4.26
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,10 @@ If you experience any issues, please review your user and password and try again
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.4.26 =
+
+New properties for vehicle class model.
 
 = 1.4.25 =
 

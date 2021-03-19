@@ -13,6 +13,7 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 {
     public static $custom_fields = [];
+    private static $additionalChargeForExceededDistanceType ='additional_charge_for_exceeded_distance';
     /*
      * HQ Rental Custom Post Type Configuration
      */
@@ -34,6 +35,11 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     protected $metaDescriptionForWebiste = 'hq_wordpress_vehicle_class_description_for_webiste_meta';
     protected $metaForRate = 'hq_wordpress_vehicle_class_rate_meta';
     protected $metaCustomField = 'hq_wordpress_vehicle_class_custom_field_';
+    protected $metaDistanceLimit = 'hq_wordpress_vehicle_class_distance_limit_meta';
+    protected $metaDistanceLimitPerDay = 'hq_wordpress_vehicle_class_distance_limit_per_day_meta';
+    protected $metaDistanceLimitPerWeek = 'hq_wordpress_vehicle_class_distance_limit_per_week_meta';
+    protected $metaDistanceLimitPerMonth = 'hq_wordpress_vehicle_class_distance_limit_per_month_meta';
+
     /*
      * Object Data to Display
      */
@@ -54,6 +60,11 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $permalink = '';
     public $priceIntervals = [];
     public $rates = [];
+    public $distanceLimit = '';
+    public $distanceLimitPerDay = '';
+    public $distanceLimitPerWeek = '';
+    public $distanceLimitPerMonth = '';
+    public $additionalChargeForExceededDistance = null;
 
     public function __construct($post = null)
     {
@@ -179,6 +190,14 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $this->{$this->metaCustomField . $custom_field->dbcolumn} = $data->{$custom_field->dbcolumn};
             }
         }
+        $this->distanceLimit = $data->distance_limit;
+        $this->distanceLimitPerDay = $data->distance_limit_per_day;
+        $this->distanceLimitPerWeek = $data->distance_limit_per_week;
+        $this->distanceLimitPerMonth = $data->distance_limit_per_month;
+        if( !empty($data->additional_charge_for_exceeded_distance->id) ){
+            $this->additionalChargeForExceededDistance = new HQRentalsModelsVehicleCharge();
+            $this->additionalChargeForExceededDistance->setVehicleChargeFromApi($data->additional_charge_for_exceeded_distance, $this->id, HQRentalsModelsVehicleClass::$additionalChargeForExceededDistanceType);
+        }
     }
 
     /*
@@ -237,11 +256,17 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 }
             }
         }
+        hq_update_post_meta($post_id, $this->metaDistanceLimit, $this->distanceLimit);
+        hq_update_post_meta($post_id, $this->metaDistanceLimitPerDay, $this->distanceLimitPerDay);
+        hq_update_post_meta($post_id, $this->metaDistanceLimitPerWeek, $this->distanceLimitPerWeek);
+        hq_update_post_meta($post_id, $this->metaDistanceLimitPerMonth, $this->distanceLimitPerMonth);
+        if($this->additionalChargeForExceededDistance){
+            $this->additionalChargeForExceededDistance->setVehicleClassPostId($post_id);
+            $this->additionalChargeForExceededDistance->create();
+        }
+
     }
 
-    /*
-    * Find
-    */
     public function find($caag_id)
     {
         $query = new \WP_Query($this->postArgs);
@@ -271,11 +296,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         ];
     }
 
-    /**
-     * @param $post
-     */
     public function setFromPost($post)
     {
+        $this->postId = $post->ID;
         $this->name = $post->post_name;
         $labelsMetaKeys = $this->getMetaKeysFromLabel();
         $shortDescriptionKeys = $this->getMetaKeysFromShortDescription();
@@ -285,9 +308,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $this->{$property} = get_post_meta($post->ID, $metakey, true);
             }
         }
-        /*
-         * Languages
-         */
         foreach ($labelsMetaKeys as $key => $value) {
             $metakey = explode('_', $value[0]);
             $this->labels[end($metakey)] = get_post_meta($post->ID, $value[0], true);
@@ -300,8 +320,12 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             $metakey = explode('_', $value[0]);
             $this->descriptions[end($metakey)] = get_post_meta($post->ID, $value[0], true);
         }
-        $this->postId = $post->ID;
         $this->permalink = get_permalink($post->ID);
+        $this->distanceLimit = get_post_meta($post->ID, $this->metaDistanceLimit, true);
+        $this->distanceLimitPerDay = get_post_meta($post->ID, $this->metaDistanceLimitPerDay, true);
+        $this->distanceLimitPerWeek = get_post_meta($post->ID, $this->metaDistanceLimitPerWeek, true);
+        $this->distanceLimitPerMonth = get_post_meta($post->ID, $this->metaDistanceLimitPerMonth, true);
+        $this->additionalChargeForExceededDistance = $this->getDistanceCharge();
     }
 
     public function getMetaKeysFromLabel()
@@ -332,10 +356,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         );
     }
 
-    /*
-     * Eliminar en el futuro
-     *
-     */
     public function getMetaKeysFromDescription()
     {
         global $wpdb;
@@ -523,5 +543,27 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         return $queryBrand->getBrand($this->brandId);
     }
 
+    public function getDistanceLimit()
+    {
+        return $this->distanceLimit;
+    }
+    public function getDistanceLimitDay()
+    {
+        return $this->distanceLimitPerDay;
+    }
+    public function getDistanceLimitePerWeek()
+    {
+        return $this->distanceLimitPerWeek;
+    }
+    public function getDistanceLimitPerMonth()
+    {
+        return $this->distanceLimitPerMonth;
+    }
+    public function getDistanceCharge()
+    {
+        $charge = new HQRentalsModelsVehicleCharge();
+        $charge->setChargeByVehicleClassPostId($this->postId);
+        return $charge;
+    }
 }
 

@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 5.0.11
 Tested up to: 5.7
 Requires PHP: 5.6.3
-Stable tag: 1.4.26
+Stable tag: 1.4.28
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,7 +31,7 @@ If you experience any issues, please review your user and password and try again
 
 == Changelog ==
 
-= 1.4.26 =
+= 1.4.28 =
 
 New properties for vehicle class model.
 

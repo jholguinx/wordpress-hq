@@ -33,7 +33,7 @@ If you experience any issues, please review your user and password and try again
 
 = 1.4.26 =
 
-New properties for Vehicle Class Model.
+New properties for vehicle class model.
 
 = 1.4.25 =
 

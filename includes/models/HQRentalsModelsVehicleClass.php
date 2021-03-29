@@ -27,6 +27,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     protected $metaId = 'hq_wordpress_vehicle_class_id_meta';
     protected $metaBrandId = 'hq_wordpress_vehicle_class_brand_id_meta';
     protected $metaName = 'hq_wordpress_vehicle_class_name_meta';
+    protected $metaUUID = 'hq_wordpress_vehicle_class_uuid_meta';
     protected $metaOrder = 'hq_wordpress_vehicle_class_order_meta';
     protected $metaAvailableOnWebsite = 'hq_wordpress_vehicle_class_available_on_website_meta';
     protected $metaPublicImageLink = 'hq_wordpress_vehicle_class_public_image_link_meta';
@@ -47,6 +48,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $postId = '';
     public $brandId = '';
     public $name = '';
+    public $uuid = '';
     public $order = '';
     public $availableOnWebsite = '';
     public $publicImageLink = '';
@@ -126,6 +128,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->id = $data->id;
         $this->brandId = $data->brand->id;
         $this->name = $data->name;
+        $this->uuid = $data->uuid;
         $this->order = $data->order;
         $this->publicImageLink = $data->public_image_link;
         if(!empty($data->label_for_website)){
@@ -218,6 +221,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaId, $this->id);
         hq_update_post_meta($post_id, $this->metaBrandId, $this->brandId);
         hq_update_post_meta($post_id, $this->metaName, $this->name);
+        hq_update_post_meta($post_id, $this->metaUUID, $this->uuid);
         hq_update_post_meta($post_id, $this->metaOrder, $this->order);
         hq_update_post_meta($post_id, $this->metaAvailableOnWebsite, $this->availableOnWebsite);
         hq_update_post_meta($post_id, $this->metaPublicImageLink, $this->publicImageLink);
@@ -326,6 +330,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->distanceLimitPerWeek = get_post_meta($post->ID, $this->metaDistanceLimitPerWeek, true);
         $this->distanceLimitPerMonth = get_post_meta($post->ID, $this->metaDistanceLimitPerMonth, true);
         $this->additionalChargeForExceededDistance = $this->getDistanceCharge();
+        $this->uuid = get_post_meta($post->ID, $this->metaUUID, true);
     }
 
     public function getMetaKeysFromLabel()
@@ -564,6 +569,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $charge = new HQRentalsModelsVehicleCharge();
         $charge->setChargeByVehicleClassPostId($this->postId);
         return $charge;
+    }
+    public function getUUID()
+    {
+        return $this->uuid;
     }
 }
 

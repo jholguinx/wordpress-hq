@@ -16,6 +16,7 @@ class HQRentalsTransformersVehicleClasses extends HQRentalsTransformersBase {
             $transformation = new \stdClass();
             $transformation->id = $data->id;
             $transformation->name = $data->name;
+            $transformation->uuid = $data->uuid;
             $transformation->brand_id = $data->brand->id;
             $transformation->order = $data->order;
             $transformation->available_on_website = 1;

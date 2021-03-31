@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 5.0.11
 Tested up to: 5.7
 Requires PHP: 5.6.3
-Stable tag: 1.4.30
+Stable tag: 1.4.31
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,10 @@ If you experience any issues, please review your user and password and try again
 
 == Changelog ==
 
+= 1.4.31 =
+
+Fix on Query for Distance Charge
+
 = 1.4.30 =
 
 Fixes on Calendars.
@@ -49,18 +53,6 @@ Fix to solve authentication issues when connecting plugin to HQ tenant account.
 
 = 1.4.23 =
 Screenshots update
-
-= 1.4.21 =
-Support for Elementor
-
-= 1.4.20 =
-New Region on API
-
-= 1.4.19 =
-Small fixes on settings
-
-= 1.4.18 =
-Support for Grand Car Theme
 
 == Screenshots ==
 

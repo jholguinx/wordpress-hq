@@ -184,9 +184,11 @@ class HQRentalsModelsVehicleCharge extends HQRentalsBaseModel
             $this->postArgs,
             array(
                 'meta_query' => array(
-                    'key' => $this->metaVehicleClassPostId,
-                    'value' => $this->vehicle_class_post_id,
-                    'compare' => '=',
+                    array(
+                        'key' => $this->metaVehicleClassPostId,
+                        'value' => $vehicleClassPostId,
+                        'compare' => '=',
+                    )
                 )
             )
         );

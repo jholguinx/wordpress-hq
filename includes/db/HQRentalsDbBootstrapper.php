@@ -6,7 +6,8 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 
-class HQRentalsDbBootstrapper{
+class HQRentalsDbBootstrapper
+{
 
     public function __construct()
     {
@@ -16,13 +17,14 @@ class HQRentalsDbBootstrapper{
         $this->vehicleClassModel = new HQRentalsModelsVehicleClass();
     }
 
-    public function createTablesOnInit(){
+    public function createTablesOnInit()
+    {
         $brandData = $this->brandsModel->getDataToCreateTable();
         $locationData = $this->locationModel->getDataToCreateTable();
         $vehiclesData = $this->vehicleClassModel->getDataToCreateTable();
-        $brandTable = $this->db->createTable( $brandData['table_name'], $brandData['table_columns'] );
-        $locationTable = $this->db->createTable( $locationData['table_name'], $locationData['table_columns'] );
-        $vehicleTable = $this->db->createTable( $vehiclesData['table_name'], $vehiclesData['table_columns'] );
+        $brandTable = $this->db->createTable($brandData['table_name'], $brandData['table_columns']);
+        $locationTable = $this->db->createTable($locationData['table_name'], $locationData['table_columns']);
+        $vehicleTable = $this->db->createTable($vehiclesData['table_name'], $vehiclesData['table_columns']);
         // add validation for process completed
     }
 }

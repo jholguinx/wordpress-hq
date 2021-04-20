@@ -31,25 +31,25 @@ class HQRentalsModelsVehicleType extends HQRentalsBaseModel
             'posts_per_page' => -1
         );
         $this->labels = array(
-            'name'               => _x( 'Vehicle Types', 'post type general name', 'hq-wordpress' ),
-            'singular_name'      => _x( 'Vehicle Type', 'post type singular name', 'hq-wordpress' ),
-            'menu_name'          => _x( 'Vehicle Types', 'admin menu', 'hq-wordpress' ),
-            'name_admin_bar'     => _x( 'Vehicle Type', 'add new on admin bar', 'hq-wordpress' ),
-            'view_item'          => __( 'View', 'hq-wordpress' ),
+            'name' => _x('Vehicle Types', 'post type general name', 'hq-wordpress'),
+            'singular_name' => _x('Vehicle Type', 'post type singular name', 'hq-wordpress'),
+            'menu_name' => _x('Vehicle Types', 'admin menu', 'hq-wordpress'),
+            'name_admin_bar' => _x('Vehicle Type', 'add new on admin bar', 'hq-wordpress'),
+            'view_item' => __('View', 'hq-wordpress'),
         );
         $this->customPostArgs = array(
-            'labels'                    =>  $this->labels,
-            'public'                    =>  false,
-            'show_in_admin_bar'         =>  true,
-            'publicly_queryable'        =>  true,
-            'show_ui'                   => true,
-            'query_var'                 =>  true,
-            'has_archive'               =>  false,
-            'hierarchical'              =>  false,
-            'exclude_from_search'       =>  true,
-            'menu_icon'                 => 'dashicons-location-alt',
-            'menu_position'             => 7,
-            'capabilities'              => array(
+            'labels' => $this->labels,
+            'public' => false,
+            'show_in_admin_bar' => true,
+            'publicly_queryable' => true,
+            'show_ui' => true,
+            'query_var' => true,
+            'has_archive' => false,
+            'hierarchical' => false,
+            'exclude_from_search' => true,
+            'menu_icon' => 'dashicons-location-alt',
+            'menu_position' => 7,
+            'capabilities' => array(
                 'create_posts' => 'do_not_allow'
             )
         );

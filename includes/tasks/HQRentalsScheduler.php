@@ -44,8 +44,8 @@ class HQRentalsScheduler
 
     public function refreshHQData()
     {
-        try{
-            if($this->isWorkspotWebsite()){
+        try {
+            if ($this->isWorkspotWebsite()) {
                 $workspot = $this->workspot->refreshLocationsData();
             }
             $this->settingsTask->tryToRefreshSettingsData();
@@ -55,16 +55,16 @@ class HQRentalsScheduler
             $this->additionalChargesTask->tryToRefreshSettingsData();
             $this->vehicleClassesTask->tryToRefreshSettingsData();
             $this->vehicleTypesTask->tryToRefreshSettingsData();
-            if($this->allResponseAreOK()){
+            if ($this->allResponseAreOK()) {
                 $this->deleteHQData();
                 $this->refreshAllDataOnDatabase();
                 $_POST['success'] = 'success';
-            }else{
+            } else {
                 $error = $this->getErrorOnSync();
                 $error = "There was an issue with your request. Please verify tokens and installation region.";
                 $this->setErrorMessage($error);
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             $this->setErrorMessage($e->getMessage());
         }
     }
@@ -81,6 +81,7 @@ class HQRentalsScheduler
     {
         return $this->siteURL == 'http://workspot.test' or $this->siteURL == 'https://workspot.nu';
     }
+
     public function allResponseAreOK()
     {
         return $this->settingsTask->dataWasRetrieved() and
@@ -100,25 +101,27 @@ class HQRentalsScheduler
         $this->additionalChargesTask->setDataOnWP();
         $this->vehicleTypesTask->setDataOnWP();
     }
+
     public function getErrorOnSync()
     {
-        if($this->settingsTask->getError()){
+        if ($this->settingsTask->getError()) {
             return $this->settingsTask->getError();
         }
-        if($this->brandsTask->getError()){
+        if ($this->brandsTask->getError()) {
             return $this->brandsTask->getError();
         }
-        if($this->locationsTask->getError()){
+        if ($this->locationsTask->getError()) {
             return $this->locationsTask->getError();
         }
-        if($this->additionalChargesTask->getError()){
+        if ($this->additionalChargesTask->getError()) {
             return $this->additionalChargesTask->getError();
         }
-        if($this->vehicleClassesTask->getError()){
+        if ($this->vehicleClassesTask->getError()) {
             return $this->vehicleClassesTask->getError();
         }
         return "";
     }
+
     public function setErrorMessage($error)
     {
         $_POST['success'] = 'error';

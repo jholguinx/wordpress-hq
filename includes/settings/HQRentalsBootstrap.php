@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsSettings;
+
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbBootstrapper;
@@ -81,19 +82,19 @@ class HQRentalsBootstrap
         if ($this->settings->noOfficeHoursSetting()) {
             $this->settings->saveOfficeHoursSetting($this->hq_default_value_for_string);
         }
-        if($this->settings->noBrandURLToReplaceSetting()){
+        if ($this->settings->noBrandURLToReplaceSetting()) {
             $this->settings->saveBrandURLToReplaceSetting($this->hq_default_value_for_string);
         }
-        if($this->settings->noReplaceBaseURLOnBrandsSetting()){
+        if ($this->settings->noReplaceBaseURLOnBrandsSetting()) {
             $this->settings->saveReplaceBaseURLOnBrandsSetting($this->hq_integration_on_home_default_value);
         }
-        if($this->settings->noDefaultLatitudeSetting()){
+        if ($this->settings->noDefaultLatitudeSetting()) {
             $this->settings->setDefaultLatitudeSetting($this->hq_default_value_for_string);
         }
-        if($this->settings->noDefaultLongitudeSetting()){
+        if ($this->settings->noDefaultLongitudeSetting()) {
             $this->settings->setDefaultLongitudeSetting($this->hq_default_value_for_string);
         }
-        if($this->settings->noCurrencyIconOption()){
+        if ($this->settings->noCurrencyIconOption()) {
             $this->settings->setCurrencyIconOption($this->hq_default_value_for_string);
         }
         $this->resolveDefaultPages();
@@ -108,10 +109,11 @@ class HQRentalsBootstrap
         if (empty($page)) {
             $this->resolvePageOnCreation('Quotes');
         }
-        if(empty($payments)){
+        if (empty($payments)) {
             $this->resolvePageOnCreation('Payments');
         }
     }
+
     public function resolvePageOnCreation($pageTitle)
     {
         $args = array(
@@ -123,9 +125,10 @@ class HQRentalsBootstrap
         if (is_wp_error($post_id)) {
             $this->resolvePageOnCreation($pageTitle);
         } else {
-            update_post_meta($post_id, 'hq_wordpress_is_wordpress_page', '1' );
+            update_post_meta($post_id, 'hq_wordpress_is_wordpress_page', '1');
         }
     }
+
     public function notifyToSystemOnActivation()
     {
         $api = new HQRentalsApiConnector();

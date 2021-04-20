@@ -15,54 +15,64 @@ label.error {
     padding-left: 10px;
     font-style: italic;
 }
+
 .car-rental-wrapper {
     line-height: 1.56em; /*equal to 25px for default font size of 16px*/
 }
+
 .car-rental-wrapper input[type="text"],
 .car-rental-wrapper select,
-.car-rental-wrapper textarea
-{
+.car-rental-wrapper textarea {
     height: 40px;
     font-size: 16px;
 }
+
 .car-rental-wrapper .dynamic-text-item {
     color: transparent;
     visibility: hidden;
 }
+
 /* this is a dynamic item */
 .car-rental-wrapper .dynamic-text-item.required {
     color: #4C8AB1;
     font-weight: bold;
     visibility: visible;
 }
+
 .car-rental-wrapper .item-required {
     color: #4C8AB1;
     font-weight: bold;
 }
+
 .car-rental-wrapper .item-not-required {
     color: #006400;
     font-weight: bold;
 }
+
 .car-rental-wrapper .highlight {
     color: #4C8AB1;
 }
+
 .car-rental-wrapper {
 
 }
+
 ul.car-rental-item-features-list {
     margin: 0;
     float: left;
     padding-left: 0;
 }
+
 ul.car-rental-item-features-list li {
     list-style: none;
     border-bottom: 1px solid #afafaf;
     float: left;
     padding-bottom: 3px;
     padding-top: 3px;
-    font-size:14px;
+    font-size: 14px;
     width: 50%;
 }
+
 ul.car-rental-item-features-list li::before {
     content: "";
     display: inline-block;
@@ -80,7 +90,7 @@ ul.car-rental-item-features-list li::before {
     line-height: 1;
     text-rendering: auto;
     color: #54770f;
-    margin-right:3px
+    margin-right: 3px
 }
 
 /***********************************************************************************/
@@ -88,17 +98,20 @@ ul.car-rental-item-features-list li::before {
 /***********************************************************************************/
 .car-rental-slider {
 }
+
 .car-rental-slider .responsive-items-slider div.car-rental-item-image {
     width: 240px;
     height: 150px;
     margin-left: 10px;
     margin-right: 10px;
 }
+
 .car-rental-slider .responsive-items-slider div.car-rental-item-image img {
     border-radius: 12px 12px 12px 12px;
     width: 240px;
     height: 150px;
 }
+
 .car-rental-slider .responsive-items-slider div.car-rental-item-details {
     width: 240px;
     text-align: center;
@@ -106,12 +119,14 @@ ul.car-rental-item-features-list li::before {
     margin-right: 10px;
     margin-bottom: 6px;
 }
+
 @media screen and (max-width: 420px) {
     /* Lets make space for dots to appear bellow the item slider */
     .car-rental-slider .responsive-items-slider div.car-rental-item-details {
         margin-bottom: 28px;
     }
 }
+
 .car-rental-slider .responsive-items-slider div.car-rental-item-title {
     text-transform: uppercase;
     color: black;
@@ -124,6 +139,7 @@ ul.car-rental-item-features-list li::before {
     height: 22px;
     overflow: hidden;
 }
+
 .car-rental-slider .responsive-items-slider div.car-rental-item-title-with-partner {
     text-transform: uppercase;
     color: black;
@@ -137,6 +153,7 @@ ul.car-rental-item-features-list li::before {
     line-height: 13px;
     overflow: hidden;
 }
+
 .car-rental-slider .responsive-items-slider div.car-rental-slider-partner-title {
     text-transform: uppercase;
     color: gray;
@@ -150,6 +167,7 @@ ul.car-rental-item-features-list li::before {
     line-height: 10px;
     overflow: hidden;
 }
+
 .car-rental-slider .responsive-items-slider div.car-rental-item-price {
     display: inline-block;
     margin-left: 8px;
@@ -165,6 +183,7 @@ ul.car-rental-item-features-list li::before {
     padding-left: 14px;
     padding-right: 14px;
 }
+
 .car-rental-slider .responsive-items-slider div.car-rental-item-prefix {
     text-transform: uppercase;
     display: inline-block;
@@ -176,6 +195,7 @@ ul.car-rental-item-features-list li::before {
     padding-top: 18px;
     height: 62px;
 }
+
 .car-rental-slider .responsive-items-slider button.car-rental-slider-prev,
 .car-rental-slider .responsive-items-slider button.car-rental-slider-next {
     font-size: 0;
@@ -188,6 +208,7 @@ ul.car-rental-item-features-list li::before {
     border: none;
     outline: none;
 }
+
 .car-rental-slider .responsive-items-slider button.car-rental-slider-prev {
     background-image: url("../Images/slider-arrow-left.png");
     background-repeat: no-repeat;
@@ -196,6 +217,7 @@ ul.car-rental-item-features-list li::before {
     width: 14px;
     height: 24px;
 }
+
 .car-rental-slider .responsive-items-slider button.car-rental-slider-next {
     background-image: url("../Images/slider-arrow-right.png");
     background-repeat: no-repeat;
@@ -204,14 +226,17 @@ ul.car-rental-item-features-list li::before {
     width: 14px;
     height: 24px;
 }
+
 /* Hide the arrow if there is no items on the left/right */
 .car-rental-slider .responsive-items-slider button.car-rental-slider-prev.slick-disabled,
 .car-rental-slider .responsive-items-slider button.car-rental-slider-next.slick-disabled {
     visibility: hidden;
 }
+
 .car-rental-slider .no-items-available {
     text-align: center;
 }
+
 /***********************************************************************************/
 /******************************** BENEFITS SLIDER **********************************/
 /***********************************************************************************/
@@ -219,19 +244,23 @@ ul.car-rental-item-features-list li::before {
     margin-top: 19px;
     margin-bottom: 19px;
 }
+
 .car-rental-benefits-slider .responsive-benefits-slider div.slick-slide {
     text-align: center;
 }
+
 .car-rental-benefits-slider .responsive-benefits-slider div.car-rental-benefit-image {
     height: 81px;
     margin-left: 64px;
     margin-right: 10px;
 }
+
 .car-rental-benefits-slider .responsive-benefits-slider div.car-rental-benefit-image img {
     border-radius: 12px 12px 12px 12px;
     width: 71px;
     height: 81px;
 }
+
 .car-rental-benefits-slider .responsive-benefits-slider div.car-rental-benefit-title {
     font-size: 16px;
     margin-top: 25px;
@@ -241,6 +270,7 @@ ul.car-rental-item-features-list li::before {
     height: 46px;
     overflow: hidden;
 }
+
 .car-rental-benefits-slider .responsive-benefits-slider button.car-rental-slider-prev,
 .car-rental-benefits-slider .responsive-benefits-slider button.car-rental-slider-next {
     font-size: 0;
@@ -253,6 +283,7 @@ ul.car-rental-item-features-list li::before {
     border: none;
     outline: none;
 }
+
 .car-rental-benefits-slider .responsive-benefits-slider button.car-rental-slider-prev {
     background-image: url("../Images/slider-arrow-left.png");
     background-repeat: no-repeat;
@@ -261,6 +292,7 @@ ul.car-rental-item-features-list li::before {
     width: 14px;
     height: 24px;
 }
+
 .car-rental-benefits-slider .responsive-benefits-slider button.car-rental-slider-next {
     background-image: url("../Images/slider-arrow-right.png");
     background-repeat: no-repeat;
@@ -269,14 +301,17 @@ ul.car-rental-item-features-list li::before {
     width: 14px;
     height: 24px;
 }
+
 /* Hide the arrow if there is no items on the left/right */
 .car-rental-benefits-slider .responsive-benefits-slider button.car-rental-slider-prev.slick-disabled,
 .car-rental-benefits-slider .responsive-benefits-slider button.car-rental-slider-next.slick-disabled {
     visibility: hidden;
 }
+
 .car-rental-benefits-slider .no-benefits-available {
     text-align: center;
 }
+
 /***********************************************************************************/
 /**************************** MANUFACTURERS SLIDER *********************************/
 /***********************************************************************************/
@@ -284,18 +319,22 @@ ul.car-rental-item-features-list li::before {
     margin-top: 19px;
     margin-bottom: 19px;
 }
+
 .car-rental-manufacturers-slider .responsive-manufacturers-slider div.slick-slide {
     text-align: center;
 }
+
 .car-rental-manufacturers-slider .responsive-manufacturers-slider div.car-rental-manufacturer-logo {
     margin-left: 10px;
     margin-right: 10px;
 }
+
 .car-rental-manufacturers-slider .responsive-manufacturers-slider div.car-rental-manufacturer-logo img {
     border-radius: 12px 12px 12px 12px;
     height: 179px;
     width: 179px;
 }
+
 .car-rental-manufacturers-slider .responsive-manufacturers-slider div.car-rental-manufacturer-title {
     position: absolute;
     width: 179px;
@@ -309,6 +348,7 @@ ul.car-rental-item-features-list li::before {
     font-weight: bold;
     color: black;
 }
+
 .car-rental-manufacturers-slider .responsive-manufacturers-slider button.car-rental-slider-prev,
 .car-rental-manufacturers-slider .responsive-manufacturers-slider button.car-rental-slider-next {
     font-size: 0;
@@ -321,6 +361,7 @@ ul.car-rental-item-features-list li::before {
     border: none;
     outline: none;
 }
+
 .car-rental-manufacturers-slider .responsive-manufacturers-slider button.car-rental-slider-prev {
     background-image: url("../Images/slider-arrow-left.png");
     background-repeat: no-repeat;
@@ -329,6 +370,7 @@ ul.car-rental-item-features-list li::before {
     width: 14px;
     height: 24px;
 }
+
 .car-rental-manufacturers-slider .responsive-manufacturers-slider button.car-rental-slider-next {
     background-image: url("../Images/slider-arrow-right.png");
     background-repeat: no-repeat;
@@ -337,14 +379,17 @@ ul.car-rental-item-features-list li::before {
     width: 14px;
     height: 24px;
 }
+
 /* Hide the arrow if there is no items on the left/right */
 .car-rental-manufacturers-slider .responsive-manufacturers-slider button.car-rental-slider-prev.slick-disabled,
 .car-rental-manufacturers-slider .responsive-manufacturers-slider button.car-rental-slider-next.slick-disabled {
     visibility: hidden;
 }
+
 .car-rental-manufacturers-slider .no-manufacturers-available {
     text-align: center;
 }
+
 /***********************************************************************************/
 /****************************** MANUFACTURERS GRID *********************************/
 /***********************************************************************************/
@@ -352,6 +397,7 @@ ul.car-rental-item-features-list li::before {
     margin-top: 19px;
     margin-bottom: 19px;
 }
+
 .car-rental-manufacturers-grid div.car-rental-manufacturer-box {
     display: inline-block;
     margin-left: 11px;
@@ -359,11 +405,13 @@ ul.car-rental-item-features-list li::before {
     height: 179px;
     margin-bottom: 6px;
 }
+
 .car-rental-manufacturers-grid div.car-rental-manufacturer-box img {
     border-radius: 12px 12px 12px 12px;
     width: 179px;
     height: 179px;
 }
+
 .car-rental-manufacturers-grid div.car-rental-manufacturer-box div.car-rental-manufacturer-title {
     display: block;
     position: relative;
@@ -375,9 +423,11 @@ ul.car-rental-item-features-list li::before {
     font-weight: bold;
     color: black;
 }
+
 .car-rental-manufacturers-grid .no-manufacturers-available {
     text-align: center;
 }
+
 /******************************************************************/
 /******************* ITEM SEARCH STEP 1 PAGE **********************/
 /******************************************************************/
@@ -386,11 +436,13 @@ ul.car-rental-item-features-list li::before {
     text-align: center;
     padding: 15px;
 }
+
 /* Not used */
 .car-rental-search-step1-bg {
     background-image: url("../Images/SearchBackground.png");
     background-repeat: repeat;
 }
+
 .car-rental-search-step1 .booking-item {
     max-width: 325px;
     width: 100%;
@@ -400,12 +452,15 @@ ul.car-rental-item-features-list li::before {
     margin-right: 4px;
     margin-top: 19px;
 }
+
 .car-rental-search-step1 .booking-item:last-child {
     margin-right: 0;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-header {
     height: 138px;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-header .booking-item-title {
     text-transform: uppercase;
     text-align: left;
@@ -416,9 +471,11 @@ ul.car-rental-item-features-list li::before {
     margin-left: 53px;
     margin-top: 39px;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body {
     text-align: left;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.styled-select-dropdown select {
     background: transparent;
     height: 26px;
@@ -444,25 +501,29 @@ ul.car-rental-item-features-list li::before {
     border: 2px solid rgb(182, 182, 182);
     border-radius: 4px 4px 4px 4px;
 }
+
 .car-rental-search-step1 img.date-selector-image {
     width: 25px;
     height: 25px;
     margin-top: 2px;
 }
+
 .car-rental-search-step1 div.styled-select-dropdown {
     overflow: hidden;
     background: url("../Images/dropdown-icon.png") no-repeat right #fff;
     border: 2px solid #b6b6b6;
     border-radius: 4px 4px 4px 4px;
-    -webkit-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    -moz-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
+    -webkit-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    -moz-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.wide-dropdown select {
     /*width: 364px;*/
     width: 354px;
     cursor: pointer;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.wide-dropdown {
     /*width: 335px;*/
     width: 325px;
@@ -471,10 +532,12 @@ ul.car-rental-item-features-list li::before {
     margin-right: 0;
     display: inline-block;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.narrow-dropdown select {
     width: 143px;
     cursor: pointer;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.narrow-dropdown {
     width: 115px;
     margin-left: 24px;
@@ -483,30 +546,35 @@ ul.car-rental-item-features-list li::before {
     margin-right: 0;
     display: inline-block;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.inline-div {
     /*margin-bottom: 7px;*/
     margin-bottom: 6px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.top-padded {
     margin-top: 1px;
     margin-bottom: 12px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.top-padded-cancel {
     margin-top: 10px;
     margin-bottom: 12px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body div.top-padded-submit {
     margin-top: 10px;
     margin-bottom: 12px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body input[name="pickup_date"],
 .car-rental-search-step1 .booking-item .booking-item-body input[name="return_date"] {
     /*width: 178px;*/
@@ -520,20 +588,22 @@ ul.car-rental-item-features-list li::before {
     padding-left: 8px;
     padding-bottom: 2px;
     padding-top: 2px;
-    -webkit-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    -moz-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
+    -webkit-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    -moz-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
     font-style: italic;
     cursor: pointer;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body img[name="datepicker"] {
     width: 25px;
     height: 25px;
     margin-top: 2px;
-    -webkit-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    -moz-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
+    -webkit-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    -moz-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body input[name="booking_code"],
 .car-rental-search-step1 .booking-item .booking-item-body input[name="coupon_code"] {
     /*width: 335px;*/
@@ -545,12 +615,13 @@ ul.car-rental-item-features-list li::before {
     padding-left: 8px;
     padding-bottom: 2px;
     padding-top: 2px;
-    -webkit-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    -moz-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
+    -webkit-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    -moz-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
     font-style: italic;
     cursor: pointer;
 }
+
 @media screen and (max-width: 420px) {
     /* Lets make coupon code and booking code input boxes more narrow now */
     .car-rental-search-step1 .booking-item .booking-item-body input[name="booking_code"],
@@ -558,6 +629,7 @@ ul.car-rental-item-features-list li::before {
         width: 230px;
     }
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body input[type="submit"] {
     width: 244px;
     height: 30px;
@@ -572,57 +644,69 @@ ul.car-rental-item-features-list li::before {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 16px;
-    font-family: "Arial Narrow", Verdana , "Bitstream Vera Sans" , sans-serif;
+    font-family: "Arial Narrow", Verdana, "Bitstream Vera Sans", sans-serif;
     cursor: pointer;
 }
+
 .car-rental-search-step1 .booking-item .booking-item-body input[type="submit"]:hover {
     color: red;
 }
+
 @media (max-width: 768px) {
     .car-rental-search-step1 .booking-item .booking-item-body {
         text-align: center;
     }
+
     .car-rental-search-step1 .booking-item .booking-item-body div.wide-dropdown select {
         /*width: 294px;*/
         width: 259px;
     }
+
     .car-rental-search-step1 .booking-item .booking-item-body div.wide-dropdown {
         /*width: 265px;*/
         width: 230px;
     }
+
     .car-rental-search-step1 .booking-item .booking-item-body div.narrow-dropdown select {
         /*width: 294px;*/
         width: 259px;
     }
+
     .car-rental-search-step1 .booking-item .booking-item-body div.narrow-dropdown {
         /*width: 265px;*/
         width: 230px;
         margin-left: 0;
     }
+
     .car-rental-search-step1 .booking-item .booking-item-body input[name="pickup_date"],
     .car-rental-search-step1 .booking-item .booking-item-body input[name="return_date"] {
         /*width: 231px;*/
         width: 201px;
     }
+
     .car-rental-search-step1 .booking-item .booking-item-body input[name="booking_code"] {
         /*width: 265px;*/
         width: 230px;
     }
+
     .car-rental-search-step1 .booking-item .booking-item-body input[type="submit"] {
         /*width: 265px;*/
         width: 230px;
         margin-left: 0;
     }
 }
+
 @media (max-width: 385px) {
     .car-rental-search-step1 .booking-item .booking-item-header .booking-item-title {
         margin-left: 33px;
         margin-top: 31px;
     }
 }
-#ui-datepicker-div{
+
+#ui-datepicker-div {
     z-index: 999 !important;
 }
+
 /******************************************************************/
 /************************* EDIT BOOKING PAGE **********************/
 /******************************************************************/
@@ -631,11 +715,13 @@ ul.car-rental-item-features-list li::before {
     text-align: center;
     padding: 15px;
 }
+
 /* Not used */
 .car-rental-edit-booking-bg {
     background-image: url("../Images/SearchBackground.png");
     background-repeat: repeat;
 }
+
 .car-rental-edit-booking .booking-item {
     max-width: 325px;
     width: 100%;
@@ -645,12 +731,15 @@ ul.car-rental-item-features-list li::before {
     margin-right: 4px;
     margin-top: 19px;
 }
+
 .car-rental-edit-booking .booking-item:last-child {
     margin-right: 0;
 }
+
 .car-rental-edit-booking .booking-item .booking-item-header {
     height: 138px;
 }
+
 .car-rental-edit-booking .booking-item .booking-item-header .booking-item-title {
     text-transform: uppercase;
     text-align: left;
@@ -661,27 +750,32 @@ ul.car-rental-item-features-list li::before {
     margin-left: 53px;
     margin-top: 39px;
 }
+
 .car-rental-edit-booking .booking-item .booking-item-body {
     text-align: left;
 }
+
 .car-rental-edit-booking .booking-item .booking-item-body div.inline-div {
     /*margin-bottom: 7px;*/
     margin-bottom: 6px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-edit-booking .booking-item .booking-item-body div.top-padded {
     margin-top: 1px;
     margin-bottom: 12px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-edit-booking .booking-item .booking-item-body div.top-padded-submit {
     margin-top: 10px;
     margin-bottom: 12px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-edit-booking .booking-item .booking-item-body input[name="booking_code"] {
     /*width: 335px;*/
     width: 325px;
@@ -692,18 +786,20 @@ ul.car-rental-item-features-list li::before {
     padding-left: 8px;
     padding-bottom: 2px;
     padding-top: 2px;
-    -webkit-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    -moz-box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
-    box-shadow: 6px 13px 18px 0 rgba(186,186,186,0.68);
+    -webkit-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    -moz-box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
+    box-shadow: 6px 13px 18px 0 rgba(186, 186, 186, 0.68);
     font-style: italic;
     cursor: pointer;
 }
+
 @media screen and (max-width: 420px) {
     /* Lets make coupon code and booking code input boxes more narrow now */
     .car-rental-edit-booking .booking-item .booking-item-body input[name="booking_code"] {
         width: 230px;
     }
 }
+
 .car-rental-edit-booking .booking-item .booking-item-body input[type="submit"] {
     width: 244px;
     height: 30px;
@@ -718,33 +814,39 @@ ul.car-rental-item-features-list li::before {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 16px;
-    font-family: "Arial Narrow", Verdana , "Bitstream Vera Sans" , sans-serif;
+    font-family: "Arial Narrow", Verdana, "Bitstream Vera Sans", sans-serif;
     cursor: pointer;
 }
+
 .car-rental-edit-booking .booking-item .booking-item-body input[type="submit"]:hover {
     color: red;
 }
+
 @media (max-width: 768px) {
     .car-rental-edit-booking .booking-item .booking-item-body {
         text-align: center;
     }
+
     .car-rental-edit-booking .booking-item .booking-item-body input[name="booking_code"] {
         /*width: 265px;*/
         width: 230px;
     }
+
     .car-rental-edit-booking .booking-item .booking-item-body input[type="submit"] {
         /*width: 265px;*/
         width: 230px;
         margin-left: 0;
     }
 }
+
 @media (max-width: 385px) {
     .car-rental-edit-booking .booking-item .booking-item-header .booking-item-title {
         margin-left: 33px;
         margin-top: 31px;
     }
 }
-#ui-datepicker-div{
+
+#ui-datepicker-div {
     z-index: 999 !important;
 }
 
@@ -762,6 +864,7 @@ ul.car-rental-item-features-list li::before {
     float: left;
     margin-bottom: 22px;
 }
+
 .car-rental-single-booking .booking-item {
     width: 335px;
     display: inline-block;
@@ -769,11 +872,13 @@ ul.car-rental-item-features-list li::before {
     margin-left: 0;
     margin-right: 4px;
 }
+
 .car-rental-single-booking .booking-item:last-child {
     margin-right: 0;
     width: 246px;
     text-align: right;
 }
+
 /* We need this to fit button well into page on responsive mode */
 @media (max-width: 1026px) {
     .car-rental-single-booking .booking-item:last-child {
@@ -781,6 +886,7 @@ ul.car-rental-item-features-list li::before {
         text-align: center;
     }
 }
+
 .car-rental-single-booking .booking-item .booking-item-header {
     background: transparent url("../Images/booking-header.png") no-repeat right top;
     width: 298px;
@@ -795,6 +901,7 @@ ul.car-rental-item-features-list li::before {
     padding-left: 70px;
     text-align: left;
 }
+
 .car-rental-single-booking .booking-item .booking-item-header-with-title {
     background: transparent url("../Images/booking-header.png") no-repeat right top;
     width: 298px;
@@ -808,19 +915,23 @@ ul.car-rental-item-features-list li::before {
     padding-left: 0;
     text-align: left;
 }
+
 .car-rental-single-booking .booking-item .booking-item-header-with-title .booking-title {
     left: -23px;
     top: -7px;
     position: relative;
     margin-bottom: 3px;
 }
+
 .car-rental-single-booking .booking-item .booking-item-header-with-title .booking-item-title {
     text-transform: uppercase;
     padding-left: 70px;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body {
 
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.location-title {
     text-align: left;
     padding-bottom: 17px;
@@ -828,6 +939,7 @@ ul.car-rental-item-features-list li::before {
     padding-top: 2px;
     padding-left: 8px;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.styled-select-dropdown select {
     background: transparent;
     height: 30px;
@@ -848,15 +960,18 @@ ul.car-rental-item-features-list li::before {
     height: 25px;
     width: 25px;
 }
+
 .car-rental-single-booking div.styled-select-dropdown {
     overflow: hidden;
     background: url("../Images/dropdown-icon.png") no-repeat right #fff;
     border: 0;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.wide-dropdown select {
     width: 364px;
     cursor: pointer;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.wide-dropdown {
     width: 335px;
     margin-left: 0;
@@ -864,10 +979,12 @@ ul.car-rental-item-features-list li::before {
     margin-right: 0;
     display: inline-block;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.narrow-dropdown select {
     width: 134px;
     cursor: pointer;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.narrow-dropdown {
     width: 106px;
     margin-left: 18px;
@@ -875,23 +992,27 @@ ul.car-rental-item-features-list li::before {
     margin-right: 0;
     display: inline-block;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.inline-div {
     margin-bottom: 7px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.top-padded {
     margin-top: 3px;
     margin-bottom: 12px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body div.top-padded-submit {
     margin-top: 21px;
     margin-bottom: 12px;
     display: inline-block;
     vertical-align: top;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body input[name="pickup_date"],
 .car-rental-single-booking .booking-item .booking-item-body input[name="return_date"] {
     width: 178px;
@@ -907,11 +1028,13 @@ ul.car-rental-item-features-list li::before {
     cursor: pointer;
     font-size: 17px;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body img[name="datepicker"] {
     width: 25px;
     height: 25px;
     margin-top: 2px;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body input[name="coupon_code"] {
     width: 335px;
     height: 30px;
@@ -923,6 +1046,7 @@ ul.car-rental-item-features-list li::before {
     font-style: normal;
     cursor: pointer;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body input[type="submit"] {
     width: 180px;
     height: 30px;
@@ -937,16 +1061,18 @@ ul.car-rental-item-features-list li::before {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 16px;
-    font-family: "Arial Narrow", Verdana , "Bitstream Vera Sans" , sans-serif;
+    font-family: "Arial Narrow", Verdana, "Bitstream Vera Sans", sans-serif;
     cursor: pointer;
 }
+
 .car-rental-single-booking .booking-item .booking-item-body input[type="submit"]:hover {
     color: red;
 }
+
 /******************************************************************/
 /************************* OTHER STYLES ***************************/
 /******************************************************************/
-.car-rental-booking-confirmed,.car-rental-booking-cancelled {
+.car-rental-booking-confirmed, .car-rental-booking-cancelled {
     /*width:400px !important;*/
     height: 200px;
     margin-bottom: 20px;
@@ -960,20 +1086,25 @@ ul.car-rental-item-features-list li::before {
     padding: 15px;
     clear: both; /*we need this so that section before wouldn't hide*/
 }
+
 .car-rental-booking-confirmed, .car-rental-booking-cancelled, .car-rental-booking-failure {
     padding-top: 50px;
 }
+
 .car-rental-booking-confirmed .booking-content,
 .car-rental-booking-cancelled .booking-content {
     padding-top: 48px;
     font-size: 16px;
 }
+
 .car-rental-search-result {
 
 }
+
 .buttons input {
     margin-right: 4px;
 }
+
 .car-rental-search-result button[name="car_rental_do_search0"], .car-rental-search-result input[name="car_rental_do_search0"],
 .car-rental-search-result button[name="car_rental_do_search"], .car-rental-search-result input[name="car_rental_do_search"],
 .car-rental-search-result button[name="car_rental_do_search2"], .car-rental-search-result input[name="car_rental_do_search2"],
@@ -989,7 +1120,7 @@ ul.car-rental-item-features-list li::before {
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
-    margin-bottom:4px;
+    margin-bottom: 4px;
     padding-bottom: 5px;
     min-width: 130px;
     height: 39px;
@@ -1000,6 +1131,7 @@ ul.car-rental-item-features-list li::before {
     border: 0;
     cursor: pointer;
 }
+
 .car-rental-search-result button[name="car_rental_do_search0"]:hover, .car-rental-search-result input[name="car_rental_do_search0"]:hover,
 .car-rental-search-result button[name="car_rental_do_search"]:hover, .car-rental-search-result input[name="car_rental_do_search"]:hover,
 .car-rental-search-result button[name="car_rental_do_search2"]:hover, .car-rental-search-result input[name="car_rental_do_search2"]:hover,
@@ -1014,6 +1146,7 @@ ul.car-rental-item-features-list li::before {
 .car-rental-booking-details button[name="car_rental_do_search4"]:hover, .car-rental-booking-details input[name="car_rental_do_search4"]:hover {
     background-color: #9F0001;
 }
+
 @media screen and (max-width: 768px) {
     .car-rental-search-result button[name="car_rental_do_search0"], .car-rental-search-result input[name="car_rental_do_search0"],
     .car-rental-search-result button[name="car_rental_do_search"], .car-rental-search-result input[name="car_rental_do_search"],
@@ -1030,21 +1163,26 @@ ul.car-rental-item-features-list li::before {
         width: 100%;
     }
 }
+
 .car-rental-search-result button.selected {
     border: 2px solid #585858;
     background-color: #54770f;
 }
+
 .car-rental-wrapper .booking-data {
     margin-bottom: 10px;
     width: 100%;
 }
+
 .car-rental-search-result {
     margin-bottom: 30px;
 }
-.car-rental-search-result h2.car-rental-page-title,.car-rental-options h2.car-rental-page-title,.car-rental-booking-details h2.car-rental-page-title {
+
+.car-rental-search-result h2.car-rental-page-title, .car-rental-options h2.car-rental-page-title, .car-rental-booking-details h2.car-rental-page-title {
     text-transform: uppercase;
     margin-bottom: 30px;
 }
+
 .car-rental-search-result .list-headers {
     clear: both;
     width: 100%;
@@ -1057,6 +1195,7 @@ ul.car-rental-item-features-list li::before {
     border-bottom: 2px solid #fff;
     font-size: 12px;
 }
+
 .booking-data-row {
     /*width: 24%;*/ /*4 columns*/
     width: 32.33%; /*3 colums*/
@@ -1064,49 +1203,58 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 11px;
     float: left;
 }
+
 .booking-data-row:last-child {
     margin-right: 0;
 }
+
 .booking-data-row-wide {
     width: 32.33%; /*3 colums*/
     margin-right: 1%;
     margin-bottom: 11px;
     float: left;
 }
+
 .booking-data-row-wide:last-child {
     margin-right: 0;
 }
+
 @media screen and (max-width: 768px) {
     .booking-data-row {
         width: 100%;
     }
+
     .booking-data-row-wide {
         width: 100%;
     }
+
     .car-rental-search-result .list-headers {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-items-list .car-rental-list-item .item-more {
         margin-top: 15px;
     }
+
     .booking-data-group-item {
         width: 100%;
     }
 }
 
 .booking-data-group {
-    width:100%;
-    float:left;
-    padding-top:5px;
-    padding-bottom:5px;
-    text-align:center;
-    text-transform:uppercase;
-    background:#4C8AB1;
-    font-weight:bold;
-    color:#fff;
-    font-size:12px;
+    width: 100%;
+    float: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    background: #4C8AB1;
+    font-weight: bold;
+    color: #fff;
+    font-size: 12px;
 }
+
 .booking-data-group-items {
     float: left;
     width: 100%;
@@ -1115,20 +1263,24 @@ ul.car-rental-item-features-list li::before {
     border-bottom: 1px solid #ededed;
     font-size: 14px;
 }
+
 .booking-data-group-item {
     float: left;
     padding: 5px;
     width: 100%;
 }
+
 .booking-data-icon {
     width: 7%;
     float: left;
     clear: both;
 }
+
 .booking-data-text {
     width: 93%;
     float: left;
 }
+
 #search-results-title {
     float: left;
     width: 100%;
@@ -1138,82 +1290,99 @@ ul.car-rental-item-features-list li::before {
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .search-label {
     text-transform: uppercase;
 }
+
 .search-result-form-wrapper {
     float: left;
 }
+
 .car-rental-search-result .list-headers .col1 {
     float: left;
     width: 64%;
     text-transform: uppercase;
     padding-left: 2%;
 }
+
 .car-rental-search-result .list-headers .col3 {
     float: left;
     width: 11%;
     text-transform: uppercase;
 }
+
 .car-rental-search-result .list-headers .col4 {
     float: left;
     width: 10%;
     text-transform: uppercase;
 }
+
 .car-rental-search-result .list-headers .col5 {
     float: right;
     width: 14%;
     text-align: right;
     text-transform: uppercase;
 }
+
 @media screen and (max-width: 768px) {
     .car-rental-search-result .list-headers .col1 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-search-result .list-headers .col3 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-search-result .list-headers .col4 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-search-result .list-headers .col5 {
         display: none;
         visibility: hidden;
     }
 }
-.car-rental-search-result .car-rental-list-item,.car-rental-items-list .car-rental-list-item {
+
+.car-rental-search-result .car-rental-list-item, .car-rental-items-list .car-rental-list-item {
     clear: both;
     float: left;
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .car-rental-search-result .car-rental-list-item .col1 {
     float: left;
     width: 25%;
 }
+
 .car-rental-search-result .car-rental-list-item .col2 {
     float: left;
     width: 39%;
     padding-left: 2%;
     padding-right: 2%;
 }
+
 .car-rental-search-result .car-rental-list-item .col3 {
     float: left;
     width: 11%;
     padding-top: 5%;
 }
+
 .car-rental-search-result .car-rental-list-item .col3 .price-per-period {
     font-size: 12px;
 }
+
 .car-rental-search-result .car-rental-list-item .col4 {
     float: left;
     width: 10%;
     padding-top: 5%;
 }
+
 .car-rental-search-result .car-rental-list-item .col5 {
     float: right;
     /*width: 2%;*/
@@ -1222,42 +1391,50 @@ ul.car-rental-item-features-list li::before {
     padding-top: 4.5%;
     padding-right: 1%;
 }
+
 .car-rental-search-result .car-rental-list-item .price-per-period {
     font-size: 13px;
 }
+
 .car-rental-search-result label.checkbox input[type="checkbox"] {
-    display:none;
+    display: none;
 }
+
 .car-rental-search-result label.checkbox span {
-    display:inline-block;
-    border:2px solid #585858;
+    display: inline-block;
+    border: 2px solid #585858;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 3px;
     padding-bottom: 3px;
     background: #4C8AB1;
-    vertical-align:middle;
-    color:white;
-    cursor:pointer;
-    text-align:center
+    vertical-align: middle;
+    color: white;
+    cursor: pointer;
+    text-align: center
 }
+
 .car-rental-search-result label.checkbox :checked + span {
-    background:#54770f;
+    background: #54770f;
 }
+
 .car-rental-search-result .car-rental-list-item .mobile-only {
     display: none;
     visibility: hidden;
 }
+
 .car-rental-search-result .car-rental-list-item .item-name {
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .car-rental-search-result .buttons {
     clear: both;
     padding-top: 30px;
     text-align: right;
 }
+
 @media screen and (max-width: 768px) {
     .car-rental-search-result .car-rental-list-item .col1 {
         width: 100%;
@@ -1265,12 +1442,14 @@ ul.car-rental-item-features-list li::before {
         padding-right: 0;
         text-align: center;
     }
+
     .car-rental-search-result .car-rental-list-item .col2 {
         width: 100%;
         padding-left: 0;
         padding-right: 0;
         text-align: center;
     }
+
     .car-rental-search-result .car-rental-list-item .col3 {
         width: 100%;
         padding-left: 0;
@@ -1278,6 +1457,7 @@ ul.car-rental-item-features-list li::before {
         text-align: center;
         padding-top: 0;
     }
+
     .car-rental-search-result .car-rental-list-item .col4 {
         width: 100%;
         padding-left: 0;
@@ -1285,6 +1465,7 @@ ul.car-rental-item-features-list li::before {
         text-align: center;
         padding-top: 0;
     }
+
     .car-rental-search-result .car-rental-list-item .col5 {
         width: 100%;
         text-align: center;
@@ -1292,29 +1473,34 @@ ul.car-rental-item-features-list li::before {
         padding-left: 0;
         padding-right: 0;
     }
+
     .car-rental-search-result .car-rental-list-item .mobile-only {
         display: inline-block;
         visibility: visible;
     }
+
     .car-rental-search-result .buttons {
         text-align: center;
     }
 }
-.car-rental-search-result div.item-type-label,.car-rental-items-list div.item-type-label{
+
+.car-rental-search-result div.item-type-label, .car-rental-items-list div.item-type-label {
     background-color: #4C8AB1;
     font-weight: bold;
     color: white;
     text-align: center;
     text-transform: uppercase;
-    float:left;
-    width:100%;
+    float: left;
+    width: 100%;
     padding-bottom: 5px;
     padding-top: 5px;
-    font-size:12px
+    font-size: 12px
 }
+
 .car-rental-search-result:after {
     clear: both;
 }
+
 .car-rental-search-result .clear {
     clear: both;
 }
@@ -1322,9 +1508,11 @@ ul.car-rental-item-features-list li::before {
 .car-rental-options {
     margin-bottom: 30px;
 }
+
 .car-rental-wrapper h2.top-padded {
     margin-top: 60px;
 }
+
 .car-rental-options .list-headers {
     clear: both;
     width: 100%;
@@ -1335,24 +1523,29 @@ ul.car-rental-item-features-list li::before {
     color: white;
     font-weight: bold;
 }
+
 .car-rental-options .mobile-only {
     display: none;
     visibility: hidden;
 }
+
 @media screen and (max-width: 768px) {
     .car-rental-options .list-headers {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-options .mobile-only {
         display: inline-block;
         visibility: visible;
     }
 }
+
 .car-rental-options input[type="range"] {
     cursor: pointer;
     width: 120px;
 }
+
 .car-rental-options select {
     font-size: 13px;
     border: 0 none;
@@ -1363,16 +1556,19 @@ ul.car-rental-item-features-list li::before {
     padding-top: 1px;
     font-weight: bold;
 }
+
 .car-rental-options .extra-options select {
     margin-left: 11px;
     width: 200px;
 }
+
 .car-rental-options .list-headers .col1 {
     float: left;
     width: 36%;
     text-transform: uppercase;
     padding-left: 2%;
 }
+
 .car-rental-options .list-headers .col2 {
     float: left;
     width: 31%;
@@ -1380,6 +1576,7 @@ ul.car-rental-item-features-list li::before {
     padding-right: 1%;
     text-transform: uppercase;
 }
+
 .car-rental-options .list-headers .col3 {
     float: left;
     width: 13%;
@@ -1387,6 +1584,7 @@ ul.car-rental-item-features-list li::before {
     padding-right: 1%;
     text-transform: uppercase;
 }
+
 .car-rental-options .list-headers .col4 {
     float: left;
     width: 13%;
@@ -1394,34 +1592,41 @@ ul.car-rental-item-features-list li::before {
     padding-right: 1%;
     text-transform: uppercase;
 }
+
 .car-rental-options .list-headers .col5 {
     float: right;
     width: 6%;
     padding-right: 2%;
     text-transform: uppercase;
 }
+
 @media screen and (max-width: 768px) {
     .car-rental-options .list-headers .col1 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-options .list-headers .col2 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-options .list-headers .col3 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-options .list-headers .col4 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-options .list-headers .col5 {
         display: none;
         visibility: hidden;
     }
 }
+
 .car-rental-options .selected-item {
     width: 100%;
     float: left;
@@ -1429,40 +1634,48 @@ ul.car-rental-item-features-list li::before {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .car-rental-options .selected-item:nth-child(even) {
     background-color: #ededed;
 }
+
 .car-rental-options .selected-item:nth-child(odd) {
 
 }
+
 .car-rental-options .selected-item .col1 {
     float: left;
     width: 36%;
     padding-left: 2%;
 }
+
 .car-rental-options .selected-item .col2 {
     float: left;
     width: 31%;
     padding-left: 1%;
     padding-right: 1%;
 }
+
 .car-rental-options .selected-item .col3 {
     float: left;
     width: 13%;
     padding-left: 1%;
     padding-right: 1%;
 }
+
 .car-rental-options .selected-item .col4 {
     float: left;
     width: 13%;
     padding-left: 1%;
     padding-right: 1%;
 }
+
 .car-rental-options .selected-item .col5 {
     float: right;
     width: 6%;
     padding-right: 2%;
 }
+
 @media screen and (max-width: 768px) {
     .car-rental-options .selected-item .col1 {
         width: 100%;
@@ -1475,14 +1688,17 @@ ul.car-rental-item-features-list li::before {
         width: 100%;
         text-align: center;
     }
+
     .car-rental-options .selected-item .col3 {
         width: 100%;
         text-align: center;
     }
+
     .car-rental-options .selected-item .col4 {
         width: 100%;
         text-align: center;
     }
+
     .car-rental-options .selected-item .col5 {
         width: 100%;
         text-align: center;
@@ -1496,46 +1712,55 @@ ul.car-rental-item-features-list li::before {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .car-rental-options .extra:nth-child(even) {
     background-color: #ededed;
 }
+
 .car-rental-options .extra:nth-child(odd) {
 
 }
+
 .car-rental-options .extra .col1 {
     float: left;
     width: 36%;
     padding-left: 2%;
 }
+
 .car-rental-options .extra .col2 {
     float: left;
     width: 31%;
     padding-left: 1%;
     padding-right: 1%;
 }
+
 .car-rental-options .extra .col3 {
     float: left;
     width: 13%;
     padding-left: 1%;
     padding-right: 1%;
 }
+
 .car-rental-options .extra .col4 {
     float: left;
     width: 13%;
     padding-left: 1%;
     padding-right: 1%;
 }
+
 .car-rental-options .extra .col5 {
     float: right;
     width: 6%;
     padding-right: 2%;
     text-align: right;
 }
+
 .car-rental-options .buttons {
     clear: both;
     padding-top: 30px;
     text-align: right;
 }
+
 @media screen and (max-width: 768px) {
     .car-rental-options .extra .col1 {
         width: 100%;
@@ -1543,34 +1768,39 @@ ul.car-rental-item-features-list li::before {
         padding-left: 0;
         padding-right: 0;
     }
+
     .car-rental-options .extra .col2 {
         width: 100%;
         text-align: center;
     }
+
     .car-rental-options .extra .col3 {
         width: 100%;
         text-align: center;
     }
+
     .car-rental-options .extra .col4 {
         width: 100%;
         text-align: center;
     }
+
     .car-rental-options .extra .col5 {
         width: 100%;
         text-align: center;
         padding-left: 0;
         padding-right: 0;
     }
+
     .car-rental-options .buttons {
         text-align: center;
     }
 }
 
 
-
 .car-rental-booking-details {
     margin-bottom: 30px;
 }
+
 .car-rental-booking-details table {
     font-size: 14px;
 }
@@ -1585,9 +1815,11 @@ ul.car-rental-item-features-list li::before {
     .car-rental-booking-details table tr {
         display: block;
     }
+
     .car-rental-booking-details table tr:first-child {
         border-top: 2px solid #747474;
     }
+
     .car-rental-booking-details table tr {
         border-bottom: 2px solid #747474;
     }
@@ -1595,8 +1827,7 @@ ul.car-rental-item-features-list li::before {
     /* Make necessary cols as centered 100% width for responsive mode */
     .car-rental-booking-details table .col1,
     .car-rental-booking-details table .col2,
-    .car-rental-booking-details table .col3
-    {
+    .car-rental-booking-details table .col3 {
         width: 100%;
         text-align: center;
         padding-left: 0;
@@ -1604,31 +1835,30 @@ ul.car-rental-item-features-list li::before {
         position: relative;
     }
 
-    .car-rental-booking-details table .duration-headers .col3
-    {
+    .car-rental-booking-details table .duration-headers .col3 {
         display: none;
         visibility: hidden;
     }
-    .car-rental-booking-details table .duration-details .col3
-    {
+
+    .car-rental-booking-details table .duration-details .col3 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-booking-details table .item-headers .col2,
-    .car-rental-booking-details table .item-headers .col3
-    {
+    .car-rental-booking-details table .item-headers .col3 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-booking-details table .office-fee-headers .col2,
-    .car-rental-booking-details table .office-fee-headers .col3
-    {
+    .car-rental-booking-details table .office-fee-headers .col3 {
         display: none;
         visibility: hidden;
     }
+
     .car-rental-booking-details table .extra-headers .col2,
-    .car-rental-booking-details table .extra-headers .col3
-    {
+    .car-rental-booking-details table .extra-headers .col3 {
         display: none;
         visibility: hidden;
     }
@@ -1639,39 +1869,47 @@ ul.car-rental-item-features-list li::before {
     width: 73%;
     padding-right: 1%;
 }
+
 .car-rental-booking-details .email-search {
     float: left;
     width: 65%;
     padding-right: 5%;
 }
+
 .car-rental-booking-details .form-row-wide .email-search {
     float: left;
     width: 40%;
     padding-right: 1%;
 }
+
 .car-rental-booking-details .email-search .search-email-address {
     width: 100%;
     font-style: italic;
 }
+
 .car-rental-booking-details .form-row-wide .birth-search {
     float: left;
     width: 29%;
     padding-right: 1%;
     font-size: 14px;
 }
+
 .car-rental-booking-details .form-row-wide .birth-search select {
     width: 100%;
     font-style: italic;
 }
+
 .car-rental-booking-details .customer-lookup-button {
     float: left;
     width: 29%;
 }
+
 .car-rental-booking-details .ajax-loader {
     float: left;
     width: 21%;
     padding-top: 10px;
 }
+
 .car-rental-booking-details .customer-data-label {
     clear: both;
     width: 20%;
@@ -1681,6 +1919,7 @@ ul.car-rental-item-features-list li::before {
     font-size: 14px;
     font-weight: 300;
 }
+
 .car-rental-booking-details .customer-data-input {
     width: 80%;
     float: left;
@@ -1688,23 +1927,26 @@ ul.car-rental-item-features-list li::before {
     padding-bottom: 5px;
     font-size: 14px;
 }
+
 .car-rental-booking-details .customer-data-input .payment-method-name {
     color: black;
 }
+
 .car-rental-booking-details .customer-data-input .padded-payment-method-description {
     padding-left: 22px;
     font-style: italic;
     padding-bottom: 11px;
 }
+
 .car-rental-booking-details .customer-data-input .payment-method-description {
     font-style: italic;
 }
+
 .car-rental-booking-details .customer-data-input input[type="text"],
 .car-rental-booking-details .email-search input[type="text"],
 .car-rental-booking-details .customer-data-input select,
 .car-rental-booking-details .birth-search select,
-.car-rental-booking-details .customer-data-input textarea
-{
+.car-rental-booking-details .customer-data-input textarea {
     background-color: #FFF;
     border: 1px solid #D2D2D2;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1) inset;
@@ -1712,50 +1954,53 @@ ul.car-rental-item-features-list li::before {
     box-sizing: border-box;
     color: #AAA9A9;
 }
+
 .car-rental-booking-details .customer-data-input input[type="text"],
-.car-rental-booking-details .email-search input[type="text"]
-{
+.car-rental-booking-details .email-search input[type="text"] {
     padding: 9px 15px;
 }
+
 .car-rental-booking-details .customer-data-input select,
 .car-rental-booking-details .birth-search select,
-.car-rental-booking-details .customer-data-input textarea
-{
+.car-rental-booking-details .customer-data-input textarea {
     padding: 8px 15px;
 }
+
 .car-rental-booking-details .customer-data-input input[type="text"],
-.car-rental-booking-details .customer-data-input textarea
-{
+.car-rental-booking-details .customer-data-input textarea {
     width: 100%;
 }
-.car-rental-booking-details .customer-data-input select
-{
+
+.car-rental-booking-details .customer-data-input select {
     width: 31.5%;
 }
-.car-rental-booking-details .customer-birthday-select select:last-child
-{
+
+.car-rental-booking-details .customer-birthday-select select:last-child {
     text-align: left;
     float: right;
     margin-right: 0;
 }
-.car-rental-booking-details .customer-data-input select[name="title"]
-{
+
+.car-rental-booking-details .customer-data-input select[name="title"] {
     width: 100%;
 }
+
 .car-rental-booking-details .customer-data-input input[type="checkbox"].terms-and-conditions {
     width: 15px;
 }
+
 .car-rental-booking-details .customer-buttons {
     clear: both;
     width: 100%;
     padding-top: 30px;
     text-align: center;
 }
-.customer-buttons input,.customer-buttons button {
+
+.customer-buttons input, .customer-buttons button {
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
-    margin-bottom:4px;
+    margin-bottom: 4px;
     padding-bottom: 5px;
     min-width: 130px;
     height: 36px;
@@ -1767,9 +2012,11 @@ ul.car-rental-item-features-list li::before {
     cursor: pointer;
     margin-left: 4px;
 }
-.customer-buttons input:hover,.customer-buttons button:hover {
+
+.customer-buttons input:hover, .customer-buttons button:hover {
     background-color: #9F0001;
 }
+
 .car-rental-booking-details .form-row {
     width: 49%;
     margin-right: 1%;
@@ -1781,23 +2028,26 @@ ul.car-rental-item-features-list li::before {
         width: 100%;
         margin: 0;
     }
+
     .car-rental-booking-details .form-row-wide {
         width: 100%;
         margin: 0;
     }
-    .customer-buttons input
-    {
+
+    .customer-buttons input {
         width: 100%;
     }
+
     .car-rental-booking-details .customer-textarea {
         display: block;
         width: 100%;
     }
+
     .car-rental-booking-details .customer-data-input select,
-    .car-rental-booking-details .customer-data-input textarea
-    {
+    .car-rental-booking-details .customer-data-input textarea {
         width: 100%;
     }
+
     .car-rental-booking-details .form-row .email-search,
     .car-rental-booking-details .form-row-wide .email-search,
     .car-rental-booking-details .form-row .birth-search,
@@ -1810,6 +2060,7 @@ ul.car-rental-item-features-list li::before {
         padding-right: 0;
         text-align: center;
     }
+
     .car-rental-booking-details .customer-data-label,
     .car-rental-booking-details .customer-data-input {
         width: 100%;
@@ -1817,9 +2068,11 @@ ul.car-rental-item-features-list li::before {
         padding-right: 0;
         text-align: center;
     }
+
     .car-rental-booking-details .customer-data-input .padded-payment-method-description {
         padding-left: 0;
     }
+
     .car-rental-booking-details .customer-buttons {
         width: 100%;
         padding-left: 0;
@@ -1830,8 +2083,7 @@ ul.car-rental-item-features-list li::before {
     .car-rental-booking-details .email-search input[type="text"],
     .car-rental-booking-details .customer-data-input select,
     .car-rental-booking-details .birth-search select,
-    .car-rental-booking-details .customer-data-input textarea
-    {
+    .car-rental-booking-details .customer-data-input textarea {
         text-align: center;
     }
 }
@@ -1845,6 +2097,7 @@ ul.car-rental-item-features-list li::before {
     color: #4C8AB1;
     margin-bottom: 20px;
 }
+
 .car-rental-booking-failure .booking-failure-title {
     color: #4C8AB1;
     font-weight: bold;
@@ -1852,16 +2105,19 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 8px;
     font-size: 18px;
 }
+
 .car-rental-booking-failure .booking-failure-content {
     border-top: 2px solid black;
     padding-top: 8px;
     font-size: 14px;
     font-weight: bold;
 }
+
 .car-rental-booking-failure .booking-failure-content .buttons {
     margin-top: 20px;
     text-align: center;
 }
+
 .car-rental-booking-failure .booking-failure-content .back-button {
     width: 200px;
     height: 40px;
@@ -1872,15 +2128,18 @@ ul.car-rental-item-features-list li::before {
     border-radius: 5px 5px 5px 5px;
     cursor: pointer;
 }
+
 .car-rental-booking-failure .booking-failure-content .back-button:hover {
     background-color: #c0c0c0;
 }
+
 .car-rental-item-features-list {
 
 }
+
 @media (max-width: 768px) {
-    .car-rental-item-features-list li{
-        width:100% !important;
+    .car-rental-item-features-list li {
+        width: 100% !important;
     }
 }
 
@@ -1890,25 +2149,31 @@ ul.car-rental-item-features-list li::before {
 .car-rental-single-item {
 
 }
+
 .car-rental-single-item .item-images {
     float: left;
     width: 35%;
 }
+
 .car-rental-single-item .item-images .item-small-image {
     padding-top: 5px;
     width: 33.3%;
     float: left;
     display: block;
 }
+
 .car-rental-single-item .item-images .item-small-image:nth-child(1) {
     text-align: left;
 }
+
 .car-rental-single-item .item-images .item-small-image:nth-child(2) {
     text-align: center;
 }
+
 .car-rental-single-item .item-images .item-small-image:nth-child(3) {
     text-align: right;
 }
+
 .car-rental-single-item .item-images hr {
     color: #4C8AB1;
     background-color: #4C8AB1;
@@ -1917,16 +2182,19 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 3px;
     margin-top: 3px;
 }
+
 .car-rental-single-item .item-description {
     float: left;
     width: 61.5%;
     padding-left: 4%;
 }
+
 .car-rental-single-item .item-features {
     clear: both;
     width: 100%;
     float: left;
 }
+
 .car-rental-single-item .item-features .item-features-label {
     border-bottom: 3px solid #4C8AB1;
     float: left;
@@ -1934,18 +2202,22 @@ ul.car-rental-item-features-list li::before {
     margin-top: 10px;
     text-transform: uppercase;
     width: 100%;
-    padding-bottom:4px
+    padding-bottom: 4px
 }
+
 .car-rental-single-item .item-features ul.car-rental-item-features-list {
     list-style-type: none;
     margin-bottom: 20px;
 }
+
 .car-rental-single-item .item-features ul.car-rental-item-features-list li:before {
 
 }
+
 .car-rental-single-item .item-features ul.car-rental-item-features-list ul li {
     text-indent: -5px;
 }
+
 .car-rental-list-single-item .description-item {
     float: left;
     padding-top: 3px;
@@ -1953,27 +2225,34 @@ ul.car-rental-item-features-list li::before {
     border-bottom: 1px solid #afafaf;
     width: 50%;
 }
+
 @media (max-width: 768px) {
     .car-rental-single-item .item-images {
         width: 100%;
     }
+
     .car-rental-single-item .item-images img {
         width: 100%;
     }
+
     .car-rental-single-item .item-images .item-small-image:nth-child(1) {
         padding-right: 3px;
     }
+
     .car-rental-single-item .item-images .item-small-image:nth-child(2) {
         padding-left: 3px;
         padding-right: 3px;
     }
+
     .car-rental-single-item .item-images .item-small-image:nth-child(3) {
         padding-left: 3px;
     }
+
     .car-rental-single-item .item-description {
         width: 100%;
         padding-left: 0;
     }
+
     .car-rental-list-single-item .description-item {
         width: 100%;
     }
@@ -1987,16 +2266,18 @@ ul.car-rental-item-features-list li::before {
     clear: both;
 }
 
-.car-rental-items-list .car-rental-list-item,.car-rental-list-item {
+.car-rental-items-list .car-rental-list-item, .car-rental-list-item {
     float: left;
     width: 100%;
     border-top: 1px solid #afafaf;
 }
+
 .car-rental-items-list .car-rental-list-item .item-image {
     float: left;
     text-align: center;
     width: 23.5%;
 }
+
 .car-rental-items-list .car-rental-list-item .item-description {
     text-align: left;
     float: left;
@@ -2005,6 +2286,7 @@ ul.car-rental-item-features-list li::before {
     line-height: 15px;
     width: 30%;
 }
+
 .car-rental-items-list .car-rental-list-item .item-more {
     text-align: left;
     float: right;
@@ -2013,11 +2295,13 @@ ul.car-rental-item-features-list li::before {
     line-height: 15px;
     width: 46.5%;
 }
+
 .car-rental-items-list .car-rental-buttons {
     float: left;
     width: 100%;
     margin-top: 15px;
 }
+
 .car-rental-items-list .car-rental-single-button {
     float: right;
     font-size: 14px;
@@ -2030,14 +2314,17 @@ ul.car-rental-item-features-list li::before {
     color: white;
     text-transform: uppercase;
 }
+
 .car-rental-items-list .car-rental-single-button a {
     color: white;
     text-decoration: none;
 }
-.car-rental-items-list .description-item .fa,.car-rental-search-result .description-item .fa,.car-rental-single-item .description-item .fa {
+
+.car-rental-items-list .description-item .fa, .car-rental-search-result .description-item .fa, .car-rental-single-item .description-item .fa {
     margin-right: 5px;
     color: #000;
 }
+
 .car-rental-items-list .item-more hr {
     background-color: #4C8AB1;
     border: medium none;
@@ -2046,6 +2333,7 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 3px;
     margin-top: 4px;
 }
+
 .car-rental-items-list .item-features-title {
     font-size: 18px;
     font-weight: bold;
@@ -2054,6 +2342,7 @@ ul.car-rental-item-features-list li::before {
     color: #333333;
     line-height: 15px;
 }
+
 .car-rental-items-list .description-item {
     float: left;
     padding-top: 3px;
@@ -2061,29 +2350,36 @@ ul.car-rental-item-features-list li::before {
     border-bottom: 1px solid #afafaf;
     width: 100%;
 }
+
 @media (max-width: 768px) {
     .car-rental-items-list .car-rental-list-item .item-image {
         width: 100%;
     }
+
     .car-rental-items-list .car-rental-list-item .item-description {
         width: 100%;
     }
+
     .car-rental-items-list .car-rental-list-item .item-more {
         width: 100%;
     }
 }
+
 .car-rental-items-list .car-rental-list-item .item-image .fusion-flip-box {
     cursor: pointer;
 }
+
 .car-rental-items-list .car-rental-list-item .item-image .fusion-flip-box .flip-box-front {
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
 }
+
 .car-rental-items-list .car-rental-list-item .item-image .fusion-flip-box .flip-box-back .flip-box-back-inner {
     margin-top: 40px !important;
 }
+
 .car-rental-items-list .car-rental-list-item .item-image img {
     width: 240px;
     height: 150px;
@@ -2094,6 +2390,7 @@ ul.car-rental-item-features-list li::before {
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .car-rental-items-list .car-rental-list-item .item-description hr {
     color: #4C8AB1;
     background-color: #4C8AB1;
@@ -2102,9 +2399,11 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 3px;
     margin-top: 3px;
 }
+
 .car-rental-items-list .no-items-in-category {
     text-align: center;
 }
+
 .car-rental-items-list .no-items-available {
     text-align: center;
 }
@@ -2123,9 +2422,11 @@ ul.car-rental-item-features-list li::before {
     padding-top: 15px;
     padding-bottom: 25px;
 }
+
 .car-rental-locations-list .car-rental-location:first-child {
     border-top: 0 none transparent;
 }
+
 /* 4 sections - #1 */
 .car-rental-locations-list .car-rental-location .location-description {
     text-align: left;
@@ -2135,6 +2436,7 @@ ul.car-rental-item-features-list li::before {
     width: 38.5%;
     padding-right: 2%;
 }
+
 /* 4 sections - #2 */
 .car-rental-locations-list .car-rental-location .location-business-hours {
     text-align: left;
@@ -2144,6 +2446,7 @@ ul.car-rental-item-features-list li::before {
     width: 20%;
     padding-right: 2%;
 }
+
 /* 4 sections - #3 */
 .car-rental-locations-list .car-rental-location .location-more {
     text-align: left;
@@ -2153,28 +2456,34 @@ ul.car-rental-item-features-list li::before {
     width: 24%;
     padding-right: 2%;
 }
+
 /* 4 sections - #4 */
 .car-rental-locations-list .car-rental-location .location-image {
     float: left;
     text-align: right;
     width: 17.5%;
 }
+
 @media (max-width: 768px) {
     .car-rental-locations-list .car-rental-location .location-description {
         width: 100%;
     }
+
     .car-rental-locations-list .car-rental-location .location-more {
         width: 100%;
     }
+
     .car-rental-locations-list .car-rental-location .location-image {
         width: 100%;
     }
 }
+
 /* The rest css */
 .car-rental-locations-list .car-rental-buttons {
     width: 100%;
     margin-top: 59px;
 }
+
 .car-rental-locations-list .car-rental-single-button {
     float: left;
     font-size: 14px;
@@ -2187,15 +2496,18 @@ ul.car-rental-item-features-list li::before {
     color: white;
     text-transform: uppercase;
 }
+
 .car-rental-locations-list .car-rental-single-button a {
     color: white;
     text-decoration: none;
 }
+
 .car-rental-locations-list .description-location .fa,
 .car-rental-locations-list ul li .fa {
     margin-right: 5px;
     color: #000;
 }
+
 .car-rental-locations-list .location-business-hours hr,
 .car-rental-locations-list .location-more hr {
     background-color: #4C8AB1;
@@ -2205,6 +2517,7 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 3px;
     margin-top: 4px;
 }
+
 .car-rental-locations-list .location-features-title {
     font-size: 18px;
     font-weight: bold;
@@ -2213,6 +2526,7 @@ ul.car-rental-item-features-list li::before {
     color: #333333;
     line-height: 15px;
 }
+
 .car-rental-locations-list .description-location {
     padding-top: 0;
     padding-bottom: 0;
@@ -2220,6 +2534,7 @@ ul.car-rental-item-features-list li::before {
     width: 100%;
     line-height: 1.5em;
 }
+
 .car-rental-locations-list .car-rental-location .location-image img {
     width: 179px;
     height: 179px;
@@ -2230,6 +2545,7 @@ ul.car-rental-item-features-list li::before {
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .car-rental-locations-list .car-rental-location .location-description hr {
     color: #4C8AB1;
     background-color: #4C8AB1;
@@ -2238,6 +2554,7 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 3px;
     margin-top: 3px;
 }
+
 .car-rental-locations-list .car-rental-section-title {
     font-size: 18px;
     font-weight: bold;
@@ -2246,12 +2563,14 @@ ul.car-rental-item-features-list li::before {
     color: #333333;
     line-height: 15px;
 }
+
 .car-rental-locations-list ul.car-rental-business-hours-list,
 .car-rental-locations-list ul.car-rental-fees-list {
     margin: 0;
     padding-left: 0;
     padding-bottom: 0;
 }
+
 .car-rental-locations-list ul.car-rental-lunch-hours-list {
     margin: 0;
     padding-left: 0;
@@ -2267,6 +2586,7 @@ ul.car-rental-item-features-list li::before {
     padding-top: 3px;
     font-size: 14px;
 }
+
 .car-rental-locations-list .no-locations-available {
     text-align: center;
 }
@@ -2278,17 +2598,20 @@ ul.car-rental-item-features-list li::before {
 .car-rental-single-location {
     clear: both;
 }
+
 /* 3 sections - #1 */
 .car-rental-single-location .location-images {
     float: left;
     width: 35%;
 }
+
 .car-rental-single-location .location-description {
     float: left;
     width: 61.5%;
     padding-left: 4%;
     font-size: 16px;
 }
+
 /* 3 sections - #2, #3 */
 .car-rental-single-location .location-description .location-more {
     text-align: left;
@@ -2296,38 +2619,47 @@ ul.car-rental-item-features-list li::before {
     width: 50%;
     padding-right: 2%;
 }
+
 @media (max-width: 768px) {
     .car-rental-single-location .location-images {
         width: 100%;
     }
+
     .car-rental-single-location .location-description {
         width: 100%;
         padding-left: 0;
     }
+
     .car-rental-single-location .location-description .location-more {
         width: 100%;
     }
 }
+
 .car-rental-single-location .location-images .location-small-image {
     padding-top: 5px;
     width: 33.3%;
     float: left;
     display: block;
 }
+
 .car-rental-single-location .location-images .location-small-image:nth-child(1) {
     text-align: left;
 }
+
 .car-rental-single-location .location-images .location-small-image:nth-child(2) {
     text-align: center;
 }
+
 .car-rental-single-location .location-images .location-small-image:nth-child(3) {
     text-align: right;
 }
+
 .car-rental-single-location .location-more .fa,
 .car-rental-single-location ul li .fa {
     margin-right: 5px;
     color: #000;
 }
+
 .car-rental-single-location .location-images hr {
     color: #4C8AB1;
     background-color: #4C8AB1;
@@ -2336,17 +2668,21 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 3px;
     margin-top: 3px;
 }
+
 @media (max-width: 768px) {
     .car-rental-single-location .location-images img {
         width: 100%;
     }
+
     .car-rental-single-location .location-images .location-small-image:nth-child(1) {
         padding-right: 3px;
     }
+
     .car-rental-single-location .location-images .location-small-image:nth-child(2) {
         padding-left: 3px;
         padding-right: 3px;
     }
+
     .car-rental-single-location .location-images .location-small-image:nth-child(3) {
         padding-left: 3px;
     }
@@ -2360,6 +2696,7 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 3px;
     margin-top: 3px;
 }
+
 .car-rental-single-location .car-rental-section-title {
     font-weight: bold;
     text-transform: uppercase;
@@ -2367,9 +2704,11 @@ ul.car-rental-item-features-list li::before {
     line-height: 15px;
     padding-bottom: 4px;
 }
+
 .car-rental-single-location .car-rental-section-title.top-padded {
     padding-top: 34px;
 }
+
 .car-rental-single-location .description-location {
     padding-top: 3px;
     padding-bottom: 3px;
@@ -2399,9 +2738,11 @@ ul.car-rental-item-features-list li::before {
 .car-rental-price-table {
     margin-bottom: 14px;
 }
+
 .car-rental-price-table .price-table {
     width: 100%;
 }
+
 .car-rental-price-table tr.item-table-labels {
     font-size: 14px;
     background-color: #4C8AB1;
@@ -2410,10 +2751,12 @@ ul.car-rental-item-features-list li::before {
     height: 25px;
     text-transform: uppercase;
 }
+
 .car-rental-price-table tr.classified-item-table-labels {
     font-size: 14px;
     height: 21px;
 }
+
 .car-rental-price-table th.item-label {
     width: 300px;
     text-align: left;
@@ -2421,25 +2764,30 @@ ul.car-rental-item-features-list li::before {
     padding-left: 10px;
     text-transform: uppercase;
 }
+
 .car-rental-price-table th.classified-item-label {
     width: 290px;
     text-align: left;
     font-weight: normal;
     padding-left: 10px;
 }
+
 .car-rental-price-table th.item-price-on-duration {
     width: 100px;
     text-align: center;
     font-weight: normal;
 }
+
 .car-rental-price-table th.item-deposit {
     width: 100px;
     text-align: center;
     font-weight: normal;
 }
+
 .car-rental-price-table .car-rental-price-table-item {
 
 }
+
 .car-rental-price-table tr.item-type-label {
     background-color: #4C8AB1;
     font-weight: bold;
@@ -2448,24 +2796,30 @@ ul.car-rental-item-features-list li::before {
     height: 25px;
     text-transform: uppercase;
 }
+
 .car-rental-price-table tr.item-type-label td.item-type-name {
     padding-left: 10px;
 }
+
 .car-rental-price-table tr.car-rental-price-table-item .item-image {
     width: 120px;
     text-align: center;
 }
+
 .car-rental-price-table tr.car-rental-price-table-item .item-image img {
     width: 100px;
 }
+
 .car-rental-price-table tr.car-rental-price-table-item .item-description {
     text-align: left;
 }
+
 .car-rental-price-table tr.car-rental-price-table-item .item-description .item-name {
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .car-rental-price-table tr.car-rental-price-table-item .item-description hr {
     color: #4C8AB1;
     background-color: #4C8AB1;
@@ -2474,15 +2828,19 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 1px;
     margin-top: 1px;
 }
+
 .car-rental-price-table tr.car-rental-price-table-item .item-price-on-duration {
     text-align: center;
 }
+
 .car-rental-price-table tr.car-rental-price-table-item .item-price-on-duration span {
     cursor: pointer;
 }
+
 .car-rental-price-table tr.car-rental-price-table-item .item-deposit {
     text-align: center;
 }
+
 .car-rental-price-table tr td.no-items-in-category {
     text-align: center;
     padding-top: 5px;
@@ -2494,9 +2852,11 @@ ul.car-rental-item-features-list li::before {
 .extra-rental-price-table {
     margin-bottom: 14px;
 }
+
 .extra-rental-price-table .price-table {
     width: 100%;
 }
+
 .extra-rental-price-table tr.extra-table-labels {
     font-size: 14px;
     background-color: #4C8AB1;
@@ -2505,36 +2865,43 @@ ul.car-rental-item-features-list li::before {
     height: 25px;
     text-transform: uppercase;
 }
+
 .extra-rental-price-table th.extra-label {
     width: 300px;
     text-align: left;
     font-weight: normal;
     padding-left: 10px;
 }
+
 .extra-rental-price-table th.extra-price-on-duration {
     width: 100px;
     text-align: center;
     font-weight: normal;
 }
+
 .extra-rental-price-table th.extra-deposit {
     width: 100px;
     text-align: center;
     font-weight: normal;
     text-transform: uppercase;
 }
+
 .extra-rental-price-table .car-rental-price-table-extra {
 
 }
+
 .extra-rental-price-table tr.car-rental-price-table-extra .extra-description {
     text-align: left;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
 .extra-rental-price-table tr.car-rental-price-table-extra .extra-description .extra-name {
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .extra-rental-price-table tr.car-rental-price-table-extra .extra-description hr {
     color: #4C8AB1;
     background-color: #4C8AB1;
@@ -2543,15 +2910,19 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 1px;
     margin-top: 1px;
 }
+
 .extra-rental-price-table tr.car-rental-price-table-extra .extra-price-on-duration {
     text-align: center;
 }
+
 .extra-rental-price-table tr.car-rental-price-table-extra .extra-price-on-duration span {
     cursor: pointer;
 }
+
 .extra-rental-price-table tr.car-rental-price-table-extra .extra-deposit {
     text-align: center;
 }
+
 .extra-rental-price-table tr td.no-extras-available {
     text-align: center;
     padding-top: 5px;
@@ -2563,9 +2934,11 @@ ul.car-rental-item-features-list li::before {
 .car-rental-calendar {
     margin-bottom: 14px;
 }
+
 .car-rental-calendar .availability-table {
     width: 100%;
 }
+
 .car-rental-calendar .availability-table tr.item-table-labels {
     font-size: 14px;
     background-color: #4C8AB1;
@@ -2575,10 +2948,12 @@ ul.car-rental-item-features-list li::before {
     height: 25px;
     border-left: 1px solid #4C8AB1;
 }
+
 .car-rental-calendar .availability-table tr.classified-item-table-labels {
     font-size: 14px;
     height: 21px;
 }
+
 .car-rental-calendar .availability-table th.month-label {
     width: 290px;
     text-align: left;
@@ -2586,26 +2961,32 @@ ul.car-rental-item-features-list li::before {
     padding-left: 10px;
     text-transform: uppercase;
 }
+
 .car-rental-calendar .availability-table th.classified-month-label {
     width: 290px;
     padding-left: 10px;
     text-align: left;
     font-weight: normal;
 }
+
 .car-rental-calendar .availability-table th.item-price {
     text-align: center;
     font-weight: normal;
 }
+
 .car-rental-calendar .availability-table th.one-day {
     text-align: center;
     font-weight: normal;
     width: 23px;
 }
+
 .car-rental-calendar .availability-table .car-rental-calendar-item {
 }
+
 .car-rental-calendar .availability-table .car-rental-calendar-item:last-child {
     border-bottom: 1px solid #4C8AB1;
 }
+
 .car-rental-calendar .availability-table tr.item-type-label {
     background-color: #4C8AB1;
     font-weight: bold;
@@ -2615,23 +2996,28 @@ ul.car-rental-item-features-list li::before {
     text-transform: uppercase;
     border-left: 1px solid #4C8AB1;
 }
+
 .car-rental-calendar .availability-table tr.item-type-label td.item-type-name {
     padding-left: 10px;
 }
+
 .car-rental-calendar tr.car-rental-calendar-item .item-image {
     width: 120px;
     text-align: center;
     border-left: 1px solid #4C8AB1;
 }
+
 .car-rental-calendar tr.car-rental-calendar-item .item-image img {
     width: 100px;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .item-description {
     text-align: left;
     padding-top: 5px;
     padding-bottom: 5px;
     border-right: 1px solid #4C8AB1;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .extra-description {
     text-align: left;
     padding-top: 5px;
@@ -2640,12 +3026,14 @@ ul.car-rental-item-features-list li::before {
     border-left: 1px solid #4C8AB1;
     border-right: 1px solid #4C8AB1;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .item-description .item-name,
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .extra-description .item-name {
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .item-description hr,
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .extra-description hr {
     color: #4C8AB1;
@@ -2655,21 +3043,26 @@ ul.car-rental-item-features-list li::before {
     margin-bottom: 1px;
     margin-top: 1px;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .quantity-left-in-day {
     text-align: center;
     border-right: 1px solid #4C8AB1;
     line-height: 18px; /*special height to get partial availability closer*/
     vertical-align: middle;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .all-taken {
     color: red;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .has-available {
     color: #333;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .quantity-hover {
     cursor: pointer;
 }
+
 .car-rental-calendar .availability-table tr.car-rental-calendar-item .partial-quantity-hover {
     cursor: pointer;
     font-size: 12px;
@@ -2685,6 +3078,7 @@ ul.car-rental-item-features-list li::before {
     border-right: 1px solid #4C8AB1;
     border-bottom: 1px solid #4C8AB1;
 }
+
 /**
  * Right to Left Extension
  */
@@ -2692,25 +3086,31 @@ ul.car-rental-item-features-list li::before {
     direction: rtl;
     unicode-bidi: embed;
 }
+
 .rtl .car-rental-search-step1 .booking-item .booking-item-header .booking-item-title {
     margin-right: 95px;
     margin-left: 0;
     text-align: right;
 }
+
 .rtl .car-rental-single-booking .booking-item .booking-item-header {
     background: transparent url("../Images/booking-header-rtl.png") no-repeat left top;
 }
+
 .rtl .car-rental-single-booking .booking-item .booking-item-header-with-title {
     background: transparent url("../Images/booking-header-rtl.png") no-repeat left top;
 }
+
 .rtl .car-rental-search-step1 .booking-item .booking-item-body div.styled-select-dropdown select {
     padding-left: 0;
     padding-right: 4px;
 }
+
 .rtl .car-rental-search-step1 .booking-item .booking-item-body input[type="submit"] {
     margin-left: 0;
     margin-right: 80px;
 }
+
 .rtl .car-rental-search-step1 div.styled-select-dropdown {
     background: #FFF url("../Images/dropdown-icon-rtl.png") no-repeat scroll left center;
 }

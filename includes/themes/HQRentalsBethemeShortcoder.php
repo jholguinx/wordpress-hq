@@ -2,7 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsThemes;
 
-class HQRentalsBethemeShortcoder{
+class HQRentalsBethemeShortcoder
+{
 
     public function __construct()
     {

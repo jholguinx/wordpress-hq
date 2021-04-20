@@ -42,13 +42,13 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $this->post_id = '';
         $this->dataType = new HQRentalsDataFilter();
         $this->postArg = array(
-            'post_type'         => $this->activeRateCustomPostName,
-            'post_status'       => 'publish',
-            'posts_per_page'    =>  -1
+            'post_type' => $this->activeRateCustomPostName,
+            'post_status' => 'publish',
+            'posts_per_page' => -1
         );
-        if ($this->dataType->isPost($vehicleClassID)){
+        if ($this->dataType->isPost($vehicleClassID)) {
             $this->setFromPost($vehicleClassID);
-        }else if(!empty($vehicleClassID)) {
+        } else if (!empty($vehicleClassID)) {
             $this->setFromVehicleClass($vehicleClassID, $allRates);
         }
     }
@@ -115,18 +115,18 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $args = array_merge(
             $this->postArg,
             array(
-                'order'     => 'ASC',
-                'orderby'   =>  'meta_value_num',
-                'meta_key'  =>  ( ! ( empty($order) ) ) ? $this->getOrderMetaForQuery($order) : $this->metaDailyRate
+                'order' => 'ASC',
+                'orderby' => 'meta_value_num',
+                'meta_key' => (!(empty($order))) ? $this->getOrderMetaForQuery($order) : $this->metaDailyRate
             )
         );
-        $query = new \WP_Query( $args );
+        $query = new \WP_Query($args);
         return $query->posts;
     }
 
     public function setFromPost($post)
     {
-        foreach ($this->getAllMetaTag() as $property => $metaKey){
+        foreach ($this->getAllMetaTag() as $property => $metaKey) {
             $this->{$property} = get_post_meta($post->ID, $metaKey, true);
         }
     }
@@ -138,13 +138,13 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function getAllMetaTag()
     {
         return array(
-            'vehicleClassId'    => $this->metaVehicleIdClass,
-            'baseRate'          => $this->metaBaseRate,
-            'minuteRate'        => $this->metaMinuteRate,
-            'hourlyRate'        => $this->metaHourRate,
-            'dailyRate'         => $this->metaDailyRate,
-            'weeklyRate'        => $this->metaWeeklyRate,
-            'monthlyRate'       => $this->metaMonthlyRate
+            'vehicleClassId' => $this->metaVehicleIdClass,
+            'baseRate' => $this->metaBaseRate,
+            'minuteRate' => $this->metaMinuteRate,
+            'hourlyRate' => $this->metaHourRate,
+            'dailyRate' => $this->metaDailyRate,
+            'weeklyRate' => $this->metaWeeklyRate,
+            'monthlyRate' => $this->metaMonthlyRate
         );
     }
 
@@ -153,11 +153,11 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         return array_merge(
             $this->postArg,
             array(
-                'meta_query'    => array(
+                'meta_query' => array(
                     array(
-                        'key'       => $this->metaVehicleIdClass,
-                        'value'     => $vehicleClassID,
-                        'compare'   => '='
+                        'key' => $this->metaVehicleIdClass,
+                        'value' => $vehicleClassID,
+                        'compare' => '='
                     )
                 )
             )
@@ -172,20 +172,22 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
         }
     }
+
     public function allRatesFromVehicleClass($vehicleClassId)
     {
         $query = new \WP_Query($this->getQueryArgumentsFromVehicleClass($vehicleClassId));
-        $rates= [];
-        foreach ($query->posts as $postRate){
+        $rates = [];
+        foreach ($query->posts as $postRate) {
             $rates[] = new HQRentalsModelsActiveRate($postRate);
         }
         return $rates;
     }
+
     public function formatRateForDisplay($rate, $decimals = 2)
     {
-        if($rate and $rate !== "0.00"){
-            return number_format((float) $rate, $decimals, '.', '');
-        }else{
+        if ($rate and $rate !== "0.00") {
+            return number_format((float)$rate, $decimals, '.', '');
+        } else {
             return '';
         }
     }
@@ -194,57 +196,72 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     {
         return $this->formatRateForDisplay($this->baseRate->amount);
     }
+
     public function getFormattedBaseRateAsNumber()
     {
         return (float)$this->getFormattedBaseRate();
     }
+
     public function getFormattedMinuteRate()
     {
         return $this->formatRateForDisplay($this->minuteRate->amount);
     }
+
     public function getFormattedMinuteRateAsNumber()
     {
         return (float)$this->getFormattedMinuteRate();
     }
+
     public function getFormattedHourlyRate()
     {
         return $this->formatRateForDisplay($this->hourlyRate->amount);
     }
+
     public function getFormattedHourlyRateAsNumber()
     {
         return (float)$this->getFormattedHourlyRate();
     }
+
     public function getFormattedDailyRate()
     {
         return $this->formatRateForDisplay($this->dailyRate->amount);
     }
+
     public function getDailyRateAmountForDisplay()
     {
         return $this->dailyRate->amount_for_display;
     }
+
     public function getMonthlyRateAmountForDisplay()
     {
         return $this->monthlyRate->amount_for_display;
     }
-    public function getFormattedDailyRateAsNumber(){
+
+    public function getFormattedDailyRateAsNumber()
+    {
         return (float)$this->getFormattedDailyRate();
     }
+
     public function getFormattedWeeklyRate()
     {
         return $this->formatRateForDisplay($this->weeklyRate->amount);
     }
+
     public function getFormattedWeeklyRateAsNumber()
     {
         return (float)$this->getFormattedWeeklyRate();
     }
+
     public function getFormattedMonthlyRate($decimals = 2)
     {
         return $this->formatRateForDisplay($this->monthlyRate->amount, $decimals);
     }
+
     public function getFormattedMonthlyRateAsNumber()
     {
         return (float)$this->getFormattedMonthlyRate();
     }
+
     public function getOrderMetaForQuery($order)
     {
         switch ($order) {
@@ -268,6 +285,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
                 break;
         }
     }
+
     public function ratePublicInterface()
     {
         $data = new \stdClass();
@@ -277,6 +295,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $data->monthlyRateAmountForDisplay = $this->getMonthlyRateAmountForDisplay();
         return $data;
     }
+
     public function getDailyRateObject()
     {
         return $this->dailyRate;

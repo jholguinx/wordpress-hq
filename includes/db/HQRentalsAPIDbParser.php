@@ -1,29 +1,34 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsDb;
+
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 
-class HQRentalsAPiDbParser{
+class HQRentalsAPiDbParser
+{
     public static function parseBrandToDB($apiData)
     {
         $dataAsArray = (array)$apiData;
         $dataAsArray['integration_snippets'] = json_encode($dataAsArray['integration_snippets']);
         return $dataAsArray;
     }
+
     public static function parseBrandsToWP($dbBrands)
     {
-        if($dbBrands){
-            return array_map(function($brandRow){
+        if ($dbBrands) {
+            return array_map(function ($brandRow) {
                 return HQRentalsAPiDBParser::parseBrandToWP($brandRow);
-            },$dbBrands);
-        }else{
+            }, $dbBrands);
+        } else {
             return [];
         }
     }
+
     public static function parseBrandToWP($brandDB)
     {
         return new HQRentalsModelsBrand($brandDB, true);
     }
+
     public static function parseLocationToDB($apiData)
     {
         $dataAsArray = (array)$apiData;

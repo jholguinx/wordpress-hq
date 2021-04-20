@@ -93,6 +93,7 @@ class HQRentalsModelsWorkspotRegion extends HQRentalsBaseModel
         $query = new \WP_Query($this->postArgs);
         return $query->posts;
     }
+
     public function setFromPost($post)
     {
         foreach ($this->getAllMetaTags() as $property => $metakey) {

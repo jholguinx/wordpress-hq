@@ -149,9 +149,9 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
     public function setFromPost($post)
     {
         foreach ($this->getAllMetaTags() as $property => $metakey) {
-            if($property === "floors"){
+            if ($property === "floors") {
                 $this->{$property} = json_decode(get_post_meta($post->ID, $metakey, true));
-            }else{
+            } else {
                 $this->{$property} = get_post_meta($post->ID, $metakey, true);
             }
 
@@ -166,15 +166,15 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             'label' => $this->metaLabel,
             'uuid' => $this->metaUUID,
             'mapUUID' => $this->metaMapUUID,
-            'active'    =>  $this->metaActive,
-            'hasFloors' =>  $this->metaHasFloors,
+            'active' => $this->metaActive,
+            'hasFloors' => $this->metaHasFloors,
             'available_spots_coordinates_Json' => $this->metaAvailable_spots_coordinates_Json,
             'unavailable_spots_coordinates_Json' => $this->metaUnavailable_spots_coordinates_Json,
             'rented_spots_coordinates_Json' => $this->metaRented_spots_coordinates_Json,
             'available_from_spots_coordinates_Json' => $this->metaAvailable_from_spots_coordinates_Json,
-            'option_spots_coordinates_Json'         => $this->metaOptions_spots_coordinates_Json,
-            'floors'    => $this->metaFloors,
-            'regions'   =>  $this->metaRegions
+            'option_spots_coordinates_Json' => $this->metaOptions_spots_coordinates_Json,
+            'floors' => $this->metaFloors,
+            'regions' => $this->metaRegions
         );
     }
 
@@ -183,14 +183,14 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
         $prefix = 'https://files-europe.caagcrm.com/tenants/93a9ba46-f29c-4582-a651-25f681c65d9f/files/';
         $spots = $this->processSpots($data, $prefix);
         $processSpots = $this->proccessMap($spots, $data, $prefix);
-        if(empty($data->floors)){
+        if (empty($data->floors)) {
             hq_update_post_meta($this->post_id, $this->metaHasFloors, 0);
             hq_update_post_meta($this->post_id, $this->metaAvailable_spots_coordinates_Json, $processSpots['available_spots_coordinates_Json']);
             hq_update_post_meta($this->post_id, $this->metaUnavailable_spots_coordinates_Json, $processSpots['unavailable_spots_coordinates_Json']);
             hq_update_post_meta($this->post_id, $this->metaRented_spots_coordinates_Json, $processSpots['rented_spots_coordinates_Json']);
             hq_update_post_meta($this->post_id, $this->metaAvailable_from_spots_coordinates_Json, $processSpots['available_from_spots_coordinates_Json']);
             hq_update_post_meta($this->post_id, $this->metaOptions_spots_coordinates_Json, $processSpots['option_spots_coordinates_Json']);
-        }else{
+        } else {
             hq_update_post_meta($this->post_id, $this->metaHasFloors, 1);
             hq_update_post_meta($this->post_id, $this->metaFloors, $processSpots);
         }
@@ -223,7 +223,9 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             return $prefix . $cover . '/redirect';
         }
     }
-    protected function processSpotsForGebouw($units, $prefix, $details){
+
+    protected function processSpotsForGebouw($units, $prefix, $details)
+    {
         $prefix = "https://files-europe.caagcrm.com/tenants/93a9ba46-f29c-4582-a651-25f681c65d9f/files/";
         return array_map(function ($unit) use (&$show_units, $prefix, $details) {
             return [
@@ -245,9 +247,10 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             ];
         }, $units);
     }
+
     protected function processSpots($details, $prefix)
     {
-        if(empty($details->floors)){
+        if (empty($details->floors)) {
             return array_map(function ($unit) use (&$show_units, $prefix, $details) {
                 return [
                     'id' => $unit->id,
@@ -265,7 +268,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
                     'show_in_website' => $unit->f501,
                 ];
             }, $details->units);
-        }else{
+        } else {
             return array_map(function ($unit) use (&$show_units, $prefix, $details) {
                 return [
                     'id' => $unit->id,
@@ -287,10 +290,10 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             }, $details->units);
         }
     }
+
     protected function proccessMap($spots, $details, $prefix)
     {
-        if(empty($details->floors))
-        {
+        if (empty($details->floors)) {
             $available_spots_coordinates_Json = caag_init_Json();
             $unavailable_spots_coordinates_Json = caag_init_Json();
             $rented_spots_coordinates_Json = caag_init_Json();
@@ -361,13 +364,13 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             $available_from_spots_coordinates_Json = json_encode($available_from_spots_coordinates_Json);
             $option_spots_coordinates_Json = json_encode($option_spots_coordinates_Json);
             return [
-                'available_spots_coordinates_Json'      => $available_spots_coordinates_Json,
-                'unavailable_spots_coordinates_Json'    =>  $unavailable_spots_coordinates_Json,
-                'rented_spots_coordinates_Json'         =>  $rented_spots_coordinates_Json,
-                'available_from_spots_coordinates_Json' =>  $available_from_spots_coordinates_Json,
-                'option_spots_coordinates_Json'         =>  $option_spots_coordinates_Json
+                'available_spots_coordinates_Json' => $available_spots_coordinates_Json,
+                'unavailable_spots_coordinates_Json' => $unavailable_spots_coordinates_Json,
+                'rented_spots_coordinates_Json' => $rented_spots_coordinates_Json,
+                'available_from_spots_coordinates_Json' => $available_from_spots_coordinates_Json,
+                'option_spots_coordinates_Json' => $option_spots_coordinates_Json
             ];
-        }else{
+        } else {
             $processedFloors = [];
             foreach ($details->floors as $floor) {
                 $floor->available_spots_coordinates_Json = caag_init_Json();
@@ -451,6 +454,7 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
             return json_encode($processedFloors);
         }
     }
+
     protected function proccessMapGebouw($spots, $floors, $prefix)
     {
         $processedFloors = [];
@@ -532,11 +536,12 @@ class HQRentalsModelsWorkspotLocation extends HQRentalsBaseModel
         }
         return json_encode($processedFloors);
     }
+
     protected function resolveMapOnFloors($prefix, $floor)
     {
-        if($this->id != 20){
+        if ($this->id != 20) {
             return empty($floor->f1567[0]->uuid) ? '' : $prefix . $floor->f1567[0]->uuid . '/redirect';
-        }else{
+        } else {
             return $prefix . $floor->f1402[0]->uuid . '/redirect';
         }
     }

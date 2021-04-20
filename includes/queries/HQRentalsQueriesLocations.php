@@ -1,26 +1,33 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsQueries;
+
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation;
 
-class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
+class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass
+{
 
     public function __construct()
     {
         $this->model = new HQRentalsModelsLocation();
     }
+
     public function allLocations()
     {
         $locations = $this->model->all();
         return $this->fillModelWithPosts($locations);
     }
-	public function getAllMetaKey() {
-    	return 'hq_wordpress_location_all_for_frontend';
-	}
-	public function allToFrontEnd()
+
+    public function getAllMetaKey()
+    {
+        return 'hq_wordpress_location_all_for_frontend';
+    }
+
+    public function allToFrontEnd()
     {
         $locationsPost = $this->model->all();
         $data = [];
-        foreach ( $locationsPost as $post ){
+        foreach ($locationsPost as $post) {
             $location = new HQRentalsModelsLocation($post);
             $data[] = $this->locationPublicInterface($location);
         }
@@ -30,37 +37,40 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
     public function fillModelWithPosts($posts)
     {
         $data = [];
-        foreach ($posts as $post){
+        foreach ($posts as $post) {
             $location = new HQRentalsModelsLocation($post);
             $data[] = $location;
         }
         return $data;
     }
+
     public function getLocationsByBrand($brandId)
     {
         $args = array_merge(
             $this->model->postArgs,
             array(
-                'meta_query'    =>  array(
+                'meta_query' => array(
                     array(
-                        'value'         => $brandId,
-                        'compare'       =>  '=',
-                        'key'           =>  $this->model->getMetaKeyFromBrandID()
+                        'value' => $brandId,
+                        'compare' => '=',
+                        'key' => $this->model->getMetaKeyFromBrandID()
                     )
                 )
             )
         );
         $query = new \WP_Query($args);
         $data = [];
-        foreach ($query->posts as $post){
+        foreach ($query->posts as $post) {
             $data[] = new HQRentalsModelsLocation($post);
         }
         return $data;
     }
-    public function getLocationsForBrandsFrontEnd($brandId){
+
+    public function getLocationsForBrandsFrontEnd($brandId)
+    {
         $location = $this->getLocationsByBrand($brandId);
-        return array_map(function($location){
-            $newObject= new \stdClass();
+        return array_map(function ($location) {
+            $newObject = new \stdClass();
             $newObject->id = $location->id;
             $newObject->name = $location->name;
             $newObject->coordinates = $location->coordinates;
@@ -68,13 +78,15 @@ class HQRentalsQueriesLocations extends HQRentalsQueriesBaseClass{
             return $newObject;
         }, $location);
     }
+
     public function locationsPublicInterface()
     {
         $locations = $this->allLocations();
-        return array_map(function($location){
+        return array_map(function ($location) {
             return $this->locationPublicInterface($location);
         }, $locations);
     }
+
     public function locationPublicInterface($location)
     {
         return $this->parseObject(array(

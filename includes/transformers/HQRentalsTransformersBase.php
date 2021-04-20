@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsTransformers;
+
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 abstract class HQRentalsTransformersBase
@@ -20,11 +21,11 @@ abstract class HQRentalsTransformersBase
     public static function resolveArrayOfObjects($arrayApiData, $callback = null)
     {
         if (is_array($arrayApiData) and !empty($callback)) {
-            return array_map(function($item) use ($callback){
+            return array_map(function ($item) use ($callback) {
                 return call_user_func($callback, $item);
             }, $arrayApiData);
         } else {
-            return [ ];
+            return [];
         }
     }
 
@@ -37,11 +38,12 @@ abstract class HQRentalsTransformersBase
                 $objectToReturn->{$property} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$property});
             }
         }
-        if($isLocation){
+        if ($isLocation) {
             HQRentalsTransformersBase::resolveCustomFieldsOnLocation($objectToReturn, $apiObject);
         }
         return $objectToReturn;
     }
+
     public static function resolveCustomFieldsOnLocation($objectToReturn, $apiObject)
     {
         $setting = new HQRentalsSettings();
@@ -62,9 +64,10 @@ abstract class HQRentalsTransformersBase
         HQRentalsTransformersBase::resolveSingleCustomField($address, $objectToReturn, $apiObject, 'address');
         HQRentalsTransformersBase::resolveSingleCustomField($phone, $objectToReturn, $apiObject, 'phone');
     }
+
     public static function resolveSingleCustomField($settingField, $objectToReturn, $apiObject, $newPropertyName)
     {
-        if(!empty($settingField)){
+        if (!empty($settingField)) {
             $objectToReturn->{$newPropertyName} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$settingField});
         }
     }

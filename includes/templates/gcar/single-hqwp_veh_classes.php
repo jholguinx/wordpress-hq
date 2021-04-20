@@ -8,6 +8,7 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiDataResolver;
 use HQRentalsPlugin\HQRentalsApihelpers\HQRentalsApihelpersAvailability;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
+
 $vehicle = new HQRentalsModelsVehicleClass($post);
 $helper = new HQRentalsFrontHelper();
 $vehicleFeatures = HQRentalsApiDataResolver::resolveCKEditor($vehicle->getCustomField('f324'));
@@ -21,9 +22,9 @@ $locations = $queryLocations->allLocations();
 $similarCars = $queryVehicles->getVehicleClassFilterByCustomField('f268', $vehicle->getCustomField('f268'));
 $availability = new HQRentalsApihelpersAvailability();
 $availabilityCars = $availability->getMonthlyAvailability($vehicle->id);
-if($availabilityCars->data['success']){
+if ($availabilityCars->data['success']) {
     $cars = $availabilityCars->data['data']->vehicles;
-}else{
+} else {
     $cars = [];
 }
 $car = $helper->filterElementsBYId($cars, $vehicle->id);
@@ -32,52 +33,64 @@ include_once("templates/template-car-header.php");
 
 ?>
     <style>
-        #page_content_wrapper .inner .sidebar_content{
+        #page_content_wrapper .inner .sidebar_content {
             margin-top: 40px !important;
         }
-        #page_caption{
+
+        #page_caption {
             margin-bottom: 0px !important;
         }
-        .hq-feature-wrapper{
+
+        .hq-feature-wrapper {
             display: flex;
             flex: 1;
             align-items: center;
             justify-content: center;
             width: 20% !important;
         }
-        .single_car_attribute_wrapper .car_attribute_content{
+
+        .single_car_attribute_wrapper .car_attribute_content {
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .hq-feature-wrapper .car_attribute_content{
+
+        .hq-feature-wrapper .car_attribute_content {
             margin-left: 20px;
         }
-        .feature-wrapper{
+
+        .feature-wrapper {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
         }
-        .hq-inputs{
+
+        .hq-inputs {
             width: 100%;
         }
-        label{
+
+        label {
             text-align: left;
         }
-        #portfolio_filter_wrapper .car_attribute_wrapper{
+
+        #portfolio_filter_wrapper .car_attribute_wrapper {
             width: 60% !important;
         }
-        #portfolio_filter_wrapper .car_attribute_price{
+
+        #portfolio_filter_wrapper .car_attribute_price {
             width: 40% !important;
         }
-        .car_attribute_price_day.three_cols .single_car_price{
+
+        .car_attribute_price_day.three_cols .single_car_price {
             font-size: 34px !important;
         }
-        .single_car_attribute_wrapper .fa,.single_car_attribute_wrapper .fas , .single_car_attribute_wrapper .fab{
+
+        .single_car_attribute_wrapper .fa, .single_car_attribute_wrapper .fas, .single_car_attribute_wrapper .fab {
             font-size: 30px !important;
         }
-        .wrapper{
+
+        .wrapper {
             max-width: 1425px;
             width: 100%;
             box-sizing: border-box;
@@ -85,17 +98,20 @@ include_once("templates/template-car-header.php");
             padding: 0 90px;
             height: 100%;
         }
-        @media only screen and (max-width: 960px) and (min-width: 768px){
-            .portfolio_info_wrapper{
+
+        @media only screen and (max-width: 960px) and (min-width: 768px) {
+            .portfolio_info_wrapper {
                 display: flex;
                 flex: 1;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
             }
-            .portfolio_info_wrapper div,#portfolio_filter_wrapper .car_attribute_wrapper, #portfolio_filter_wrapper .car_attribute_price{
+
+            .portfolio_info_wrapper div, #portfolio_filter_wrapper .car_attribute_wrapper, #portfolio_filter_wrapper .car_attribute_price {
                 width: 100% !important;
             }
+
             .wrapper {
                 width: 100%;
                 margin-top: 0;
@@ -104,6 +120,7 @@ include_once("templates/template-car-header.php");
             }
 
         }
+
         @media only screen and (max-width: 1099px) and (min-width: 960px) {
             .wrapper {
                 width: 100%;
@@ -116,6 +133,7 @@ include_once("templates/template-car-header.php");
                 font-size: 25px !important;
             }
         }
+
         @media only screen and (max-width: 767px) {
             .wrapper {
                 width: 100%;
@@ -138,6 +156,7 @@ include_once("templates/template-car-header.php");
                 text-align: left;
             }
         }
+
         .hq-feature-wrapper {
             display: flex;
             flex: 1;
@@ -149,27 +168,32 @@ include_once("templates/template-car-header.php");
             line-height: 1.5;
         }
 
-        .inner{
+        .inner {
             padding-bottom: 50px;
         }
-        #portfolio_filter_wrapper .car_unit_day{
+
+        #portfolio_filter_wrapper .car_unit_day {
             margin-top: -15px !important;
             font-size: 11px !important;
         }
-        #portfolio_filter_wrapper .single_car_currency{
+
+        #portfolio_filter_wrapper .single_car_currency {
             top: -15px !important;
         }
-        .car_attribute_price_day.four_cols .single_car_price{
+
+        .car_attribute_price_day.four_cols .single_car_price {
             font-size: 34px !important;
         }
-        .hq-class-title{
+
+        .hq-class-title {
             font-size: 40px;
             font-weight: 700;
             line-height: 1.3;
         }
+
         /*Features*/
-        .car_attribute_wrapper_icon{
-            flex:1;
+        .car_attribute_wrapper_icon {
+            flex: 1;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
@@ -177,12 +201,15 @@ include_once("templates/template-car-header.php");
             padding: 0px 20px 20px 20px;
             margin-top: 0px !important;
         }
-        .car_attribute_wrapper_icon .feature-wrapper{
+
+        .car_attribute_wrapper_icon .feature-wrapper {
             margin-right: 15px;
         }
-        .portfolio_info_wrapper{
+
+        .portfolio_info_wrapper {
             padding-bottom: 0px !important;
         }
+
         /*End Features*/
 
     </style>
@@ -216,26 +243,31 @@ include_once("templates/template-car-header.php");
                 <div class="content">
                     <div class="single_car_booking_wrapper themeborder book_instantly">
                         <div class="single_car_booking_woocommerce_wrapper">
-                            <form action="<?php echo $brand->websiteLink; ?>" method="GET" autocomplete="off" id="hq-wiget-form">
+                            <form action="<?php echo $brand->websiteLink; ?>" method="GET" autocomplete="off"
+                                  id="hq-wiget-form">
                                 <p>
                                     <label for="">Pickup Location</label>
-                                    <select id="pick-up-location" name="pick_up_location" required="required" autocomplete="off">
-                                        <?php foreach($locations as $location): ?>
+                                    <select id="pick-up-location" name="pick_up_location" required="required"
+                                            autocomplete="off">
+                                        <?php foreach ($locations as $location): ?>
                                             <option value="<?php echo $location->id; ?>"><?php echo $location->name; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </p>
                                 <p>
                                     <label for="">Return Location</label>
-                                    <select id="return-location-select" name="return_location_select" required="required" autocomplete="off" disabled>
-                                        <?php foreach($locations as $location): ?>
+                                    <select id="return-location-select" name="return_location_select"
+                                            required="required" autocomplete="off" disabled>
+                                        <?php foreach ($locations as $location): ?>
                                             <option value="<?php echo $location->id; ?>"><?php echo $location->name; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </p>
                                 <p>
                                     <label for="">Pickup Date</label>
-                                    <input id="hq-pickup-date-time-input" class="hq-inputs" type="text" autocomplete="off" name="pick_up_date" placeholder="Select Date" required="required" />
+                                    <input id="hq-pickup-date-time-input" class="hq-inputs" type="text"
+                                           autocomplete="off" name="pick_up_date" placeholder="Select Date"
+                                           required="required"/>
                                 </p>
                                 <p>
                                     <label for="">Duration</label>
@@ -254,7 +286,7 @@ include_once("templates/template-car-header.php");
                                     </select>
                                 </p>
                                 <style>
-                                    #hq-wiget-form span{
+                                    #hq-wiget-form span {
                                         opacity: 0.5;
                                         line-height: 1;
                                         color: #000;
@@ -272,7 +304,8 @@ include_once("templates/template-car-header.php");
                             </form>
                         </div>
                     </div>
-                    <a id="single_car_share_button" href="javascript:;" class="button ghost themeborder"><span class="ti-email"></span>Share this car</a>
+                    <a id="single_car_share_button" href="javascript:;" class="button ghost themeborder"><span
+                                class="ti-email"></span>Share this car</a>
                 </div>
                 <br class="clear"/>
                 <div class="sidebar_bottom"></div>
@@ -284,34 +317,38 @@ include_once("templates/template-car-header.php");
     </div>
 
     </div>
-<?php if($similarCars and $hideSimilarCars !== 'Yes'): ?>
+<?php if ($similarCars and $hideSimilarCars !== 'Yes'): ?>
     <?php $permalink = get_permalink($vehicle->postId); ?>
     <div class="wrapper">
         <div class="car_related" style="margin-top: 30px;">
             <h3 class="sub_title">Similar cars</h3>
-            <div id="portfolio_filter_wrapper" class="gallery classic three_cols portfolio-content section content clearfix" data-columns="3">
-                <?php foreach(array_splice($similarCars, 0, 3) as $vehicle): ?>
+            <div id="portfolio_filter_wrapper"
+                 class="gallery classic three_cols portfolio-content section content clearfix" data-columns="3">
+                <?php foreach (array_splice($similarCars, 0, 3) as $vehicle): ?>
                     <div id="vehicle-class-<?php echo $vehicle->id; ?>" class="element grid classic3_cols">
-                        <div class="one_third gallery3 classic static filterable portfolio_type themeborder" data-id="post-246">
+                        <div class="one_third gallery3 classic static filterable portfolio_type themeborder"
+                             data-id="post-246">
                             <a class="car_image" href="<?php echo $permalink; ?>">
                                 <img src="<?php echo $vehicle->publicImageLink; ?>">
                             </a>
                             <div class="portfolio_info_wrapper">
                                 <div class="car_attribute_wrapper">
-                                    <a class="car_link" href="<?php echo $permalink; ?>"><h4><?php echo $vehicle->getLabel(); ?></h4></a>
+                                    <a class="car_link" href="<?php echo $permalink; ?>">
+                                        <h4><?php echo $vehicle->getLabel(); ?></h4></a>
                                     <br class="clear">
                                 </div>
                                 <?php $auxCar = $helper->filterElementsBYId($cars, $vehicle->id); ?>
                                 <div class="car_attribute_price">
                                     <div class="car_attribute_price_day three_cols">
-                                        <span class="single_car_currency">R</span><span class="single_car_price"><?php echo number_format((float) $auxCar->price->base_price_with_taxes->amount, 0, '.', ''); ?></span>
+                                        <span class="single_car_currency">R</span><span
+                                                class="single_car_price"><?php echo number_format((float)$auxCar->price->base_price_with_taxes->amount, 0, '.', ''); ?></span>
                                         <span class="car_unit_day">Per Month</span>
                                     </div>
                                 </div>
                                 <br class="clear">
                             </div>
                             <div class="car_attribute_wrapper_icon">
-                                <?php foreach(array_splice($vehicle->features(), 0 , 6) as $feature): ?>
+                                <?php foreach (array_splice($vehicle->features(), 0, 6) as $feature): ?>
                                     <div class="feature-wrapper">
                                         <i class="<?php echo $feature->icon; ?>" aria-hidden="true"></i>
                                         <div class="car_attribute_content"><?php echo $feature->getLabelForWebsite(); ?></div>

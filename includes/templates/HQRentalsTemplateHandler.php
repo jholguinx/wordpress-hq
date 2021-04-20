@@ -6,7 +6,7 @@ class HQRentalsTemplateHandler
 {
     public function __construct()
     {
-        add_filter('template_include', array($this, 'addingTemplates'),3);
+        add_filter('template_include', array($this, 'addingTemplates'), 3);
     }
 
     public function addingTemplates($defaultTemplate)
@@ -14,14 +14,14 @@ class HQRentalsTemplateHandler
         global $post;
         $theme = wp_get_theme();
         // add theme route
-        if($post->post_type === 'hqwp_veh_classes' and is_single() and $theme->stylesheet === 'grandcarrental'){
-            $defaultTemplate = load_template(dirname( __FILE__ ) . '/gcar/single-hqwp_veh_classes.php');
+        if ($post->post_type === 'hqwp_veh_classes' and is_single() and $theme->stylesheet === 'grandcarrental') {
+            $defaultTemplate = load_template(dirname(__FILE__) . '/gcar/single-hqwp_veh_classes.php');
 
-        }else if (is_page('quotes')) {
+        } else if (is_page('quotes')) {
             load_template(__DIR__ . '/page-quotes.php');
-        }else if (is_page('payments')) {
+        } else if (is_page('payments')) {
             load_template(__DIR__ . '/page-payments.php');
-        }else{
+        } else {
             return $defaultTemplate;
         }
         /*

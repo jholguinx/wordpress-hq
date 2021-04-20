@@ -4,28 +4,28 @@ document.querySelectorAll('#hq-snippet-reservation-button').forEach(item => {
         var brand = item.dataset.brand;
         var snippet = item.dataset.snippet;
         var code = hqBrandSnippets[brand][snippet];
-        navigator.clipboard.writeText(code).then(function() {
+        navigator.clipboard.writeText(code).then(function () {
             alert('Snippet copied.');
-        }, function() {
+        }, function () {
             alert("There was an issue copying the snippet. Please get in touch with our support team.");
         });
-        try{
-            navigator.permissions.query({ name: 'clipboard-write' }).then(result => {
+        try {
+            navigator.permissions.query({name: 'clipboard-write'}).then(result => {
                 if (result.state == 'granted' || result.state == 'prompt') {
-                    navigator.clipboard.writeText(code).then(function() {
+                    navigator.clipboard.writeText(code).then(function () {
                         alert('Snippet copied.');
-                    }, function() {
+                    }, function () {
                         alert("There was an issue copying the snippet. Please get in touch with our support team.");
                     });
-                }else{
+                } else {
                     alert("There was an issue copying the snippet. Please get in touch with our support team.");
                 }
             });
-        }catch (e) {
+        } catch (e) {
             alert("There was an issue copying the snippet. Please get in touch with our support team.");
         }
     });
 });
-(function($){
+(function ($) {
     tippy('#hq-snippet-reservation-button');
 })(jQuery);

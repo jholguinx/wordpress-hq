@@ -1,8 +1,11 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsHelpers;
+
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 
-class HQRentalsCacheableData{
+class HQRentalsCacheableData
+{
     public function __construct()
     {
         $this->query = new HQRentalsQueriesVehicleClasses();

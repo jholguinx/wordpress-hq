@@ -1,3 +1,3 @@
-###HQ Rentals Wordpress Plugin
+### HQ Rentals Wordpress Plugin
 
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsTasks;
+
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsCronJob
@@ -10,9 +11,9 @@ class HQRentalsCronJob
         $this->scheduler = new HQRentalsScheduler();
         $this->pluginSettings = new HQRentalsSettings();
         add_filter('cron_schedules', array($this, 'addCustomScheduleTime'));
-        add_action( 'refreshAllHQDataJob', array($this, 'refreshAllData') );
-        if ( ! wp_next_scheduled( 'refreshAllHQDataJob' ) ) {
-            wp_schedule_event( time(), 'daily', 'refreshAllHQDataJob' );
+        add_action('refreshAllHQDataJob', array($this, 'refreshAllData'));
+        if (!wp_next_scheduled('refreshAllHQDataJob')) {
+            wp_schedule_event(time(), 'daily', 'refreshAllHQDataJob');
         }
 
     }
@@ -23,7 +24,7 @@ class HQRentalsCronJob
          * Disable by option on refresh data
          * */
 
-        if(!($this->pluginSettings->getDisableCronjobOption() == 'true')){
+        if (!($this->pluginSettings->getDisableCronjobOption() == 'true')) {
             $this->scheduler->refreshHQData();
         }
     }

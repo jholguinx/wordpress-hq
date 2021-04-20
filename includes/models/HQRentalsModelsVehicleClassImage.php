@@ -1,4 +1,5 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsModels;
 
 class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
@@ -32,16 +33,16 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
     public $vehicleClassPostId = '';
 
 
-    public function __construct( $post = null )
+    public function __construct($post = null)
     {
         $this->post_id = '';
         $this->postArgs = array(
-            'post_type'         =>  $this->vehicleClassImageCustomPostName,
-            'post_status'       =>  'publish',
-            'posts_per_page'    =>  -1
+            'post_type' => $this->vehicleClassImageCustomPostName,
+            'post_status' => 'publish',
+            'posts_per_page' => -1
         );
-        if(!empty($post)){
-            $this->setFromPost( $post );
+        if (!empty($post)) {
+            $this->setFromPost($post);
         }
     }
 
@@ -59,52 +60,55 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         $this->postArgs = array_merge(
             $this->postArgs,
             array(
-                'post_title'    =>  $this->label,
-                'post_name'     =>  $this->label
+                'post_title' => $this->label,
+                'post_name' => $this->label
             )
         );
-        $post_id = wp_insert_post( $this->postArgs );
+        $post_id = wp_insert_post($this->postArgs);
         $this->post_id = $post_id;
-        hq_update_post_meta( $post_id, $this->metaId, $this->id );
-        hq_update_post_meta( $post_id, $this->metaVehicleClassId, $this->vehicleClassId );
-        hq_update_post_meta( $post_id, $this->metaFilename, $this->filename );
-        hq_update_post_meta( $post_id, $this->metaExtension, $this->extension );
-        hq_update_post_meta( $post_id, $this->metaPublicLink, $this->publicLink );
+        hq_update_post_meta($post_id, $this->metaId, $this->id);
+        hq_update_post_meta($post_id, $this->metaVehicleClassId, $this->vehicleClassId);
+        hq_update_post_meta($post_id, $this->metaFilename, $this->filename);
+        hq_update_post_meta($post_id, $this->metaExtension, $this->extension);
+        hq_update_post_meta($post_id, $this->metaPublicLink, $this->publicLink);
     }
 
     public function find($caagImage)
     {
-        $query = new \WP_Query( $this->postArgs );
+        $query = new \WP_Query($this->postArgs);
     }
 
     public function first()
     {
         // TODO: Implement first() method.
     }
+
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
         return $query->posts;
     }
+
     public function set($data)
     {
-        if($this->filter->isPost($data)){
+        if ($this->filter->isPost($data)) {
 
-        }else{
+        } else {
 
         }
         //$metas =
     }
+
     public function getImagesPostByVehicleClassID($vehicleClassId)
     {
         $args = array_merge(
             $this->postArgs,
             array(
-                'meta_query'    =>  array(
+                'meta_query' => array(
                     array(
-                        'key'       =>  $this->metaVehicleClassId,
-                        'value'     =>  $vehicleClassId,
-                        'compare'   =>  '='
+                        'key' => $this->metaVehicleClassId,
+                        'value' => $vehicleClassId,
+                        'compare' => '='
                     )
 
                 )
@@ -113,6 +117,7 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         $query = new \WP_Query($args);
         return $query->posts;
     }
+
     public function getImageFromPostByVehicleClassID($vehicleClassId)
     {
         $posts = $this->getImagesPostByVehicleClassID($vehicleClassId);
@@ -126,25 +131,29 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
     public function getAllMetaTag()
     {
         return array(
-            'id'                    =>  $this->metaId,
-            'vehicleClassId'        =>  $this->vehicleClassId,
-            'filename'              =>  $this->metaFilename,
-            'extension'             =>  $this->metaExtension,
-            'publicLink'            =>  $this->metaPublicLink,
-            'vehicleClassPostId'    =>  $this->metaVehicleClassPostId
+            'id' => $this->metaId,
+            'vehicleClassId' => $this->vehicleClassId,
+            'filename' => $this->metaFilename,
+            'extension' => $this->metaExtension,
+            'publicLink' => $this->metaPublicLink,
+            'vehicleClassPostId' => $this->metaVehicleClassPostId
         );
     }
-    public function setFromPost( $post )
+
+    public function setFromPost($post)
     {
-        foreach ($this->getAllMetaTag() as $property => $metakey){
+        foreach ($this->getAllMetaTag() as $property => $metakey) {
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
         }
     }
+
     public function getImageWithSize($size = 500)
     {
         return $this->publicLink . '?size=' . $size;
     }
-    public function getImagePublicLink(){
+
+    public function getImagePublicLink()
+    {
         return $this->getImageWithSize(1000);
     }
 

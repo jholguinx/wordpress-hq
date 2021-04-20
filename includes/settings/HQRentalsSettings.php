@@ -57,9 +57,9 @@ class HQRentalsSettings
     public function getApiUserToken()
     {
         $option = get_option($this->api_user_token, "");
-        if(!empty($option)){
+        if (!empty($option)) {
             return HQRentalsEncryptionHandler::decrypt(get_option($this->api_user_token));
-        }else{
+        } else {
             return '';
         }
     }
@@ -71,9 +71,9 @@ class HQRentalsSettings
     public function getApiTenantToken()
     {
         $option = get_option($this->api_tenant_token, "");
-        if(!empty($option)){
+        if (!empty($option)) {
             return HQRentalsEncryptionHandler::decrypt(get_option($this->api_tenant_token));
-        }else{
+        } else {
             return '';
         }
     }
@@ -136,18 +136,22 @@ class HQRentalsSettings
     {
         return get_option($this->hq_integration_on_home, 'false');
     }
+
     public function getDisableCronjobOption()
     {
         return get_option($this->hq_disable_cronjob_option, 'false');
     }
+
     public function getTenantDatetimeFormat()
     {
         return get_option($this->hq_tenant_datetime_format, '');
     }
+
     public function getDisableSafari()
     {
         return get_option($this->hq_disable_safari_functionality, 'false');
     }
+
     public function getDisableSafariValue()
     {
         return $this->getDisableSafari() == 'true';
@@ -179,9 +183,9 @@ class HQRentalsSettings
      */
     public function saveApiUserToken($token)
     {
-        if(empty($token)){
+        if (empty($token)) {
             return update_option($this->api_user_token, "");
-        }else{
+        } else {
             return update_option($this->api_user_token, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($token)));
         }
 
@@ -204,9 +208,9 @@ class HQRentalsSettings
      */
     public function saveApiTenantToken($token)
     {
-        if(empty($token)){
+        if (empty($token)) {
             return update_option($this->api_tenant_token, "");
-        }else{
+        } else {
             return update_option($this->api_tenant_token, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($token)));
         }
 
@@ -273,20 +277,27 @@ class HQRentalsSettings
     {
         return update_option($this->hq_integration_on_home, sanitize_text_field($data));
     }
+
     public function saveDisableCronjobOption($data)
     {
         return update_option($this->hq_disable_cronjob_option, sanitize_text_field($data));
     }
+
     public function saveTenantDatetimeOption($data)
     {
         return update_option($this->hq_tenant_datetime_format, sanitize_text_field($data));
     }
-    public function saveTenantLink($data){
+
+    public function saveTenantLink($data)
+    {
         return update_option($this->hq_tenant_link, sanitize_text_field($data));
     }
-    public function getTenantLink(){
+
+    public function getTenantLink()
+    {
         return get_option($this->hq_tenant_link, '');
     }
+
     public function saveDisableSafariOption($data)
     {
         return update_option($this->hq_disable_safari_functionality, sanitize_text_field($data));
@@ -302,129 +313,163 @@ class HQRentalsSettings
     {
         return update_option($this->hq_location_coordinate_field, sanitize_text_field($data));
     }
+
     public function getLocationCoordinateField()
     {
         return get_option($this->hq_location_coordinate_field, '');
     }
 
-    public function noLocationImageSetting(){
+    public function noLocationImageSetting()
+    {
         return empty(get_option($this->hq_location_image_field));
     }
+
     public function saveLocationImageSetting($data)
     {
         return update_option($this->hq_location_image_field, $data);
     }
+
     public function getLocationImageField()
     {
         return get_option($this->hq_location_image_field, '');
     }
 
-    public function noLocationDescriptionSetting(){
+    public function noLocationDescriptionSetting()
+    {
         return empty(get_option($this->hq_location_description_field));
     }
+
     public function saveLocationDescriptionSetting($data)
     {
         return update_option($this->hq_location_description_field, $data);
     }
+
     public function getLocationDescriptionField()
     {
         return get_option($this->hq_location_description_field, '');
     }
 
-    public function noAddressLabelSetting(){
+    public function noAddressLabelSetting()
+    {
         return empty(get_option($this->hq_location_address_label_field));
     }
+
     public function saveAddressLabelSetting($data)
     {
         return update_option($this->hq_location_address_label_field, $data);
     }
+
     public function getAddressLabelField()
     {
         return get_option($this->hq_location_address_label_field, '');
     }
 
-    public function noOfficeHoursSetting(){
+    public function noOfficeHoursSetting()
+    {
         return empty(get_option($this->hq_location_office_hours_field));
     }
+
     public function saveOfficeHoursSetting($data)
     {
         return update_option($this->hq_location_office_hours_field, $data);
     }
+
     public function getOfficeHoursSetting()
     {
         return get_option($this->hq_location_office_hours_field, '');
     }
 
-    public function noBrandsSetting(){
+    public function noBrandsSetting()
+    {
         return empty(get_option($this->hq_location_brands_field));
     }
+
     public function saveBrandsSetting($data)
     {
         return update_option($this->hq_location_brands_field, $data);
     }
+
     public function getBrandsSetting()
     {
         return get_option($this->hq_location_brands_field, '');
     }
 
 
-    public function noPhoneSetting(){
+    public function noPhoneSetting()
+    {
         return empty(get_option($this->hq_location_phone_field));
     }
+
     public function savePhoneSetting($data)
     {
         return update_option($this->hq_location_phone_field, $data);
     }
+
     public function getPhoneSetting()
     {
         return get_option($this->hq_location_phone_field, '');
     }
-    public function noAddressSetting(){
+
+    public function noAddressSetting()
+    {
         return empty(get_option($this->hq_location_address_field));
     }
+
     public function saveAddressSetting($data)
     {
         return update_option($this->hq_location_address_field, $data);
     }
+
     public function getAddressSetting()
     {
         return get_option($this->hq_location_address_field, '');
     }
 
-    public function noDecreasingRateOrder(){
+    public function noDecreasingRateOrder()
+    {
         return empty(get_option($this->hq_enable_decreasing_rate_order_on_vehicles_query));
     }
+
     public function saveDecreasingRateOrder($data)
     {
         return update_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, $data);
     }
+
     public function getDecreasingRateOrder()
     {
         return get_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, 'false');
     }
+
     public function isDecreasingRateOrderActive()
     {
         return $this->getDecreasingRateOrder() === 'true';
     }
 
-    public function noReplaceBaseURLOnBrandsSetting(){
+    public function noReplaceBaseURLOnBrandsSetting()
+    {
         return empty(get_option($this->hq_replace_url_on_brand_option));
     }
+
     public function saveReplaceBaseURLOnBrandsSetting($data)
     {
         return update_option($this->hq_replace_url_on_brand_option, $data);
     }
+
     public function getReplaceBaseURLOnBrandsSetting()
     {
         return get_option($this->hq_replace_url_on_brand_option, '');
     }
-    public function noBrandURLToReplaceSetting(){
+
+    public function noBrandURLToReplaceSetting()
+    {
         return empty(get_option($this->hq_url_to_replace_on_brands_option));
     }
+
     public function saveBrandURLToReplaceSetting($data)
     {
         return update_option($this->hq_url_to_replace_on_brands_option, $data);
     }
+
     public function getBrandURLToReplaceSetting()
     {
         return get_option($this->hq_url_to_replace_on_brands_option, '');
@@ -437,10 +482,12 @@ class HQRentalsSettings
     {
         return empty(get_option($this->hq_default_latitude_for_map_shortcode));
     }
+
     public function getDefaultLatitudeSetting()
     {
         return get_option($this->hq_default_latitude_for_map_shortcode, "");
     }
+
     public function setDefaultLatitudeSetting($data)
     {
         return update_option($this->hq_default_latitude_for_map_shortcode, $data);
@@ -453,17 +500,16 @@ class HQRentalsSettings
     {
         return empty(get_option($this->hq_default_longitude_for_map_shortcode));
     }
+
     public function getDefaultLongitudeSetting()
     {
         return get_option($this->hq_default_longitude_for_map_shortcode, "");
     }
+
     public function setDefaultLongitudeSetting($data)
     {
         return update_option($this->hq_default_longitude_for_map_shortcode, $data);
     }
-
-
-
 
 
     /***
@@ -503,7 +549,7 @@ class HQRentalsSettings
         if (empty($postDataFromSettings[$this->hq_replace_url_on_brand_option])) {
             update_option($this->hq_replace_url_on_brand_option, "false");
         }
-        if(empty($postDataFromSettings[$this->hq_enable_decreasing_rate_order_on_vehicles_query])){
+        if (empty($postDataFromSettings[$this->hq_enable_decreasing_rate_order_on_vehicles_query])) {
             update_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, "false");
         }
         /*Refresh data on save */
@@ -552,6 +598,7 @@ class HQRentalsSettings
     {
         return empty(get_option($this->new_auth_scheme));
     }
+
     public function noDisableSafariFunctionality()
     {
         return empty(get_option($this->hq_disable_safari_functionality));
@@ -565,6 +612,7 @@ class HQRentalsSettings
     {
         return get_option($this->new_auth_scheme) == 'true';
     }
+
     public function noTenantDatetimeFormat()
     {
         return empty(get_option($this->hq_tenant_datetime_format));
@@ -574,6 +622,7 @@ class HQRentalsSettings
     {
         return empty(get_option($this->hq_integration_on_home));
     }
+
     public function noDisabledCronjobOption()
     {
         return empty(get_option($this->hq_disable_cronjob_option));
@@ -588,23 +637,24 @@ class HQRentalsSettings
     {
         $schedule = new HQRentalsScheduler();
         $res = $schedule->refreshHQData();
-        if($res === true){
+        if ($res === true) {
             $_POST['forcing_update'] = 'success';
-        }else{
+        } else {
             $_POST['forcing_update'] = $res;
         }
     }
+
     public function resolveSettingsOnAuth($response)
     {
-        if($response->data->success){
+        if ($response->data->success) {
             $tenants = $response->data->data->tenants;
-            if(is_array($tenants)){
+            if (is_array($tenants)) {
                 $first = $response->data->data->tenants[0];
                 $user = $response->data->data->user;
                 $link = $first->api_link;
                 $userToken = $user->api_token;
                 $tenantToken = $first->api_token;
-                if($link and $userToken and $tenants){
+                if ($link and $userToken and $tenants) {
                     $this->saveApiBaseUrl($link);
                     $this->saveApiTenantToken($tenantToken);
                     $this->saveApiUserToken($userToken);
@@ -613,16 +663,19 @@ class HQRentalsSettings
             }
         }
     }
+
     public function isApiOkay()
     {
         $connector = new HQRentalsApiConnector();
         $apiTestCall = $connector->getHQRentalsBrands();
         return $apiTestCall->success;
     }
+
     public function updateEmail($email)
     {
         update_option($this->hq_auth_email, $email);
     }
+
     public function getEmail()
     {
         return get_option($this->hq_auth_email, "");
@@ -632,10 +685,12 @@ class HQRentalsSettings
     {
         return empty(get_option($this->hq_currency_symbol));
     }
+
     public function setCurrencyIconOption($icon)
     {
         return update_option($this->hq_currency_symbol, $icon);
     }
+
     public function getCurrencyIconOption()
     {
         return get_option($this->hq_currency_symbol, '');

@@ -1,4 +1,5 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsQueries;
 
 
@@ -15,7 +16,7 @@ class HQRentalsQueriesAdditionalCharges
     public function allCharges()
     {
         $charges = $this->model->all();
-        return array_map(function($post){
+        return array_map(function ($post) {
             return new HQRentalsModelsAdditionalCharge($post);
         }, $charges);
     }

@@ -56,7 +56,7 @@ class HQRentalsAdminSettings
             <?php
         } else {
             $this->assets->loadAssetsForAdminSettingPage();
-            $okAPI  = $this->settings->isApiOkay();
+            $okAPI = $this->settings->isApiOkay();
             HQRentalsAssetsHandler::getHQFontAwesome();
             ?>
             <script>
@@ -70,18 +70,24 @@ class HQRentalsAdminSettings
                         </div>
                         <div></div>
                         <?php if ($okAPI): ?>
-                            <div id="hq-connected-indicator" style="background-color: #28a745; border: 2px solid #28a745;" class="hq-connected-sign">
+                            <div id="hq-connected-indicator"
+                                 style="background-color: #28a745; border: 2px solid #28a745;"
+                                 class="hq-connected-sign">
                                 <h6 class="hq-connected-sign-text">CONNECTED</h6>
                             </div>
                         <?php else: ?>
-                            <div id="hq-not-connected-indicator" style="background-color: #dc3545; border: 2px solid #dc3545;" class="hq-connected-sign">
+                            <div id="hq-not-connected-indicator"
+                                 style="background-color: #dc3545; border: 2px solid #dc3545;"
+                                 class="hq-connected-sign">
                                 <h6 class="hq-connected-sign-text">NOT CONNECTED</h6>
                             </div>
-                            <div id="hq-connected-indicator" style="background-color: #28a745; border: 2px solid #28a745;" class="hq-connected-sign">
+                            <div id="hq-connected-indicator"
+                                 style="background-color: #28a745; border: 2px solid #28a745;"
+                                 class="hq-connected-sign">
                                 <h6 class="hq-connected-sign-text">CONNECTED</h6>
                             </div>
                             <style>
-                                #hq-connected-indicator{
+                                #hq-connected-indicator {
                                     display: none;
                                 }
                             </style>
@@ -95,14 +101,17 @@ class HQRentalsAdminSettings
                                     <h3 class="hq-admin-h3">General Settings</h3>
                                 </div>
                                 <div>
-                                    <?php if(!$_GET['dev']): ?>
-                                        <button id="hq-login-toogle-button"  class="hq-admin-toggle-button" type="button" aria-expanded="true">
-                                            <i id="hq-login-button-icon" class="fas <?php echo ($okAPI) ? 'fa-angle-down' : 'fa-angle-right'; ?>" aria-hidden="true"></i>
+                                    <?php if (!$_GET['dev']): ?>
+                                        <button id="hq-login-toogle-button" class="hq-admin-toggle-button" type="button"
+                                                aria-expanded="true">
+                                            <i id="hq-login-button-icon"
+                                               class="fas <?php echo ($okAPI) ? 'fa-angle-down' : 'fa-angle-right'; ?>"
+                                               aria-hidden="true"></i>
                                         </button>
                                     <?php endif; ?>
-                                    <?php if($okAPI): ?>
+                                    <?php if ($okAPI): ?>
                                         <style>
-                                            .hq-login-wrapper{
+                                            .hq-login-wrapper {
                                                 display: none;
                                             }
                                         </style>
@@ -155,7 +164,7 @@ class HQRentalsAdminSettings
                                                                name="hq-email"
                                                                id="hq-email"
                                                                spellcheck="true" autocomplete="off"
-                                                                value="<?php echo esc_attr($this->settings->getEmail()); ?>"
+                                                               value="<?php echo esc_attr($this->settings->getEmail()); ?>"
                                                         >
                                                     </div>
                                                 </div>
@@ -165,11 +174,11 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper tokens">
                                                         <input
-                                                               class="hq-admin-text-input"
-                                                               type="password"
-                                                               name="hq-password"
-                                                               id="hq-password"
-                                                               spellcheck="true" autocomplete="off"/>
+                                                                class="hq-admin-text-input"
+                                                                type="password"
+                                                                name="hq-password"
+                                                                id="hq-password"
+                                                                spellcheck="true" autocomplete="off"/>
                                                     </div>
                                                 </div>
                                                 <div class="hq-loader">
@@ -290,14 +299,15 @@ class HQRentalsAdminSettings
                                 <h3 class="hq-admin-h3">Advanced Development Settings</h3>
                             </div>
                             <div>
-                                <button id="hq-advanced-features-toogle-button" type="button" class="hq-admin-toggle-button" aria-expanded="true">
+                                <button id="hq-advanced-features-toogle-button" type="button"
+                                        class="hq-admin-toggle-button" aria-expanded="true">
                                     <i id="hq-advanced-button-icon" class="fas fa-angle-down"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="hq-advanced-section">
                             <style>
-                                .hq-advanced-section{
+                                .hq-advanced-section {
                                     display: none;
                                 }
                             </style>
@@ -543,7 +553,7 @@ class HQRentalsAdminSettings
                                        name="save" value="SAVE"
                                        class="button button-primary button-large hq-admin-submit-button">
                                 <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
-                                                                      href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
+                                                                                                 href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
                                     more information on how to set up the HQ Rentals plugin.</p>
                             </div>
                         </div>

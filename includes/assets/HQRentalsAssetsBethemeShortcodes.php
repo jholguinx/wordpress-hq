@@ -2,7 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsAssets;
 
-class HQRentalsAssetsBethemeShortcodes{
+class HQRentalsAssetsBethemeShortcodes
+{
     public function loadVehicleGridAssets()
     {
         wp_enqueue_style('hq-betheme-sc-vehicle-grid-styles');
@@ -10,6 +11,7 @@ class HQRentalsAssetsBethemeShortcodes{
         wp_enqueue_script('hq-fancy-box-js');
         wp_enqueue_script('hq-betheme-vehicle-grid-js');
     }
+
     public function loadVehicleCarouselAssets()
     {
         wp_enqueue_style('hq-owl-carousel-css');

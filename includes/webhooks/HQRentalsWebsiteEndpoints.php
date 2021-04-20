@@ -205,44 +205,47 @@ class HQRentalsWebsiteEndpoints
             return $this->resolveResponse($e, false);
         }
     }
+
     /*
      * Filter Init
      */
-    public function vehicleFilter(){
-        try{
+    public function vehicleFilter()
+    {
+        try {
             $connector = new HQRentalsApiConnector();
             $response = $connector->getVehicleClassesForm();
             $responseAvailability = $connector->getVehiclesAvailabilityDates($_GET);
-            if($response->success){
+            if ($response->success) {
                 return $this->resolveResponse((object)[
-                    'fields'    =>  $response->data[0]->columns[0],
-                    'brands'    =>  $this->brandQuery->brandsPublicInterface(),
-                    'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($responseAvailability),
-                    'locations' =>  $this->locationsQuery->locationsPublicInterface(),
+                    'fields' => $response->data[0]->columns[0],
+                    'brands' => $this->brandQuery->brandsPublicInterface(),
+                    'vehicles' => $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($responseAvailability),
+                    'locations' => $this->locationsQuery->locationsPublicInterface(),
                 ], true);
             }
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->resolveResponse($e->getMessage(), false);
         }
     }
+
     /*
      * Dates
      */
     public function dates()
     {
-        try{
+        try {
             $connector = new HQRentalsApiConnector();
             $response = $connector->getVehiclesAvailabilityDates($_GET);
-            if($response->success){
-                if($response->data->applicable_classes){
+            if ($response->success) {
+                if ($response->data->applicable_classes) {
                     return $this->resolveResponse((object)[
-                        'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($response),
+                        'vehicles' => $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($response),
                     ], true);
-                }else{
+                } else {
                     return [];
                 }
             }
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->resolveResponse($e, false);
         }
     }

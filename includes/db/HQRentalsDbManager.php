@@ -28,14 +28,14 @@ class HQRentalsDbManager
         return $this->getResults($sqlQuery);
     }
 
-    public function insertIntoTable($tableName, $columnData) : \stdClass
+    public function insertIntoTable($tableName, $columnData): \stdClass
     {
-        return $this->insert($tableName,$columnData);
+        return $this->insert($tableName, $columnData);
     }
 
-    public function updateIntoTable($tableName, $columnData, $where) : \stdClass
+    public function updateIntoTable($tableName, $columnData, $where): \stdClass
     {
-        return $this->update($tableName,$columnData, $where);
+        return $this->update($tableName, $columnData, $where);
     }
 
     private function resolveCreateStatementString($tableName, $tableContent): string
@@ -72,22 +72,23 @@ class HQRentalsDbManager
         return $this->db->query($sql);
     }
 
-    public function insert($tableName, $data) : \stdClass
+    public function insert($tableName, $data): \stdClass
     {
         $results = $this->db->insert($this->dbPrefix . $tableName, $data);
-        if($results){
-            return $this->resolveQuery(true,$results,null);
-        }else{
-            return $this->resolveQuery(false,null,'ERROR');
+        if ($results) {
+            return $this->resolveQuery(true, $results, null);
+        } else {
+            return $this->resolveQuery(false, null, 'ERROR');
         }
     }
-    public function update($tableName, $data, $where) : \stdClass
+
+    public function update($tableName, $data, $where): \stdClass
     {
         $results = $this->db->update($tableName, $data, $where);
-        if($results){
-            return $this->resolveQuery(true,$results,null);
-        }else{
-            return $this->resolveQuery(false,null,'ERROR');
+        if ($results) {
+            return $this->resolveQuery(true, $results, null);
+        } else {
+            return $this->resolveQuery(false, null, 'ERROR');
         }
     }
 
@@ -95,7 +96,6 @@ class HQRentalsDbManager
     {
 
     }
-
 
 
     public function getTablesPrefix(): string
@@ -117,14 +117,14 @@ class HQRentalsDbManager
     private function query($query)
     {
         $queryResult = $this->db->query($query);
-        if($queryResult){
+        if ($queryResult) {
             $data = $this->resolveQuery(
                 true,
                 null,
                 null,
                 $query
             );
-        }else{
+        } else {
             $data = $this->resolveQuery(
                 false,
                 null,
@@ -134,7 +134,8 @@ class HQRentalsDbManager
         }
         return $data;
     }
-    private function resolveQuery($success, $dataToReturn, $errors, $query = null) : \stdClass
+
+    private function resolveQuery($success, $dataToReturn, $errors, $query = null): \stdClass
     {
         $data = new \stdClass();
         $data->success = $success;

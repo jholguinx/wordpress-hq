@@ -35,14 +35,15 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
     {
         $this->post_id = '';
         $this->postArg = array(
-            'post_type'         => $this->priceIntervalCustomPostName,
-            'post_status'       => 'publish',
-            'posts_per_page'    =>  -1
+            'post_type' => $this->priceIntervalCustomPostName,
+            'post_status' => 'publish',
+            'posts_per_page' => -1
         );
         if (!empty($post)) {
             $this->setFromPost($post);
         }
     }
+
     public function setFromPost($post)
     {
         foreach ($this->getAllMetaTags() as $property => $metakey) {
@@ -50,6 +51,7 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
         }
         $this->post_id = $post->ID;
     }
+
     public function setIntervalRateFromApi($data, $vehicle_class_id)
     {
         $this->vehicleClassId = $vehicle_class_id;
@@ -103,7 +105,7 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
 
     public function all()
     {
-        $query = new \WP_Query( $this->postArg );
+        $query = new \WP_Query($this->postArg);
         return $query->posts;
     }
 
@@ -115,11 +117,11 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
     public function getAllMetaTags()
     {
         return array(
-            'vehicleClassId'    => $this->metaVehicleIdClass,
-            'price'             =>  $this->metaPrice,
-            'order'             =>  $this->metaOrder,
-            'endInterval'       =>  $this->metaEndInterval,
-            'startInterval'     =>  $this->metaStartInterval
+            'vehicleClassId' => $this->metaVehicleIdClass,
+            'price' => $this->metaPrice,
+            'order' => $this->metaOrder,
+            'endInterval' => $this->metaEndInterval,
+            'startInterval' => $this->metaStartInterval
         );
     }
 
@@ -128,11 +130,11 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
         return array_merge(
             $this->postArg,
             array(
-                'meta_query'    => array(
+                'meta_query' => array(
                     array(
-                        'key'       => $this->metaVehicleIdClass,
-                        'value'     => $vehicleClassID,
-                        'compare'   => '='
+                        'key' => $this->metaVehicleIdClass,
+                        'value' => $vehicleClassID,
+                        'compare' => '='
                     )
                 )
             )
@@ -147,15 +149,17 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
             $this->{$property} = get_post_meta($post->ID, $metakey, true);
         }
     }
-    public function getIntervalPricesByVehicleId($classId){
+
+    public function getIntervalPricesByVehicleId($classId)
+    {
         $args = array_merge(
             $this->postArg,
             array(
-                'meta_query'    =>  array(
+                'meta_query' => array(
                     array(
-                        'key'       =>  $this->metaVehicleIdClass,
-                        'value'     =>  $classId,
-                        'compare'   =>  '='
+                        'key' => $this->metaVehicleIdClass,
+                        'value' => $classId,
+                        'compare' => '='
                     )
                 )
             )
@@ -163,61 +167,65 @@ class HQRentalsModelsPriceInterval extends HQRentalsBaseModel
         $query = new \WP_Query($args);
         return $query->posts;
     }
+
     public function getCheapestPriceInterval($vehicleClassId)
     {
-       $args = array_merge(
-           $this->postArg,
-           array(
-               'meta_key'   =>  $this->metaPrice,
-               'orderby'    =>  'meta_value_num',
-               'order'      =>  'ASC',
-           ),
-           array(
-               'meta_query' =>  array(
-                   array(
-                       'key'       =>  $this->metaVehicleIdClass,
-                       'value'     =>  $vehicleClassId,
-                       'compare'   =>  '='
-                   )
-               )
-           )
-       );
-       $query = new \WP_Query($args);
-       return $query->posts[0];
+        $args = array_merge(
+            $this->postArg,
+            array(
+                'meta_key' => $this->metaPrice,
+                'orderby' => 'meta_value_num',
+                'order' => 'ASC',
+            ),
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->metaVehicleIdClass,
+                        'value' => $vehicleClassId,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return $query->posts[0];
     }
+
     public function getHighestPriceInterval($vehicleClassId)
     {
-       $args = array_merge(
-           $this->postArg,
-           array(
-               'meta_key'   =>  $this->metaPrice,
-               'orderby'    =>  'meta_value_num',
-               'order'      =>  'DESC',
-           ),
-           array(
-               'meta_query' =>  array(
-                   array(
-                       'key'       =>  $this->metaVehicleIdClass,
-                       'value'     =>  $vehicleClassId,
-                       'compare'   =>  '='
-                   )
-               )
-           )
-       );
-       $query = new \WP_Query($args);
-       return $query->posts[0];
+        $args = array_merge(
+            $this->postArg,
+            array(
+                'meta_key' => $this->metaPrice,
+                'orderby' => 'meta_value_num',
+                'order' => 'DESC',
+            ),
+            array(
+                'meta_query' => array(
+                    array(
+                        'key' => $this->metaVehicleIdClass,
+                        'value' => $vehicleClassId,
+                        'compare' => '='
+                    )
+                )
+            )
+        );
+        $query = new \WP_Query($args);
+        return $query->posts[0];
     }
+
     public function formatPrice($decimal = 2)
     {
-        if($this->price and $this->price !== '0.00'){
-            return number_format((float) $this->price, $decimal, '.', '');
-        }else{
+        if ($this->price and $this->price !== '0.00') {
+            return number_format((float)$this->price, $decimal, '.', '');
+        } else {
             return '';
         }
 
     }
+
     public function getPriceAsANumber()
     {
-        return (float) $this->price;
+        return (float)$this->price;
     }
 }

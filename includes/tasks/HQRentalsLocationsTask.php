@@ -36,10 +36,12 @@ class HQRentalsLocationsTask extends HQRentalsBaseTask
             }
         }
     }
+
     public function getError()
     {
         return $this->response->error;
     }
+
     public function getResponse()
     {
         return $this->response;

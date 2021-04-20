@@ -29,27 +29,29 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
     public function allVehicleClasses($order = null)
     {
         $cacheData = $this->cache->getVehicleClassesFromCache();
-        if($cacheData){
+        if ($cacheData) {
             /* Return data if Cache*/
             return $cacheData;
         }
         return $this->allVehiclesByRate();
     }
+
     public function allVehiclesWithoutOrder()
     {
         $args = $this->model->postArgs;
         $query = new \WP_Query($args);
         return $this->fillModelWithPosts($query->posts);
     }
+
     public function allVehiclesByRate()
     {
         $vehicles = $this->allVehiclesWithoutOrder();
         $option = $this->settings->isDecreasingRateOrderActive();
-        if(is_array($vehicles)){
-            usort($vehicles, function($oneVehicle, $otherVehicle) use ($option) {
-                if($option){
+        if (is_array($vehicles)) {
+            usort($vehicles, function ($oneVehicle, $otherVehicle) use ($option) {
+                if ($option) {
                     return $oneVehicle->rate()->getFormattedDailyRateAsNumber() < $otherVehicle->rate()->getFormattedDailyRateAsNumber();
-                }else{
+                } else {
                     return $oneVehicle->rate()->getFormattedDailyRateAsNumber() > $otherVehicle->rate()->getFormattedDailyRateAsNumber();
                 }
             });
@@ -66,9 +68,9 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
     {
         $args = $this->resolveQueryArray(
             array(
-                'order'     =>  'ASC',
-                'orderby'   =>  'meta_value_num',
-                'meta_key'  =>  $this->model->getOrderMetaKey(),
+                'order' => 'ASC',
+                'orderby' => 'meta_value_num',
+                'meta_key' => $this->model->getOrderMetaKey(),
             )
         );
         $query = new \WP_Query($args);
@@ -120,17 +122,17 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             array(
                 'meta_query' => array(
                     array(
-                        'key'       => 'hq_wordpress_vehicle_class_id_meta',
-                        'value'     => $hqId,
-                        'compare'   => '='
+                        'key' => 'hq_wordpress_vehicle_class_id_meta',
+                        'value' => $hqId,
+                        'compare' => '='
                     )
                 )
             )
         );
         $query = new \WP_Query($args);
-        if($query->posts[0]){
+        if ($query->posts[0]) {
             return new HQRentalsModelsVehicleClass($query->posts[0]);
-        }else{
+        } else {
             return null;
         }
     }
@@ -187,6 +189,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         }
         return $data;
     }
+
     public function getCheapestClassesFromCustomFieldAndPriceIntervals($dbColumn)
     {
         $customFieldsValues = $this->getAllDifferentsValuesFromCustomField($dbColumn);
@@ -219,6 +222,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         $query = new \WP_Query($args);
         return $this->fillModelWithPosts($query->posts);
     }
+
     public function getClassesFilterByCustomField($dbColumn, $value)
     {
         $args = $this->resolveQueryArray(
@@ -317,10 +321,10 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      * @param $posts
      * @return array
      */
-    public function fillModelWithPosts( $posts )
+    public function fillModelWithPosts($posts)
     {
         $data = [];
-        foreach ($posts as $post){
+        foreach ($posts as $post) {
             $data[] = new HQRentalsModelsVehicleClass($post);
         }
         return $data;
@@ -333,10 +337,11 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
      * @param $value
      * @return array
      */
-    public function getVehiclesIdsFromCustomField( $dbColumn, $value ){
-        $classes = $this->getVehicleClassFilterByCustomField( $dbColumn, $value );
+    public function getVehiclesIdsFromCustomField($dbColumn, $value)
+    {
+        $classes = $this->getVehicleClassFilterByCustomField($dbColumn, $value);
         $data = [];
-        foreach ($classes as $class){
+        foreach ($classes as $class) {
             $data[] = $class->id;
         }
         return $data;
@@ -359,17 +364,20 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         return $this->fillModelWithPosts($query->posts);
     }
 
-    public function vehiclesPublicInterface($brandId = null){
-        if(empty($brandId)){
+    public function vehiclesPublicInterface($brandId = null)
+    {
+        if (empty($brandId)) {
             $vehicles = $this->allVehicleClasses();
-        }else{
+        } else {
             $vehicles = $this->getVehicleClassesByBrand($brandId);
         }
-        return array_map( function($vehicle){
-                return $this->vehiclePublicInterface($vehicle);
-        }, $vehicles );
+        return array_map(function ($vehicle) {
+            return $this->vehiclePublicInterface($vehicle);
+        }, $vehicles);
     }
-    public function vehiclePublicInterface($vehicle){
+
+    public function vehiclePublicInterface($vehicle)
+    {
         return $this->parseObject(array(
             'id',
             'name',
@@ -395,20 +403,22 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             'features' => array(
                 'property_name' => 'features',
                 'values' => $vehicle->getFeaturesPublicInterface()
-             ),
+            ),
             'rate' => array(
                 'property_name' => 'rate',
                 'values' => $vehicle->getRatePublicInterface()
             ),
         ), $vehicle);
     }
+
     public function vehiclesPublicInterfaceFiltered($brandId, $customField, $customFieldValue)
     {
         $vehicles = $this->getVehiclesByBrandAndCustomField($brandId, $customField, $customFieldValue);
-        return array_map(function($vehicle) use ($brandId) {
+        return array_map(function ($vehicle) use ($brandId) {
             return $this->vehiclePublicInterface($vehicle);
         }, $vehicles);
     }
+
     public function getVehiclesByBrandAndCustomField($brandId, $customField, $customFieldValue)
     {
         $args = $this->resolveQueryArray(
@@ -431,6 +441,7 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
         $query = new \WP_Query($args);
         return $this->fillModelWithPosts($query->posts);
     }
+
     protected function resolveQueryArray(array $metaQueryArray)
     {
         return array_merge(
@@ -438,20 +449,24 @@ class HQRentalsQueriesVehicleClasses extends HQRentalsQueriesBaseClass
             $metaQueryArray
         );
     }
-    public function vehiclesPublicInterfaceFromHQDatesApi($data){
-        if($data->success){
-            if(is_array($data->data->applicable_classes)){
-                return array_map(function($vehicle) {
+
+    public function vehiclesPublicInterfaceFromHQDatesApi($data)
+    {
+        if ($data->success) {
+            if (is_array($data->data->applicable_classes)) {
+                return array_map(function ($vehicle) {
                     return $this->vehiclePublicInterfaceFromHQDatesApi($vehicle);
                 }, $data->data->applicable_classes);
-            }else{
+            } else {
                 return [];
             }
-        }else{
+        } else {
             return [];
         }
     }
-    public function vehiclePublicInterfaceFromHQDatesApi($vehicle){
+
+    public function vehiclePublicInterfaceFromHQDatesApi($vehicle)
+    {
         $data = new \stdClass();
         $model = $this->getVehicleClassBySystemId($vehicle->vehicle_class_id);
         $data->id = $vehicle->vehicle_class_id;

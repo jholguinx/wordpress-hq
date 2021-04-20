@@ -1,12 +1,15 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsApihelpers;
+
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 use HQRentalsPlugin\HQRentalsWebhooks\HQRentalsWebsiteEndpoints;
 use Unirest\Exception;
 
-class HQRentalsApihelpersAvailability{
+class HQRentalsApihelpersAvailability
+{
 
     protected static $systemFormat = 'Y-m-d H:i';
 
@@ -17,12 +20,13 @@ class HQRentalsApihelpersAvailability{
         $this->websiteEndpoints = new HQRentalsWebsiteEndpoints();
 
     }
+
     public static function getAvailability($startDate = '', $endDate = '', $brandId = '1')
     {
         $data = array(
-            'start_date'    =>  $startDate,
-            'end_date'      =>  $endDate,
-            'brand_id'      =>  $brandId
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'brand_id' => $brandId
         );
         $connector = new HQRentalsApiConnector();
         return $connector->getHQRentalsAvailability($data);
@@ -30,23 +34,24 @@ class HQRentalsApihelpersAvailability{
 
     public function getAvailabilityFromDates($data)
     {
-        try{
+        try {
             $connector = new HQRentalsApiConnector();
             $response = $connector->getVehiclesAvailabilityDates($data);
-            if($response->success){
-                if($response->data->applicable_classes){
+            if ($response->success) {
+                if ($response->data->applicable_classes) {
                     return $this->websiteEndpoints->resolveResponse((object)[
-                        'vehicles'  =>  $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($response),
+                        'vehicles' => $this->vehicleClassQuery->vehiclesPublicInterfaceFromHQDatesApi($response),
                     ], true);
-                }else{
+                } else {
                     return [];
                 }
             }
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->resolveResponse($e, false);
         }
 
     }
+
     public function getMonthlyAvailability($vehicleClassId)
     {
         $now = Carbon::now()->format("Y-m-d");
@@ -56,10 +61,10 @@ class HQRentalsApihelpersAvailability{
         $data = [
             'pick_up_location' => $location,
             'return_location' => $location,
-            'pick_up_time'      => $time,
-            'return_time'       => $time,
-            'pick_up_date'      => $now,
-            'return_date'       =>  $month
+            'pick_up_time' => $time,
+            'return_time' => $time,
+            'pick_up_date' => $now,
+            'return_date' => $month
         ];
         return $this->getAvailabilityFromDates($data);
     }

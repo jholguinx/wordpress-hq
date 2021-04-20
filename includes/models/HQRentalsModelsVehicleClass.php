@@ -14,9 +14,6 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 {
     public static $custom_fields = [];
-    /*
-     * HQ Rental Custom Post Type Configuration
-     */
     public $vehicleClassesCustomPostName = 'hqwp_veh_classes';
     public $vehicleClassesCustomPostSlug = 'vehicle-classes';
     private $tableName = 'hq_vehicle_classes';
@@ -66,10 +63,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'column_data_type' => 'LONGTEXT'
         ),
     );
-    /*
-     * HQ Rentals Vehicle Classes Data
-     * Custom Post Metas
-     */
 
     protected $metaId = 'hq_wordpress_vehicle_class_id_meta';
     protected $metaBrandId = 'hq_wordpress_vehicle_class_brand_id_meta';
@@ -82,9 +75,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     protected $metaDescriptionForWebiste = 'hq_wordpress_vehicle_class_description_for_webiste_meta';
     protected $metaForRate = 'hq_wordpress_vehicle_class_rate_meta';
     protected $metaCustomField = 'hq_wordpress_vehicle_class_custom_field_';
-    /*
-     * Object Data to Display
-     */
+
     public $id = '';
     public $postId = '';
     public $brandId = '';
@@ -159,9 +150,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
     }
 
-    /*
-     * set Vehicle Class From Api
-     */
     public function setVehicleClassFromApi($data, $customFields = null)
     {
         $this->id = $data->id;
@@ -236,9 +224,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
     }
 
-    /*
-     * Create Vehicle Class Custom Post
-     */
     public function create()
     {
         $this->postArgs = array_merge(
@@ -294,23 +279,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
     }
 
-    /*
-    * Find
-    */
-    public function find($caag_id)
-    {
-        $query = new \WP_Query($this->postArgs);
-    }
-
-    public function first()
-    {
-        // TODO: Implement first() method.
-    }
-
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
-
         return $query->posts;
     }
 
@@ -326,9 +297,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         ];
     }
 
-    /**
-     * @param $post
-     */
     public function setFromPost($post)
     {
         $this->name = $post->post_name;
@@ -387,10 +355,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         );
     }
 
-    /*
-     * Eliminar en el futuro
-     *
-     */
     public function getMetaKeysFromDescription()
     {
         global $wpdb;
@@ -611,4 +575,3 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         );
     }
 }
-

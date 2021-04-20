@@ -30,7 +30,7 @@ class HQRentalsVehicleClassesTask extends HQRentalsBaseTask {
                 HQVehicleClass::$custom_fields[] = $field->dbcolumn;
             }
         }
-        if ( $this->response->success and !empty($this->response->data)) {
+        if ( $this->response->success and !empty($this->response->data) ) {
             foreach ( $this->response->data as $vehicle_class ) {
                 $newVehicleClass = new HQVehicleClass();
                 $newVehicleClass->setVehicleClassFromApi( $vehicle_class, $customFields );

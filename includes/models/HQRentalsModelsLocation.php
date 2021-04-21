@@ -8,9 +8,6 @@ use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 class HQRentalsModelsLocation extends HQRentalsBaseModel
 {
 
-    /*
-     * Custom Post Configuration
-     */
     public $locationsCustomPostName = 'hqwp_locations';
     public $locationsCustomPostSlug = 'locations';
     private $tableName = 'hq_locations';
@@ -73,11 +70,6 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         ),
     );
 
-    /*
-     * HQ Rentals Location Data
-     * Custom Post Metas
-     */
-
     protected $metaId = 'hq_wordpress_location_id_meta';
     protected $metaBrandId = 'hq_wordpress_location_brand_id_meta';
     protected $metaName = 'hq_wordpress_location_name_meta';
@@ -94,9 +86,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     protected $metaIsActive = 'hq_wordpress_location_is_active_meta';
     protected $metaOrder = 'hq_wordpress_location_order_meta';
     protected $metaLabelForWebsites = 'hq_wordpress_location_labels_meta';
-    /*
-     * Object Data to Display
-     */
+
     public $id = '';
     public $brandId = '';
     public $name = '';
@@ -163,6 +153,10 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         if (!empty($post)) {
             $this->setFromPost($post);
         }
+    }
+    public function getTableName() : string
+    {
+        return $this->tableName;
     }
 
     public function setLocationFromApi($data)
@@ -270,11 +264,6 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         return $this->metaBrandId;
     }
 
-    public function getBrandId()
-    {
-        return $this->brandId;
-    }
-
     public function getOfficeHours($cssClass = "")
     {
         $html = '';
@@ -354,5 +343,44 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'return_allowed' => 1,
             'label_for_website_translated' => ''
         );
+    }
+    public function setFromDB($locationFromDB)
+    {
+        foreach ($this->parseDataToSaveOnDB() as $property => $dbField){
+            $this->id = $locationFromDB->id;
+            $this->name = $locationFromDB->name;
+            $this->brandId = $locationFromDB->brand_id;
+            $this->isAirport = $locationFromDB->is_airport;
+            $this->coordinates = $locationFromDB->coordinates;
+            $this->isActive = $locationFromDB->active;
+            $this->order = $locationFromDB->location_order;
+            $this->address = $locationFromDB->address;
+            $this->officeHours = $locationFromDB->open_hours;
+            $this->labelsForWebsite = json_decode($locationFromDB->label_for_website);
+        }
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getBrandId()
+    {
+        return $this->brandId;
+    }
+    public function getIsAirport()
+    {
+        return $this->isAirport;
+    }
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

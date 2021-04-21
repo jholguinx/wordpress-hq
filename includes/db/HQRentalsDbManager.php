@@ -22,7 +22,7 @@ class HQRentalsDbManager
         return $this->query($sqlQuery);
     }
 
-    public function selectFromTable($tableName, $columns, $where): \stdClass
+    public function selectFromTable($tableName, $columns, $where = null): \stdClass
     {
         $sqlQuery = $this->resolveSelectStatementString($tableName, $columns, $where);
         return $this->getResults($sqlQuery);
@@ -50,8 +50,14 @@ class HQRentalsDbManager
 
     private function resolveSelectStatementString($tableName, $tableColumns, $where): string
     {
+        $whereClause = ((!empty($where)) ? ' WHERE ' . $where : '');
+        if (is_array($tableColumns)) {
+            return $this->db->prepare(
+                'SELECT ' . join(',', $tableColumns) . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ';'
+            );
+        }
         return $this->db->prepare(
-            'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . ' WHERE ' . $where . ';'
+            'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ';'
         );
     }
 

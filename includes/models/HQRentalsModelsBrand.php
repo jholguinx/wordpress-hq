@@ -370,4 +370,21 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'payment_requests_snippet' => $this->snippetPaymentRequest,
         );
     }
+    public function setFromDB($brandFromDB)
+    {
+        $this->id = $brandFromDB->id;
+        $this->name = $brandFromDB->name;
+        $this->taxLabel = $brandFromDB->tax_label;
+        $this->websiteLink = $brandFromDB->website_link;
+        $this->uuid = $brandFromDB->uuid;
+        $this->snippetReservations = $brandFromDB->reservations_snippet;
+        $this->snippetReservationForm = $brandFromDB->reservation_form_snippet;
+        $this->snippetQuotes = $brandFromDB->quote_snippet;
+        $this->snippetPackageQuote = $brandFromDB->package_quotes_snippet;
+        $this->snippetPaymentRequest = $brandFromDB->payment_requests_snippet;
+    }
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
 }

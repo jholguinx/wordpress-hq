@@ -377,11 +377,11 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->taxLabel = $brandFromDB->tax_label;
         $this->websiteLink = $brandFromDB->website_link;
         $this->uuid = $brandFromDB->uuid;
-        $this->snippetReservations = $brandFromDB->reservations_snippet;
-        $this->snippetReservationForm = $brandFromDB->reservation_form_snippet;
-        $this->snippetQuotes = $brandFromDB->quote_snippet;
-        $this->snippetPackageQuote = $brandFromDB->package_quotes_snippet;
-        $this->snippetPaymentRequest = $brandFromDB->payment_requests_snippet;
+        $this->snippetReservations = htmlspecialchars_decode($brandFromDB->reservations_snippet);
+        $this->snippetReservationForm = htmlspecialchars_decode($brandFromDB->reservation_form_snippet);
+        $this->snippetQuotes = htmlspecialchars_decode($brandFromDB->quote_snippet);
+        $this->snippetPackageQuote = htmlspecialchars_decode($brandFromDB->package_quotes_snippet);
+        $this->snippetPaymentRequest = htmlspecialchars_decode($brandFromDB->payment_requests_snippet);
     }
     public function getTableName()
     {

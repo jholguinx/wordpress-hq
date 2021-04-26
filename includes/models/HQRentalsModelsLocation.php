@@ -346,18 +346,16 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     }
     public function setFromDB($locationFromDB)
     {
-        foreach ($this->parseDataToSaveOnDB() as $property => $dbField){
-            $this->id = $locationFromDB->id;
-            $this->name = $locationFromDB->name;
-            $this->brandId = $locationFromDB->brand_id;
-            $this->isAirport = $locationFromDB->is_airport;
-            $this->coordinates = $locationFromDB->coordinates;
-            $this->isActive = $locationFromDB->active;
-            $this->order = $locationFromDB->location_order;
-            $this->address = $locationFromDB->address;
-            $this->officeHours = $locationFromDB->open_hours;
-            $this->labelsForWebsite = json_decode($locationFromDB->label_for_website);
-        }
+        $this->id = $locationFromDB->id;
+        $this->name = $locationFromDB->name;
+        $this->brandId = $locationFromDB->brand_id;
+        $this->isAirport = $locationFromDB->is_airport;
+        $this->coordinates = $locationFromDB->coordinates;
+        $this->isActive = $locationFromDB->active;
+        $this->order = $locationFromDB->location_order;
+        $this->address = $locationFromDB->address;
+        $this->officeHours = $locationFromDB->open_hours;
+        $this->labelsForWebsite = json_decode($locationFromDB->label_for_website);
     }
     public function getId()
     {

@@ -587,4 +587,22 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'features' => json_encode($this->features)
         );
     }
+    public function setFromDB($vehicleDB)
+    {
+        $this->id = $vehicleDB->id;
+        $this->name = $vehicleDB->name;
+        $this->brandId = $vehicleDB->brand_id;
+        $this->order = $vehicleDB->vehicle_class_order;
+        $this->publicImageLink = $vehicleDB->public_image_link;
+        $this->labels = json_decode($vehicleDB->label_for_website);
+        $this->shortDescriptions = json_decode($vehicleDB->short_description_for_website);
+        $this->descriptions = json_decode($vehicleDB->description_for_website);
+        $this->images = json_decode($vehicleDB->images);
+        $this->features = json_decode($vehicleDB->features);
+        $this->rates = json_decode($vehicleDB->active_rates)[0];
+    }
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
 }

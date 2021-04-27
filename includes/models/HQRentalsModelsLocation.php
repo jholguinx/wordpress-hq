@@ -50,7 +50,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         ),
         array(
             'column_name' => 'label_for_website',
-            'column_data_type' => 'varchar(255)'
+            'column_data_type' => 'varchar(1024)'
         ),
         array(
             'column_name' => 'all_map_coordinate',
@@ -154,7 +154,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             $this->setFromPost($post);
         }
     }
-    public function getTableName() : string
+
+    public function getTableName(): string
     {
         return $this->tableName;
     }
@@ -317,9 +318,9 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
 
     public function saveOrUpdate(): void
     {
-        $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
+        $result = $this->db->selectFromTable($this->tableName, '*', 'id="' . $this->id . '"');
         if ($result->success) {
-            $resultUpdate = $this->db->updateIntoTable($this->tableName, $this->parseDataToSaveOnDB(), 'id=' . $this->id);
+            $resultUpdate = $this->db->updateIntoTable($this->tableName, $this->parseDataToSaveOnDB(), ['id' => $this->id]);
         } else {
             $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
         }
@@ -337,13 +338,14 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'location_order' => $this->order,
             'address' => $this->address,
             'open_hours' => '',
-            'label_for_website' => $this->labelsForWebsite,
+            'label_for_website' => json_encode($this->labelsForWebsite),
             'all_map_coordinate' => '',
             'pick_up_allowed' => 1,
             'return_allowed' => 1,
             'label_for_website_translated' => ''
         );
     }
+
     public function setFromDB($locationFromDB)
     {
         $this->id = $locationFromDB->id;
@@ -357,26 +359,32 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->officeHours = $locationFromDB->open_hours;
         $this->labelsForWebsite = json_decode($locationFromDB->label_for_website);
     }
+
     public function getId()
     {
         return $this->id;
     }
+
     public function getName()
     {
         return $this->name;
     }
+
     public function getBrandId()
     {
         return $this->brandId;
     }
+
     public function getIsAirport()
     {
         return $this->isAirport;
     }
+
     public function getIsActive()
     {
         return $this->isActive;
     }
+
     public function getOrder()
     {
         return $this->order;

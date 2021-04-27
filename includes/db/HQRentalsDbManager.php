@@ -80,7 +80,7 @@ class HQRentalsDbManager
 
     public function insert($tableName, $data): \stdClass
     {
-        $results = $this->db->insert($this->dbPrefix . $tableName, $data);
+        $results = $this->db->insert($this->resolveTableName($tableName), $data);
         if ($results) {
             return $this->resolveQuery(true, $results, null);
         } else {
@@ -90,11 +90,11 @@ class HQRentalsDbManager
 
     public function update($tableName, $data, $where): \stdClass
     {
-        $results = $this->db->update($tableName, $data, $where);
+        $results = $this->db->update($this->resolveTableName($tableName), $data, $where);
         if ($results) {
             return $this->resolveQuery(true, $results, null);
         } else {
-            return $this->resolveQuery(false, null, 'ERROR');
+            return $this->resolveQuery(false, $results, 'ERROR');
         }
     }
 
@@ -107,6 +107,10 @@ class HQRentalsDbManager
     public function getTablesPrefix(): string
     {
         return $this->dbPrefix;
+    }
+    public function resolveTableName($table): string
+    {
+        return $this->dbPrefix . $table;
     }
 
     public function getResults($query): \stdClass

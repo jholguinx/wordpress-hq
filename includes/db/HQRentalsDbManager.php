@@ -22,9 +22,9 @@ class HQRentalsDbManager
         return $this->query($sqlQuery);
     }
 
-    public function selectFromTable($tableName, $columns, $where = null): \stdClass
+    public function selectFromTable($tableName, $columns, $where = null, $order = null): \stdClass
     {
-        $sqlQuery = $this->resolveSelectStatementString($tableName, $columns, $where);
+        $sqlQuery = $this->resolveSelectStatementString($tableName, $columns, $where, $order);
         return $this->getResults($sqlQuery);
     }
 
@@ -48,16 +48,16 @@ class HQRentalsDbManager
         );
     }
 
-    private function resolveSelectStatementString($tableName, $tableColumns, $where): string
+    private function resolveSelectStatementString($tableName, $tableColumns, $where, $order): string
     {
         $whereClause = ((!empty($where)) ? ' WHERE ' . $where : '');
         if (is_array($tableColumns)) {
             return $this->db->prepare(
-                'SELECT ' . join(',', $tableColumns) . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ';'
+                'SELECT ' . join(',', $tableColumns) . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' .$order . ';'
             );
         }
         return $this->db->prepare(
-            'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ';'
+            'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';'
         );
     }
 

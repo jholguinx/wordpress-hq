@@ -16,7 +16,7 @@ class HQRentalsDBQueriesLocations extends HQRentalsDBBaseQueries
 
     public function allLocations()
     {
-        $query = $this->db->selectFromTable($this->model->getTableName(), '*');
+        $query = $this->db->selectFromTable($this->model->getTableName(), '*', '','ORDER BY location_order');
         if ($query->success) {
             return $this->fillObjectsFromDB($query->data);
         }

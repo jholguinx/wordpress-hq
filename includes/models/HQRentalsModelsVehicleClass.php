@@ -60,6 +60,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'column_name' => 'features',
             'column_data_type' => 'LONGTEXT'
         ),
+        array(
+            'column_name' => 'custom_fields',
+            'column_data_type' => 'LONGTEXT'
+        ),
     );
 
     protected $metaId = 'hq_wordpress_vehicle_class_id_meta';
@@ -94,6 +98,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $imageForDB = '';
     public $activeRateDB = '';
     public $featuresDB = '';
+    public $customFields = null;
 
     public function __construct($post = null)
     {
@@ -101,6 +106,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->locale = new HQRentalsLocaleHelper();
         $this->queryFeatures = new HQRentalsQueriesFeatures();
         $this->pluginSettings = new HQRentalsSettings();
+        $this->customFields = new \stdClass();
         $this->postArgs = [
             'post_type' => $this->vehicleClassesCustomPostName,
             'post_status' => 'publish',
@@ -218,6 +224,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         if (!empty($customFields->data)) {
             foreach ($customFields->data as $custom_field) {
                 $this->{$this->metaCustomField . $custom_field->dbcolumn} = $data->{$custom_field->dbcolumn};
+                $this->customFields->{$custom_field->dbcolumn} = $data->{$custom_field->dbcolumn};
             }
         }
     }
@@ -565,7 +572,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
         if ($result->success) {
-            $resultUpdate = $this->db->updateIntoTable($this->tableName, $this->parseDataToSaveOnDB(), 'id=' . $this->id);
+            $resultUpdate = $this->db->updateIntoTable($this->tableName, $this->parseDataToSaveOnDB(), array('id' => $this->id) );
         } else {
             $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
         }
@@ -573,20 +580,24 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 
     private function parseDataToSaveOnDB(): array
     {
-        return array(
-            'id' => $this->id,
-            'name' => $this->name,
-            'brand_id' => $this->brandId,
-            'public_image_link' => $this->publicImageLink,
-            'vehicle_class_order' => $this->order,
-            'label_for_website' => json_encode($this->labels),
-            'short_description_for_website' => json_encode($this->shortDescriptions),
-            'description_for_website' => json_encode($this->descriptions),
-            'images' => json_encode($this->images),
-            'active_rates' => json_encode($this->rate),
-            'features' => json_encode($this->features)
+        return array_merge(
+            array(
+                'id' => $this->id,
+                'name' => $this->name,
+                'brand_id' => $this->brandId,
+                'public_image_link' => $this->publicImageLink,
+                'vehicle_class_order' => $this->order,
+                'label_for_website' => json_encode($this->labels),
+                'short_description_for_website' => json_encode($this->shortDescriptions),
+                'description_for_website' => json_encode($this->descriptions),
+                'images' => json_encode($this->images),
+                'active_rates' => json_encode($this->rate),
+                'features' => json_encode($this->features)
+            ),
+            $this->getCustomFieldsAsArray()
         );
     }
+
     public function setFromDB($vehicleDB)
     {
         $this->id = $vehicleDB->id;
@@ -601,8 +612,13 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->features = json_decode($vehicleDB->features);
         $this->rates = json_decode($vehicleDB->active_rates)[0];
     }
-    public function getTableName()
+
+    public function getTableName() : string
     {
         return $this->tableName;
+    }
+    public function getCustomFieldsAsArray() : array
+    {
+        return (array) $this->customFields;
     }
 }

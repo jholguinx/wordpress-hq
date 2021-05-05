@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
+use HQRentalsPlugin\HQRentalsDb\HQRentalsDbBootstrapper;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass as HQVehicleClass;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 
@@ -12,6 +13,7 @@ class HQRentalsVehicleClassesTask extends HQRentalsBaseTask
     public function __construct()
     {
         $this->connector = new Connector();
+        $this->db = new HQRentalsDbBootstrapper();
     }
 
     public function tryToRefreshSettingsData()
@@ -32,6 +34,8 @@ class HQRentalsVehicleClassesTask extends HQRentalsBaseTask
                 HQVehicleClass::$custom_fields[] = $field->dbcolumn;
             }
         }
+        $fields = HQVehicleClass::$custom_fields;
+        $this->db->createColumnsForVehiclesClassesCustomFields($fields);
         if ($this->response->success and !empty($this->response->data)) {
             foreach ($this->response->data as $vehicle_class) {
                 $newVehicleClass = new HQVehicleClass();

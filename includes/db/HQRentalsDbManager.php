@@ -22,6 +22,12 @@ class HQRentalsDbManager
         return $this->query($sqlQuery);
     }
 
+    public function checkColumnOnDB($tableName, $column): \stdClass
+    {
+        $sqlQuery = $this->resolveColumnCheckStatementString($tableName, $column);
+        return $this->query($sqlQuery);
+    }
+
     public function selectFromTable($tableName, $columns, $where = null, $order = null): \stdClass
     {
         $sqlQuery = $this->resolveSelectStatementString($tableName, $columns, $where, $order);
@@ -31,6 +37,12 @@ class HQRentalsDbManager
     public function insertIntoTable($tableName, $columnData): \stdClass
     {
         return $this->insert($tableName, $columnData);
+    }
+
+    public function alterTable($tableName, $columns): \stdClass
+    {
+        $sqlQuery = $this->resolveAlterStatementString($tableName, $columns);
+        return $this->query($sqlQuery);
     }
 
     public function updateIntoTable($tableName, $columnData, $where): \stdClass
@@ -53,11 +65,33 @@ class HQRentalsDbManager
         $whereClause = ((!empty($where)) ? ' WHERE ' . $where : '');
         if (is_array($tableColumns)) {
             return $this->db->prepare(
-                'SELECT ' . join(',', $tableColumns) . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' .$order . ';'
+                'SELECT ' . join(',', $tableColumns) . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';'
             );
         }
         return $this->db->prepare(
             'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';'
+        );
+    }
+
+    private function resolveAlterStatementString($tableName, $tableColumns): string
+    {
+        $columns = '';
+        if (is_array($tableColumns)) {
+            foreach ($tableColumns as $key => $value) {
+                $columns .= $value . ' VARCHAR(255) NULL DEFAULT ""';
+                $columns .= ((int)($key + 1) == count($tableColumns)) ? "" : ",";
+            }
+        } else {
+            $columns = $tableColumns;
+        }
+        return $this->db->prepare(
+            'ALTER TABLE ' . $this->dbPrefix . $tableName . ' ADD COLUMN ' . $columns . ' VARCHAR(255) NULL DEFAULT "";'
+        );
+    }
+
+    private function resolveColumnCheckStatementString($table, $column)
+    {
+        return $this->db->prepare('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = "'. $this->dbPrefix . $table .'" AND column_name = "'. $column .'";'
         );
     }
 
@@ -92,9 +126,9 @@ class HQRentalsDbManager
     {
         $results = $this->db->update($this->resolveTableName($tableName), $data, $where);
         if ($results) {
-            return $this->resolveQuery(true, $results, null);
+            return $this->resolveQuery(true, $results, null, $data);
         } else {
-            return $this->resolveQuery(false, $results, 'ERROR');
+            return $this->resolveQuery(false, $results, 'ERROR', $data);
         }
     }
 
@@ -108,6 +142,7 @@ class HQRentalsDbManager
     {
         return $this->dbPrefix;
     }
+
     public function resolveTableName($table): string
     {
         return $this->dbPrefix . $table;
@@ -130,11 +165,12 @@ class HQRentalsDbManager
         if ($queryResult) {
             $data = $this->resolveQuery(
                 true,
-                null,
+                $queryResult,
                 null,
                 $query
             );
         } else {
+
             $data = $this->resolveQuery(
                 false,
                 null,
@@ -154,4 +190,6 @@ class HQRentalsDbManager
         $data->query = $query;
         return $data;
     }
+
+
 }

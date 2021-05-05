@@ -27,4 +27,14 @@ class HQRentalsDbBootstrapper
         $vehicleTable = $this->db->createTable($vehiclesData['table_name'], $vehiclesData['table_columns']);
         // add validation for process completed
     }
+    public function createColumnsForVehiclesClassesCustomFields($customFields)
+    {
+        $vehiclesData = $this->vehicleClassModel->getDataToCreateTable();
+        foreach ($customFields as $column){
+            $result = $this->db->checkColumnOnDB($vehiclesData['table_name'], $column);
+            if(!$result->success or !$result->data){
+                $data = $this->db->alterTable($vehiclesData['table_name'], $column);
+            }
+        }
+    }
 }

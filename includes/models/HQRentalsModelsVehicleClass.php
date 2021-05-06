@@ -12,7 +12,7 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 {
     public static $custom_fields = [];
-    private static $additionalChargeForExceededDistanceType ='additional_charge_for_exceeded_distance';
+    private static $additionalChargeForExceededDistanceType = 'additional_charge_for_exceeded_distance';
     /*
      * HQ Rental Custom Post Type Configuration
      */
@@ -251,7 +251,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->distanceLimitPerDay = $data->distance_limit_per_day;
         $this->distanceLimitPerWeek = $data->distance_limit_per_week;
         $this->distanceLimitPerMonth = $data->distance_limit_per_month;
-        if( !empty($data->additional_charge_for_exceeded_distance->id) ){
+        if (!empty($data->additional_charge_for_exceeded_distance->id)) {
             $this->additionalChargeForExceededDistance = new HQRentalsModelsVehicleCharge();
             $this->additionalChargeForExceededDistance->setVehicleChargeFromApi($data->additional_charge_for_exceeded_distance, $this->id, HQRentalsModelsVehicleClass::$additionalChargeForExceededDistanceType);
         }
@@ -315,7 +315,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaDistanceLimitPerDay, $this->distanceLimitPerDay);
         hq_update_post_meta($post_id, $this->metaDistanceLimitPerWeek, $this->distanceLimitPerWeek);
         hq_update_post_meta($post_id, $this->metaDistanceLimitPerMonth, $this->distanceLimitPerMonth);
-        if($this->additionalChargeForExceededDistance){
+        if ($this->additionalChargeForExceededDistance) {
             $this->additionalChargeForExceededDistance->setVehicleClassPostId($post_id);
             $this->additionalChargeForExceededDistance->create();
         }
@@ -618,39 +618,44 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'table_columns' => $this->columns
         );
     }
+
     public function getDistanceLimit()
     {
         return $this->distanceLimit;
     }
+
     public function getDistanceLimitDay()
     {
         return $this->distanceLimitPerDay;
     }
+
     public function getDistanceLimitePerWeek()
     {
         return $this->distanceLimitPerWeek;
     }
+
     public function getDistanceLimitPerMonth()
     {
         return $this->distanceLimitPerMonth;
     }
+
     public function getDistanceCharge()
     {
         $charge = new HQRentalsModelsVehicleCharge();
         $charge->setChargeByVehicleClassPostId($this->postId);
         return $charge;
     }
+
     public function getUUID()
     {
         return $this->uuid;
     }
-}
 
     public function saveOrUpdate(): void
     {
         $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
         if ($result->success) {
-            $resultUpdate = $this->db->updateIntoTable($this->tableName, $this->parseDataToSaveOnDB(), array('id' => $this->id) );
+            $resultUpdate = $this->db->updateIntoTable($this->tableName, $this->parseDataToSaveOnDB(), array('id' => $this->id));
         } else {
             $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
         }
@@ -691,12 +696,13 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->rates = json_decode($vehicleDB->active_rates)[0];
     }
 
-    public function getTableName() : string
+    public function getTableName(): string
     {
         return $this->tableName;
     }
-    public function getCustomFieldsAsArray() : array
+
+    public function getCustomFieldsAsArray(): array
     {
-        return (array) $this->customFields;
+        return (array)$this->customFields;
     }
 }

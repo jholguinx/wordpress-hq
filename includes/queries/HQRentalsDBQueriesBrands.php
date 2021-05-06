@@ -39,4 +39,24 @@ class HQRentalsDBQueriesBrands extends HQRentalsDBBaseQueries
         $brand->setFromDB($brandFromDB);
         return $brand;
     }
+    public function getAllBrandsIds() :array
+    {
+        $query = $this->db->selectFromTable($this->model->getTableName(), 'id', '','ORDER BY id');
+        if($query->success){
+            return array_map(function($id){
+                return (int)$id->id;
+            },$query->data) ;
+        }
+        return [];
+    }
+    public function deleteBrands($ids){
+        if(is_array($ids)){
+            foreach ($ids as $id){
+                $this->db->delete($this->model->getTableName(), $id);
+            }
+        }
+        if(is_string($ids)){
+            $this->db->delete($this->model->getTableName(), $ids);
+        }
+    }
 }

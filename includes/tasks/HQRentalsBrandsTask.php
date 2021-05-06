@@ -2,14 +2,16 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand as HQBrand;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 
 class HQRentalsBrandsTask extends HQRentalsBaseTask
 {
     public function __construct()
     {
         $this->connector = new Connector();
+        $this->query = new HQRentalsDBQueriesBrands();
     }
 
     public function tryToRefreshSettingsData()
@@ -20,12 +22,16 @@ class HQRentalsBrandsTask extends HQRentalsBaseTask
     public function setDataOnWP()
     {
         if ($this->response->success and !empty($this->response->data)) {
+            $hqIds = $this->getCurrentSystemIds($this->response->data);
             foreach ($this->response->data as $brand) {
-                $newBrand = new HQBrand();
+                $newBrand = new HQRentalsModelsBrand();
                 $newBrand->setBrandFromApi($brand);
                 $newBrand->create();
                 $newBrand->saveOrUpdate();
             }
+            $dbIds = $this->currentDBIds();
+            $idsToDelete = array_diff($dbIds, $hqIds);
+            $this->query->deleteBrands($idsToDelete);
         }
     }
 
@@ -42,5 +48,20 @@ class HQRentalsBrandsTask extends HQRentalsBaseTask
     public function getResponse()
     {
         return $this->response;
+    }
+    public function getCurrentSystemIds($brands) : array
+    {
+        if(is_array($brands)){
+            return array_map(function($item){
+                return $item->id;
+            }, $brands);
+        }else{
+            return $this->currentDBIds();
+        }
+    }
+
+    public function currentDBIds()
+    {
+        return $this->query->getAllBrandsIds();
     }
 }

@@ -4,13 +4,14 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation as HQLocation;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsFrontEnd as HQFrontEnd;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 
 class HQRentalsLocationsTask extends HQRentalsBaseTask
 {
     public function __construct()
     {
         $this->connector = new Connector();
+        $this->query = new HQRentalsDBQueriesLocations();
     }
 
     /*Get data from api and set response*/
@@ -28,12 +29,16 @@ class HQRentalsLocationsTask extends HQRentalsBaseTask
     public function setDataOnWP()
     {
         if ($this->response->success and !empty($this->response->data)) {
+            $hqIds = $this->getCurrentSystemIds($this->response->data);
             foreach ($this->response->data as $location) {
                 $newLocation = new HQLocation();
                 $newLocation->setLocationFromApi($location);
                 $newLocation->create();
                 $newLocation->saveOrUpdate();
             }
+            $dbIds = $this->currentDBIds();
+            $idsToDelete = array_diff($dbIds, $hqIds);
+            $this->query->deleteLocations($idsToDelete);
         }
     }
 
@@ -45,5 +50,19 @@ class HQRentalsLocationsTask extends HQRentalsBaseTask
     public function getResponse()
     {
         return $this->response;
+    }
+    public function getCurrentSystemIds($locations) : array
+    {
+        if(is_array($locations)){
+            return array_map(function($item){
+                return $item->id;
+            }, $locations);
+        }else{
+            return $this->currentDBIds();
+        }
+    }
+    public function currentDBIds() : array
+    {
+        return $this->query->getAllLocationsIds();
     }
 }

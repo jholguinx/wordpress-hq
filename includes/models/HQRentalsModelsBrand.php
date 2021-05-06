@@ -341,4 +341,56 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
     {
         return $this->metaUUID;
     }
+
+    public function getDataToCreateTable(): array
+    {
+        return array(
+            'table_name' => $this->tableName,
+            'table_columns' => $this->columns
+        );
+    }
+
+    public function saveOrUpdate(): void
+    {
+        $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
+        if ($result->success) {
+            $resultUpdate = $this->db->updateIntoTable($this->tableName, $this->parseDataToSaveOnDB(), array('id' => $this->id) );
+        } else {
+            $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
+        }
+    }
+
+    private function parseDataToSaveOnDB(): array
+    {
+        return array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'location_fee' => '',
+            'tax_label' => $this->taxLabel,
+            'website_link' => $this->websiteLink,
+            'uuid' => $this->uuid,
+            'reservation_form_snippet' => $this->snippetReservationForm,
+            'reservations_snippet' => $this->snippetReservations,
+            'quote_snippet' => $this->snippetQuotes,
+            'package_quotes_snippet' => $this->snippetPackageQuote,
+            'payment_requests_snippet' => $this->snippetPaymentRequest,
+        );
+    }
+    public function setFromDB($brandFromDB)
+    {
+        $this->id = $brandFromDB->id;
+        $this->name = $brandFromDB->name;
+        $this->taxLabel = $brandFromDB->tax_label;
+        $this->websiteLink = $brandFromDB->website_link;
+        $this->uuid = $brandFromDB->uuid;
+        $this->snippetReservations = htmlspecialchars_decode($brandFromDB->reservations_snippet);
+        $this->snippetReservationForm = htmlspecialchars_decode($brandFromDB->reservation_form_snippet);
+        $this->snippetQuotes = htmlspecialchars_decode($brandFromDB->quote_snippet);
+        $this->snippetPackageQuote = htmlspecialchars_decode($brandFromDB->package_quotes_snippet);
+        $this->snippetPaymentRequest = htmlspecialchars_decode($brandFromDB->payment_requests_snippet);
+    }
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
 }

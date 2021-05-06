@@ -132,9 +132,14 @@ class HQRentalsDbManager
         }
     }
 
-    public function remove()
+    public function delete($tableName, $data): \stdClass
     {
-
+        $results = $this->db->delete($this->resolveTableName($tableName), array('id' => $data));
+        if ($results) {
+            return $this->resolveQuery(true, $results, null, $data);
+        } else {
+            return $this->resolveQuery(false, $results, 'ERROR', $data);
+        }
     }
 
 

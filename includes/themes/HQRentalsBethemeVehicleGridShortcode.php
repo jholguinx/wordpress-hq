@@ -1,16 +1,19 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsThemes;
 
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsBethemeShortcodes;
 
-class HQRentalsBethemeVehicleGridShortcode{
+class HQRentalsBethemeVehicleGridShortcode
+{
     public function __construct()
     {
         $this->queryVehicles = new HQRentalsQueriesVehicleClasses();
         $this->assets = new HQRentalsAssetsBethemeShortcodes();
-        add_shortcode('hq_rentals_betheme_vehicles_grid' , array ($this, 'renderShortcode'));
+        add_shortcode('hq_rentals_betheme_vehicles_grid', array($this, 'renderShortcode'));
     }
+
     public function renderShortcode($atts = [])
     {
         $this->assets->loadVehicleGridAssets();
@@ -29,12 +32,16 @@ class HQRentalsBethemeVehicleGridShortcode{
                             <div class="item-type-label"><?php echo $vehicle->name; ?></div>
                             <div class="car-rental-list-item">
                                 <div class="item-image">
-                                    <a data-fancybox="gallery" href="<?php echo $vehicle->getFeatureImage(); ?>" title="<?php echo $vehicle->name; ?>">
-                                        <img src="<?php echo $vehicle->getFeatureImage(); ?>" alt="Mitsubishi Montero Sport or Similar ">
+                                    <a data-fancybox="gallery" href="<?php echo $vehicle->getFeatureImage(); ?>"
+                                       title="<?php echo $vehicle->name; ?>">
+                                        <img src="<?php echo $vehicle->getFeatureImage(); ?>"
+                                             alt="Mitsubishi Montero Sport or Similar ">
                                     </a>
                                 </div>
                                 <div class="item-description">
-                                    <a href="https://www.axis-cr.com/car/mitsubishi-montero-sport/" title="Show car description"><span class="item-name"><?php echo $vehicle->name; ?></span></a>
+                                    <a href="https://www.axis-cr.com/car/mitsubishi-montero-sport/"
+                                       title="Show car description"><span
+                                                class="item-name"><?php echo $vehicle->name; ?></span></a>
                                     <br>
                                     <hr>
                                 </div>
@@ -48,7 +55,8 @@ class HQRentalsBethemeVehicleGridShortcode{
                                     </ul>
                                     <div class="car-rental-buttons">
                                         <div class="car-rental-single-button">
-                                            <a href="<?php echo $atts['rent_button_url']; ?>" title="Rent">Rent</a> </div>
+                                            <a href="<?php echo $atts['rent_button_url']; ?>" title="Rent">Rent</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +66,7 @@ class HQRentalsBethemeVehicleGridShortcode{
             </div>
         </div>
         <style>
-            .car-rental-items-list .car-rental-list-item .item-more{
+            .car-rental-items-list .car-rental-list-item .item-more {
                 width: 40% !important;
             }
         </style>

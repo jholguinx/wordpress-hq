@@ -1,21 +1,68 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsModels;
 
+use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
-class HQRentalsModelsBrand extends HQRentalsBaseModel{
+class HQRentalsModelsBrand extends HQRentalsBaseModel
+{
 
-    /*
-     * Custom Post Configuration
-     */
     public $brandsCustomPostName = 'hqwp_brands';
     public $brandsCustomPostSlug = 'brands';
+    private $tableName = 'hq_brands';
+    private $columns = array(
+        array(
+            'column_name' => 'id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'name',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'location_fee',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'tax_label',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'website_link',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'uuid',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'reservation_form_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'reservations_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'quote_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'package_quotes_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'payment_requests_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+        array(
+            'column_name' => 'calendar_snippet',
+            'column_data_type' => 'varchar(1000)'
+        ),
+    );
 
-    /*
-     * HQ Rentals Brand Data
-     * Custom Post Metas
-     */
     protected $metaId = 'hq_wordpress_brand_id_meta';
     protected $metaName = 'hq_wordpress_brand_name_meta';
     protected $metaTaxLabel = 'hq_wordpress_brand_tax_label_meta';
@@ -37,9 +84,6 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     protected $metaIntegrationSnippetsCalendar = 'hq_wordpress_brand_integration_snippets_calendar';
     protected $metaIntegrationSnippetsClassCalendar = 'hq_wordpress_brand_integration_snippets_class_calendar';
 
-    /*
-     * Object Data to Display
-     */
     public $id = '';
     public $name = '';
     public $taxLabel = '';
@@ -62,67 +106,61 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     public $snippetClassCalendar = '';
     public $uuid = '';
 
-    /*
-     * Constructor
-     */
-    public function __construct( $post = null )
+    public function __construct($post = null)
     {
         $this->post_id = '';
         if ($post) {
-	        $this->systemId = $post->ID;
+            $this->systemId = $post->ID;
         }
         $this->postArgs = array(
-            'post_type'         =>  $this->brandsCustomPostName,
-            'post_status'       =>  'publish',
-            'posts_per_page'    =>  -1,
-            'order'             =>  'ASC'
+            'post_type' => $this->brandsCustomPostName,
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'order' => 'ASC'
         );
         $this->labels = array(
-            'name'               => _x( 'Brands', 'post type general name', 'your-plugin-textdomain' ),
-            'singular_name'      => _x( 'Brand', 'post type singular name', 'your-plugin-textdomain' ),
-            'menu_name'          => _x( 'Brands', 'admin menu', 'your-plugin-textdomain' ),
-            'name_admin_bar'     => _x( 'Brand', 'add new on admin bar', 'your-plugin-textdomain' ),
-            'add_new'            => _x( 'Add New', 'brand', 'your-plugin-textdomain' ),
-            'add_new_item'       => __( 'Add New Brand', 'your-plugin-textdomain' ),
-            'new_item'           => __( 'New Brand', 'your-plugin-textdomain' ),
-            'edit_item'          => __( 'Edit Brand', 'your-plugin-textdomain' ),
-            'view_item'          => __( 'View Brand', 'your-plugin-textdomain' ),
-            'all_items'          => __( 'All Brands', 'your-plugin-textdomain' ),
-            'search_items'       => __( 'Search Brands', 'your-plugin-textdomain' ),
-            'parent_item_colon'  => __( 'Parent Brands', 'your-plugin-textdomain' ),
-            'not_found'          => __( 'No brands found.', 'your-plugin-textdomain' ),
-            'not_found_in_trash' => __( 'No brands found in Trash.', 'your-plugin-textdomain' )
+            'name' => _x('Brands', 'post type general name', 'your-plugin-textdomain'),
+            'singular_name' => _x('Brand', 'post type singular name', 'your-plugin-textdomain'),
+            'menu_name' => _x('Brands', 'admin menu', 'your-plugin-textdomain'),
+            'name_admin_bar' => _x('Brand', 'add new on admin bar', 'your-plugin-textdomain'),
+            'add_new' => _x('Add New', 'brand', 'your-plugin-textdomain'),
+            'add_new_item' => __('Add New Brand', 'your-plugin-textdomain'),
+            'new_item' => __('New Brand', 'your-plugin-textdomain'),
+            'edit_item' => __('Edit Brand', 'your-plugin-textdomain'),
+            'view_item' => __('View Brand', 'your-plugin-textdomain'),
+            'all_items' => __('All Brands', 'your-plugin-textdomain'),
+            'search_items' => __('Search Brands', 'your-plugin-textdomain'),
+            'parent_item_colon' => __('Parent Brands', 'your-plugin-textdomain'),
+            'not_found' => __('No brands found.', 'your-plugin-textdomain'),
+            'not_found_in_trash' => __('No brands found in Trash.', 'your-plugin-textdomain')
         );
         $this->customPostArgs = array(
-            'labels'                    =>  $this->labels,
-            'public'                    =>  true,
-            'show_in_admin_bar'         =>  true,
-            'publicly_queryable'        =>  true,
-            'show_ui'                   =>  true,
-            'show_in_menu'              =>  true,
-            'show_in_nav_menus'         =>  true,
-            'query_var'                 =>  true,
-            'rewrite'                   =>  array( 'slug' => $this->brandsCustomPostSlug ),
-            'has_archive'               =>  true,
-            'hierarchical'              =>  false,
-            'exclude_from_search'       =>  false,
-            'menu_icon'                 => 'dashicons-store',
-            'menu_position'             => 6,
-            'capabilities'              => array(
+            'labels' => $this->labels,
+            'public' => true,
+            'show_in_admin_bar' => true,
+            'publicly_queryable' => true,
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'show_in_nav_menus' => true,
+            'query_var' => true,
+            'rewrite' => array('slug' => $this->brandsCustomPostSlug),
+            'has_archive' => true,
+            'hierarchical' => false,
+            'exclude_from_search' => false,
+            'menu_icon' => 'dashicons-store',
+            'menu_position' => 6,
+            'capabilities' => array(
                 'create_posts' => 'do_not_allow'
             )
         );
         $this->filter = new HQRentalsDataFilter();
         $this->settings = new HQRentalsSettings();
-        if(! empty( $post ) ){
+        if (!empty($post)) {
             $this->setBrandFromPost($post);
         }
+        $this->db = new HQRentalsDbManager();
     }
 
-
-    /*
-     * Set Brand from Api Data
-     */
     public function setBrandFromApi($data)
     {
         $baseUrlForCalendar = explode('packages', $data->my_package_reservations_link);
@@ -131,7 +169,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->uuid = $data->uuid;
         $this->taxLabel = $data->tax_label;
         $this->websiteLink = $data->website_link;
-        $snippetData = (array) $data->integration_snippets;
+        $snippetData = (array)$data->integration_snippets;
         $this->snippetReservations = htmlspecialchars($snippetData['reservations']);
         $this->snippetReservationForm = htmlspecialchars($snippetData['reservation-form']);
         $this->snippetQuotes = htmlspecialchars($snippetData['quotes']);
@@ -147,9 +185,9 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
             $this->publicPackagesFirstStepLink = $this->resolveBrandURL($data->public_packages_link_first_step, $urlReplacement);
             $this->publicReservationPackagesFirstStepLink = $this->resolveBrandURL($data->public_reservations_packages_link_first_step, $urlReplacement);
             $this->myReservationsLink = $this->resolveBrandURL($data->my_reservations_link, $urlReplacement);
-            $this->myPackagesReservationsLink = $this->resolveBrandURL( $data->my_package_reservations_link, $urlReplacement);
+            $this->myPackagesReservationsLink = $this->resolveBrandURL($data->my_package_reservations_link, $urlReplacement);
             $this->publicCalendarLink = $this->resolveBrandURL($baseUrlForCalendar[0] . 'calendar?brand_id=' . $data->uuid, $urlReplacement);
-        }else{
+        } else {
             $this->publicReservationsLinkFull = $data->public_reservations_link_full;
             $this->publicPackagesLinkFull = $data->public_packages_link_full;
             $this->publicReservationsFirstStepLink = $data->public_reservations_link_first_step;
@@ -169,11 +207,11 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->postArgs = array_merge(
             $this->postArgs,
             array(
-                'post_title'    =>  $this->name,
-                'post_name'     =>  $this->name
+                'post_title' => $this->name,
+                'post_name' => $this->name
             )
         );
-        $post_id = wp_insert_post( $this->postArgs );
+        $post_id = wp_insert_post($this->postArgs);
         $this->post_id = $post_id;
         hq_update_post_meta( $post_id, $this->metaId, $this->id );
         hq_update_post_meta( $post_id, $this->metaName, $this->name );
@@ -190,31 +228,27 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsQuotes, $this->snippetQuotes);
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPackageQuotes, $this->snippetPackageQuote );
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPaymentRequest, $this->snippetPaymentRequest );
-        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsCalendar, $this->snippetCalendar );
-        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsClassCalendar, $this->snippetClassCalendar );
         hq_update_post_meta( $post_id, $this->metaUUID, $this->uuid );
     }
 
-    /*
-     * Find
-     */
     public function find($brandId)
     {
         $args = array_merge(
             $this->postArgs,
             array(
-                'meta_query'  =>  array(
+                'meta_query' => array(
                     array(
-                        'key'     => $this->metaId,
-                        'value'   => $brandId,
+                        'key' => $this->metaId,
+                        'value' => $brandId,
                         'compare' => '=',
                     )
                 )
             )
         );
-        $query = new \WP_Query( $args );
+        $query = new \WP_Query($args);
         $this->setBrandFromPost($query->posts[0]->ID);
     }
+
     public function setBrandFromPost($brandPost)
     {
         $this->setBrandFromPostId($brandPost->ID);
@@ -223,7 +257,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
     public function setBrandFromPostId($id)
     {
         $this->id = get_post_meta($id, $this->metaId, true);
-        $this->name = get_post_meta( $id, $this->metaName, true);
+        $this->name = get_post_meta($id, $this->metaName, true);
         $this->taxLabel = get_post_meta($id, $this->metaTaxLabel, true);
         $this->uuid = get_post_meta($id, $this->metaUUID, true);
         $this->websiteLink = get_post_meta($id, $this->metaWebsiteLink, true);
@@ -240,76 +274,71 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel{
         $this->snippetQuotes = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsQuotes, true ) );
         $this->snippetPackageQuote = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPackageQuotes, true ) );
         $this->snippetPaymentRequest = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPaymentRequest, true ));
-        $this->snippetCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsCalendar, true ));
-        $this->snippetClassCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsClassCalendar, true ));
     }
 
-    public function first()
-    {
-        // TODO: Implement first() method.
-    }
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
         return $query->posts;
     }
+
     public function findBySystemId($hqBrandId)
     {
         $args = array_merge(
             $this->postArgs,
             array(
-                'meta_query'  =>  array(
+                'meta_query' => array(
                     array(
-                        'key'     => $this->metaId,
-                        'value'   => $hqBrandId,
+                        'key' => $this->metaId,
+                        'value' => $hqBrandId,
                         'compare' => '=',
                     )
                 )
             )
         );
-        $query = new \WP_Query( $args );
+        $query = new \WP_Query($args);
         return $this->setBrandFromPost($query->posts[0]);
     }
+
     protected function resolveBrandURL($url, $replacement)
     {
         $url_info = parse_url($url);
         $baseURL = $url_info["host"];
         return str_replace($baseURL, $replacement, $url);
     }
+
     public function getReservationSnippet()
     {
         return $this->snippetReservations;
     }
+
     public function getReservationFormSnippet()
     {
         return $this->snippetReservationForm;
     }
+
     public function getQuoteSnippet()
     {
         return $this->snippetQuotes;
     }
+
     public function getPackageSnippet()
     {
         return $this->snippetPackageQuote;
     }
+
     public function getPaymentRequestSnippet()
     {
         return $this->snippetPaymentRequest;
     }
+
     public function getUUID()
     {
         return $this->uuid;
     }
+
     public function getUUIDMetaKey()
     {
         return $this->metaUUID;
-    }
-    public function getCalendarSnippet()
-    {
-        return $this->snippetCalendar;
-    }
-    public function getClassCalendarSnippet()
-    {
-        return $this->snippetClassCalendar;
     }
 }

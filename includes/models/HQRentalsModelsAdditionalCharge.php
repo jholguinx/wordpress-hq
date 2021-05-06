@@ -1,4 +1,5 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsModels;
 
 class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
@@ -33,13 +34,13 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     public $id = '';
     public $name = '';
     public $chargeType = '';
-    public $mandatoryBrands = [  ];
+    public $mandatoryBrands = [];
     public $selectionType = '';
     public $recommended = '';
-    public $descriptions = [ ];
+    public $descriptions = [];
     public $icon = '';
-    public $labels = [ ];
-    public $shortDescriptions = [ ];
+    public $labels = [];
+    public $shortDescriptions = [];
     public $selectionRange = '';
 
 
@@ -47,43 +48,44 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     {
         $this->post_id = '';
         $this->postArgs = array(
-            'post_type'         =>  $this->additionalChargesCustomPostName,
-            'post_status'       =>  'publish',
-            'posts_per_page'    =>  -1
+            'post_type' => $this->additionalChargesCustomPostName,
+            'post_status' => 'publish',
+            'posts_per_page' => -1
         );
         /*
          * Custom Post Parameters
          */
-        if(!empty($post)){
-            $this->setFromPost( $post );
+        if (!empty($post)) {
+            $this->setFromPost($post);
         }
 
     }
+
     public function setAdditionalChargeFromApi($data)
     {
         $this->id = $data->id;
         $this->name = $data->name;
         $this->chargeType = $data->charge_type;
-        if(!empty($data->mandatory)){
-            foreach($data->mandatory as $brandId){
+        if (!empty($data->mandatory)) {
+            foreach ($data->mandatory as $brandId) {
                 $this->mandatoryBrands[] = $brandId;
             }
         }
         $this->selectionType = $data->selection_type;
         $this->hardcoded = $data->hardcoded;
         $this->recommended = $data->recommended;
-        if(!empty($data->description)){
-            foreach ( $data->description as $key => $value ){
+        if (!empty($data->description)) {
+            foreach ($data->description as $key => $value) {
                 $this->descriptions[$key] = $value;
             }
         }
-        if(!empty($data->short_description_for_website)){
-            foreach ( $data->short_description_for_website as $key => $value ){
+        if (!empty($data->short_description_for_website)) {
+            foreach ($data->short_description_for_website as $key => $value) {
                 $this->shortDescriptions[$key] = $value;
             }
         }
-        if(!empty($data->label_for_website)){
-            foreach ( $data->label_for_website as $key => $value ){
+        if (!empty($data->label_for_website)) {
+            foreach ($data->label_for_website as $key => $value) {
                 $this->labels[$key] = $value;
             }
         }
@@ -98,31 +100,31 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
         $this->postArgs = array_merge(
             $this->postArgs,
             array(
-                'post_title'    =>  $this->name,
-                'post_name'     =>  $this->name
+                'post_title' => $this->name,
+                'post_name' => $this->name
             )
         );
-        $post_id = wp_insert_post( $this->postArgs );
+        $post_id = wp_insert_post($this->postArgs);
         $this->post_id = $post_id;
-        hq_update_post_meta( $post_id, $this->metaId, $this->id );
-        hq_update_post_meta( $post_id, $this->metaName, $this->name );
-        hq_update_post_meta( $post_id, $this->metaChargeType, $this->chargeType );
-        foreach ( $this->mandatoryBrands as $value ){
-            hq_update_post_meta( $post_id, $this->metaMandatoryBrands, $value );
+        hq_update_post_meta($post_id, $this->metaId, $this->id);
+        hq_update_post_meta($post_id, $this->metaName, $this->name);
+        hq_update_post_meta($post_id, $this->metaChargeType, $this->chargeType);
+        foreach ($this->mandatoryBrands as $value) {
+            hq_update_post_meta($post_id, $this->metaMandatoryBrands, $value);
         }
-        hq_update_post_meta( $post_id, $this->metaSelectionType, $this->selectionType );
-        hq_update_post_meta( $post_id, $this->metaHardcoded, $this->hardcoded );
-        foreach ( $this->descriptions as $key => $value ){
-            hq_update_post_meta( $post_id, $this->metaDescription . '_' . $key, $value );
+        hq_update_post_meta($post_id, $this->metaSelectionType, $this->selectionType);
+        hq_update_post_meta($post_id, $this->metaHardcoded, $this->hardcoded);
+        foreach ($this->descriptions as $key => $value) {
+            hq_update_post_meta($post_id, $this->metaDescription . '_' . $key, $value);
         }
-        hq_update_post_meta( $post_id, $this->metaIcon, $this->icon );
-        foreach( $this->labels as $key => $value ){
-            hq_update_post_meta( $post_id, $this->metaLabelForWebsite . '_' . $key, $value );
+        hq_update_post_meta($post_id, $this->metaIcon, $this->icon);
+        foreach ($this->labels as $key => $value) {
+            hq_update_post_meta($post_id, $this->metaLabelForWebsite . '_' . $key, $value);
         }
-        foreach( $this->shortDescriptions as $key => $value ){
-            hq_update_post_meta( $post_id, $this->metaShortDescription . '_' . $key, $value );
+        foreach ($this->shortDescriptions as $key => $value) {
+            hq_update_post_meta($post_id, $this->metaShortDescription . '_' . $key, $value);
         }
-        hq_update_post_meta( $post_id, $this->metaSelectionRange, $this->selectionRange );
+        hq_update_post_meta($post_id, $this->metaSelectionRange, $this->selectionRange);
     }
 
     /*
@@ -130,23 +132,26 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
      */
     public function find($caag_id)
     {
-        $query = new \WP_Query( $this->postArgs );
+        $query = new \WP_Query($this->postArgs);
     }
 
     public function first()
     {
         // TODO: Implement first() method.
     }
+
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
         return $query->posts;
     }
+
     public function set($data)
     {
-        if($this->filter->isPost($data)){
+        if ($this->filter->isPost($data)) {
 
-        }else{}
+        } else {
+        }
         //$metas =
     }
 
@@ -162,6 +167,7 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
             ARRAY_N
         );
     }
+
     public function getMetaKeysFromShortDescription()
     {
         global $wpdb;
@@ -174,6 +180,7 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
             ARRAY_N
         );
     }
+
     /*
      * Eliminar en el futuro
      *
@@ -194,47 +201,48 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
     public function getAllMetaTags()
     {
         return array(
-            'id'                =>  $this->metaId,
-            'name'              =>  $this->metaName,
-            'chargeType'        =>  $this->metaChargeType,
-            'mandatoryBrands'   =>  $this->metaMandatoryBrands,
-            'selectionType'     =>  $this->metaSelectionType,
-            'hardcoded'         =>  $this->metaHardcoded,
-            'recommended'       =>  $this->metaRecommended,
-            'descriptions'      =>  $this->metaDescription,
-            'icon'              =>  $this->metaIcon,
-            'labels'            =>  $this->metaLabelForWebsite,
-            'shortDescriptions' =>  $this->metaShortDescription,
-            'selectionRange'    =>  $this->metaSelectionRange
+            'id' => $this->metaId,
+            'name' => $this->metaName,
+            'chargeType' => $this->metaChargeType,
+            'mandatoryBrands' => $this->metaMandatoryBrands,
+            'selectionType' => $this->metaSelectionType,
+            'hardcoded' => $this->metaHardcoded,
+            'recommended' => $this->metaRecommended,
+            'descriptions' => $this->metaDescription,
+            'icon' => $this->metaIcon,
+            'labels' => $this->metaLabelForWebsite,
+            'shortDescriptions' => $this->metaShortDescription,
+            'selectionRange' => $this->metaSelectionRange
         );
     }
+
     public function setFromPost($post)
     {
         $labelsMetaKeys = $this->getMetaKeysFromLabel();
         $shortDescriptionKeys = $this->getMetaKeysFromShortDescription();
         $descriptionsKeys = $this->getMetaKeysFromDescription();
-        foreach ($this->getAllMetaTags() as $property => $metakey)
-        {
-            if (! in_array($property, ['labels', 'shortDescriptions', 'descriptions']) ) {
-                $this->{$property} = get_post_meta( $post->ID, $metakey, true );
+        foreach ($this->getAllMetaTags() as $property => $metakey) {
+            if (!in_array($property, ['labels', 'shortDescriptions', 'descriptions'])) {
+                $this->{$property} = get_post_meta($post->ID, $metakey, true);
             }
         }
         /*
          * Languages
          */
-        foreach ($labelsMetaKeys as $key => $value){
+        foreach ($labelsMetaKeys as $key => $value) {
             $metakey = explode('_', $value[0]);
-            $this->labels[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+            $this->labels[end($metakey)] = get_post_meta($post->ID, $value[0], true);
         }
-        foreach ($shortDescriptionKeys as $key => $value){
+        foreach ($shortDescriptionKeys as $key => $value) {
             $metakey = explode('_', $value[0]);
-            $this->shortDescription[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+            $this->shortDescription[end($metakey)] = get_post_meta($post->ID, $value[0], true);
         }
-        foreach ($descriptionsKeys as $key => $value){
+        foreach ($descriptionsKeys as $key => $value) {
             $metakey = explode('_', $value[0]);
-            $this->description[end($metakey)] = get_post_meta( $post->ID, $value[0], true );
+            $this->description[end($metakey)] = get_post_meta($post->ID, $value[0], true);
         }
     }
+
     public function getAllAdditionalChargesPosts()
     {
         $query = new \WP_Query($this->postArgs);

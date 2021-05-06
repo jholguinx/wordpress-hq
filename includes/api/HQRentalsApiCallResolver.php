@@ -19,20 +19,21 @@ class HQRentalsApiCallResolver
 
     public function resolveErrorMessageFromResponse($wpResponse)
     {
-        if(is_wp_error($wpResponse)){
+        if (is_wp_error($wpResponse)) {
             return $wpResponse->get_error_message();
-        }else{
+        } else {
             $errorResponse = json_decode($wpResponse['body']);
             return $errorResponse->errors->error_message;
         }
     }
+
     public function isErrorOnApiInteraction($responseWP)
     {
-        if(is_wp_error($responseWP)){
+        if (is_wp_error($responseWP)) {
             return true;
         }
         $responseData = json_decode($responseWP['body']);
-        if($responseData->errors){
+        if ($responseData->errors) {
             return true;
         }
         return false;
@@ -218,9 +219,10 @@ class HQRentalsApiCallResolver
         if ($this->isErrorOnApiInteraction($response)) {
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
-            return new HQRentalsApiResponse(null, true, HQRentalsTransformersSettings::transformDataFromApi(json_decode($response['body'])->data) );
+            return new HQRentalsApiResponse(null, true, HQRentalsTransformersSettings::transformDataFromApi(json_decode($response['body'])->data));
         }
     }
+
     public function resolveGoogleAutocomplete($response)
     {
         if (is_wp_error($response)) {
@@ -229,6 +231,7 @@ class HQRentalsApiCallResolver
             return new HQRentalsApiResponse(null, true, HQRentalsTransformersGoogle::transformGoogleAutocompleteData(json_decode($response['body'])));
         }
     }
+
     public function resolveGooglePlaceDetails($response)
     {
         if (is_wp_error($response)) {
@@ -237,6 +240,7 @@ class HQRentalsApiCallResolver
             return new HQRentalsApiResponse(null, true, HQRentalsTransformersGoogle::transformGooglePlaceData(json_decode($response['body'])));
         }
     }
+
     public function resolveActivation($response)
     {
         if (is_wp_error($response)) {
@@ -245,10 +249,11 @@ class HQRentalsApiCallResolver
             return new HQRentalsApiResponse(null, true, json_decode($response['body']));
         }
     }
+
     public function resolveApiCallForAuth($response)
     {
         if (is_wp_error($response)) {
-            return new HQRentalsApiResponse( $this->resolveErrorMessageFromResponse($response), false, null);
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
             return new HQRentalsApiResponse(null, true, json_decode($response['body']));
         }

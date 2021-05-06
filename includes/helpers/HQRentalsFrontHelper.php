@@ -50,17 +50,20 @@ class HQRentalsFrontHelper
     {
         return (empty($getData[$paramName])) ? '' : ('?' . $paramName . '=' . $getData[$paramName]);
     }
+
     public function resolveUrlOnQuotes($baseUrl, $quoteId)
     {
-        return $baseUrl .'public/car-rental/reservations/step3'. $quoteId;
+        return $baseUrl . 'public/car-rental/reservations/step3' . $quoteId;
     }
+
     public function resolveUrlOnPayments($baseUrl, $paymentId)
     {
-        return $baseUrl . 'public/car-rental/all-payments/'. $paymentId . '/request/resolve';
+        return $baseUrl . 'public/car-rental/all-payments/' . $paymentId . '/request/resolve';
     }
-    public function filterElementsBYId($array , $itemId)
+
+    public function filterElementsBYId($array, $itemId)
     {
-        return array_values(array_filter($array, function ($car) use ($itemId){
+        return array_values(array_filter($array, function ($car) use ($itemId) {
             return (string)$car->id == (string)$itemId;
         }))[0];
     }

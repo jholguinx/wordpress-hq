@@ -5,10 +5,12 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsAdditionalCharge as HQCharge;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 
-class HQRentalsAdditionalChargesTask extends HQRentalsBaseTask {
-	public function __construct() {
-		$this->connector = new Connector();
-	}
+class HQRentalsAdditionalChargesTask extends HQRentalsBaseTask
+{
+    public function __construct()
+    {
+        $this->connector = new Connector();
+    }
 
     /*Get data from api and set response*/
     public function tryToRefreshSettingsData()
@@ -25,18 +27,20 @@ class HQRentalsAdditionalChargesTask extends HQRentalsBaseTask {
     /*Populate WP Database*/
     public function setDataOnWP()
     {
-        if ( $this->response->success and !empty($this->response->data)) {
-            foreach ( $this->response->data as $additionalCharge ) {
+        if ($this->response->success and !empty($this->response->data)) {
+            foreach ($this->response->data as $additionalCharge) {
                 $newCharge = new HQCharge();
-                $newCharge->setAdditionalChargeFromApi( $additionalCharge );
+                $newCharge->setAdditionalChargeFromApi($additionalCharge);
                 $newCharge->create();
             }
         }
     }
+
     public function getError()
     {
         return $this->response->error;
     }
+
     public function getResponse()
     {
         return $this->response;

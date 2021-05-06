@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsModels;
+
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 
@@ -77,6 +78,7 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     {
         $query = new \WP_Query($this->postArgs);
     }
+
     /*
      * Return All Posts
      */
@@ -97,11 +99,11 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     public function getAllMetaTags()
     {
         return array(
-            'vehicleClassId'        => $this->metaVehicleClassId,
-            'label'                 => $this->metaLabel,
-            'icon'                  => $this->metaIcon,
-            'label_for_website'     => $this->metaLabelForWebsite,
-            'order'                 => $this->metaOrder
+            'vehicleClassId' => $this->metaVehicleClassId,
+            'label' => $this->metaLabel,
+            'icon' => $this->metaIcon,
+            'label_for_website' => $this->metaLabelForWebsite,
+            'order' => $this->metaOrder
         );
     }
 
@@ -109,23 +111,28 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
     {
         return HQRentalsFrontHelper::resolveFontAwesomeIcon($this->icon);
     }
-    public function getLabelForWebsite( $override = false, $lang = 'en' )
+
+    public function getLabelForWebsite($override = false, $lang = 'en')
     {
-        if($override){
+        if ($override) {
             return $this->label_for_website;
         }
-        if($this->locale->language === "zh"){
+        if ($this->locale->language === "zh") {
             return $this->label_for_website->{"zh-Hans"};
         }
-        return $this->label_for_website->{explode('_',get_locale())[0]};
+        return $this->label_for_website->{explode('_', get_locale())[0]};
     }
-    public function getLabelsForWebsite(){
+
+    public function getLabelsForWebsite()
+    {
         return $this->label_for_website;
     }
+
     public function getOrderMetaKey()
     {
         return $this->metaOrder;
     }
+
     public function getVehicleClassIdMetaKey()
     {
         return $this->metaVehicleClassId;

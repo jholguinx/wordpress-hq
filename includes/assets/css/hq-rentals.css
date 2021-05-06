@@ -3,21 +3,21 @@
  */
 
 
-
-#hq-rental-iframe{
+#hq-rental-iframe {
     width: 1px;
     min-width: 100%;
     border: none;
     min-height: 600px;
 }
-#hq-rentals-integration-iframe{
+
+#hq-rentals-integration-iframe {
     width: 100%;
 }
 
 /*
  * Setting Page Styles
  */
-.caag-notice-wp{
+.caag-notice-wp {
     margin: 5px 0 5px;
     padding-bottom: 15px;
 }

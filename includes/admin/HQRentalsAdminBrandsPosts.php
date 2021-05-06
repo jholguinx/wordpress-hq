@@ -16,11 +16,11 @@ class HQRentalsAdminBrandsPosts
     public function addNewColumnsOnBrandAdminScreen($defaults)
     {
         return array(
-            'title'                     => 'Name',
-            'reservation_form_snippet'  => 'Reservation Form Snippet',
-            'reservation_snippet'       => 'Reservation Snippet',
-            'vehicle_class_calendar'    => 'Vehicle Class Calendar',
-            'date'                      => 'Date',
+            'title' => 'Name',
+            'reservation_form_snippet' => 'Reservation Form Snippet',
+            'reservation_snippet' => 'Reservation Snippet',
+            'vehicle_class_calendar' => 'Vehicle Class Calendar',
+            'date' => 'Date',
         );
     }
 
@@ -43,6 +43,7 @@ class HQRentalsAdminBrandsPosts
                 break;
         }
     }
+
     public function resolveShortcode($shortcodeContent)
     {
         ?>
@@ -53,10 +54,12 @@ class HQRentalsAdminBrandsPosts
         </div>
         <?php
     }
+
     public function resolveReservationFormSnippetShortcode($brand)
     {
         $this->resolveShortcode('[hq_rentals_reservation_form_snippet id=' . $brand->id . ']');
     }
+
     public function resolveReservationSnippetShortcode($brand)
     {
         $this->resolveShortcode('[hq_rentals_reservations_snippet id=' . $brand->id . ']');
@@ -72,6 +75,7 @@ class HQRentalsAdminBrandsPosts
         </div>
         <?php
     }
+
     public function resolveSnippets($brand)
     {
         ob_start();
@@ -79,38 +83,38 @@ class HQRentalsAdminBrandsPosts
         <div>
             <div class="theme-actions">
                 <a
-                    id="hq-snippet-reservation-button"
-                    class="hq-snippets"
-                    data-brand="<?php echo $brand->id; ?>"
-                    data-snippet="reservation"
-                    data-tippy-content="Click to copy"
-                    >Reservations</a>
+                        id="hq-snippet-reservation-button"
+                        class="hq-snippets"
+                        data-brand="<?php echo $brand->id; ?>"
+                        data-snippet="reservation"
+                        data-tippy-content="Click to copy"
+                >Reservations</a>
             </div>
             <div class="theme-actions">
                 <a
-                    id="hq-snippet-reservation-button"
-                    class="hq-snippets"
-                    data-brand="<?php echo $brand->id; ?>"
-                    data-snippet="package"
-                    data-tippy-content="Click to copy"
+                        id="hq-snippet-reservation-button"
+                        class="hq-snippets"
+                        data-brand="<?php echo $brand->id; ?>"
+                        data-snippet="package"
+                        data-tippy-content="Click to copy"
                 >Package Quotes</a>
             </div>
             <div class="theme-actions">
                 <a
-                    id="hq-snippet-reservation-button"
-                    class="hq-snippets"
-                    data-brand="<?php echo $brand->id; ?>"
-                    data-snippet="payment"
-                    data-tippy-content="Click to copy"
+                        id="hq-snippet-reservation-button"
+                        class="hq-snippets"
+                        data-brand="<?php echo $brand->id; ?>"
+                        data-snippet="payment"
+                        data-tippy-content="Click to copy"
                 >Payment Requests</a>
             </div>
             <div class="theme-actions">
                 <a
-                    id="hq-snippet-reservation-button"
-                    class="hq-snippets"
-                    data-brand="<?php echo $brand->id; ?>"
-                    data-snippet="quote"
-                    data-tippy-content="Click to copy"
+                        id="hq-snippet-reservation-button"
+                        class="hq-snippets"
+                        data-brand="<?php echo $brand->id; ?>"
+                        data-snippet="quote"
+                        data-tippy-content="Click to copy"
                 >Quotes</a>
             </div>
         </div>

@@ -8,9 +8,9 @@ class HQRentalsWorkspotCronjob
     {
         $this->scheduler = new HQRentalsWorkspotScheduler();
         add_filter('cron_schedules', array($this, 'addCustomScheduleTime'));
-        add_action( 'refreshAllHQDataJob', array($this, 'refreshAllData') );
-        if ( ! wp_next_scheduled( 'refreshAllHQDataJob' ) ) {
-            wp_schedule_event( time(), 'daily', 'refreshAllHQDataJob' );
+        add_action('refreshAllHQDataJob', array($this, 'refreshAllData'));
+        if (!wp_next_scheduled('refreshAllHQDataJob')) {
+            wp_schedule_event(time(), 'daily', 'refreshAllHQDataJob');
         }
     }
 

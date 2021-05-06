@@ -32,13 +32,16 @@ class HQRentalsLocationsTask extends HQRentalsBaseTask
                 $newLocation = new HQLocation();
                 $newLocation->setLocationFromApi($location);
                 $newLocation->create();
+                $newLocation->saveOrUpdate();
             }
         }
     }
+
     public function getError()
     {
         return $this->response->error;
     }
+
     public function getResponse()
     {
         return $this->response;

@@ -3,7 +3,8 @@
 namespace HQRentalsPlugin\HQRentalsTasks;
 
 
-abstract class HQRentalsBaseTask{
+abstract class HQRentalsBaseTask
+{
     protected $response;
 
     /*Get data from api and set response*/

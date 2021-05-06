@@ -2,12 +2,13 @@
 
 namespace HQRentalsPlugin\HQRentalsTransformers;
 
-class HQRentalsTransformersGoogle{
+class HQRentalsTransformersGoogle
+{
 
     public static function transformGoogleAutocompleteData($googleData)
     {
         $predictions = $googleData->predictions;
-        return array_map(function($prediction){
+        return array_map(function ($prediction) {
             return HQRentalsTransformersGoogle::transformPrediction($prediction);
         }, $predictions);
 
@@ -22,6 +23,7 @@ class HQRentalsTransformersGoogle{
         $newPrediction->reference = $prediction->reference;
         return $newPrediction;
     }
+
     public static function transformGooglePlaceData($googlePlaceData)
     {
         $place = $googlePlaceData->result;

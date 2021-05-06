@@ -1,4 +1,5 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsHelpers;
 
 class HQRentalsDataFilter

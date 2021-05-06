@@ -22,7 +22,7 @@ class HQRentalsTransformersBrands extends HQRentalsTransformersBase
 
     public static function transformDataFromApi($apiData)
     {
-        return HQRentalsTransformersBrands::resolveArrayOfObjects($apiData, function($apiSingleBrand){
+        return HQRentalsTransformersBrands::resolveArrayOfObjects($apiData, function ($apiSingleBrand) {
             return HQRentalsTransformersBrands::transformSingleBrand($apiSingleBrand);
         });
     }

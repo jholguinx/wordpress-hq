@@ -15,21 +15,22 @@ class HQRentalsDatesHelper
     }
 
     public $systemSupportedDatesFormats = array(
-        'iso'   => 'Y-m-d H:i',
-        'eu'    => 'd-m-Y H:i',
-        'eu_a'  => 'd-m-Y g:iA',
-        'us'    => 'm/d/Y g:iA',
-        'us_c'  => 'm/d/Y g:i',
-        'us_G'  => 'm/d/Y G:i',
-        've'    => 'd/m/Y g:iA',
-        'int'   => 'd.m.Y g:iA',
-        'id'    => 'd-M-Y g:iA',
-        'ch'    => 'd.m.Y H:i',
-        'ch_c'  => 'Y-m-d G:i',
-        'wp_c'  => 'd-m-Y G:i',
-        'wp_d'  => 'Y-m-d G:i',
-        'wp_e'  => 'd/m/Y G:i'
+        'iso' => 'Y-m-d H:i',
+        'eu' => 'd-m-Y H:i',
+        'eu_a' => 'd-m-Y g:iA',
+        'us' => 'm/d/Y g:iA',
+        'us_c' => 'm/d/Y g:i',
+        'us_G' => 'm/d/Y G:i',
+        've' => 'd/m/Y g:iA',
+        'int' => 'd.m.Y g:iA',
+        'id' => 'd-M-Y g:iA',
+        'ch' => 'd.m.Y H:i',
+        'ch_c' => 'Y-m-d G:i',
+        'wp_c' => 'd-m-Y G:i',
+        'wp_d' => 'Y-m-d G:i',
+        'wp_e' => 'd/m/Y G:i'
     );
+
     public function getHtmlOptionForFrontEndDateSettingOption()
     {
         $html = '';
@@ -43,6 +44,7 @@ class HQRentalsDatesHelper
         }
         return $html;
     }
+
     public function getHtmlOptionForSystemDateSettingOption()
     {
         $html = '';
@@ -56,10 +58,12 @@ class HQRentalsDatesHelper
         }
         return $html;
     }
+
     public function getDateFormatFromCarbon($format)
     {
         return explode(' ', $format)[0];
     }
+
     public function getTimeFormatFromCarbon($format)
     {
         return explode(' ', $format)[1];

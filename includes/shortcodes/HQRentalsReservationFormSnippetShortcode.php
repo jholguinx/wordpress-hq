@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsShortcodes;
+
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 
 
@@ -17,10 +18,10 @@ class HQRentalsReservationFormSnippetShortcode extends HQBaseShortcode
     {
         $atts = shortcode_atts(
             array(
-                'id'                =>  '1',
-                'forced_locale'     =>  '',
-                'reservation_page'  =>  '',
-                'layout'            =>  ''
+                'id' => '1',
+                'forced_locale' => '',
+                'reservation_page' => '',
+                'layout' => ''
             ), $atts);
         ob_start();
         $brand = new HQRentalsModelsBrand();

@@ -53,7 +53,7 @@ class HQElementorActions
         $redirect = get_site_url(null, $this->getValueFromRecord($record, 'booking_page'));
         $ajax_handler->is_success = true;
         $ajax_handler->data = [
-            'redirect_url' => $redirect.'?'.http_build_query($parameters),
+            'redirect_url' => $redirect . '?' . http_build_query($parameters),
         ];
     }
 

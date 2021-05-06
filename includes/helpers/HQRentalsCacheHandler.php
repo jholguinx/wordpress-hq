@@ -11,6 +11,7 @@ class HQRentalsCacheHandler
     {
         return set_transient($key, $data, HQRentalsCacheHandler::$cacheExpiration);
     }
+
     public function addVehiclesClassesToCache()
     {
         $query = new HQRentalsCacheableData();
@@ -20,11 +21,12 @@ class HQRentalsCacheHandler
     public function getDataFromCache($key)
     {
         $cacheData = get_transient($key);
-        if($cacheData){
+        if ($cacheData) {
             return $cacheData;
         }
         return false;
     }
+
     public function getVehicleClassesFromCache()
     {
         return $this->getDataFromCache(HQRentalsCacheHandler::$vehiclesQueryKey);

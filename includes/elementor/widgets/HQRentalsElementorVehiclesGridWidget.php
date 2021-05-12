@@ -1,10 +1,16 @@
 <?php
 
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
-
-
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use \HQRentalsPlugin\HQRentalsElementor\HQRentalsElementorAssetsHandler;
 class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
 {
+    public function __construct($data = [], $args = null)
+    {
+        parent::__construct($data, $args);
+        $this->linkURL = '';
+    }
+
     public function get_name()
     {
         return 'Vehicles Grid';
@@ -12,17 +18,17 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
 
     public function get_title()
     {
-        return __('Vehicles Grid - HQ Rental Software', 'hq-wordpress');
+        return __('Vehicles Grid', 'hq-wordpress');
     }
 
     public function get_icon()
     {
-        return 'fab fa-wpforms';
+        return 'fas fa-grip-horizontal';
     }
 
     public function get_categories()
     {
-        return ['general'];
+        return ['hq-rental-software'];
     }
 
     protected function _register_controls()
@@ -39,19 +45,19 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
         $this->add_control(
             'url',
             [
-                'label' => __('URL to Reservation Widget Page', 'hq-wordpress-circle'),
+                'label' => __('URL to Reservation Widget Page', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'input_type' => 'string',
-                'placeholder' => __('https://your-link.com', 'hq-wordpress-circle'),
+                'placeholder' => __('https://your-link.com', 'hq-wordpress'),
             ]
         );
         $this->add_control(
             'title',
             [
-                'label' => __('Title', 'hq-wordpress-circle'),
+                'label' => __('Title', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'input_type' => 'string',
-                'placeholder' => __('HQ RENTAL', 'hq-wordpress-circle'),
+                'placeholder' => __('HQ RENTAL', 'hq-wordpress'),
             ]
         );
         $this->end_controls_section();
@@ -61,15 +67,14 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $url = $settings['url'];
-        $title = $settings['title'];
-        $subtitle = $settings['sub_title'];
-        $titleHtml = empty($title) ? "" : '<b>' . $title . '</b> - ';
-        $subtitleHtml = empty($subtitle) ? "" : $subtitle;
+        $this->linkURL = $settings['url'];
         $vehiclesCode = $this->getVehiclesHTML();
+        HQRentalsElementorAssetsHandler::loadVehicleGridAssets();
         echo '
-                <link rel="stylesheet" href="https://d1l2ym829b5nxo.cloudfront.net/public/assets/css/fonts.f38c3bc5.css">
-    <link rel="stylesheet" href="https://caag.caagcrm.com/assets/font-awesome">
+    '. HQRentalsAssetsHandler::getHQFontAwesome() .' 
+    <div class="elementor-widget-container hq-elementor-title">
+			<h2 class="elementor-heading-title elementor-size-default">. ' . $settings["title"] . ' .</h2>		
+    </div>
     <div class="elementor-element elementor-widget elementor-widget-html">
         <div class="elementor-widget-container">
             <!-- Begin Loop -->
@@ -78,61 +83,6 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
            
         </div>
     </div>
-    <style>
-    #hq-smart-vehicle-grid-row{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        margin-bottom: 50px;
-    }
-    .vehicle-card{
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        margin-left: 1.5%;
-        margin-right: 1.5%;
-    }
-    .hq-elementor-li{
-        list-style-type: none;
-        padding: 0px;
-        margin: 0px;
-    }
-    .hq-elementor-li .feature-label{
-        margin-left: 20px;
-    }
-    .hq-list-image-wrapper{
-        justify-content: center;
-        display: flex;
-        align-items: center;
-    }
-    .hq-list-label-wrapper{
-        justify-content: flex-start;
-        display: flex;
-        align-items: flex-start;
-    }
-    .list-feature-listing{
-        margin-left: 0px;
-        margin-bottom: 20px;
-    }
-    @media only screen and (max-width: 767px) {
-      .vehicle-card{
-        width: 100%;
-        }
-        #hq-smart-vehicle-grid-row{
-        display: flex;
-        flex-direction: column;
-       
-        }
-    }
-    @media only screen and (max-width: 1024px) and (min-width: 768px) {
-      body {
-        background-color: lightblue;
-      }
-    }
-    </style>
         ';
     }
 
@@ -186,7 +136,7 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
                     " . $this->resolveVehicleFeaturesHTML($vehicle) . "
                     <div class='bottom-info'>
                         <p><span>{$vehicle->getActiveRate()->daily_rate->amount_for_display}</span>/Day</p>
-                        <a class='small-cta' href='RESERVATION-PAGE'>RENT NOW</a>
+                        <a class='hq-list-rent-button' href='{$this->linkURL}'>RENT NOW</a>
                     </div>
                 </div>
         ";

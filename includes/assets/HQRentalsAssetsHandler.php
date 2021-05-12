@@ -211,8 +211,6 @@ class HQRentalsAssetsHandler
 
     public function gCarVehicleFilterAssets()
     {
-        //issues with theme styles
-        //wp_enqueue_style('r-suite-default-style');
         wp_enqueue_script('hg-gcar-vehicle-filter-js');
     }
 

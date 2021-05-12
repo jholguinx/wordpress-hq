@@ -112,6 +112,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $imageForDB = '';
     public $activeRateDB = '';
     public $featuresDB = '';
+    public $imagesDB = '';
     public $customFields = null;
     public $distanceLimit = '';
     public $distanceLimitPerDay = '';
@@ -208,7 +209,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 $this->images[] = $newImage;
             }
         }
-
+        $this->featuresDB = $data->features;
+        $this->activeRateDB = $data->activeRates;
+        $this->imagesDB = $data->images;
         foreach ($data->features as $feature) {
             $newFeature = new HQRentalsModelsFeature();
             $newFeature->setFeatureFromApi($this->id, $feature);
@@ -319,6 +322,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             $this->additionalChargeForExceededDistance->setVehicleClassPostId($post_id);
             $this->additionalChargeForExceededDistance->create();
         }
+        /*DBs*/
+
 
     }
 
@@ -673,9 +678,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 'label_for_website' => json_encode($this->labels),
                 'short_description_for_website' => json_encode($this->shortDescriptions),
                 'description_for_website' => json_encode($this->descriptions),
-                'images' => json_encode($this->images),
-                'active_rates' => json_encode($this->rate),
-                'features' => json_encode($this->features)
+                'images' => json_encode($this->imagesDB),
+                'active_rates' => json_encode($this->activeRateDB),
+                'features' => json_encode($this->featuresDB)
             ),
             $this->getCustomFieldsAsArray()
         );
@@ -704,5 +709,32 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getCustomFieldsAsArray(): array
     {
         return (array)$this->customFields;
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getPublicImage()
+    {
+        return $this->publicImageLink;
+    }
+    public function getLabelForWebsite()
+    {
+        if (!empty($forcedLocale)) {
+            return $this->labels[$forcedLocale];
+        } else {
+            if ($this->locale->language === "zh") {
+                return $this->labels->{"zh-Hans"};
+            }
+            return $this->labels->{$this->locale->language};
+        }
+    }
+    public function getVehicleFeatures()
+    {
+        return $this->features;
+    }
+    public function getActiveRate()
+    {
+        return $this->rates;
     }
 }

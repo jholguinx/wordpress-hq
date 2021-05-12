@@ -19,9 +19,11 @@ if (!defined('WPINC')) {
     die;
 }
 
+
+
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsBootstrap\HQRentalsBootstrapPlugin;
-
+use HQRentalsPlugin\HQRentalsElementor\HQRentalsElementorBoostrap;
 $bootstraper = new HQRentalsBootstrapPlugin();
 
 /*
@@ -35,3 +37,5 @@ function hq_rentals_wordpress_activation()
 }
 
 register_activation_hook(__FILE__, __NAMESPACE__ . '\hq_rentals_wordpress_activation');
+$elementor = new HQRentalsElementorBoostrap();
+$elementor->boostrapElementor();

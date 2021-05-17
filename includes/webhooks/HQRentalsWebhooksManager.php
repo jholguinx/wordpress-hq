@@ -3,8 +3,13 @@
 namespace HQRentalsPlugin\HQRentalsWebhooks;
 
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsBrandsTask;
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsLocationsTask;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsUpgrader;
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsVehicleClassesTask;
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsVehicleTypesTask;
+use PHPMailer\PHPMailer\Exception;
 
 class HQRentalsWebhooksManager
 {
@@ -12,6 +17,10 @@ class HQRentalsWebhooksManager
     public function __construct()
     {
         $this->scheduler = new HQRentalsScheduler();
+        $this->locationTask = new HQRentalsLocationsTask();
+        $this->brandsTask = new HQRentalsBrandsTask();
+        $this->vehiclesTask = new HQRentalsVehicleClassesTask();
+        $this->typeTaks = new HQRentalsVehicleTypesTask();
         $this->upgrader = new HQRentalsUpgrader();
         $this->connector = new HQRentalsApiConnector();
         add_action('rest_api_init', array($this, 'setCustomAPIRoutes'));
@@ -31,9 +40,25 @@ class HQRentalsWebhooksManager
             'methods' => 'POST',
             'callback' => array($this, 'firePluginUpgrade'),
         ));
+        // admin auth
         register_rest_route('hqrentals', '/plugin/auth', array(
             'methods' => 'GET',
             'callback' => array($this, 'loginUser'),
+        ));
+        //baseURl/wp-json/hqrentals/update/locations
+        register_rest_route('hqrentals', '/update/locations', array(
+            'methods' => 'POST',
+            'callback' => array($this, 'fireUpdateLocations'),
+        ));
+        //baseURl/wp-json/hqrentals/update/brands
+        register_rest_route('hqrentals', '/update/brands', array(
+            'methods' => 'POST',
+            'callback' => array($this, 'fireUpdateBrands'),
+        ));
+        //baseURl/wp-json/hqrentals/update/vehicle-classes
+        register_rest_route('hqrentals', '/update/vehicle-classes', array(
+            'methods' => 'POST',
+            'callback' => array($this, 'fireUpdateVehicleClasses'),
         ));
     }
 
@@ -46,6 +71,35 @@ class HQRentalsWebhooksManager
 
         return $response;
     }
+
+    public function fireUpdateLocations(\WP_REST_Request $request)
+    {
+        $response = new \WP_REST_Response();
+        $this->scheduler->deleteHQSelectedData("hqwp_locations", "hq_wordpress_location");
+        return $this->resolveSingleUpdate($response, $this->locationTask->setDataWPLocations());
+    }
+    public function fireUpdateBrands(\WP_REST_Request $request)
+    {
+        $response = new \WP_REST_Response();
+        $this->scheduler->deleteHQSelectedData("hqwp_brands", "hq_wordpress_brand");
+        return $this->resolveSingleUpdate($response, $this->brandsTask->setDataWPBrands());
+    }
+    public function fireUpdateVehicleClasses(\WP_REST_Request $request)
+    {
+        $response = new \WP_REST_Response();
+        $this->scheduler->deleteHQSelectedData("hqwp_veh_classes", "hq_wordpress_vehicle_class");
+        $this->scheduler->deleteHQSelectedData("hqwp_active_rate", "hq_wordpress_active_rate");
+        $this->scheduler->deleteHQSelectedData("hqwp_charges", "hq_wordpress_additional_charge");
+        $this->scheduler->deleteHQSelectedData("hqwp_feature", "hq_wordpress_feature");
+        $this->scheduler->deleteHQSelectedData("hqwp_price_inter", "hq_wordpress_price_interval");
+        $this->scheduler->deleteHQSelectedData("hqwp_veh_charge", "hq_wordpress_vehicle_charge");
+        $this->scheduler->deleteHQSelectedData("hqwp_veh_cfields", "hq_wordpress_custom_field");
+        $this->scheduler->deleteHQSelectedData("hqwp_vehicle_image", "hq_wordpress_vehicle_image");
+        $this->scheduler->deleteHQSelectedData("hqwp_vehicle_types", "hq_wordpress_vehicle_image");
+        $this->typeTaks->setDataWPVehicleTypes();
+        return $this->resolveSingleUpdate($response, $this->vehiclesTask->setDataWPVehicleClasses());
+    }
+
 
     public function firePluginUpgrade()
     {
@@ -80,5 +134,20 @@ class HQRentalsWebhooksManager
         $result = $this->connector->login($email, $password);
         $this->scheduler->refreshHQData();
         return $result;
+    }
+    private function resolveSingleUpdate($response, $updateResponse)
+    {
+        try {
+            if($updateResponse->success){
+                $response->status = 200;
+                return $response;
+            }else{
+                $response->status = 500;
+                return $response;
+            }
+        }catch (\Exception $exception){
+            $response->status = 500;
+            return $response;
+        }
     }
 }

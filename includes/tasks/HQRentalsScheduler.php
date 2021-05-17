@@ -76,6 +76,13 @@ class HQRentalsScheduler
         $wpdb->get_results("delete from " . $dbPrefix . "posts where post_type like 'hqwp%';");
         $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like 'hq_wordpress%';");
     }
+    public function deleteHQSelectedData($postLike, $metaLike)
+    {
+        global $wpdb;
+        $dbPrefix = $wpdb->prefix;
+        $wpdb->get_results("delete from " . $dbPrefix . "posts where post_type like '" . $postLike ."%';");
+        $wpdb->get_results("delete from " . $dbPrefix . "postmeta where meta_key like '" . $metaLike ."%';");
+    }
 
     public function isWorkspotWebsite()
     {

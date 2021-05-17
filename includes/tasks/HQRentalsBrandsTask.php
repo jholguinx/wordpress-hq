@@ -64,4 +64,10 @@ class HQRentalsBrandsTask extends HQRentalsBaseTask
     {
         return $this->query->getAllBrandsIds();
     }
+    public function setDataWPBrands()
+    {
+        $this->response = $this->connector->getHQRentalsBrands();
+        $this->setDataOnWP();
+        return $this->response;
+    }
 }

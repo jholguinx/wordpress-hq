@@ -76,4 +76,10 @@ class HQRentalsVehicleClassesTask extends HQRentalsBaseTask
     {
         return $this->query->getAllVehicleClassesIds();
     }
+    public function setDataWPVehicleClasses()
+    {
+        $this->response = $this->connector->getHQRentalsVehicleClasses();
+        $this->setDataOnWP();
+        return $this->response;
+    }
 }

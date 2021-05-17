@@ -65,4 +65,10 @@ class HQRentalsLocationsTask extends HQRentalsBaseTask
     {
         return $this->query->getAllLocationsIds();
     }
+    public function setDataWPLocations()
+    {
+        $this->response = $this->connector->getHQRentalsLocations();
+        $this->setDataOnWP();
+        return $this->response;
+    }
 }

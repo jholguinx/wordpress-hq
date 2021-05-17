@@ -302,10 +302,14 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
 
     public function getLabelForWebsite($override = false, $lang = 'en')
     {
-        if ($override) {
-            return $this->labelsForWebsite[$lang];
+        try {
+            if($override){
+                return $this->labelsForWebsite[$lang];
+            }
+            return $this->labelsForWebsite->{explode('_',get_locale())[0]};
+        }catch (\Exception $e){
+            return '';
         }
-        return $this->labelsForWebsite->{explode('_', get_locale())[0]};
     }
 
     public function getDataToCreateTable(): array

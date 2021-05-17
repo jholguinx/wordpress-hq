@@ -19,11 +19,13 @@ class HQRentalsWebhooksManager
 
     public function setCustomApiRoutes()
     {
+        //update plugin data - global
         //baseURl/wp-json/hqrentals/update/
         register_rest_route('hqrentals', '/update/', array(
             'methods' => 'POST',
             'callback' => array($this, 'fireUpdate'),
         ));
+        //upgrade plugin remotely
         //baseURl/wp-json/hqrentals/plugin/upgrade/
         register_rest_route('hqrentals', '/plugin/upgrade/', array(
             'methods' => 'POST',

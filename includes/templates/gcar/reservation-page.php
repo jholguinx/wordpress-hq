@@ -16,7 +16,7 @@ get_template_part("/templates/template-header");
         <!-- Begin main content -->
         <div class="inner_wrapper">
 
-            <?php if ( have_posts()) while ( have_posts() ) : the_post(); ?>
+            <?php if (have_posts()) while (have_posts()) : the_post(); ?>
 
                 <div class="page_content_wrapper"><?php the_content(); ?></div>
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsCustomPosts;
+
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation;
@@ -19,20 +20,21 @@ class HQRentalsCustomPostsHandler
         $this->vehicleTypes = new HQRentalsModelsVehicleType();
         $this->workspotLocations = new HQRentalsModelsWorkspotLocation();
         $this->workspotRegions = new HQRentalsModelsWorkspotRegion();
-        add_action( 'init', array( $this, 'registerAllHQRentalsCustomPosts' ) );
+        add_action('init', array($this, 'registerAllHQRentalsCustomPosts'));
     }
+
     /*
      * Register all Custom Posts
      */
     public function registerAllHQRentalsCustomPosts()
     {
-        register_post_type( $this->brands->brandsCustomPostName , $this->brands->customPostArgs );
-        register_post_type( $this->locations->locationsCustomPostName, $this->locations->customPostArgs );
-        register_post_type( $this->vehicleClasses->vehicleClassesCustomPostName, $this->vehicleClasses->customPostArgs );
-        register_post_type( $this->vehicleTypes->vehicleTypeCustomPostName, $this->vehicleTypes->customPostArgs );
-        if($this->currentWebsite == 'http://workspot.test' or $this->currentWebsite == 'https://workspot.nu'){
-            register_post_type( $this->workspotLocations->locationsCustomPostName, $this->workspotLocations->customPostArgs );
-            register_post_type( $this->workspotRegions->regionsCustomPostName, $this->workspotRegions->customPostArgs );
+        register_post_type($this->brands->brandsCustomPostName, $this->brands->customPostArgs);
+        register_post_type($this->locations->locationsCustomPostName, $this->locations->customPostArgs);
+        register_post_type($this->vehicleClasses->vehicleClassesCustomPostName, $this->vehicleClasses->customPostArgs);
+        register_post_type($this->vehicleTypes->vehicleTypeCustomPostName, $this->vehicleTypes->customPostArgs);
+        if ($this->currentWebsite == 'http://workspot.test' or $this->currentWebsite == 'https://workspot.nu') {
+            register_post_type($this->workspotLocations->locationsCustomPostName, $this->workspotLocations->customPostArgs);
+            register_post_type($this->workspotRegions->regionsCustomPostName, $this->workspotRegions->customPostArgs);
         }
     }
 }

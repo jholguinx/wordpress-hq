@@ -1,21 +1,21 @@
 var locations = hqWorkspotLocations;
-locations.forEach( function (location){
-    if(location.hasFloors === '1'){
+locations.forEach(function (location) {
+    if (location.hasFloors === '1') {
         var floors = Object.entries(location.floors);
-        floors.forEach(function(floor){
-            if(floor[1].map){
+        floors.forEach(function (floor) {
+            if (floor[1].map) {
                 setFloor(floor[1], location);
             }
         });
     }
-    if(location.mapUUID){
+    if (location.mapUUID) {
         setMaps(location);
     }
 });
 
 
-function setMaps(location){
-    (function($){
+function setMaps(location) {
+    (function ($) {
         //Set Static Map Image layer
 
         var extent = [0, 0, 1980, 1080];
@@ -86,19 +86,19 @@ function setMaps(location){
         var rentedSpotsLayer = initLayer();
         var availableFromSpotsLayer = initLayer();
         var optionSpotsLayer = initLayer();
-        if(location.available_spots_coordinates_Json){
+        if (location.available_spots_coordinates_Json) {
             availableSpotsLayer = addVector(location.available_spots_coordinates_Json, 'available');
         }
-        if(location.unavailable_spots_coordinates_Json){
+        if (location.unavailable_spots_coordinates_Json) {
             unavailableSpotsLayer = addVector(location.unavailable_spots_coordinates_Json, 'unavailable');
         }
-        if(location.rented_spots_coordinates_Json){
+        if (location.rented_spots_coordinates_Json) {
             rentedSpotsLayer = addVector(location.rented_spots_coordinates_Json, 'rented');
         }
-        if(location.available_from_spots_coordinates_Json){
+        if (location.available_from_spots_coordinates_Json) {
             availableFromSpotsLayer = addVector(location.available_from_spots_coordinates_Json, 'available');
         }
-        if(location.option_spots_coordinates_Json){
+        if (location.option_spots_coordinates_Json) {
             optionSpotsLayer = addVector(location.option_spots_coordinates_Json, 'option');
         }
 
@@ -153,9 +153,9 @@ function setMaps(location){
             if (feature) {
                 var feature_data;
                 if (feature.get('status') == 'Algemene Ruimte') {
-                    if(!(feature.get('website_product') === null)){
+                    if (!(feature.get('website_product') === null)) {
                         feature_data = '<p style="margin-bottom: 3px;"> ' + feature.get('website_product') + ' </p>';
-                    }else{
+                    } else {
                         feature_data = '<p style="margin-bottom: 3px;"></p>';
                     }
                 } else {
@@ -246,13 +246,13 @@ function setMaps(location){
             var pixel = map.getEventPixel(evt.originalEvent);
             redirectToFeaturePage(pixel, evt.coordinate);
         });
-        $('.ol-viewport').css('overflow','visible');
+        $('.ol-viewport').css('overflow', 'visible');
     })(jQuery);
 }
 
 
-function setFloor(floor, location){
-    (function($){
+function setFloor(floor, location) {
+    (function ($) {
         //Set Static Map Image layer
 
         var extent = [0, 0, 1980, 1080];
@@ -323,29 +323,29 @@ function setFloor(floor, location){
         var rentedSpotsLayer = initLayer();
         var availableFromSpotsLayer = initLayer();
         var optionSpotsLayer = initLayer();
-        if(floor.available_spots_coordinates_Json){
+        if (floor.available_spots_coordinates_Json) {
             availableSpotsLayer = addVector(floor.available_spots_coordinates_Json, 'available');
         }
-        if(floor.unavailable_spots_coordinates_Json){
+        if (floor.unavailable_spots_coordinates_Json) {
             unavailableSpotsLayer = addVector(floor.unavailable_spots_coordinates_Json, 'unavailable');
         }
-        if(floor.rented_spots_coordinates_Json){
+        if (floor.rented_spots_coordinates_Json) {
             rentedSpotsLayer = addVector(floor.rented_spots_coordinates_Json, 'rented');
         }
-        if(floor.available_from_spots_coordinates_Json){
+        if (floor.available_from_spots_coordinates_Json) {
             availableFromSpotsLayer = addVector(floor.available_from_spots_coordinates_Json, 'available');
         }
-        if(floor.option_spots_coordinates_Json){
+        if (floor.option_spots_coordinates_Json) {
             optionSpotsLayer = addVector(floor.option_spots_coordinates_Json, 'option');
         }
 
         //Set everything for popups
-        if(location.id == 20){
-            var container = document.getElementById('popup-' + location.id + '-' + floor['f1403'] );
+        if (location.id == 20) {
+            var container = document.getElementById('popup-' + location.id + '-' + floor['f1403']);
             var content = document.getElementById('popup-content-' + location.id + '-' + floor['f1403']);
             var target = 'location-map-' + location.id + '-' + floor['f1403'];
-        }else{
-            var container = document.getElementById('popup-' + location.id + '-' + floor['f1601'] );
+        } else {
+            var container = document.getElementById('popup-' + location.id + '-' + floor['f1601']);
             var content = document.getElementById('popup-content-' + location.id + '-' + floor['f1601']);
             var target = 'location-map-' + location.id + '-' + floor['f1601'];
         }
@@ -398,9 +398,9 @@ function setFloor(floor, location){
             if (feature) {
                 var feature_data;
                 if (feature.get('status') == 'Algemene Ruimte') {
-                    if(!(feature.get('website_product') === null)){
+                    if (!(feature.get('website_product') === null)) {
                         feature_data = '<p style="margin-bottom: 3px;"> ' + feature.get('website_product') + ' </p>';
-                    }else{
+                    } else {
                         feature_data = '<p style="margin-bottom: 3px;"></p>';
                     }
                 } else {
@@ -495,6 +495,6 @@ function setFloor(floor, location){
             var pixel = map.getEventPixel(evt.originalEvent);
             redirectToFeaturePage(pixel, evt.coordinate);
         });
-        $('.ol-viewport').css('overflow','visible');
+        $('.ol-viewport').css('overflow', 'visible');
     })(jQuery);
 }

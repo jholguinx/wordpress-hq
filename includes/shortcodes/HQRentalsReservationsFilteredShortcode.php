@@ -22,8 +22,9 @@ class HQRentalsReservationsFilteredShortcode
         $this->queryVehicles = new HQRentalsQueriesVehicleClasses();
         $this->queryStringHelper = new HQRentalsQueryStringHelper();
         $this->frontHelper = new HQRentalsFrontHelper();
-        add_shortcode('hq_rentals_reservation_filter' , array ($this, 'reservationsShortcode'));
+        add_shortcode('hq_rentals_reservation_filter', array($this, 'reservationsShortcode'));
     }
+
     public function reservationsShortcode($atts = [])
     {
         global $is_safari;
@@ -32,7 +33,7 @@ class HQRentalsReservationsFilteredShortcode
                 'id' => '1',
                 'forced_locale' => 'en',
                 'new' => 'true',
-                'autoscroll'        =>  'true'
+                'autoscroll' => 'true'
             )
             , $atts, 'hq_rentals_reservations');
         $post_data = $_POST;
@@ -50,33 +51,37 @@ class HQRentalsReservationsFilteredShortcode
                 }
                 $queryStringVehicle = $this->queryStringHelper->getVehicleClassesQueryString($post_data['vehicle_class_filter_db_column'], $post_data['vehicle_classes_filter']);
                 ?>
-                <form action="<?php echo esc_url($this->brand->publicReservationsFirstStepLink . $queryStringVehicle); ?>" method="POST"
+                <form action="<?php echo esc_url($this->brand->publicReservationsFirstStepLink . $queryStringVehicle); ?>"
+                      method="POST"
                       target="hq-rental-iframe" id="hq-form-init">
                     <input type="hidden" name="pick_up_date"
-                           value="<?php echo esc_attr($pickup_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
+                           value="<?php echo esc_attr($pickup_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>"/>
                     <input type="hidden" name="pick_up_time"
-                           value="<?php echo esc_attr($pickup_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
+                           value="<?php echo esc_attr($pickup_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>"/>
                     <input type="hidden" name="return_date"
-                           value="<?php echo esc_attr($return_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
+                           value="<?php echo esc_attr($return_date->format($this->dateHelper->getDateFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>"/>
                     <input type="hidden" name="return_time"
-                           value="<?php echo esc_attr($return_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>" />
+                           value="<?php echo esc_attr($return_date->format($this->dateHelper->getTimeFormatFromCarbon($this->settings->getHQDatetimeFormat()))); ?>"/>
                     <?php foreach ($post_data as $key => $value): ?>
                         <?php if ($key !== 'pick_up_date' and $key !== 'pick_up_time' and $key !== 'return_date' and $key !== 'return_time' and $key != 'vehicle_class_filter_db_column' and $key != 'vehicle_classes_filter'): ?>
-                            <input type="hidden" name="<?php echo esc_attr($key); ?>" value="<?php echo esc_attr($value); ?>" />
+                            <input type="hidden" name="<?php echo esc_attr($key); ?>"
+                                   value="<?php echo esc_attr($value); ?>"/>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <input type="submit" style="display: none;">
                 </form>
                 <iframe id="hq-rental-iframe" name="hq-rental-iframe"
-                        src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>" scrolling="no"></iframe>
+                        src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>"
+                        scrolling="no"></iframe>
                 <?php
                 $this->assets->getFirstStepShortcodeAssets();
-                if($atts['autoscroll'] == 'true'){
+                if ($atts['autoscroll'] == 'true') {
                     $this->assets->loadScrollScript();
                 }
             } else {
                 ?>
-                <iframe id="hq-rental-iframe" name="hq-rental-iframe" src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>"
+                <iframe id="hq-rental-iframe" name="hq-rental-iframe"
+                        src="<?php echo esc_url($this->brand->publicReservationsLinkFull . '&' . 'forced_locale=' . $atts['forced_locale']); ?>"
                         scrolling="no"></iframe>
                 <?php
             }

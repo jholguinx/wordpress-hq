@@ -2,24 +2,73 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 
+use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 
+
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 {
     public static $custom_fields = [];
-    private static $additionalChargeForExceededDistanceType ='additional_charge_for_exceeded_distance';
+    private static $additionalChargeForExceededDistanceType = 'additional_charge_for_exceeded_distance';
     /*
      * HQ Rental Custom Post Type Configuration
      */
     public $vehicleClassesCustomPostName = 'hqwp_veh_classes';
     public $vehicleClassesCustomPostSlug = 'vehicle-classes';
-    /*
-     * HQ Rentals Vehicle Classes Data
-     * Custom Post Metas
-     */
+    private $tableName = 'hq_vehicle_classes';
+    private $columns = array(
+        array(
+            'column_name' => 'id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'name',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'public_image_link',
+            'column_data_type' => 'varchar(255)'
+        ),
+        array(
+            'column_name' => 'vehicle_class_order',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'brand_id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'label_for_website',
+            'column_data_type' => 'LONGTEXT'
+        ),
+        array(
+            'column_name' => 'short_description_for_website',
+            'column_data_type' => 'LONGTEXT'
+        ),
+        array(
+            'column_name' => 'description_for_website',
+            'column_data_type' => 'LONGTEXT'
+        ),
+        array(
+            'column_name' => 'images',
+            'column_data_type' => 'LONGTEXT'
+        ),
+        array(
+            'column_name' => 'active_rates',
+            'column_data_type' => 'LONGTEXT'
+        ),
+        array(
+            'column_name' => 'features',
+            'column_data_type' => 'LONGTEXT'
+        ),
+        array(
+            'column_name' => 'custom_fields',
+            'column_data_type' => 'LONGTEXT'
+        ),
+    );
 
     protected $metaId = 'hq_wordpress_vehicle_class_id_meta';
     protected $metaBrandId = 'hq_wordpress_vehicle_class_brand_id_meta';
@@ -33,6 +82,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     protected $metaDescriptionForWebiste = 'hq_wordpress_vehicle_class_description_for_webiste_meta';
     protected $metaForRate = 'hq_wordpress_vehicle_class_rate_meta';
     protected $metaCustomField = 'hq_wordpress_vehicle_class_custom_field_';
+
     protected $metaDistanceLimit = 'hq_wordpress_vehicle_class_distance_limit_meta';
     protected $metaDistanceLimitPerDay = 'hq_wordpress_vehicle_class_distance_limit_per_day_meta';
     protected $metaDistanceLimitPerWeek = 'hq_wordpress_vehicle_class_distance_limit_per_week_meta';
@@ -59,6 +109,11 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $permalink = '';
     public $priceIntervals = [];
     public $rates = [];
+    public $imageForDB = '';
+    public $activeRateDB = '';
+    public $featuresDB = '';
+    public $imagesDB = '';
+    public $customFields = null;
     public $distanceLimit = '';
     public $distanceLimitPerDay = '';
     public $distanceLimitPerWeek = '';
@@ -71,6 +126,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->locale = new HQRentalsLocaleHelper();
         $this->queryFeatures = new HQRentalsQueriesFeatures();
         $this->pluginSettings = new HQRentalsSettings();
+        $this->customFields = new \stdClass();
         $this->postArgs = [
             'post_type' => $this->vehicleClassesCustomPostName,
             'post_status' => 'publish',
@@ -93,33 +149,31 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'not_found_in_trash' => __('No vehicles classes found in Trash.', 'your-plugin-textdomain'),
         ];
         $this->customPostArgs = [
-            'labels'                    => $this->labelsPost,
-            'public'                    => true,
-            'show_in_admin_bar'         => true,
-            'publicly_queryable'        => true,
-            'show_ui'                   => true,
-            'show_in_menu'              => true,
-            'show_in_nav_menus'         => true,
-            'query_var'                 => true,
-            'rewrite'                   => ['slug' => $this->vehicleClassesCustomPostSlug],
-            'has_archive'               => true,
-            'hierarchical'              => false,
-            'exclude_from_search'       => false,
-            'menu_icon'                 => 'dashicons-thumbs-up',
-            'menu_position'             => 8,
-            'supports'                  => ['title', 'editor', 'thumbnail', 'excerpt'],
-            'capabilities'              => [
+            'labels' => $this->labelsPost,
+            'public' => true,
+            'show_in_admin_bar' => true,
+            'publicly_queryable' => true,
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'show_in_nav_menus' => true,
+            'query_var' => true,
+            'rewrite' => ['slug' => $this->vehicleClassesCustomPostSlug],
+            'has_archive' => true,
+            'hierarchical' => false,
+            'exclude_from_search' => false,
+            'menu_icon' => 'dashicons-thumbs-up',
+            'menu_position' => 8,
+            'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
+            'capabilities' => [
                 'create_posts' => 'do_not_allow',
             ],
         ];
+        $this->db = new HQRentalsDbManager();
         if (!empty($post)) {
             $this->setFromPost($post);
         }
     }
 
-    /*
-     * set Vehicle Class From Api
-     */
     public function setVehicleClassFromApi($data, $customFields = null)
     {
         $this->id = $data->id;
@@ -128,44 +182,49 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->uuid = $data->uuid;
         $this->order = $data->order;
         $this->publicImageLink = $data->public_image_link;
-        if(!empty($data->label_for_website)){
+        $this->imageForDB = '';
+        $this->activeRateDB = '';
+        $this->featuresDB = '';
+        if (!empty($data->label_for_website)) {
             foreach ($data->label_for_website as $key => $label) {
                 $this->labels[$key] = $label;
             }
         }
 
-        if(!empty($data->short_description_for_website)){
+        if (!empty($data->short_description_for_website)) {
             foreach ($data->short_description_for_website as $key => $shortDescription) {
                 $this->shortDescriptions[$key] = $shortDescription;
             }
         }
-        if(!empty($data->description_for_website)){
+        if (!empty($data->description_for_website)) {
             foreach ($data->description_for_website as $key => $description) {
                 $this->descriptions[$key] = $description;
             }
         }
 
-        if(!empty($data->images)){
+        if (!empty($data->images)) {
             foreach ($data->images as $image) {
                 $newImage = new HQRentalsModelsVehicleClassImage();
                 $newImage->setVehicleClassImageFromApi($this->id, $image);
                 $this->images[] = $newImage;
             }
         }
-
+        $this->featuresDB = $data->features;
+        $this->activeRateDB = $data->activeRates;
+        $this->imagesDB = $data->images;
         foreach ($data->features as $feature) {
             $newFeature = new HQRentalsModelsFeature();
             $newFeature->setFeatureFromApi($this->id, $feature);
             $this->features[] = $newFeature;
         }
         if (!empty($data->activeRates)) {
-            foreach ($data->activeRates as $rate){
+            foreach ($data->activeRates as $rate) {
                 $newRate = new HQRentalsModelsActiveRate();
                 $newRate->setActiveRateFromApi($this->id, $rate);
                 $this->rate[] = $newRate;
-                if(is_array($rate->price_intervals)){
-                    if(count($rate->price_intervals) > 0){
-                        foreach ($rate->price_intervals as $price){
+                if (is_array($rate->price_intervals)) {
+                    if (count($rate->price_intervals) > 0) {
+                        foreach ($rate->price_intervals as $price) {
                             $newPrice = new HQRentalsModelsPriceInterval();
                             $newPrice->setIntervalRateFromApi($price, $this->id);
                             $this->priceIntervals[] = $newPrice;
@@ -179,30 +238,28 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                     if (isset($data->activeRates[0]->{$type})) {
                         $rate = $data->activeRates[0]->{$type};
                         $this->rates[$type] = $rate->amount_for_display;
-                        $this->rates[$type.'_no_format'] = $rate->amount;
-                        $this->rates[$type.'_no_decimals'] = $rate->currency_icon.round($rate->amount, 0);
+                        $this->rates[$type . '_no_format'] = $rate->amount;
+                        $this->rates[$type . '_no_decimals'] = $rate->currency_icon . round($rate->amount, 0);
                     }
                 }
             }
         }
-        if(!empty($customFields->data)){
+        if (!empty($customFields->data)) {
             foreach ($customFields->data as $custom_field) {
                 $this->{$this->metaCustomField . $custom_field->dbcolumn} = $data->{$custom_field->dbcolumn};
+                $this->customFields->{$custom_field->dbcolumn} = $data->{$custom_field->dbcolumn};
             }
         }
         $this->distanceLimit = $data->distance_limit;
         $this->distanceLimitPerDay = $data->distance_limit_per_day;
         $this->distanceLimitPerWeek = $data->distance_limit_per_week;
         $this->distanceLimitPerMonth = $data->distance_limit_per_month;
-        if( !empty($data->additional_charge_for_exceeded_distance->id) ){
+        if (!empty($data->additional_charge_for_exceeded_distance->id)) {
             $this->additionalChargeForExceededDistance = new HQRentalsModelsVehicleCharge();
             $this->additionalChargeForExceededDistance->setVehicleChargeFromApi($data->additional_charge_for_exceeded_distance, $this->id, HQRentalsModelsVehicleClass::$additionalChargeForExceededDistanceType);
         }
     }
 
-    /*
-     * Create Vehicle Class Custom Post
-     */
     public function create()
     {
         $this->postArgs = array_merge(
@@ -244,15 +301,15 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             hq_update_post_meta($post_id, $this->metaCustomField . $custom_field, $this->{$this->metaCustomField . $custom_field});
         }
         if (!empty($this->rate)) {
-            foreach ($this->rate as $rate){
-                if($rate instanceof HQRentalsModelsActiveRate){
+            foreach ($this->rate as $rate) {
+                if ($rate instanceof HQRentalsModelsActiveRate) {
                     $rate->create();
                 }
             }
         }
-        if(!empty($this->priceIntervals)){
-            foreach ($this->priceIntervals as $price){
-                if(!empty($price)){
+        if (!empty($this->priceIntervals)) {
+            foreach ($this->priceIntervals as $price) {
+                if (!empty($price)) {
                     $price->create();
                 }
             }
@@ -261,10 +318,12 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaDistanceLimitPerDay, $this->distanceLimitPerDay);
         hq_update_post_meta($post_id, $this->metaDistanceLimitPerWeek, $this->distanceLimitPerWeek);
         hq_update_post_meta($post_id, $this->metaDistanceLimitPerMonth, $this->distanceLimitPerMonth);
-        if($this->additionalChargeForExceededDistance){
+        if ($this->additionalChargeForExceededDistance) {
             $this->additionalChargeForExceededDistance->setVehicleClassPostId($post_id);
             $this->additionalChargeForExceededDistance->create();
         }
+        /*DBs*/
+
 
     }
 
@@ -281,7 +340,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function all()
     {
         $query = new \WP_Query($this->postArgs);
-
         return $query->posts;
     }
 
@@ -376,6 +434,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return new HQRentalsModelsActiveRate($this->id);
     }
+
     public function rates()
     {
         $rateModel = new HQRentalsModelsActiveRate();
@@ -385,8 +444,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getPriceIntervals()
     {
         $prices = new HQRentalsModelsPriceInterval();
-        $data= [];
-        foreach ($prices->getIntervalPricesByVehicleId( $this->id ) as $pricePost){
+        $data = [];
+        foreach ($prices->getIntervalPricesByVehicleId($this->id) as $pricePost) {
             $data[] = new HQRentalsModelsPriceInterval($pricePost);
         }
         return $data;
@@ -430,18 +489,23 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         if (!empty($forcedLocale)) {
             return $this->labels[$forcedLocale];
         } else {
-            if($this->locale->language === "zh"){
+            if ($this->locale->language === "zh") {
                 return $this->labels["zh-Hans"];
             }
             return $this->labels[$this->locale->language];
         }
     }
-    public function getLabels(){
+
+    public function getLabels()
+    {
         return $this->labels;
     }
-    public function getDescriptions(){
+
+    public function getDescriptions()
+    {
         return $this->descriptions;
     }
+
     public function getCustomFields()
     {
         return $this->customField;
@@ -473,6 +537,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return get_post_meta($this->postId, $this->metaCustomField . $dbColumn, true);
     }
+
     public function getTranslatableCustomField($dbColumn, $forced_locale = null)
     {
         $field = $this->getCustomField($dbColumn);
@@ -481,7 +546,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         } else {
             try {
                 $content = $field->{$this->locale->language};
-            }catch (\Exception $e){
+            } catch (\Exception $e) {
                 $content = $field[$this->locale->language];
             }
             return ($content) ? $content : '';
@@ -492,6 +557,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return $this->metaCustomField;
     }
+
     public function getVehicleClassIdMeta()
     {
         return $this->metaId;
@@ -508,9 +574,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public function getUsersPriceIntervalOption($cheapest = true)
     {
         $price = new HQRentalsModelsPriceInterval();
-        if($cheapest){
+        if ($cheapest) {
             $post = $price->getCheapestPriceInterval($this->id);
-        }else{
+        } else {
             $post = $price->getHighestPriceInterval($this->id);
         }
         $interval = new HQRentalsModelsPriceInterval($post);
@@ -526,50 +592,149 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return $this->metaBrandId;
     }
+
     public function getFeatureImage($size = '500')
     {
-        return  str_replace('size=1000', 'size=' . $size, $this->publicImageLink);
+        return str_replace('size=1000', 'size=' . $size, $this->publicImageLink);
     }
+
     public function getFeaturesPublicInterface()
     {
         $queryFeatures = new HQRentalsQueriesFeatures();
         return $queryFeatures->featuresPublicInterfaceWithLocale($this->features());
     }
+
     public function getRatePublicInterface()
     {
         $rate = $this->rate();
         return $rate->ratePublicInterface();
     }
-    public function getBrand(){
+
+    public function getBrand()
+    {
         $queryBrand = new HQRentalsQueriesBrands();
         return $queryBrand->getBrand($this->brandId);
+    }
+
+    public function getDataToCreateTable()
+    {
+        return array(
+            'table_name' => $this->tableName,
+            'table_columns' => $this->columns
+        );
     }
 
     public function getDistanceLimit()
     {
         return $this->distanceLimit;
     }
+
     public function getDistanceLimitDay()
     {
         return $this->distanceLimitPerDay;
     }
+
     public function getDistanceLimitePerWeek()
     {
         return $this->distanceLimitPerWeek;
     }
+
     public function getDistanceLimitPerMonth()
     {
         return $this->distanceLimitPerMonth;
     }
+
     public function getDistanceCharge()
     {
         $charge = new HQRentalsModelsVehicleCharge();
         $charge->setChargeByVehicleClassPostId($this->postId);
         return $charge;
     }
+
     public function getUUID()
     {
         return $this->uuid;
     }
-}
 
+    public function saveOrUpdate(): void
+    {
+        $result = $this->db->selectFromTable($this->tableName, '*', 'id=' . $this->id);
+        if ($result->success) {
+            $resultUpdate = $this->db->updateIntoTable($this->tableName, $this->parseDataToSaveOnDB(), array('id' => $this->id));
+        } else {
+            $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
+        }
+    }
+
+    private function parseDataToSaveOnDB(): array
+    {
+        return array_merge(
+            array(
+                'id' => $this->id,
+                'name' => $this->name,
+                'brand_id' => $this->brandId,
+                'public_image_link' => $this->publicImageLink,
+                'vehicle_class_order' => $this->order,
+                'label_for_website' => json_encode($this->labels),
+                'short_description_for_website' => json_encode($this->shortDescriptions),
+                'description_for_website' => json_encode($this->descriptions),
+                'images' => json_encode($this->imagesDB),
+                'active_rates' => json_encode($this->activeRateDB),
+                'features' => json_encode($this->featuresDB)
+            ),
+            $this->getCustomFieldsAsArray()
+        );
+    }
+
+    public function setFromDB($vehicleDB)
+    {
+        $this->id = $vehicleDB->id;
+        $this->name = $vehicleDB->name;
+        $this->brandId = $vehicleDB->brand_id;
+        $this->order = $vehicleDB->vehicle_class_order;
+        $this->publicImageLink = $vehicleDB->public_image_link;
+        $this->labels = json_decode($vehicleDB->label_for_website);
+        $this->shortDescriptions = json_decode($vehicleDB->short_description_for_website);
+        $this->descriptions = json_decode($vehicleDB->description_for_website);
+        $this->images = json_decode($vehicleDB->images);
+        $this->features = json_decode($vehicleDB->features);
+        $this->rates = json_decode($vehicleDB->active_rates)[0];
+    }
+
+    public function getTableName(): string
+    {
+        return $this->tableName;
+    }
+
+    public function getCustomFieldsAsArray(): array
+    {
+        return (array)$this->customFields;
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getPublicImage()
+    {
+        return $this->publicImageLink;
+    }
+    public function getLabelForWebsite()
+    {
+        if (!empty($forcedLocale)) {
+            return $this->labels[$forcedLocale];
+        } else {
+            if ($this->locale->language === "zh") {
+                return $this->labels->{"zh-Hans"};
+            }
+            return $this->labels->{$this->locale->language};
+        }
+    }
+    public function getVehicleFeatures()
+    {
+        return $this->features;
+    }
+    public function getActiveRate()
+    {
+        return $this->rates;
+    }
+}

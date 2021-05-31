@@ -1,5 +1,7 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsQueries;
+
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotRegion;
 
 class HQRentalsQueriesWorkspotRegions
@@ -9,6 +11,7 @@ class HQRentalsQueriesWorkspotRegions
     {
         $this->model = new HQRentalsModelsWorkspotRegion();
     }
+
     public function allRegions()
     {
         $regions = $this->model->all();
@@ -18,7 +21,7 @@ class HQRentalsQueriesWorkspotRegions
     public function fillModelWithPosts($posts)
     {
         $data = array();
-        foreach ($posts as $post){
+        foreach ($posts as $post) {
             $region = new HQRentalsModelsWorkspotRegion($post);
             $data[] = $region;
         }

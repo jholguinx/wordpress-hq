@@ -16,10 +16,11 @@ class HQRentalsTransformersAdditionalCharges extends HQRentalsTransformersBase
 
     public static function transformDataFromApi($apiData)
     {
-        return HQRentalsTransformersAdditionalCharges::resolveArrayOfObjects($apiData, function($apiSingleBrand){
+        return HQRentalsTransformersAdditionalCharges::resolveArrayOfObjects($apiData, function ($apiSingleBrand) {
             return HQRentalsTransformersAdditionalCharges::transformSingleBrand($apiSingleBrand);
         });
     }
+
     public static function transformSingleBrand($apiBrand)
     {
         return HQRentalsTransformersBrands::extractDataFromApiObject(HQRentalsTransformersAdditionalCharges::$singleChargeProperties, $apiBrand);

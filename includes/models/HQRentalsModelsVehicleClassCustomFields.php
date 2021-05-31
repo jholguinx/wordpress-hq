@@ -27,42 +27,45 @@ class HQRentalsModelsVehicleClassCustomFields extends HQRentalsBaseModel
     {
         $this->post_id = '';
         $this->postArgs = array(
-            'post_type'         =>  $this->customFieldsPostName,
-            'post_status'       =>  'publish',
-            'posts_per_page'    =>  -1
+            'post_type' => $this->customFieldsPostName,
+            'post_status' => 'publish',
+            'posts_per_page' => -1
         );
     }
-    public function setCustomFieldFromApi( $data )
+
+    public function setCustomFieldFromApi($data)
     {
         $this->id = $data->id;
         $this->label = $data->label;
         $this->type = $data->type;
         $this->dbcolumn = $data->dbcolumn;
     }
+
     public function create()
     {
         $queryArgs = array(
             $this->postArgs,
             array(
-                'post_type' =>  $this->label,
-                'post_name' =>  $this->label
+                'post_type' => $this->label,
+                'post_name' => $this->label
             )
         );
-        $post_id = wp_insert_post( $queryArgs );
-        hq_update_post_meta( $post_id, $this->idMeta, $this->id );
-        hq_update_post_meta( $post_id, $this->labelMeta, $this->label );
-        hq_update_post_meta( $post_id, $this->typeMeta, $this->type );
-        hq_update_post_meta( $post_id, $this->dbcolumnMeta, $this->dbcolumn );
+        $post_id = wp_insert_post($queryArgs);
+        hq_update_post_meta($post_id, $this->idMeta, $this->id);
+        hq_update_post_meta($post_id, $this->labelMeta, $this->label);
+        hq_update_post_meta($post_id, $this->typeMeta, $this->type);
+        hq_update_post_meta($post_id, $this->dbcolumnMeta, $this->dbcolumn);
 
     }
 
-	protected function find( $caag_id ) {
-		// TODO: Implement find() method.
-	}
+    protected function find($caag_id)
+    {
+        // TODO: Implement find() method.
+    }
 
 
-
-	protected function all() {
-		// TODO: Implement all() method.
-	}
+    protected function all()
+    {
+        // TODO: Implement all() method.
+    }
 }

@@ -62,11 +62,13 @@
         height: 100%;
     }
 }
-.map, .hq-map-wrapper{
+
+.map, .hq-map-wrapper {
     height: 100%;
     width: 100%;
 }
-canvas{
+
+canvas {
     margin-top: 50px;
     margin-bottom: 50px;
 }

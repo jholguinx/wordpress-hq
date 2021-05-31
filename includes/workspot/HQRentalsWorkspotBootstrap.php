@@ -7,13 +7,14 @@ class HQRentalsWorkspotBootstrap
 {
     public function __construct()
     {
-        add_action( 'init', array( $this, 'lightsOn' ) );
+        add_action('init', array($this, 'lightsOn'));
         $this->scheduler = new HQRentalsWorkspotScheduler();
-        add_action( 'refreshWorkspotData', array($this, 'refreshAllData') );
-        if ( ! wp_next_scheduled( 'refreshWorkspotData' ) ) {
-            wp_schedule_event( time(), 'daily', 'refreshWorkspotData' );
+        add_action('refreshWorkspotData', array($this, 'refreshAllData'));
+        if (!wp_next_scheduled('refreshWorkspotData')) {
+            wp_schedule_event(time(), 'daily', 'refreshWorkspotData');
         }
     }
+
     public function refreshAllData()
     {
         global $wpdb;
@@ -25,6 +26,7 @@ class HQRentalsWorkspotBootstrap
         $this->additionalChargesTask->refreshAdditionalChargesData();
         $this->vehicleClassesTask->refreshVehicleClassesData();
     }
+
     public function lightsOn()
     {
 

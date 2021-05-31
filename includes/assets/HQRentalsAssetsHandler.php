@@ -71,7 +71,7 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-dummy-script');
         global $post;
         $theme = wp_get_theme();
-        if(is_single() and $post->post_type === 'hqwp_veh_classes' and $theme->stylesheet === 'grandcarrental'){
+        if (is_single() and $post->post_type === 'hqwp_veh_classes' and $theme->stylesheet === 'grandcarrental') {
             $this->datePickersAssets();
         }
     }
@@ -211,8 +211,6 @@ class HQRentalsAssetsHandler
 
     public function gCarVehicleFilterAssets()
     {
-        //issues with theme styles
-        //wp_enqueue_style('r-suite-default-style');
         wp_enqueue_script('hg-gcar-vehicle-filter-js');
     }
 
@@ -223,6 +221,7 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-moment');
         wp_enqueue_script('hq-wordpress-dates-js');
     }
+
     public static function getHQFontAwesome()
     {
         echo '<link rel="stylesheet" href="https://caag.caagcrm.com/assets/font-awesome">';

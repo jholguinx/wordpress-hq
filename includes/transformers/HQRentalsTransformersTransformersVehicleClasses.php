@@ -4,7 +4,8 @@ namespace HQRentalsPlugin\HQRentalsTransformers;
 
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
-class HQRentalsTransformersVehicleClasses extends HQRentalsTransformersBase {
+class HQRentalsTransformersVehicleClasses extends HQRentalsTransformersBase
+{
 
     public function __construct()
     {
@@ -33,6 +34,7 @@ class HQRentalsTransformersVehicleClasses extends HQRentalsTransformersBase {
             return $transformation;
         
     }
+
     public static function transformDataFromApi($apiData)
     {
 

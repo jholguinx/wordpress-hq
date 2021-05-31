@@ -42,4 +42,19 @@ class HQRentalsVehicleTypesTask extends HQRentalsBaseTask
     {
         return $this->response;
     }
+    public function setDataOnVehicleTypes()
+    {
+        if (is_array($this->response)) {
+            foreach ($this->response as $type) {
+                $newLocation = new HQRentalsModelsVehicleType();
+                $newLocation->setVehicleTypeFromApi($type);
+                $newLocation->create();
+            }
+        }
+    }
+    public function setDataWPVehicleTypes()
+    {
+        $this->response = $this->connector->getHQRentalsVehicleTypes();
+        return $this->setDataOnWP();
+    }
 }

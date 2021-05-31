@@ -1,9 +1,11 @@
 <?php
+
 namespace HQRentalsPlugin\HQRentalsQueries;
 
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 
-class HQRentalsQueriesCustomFields{
+class HQRentalsQueriesCustomFields
+{
 
     public function __construct()
     {

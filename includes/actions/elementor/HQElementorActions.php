@@ -13,6 +13,8 @@ class HQElementorActions
     {
         add_action('elementor/frontend/widget/before_render', array($this, 'handleDropdownForLocations'));
         add_action('elementor_pro/forms/validation', array($this, 'handleRedirectOutside'), 10, 2);
+        add_action( 'elementor/elements/categories_registered', array($this, 'addingCustomCategories') );
+
     }
 
     public function handleDropdownForLocations($form)
@@ -53,7 +55,7 @@ class HQElementorActions
         $redirect = get_site_url(null, $this->getValueFromRecord($record, 'booking_page'));
         $ajax_handler->is_success = true;
         $ajax_handler->data = [
-            'redirect_url' => $redirect.'?'.http_build_query($parameters),
+            'redirect_url' => $redirect . '?' . http_build_query($parameters),
         ];
     }
 
@@ -65,4 +67,15 @@ class HQElementorActions
 
         return isset($value[$field]['value']) ? $value[$field]['value'] : $default;
     }
+    public function addingCustomCategories( $elements_manager ) {
+
+        $elements_manager->add_category(
+            'hq-rental-software',
+            [
+                'title' => __( 'HQ Rental Software', 'hq-rental-software' ),
+                'icon' => 'fa fa-plug',
+            ]
+        );
+    }
+
 }

@@ -43,7 +43,8 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
         }
         return $data;
     }
-    public function fillModelWithPosts( $posts )
+
+    public function fillModelWithPosts($posts)
     {
         $data = [];
         foreach ($posts as $post) {
@@ -51,21 +52,25 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
         }
         return $data;
     }
+
     public function brandsPublicInterface()
     {
         $brands = $this->getAllBrands();
-        return array_map(function($brand){
+        return array_map(function ($brand) {
             return $this->brandPublicInterface($brand);
         }, $brands);
     }
-    public function singleBrandPublicInterface($brandId){
+
+    public function singleBrandPublicInterface($brandId)
+    {
         $brand = $this->getBrand($brandId);
         return $this->brandPublicInterface($brand);
     }
+
     public function brandPublicInterface($brand)
     {
         $queryLocation = new HQRentalsQueriesLocations();
-        return $this->parseObject( array(
+        return $this->parseObject(array(
             'id',
             'name',
             'websiteLink',
@@ -83,7 +88,9 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
             )
         ), $brand);
     }
-    public function getBrand($brandId){
+
+    public function getBrand($brandId)
+    {
         $args = array_merge(
             $this->model->postArgs,
             array(
@@ -99,6 +106,7 @@ class HQRentalsQueriesBrands extends HQRentalsQueriesBaseClass
         $query = new \WP_Query($args);
         return new HQRentalsModelsBrand($query->posts[0]);
     }
+
     public function getBrandByUUID($uuid)
     {
         $args = array_merge(

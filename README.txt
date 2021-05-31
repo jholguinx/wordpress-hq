@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 5.0.11
 Tested up to: 5.7
 Requires PHP: 5.6.3
-Stable tag: 1.4.31
+Stable tag: 1.4.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,25 +31,29 @@ If you experience any issues, please review your user and password and try again
 
 == Changelog ==
 
+= 1.4.32 =
+
+Internal fixes to optimize data sync
+
 = 1.4.31 =
 
 Fix on Query for Distance Charge
 
 = 1.4.30 =
 
-Fixes on Calendars.
+Fixes on Calendars
 
 = 1.4.29 =
 
-Calendar Shortcode supporting uuids.
+Calendar Shortcode supporting uuids
 
 = 1.4.28 =
 
-New properties for vehicle class model.
+New properties for vehicle class model
 
 = 1.4.25 =
 
-Fix to solve authentication issues when connecting plugin to HQ tenant account.
+Fix to solve authentication issues when connecting plugin to HQ tenant account
 
 = 1.4.23 =
 Screenshots update

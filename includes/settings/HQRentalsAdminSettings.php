@@ -380,6 +380,18 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">ENABLE CUSTOM POSTS PAGES</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                      data-tippy-content="This option will enable Vehicle Classes single pages on your website."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="checkbox"
+                                                       name="<?php echo $this->settings->hq_enable_custom_post_pages; ?>"
+                                                       value="true" <?php echo ($this->settings->getEnableCustomPostsPages() === 'true') ? 'checked' : ''; ?> />
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">DEFAULT CURRENCY DISPLAY</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                       data-tippy-content="This will be the currency the displayed by default on the vehicle class grid, and the dedicated vehicle class pages."></span>

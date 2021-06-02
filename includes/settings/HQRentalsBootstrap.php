@@ -97,6 +97,9 @@ class HQRentalsBootstrap
         if ($this->settings->noCurrencyIconOption()) {
             $this->settings->setCurrencyIconOption($this->hq_default_value_for_string);
         }
+        if($this->settings->noEnableCustomPostsPages()){
+            $this->settings->setEnableCustomPostsPages('false');
+        }
         $this->resolveDefaultPages();
         $this->notifyToSystemOnActivation();
         $this->dbBootstrap->createTablesOnInit();

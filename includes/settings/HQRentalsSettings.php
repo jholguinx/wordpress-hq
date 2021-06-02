@@ -44,6 +44,7 @@ class HQRentalsSettings
     public $hq_default_longitude_for_map_shortcode = 'hq_default_longitude_for_map_shortcode';
     public $hq_auth_email = 'hq_auth_email';
     public $hq_currency_symbol = 'hq_currency_symbol';
+    public $hq_enable_custom_post_pages = 'hq_enable_custom_post_pages';
 
     public function __construct()
     {
@@ -445,6 +446,19 @@ class HQRentalsSettings
         return $this->getDecreasingRateOrder() === 'true';
     }
 
+    public function getEnableCustomPostsPages()
+    {
+        return get_option($this->hq_enable_custom_post_pages, 'false');
+    }
+    public function setEnableCustomPostsPages($data)
+    {
+        return update_option($this->hq_enable_custom_post_pages, $data);
+    }
+    public function isEnableCustomPostsPages()
+    {
+        return $this->getEnableCustomPostsPages() === 'true';
+    }
+
     public function noReplaceBaseURLOnBrandsSetting()
     {
         return empty(get_option($this->hq_replace_url_on_brand_option));
@@ -551,6 +565,9 @@ class HQRentalsSettings
         }
         if (empty($postDataFromSettings[$this->hq_enable_decreasing_rate_order_on_vehicles_query])) {
             update_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, "false");
+        }
+        if (empty($postDataFromSettings[$this->hq_enable_custom_post_pages])) {
+            update_option($this->hq_enable_custom_post_pages, "false");
         }
         /*Refresh data on save */
         $worker = new HQRentalsCronJob();
@@ -684,6 +701,10 @@ class HQRentalsSettings
     public function noCurrencyIconOption()
     {
         return empty(get_option($this->hq_currency_symbol));
+    }
+    public function noEnableCustomPostsPages()
+    {
+        return empty(get_option($this->hq_enable_custom_post_pages));
     }
 
     public function setCurrencyIconOption($icon)

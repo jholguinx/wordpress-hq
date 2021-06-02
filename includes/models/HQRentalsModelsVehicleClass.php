@@ -152,7 +152,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'labels' => $this->labelsPost,
             'public' => true,
             'show_in_admin_bar' => true,
-            'publicly_queryable' => true,
+            'publicly_queryable' => $this->pluginSettings->isEnableCustomPostsPages(),
             'show_ui' => true,
             'show_in_menu' => true,
             'show_in_nav_menus' => true,

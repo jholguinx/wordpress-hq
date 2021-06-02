@@ -45,10 +45,9 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
         $this->add_control(
             'url',
             [
-                'label' => __('URL to Reservation Widget Page', 'hq-wordpress'),
+                'label' => __('Reservations URL', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'input_type' => 'string',
-                'placeholder' => __('https://your-link.com', 'hq-wordpress'),
             ]
         );
         $this->add_control(
@@ -57,7 +56,6 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
                 'label' => __('Title', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'input_type' => 'string',
-                'placeholder' => __('HQ RENTAL', 'hq-wordpress'),
             ]
         );
         $this->end_controls_section();
@@ -73,7 +71,7 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
         echo '
     '. HQRentalsAssetsHandler::getHQFontAwesome() .' 
     <div class="elementor-widget-container hq-elementor-title">
-			<h2 class="elementor-heading-title elementor-size-default">. ' . $settings["title"] . ' .</h2>		
+			<h2 class="elementor-heading-title elementor-size-default">' . $settings["title"] . '</h2>		
     </div>
     <div class="elementor-element elementor-widget elementor-widget-html">
         <div class="elementor-widget-container">

@@ -108,6 +108,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
 
     public function __construct($post = null)
     {
+        $this->pluginSettings = new HQRentalsSettings();
         $this->post_id = '';
         if ($post) {
             $this->systemId = $post->ID;
@@ -138,7 +139,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'labels' => $this->labels,
             'public' => true,
             'show_in_admin_bar' => true,
-            'publicly_queryable' => true,
+            'publicly_queryable' => $this->pluginSettings->isEnableCustomPostsPages(),
             'show_ui' => true,
             'show_in_menu' => true,
             'show_in_nav_menus' => true,

@@ -100,7 +100,9 @@ class HQRentalsBootstrap
         if($this->settings->noEnableCustomPostsPages()){
             $this->settings->setEnableCustomPostsPages('false');
         }
-        $this->resolveDefaultPages();
+        if($this->settings->isEnableCustomPostsPages()){
+            $this->resolveDefaultPages();
+        }
         $this->notifyToSystemOnActivation();
         $this->dbBootstrap->createTablesOnInit();
     }

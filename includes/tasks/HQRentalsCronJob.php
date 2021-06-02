@@ -20,10 +20,6 @@ class HQRentalsCronJob
 
     public function refreshAllData()
     {
-        /*
-         * Disable by option on refresh data
-         * */
-
         if (!($this->pluginSettings->getDisableCronjobOption() == 'true')) {
             $this->scheduler->refreshHQData();
         }

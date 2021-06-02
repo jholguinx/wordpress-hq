@@ -572,6 +572,12 @@ class HQRentalsSettings
         /*Refresh data on save */
         $worker = new HQRentalsCronJob();
         $worker->refreshAllData();
+
+        /*delete page in case*/
+        if(!$this->isEnableCustomPostsPages()){
+            $pages = new HQRentalsPagesHandler();
+            $pages->deleteAllPages();
+        }
     }
 
     /***

@@ -390,8 +390,12 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetPackageQuote = htmlspecialchars_decode($brandFromDB->package_quotes_snippet);
         $this->snippetPaymentRequest = htmlspecialchars_decode($brandFromDB->payment_requests_snippet);
     }
-    public function getTableName()
+    public function getTableName() : string
     {
         return $this->tableName;
+    }
+    public function getClassCalendarSnippet() : string
+    {
+        return $this->snippetClassCalendar;
     }
 }

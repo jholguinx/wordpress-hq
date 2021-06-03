@@ -226,4 +226,8 @@ class HQRentalsAssetsHandler
     {
         echo '<link rel="stylesheet" href="https://caag.caagcrm.com/assets/font-awesome">';
     }
+    public static function getHQLogo()
+    {
+        return plugin_dir_url(__FILE__) . 'img/logo.png';
+    }
 }

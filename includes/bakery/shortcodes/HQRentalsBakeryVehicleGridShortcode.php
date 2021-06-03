@@ -22,7 +22,7 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
         vc_map(
             array(
                 'name'                    => __( 'HQ Vehicle Grid', 'hq-wordpress' ),
-                'base'                    => 'hq_rentals_vehicle_grid',
+                'base'                    => 'hq_bakery_vehicle_grid',
                 'content_element'         => true,
                 "category" => __('HQ Rental Software'),
                 'show_settings_on_create' => true,

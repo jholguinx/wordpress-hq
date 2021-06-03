@@ -229,6 +229,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsQuotes, $this->snippetQuotes);
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPackageQuotes, $this->snippetPackageQuote );
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPaymentRequest, $this->snippetPaymentRequest );
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsCalendar, $this->snippetCalendar);
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsClassCalendar, $this->snippetClassCalendar);
         hq_update_post_meta( $post_id, $this->metaUUID, $this->uuid );
     }
 
@@ -275,6 +277,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetQuotes = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsQuotes, true ) );
         $this->snippetPackageQuote = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPackageQuotes, true ) );
         $this->snippetPaymentRequest = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPaymentRequest, true ));
+        $this->snippetCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsCalendar, true ));
+        $this->snippetClassCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsClassCalendar, true ));
     }
 
     public function all()
@@ -390,8 +394,16 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetPackageQuote = htmlspecialchars_decode($brandFromDB->package_quotes_snippet);
         $this->snippetPaymentRequest = htmlspecialchars_decode($brandFromDB->payment_requests_snippet);
     }
-    public function getTableName()
+    public function getTableName() : string
     {
         return $this->tableName;
+    }
+    public function getCalendarSnippet() : string
+    {
+        return $this->snippetCalendar;
+    }
+    public function getCalendarClassSnippet() : string
+    {
+        return $this->snippetCalendar;
     }
 }

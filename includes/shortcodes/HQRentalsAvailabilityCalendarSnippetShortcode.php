@@ -32,7 +32,7 @@ class HQRentalsAvailabilityCalendarSnippetShortcode extends HQBaseShortcode
                 $brand->findBySystemId($atts['id']);
                 $vehicle = $this->vehicleClass->getVehicleClassBySystemId($atts['vehicle_class_id']);
                 $uuid = $vehicle->getUUID();
-                return $this->filledSnippetData($brand->getClassCalendarSnippet(), array(
+                return $this->filledSnippetData($brand->getCalendarClassSnippet(), array(
                     'class' => $uuid,
                     'forced_locale' => ($atts['forced_locale']) ? $atts['forced_locale'] : 'en'
                 ));

@@ -32,13 +32,13 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
                     array(
                         'type'        => 'textfield',
                         'heading'     => __( 'Reservation URL', 'hq-wordpress' ),
-                        'param_name'  => 'name_label',
+                        'param_name'  => 'url',
                         'value'       => ''
                     ),
                     array(
                         'type'        => 'textfield',
                         'heading'     => __( 'Title', 'hq-wordpress' ),
-                        'param_name'  => 'name_placeholder',
+                        'param_name'  => 'title',
                         'value'       => ''
                     ),
                 )

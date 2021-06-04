@@ -556,6 +556,21 @@ class HQRentalsAdminSettings
                                                        name="<?php echo $this->settings->hq_url_to_replace_on_brands_option; ?>"
                                                        value="<?php echo esc_attr($this->settings->getBrandURLToReplaceSetting()); ?>"/>
                                             </div>
+
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Google API Key</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                      data-tippy-content="Google Services API Key"></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input hq-admin-text-input-medium medium"
+                                                       name="<?php echo $this->settings->hq_google_api_key; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getGoogleAPIKey()); ?>"/>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

@@ -24,7 +24,7 @@ class HQRentalsVehicleGrid
     public function renderShortcode()
     {
         $vehiclesCode = $this->getVehiclesHTML();
-        HQRentalsElementorAssetsHandler::loadVehicleGridAssets();
+        HQRentalsAssetsHandler::loadVehicleGridAssets();
         echo '
     ' . HQRentalsAssetsHandler::getHQFontAwesome() . ' 
     <div class="elementor-widget-container hq-elementor-title">

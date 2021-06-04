@@ -6,7 +6,6 @@ use HQRentalsPlugin\HQRentalsActions\elementor\HQElementorActions;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsActionsRedirects;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsAjaxHandler;
 use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
-use HQRentalsPlugin\HQRentalsElementor\HQRentalsElementorAssetsHandler;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsShortcoder;
@@ -40,6 +39,5 @@ class HQRentalsBootstrapPlugin
         $this->elementor = new HQElementorActions();
         $this->templates = new HQRentalsTemplateHandler();
         $this->ajaxHandler = new HQRentalsAjaxHandler();
-        $this->assetsElementor = new HQRentalsElementorAssetsHandler();
     }
 }

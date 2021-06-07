@@ -100,7 +100,8 @@ class HQRentalsPlacesReservationForm
                     .hq-places-vertical-form-wrapper{
                         background-color: #fff;
                         padding:20px;
-                        border-radius:5px; 
+                        border-radius:5px;  
+                        
                     }
                     .hq-places-date-time-wrapper-vertical{
                         display: flex;
@@ -117,10 +118,9 @@ class HQRentalsPlacesReservationForm
                         color: #fff;
                         fill: #fff;
                         text-align: center;
-                        -webkit-transition: all .3s;
-                        -o-transition: all .3s;
-                        transition: all .3s;
                         width: 100%;
+                        background-color: #1D71B8 !important;
+                        box-shadow: 0 0px 0 #000000 !important;
                     }
                     .hq-places-dates-wrapper-vertical{
                         position: relative !important;
@@ -133,7 +133,7 @@ class HQRentalsPlacesReservationForm
                         right:0;
                     }
                     .hq-places-vertical-button-wrapper{
-                        margin-top: 20px; 
+                        margin-top: 20px;  
                     }
                     .hq-places-vertical-form-item-wrapper{
                         margin-top: 10px;
@@ -142,6 +142,10 @@ class HQRentalsPlacesReservationForm
                     .hq-places-vertical-form-item-wrapper label{
                         font-weight: bold;
                     }
+                    .hq-places-vertical-form-wrapper {
+                        box-shadow:-2px 15px 18px 6px rgba(0,0,0,.30);
+                      }
+                    
                 </style>
             ". HQRentalsAssetsHandler::getHQFontAwesome() ."
                     <div class='hq-places-vertical-form-wrapper'>
@@ -197,13 +201,12 @@ class HQRentalsPlacesReservationForm
                                                            <span class='elementor-button-text'>Find a Car</span>
                                                            </span>
                                                     </button>
+                                                    <input type='hidden' name='target_step' value='2'>
+                                                    <input type='hidden' name='pick_up_location' value='custom'>
+                                                    <input type='hidden' name='return_location' value='custom'>
+                                                    <input type='hidden' name='return_location_custom' value='' id='hq-return-location-custom'>
                                                 </div>
                                             </div>
-                                            <input type='hidden' name='target_step' value='2'>
-                                            <input type='hidden' name='pick_up_location' value='custom'>
-                                            <input type='hidden' name='return_location' value='custom'>
-                                            <input type='hidden' name='return_location_custom' value='' id='hq-return-location-custom'>
-                                            
                                         </form>
                                     </div>
                                 </div>

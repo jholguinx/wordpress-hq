@@ -10,12 +10,22 @@ dayjs.extend(window.dayjs_plugin_customParseFormat)
 let autocomplete;
 let addressField;
 function initPlacesForm() {
+    const center = { lat: 26.7751182, lng: -82.2354601 };
+    const defaultBounds = {
+        north: center.lat + 2,
+        south: center.lat - 2,
+        east: center.lng + 2,
+        west: center.lng - 2,
+    };
     addressField = document.querySelector("#hq-places-field");
     // Create the autocomplete object, restricting the search predictions to
     // addresses in the US and Canada.
     autocomplete = new google.maps.places.Autocomplete(addressField, {
+        bounds: defaultBounds,
+        origin: center,
+        strictBounds: true,
         componentRestrictions: { country: ["us"] },
-        fields: ["address_components", "geometry"],
+        fields: ["address_components"],
         types: ["address"],
     });
     //address1Field.focus();

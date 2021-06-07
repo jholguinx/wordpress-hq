@@ -165,7 +165,6 @@ class HQRentalsPlacesReservationForm
                                                         <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-map-marked-alt'></i></span>
                                                     </div>
                                                 </div>
-                                                <!--
                                                 <div class='hq-places-vertical-form-item-wrapper'>
                                                     <label for='form-field-location'
                                                            class='hq-smart-label'>Vehicle Type</label>
@@ -177,7 +176,7 @@ class HQRentalsPlacesReservationForm
                                                         </select>
                                                         <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-chevron-down'></i></span>
                                                     </div>
-                                                </div>-->
+                                                </div>
                                                 <div class='hq-places-vertical-form-item-wrapper hq-places-vertical-form-dates-wrapper'>
                                                       <div>
                                                             <label class='hq-places-label'>From</label> 

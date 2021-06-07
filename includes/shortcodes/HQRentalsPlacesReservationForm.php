@@ -35,9 +35,9 @@ class HQRentalsPlacesReservationForm
         $this->assets->loadPlacesReservationAssets();
         $html = "";
         if(empty($key)){
-            return "<p>Add Google Key</p>";
+            echo "<p>Add Google Key</p>";
         }else{
-            if($this->orientation === 'horizontal'){
+            if($this->orientation == 'horizontal'){
                 $html = "
             ". HQRentalsAssetsHandler::getHQFontAwesome() ."
             <div id='hq-place-form-desktop' class=''>
@@ -96,34 +96,29 @@ class HQRentalsPlacesReservationForm
         ";
         }else{
                 $html = "
+                <style>
+                    .hq-places-vertical-form-wrapper{
+                        background-color: #fff;
+                        padding:20px;
+                        
+                    }
+                </style>
             ". HQRentalsAssetsHandler::getHQFontAwesome() ."
-                <div class='elementor-tab-title elementor-tab-mobile-title' data-tab='1' role='tab'>
-                        <center><i aria-hidden='true' class='icon icon-car'></i>Cars</center>
-                    </div>
-                    <div id='elementor-tab-content-1931' class='elementor-tab-content elementor-clearfix' data-tab='1'
-                         role='tabpanel' aria-labelledby='elementor-tab-title-1931' style='display: none;'>
-
+                    <div class='elementor-tab-content elementor-clearfix hq-places-vertical-form-wrapper'>
                         <div class='elementor-column-wrap  elementor-element-populated'>
                             <div class='elementor-widget-wrap'>
                                 <div class='elementor-element elementor-element-3f9ae7f6 elementor-button-align-stretch elementor-widget elementor-widget-form'
                                      data-id='3f9ae7f6' data-element_type='widget' data-widget_type='form.default'>
                                     <div class='elementor-widget-container'>
-                                        <form method='post' name='Booking' action='/cars-reservations/'>
+                                        <form method='post' name='Booking' action='{$this->linkURL}'>
                                             <div class='elementor-form-fields-wrapper elementor-labels-above'>
                                                 <div class='hq-smart-form-element-wrapper elementor-field-type-select elementor-field-group elementor-column elementor-field-group-location elementor-col-50 elementor-field-required'>
                                                     <label for='form-field-location'
-                                                           class='elementor-field-label hq-smart-label'>Location</label>
+                                                           class='elementor-field-label hq-smart-label'>Pickup Location</label>
                                                     <div class='elementor-field elementor-select-wrapper '>
-                                                        <select name='pick_up_location' id='hq-form-pick_up_location_cars'
-                                                                class='hq-smart-select elementor-field-textual elementor-size-sm'
-                                                                required='required' aria-required='true'>
-                                                            <?php foreach ($locationCars as $location): ?>
-                                                                <option value='<?php echo $location->id ?>'><?php echo $location->name ?></option>
-                                                            <?php endforeach; ?>
-                                                        </select>
+                                                        <input type='text' name='pick_up_location_custom' id='hq-places-field' class='hq-places-auto-complete'>
                                                     </div>
                                                 </div>
-                                                <input type='hidden' name='return_location' id='hq-form-return_location_cars' value='<?php echo $locationCars[0]->id; ?>'>
                                                 <div class='hq-smart-form-element-wrapper elementor-field-type-date elementor-field-group elementor-column elementor-field-group-pick_up_date elementor-col-50 elementor-field-required'>
                                                     <label for='form-field-pick_up_date'
                                                            class='elementor-field-label hq-smart-label'>Pickup
@@ -140,7 +135,7 @@ class HQRentalsPlacesReservationForm
                                                         Date</label>
                                                     <input type='text' name='return_date' id='hq-form-return_date_cars'
                                                            class='hq-smart-input-picker elementor-field elementor-size-sm elementor-field-textual flatpickr-input'
-                                                           placeholder='Tomorrow' required='required'
+                                                           placeholder='Tomorrow'
                                                            pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}' readonly='readonly'>
                                                 </div>
                                                 <div class='hq-smart-form-element-wrapper elementor-field-type-time elementor-field-group elementor-column elementor-field-group-field_b55a2fd elementor-col-50 elementor-field-required'>
@@ -179,7 +174,7 @@ class HQRentalsPlacesReservationForm
                     </div>
                 ";      
             }
-            echo $html;
         }
+        echo $html;
     }
 }

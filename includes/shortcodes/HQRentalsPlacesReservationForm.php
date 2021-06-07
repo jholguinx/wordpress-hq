@@ -100,72 +100,110 @@ class HQRentalsPlacesReservationForm
                     .hq-places-vertical-form-wrapper{
                         background-color: #fff;
                         padding:20px;
-                        
+                        border-radius:5px; 
+                    }
+                    .hq-places-date-time-wrapper-vertical{
+                        display: flex;
+                        flex-direction: row;
+                    }
+                    .hq-submit-button{
+                        display: inline-block;
+                        line-height: 1;
+                        background-color: #818a91;
+                        font-size: 15px;
+                        padding: 12px 24px;
+                        -webkit-border-radius: 3px;
+                        border-radius: 3px;
+                        color: #fff;
+                        fill: #fff;
+                        text-align: center;
+                        -webkit-transition: all .3s;
+                        -o-transition: all .3s;
+                        transition: all .3s;
+                        width: 100%;
+                    }
+                    .hq-places-dates-wrapper-vertical{
+                        position: relative !important;
+                    }
+                    .hq-select-icon-wrapper-vertical{
+                        position: absolute;
+                        top: 0;
+                        margin-top: 15px;
+                        margin-right: 15px;
+                        right:0;
+                    }
+                    .hq-places-vertical-button-wrapper{
+                        margin-top: 20px; 
+                    }
+                    .hq-places-vertical-form-item-wrapper{
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                    .hq-places-vertical-form-item-wrapper label{
+                        font-weight: bold;
                     }
                 </style>
             ". HQRentalsAssetsHandler::getHQFontAwesome() ."
-                    <div class='elementor-tab-content elementor-clearfix hq-places-vertical-form-wrapper'>
-                        <div class='elementor-column-wrap  elementor-element-populated'>
-                            <div class='elementor-widget-wrap'>
-                                <div class='elementor-element elementor-element-3f9ae7f6 elementor-button-align-stretch elementor-widget elementor-widget-form'
-                                     data-id='3f9ae7f6' data-element_type='widget' data-widget_type='form.default'>
-                                    <div class='elementor-widget-container'>
-                                        <form method='post' name='Booking' action='{$this->linkURL}'>
-                                            <div class='elementor-form-fields-wrapper elementor-labels-above'>
-                                                <div class='hq-smart-form-element-wrapper elementor-field-type-select elementor-field-group elementor-column elementor-field-group-location elementor-col-50 elementor-field-required'>
+                    <div class='hq-places-vertical-form-wrapper'>
+                        <div class=''>
+                            <div class=''>
+                                <div class=''>
+                                    <div class=''>
+                                        <form method='get' name='Booking' action='{$this->linkURL}'>
+                                            <div class=''>
+                                                <div class='hq-places-vertical-form-item-wrapper'>
                                                     <label for='form-field-location'
                                                            class='elementor-field-label hq-smart-label'>Pickup Location</label>
-                                                    <div class='elementor-field elementor-select-wrapper '>
-                                                        <input type='text' name='pick_up_location_custom' id='hq-places-field' class='hq-places-auto-complete'>
+                                                    <div class='elementor-field elementor-select-wrapper hq-places-dates-wrapper-vertical'>
+                                                        <input type='text' name='pick_up_location_custom' id='hq-places-field' class='hq-places-auto-complete' placeholder='Address' required='required'>
+                                                        <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-map-marked-alt'></i></span>
                                                     </div>
                                                 </div>
-                                                <div class='hq-smart-form-element-wrapper elementor-field-type-date elementor-field-group elementor-column elementor-field-group-pick_up_date elementor-col-50 elementor-field-required'>
-                                                    <label for='form-field-pick_up_date'
-                                                           class='elementor-field-label hq-smart-label'>Pickup
-                                                        Date</label>
-                                                    <input type='text' name='pick_up_date' id='hq-form-pick_up_date_cars'
-                                                           class='hq-smart-input-picker elementor-field elementor-size-sm elementor-field-textual flatpickr-input'
-                                                           placeholder='Today' required='true'
-                                                           pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}' aria-required='true'
-                                                           readonly='readonly'>
+                                                <div class='hq-places-vertical-form-item-wrapper hq-places-vertical-form-dates-wrapper'>
+                                                      <div>
+                                                            <label class='hq-places-label'>From</label> 
+                                                        </div>
+                                                        <div class='hq-places-date-time-wrapper-vertical'>
+                                                            <div class='hq-places-times-input-wrapper hq-places-dates-wrapper-vertical'>
+                                                                <input type='text' name='pick_up_date' class='hq-places-auto-complete' placeholder='Today' id='hq-times-pick-up-date' required='required'>
+                                                                <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-calendar-alt'></i></span>
+                                                            </div>
+                                                            <div class='hq-places-times-input-wrapper hq-places-dates-wrapper-vertical'>
+                                                                <input type='text' name='pick_up_time' class='hq-places-auto-complete' placeholder='12:00' id='hq-times-pick-up-time' required='required'>
+                                                                <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-clock'></i></span>
+                                                            </div>
+                                                        </div>
                                                 </div>
-                                                <div class='hq-smart-form-element-wrapper elementor-field-type-date elementor-field-group elementor-column elementor-field-group-return_date elementor-col-50 elementor-field-required'>
-                                                    <label for='form-field-return_date'
-                                                           class='elementor-field-label hq-smart-label'>Return
-                                                        Date</label>
-                                                    <input type='text' name='return_date' id='hq-form-return_date_cars'
-                                                           class='hq-smart-input-picker elementor-field elementor-size-sm elementor-field-textual flatpickr-input'
-                                                           placeholder='Tomorrow'
-                                                           pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}' readonly='readonly'>
+                                                <div class='hq-places-vertical-form-item-wrapper hq-places-vertical-form-dates-wrapper'>
+                                                      <div>
+                                                            <label class='hq-places-label'>Until</label> 
+                                                        </div>
+                                                        <div class='hq-places-date-time-wrapper-vertical'>
+                                                            <div class='hq-places-times-input-wrapper hq-places-dates-wrapper-vertical'>
+                                                                <input type='text' name='return_date' class='hq-places-auto-complete' placeholder='Tomorrow' id='hq-times-return-date' required='required'>
+                                                                <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-calendar-alt'></i></span>
+                                                            </div>
+                                                            <div class='hq-places-times-input-wrapper hq-places-dates-wrapper-vertical'>
+                                                                <input type='text' name='return_time' class='hq-places-auto-complete' placeholder='12:00' id='hq-times-return-time' required='required'>
+                                                                <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-clock'></i></span>
+                                                            </div>
+                                                        </div>
                                                 </div>
-                                                <div class='hq-smart-form-element-wrapper elementor-field-type-time elementor-field-group elementor-column elementor-field-group-field_b55a2fd elementor-col-50 elementor-field-required'>
-                                                    <label for='form-field-field_b55a2fd'
-                                                           class='elementor-field-label hq-smart-label'>Pickup
-                                                        Time</label>
-                                                    <input type='text' name='pick_up_time' id='hq-form-pick_up_time_cars'
-                                                           class='hq-smart-input-picker elementor-field elementor-size-sm elementor-field-textual flatpickr-input'
-                                                           placeholder='8:00' required='required'
-                                                           readonly='readonly'>
-                                                </div>
-                                                <div class='hq-smart-form-element-wrapper elementor-field-type-time elementor-field-group elementor-column elementor-field-group-field_2fcfe93 elementor-col-50 elementor-field-required'>
-                                                    <label for='form-field-field_2fcfe93'
-                                                           class='elementor-field-label hq-smart-label'>Return
-                                                        Time</label>
-                                                    <input type='text' name='return_time' id='hq-form-return_time_cars'
-                                                           class='hq-smart-input-picker elementor-field elementor-size-sm elementor-field-textual flatpickr-input'
-                                                           placeholder='8:00' required='required'
-                                                           readonly='readonly'>
-                                                </div>
-                                                <div class='hq-smart-form-element-wrapper elementor-field-group elementor-column elementor-field-type-submit elementor-col-100'>
+                                                <div class='hq-places-vertical-button-wrapper'>
                                                     <button type='submit'
-                                                            class='elementor-button elementor-size-sm'>
-                                       <span>
-                                       <span class='elementor-button-icon'></span>
-                                       <span class='elementor-button-text'>Find a Car</span>
-                                       </span>
+                                                            class='hq-submit-button'>
+                                                           <span>
+                                                           <span class='elementor-button-icon'></span>
+                                                           <span class='elementor-button-text'>Find a Car</span>
+                                                           </span>
                                                     </button>
                                                 </div>
                                             </div>
+                                            <input type='hidden' name='target_step' value='2'>
+                                            <input type='hidden' name='pick_up_location' value='custom'>
+                                            <input type='hidden' name='return_location' value='custom'>
+                                            <input type='hidden' name='return_location_custom' value='' id='hq-return-location-custom'>
+                                            
                                         </form>
                                     </div>
                                 </div>

@@ -1,3 +1,4 @@
+dayjs.extend(window.dayjs_plugin_customParseFormat)
 // This sample uses the Places Autocomplete widget to:
 // 1. Help the user select a place
 // 2. Retrieve the address components associated with that place
@@ -29,6 +30,7 @@ function updateReturnLocation(){
 jQuery(document).ready(function(){
     const dateFormat = hqRentalsSystemDateformat.split(' ')[0];
     const timeFormat = hqRentalsSystemDateformat.split(' ')[1];
+    const jsDateFormat = 'YYYY-MM-DD'
     const dateConfig  = {
         dateFormat: dateFormat,
         disableMobile: true,
@@ -47,4 +49,22 @@ jQuery(document).ready(function(){
     flatpickr("#hq-times-pick-up-time", timeConfig);
     flatpickr("#hq-times-return-date", dateConfig);
     flatpickr("#hq-times-return-time", timeConfig);
+
+    setDefaults(dateFormat, jsDateFormat);
+    jQuery("#hq-times-pick-up-date").on("change",function(){
+        var newDate = dayjs(jQuery("#hq-times-pick-up-date").val(), dateFormat).add(1, 'day').format(jsDateFormat);
+        jQuery("#hq-times-return-date").val(newDate);
+    });
+    jQuery("#hq-times-pick-up-time").on("change",function(){
+        jQuery("#hq-times-return-time").val(jQuery("#hq-times-pick-up-time").val());
+    });
 });
+function setDefaults(dateFormat, jsDateFormat){
+    var newDate = dayjs().format(jsDateFormat);
+    var tomorrowDate = dayjs().add(1, 'day').format(jsDateFormat);
+    var nowMinute = dayjs().add(15,'minute').format("HH:mm");
+    jQuery("#hq-times-pick-up-date").val(newDate);
+    jQuery("#hq-times-return-date").val(tomorrowDate);
+    jQuery("#hq-times-pick-up-time").val(nowMinute);
+    jQuery("#hq-times-return-time").val(nowMinute);
+}

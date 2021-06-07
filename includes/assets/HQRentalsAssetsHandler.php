@@ -60,6 +60,8 @@ class HQRentalsAssetsHandler
         wp_register_style('hq-map-form-style', plugin_dir_url(__FILE__) . 'css/hq-gcar-map.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_script('hq-iframe-resizer-script', plugin_dir_url(__FILE__) . 'js/iframeResizer.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-moment', plugin_dir_url(__FILE__) . 'js/moment.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-daysjs-js', plugin_dir_url(__FILE__) . 'js/dayjs.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-daysjs-custom-js', plugin_dir_url(__FILE__) . 'js/daysjs-customParseFormat.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-datepicker-js', plugin_dir_url(__FILE__) . 'js/jquery.datetimepicker.full.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-flatpickr-js', plugin_dir_url(__FILE__) . 'js/flatpickr.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-wordpress-openlayer-js', plugin_dir_url(__FILE__) . 'js/ol.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
@@ -254,6 +256,8 @@ class HQRentalsAssetsHandler
         $this->registerGoogleAssets();
         wp_enqueue_style('hq-flatpickr-css');
         wp_enqueue_script('hq-places-form-css');
+        wp_enqueue_script('hq-daysjs-custom-js');
+        wp_enqueue_script('hq-daysjs-js');
         wp_enqueue_script('hq-flatpickr-js');
         wp_enqueue_style('hq-elementor-vehicle-grid-widget-css');
         wp_enqueue_script('hq-flatpickr-js');

@@ -46,3 +46,8 @@
     font-weight: bold;
     font-family: inherit;
 }
+
+/*vertical*/
+.hq-places-date-time-wrapper-vertical{
+    position: relative;
+}

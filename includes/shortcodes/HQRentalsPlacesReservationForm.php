@@ -145,7 +145,9 @@ class HQRentalsPlacesReservationForm
                     .hq-places-vertical-form-wrapper {
                         box-shadow:-2px 15px 18px 6px rgba(0,0,0,.30);
                       }
-                    
+                    b{
+                    display: none;
+                    }
                 </style>
             ". HQRentalsAssetsHandler::getHQFontAwesome() ."
                     <div class='hq-places-vertical-form-wrapper'>
@@ -157,12 +159,25 @@ class HQRentalsPlacesReservationForm
                                             <div class=''>
                                                 <div class='hq-places-vertical-form-item-wrapper'>
                                                     <label for='form-field-location'
-                                                           class='elementor-field-label hq-smart-label'>Pickup Location</label>
-                                                    <div class='elementor-field elementor-select-wrapper hq-places-dates-wrapper-vertical'>
+                                                           class='hq-smart-label'>Pickup Location</label>
+                                                    <div class='hq-places-dates-wrapper-vertical'>
                                                         <input type='text' name='pick_up_location_custom' id='hq-places-field' class='hq-places-auto-complete' placeholder='Address' required='required'>
                                                         <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-map-marked-alt'></i></span>
                                                     </div>
                                                 </div>
+                                                <!--
+                                                <div class='hq-places-vertical-form-item-wrapper'>
+                                                    <label for='form-field-location'
+                                                           class='hq-smart-label'>Vehicle Type</label>
+                                                    <div class='hq-places-dates-wrapper-vertical'>
+                                                        <select name='vehicle_type' placeholder='Vehicle, Bike or Scooter'>
+                                                            <option value='vehicle'>Vehicle</option>
+                                                            <option value='scooter'>Scooter</option>
+                                                            <option value='bike'>Bike</option>
+                                                        </select>
+                                                        <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-chevron-down'></i></span>
+                                                    </div>
+                                                </div>-->
                                                 <div class='hq-places-vertical-form-item-wrapper hq-places-vertical-form-dates-wrapper'>
                                                       <div>
                                                             <label class='hq-places-label'>From</label> 
@@ -198,7 +213,7 @@ class HQRentalsPlacesReservationForm
                                                             class='hq-submit-button'>
                                                            <span>
                                                            <span class='elementor-button-icon'></span>
-                                                           <span class='elementor-button-text'>Find a Car</span>
+                                                           <span class='elementor-button-text'>Book Now</span>
                                                            </span>
                                                     </button>
                                                     <input type='hidden' name='target_step' value='2'>

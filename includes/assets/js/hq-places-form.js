@@ -15,7 +15,7 @@ function initPlacesForm() {
     autocomplete = new google.maps.places.Autocomplete(addressField, {
         componentRestrictions: { country: ["us"] },
         fields: ["address_components", "geometry"],
-        types: ["address","establishment"],
+        types: ["address"],
     });
     //address1Field.focus();
     addressField.focus();

@@ -252,8 +252,10 @@ class HQRentalsAssetsHandler
     public function loadPlacesReservationAssets()
     {
         $this->registerGoogleAssets();
-        wp_enqueue_script('hq-flatpickr-js');
         wp_enqueue_style('hq-flatpickr-css');
+        wp_enqueue_script('hq-places-form-css');
+        wp_enqueue_script('hq-flatpickr-js');
+
         wp_enqueue_style('hq-elementor-vehicle-grid-widget-css');
         wp_enqueue_script('hq-flatpickr-js');
         wp_enqueue_script('hq-places-form-js');

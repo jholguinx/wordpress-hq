@@ -47,6 +47,19 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
                 'input_type' => 'string',
             ]
         );
+        /*
+        $this->add_control(
+            'orientation',
+            [
+                'label' => __('Orientation', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'horizontal',
+                'options' => [
+                    'horizontal'  => __( 'Horizontal', 'hq-wordpress' ),
+                    'vertical' => __( 'Vertical', 'hq-wordpress' ),
+                ],
+            ]
+        );*/
         $this->end_controls_section();
 
     }

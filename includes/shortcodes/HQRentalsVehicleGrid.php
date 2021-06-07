@@ -79,6 +79,7 @@ class HQRentalsVehicleGrid
 
     public function resolveSingleVehicleHTML($vehicle): string
     {
+        $rateTag  = empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? "" : "<p><span>{$vehicle->getActiveRate()->daily_rate->amount_for_display}</span>/Day</p>";
         $html = "
                 <div id='hq-vehicle-class-{$vehicle->getId()}' class='vehicle-card'>
                     <div class='hq-list-image-wrapper'>
@@ -89,7 +90,7 @@ class HQRentalsVehicleGrid
                     </div>
                     " . $this->resolveVehicleFeaturesHTML($vehicle) . "
                     <div class='bottom-info'>
-                        <p><span>{$vehicle->getActiveRate()->daily_rate->amount_for_display}</span>/Day</p>
+                        {$rateTag}
                         <a class='hq-list-rent-button' href='{$this->linkURL}'>RENT NOW</a>
                     </div>
                 </div>

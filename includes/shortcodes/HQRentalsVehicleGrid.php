@@ -79,19 +79,27 @@ class HQRentalsVehicleGrid
 
     public function resolveSingleVehicleHTML($vehicle): string
     {
-        $rateTag  = empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? "" : "<p><span>{$vehicle->getActiveRate()->daily_rate->amount_for_display}</span>/Day</p>";
+        $rateTag  = empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? "" : "<h3>{$vehicle->getActiveRate()->daily_rate->amount_for_display}/Day</h3>";
         $html = "
                 <div id='hq-vehicle-class-{$vehicle->getId()}' class='vehicle-card'>
                     <div class='hq-list-image-wrapper'>
                         <img class='img-response' src='{$vehicle->getPublicImage()}'>
                     </div>
-                    <div class='hq-list-label-wrapper'>
-                        <h3>{$vehicle->getLabelForWebsite()}</h3>
+                    <div class='hq-vehicle-content-wrapper'>
+                        <div class='hq-list-label-wrapper-inner'>
+                            <h3>{$vehicle->getLabelForWebsite()}</h3>
+                            {$rateTag}
+                        </div>
                     </div>
-                    " . $this->resolveVehicleFeaturesHTML($vehicle) . "
-                    <div class='bottom-info'>
-                        {$rateTag}
-                        <a class='hq-list-rent-button' href='{$this->linkURL}'>RENT NOW</a>
+                    <div style='width: 100%;'>
+                        <div>
+                            " . $this->resolveVehicleFeaturesHTML($vehicle) . "    
+                        </div>
+                        <div class='hq-grid-button-wrapper'>
+                            <div class='bottom-info hq-grid-button-wrapper'>
+                                <a class='hq-list-rent-button' href='{$this->linkURL}'>RENT NOW</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
         ";

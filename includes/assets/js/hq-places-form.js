@@ -38,9 +38,10 @@ function updateReturnLocation(){
     document.querySelector("#hq-return-location-custom").value = document.querySelector("#hq-places-field").value;
 }
 jQuery(document).ready(function(){
-    const dateFormat = hqRentalsSystemDateformat.split(' ')[0];
-    const timeFormat = hqRentalsSystemDateformat.split(' ')[1];
-    const jsDateFormat = 'YYYY-MM-DD'
+    const dateFormat = hqRentalsTenantDatetimeFormat.split(' ')[0];
+    //const timeFormat = hqRentalsTenantDatetimeFormat.split(' ')[1];
+    const timeFormat = "H:iK";
+    const jsDateFormat = 'MM/DD/YYYY'
     const dateConfig  = {
         dateFormat: dateFormat,
         disableMobile: true,
@@ -53,7 +54,7 @@ jQuery(document).ready(function(){
         altFormat: timeFormat,
         altInput: timeFormat,
         ariaDateFormat: timeFormat,
-        time_24hr: true
+        time_24hr: false
     }
     flatpickr("#hq-times-pick-up-date", dateConfig);
     flatpickr("#hq-times-pick-up-time", timeConfig);
@@ -72,7 +73,7 @@ jQuery(document).ready(function(){
 function setDefaults(dateFormat, jsDateFormat){
     var newDate = dayjs().format(jsDateFormat);
     var tomorrowDate = dayjs().add(1, 'day').format(jsDateFormat);
-    var nowMinute = dayjs().add(15,'minute').format("HH:mm");
+    var nowMinute = dayjs().add(15,'minute').format("HH:mm A");
     jQuery("#hq-times-pick-up-date").val(newDate);
     jQuery("#hq-times-return-date").val(tomorrowDate);
     jQuery("#hq-times-pick-up-time").val(nowMinute);

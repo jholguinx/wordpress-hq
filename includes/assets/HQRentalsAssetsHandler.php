@@ -77,7 +77,7 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-availability-grip-script', plugin_dir_url(__FILE__) . 'js/hq-availability-grid.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hg-gcar-vehicle-filter-js', plugin_dir_url(__FILE__) . 'js/hq-gcar-vehicle-filter.js', array(), HQ_RENTALS_PLUGIN_VERSION . '1', true);
         wp_register_script('hq-reservation-form-setup', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
-        wp_register_script('hq-places-form-js', plugin_dir_url(__FILE__) . 'js/hq-places-form.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-places-form-js', plugin_dir_url(__FILE__) . 'js/hq-places-form.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_enqueue_script('hq-dummy-script');
         global $post;
         $theme = wp_get_theme();

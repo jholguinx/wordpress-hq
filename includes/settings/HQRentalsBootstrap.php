@@ -100,6 +100,9 @@ class HQRentalsBootstrap
         if($this->settings->noEnableCustomPostsPages()){
             $this->settings->setEnableCustomPostsPages('false');
         }
+        if($this->settings->noGoogleAPIKey()){
+            $this->settings->setGoogleAPIKey('');
+        }
         if($this->settings->isEnableCustomPostsPages()){
             $this->resolveDefaultPages();
         }

@@ -45,6 +45,7 @@ class HQRentalsSettings
     public $hq_auth_email = 'hq_auth_email';
     public $hq_currency_symbol = 'hq_currency_symbol';
     public $hq_enable_custom_post_pages = 'hq_enable_custom_post_pages';
+    public $hq_google_api_key = 'hq_google_api_key';
 
     public function __construct()
     {
@@ -546,7 +547,9 @@ class HQRentalsSettings
                     $this->saveApiTenantTokenForWorkspot($postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location]);
                 } elseif ($key == $this->api_user_token_workspot_gebouw_location) {
                     $this->saveApiUserTokenForWorkspotModule($postDataFromSettings[$this->api_user_token_workspot_gebouw_location]);
-                } else {
+                } elseif ($key == $this->hq_google_api_key){
+                    $this->setGoogleAPIKey($postDataFromSettings[$this->hq_google_api_key]);
+                }else {
                     update_option($key, sanitize_text_field($data));
                 }
             }
@@ -704,15 +707,14 @@ class HQRentalsSettings
         return get_option($this->hq_auth_email, "");
     }
 
-    public function noCurrencyIconOption()
-    {
-        return empty(get_option($this->hq_currency_symbol));
-    }
     public function noEnableCustomPostsPages()
     {
         return empty(get_option($this->hq_enable_custom_post_pages));
     }
-
+    public function noCurrencyIconOption()
+    {
+        return empty(get_option($this->hq_currency_symbol));
+    }
     public function setCurrencyIconOption($icon)
     {
         return update_option($this->hq_currency_symbol, $icon);
@@ -721,5 +723,18 @@ class HQRentalsSettings
     public function getCurrencyIconOption()
     {
         return get_option($this->hq_currency_symbol, '');
+    }
+    public function noGoogleAPIKey()
+    {
+        return empty(get_option($this->hq_google_api_key));
+    }
+    public function setGoogleAPIKey($key)
+    {
+        return update_option($this->hq_google_api_key, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($key)));
+    }
+
+    public function getGoogleAPIKey()
+    {
+        return HQRentalsEncryptionHandler::decrypt(get_option($this->hq_google_api_key));
     }
 }

@@ -73,7 +73,7 @@ jQuery(document).ready(function(){
 function setDefaults(dateFormat, jsDateFormat){
     var newDate = dayjs().format(jsDateFormat);
     var tomorrowDate = dayjs().add(1, 'day').format(jsDateFormat);
-    var nowMinute = dayjs().add(15,'minute').format("HH:mm A");
+    var nowMinute = dayjs().add(15,'minute').format("h:mm A");
     jQuery("#hq-times-pick-up-date").val(newDate);
     jQuery("#hq-times-return-date").val(tomorrowDate);
     jQuery("#hq-times-pick-up-time").val(nowMinute);

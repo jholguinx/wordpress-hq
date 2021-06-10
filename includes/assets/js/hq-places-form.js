@@ -40,7 +40,7 @@ function updateReturnLocation(){
 jQuery(document).ready(function(){
     const dateFormat = hqRentalsTenantDatetimeFormat.split(' ')[0];
     //const timeFormat = hqRentalsTenantDatetimeFormat.split(' ')[1];
-    const timeFormat = "H:iK";
+    const timeFormat = "h:iK";
     const jsDateFormat = 'MM/DD/YYYY'
     const dateConfig  = {
         dateFormat: dateFormat,

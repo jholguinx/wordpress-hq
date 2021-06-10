@@ -59,4 +59,16 @@ class HQRentalsDBQueriesBrands extends HQRentalsDBBaseQueries
             $this->db->delete($this->model->getTableName(), $ids);
         }
     }
+    public function getBrandsSelectorForElementor() : array
+    {
+        $brands = $this->allBrands();
+        if(is_array($brands) and count($brands)){
+            $options = [];
+            foreach ($brands as $brand){
+                $options[(string) $brand->getId()] = (string)$brand->getName();
+            }
+            return $options;
+        }
+        return [];
+    }
 }

@@ -8,13 +8,17 @@ use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 class HQRentalsReservationFormSnippetShortcode extends HQBaseShortcode
 {
     static $shortcodeTag = 'hq_rentals_reservation_form_snippet';
+    private $brand_id;
 
-    public function __construct()
+    public function __construct($params = null)
     {
         add_shortcode(HQRentalsReservationFormSnippetShortcode::$shortcodeTag, array($this, 'renderShortcode'));
+        if(!empty($params['id'])){
+            $this->brand_id = $params['id'];
+        }
     }
 
-    public function renderShortcode($atts)
+    public function renderShortcode($atts = null)
     {
         $atts = shortcode_atts(
             array(
@@ -25,7 +29,7 @@ class HQRentalsReservationFormSnippetShortcode extends HQBaseShortcode
             ), $atts);
         ob_start();
         $brand = new HQRentalsModelsBrand();
-        $brand->findBySystemId($atts['id']);
+        $brand->findBySystemId((int) !empty($this->brand_id) ? $this->brand_id : $atts['id']);
         return $this->filledSnippetData($brand->getReservationFormSnippet(), $atts);
     }
 }

@@ -566,7 +566,7 @@ class HQRentalsAdminSettings
                                             </div>
                                             <div class="hq-general-input-wrapper">
                                                 <input type="text"
-                                                       class="hq-admin-text-input hq-admin-text-input-medium medium"
+                                                       class="hq-admin-text-input hq-admin-text-input-medium medium large"
                                                        name="<?php echo $this->settings->hq_google_api_key; ?>"
                                                        value="<?php echo esc_attr($this->settings->getGoogleAPIKey()); ?>"/>
                                             </div>
@@ -580,7 +580,7 @@ class HQRentalsAdminSettings
                                        name="save" value="SAVE"
                                        class="button button-primary button-large hq-admin-submit-button">
                                 <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
-                                                                                                 href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
+                                                                 href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
                                     more information on how to set up the HQ Rentals plugin.</p>
                             </div>
                         </div>

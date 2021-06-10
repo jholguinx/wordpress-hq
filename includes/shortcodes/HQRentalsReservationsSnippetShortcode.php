@@ -26,7 +26,7 @@ class HQRentalsReservationsSnippetShortcode extends HQBaseShortcode
             ), $atts);
         ob_start();
         $brand = new HQRentalsModelsBrand();
-        $brand->findBySystemId((int) !empty($this->brand_id) ? $this->brand_id : $atts['id']);
+        $brand->findBySystemId((int) (!empty($this->brand_id) ? $this->brand_id : $atts['id']));
         return $this->filledSnippetData($brand->getReservationSnippet(), $atts);
     }
 }

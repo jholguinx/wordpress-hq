@@ -71,4 +71,16 @@ class HQRentalsDBQueriesBrands extends HQRentalsDBBaseQueries
         }
         return [];
     }
+    public function getBrandsForBakery() : array
+    {
+        $brands = $this->allBrands();
+        if(is_array($brands) and count($brands)){
+            $options = [];
+            foreach ($brands as $brand){
+                $options[] = (string)$brand->getId();
+            }
+            return $options;
+        }
+        return [];
+    }
 }

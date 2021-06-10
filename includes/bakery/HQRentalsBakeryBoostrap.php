@@ -25,7 +25,9 @@ class HQRentalsBakeryBoostrap{
         return array_merge(
             $this->dependencies,
             array(
-                plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryVehicleGridShortcode.php'
+                plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryVehicleGridShortcode.php',
+                plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryReservationsShortcode.php',
+                plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryReservationFormShortcode.php',
             )
         );
     }

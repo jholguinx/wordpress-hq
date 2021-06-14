@@ -12,12 +12,27 @@ class HQRentalsBakeryBoostrap{
         if(is_plugin_active('js_composer/js_composer.php')){
             $this->requireDependencies();
         }
+        $this->resolveFileForMotorsTheme();
     }
     public function requireDependencies()
     {
         foreach ($this->resolveFiles() as $file) {
             if (file_exists($file)) {
                 require_once($file);
+            }
+        }
+    }
+    public function resolveFileForMotorsTheme()
+    {
+        $theme = wp_get_theme();
+        if ($theme->stylesheet === 'motors' or $theme->stylesheet === 'motors-child') {
+            $themeDeps = array(
+                plugin_dir_path( __FILE__ ) . 'motors/HQRentalBakeryMotorsVehicleGridShortcode.php',
+            );
+            foreach ($themeDeps as $file){
+                if (file_exists($file)) {
+                    require_once($file);
+                }
             }
         }
     }

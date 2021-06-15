@@ -10,6 +10,7 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
 {
     private $query;
     private $reservationURL;
+    private $title;
 
     public function __construct()
     {
@@ -22,9 +23,11 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     {
         extract( shortcode_atts( array(
             'reservation_page_url'				=>	'',
+            'title'                             =>  ''
 
         ), $atts ) );
         $this->reservationURL = $atts['reservation_page_url'];
+        $this->title = $atts['title'];
         echo $this->renderShortcode();
     }
 
@@ -42,10 +45,16 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                 'params' => array(
                     array(
                         'type' => 'textfield',
+                        'heading' => __('Title', 'hq-wordpress'),
+                        'param_name' => 'title',
+                        'value' => ''
+                    ),
+                    array(
+                        'type' => 'textfield',
                         'heading' => __('Reservation URL', 'hq-wordpress'),
                         'param_name' => 'reservation_page_url',
                         'value' => ''
-                    ),
+                    )
                 )
             )
         );
@@ -63,7 +72,7 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                 <div class='wpb_column vc_column_container vc_col-sm-12'>
                     <div class='vc_column-inner'>
                         <div class='wpb_wrapper'>
-                            <h1 style='font-size: 30px;color: #000000;line-height: 50px;text-align: center' class='vc_custom_heading vc_custom_1611635496249'>Reserve a Vehicle</h1>
+                            <h1 style='font-size: 30px;color: #000000;line-height: 50px;text-align: center' class='vc_custom_heading vc_custom_1611635496249'>{$this->title}</h1>
                                 <div class='stm_products_grid_class'>
                                     ". $html_loop ."
                                 </div>

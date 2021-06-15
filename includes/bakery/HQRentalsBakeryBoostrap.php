@@ -28,6 +28,7 @@ class HQRentalsBakeryBoostrap{
         if ($theme->stylesheet === 'motors' or $theme->stylesheet === 'motors-child') {
             $themeDeps = array(
                 plugin_dir_path( __FILE__ ) . 'motors/HQRentalBakeryMotorsVehicleGridShortcode.php',
+                plugin_dir_path( __FILE__ ) . 'motors/HQRentalBakeryMotorsReservationFormShortcode.php',
             );
             foreach ($themeDeps as $file){
                 if (file_exists($file)) {

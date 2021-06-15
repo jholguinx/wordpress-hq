@@ -2,9 +2,10 @@
 
 use \HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use \HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 
+new HQRentalBakeryMotorsReservationFormShortcode();
 
-new HQRentalBakeryMotorsVehicleGridShortcode();
 
 class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
 {
@@ -16,6 +17,8 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
         add_action('vc_before_init', array($this, 'setParams'));
         add_shortcode('hq_bakery_motors_vehicle_grid', array($this, 'content'));
         $this->query = new HQRentalsDBQueriesVehicleClasses();
+        $this->assets = new HQRentalsAssetsHandler();
+        $this->helper = new HQRentalsFrontHelper();
     }
 
     public function content($atts, $content = null)
@@ -32,12 +35,12 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
     {
         vc_map(
             array(
-                'name' => __('HQ Vehicles Classes Grid', 'hq-wordpress'),
-                'base' => 'hq_bakery_motors_vehicle_grid',
+                'name' => __('HQ Reservation Form', 'hq-wordpress'),
+                'base' => 'hq_bakery_motors_reservation_form',
                 'content_element' => true,
                 "category" => __('HQ Rental Software - Motors Theme'),
                 'show_settings_on_create' => true,
-                'description' => __('HQ Vehicles Classes Grid', 'hq-wordpress'),
+                'description' => __('HQ Reservation Form', 'hq-wordpress'),
                 'icon' => HQRentalsAssetsHandler::getHQLogo(),
                 'params' => array(
                     array(
@@ -45,7 +48,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                         'heading' => __('Reservation URL', 'hq-wordpress'),
                         'param_name' => 'reservation_page_url',
                         'value' => ''
-                    ),
+                    )
                 )
             )
         );
@@ -76,87 +79,49 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
             'pick_brand_label'                  =>  '',
             'pick_brand_placeholder'            =>  ''
         ), $atts ) );
-        return HQRentalsAssetsHandler::getHQFontAwesome() . "
-            <div class='stm_rent_car_form_wrapper caag-book-form-style style_1 <?php echo $alignment; ?>'>
+        $this->assets->loadDatePickersReservationAssets();
+        $locations_options = $this->helper->getLocationOptions();
+        echo HQRentalsAssetsHandler::getHQFontAwesome() . "
+            <div class='stm_rent_car_form_wrapper caag-book-form-style style_1 <?php echo alignment; ?>'>
                 <div class='stm_rent_car_form'>
-                    <?php if($multiple_brands): ?>
-                    <form id='caag-book-form' action='<?php echo $brands_links[0]['link']; ?>' method='post'>
-                        <?php else: ?>
-                        <form id='caag-book-form' action='<?php echo $action_link; ?>' method='post'>
-                            <?php endif; ?>
-                            <?php if($multiple_brands): ?>
-                                <h4><?php echo $pick_brand_label; ?></h4>
-                                <div class='stm_rent_form_fields' style='margin-bottom: 15px;'>
-                                    <div class='stm_pickup_location'>
-                                        <i class='stm-service-icon-pin'></i>
-                                        <select id='hq-pick-brand' name='pick_up_location' data-class='stm_rent_location' tabindex='-1' class='select2-hidden-accessible' aria-hidden='true'>
-                                            <option><?php echo $pick_brand_placeholder; ?></option>
-                                            <?php foreach ($brands_links as $brand): ?>
-                                                <option value='<?php echo $brand['link']; ?>'><?php echo $brand['name']; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                            <h4><?php echo $pick_up_location_label; ?></h4>
+                        <form id='caag-book-form' action='<?php echo action_link; ?>' method='post'>
+                            <h4>Pickup Location</h4>
                             <div class='stm_rent_form_fields'>
                                 <div class='stm_pickup_location'>
                                     <i class='stm-service-icon-pin'></i>
                                     <select id='hq-pick-up-location' name='pick_up_location' data-class='stm_rent_location' tabindex='-1' class='select2-hidden-accessible' aria-hidden='true'>
-                                        <option value=''><?php echo $pick_up_location_placeholder; ?></option>
-                                        <?php foreach ($pickup_locations as $location): ?>
-                                            <option value='<?php echo $location['id']; ?>'><?php echo $location['label']; ?></option>
-                                        <?php endforeach; ?>
+                                        <option value=''>Select Location</option>
+                                        ". $locations_options ."
                                     </select>
                                 </div>
                             </div>
-                            <div id='hq-delivery-location-wrapper'>
-                                <h4 style='margin-top:18px;'><?php echo $delivery_location_label; ?></h4>
-                                <div class='stm_date_time_input'>
-                                    <div class='stm_date_input'>
-                                        <input type='text' value='' class='hq-text-fields' name='pick_up_location_custom' placeholder='<?php echo $delivery_location_placeholder; ?>' >
-                                        <i class='stm-service-icon-pin'></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 style='margin-top:18px;'><?php echo $return_location_label; ?></h4>
+                            <h4>Return Location</h4>
                             <div class='stm_rent_form_fields'>
                                 <div class='stm_pickup_location'>
                                     <i class='stm-service-icon-pin'></i>
                                     <select id='hq-return-location' name='return_location' data-class='stm_rent_location' tabindex='-1' class='select2-hidden-accessible' aria-hidden='true'>
-                                        <option value=''><?php echo $return_location_placeholder; ?></option>
-                                        <?php foreach ($return_locations as $location): ?>
-                                            <option value='<?php echo $location['id']; ?>'><?php echo $location['label']; ?></option>
-                                        <?php endforeach; ?>
+                                        <option value=''>Select Location</option>
+                                        ". $locations_options ."
                                     </select>
                                 </div>
-                                <div id='hq-collection-location-wrapper'>
-                                    <h4 style='margin-top:18px;'><?php echo $collection_location_label; ?></h4>
-                                    <div class='stm_date_time_input'>
-                                        <div class='stm_date_input'>
-                                            <input type='text' value='' class='hq-text-fields' name='return_location_custom' placeholder='<?php echo $collection_location_placeholder; ?>'>
-                                            <i class='stm-service-icon-pin'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h4 style='margin-top:18px;'><?php echo $pick_up_date_label; ?></h4>
+                                <h4>Pickup Date</h4>
                                 <div class='stm_date_time_input'>
                                     <div class='stm_date_input'>
-                                        <input type='text' id='caag-pick-up-date' class=' active' name='pick_up_date' placeholder='<?php echo $pick_up_date_placeholder; ?>' required='' readonly=''>
+                                        <input type='text' id='hq_pick_up_date' class=' active' name='pick_up_date' placeholder='Today' required='' readonly=''>
                                         <i class='stm-icon-date'></i>
                                     </div>
                                 </div>
                             </div>
-                            <h4><?php echo $return_date_label; ?></h4>
+                            <h4>Return Date</h4>
                             <div class='stm_rent_form_fields stm_rent_form_fields-drop'>
                                 <div class='stm_date_time_input'>
                                     <div class='stm_date_input'>
-                                        <input type='text' id='caag-return-date' class=' active' name='return_date' placeholder='<?php echo $return_date_placeholder; ?>' required='' readonly=''>
+                                        <input type='text' id='hq_return_date' class=' active' name='return_date' placeholder='Tomorrow' required='' readonly=''>
                                         <i class='stm-icon-date'></i>
                                     </div>
                                 </div>
                             </div>
-                            <button type='submit'><?php echo $button_text; ?><i class='fa fa-arrow-right'></i></button>
+                            <button type='submit'>Book<i class='fa fa-arrow-right'></i></button>
                         </form>
                 </div>
             </div>

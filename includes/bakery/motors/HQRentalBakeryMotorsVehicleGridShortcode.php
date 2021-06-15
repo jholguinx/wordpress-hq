@@ -9,6 +9,7 @@ new HQRentalBakeryMotorsVehicleGridShortcode();
 class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
 {
     private $query;
+    private $reservationURL;
 
     public function __construct()
     {
@@ -19,6 +20,11 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
 
     public function content($atts, $content = null)
     {
+        extract( shortcode_atts( array(
+            'reservation_page_url'				=>	'',
+
+        ), $atts ) );
+        $this->reservationURL = $atts['reservation_page_url'];
         echo $this->renderShortcode();
     }
 
@@ -36,14 +42,8 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                 'params' => array(
                     array(
                         'type' => 'textfield',
-                        'heading' => __('Currency Symbol', 'hq-wordpress'),
-                        'param_name' => 'currency_symbol',
-                        'value' => ''
-                    ),
-                    array(
-                        'type' => 'textfield',
-                        'heading' => __('Day', 'hq-wordpress'),
-                        'param_name' => 'day',
+                        'heading' => __('Reservation URL', 'hq-wordpress'),
+                        'param_name' => 'reservation_page_url',
                         'value' => ''
                     ),
                 )
@@ -79,7 +79,7 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
         return "
 
         <div class='stm_product_grid_single'>
-            <a href='test' class='inner'>
+            <a href='{$this->reservationURL}' class='inner'>
                 <div class='stm_top clearfix'>
                     <div class='stm_left heading-font'>
                         <h3>{$vehicle->getLabelForWebsite()}</h3>

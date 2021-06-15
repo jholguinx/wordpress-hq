@@ -729,7 +729,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             return $this->labels->{$this->locale->language};
         }
     }
-    public function getVehicleFeatures()
+        public function getVehicleFeatures()
     {
         return $this->features;
     }

@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsAssets;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesWorkspotLocations;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
@@ -20,6 +21,7 @@ class HQRentalsAssetsHandler
     protected $systemDateFormatFrontName = 'hqRentalsSystemDateformat';
     protected $workspotLocationsDataName = 'hqWorkspotLocations';
     protected $tenantDatetimeFormatFrontName = 'hqRentalsTenantDatetimeFormat';
+    protected $hqMomentDateFormat = 'hqMomentDateFormat';
     protected $site = 'hqSite';
     protected $spinner = 'hqSpinner';
 
@@ -30,6 +32,7 @@ class HQRentalsAssetsHandler
         $this->locationQueries = new HQRentalsQueriesLocations();
         $this->vehicleQueries = new HQRentalsQueriesVehicleClasses();
         $this->settings = new HQRentalsSettings();
+        $this->helper = new HQRentalsDatesHelper();
         $this->workspotQuery = new HQRentalsQueriesWorkspotLocations();
         if (static::$count === 1) {
             add_action('wp_enqueue_scripts', array($this, 'registerPluginAssets'), 10);
@@ -122,6 +125,7 @@ class HQRentalsAssetsHandler
         wp_localize_script('hq-dummy-script', $this->frontDateFormatFrontName, $this->settings->getFrontEndDatetimeFormat());
         wp_localize_script('hq-dummy-script', $this->systemDateFormatFrontName, $this->settings->getHQDatetimeFormat());
         wp_localize_script('hq-dummy-script', $this->tenantDatetimeFormatFrontName, $this->settings->getTenantDatetimeFormat());
+        wp_localize_script('hq-dummy-script', $this->hqMomentDateFormat, $this->helper->convertPhpToJsMomentFormat($this->settings->getTenantDatetimeFormat()));
         wp_localize_script('hq-dummy-script', $this->site, $site . '/');
         wp_localize_script('hq-dummy-script', $this->spinner, plugins_url('hq-rental-software/includes/assets/img/screen-spinner.gif'));
         /*

@@ -1,5 +1,6 @@
 (function ($) {
-    var formatDate = hqRentalsFrontEndDateformat;
+    var formatDate = hqRentalsTenantDatetimeFormat;
+    var momentFormat = hqMomentDateFormat;
     var configPickup = {
         format: formatDate,
         closeOnDateSelect: true,
@@ -16,5 +17,11 @@
     };
     jQuery('#hq_pick_up_date').datetimepicker(configPickup);
     jQuery('#hq_return_date').datetimepicker(configReturn);
-    // Custom locations inputs
+    jQuery('#hq_pick_up_date').on("change",function(){
+        jQuery('#hq_return_date').val(moment(jQuery('#hq_pick_up_date').val(), momentFormat).add(1, 'days').format(momentFormat));
+    });
+    jQuery('#hq-pick-up-location').on("change",function(){
+        jQuery('#hq-return-location').val(jQuery('#hq-pick-up-location').val());
+    });
+
 })(jQuery);

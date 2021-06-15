@@ -88,7 +88,7 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
         return "
 
         <div class='stm_product_grid_single'>
-            <a href='{$this->reservationURL}' class='inner'>
+            <a href='{$this->reservationURL}?target_step=1&vehicle_class_id={$vehicle->getId()}' class='inner'>
                 <div class='stm_top clearfix'>
                     <div class='stm_left heading-font'>
                         <h3>{$vehicle->getLabelForWebsite()}</h3>

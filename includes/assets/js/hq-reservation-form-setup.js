@@ -20,8 +20,8 @@
     jQuery('#hq_pick_up_date').on("change",function(){
         jQuery('#hq_return_date').val(moment(jQuery('#hq_pick_up_date').val(), momentFormat).add(1, 'days').format(momentFormat));
     });
+    /*
     jQuery('#hq-pick-up-location').on("change",function(){
         jQuery('#hq-return-location').val(jQuery('#hq-pick-up-location').val());
-    });
-
+    });*/
 })(jQuery);

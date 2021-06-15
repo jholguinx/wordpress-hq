@@ -105,6 +105,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                         </div>
                         <div class='hq-motors-input-wrapper'>
                             <button type='submit'>Book<i class='fa fa-arrow-right'></i></button>
+                            <input type='hidden' name='target_step' value='2'>
                         </div>    
                         </form>
                 </div>

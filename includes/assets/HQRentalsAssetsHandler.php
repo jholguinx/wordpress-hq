@@ -225,6 +225,11 @@ class HQRentalsAssetsHandler
         $data = array(
             'HQFormatDate' => $this->settings->getFrontEndDatetimeFormat()
         );
+        $theme = wp_get_theme();
+        if ($theme->stylesheet === 'motors' or $theme->stylesheet === 'motors-child') {
+            //main js code
+            wp_dequeue_script('stm-theme-scripts');
+        }
         wp_localize_script('hq-reservation-form-setup', 'HQReservationFormData', $data);
     }
 

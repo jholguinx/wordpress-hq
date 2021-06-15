@@ -118,6 +118,27 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                     padding-top: 5px;
                     padding-bottom: 5px; 
                 }
+                .stm_pickup_location select{
+                    padding-left: 37px;
+                    height: 40px;
+                    line-height: 40px;
+                    background-color: #fff;
+                    border: 0;    
+                    z-index: 10;  
+                    width: 100%;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                }
+                .stm-template-car_rental .stm_rent_car_form_wrapper .stm_pickup_location{
+                    padding-right: 10px;
+                }
+                .stm-template-car_rental .stm_rent_car_form_wrapper .stm_pickup_location > i{
+                    left: 16px !important;
+                }
+                
+                .stm-template-car_rental .stm_rent_car_form_wrapper .stm_pickup_location{
+                    background-color: #fff;
+                }
             </style>
         ";
     }

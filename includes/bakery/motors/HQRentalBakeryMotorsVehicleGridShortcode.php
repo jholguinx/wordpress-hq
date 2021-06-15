@@ -68,11 +68,11 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
             $html_loop .= $this->resolveSingleVehicleCode($vehicle);
         }
         return HQRentalsAssetsHandler::getHQFontAwesome() . "
-            <div class='vc_row wpb_row vc_row-fluid stm-fullwidth-with-parallax vc_custom_1612726915310 vc_row-no-padding'>
-                <div class='wpb_column vc_column_container vc_col-sm-12'>
+            <div class='wpb_column vc_column_container vc_col-sm-12 hq-grid-wrapper'>
+                <div class='wpb_column vc_column_container vc_col-sm-12 hq-grid-inner-wrapper'>
                     <div class='vc_column-inner'>
                         <div class='wpb_wrapper'>
-                            <h1 style='font-size: 30px;color: #000000;line-height: 50px;text-align: center' class='vc_custom_heading vc_custom_1611635496249'>{$this->title}</h1>
+                            <h1 style='font-size: 30px;color: #000000;line-height: 50px;text-align: center' class='vc_custom_heading'>{$this->title}</h1>
                                 <div class='stm_products_grid_class'>
                                     ". $html_loop ."
                                 </div>
@@ -80,6 +80,24 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                     </div>
                 </div>
             </div>
+            <style>
+            .hq-grid-wrapper{
+                display: flex;
+                flex: 1;
+                justify-content: center;
+                align-items: center;
+                padding-top: 40px;
+            }
+            .hq-grid-inner-wrapper{
+                max-width: 1200px;
+            }
+            @media only screen and (max-width: 767px) {
+                .hq-grid-inner-wrapper{
+                    margin-left: 5%;
+                    margin-right: 5%;
+                }   
+            }
+            </style>
         ";
     }
 

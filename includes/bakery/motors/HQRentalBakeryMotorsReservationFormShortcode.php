@@ -61,6 +61,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
             <div class='stm_rent_car_form_wrapper style_1 text-right'>
                 <div class='stm_rent_car_form'>
                         <form action='{$this->reservationURL}' method='get'>
+                        <div class='hq-motors-input-wrapper'>
                             <h4>Pickup</h4>
                             <div class='stm_rent_form_fields'>
                                 <div class='stm_pickup_location'>
@@ -71,6 +72,8 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class='hq-motors-input-wrapper'>
                             <h4>Return</h4>
                             <div class='stm_rent_form_fields'>
                                 <div class='stm_pickup_location'>
@@ -80,27 +83,41 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                                         ". $locations_options ."
                                     </select>
                                 </div>
-                                <h4>From</h4>
-                                <div class='stm_date_time_input'>
-                                    <div class='stm_date_input'>
-                                        <input type='text' id='hq_pick_up_date' class=' active' name='pick_up_date' placeholder='Today' readonly='' required='required'>
-                                        <i class='stm-icon-date'></i>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class='hq-motors-input-wrapper'>
+                            <h4>From</h4>
+                            <div class='stm_date_time_input'>
+                                <div class='stm_date_input'>
+                                    <input type='text' id='hq_pick_up_date' class=' active' name='pick_up_date' placeholder='Today' readonly='' required='required'>
+                                    <i class='stm-icon-date'></i>
                                 </div>
                             </div>
+                        </div>
+                        <div class='hq-motors-input-wrapper'> 
                             <h4>Until</h4>
-                            <div class='stm_rent_form_fields stm_rent_form_fields-drop'>
-                                <div class='stm_date_time_input'>
-                                    <div class='stm_date_input'>
-                                        <input type='text' id='hq_return_date' class=' active' name='return_date' placeholder='Tomorrow' required='required' readonly=''>
-                                        <i class='stm-icon-date'></i>
-                                    </div>
+                            <div class='stm_date_time_input'>
+                                <div class='stm_date_input'>
+                                    <input type='text' id='hq_return_date' class=' active' name='return_date' placeholder='Tomorrow' readonly='' required='required'>
+                                    <i class='stm-icon-date'></i>
                                 </div>
                             </div>
+                        </div>
+                        <div class='hq-motors-input-wrapper'>
                             <button type='submit'>Book<i class='fa fa-arrow-right'></i></button>
+                        </div>    
                         </form>
                 </div>
             </div>
+            <style>
+                .stm-template-car_rental .stm_date_time_input,.stm-template-car_rental .stm_date_time_input{
+                    margin-bottom: 0px !important;
+                }
+                .hq-motors-input-wrapper{
+                    padding-top: 5px;
+                    padding-bottom: 5px; 
+                }
+            </style>
         ";
     }
 }

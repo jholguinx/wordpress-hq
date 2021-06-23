@@ -89,7 +89,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                             <h4>From</h4>
                             <div class='stm_date_time_input'>
                                 <div class='stm_date_input'>
-                                    <input type='text' id='hq_pick_up_date' class=' active' name='pick_up_date' placeholder='Today' readonly='' required='required'>
+                                    <input type='text' id='hq_pick_up_date' class=' active' name='pick_up_date' placeholder='Today' readonly='readonly' required='required'>
                                     <i class='stm-icon-date'></i>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                             <h4>Until</h4>
                             <div class='stm_date_time_input'>
                                 <div class='stm_date_input'>
-                                    <input type='text' id='hq_return_date' class=' active' name='return_date' placeholder='Tomorrow' readonly='' required='required'>
+                                    <input type='text' id='hq_return_date' class=' active' name='return_date' placeholder='Tomorrow' readonly='readonly' required='required'>
                                     <i class='stm-icon-date'></i>
                                 </div>
                             </div>

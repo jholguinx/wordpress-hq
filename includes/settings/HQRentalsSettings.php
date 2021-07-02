@@ -10,10 +10,6 @@ use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
 
 class HQRentalsSettings
 {
-
-    /*
-     * Options Names
-     */
     public $api_user_token = 'hq_wordpress_api_user_token_key_option';
     public $api_tenant_token = 'hq_wordpress_api_tenant_token_key_option';
     public $api_encoded_token = 'hq_wordpress_api_encoded_token_option';
@@ -46,6 +42,8 @@ class HQRentalsSettings
     public $hq_currency_symbol = 'hq_currency_symbol';
     public $hq_enable_custom_post_pages = 'hq_enable_custom_post_pages';
     public $hq_google_api_key = 'hq_google_api_key';
+    public $hq_default_pick_up_time = 'hq_default_pick_up_time';
+    public $hq_default_return_time = 'hq_default_return_time';
 
     public function __construct()
     {
@@ -736,5 +734,32 @@ class HQRentalsSettings
     public function getGoogleAPIKey()
     {
         return HQRentalsEncryptionHandler::decrypt(get_option($this->hq_google_api_key));
+    }
+
+    public function noDefaultPickupTime() : string
+    {
+        return empty(get_option($this->hq_default_pick_up_time));
+    }
+    public function setDefaultPickupTime($data) : bool
+    {
+        return update_option($this->hq_default_pick_up_time, $data);
+    }
+
+    public function getDefaultPickupTime() : string
+    {
+        return get_option($this->hq_default_pick_up_time);
+    }
+    public function noDefaultReturnTime() : bool
+    {
+        return empty(get_option($this->hq_default_return_time));
+    }
+    public function setDefaultReturnTime($data) : bool
+    {
+        return update_option($this->hq_default_return_time, $data);
+    }
+
+    public function getDefaultReturnTime() : string
+    {
+        return get_option($this->hq_default_return_time);
     }
 }

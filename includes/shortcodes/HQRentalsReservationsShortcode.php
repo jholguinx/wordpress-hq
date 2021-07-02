@@ -2,12 +2,12 @@
 
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
-use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 
 class HQRentalsReservationsShortcode
 {

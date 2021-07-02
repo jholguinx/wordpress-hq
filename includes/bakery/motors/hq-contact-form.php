@@ -184,9 +184,9 @@ class WPBakeryShortCode_hq_contact_form extends WPBakeryShortCode{
 }
 
 
-use \HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use \HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
-use \HQRentalsPlugin\HQRentalsShortcodes\HQRentalsReservationFormSnippetShortcode;
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
+use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsReservationFormSnippetShortcode;
 
 new HQRentalsBakeryReservationFormShortcode();
 

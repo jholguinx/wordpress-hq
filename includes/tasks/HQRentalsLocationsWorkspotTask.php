@@ -4,8 +4,8 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotLocation;
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesWorkspotLocations;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotRegion;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesWorkspotLocations;
 
 class HQRentalsLocationsWorkspotTask
 {

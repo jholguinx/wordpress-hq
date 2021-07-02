@@ -21,9 +21,10 @@ if (!defined('WPINC')) {
 
 
 use HQRentalsPlugin\HQRentalsBakery\HQRentalsBakeryBoostrap;
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
 use HQRentalsPlugin\HQRentalsBootstrap\HQRentalsBootstrapPlugin;
 use HQRentalsPlugin\HQRentalsElementor\HQRentalsElementorBoostrap;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
+
 $bootstraper = new HQRentalsBootstrapPlugin();
 
 /*

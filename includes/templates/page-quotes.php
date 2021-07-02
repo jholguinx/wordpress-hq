@@ -1,7 +1,7 @@
 <?php
 
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 $settings = new HQRentalsSettings();
 $front = new HQRentalsFrontHelper();

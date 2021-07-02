@@ -1,7 +1,7 @@
 <?php
 
-use \HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use \HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 
 
 new HQRentalBakeryMotorsVehicleGridShortcode();

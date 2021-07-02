@@ -3,7 +3,6 @@
 namespace HQRentalsPlugin\HQRentalsSettings;
 
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbBootstrapper;
 
 class HQRentalsBootstrap

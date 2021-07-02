@@ -3,7 +3,6 @@
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQGCarVehicleFilterShortcode

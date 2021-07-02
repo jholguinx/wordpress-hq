@@ -2,11 +2,11 @@
 
 namespace HQRentalsPlugin\HQRentalsWebhooks;
 
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use Unirest\Exception;
 
 class HQRentalsWebsiteEndpoints

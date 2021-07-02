@@ -1,6 +1,8 @@
 <?php
-use \HQRentalsPlugin\HQRentalsShortcodes\HQRentalsVehicleGrid;
-use \HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsVehicleGrid;
+
 new HQRentalsBakeryVehicleGridShortcode();
 class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
     public function __construct()

@@ -3,10 +3,10 @@
 namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
 class HQRentalsModelsVehicleClass extends HQRentalsBaseModel

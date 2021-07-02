@@ -2,8 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsThemes;
 
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsBethemeShortcodes;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 
 class HQRentalsBethemeVehicleCarouselShortcode
 {

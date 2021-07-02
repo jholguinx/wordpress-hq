@@ -4,10 +4,10 @@ namespace HQRentalsPlugin\HQRentalsApi;
 
 
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersBrands;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersGoogle;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersLocations;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersSettings;
-use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersBrands;
 
 class HQRentalsApiCallResolver
 {

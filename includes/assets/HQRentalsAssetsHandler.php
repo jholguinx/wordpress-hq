@@ -3,11 +3,11 @@
 namespace HQRentalsPlugin\HQRentalsAssets;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesWorkspotLocations;
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesWorkspotLocations;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 
 class HQRentalsAssetsHandler

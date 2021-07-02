@@ -3,10 +3,10 @@
 namespace HQRentalsPlugin\HQRentalsSettings;
 
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
-use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsEncryptionHandler;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 
 class HQRentalsSettings
 {

@@ -108,34 +108,55 @@ class HQRentalBakeryRentitSliderShortcode extends WPBakeryShortCode
                         max-height: 230px;
                         overflow-y: hidden;
                     }
+                    .swiper-button-next,.swiper-button-prev{
+                        width: 40px;
+                        height: 40px;
+                        line-height: 40px;
+                        margin-top: -20px;
+                        text-align: center;
+                        background: 0 0;
+                        border: solid 4px #14181c;
+                        position: absolute;
+                        top: 50%;
+                    }
+                   .swiper-button-next i,.swiper-button-prev i{
+                        display: flex;
+                        flex: 1;
+                        justify-content: center;
+                        align-items: center;
+                        position: absolute;
+                        color: #000;
+                   }
+                   .swiper .swiper-button-next{
+                        color: transparent;
+                   }
+                   .features-table span{
+                        font-family: Roboto;
+                        font-weight: bold;
+                   }
+                   
                 </style>
                 <script src='https://unpkg.com/swiper/swiper-bundle.min.js'></script>
                 <script>
                     const swiper = new Swiper('.swiper-container-slider-sc', {
-                      // Optional parameters
-                      direction: 'horizontal',
-                      loop: true,
-                      speed: 400,
-                      autoHeight: true,
-                      slidesPerView: 3,
-                    
-                      // If we need pagination
-                      pagination: {
-                        el: '.swiper-pagination',
-                      },
-                    
-                      // Navigation arrows
-                      navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                      },
-                    
-                      // And if we need scrollbar
-                      scrollbar: {
-                        el: '.swiper-scrollbar',
-                      },
+                        // Optional parameters
+                        direction: 'horizontal',
+                        loop: true,
+                        speed: 400,
+                        autoHeight: true,
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                        autoplay: 2000,
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        // And if we need scrollbar
+                        scrollbar: {
+                            el: '.swiper-scrollbar',
+                        },
                     });
-                    </script>
+                </script>
         ";
     }
 
@@ -163,12 +184,12 @@ class HQRentalBakeryRentitSliderShortcode extends WPBakeryShortCode
                         <h4 class='caption-title'>
                             <a href=''>{$vehicle->getLabelForWebsite()}</a>
                         </h4>
-                        <div class='caption-text'>{$vehicle->getActiveRate()->daily_rate->amount_for_display}</div>
+                        <div class='caption-text'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} /per day</div>
                         <div class='buttons'>
                             <a class='btn btn-theme ripple-effect'
                                href=''>Reserve</a>
                         </div>
-                        " . $this->resolveFeatures($vehicle->getVehicleFeatures()) . "
+                        " . $this->resolveFeatures($vehicle->features) . "
                     </div>
                 </div>
             </div>
@@ -177,9 +198,10 @@ class HQRentalBakeryRentitSliderShortcode extends WPBakeryShortCode
 
     public function resolveFeatures($features)
     {
+
         $html = "";
         if (is_array($features) and count($features)) {
-            $html .= "<table class='table'>
+            $html .= "<table class='table features-table'>
                         <tr>";
             foreach ($features as $feature) {
                 $html .= "

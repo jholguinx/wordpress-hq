@@ -24,7 +24,6 @@
         jQuery('#hq_return_date').val(moment(jQuery('#hq_pick_up_date').val(), momentFormat).add(1, 'days').format(momentFormat));
     });
     jQuery('#hq-pick-up-location').on("change", function(){
-        console.log('test', jQuery('#hq-pick-up-location').val());
         jQuery('#hq-return-location').val(jQuery('#hq-pick-up-location').val()).trigger('change');
     });
     jQuery(document).ready(function(){

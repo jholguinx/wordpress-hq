@@ -6,16 +6,16 @@ use HQRentalsPlugin\HQRentalsActions\elementor\HQElementorActions;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsActionsRedirects;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsAjaxHandler;
 use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
-use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsShortcoder;
 use HQRentalsPlugin\HQRentalsCustomPosts\HQRentalsCustomPostsHandler;
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesAries;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsAdminSettings;
+use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsShortcoder;
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
+use HQRentalsPlugin\HQRentalsTemplates\HQRentalsTemplateHandler;
 use HQRentalsPlugin\HQRentalsThemes\HQRentalsBethemeShortcoder;
 use HQRentalsPlugin\HQRentalsWebhooks\HQRentalsWebhooksManager;
 use HQRentalsPlugin\HQRentalsWebhooks\HQRentalsWebsiteEndpoints;
-use HQRentalsPlugin\HQRentalsTemplates\HQRentalsTemplateHandler;
 
 class HQRentalsBootstrapPlugin
 {

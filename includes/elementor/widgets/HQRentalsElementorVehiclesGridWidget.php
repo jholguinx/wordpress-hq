@@ -1,6 +1,7 @@
 <?php
 
-use \HQRentalsPlugin\HQRentalsShortcodes\HQRentalsVehicleGrid;
+use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsVehicleGrid;
+
 class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
 {
     public function __construct($data = [], $args = null)

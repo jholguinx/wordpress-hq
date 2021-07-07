@@ -3,12 +3,6 @@
 namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDataFilter;
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
-
-
 
 
 class HQRentalsModelsVehicleCharge extends HQRentalsBaseModel

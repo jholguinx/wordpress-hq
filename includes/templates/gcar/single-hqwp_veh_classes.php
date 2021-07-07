@@ -1,13 +1,13 @@
 <?php
 global $post;
 
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiDataResolver;
 use HQRentalsPlugin\HQRentalsApihelpers\HQRentalsApihelpersAvailability;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
 
 $vehicle = new HQRentalsModelsVehicleClass($post);
 $helper = new HQRentalsFrontHelper();

@@ -1,10 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsShortcodes;
-use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
-use PHPMailer\PHPMailer\Exception;
 
 
 class HQRentalsAvailabilityCalendarSnippetShortcode extends HQBaseShortcode

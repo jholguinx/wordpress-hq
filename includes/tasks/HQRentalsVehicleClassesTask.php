@@ -2,9 +2,9 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbBootstrapper;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass as HQVehicleClass;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 
 

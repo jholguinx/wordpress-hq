@@ -4,10 +4,10 @@
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueryStringHelper;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsReservationsAdvancedShortcode
 {

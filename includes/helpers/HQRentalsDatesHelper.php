@@ -3,8 +3,8 @@
 namespace HQRentalsPlugin\HQRentalsHelpers;
 
 
-use HQRentalsPlugin\HQRentalsVendor\Carbon;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
 class HQRentalsDatesHelper
 {

@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsHelpers;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
+
 class HQRentalsFrontHelper
 {
 

@@ -3,7 +3,6 @@
 namespace HQRentalsPlugin\HQRentalsSettings;
 
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbBootstrapper;
 
 class HQRentalsBootstrap
@@ -97,14 +96,20 @@ class HQRentalsBootstrap
         if ($this->settings->noCurrencyIconOption()) {
             $this->settings->setCurrencyIconOption($this->hq_default_value_for_string);
         }
-        if($this->settings->noEnableCustomPostsPages()){
+        if ($this->settings->noEnableCustomPostsPages()) {
             $this->settings->setEnableCustomPostsPages('false');
         }
-        if($this->settings->noGoogleAPIKey()){
+        if ($this->settings->noGoogleAPIKey()) {
             $this->settings->setGoogleAPIKey('');
         }
-        if($this->settings->isEnableCustomPostsPages()){
+        if ($this->settings->isEnableCustomPostsPages()) {
             $this->resolveDefaultPages();
+        }
+        if ($this->settings->noDefaultPickupTime()) {
+            $this->settings->setDefaultPickupTime('');
+        }
+        if ($this->settings->noDefaultReturnTime()) {
+            $this->settings->setDefaultReturnTime('');
         }
         $this->notifyToSystemOnActivation();
         $this->dbBootstrap->createTablesOnInit();

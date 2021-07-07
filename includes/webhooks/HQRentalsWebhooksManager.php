@@ -2,14 +2,13 @@
 
 namespace HQRentalsPlugin\HQRentalsWebhooks;
 
+use HQRentalsPlugin\HQRentalsActions\HQRentalsUpgrader;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsBrandsTask;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsLocationsTask;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
-use HQRentalsPlugin\HQRentalsActions\HQRentalsUpgrader;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsVehicleClassesTask;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsVehicleTypesTask;
-use PHPMailer\PHPMailer\Exception;
 
 class HQRentalsWebhooksManager
 {

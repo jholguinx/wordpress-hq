@@ -87,6 +87,10 @@ class HQRentalsAssetsHandler
         if (is_single() and $post->post_type === 'hqwp_veh_classes' and $theme->stylesheet === 'grandcarrental') {
             $this->datePickersAssets();
         }
+        /*
+         * @TODO : Theme Manager Class => Devices with theme are install
+         * @TODO : Register Scripts if Themes are installed
+         * */
     }
 
     public function getIframeResizerAssets()
@@ -227,9 +231,8 @@ class HQRentalsAssetsHandler
         );
         $theme = wp_get_theme();
         if ($theme->stylesheet === 'motors' or $theme->stylesheet === 'motors-child') {
-            //main js code
-            //wp_dequeue_script('stm-theme-scripts');
         }
+
         wp_localize_script('hq-reservation-form-setup', 'HQReservationFormData', $data);
     }
 
@@ -272,5 +275,9 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-flatpickr-js');
         wp_enqueue_script('hq-places-form-js');
         wp_enqueue_script('hq-google-js');
+    }
+    public function loadReservationFormRentit()
+    {
+
     }
 }

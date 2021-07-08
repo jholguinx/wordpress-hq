@@ -11,6 +11,7 @@ class HQRentalsBakeryBoostrap{
     }
     public function boostrapBakery(){
         if(is_plugin_active('js_composer/js_composer.php')){
+            $this->resolveBakeryItems();
             $this->resolveFileForMotorsTheme();
             $this->resolveFileForRentitTheme();
         }
@@ -18,6 +19,19 @@ class HQRentalsBakeryBoostrap{
     public function requireDependencies()
     {
         foreach ($this->dependencies as $file) {
+            if (file_exists($file)) {
+                require_once($file);
+            }
+        }
+    }
+    public function resolveBakeryItems()
+    {
+        $deps = array(
+            plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryReservationFormShortcode.php',
+            plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryReservationsShortcode.php',
+            plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryVehicleGridShortcode.php',
+        );
+        foreach ($deps as $file){
             if (file_exists($file)) {
                 require_once($file);
             }

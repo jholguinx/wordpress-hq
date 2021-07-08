@@ -35,7 +35,7 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     {
         vc_map(
             array(
-                'name' => __('HQ Motors Vehicles Classes Grid', 'hq-wordpress'),
+                'name' => __('HQRS Motors Vehicles Classes Grid', 'hq-wordpress'),
                 'base' => 'hq_bakery_motors_vehicle_grid',
                 'content_element' => true,
                 "category" => __('HQ Rental Software - Motors Theme'),

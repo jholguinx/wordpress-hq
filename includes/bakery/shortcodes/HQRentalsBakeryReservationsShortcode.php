@@ -24,7 +24,7 @@ class HQRentalsBakeryReservationsShortcode extends WPBakeryShortCode{
     public function setParams(){
         vc_map(
             array(
-                'name'                    => __( 'HQ Reservation Engine', 'hq-wordpress' ),
+                'name'                    => __( 'HQRS Reservation Engine', 'hq-wordpress' ),
                 'base'                    => 'hq_bakery_reservation',
                 'content_element'         => true,
                 "category" => __('HQ Rental Software'),

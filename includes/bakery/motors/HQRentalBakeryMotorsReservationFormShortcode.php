@@ -34,7 +34,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
     {
         vc_map(
             array(
-                'name' => __('HQ Motors Reservation Form', 'hq-wordpress'),
+                'name' => __('HQRS Motors Reservation Form', 'hq-wordpress'),
                 'base' => 'hq_bakery_motors_reservation_form',
                 'content_element' => true,
                 "category" => __('HQ Rental Software - Motors Theme'),

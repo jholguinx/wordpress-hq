@@ -41,7 +41,7 @@ class HQRentalBakeryRentitSliderShortcode extends WPBakeryShortCode
     {
         vc_map(
             array(
-                'name' => __('HQ Rentit Vehicle Class Slider', 'hq-wordpress'),
+                'name' => __('HQRS Rentit Vehicle Class Slider', 'hq-wordpress'),
                 'base' => 'hq_bakery_rentit_slider',
                 'content_element' => true,
                 "category" => __('HQ Rental Software - Rentit Theme'),

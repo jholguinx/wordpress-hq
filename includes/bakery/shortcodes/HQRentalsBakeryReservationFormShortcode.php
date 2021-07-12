@@ -1,8 +1,9 @@
 <?php
+
 use \HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use \HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 use \HQRentalsPlugin\HQRentalsShortcodes\HQRentalsReservationFormSnippetShortcode;
-new HQRentalsBakeryReservationFormShortcode();
+
 
 class HQRentalsBakeryReservationFormShortcode extends WPBakeryShortCode{
     private $query;
@@ -44,3 +45,4 @@ class HQRentalsBakeryReservationFormShortcode extends WPBakeryShortCode{
         );
     }
 }
+new HQRentalsBakeryReservationFormShortcode();

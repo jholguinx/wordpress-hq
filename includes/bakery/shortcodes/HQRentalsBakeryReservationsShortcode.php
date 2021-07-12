@@ -2,7 +2,7 @@
 use \HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use \HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 use \HQRentalsPlugin\HQRentalsShortcodes\HQRentalsReservationsSnippetShortcode;
-new HQRentalsBakeryReservationsShortcode();
+
 
 class HQRentalsBakeryReservationsShortcode extends WPBakeryShortCode{
     private $query;
@@ -44,3 +44,4 @@ class HQRentalsBakeryReservationsShortcode extends WPBakeryShortCode{
         );
     }
 }
+new HQRentalsBakeryReservationsShortcode();

@@ -10,7 +10,7 @@ class HQRentalsBakeryBoostrap{
         $this->theme = wp_get_theme();
     }
     public function boostrapBakery(){
-        if(is_plugin_active('js_composer/js_composer.php')){
+        if(is_plugin_active('js_composer/js_composer.php') and class_exists('WPBakeryShortCode')){
             $this->resolveBakeryItems();
             $this->resolveFileForMotorsTheme();
             $this->resolveFileForRentitTheme();

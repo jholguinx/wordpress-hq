@@ -4,13 +4,16 @@ class HQRentalsBakeryBoostrap{
     protected $dependencies = array(
         ABSPATH . 'wp-admin/includes/plugin.php',
     );
+    protected $bakeryDeps = ABSPATH . 'wp-content/plugins/js_composer/js_composer.php';
+
     public function __construct()
     {
         $this->requireDependencies();
         $this->theme = wp_get_theme();
     }
     public function boostrapBakery(){
-        if(is_plugin_active('js_composer/js_composer.php') and class_exists('WPBakeryShortCode')){
+        if(is_plugin_active('js_composer/js_composer.php') ){
+            require_once($this->bakeryDeps);
             $this->resolveBakeryItems();
             $this->resolveFileForMotorsTheme();
             $this->resolveFileForRentitTheme();

@@ -19,7 +19,7 @@ class HQRentalsBakeryReservationsShortcode extends WPBakeryShortCode{
         ), $atts ) );
 
         $shortcode = new HQRentalsReservationsSnippetShortcode($atts);
-        echo $shortcode->renderShortcode();
+        return $shortcode->renderShortcode();
     }
     public function setParams(){
         vc_map(

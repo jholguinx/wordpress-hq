@@ -18,7 +18,7 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
 
         ), $atts ) );
         $shortcode = new HQRentalsVehicleGrid($atts);
-        $shortcode->renderShortcode();
+        return $shortcode->renderShortcode();
     }
     public function setParams(){
         vc_map(

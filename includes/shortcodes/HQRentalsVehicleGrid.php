@@ -21,11 +21,11 @@ class HQRentalsVehicleGrid
         add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
     }
 
-    public function renderShortcode()
+    public function renderShortcode() : string
     {
         $vehiclesCode = $this->getVehiclesHTML();
         HQRentalsAssetsHandler::loadVehicleGridAssets();
-        echo '
+        return '
     ' . HQRentalsAssetsHandler::getHQFontAwesome() . ' 
     <div class="elementor-widget-container hq-elementor-title">
 			<h2 class="elementor-heading-title elementor-size-default">' . $this->title . '</h2>		

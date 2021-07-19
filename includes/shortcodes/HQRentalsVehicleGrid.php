@@ -12,11 +12,11 @@ class HQRentalsVehicleGrid
     private $title;
     public function __construct($params)
     {
-        if(!empty($params['url'])){
-            $this->linkURL = $params['url'];
+        if(!empty($params['reservation_url_vehicle_grid'])){
+            $this->linkURL = $params['reservation_url_vehicle_grid'];
         }
-        if(!empty($params['title'])){
-            $this->title = $params['title'];
+        if(!empty($params['title_vehicle_grid'])){
+            $this->title = $params['title_vehicle_grid'];
         }
         add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
     }

@@ -12,8 +12,8 @@ class HQRentalsReservationsSnippetShortcode extends HQBaseShortcode
     public function __construct($params = null)
     {
         add_shortcode(HQRentalsReservationsSnippetShortcode::$shortcodeTag, array($this, 'renderShortcode'));
-        if(!empty($params['id'])){
-            $this->brand_id = $params['id'];
+        if(!empty($params['brand_id_reservation_engine'])){
+            $this->brand_id = $params['brand_id_reservation_engine'];
         }
     }
 

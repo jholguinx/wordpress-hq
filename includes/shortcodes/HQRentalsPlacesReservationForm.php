@@ -15,14 +15,14 @@ class HQRentalsPlacesReservationForm
 
     public function __construct($params)
     {
-        if (!empty($params['url'])) {
-            $this->linkURL = $params['url'];
+        if (!empty($params['reservation_url_places_form'])) {
+            $this->linkURL = $params['reservation_url_places_form'];
         }
         if (!empty($params['title'])) {
             $this->title = $params['title'];
         }
-        if (!empty($params['orientation'])) {
-            $this->orientation = $params['orientation'];
+        if (!empty($params['orientation_places_form'])) {
+            $this->orientation = $params['orientation_places_form'];
         }
         $this->settings = new HQRentalsSettings();
         $this->assets =new HQRentalsAssetsHandler();

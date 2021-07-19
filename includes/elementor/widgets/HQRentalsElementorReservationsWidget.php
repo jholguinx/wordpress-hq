@@ -44,7 +44,7 @@ class HQRentalsElementorReservationsWidget extends \Elementor\Widget_Base
 
         $this->add_control(
             //brand_id -> to avoid change underline shortcode
-            'id',
+            'brand_id_reservation_engine',
             [
                 'label' => __('Brand', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::SELECT,

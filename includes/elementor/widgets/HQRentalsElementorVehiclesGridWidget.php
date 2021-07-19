@@ -42,7 +42,7 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-            'url',
+            'reservation_url_vehicle_grid',
             [
                 'label' => __('Reservations URL', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::TEXT,
@@ -50,7 +50,7 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
-            'title',
+            'title_vehicle_grid',
             [
                 'label' => __('Title', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::TEXT,

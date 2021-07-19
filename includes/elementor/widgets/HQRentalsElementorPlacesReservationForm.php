@@ -40,7 +40,7 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
-            'url',
+            'reservation_url_places_form',
             [
                 'label' => __('Reservations URL', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::TEXT,
@@ -49,7 +49,7 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-            'orientation',
+            'orientation_places_form',
             [
                 'label' => __('Orientation', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::SELECT,

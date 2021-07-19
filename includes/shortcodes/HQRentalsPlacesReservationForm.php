@@ -230,6 +230,6 @@ class HQRentalsPlacesReservationForm
                 ";      
             }
         }
-        echo $html;
+        return $html;
     }
 }

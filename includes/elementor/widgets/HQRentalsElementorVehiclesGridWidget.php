@@ -65,7 +65,7 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $shortcode = new HQRentalsVehicleGrid($settings);
-        $shortcode->renderShortcode();
+        echo $shortcode->renderShortcode();
     }
 
 }

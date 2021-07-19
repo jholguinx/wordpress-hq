@@ -67,7 +67,7 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $shortcode = new HQRentalsPlacesReservationForm($settings);
-        $shortcode->renderShortcode();
+        echo $shortcode->renderShortcode();
     }
 }
 

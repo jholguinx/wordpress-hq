@@ -92,7 +92,21 @@ class HQRentalsPlacesReservationForm
                      </div>
                   </form>
                </div>
-            </div>
+            </div>  
+            <style>
+                .hq-places-inner-wrapper, .hq-places-date-time-wrapper{
+                    display: flex;
+                    flex-direction: row;
+                }
+                .hq-places-times-input-wrapper{
+                    position: relative;
+                }
+                .hq-select-icon-wrapper i{
+                    position: absolute;
+                    bottom: 15px;
+                    right: 10px; 
+                }
+            </style>
         ";
         }else{
                 $html = "
@@ -124,6 +138,7 @@ class HQRentalsPlacesReservationForm
                     }
                     .hq-places-dates-wrapper-vertical{
                         position: relative !important;
+                        flex:1;
                     }
                     .hq-select-icon-wrapper-vertical{
                         position: absolute;
@@ -148,6 +163,10 @@ class HQRentalsPlacesReservationForm
                     b{
                     display: none;
                     }
+                    .hq-palces-vertical-select{
+                        width: 100%;
+                        min-height: 50px;
+                    }
                 </style>
             ". HQRentalsAssetsHandler::getHQFontAwesome() ."
                     <div class='hq-places-vertical-form-wrapper'>
@@ -169,7 +188,7 @@ class HQRentalsPlacesReservationForm
                                                     <label for='form-field-location'
                                                            class='hq-smart-label'>Vehicle Type</label>
                                                     <div class='hq-places-dates-wrapper-vertical'>
-                                                        <select name='vehicle_type' placeholder='Vehicle, Bike or Scooter'>
+                                                        <select name='vehicle_type' placeholder='Vehicle, Bike or Scooter' class='hq-palces-vertical-select'>
                                                             <option value='vehicle'>Vehicle</option>
                                                             <option value='scooter'>Scooter</option>
                                                             <option value='bike'>Bike</option>

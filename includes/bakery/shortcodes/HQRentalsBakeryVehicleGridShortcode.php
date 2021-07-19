@@ -13,8 +13,8 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
 
     public function content( $atts, $content = null ) {
         extract( shortcode_atts( array(
-            'title' => 	'',
-            'url'   =>	'',
+            'title_vehicle_grid' => 	'',
+            'reservation_url_vehicle_grid'   =>	'',
 
         ), $atts ) );
         $shortcode = new HQRentalsVehicleGrid($atts);

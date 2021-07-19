@@ -67,7 +67,7 @@ class HQRentalsWebsiteEndpoints
         $id = $_GET['id'];
         try {
             if (empty($id)) {
-                return $this->resolveResponse("Brand id Empty", false);
+                return $this->resolveResponse("Branch id Empty", false);
             } else {
                 $query = new HQRentalsQueriesBrands();
                 return $this->resolveResponse($query->singleBrandPublicInterface($id), true);

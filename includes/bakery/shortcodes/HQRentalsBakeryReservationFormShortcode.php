@@ -35,7 +35,7 @@ class HQRentalsBakeryReservationFormShortcode extends WPBakeryShortCode{
                 'params' => array(
                     array(
                         'type'        => 'dropdown',
-                        'heading'     => __( 'Brands', 'hq-wordpress' ),
+                        'heading'     => __( 'Branches', 'hq-wordpress' ),
                         'param_name'  => 'id',
                         'value' => $this->query->getBrandsForBakery()
                     ),

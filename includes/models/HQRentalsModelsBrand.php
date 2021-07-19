@@ -120,20 +120,20 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'order' => 'ASC'
         );
         $this->labels = array(
-            'name' => _x('Brands', 'post type general name', 'your-plugin-textdomain'),
-            'singular_name' => _x('Brand', 'post type singular name', 'your-plugin-textdomain'),
-            'menu_name' => _x('Brands', 'admin menu', 'your-plugin-textdomain'),
-            'name_admin_bar' => _x('Brand', 'add new on admin bar', 'your-plugin-textdomain'),
-            'add_new' => _x('Add New', 'brand', 'your-plugin-textdomain'),
-            'add_new_item' => __('Add New Brand', 'your-plugin-textdomain'),
-            'new_item' => __('New Brand', 'your-plugin-textdomain'),
-            'edit_item' => __('Edit Brand', 'your-plugin-textdomain'),
-            'view_item' => __('View Brand', 'your-plugin-textdomain'),
-            'all_items' => __('All Brands', 'your-plugin-textdomain'),
-            'search_items' => __('Search Brands', 'your-plugin-textdomain'),
-            'parent_item_colon' => __('Parent Brands', 'your-plugin-textdomain'),
-            'not_found' => __('No brands found.', 'your-plugin-textdomain'),
-            'not_found_in_trash' => __('No brands found in Trash.', 'your-plugin-textdomain')
+            'name' => _x('Branches', 'post type general name', 'hq-rental-software'),
+            'singular_name' => _x('Branch', 'post type singular name', 'hq-rental-software'),
+            'menu_name' => _x('Branches', 'admin menu', 'hq-rental-software'),
+            'name_admin_bar' => _x('Branch', 'add new on admin bar', 'hq-rental-software'),
+            'add_new' => _x('Add New', 'Branch', 'hq-rental-software'),
+            'add_new_item' => __('Add New Branch', 'hq-rental-software'),
+            'new_item' => __('New Branch', 'hq-rental-software'),
+            'edit_item' => __('Edit Branch', 'hq-rental-software'),
+            'view_item' => __('View Branch', 'hq-rental-software'),
+            'all_items' => __('All Branches', 'hq-rental-software'),
+            'search_items' => __('Search Branches', 'hq-rental-software'),
+            'parent_item_colon' => __('Parent Branches', 'hq-rental-software'),
+            'not_found' => __('No Branches found.', 'hq-rental-software'),
+            'not_found_in_trash' => __('No Branches found in Trash.', 'hq-rental-software')
         );
         $this->customPostArgs = array(
             'labels' => $this->labels,

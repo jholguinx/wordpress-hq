@@ -13,10 +13,15 @@ class HQRentalsBakeryBoostrap{
     }
     public function boostrapBakery(){
         if(is_plugin_active('js_composer/js_composer.php') ){
-            require_once($this->bakeryDeps);
-            $this->resolveBakeryItems();
-            $this->resolveFileForMotorsTheme();
-            $this->resolveFileForRentitTheme();
+            if(
+                $this->theme->stylesheet !== 'wheelsberry' and
+                $this->theme->stylesheet !== 'wheelsberry-child'
+            ){
+                require_once($this->bakeryDeps);
+                $this->resolveBakeryItems();
+                $this->resolveFileForMotorsTheme();
+                $this->resolveFileForRentitTheme();
+            }
         }
     }
     public function requireDependencies()

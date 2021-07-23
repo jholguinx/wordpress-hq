@@ -1,5 +1,6 @@
 (function ($) {
-    var formatDate = HQReservationFormData.HQFormatDate;
+    var formatDate = hqRentalsTenantDatetimeFormat;
+    var momentFormat = hqMomentDateFormat;
     var configPickup = {
         format: formatDate,
         closeOnDateSelect: true,
@@ -14,28 +15,22 @@
         timepicker: true,
         step: 30,
     };
-    jQuery('#hq_pick_up_date').datetimepicker(configPickup);
-    jQuery('#hq_return_date').datetimepicker(configReturn);
-    // Custom locations inputs
-    jQuery('select[name="pick_up_location"]').on('change', function () {
-        var id = '#hq_pick_up_custom_location';
-        fadeCustom(id, $(this));
+    var pickupDate = jQuery('#hq_pick_up_date').datetimepicker(configPickup);
+    var returnDate = jQuery('#hq_return_date').datetimepicker(configReturn);
+    //remove events to avoid issue on dates changes
+    pickupDate.off('blur');
+    returnDate.off('blur');
+    jQuery('#hq_pick_up_date').on("change", function(){
+        jQuery('#hq_return_date').val(moment(jQuery('#hq_pick_up_date').val(), momentFormat).add(1, 'days').format(momentFormat));
     });
-    jQuery('select[name="return_location"]').on('change', function () {
-        var id = '#hq_return_custom_location';
-        fadeCustom(id, $(this));
+    jQuery('#hq-pick-up-location').on("change", function(){
+        jQuery('#hq-return-location').val(jQuery('#hq-pick-up-location').val()).trigger('change');
     });
-    jQuery("#hq_pick_up_location").on("change", function () {
-        jQuery("#hq_return_location").val(jQuery("#hq_pick_up_location").val());
+    jQuery(document).ready(function(){
+        var today = moment().add(15,'minutes').format(momentFormat);
+        var tomorrow = moment().add(15,'minutes').add(1,'days').format(momentFormat);
+        jQuery('#hq_pick_up_date').val(today);
+        jQuery('#hq_return_date').val(tomorrow
+        );
     });
 })(jQuery);
-
-function fadeCustom(id, element) {
-    if (element.val() == 'custom') {
-        jQuery(id).fadeIn();
-        jQuery(id).prop('required', true);
-    } else {
-        jQuery(id).fadeOut();
-        jQuery(id).prop('required', false);
-    }
-}

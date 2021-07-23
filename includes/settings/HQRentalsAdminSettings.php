@@ -380,6 +380,18 @@ class HQRentalsAdminSettings
                                         </div>
                                         <div class="hq-general-settings-item">
                                             <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">ENABLE CUSTOM POSTS PAGES</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                      data-tippy-content="This option will enable Vehicle Classes single pages on your website."></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="checkbox"
+                                                       name="<?php echo $this->settings->hq_enable_custom_post_pages; ?>"
+                                                       value="true" <?php echo ($this->settings->getEnableCustomPostsPages() === 'true') ? 'checked' : ''; ?> />
+                                            </div>
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
                                                 <h4 class="wp-heading-inline" for="title">DEFAULT CURRENCY DISPLAY</h4>
                                                 <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                       data-tippy-content="This will be the currency the displayed by default on the vehicle class grid, and the dedicated vehicle class pages."></span>
@@ -544,6 +556,21 @@ class HQRentalsAdminSettings
                                                        name="<?php echo $this->settings->hq_url_to_replace_on_brands_option; ?>"
                                                        value="<?php echo esc_attr($this->settings->getBrandURLToReplaceSetting()); ?>"/>
                                             </div>
+
+                                        </div>
+                                        <div class="hq-general-settings-item">
+                                            <div class="hq-general-label-wrapper">
+                                                <h4 class="wp-heading-inline" for="title">Google API Key</h4>
+                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                      data-tippy-content="Google Services API Key"></span>
+                                            </div>
+                                            <div class="hq-general-input-wrapper">
+                                                <input type="text"
+                                                       class="hq-admin-text-input hq-admin-text-input-medium medium large"
+                                                       name="<?php echo $this->settings->hq_google_api_key; ?>"
+                                                       value="<?php echo esc_attr($this->settings->getGoogleAPIKey()); ?>"/>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -553,7 +580,7 @@ class HQRentalsAdminSettings
                                        name="save" value="SAVE"
                                        class="button button-primary button-large hq-admin-submit-button">
                                 <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
-                                                                                                 href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
+                                                                 href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
                                     more information on how to set up the HQ Rentals plugin.</p>
                             </div>
                         </div>

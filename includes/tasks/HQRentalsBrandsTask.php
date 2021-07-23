@@ -2,8 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 
 class HQRentalsBrandsTask extends HQRentalsBaseTask

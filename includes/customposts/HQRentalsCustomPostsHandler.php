@@ -3,8 +3,8 @@
 namespace HQRentalsPlugin\HQRentalsCustomPosts;
 
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleType;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotLocation;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsWorkspotRegion;

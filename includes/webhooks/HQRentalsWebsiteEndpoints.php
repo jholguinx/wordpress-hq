@@ -2,11 +2,11 @@
 
 namespace HQRentalsPlugin\HQRentalsWebhooks;
 
+use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesFeatures;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
 use Unirest\Exception;
 
 class HQRentalsWebsiteEndpoints
@@ -67,7 +67,7 @@ class HQRentalsWebsiteEndpoints
         $id = $_GET['id'];
         try {
             if (empty($id)) {
-                return $this->resolveResponse("Brand id Empty", false);
+                return $this->resolveResponse("Branch id Empty", false);
             } else {
                 $query = new HQRentalsQueriesBrands();
                 return $this->resolveResponse($query->singleBrandPublicInterface($id), true);

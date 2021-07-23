@@ -3,7 +3,6 @@
 namespace HQRentalsPlugin\HQRentalsSettings;
 
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
-use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbBootstrapper;
 
 class HQRentalsBootstrap
@@ -97,36 +96,29 @@ class HQRentalsBootstrap
         if ($this->settings->noCurrencyIconOption()) {
             $this->settings->setCurrencyIconOption($this->hq_default_value_for_string);
         }
-        $this->resolveDefaultPages();
+        if ($this->settings->noEnableCustomPostsPages()) {
+            $this->settings->setEnableCustomPostsPages('false');
+        }
+        if ($this->settings->noGoogleAPIKey()) {
+            $this->settings->setGoogleAPIKey('');
+        }
+        if ($this->settings->isEnableCustomPostsPages()) {
+            $this->resolveDefaultPages();
+        }
+        if ($this->settings->noDefaultPickupTime()) {
+            $this->settings->setDefaultPickupTime('');
+        }
+        if ($this->settings->noDefaultReturnTime()) {
+            $this->settings->setDefaultReturnTime('');
+        }
         $this->notifyToSystemOnActivation();
         $this->dbBootstrap->createTablesOnInit();
     }
 
     public function resolveDefaultPages()
     {
-        $page = get_page_by_title('Quotes');
-        $payments = get_page_by_title('Payments');
-        if (empty($page)) {
-            $this->resolvePageOnCreation('Quotes');
-        }
-        if (empty($payments)) {
-            $this->resolvePageOnCreation('Payments');
-        }
-    }
-
-    public function resolvePageOnCreation($pageTitle)
-    {
-        $args = array(
-            'post_title' => $pageTitle,
-            'post_type' => 'page',
-            'post_status' => 'publish'
-        );
-        $post_id = wp_insert_post($args);
-        if (is_wp_error($post_id)) {
-            $this->resolvePageOnCreation($pageTitle);
-        } else {
-            update_post_meta($post_id, 'hq_wordpress_is_wordpress_page', '1');
-        }
+        $pages = new HQRentalsPagesHandler();
+        $pages->createPagesOnInit();
     }
 
     public function notifyToSystemOnActivation()
@@ -134,6 +126,4 @@ class HQRentalsBootstrap
         $api = new HQRentalsApiConnector();
         $response = $api->notifyOnActivation();
     }
-
-
 }

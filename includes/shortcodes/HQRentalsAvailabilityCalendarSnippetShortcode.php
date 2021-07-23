@@ -1,10 +1,7 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsShortcodes;
-use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
-use PHPMailer\PHPMailer\Exception;
 
 
 class HQRentalsAvailabilityCalendarSnippetShortcode extends HQBaseShortcode
@@ -32,7 +29,7 @@ class HQRentalsAvailabilityCalendarSnippetShortcode extends HQBaseShortcode
                 $brand->findBySystemId($atts['id']);
                 $vehicle = $this->vehicleClass->getVehicleClassBySystemId($atts['vehicle_class_id']);
                 $uuid = $vehicle->getUUID();
-                return $this->filledSnippetData($brand->getClassCalendarSnippet(), array(
+                return $this->filledSnippetData($brand->getCalendarClassSnippet(), array(
                     'class' => $uuid,
                     'forced_locale' => ($atts['forced_locale']) ? $atts['forced_locale'] : 'en'
                 ));

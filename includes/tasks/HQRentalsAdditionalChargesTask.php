@@ -2,8 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsTasks;
 
-use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsAdditionalCharge as HQCharge;
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector as Connector;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsAdditionalCharge as HQCharge;
 
 class HQRentalsAdditionalChargesTask extends HQRentalsBaseTask
 {

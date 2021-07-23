@@ -2,8 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsApi;
 
-use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsApiEndpoint
 {

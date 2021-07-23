@@ -1,6 +1,7 @@
 <?php
 
 namespace HQRentalsPlugin\HQRentalsHelpers;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 
 class HQRentalsFrontHelper
 {
@@ -66,5 +67,15 @@ class HQRentalsFrontHelper
         return array_values(array_filter($array, function ($car) use ($itemId) {
             return (string)$car->id == (string)$itemId;
         }))[0];
+    }
+    public function getLocationOptions()
+    {
+        $html = "";
+        $query = new HQRentalsDBQueriesLocations();
+        $locations = $query->allLocations();
+        foreach ($locations as $location){
+            $html .= "<option value='{$location->getId()}'>{$location->getName()}</option>";
+        }
+        return $html;
     }
 }

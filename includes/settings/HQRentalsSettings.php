@@ -3,17 +3,13 @@
 namespace HQRentalsPlugin\HQRentalsSettings;
 
 use HQRentalsPlugin\HQRentalsApi\HQRentalsApiConnector;
-use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
-use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsEncryptionHandler;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsTasks\HQRentalsCronJob;
+use HQRentalsPlugin\HQRentalsTasks\HQRentalsScheduler;
 
 class HQRentalsSettings
 {
-
-    /*
-     * Options Names
-     */
     public $api_user_token = 'hq_wordpress_api_user_token_key_option';
     public $api_tenant_token = 'hq_wordpress_api_tenant_token_key_option';
     public $api_encoded_token = 'hq_wordpress_api_encoded_token_option';
@@ -44,6 +40,10 @@ class HQRentalsSettings
     public $hq_default_longitude_for_map_shortcode = 'hq_default_longitude_for_map_shortcode';
     public $hq_auth_email = 'hq_auth_email';
     public $hq_currency_symbol = 'hq_currency_symbol';
+    public $hq_enable_custom_post_pages = 'hq_enable_custom_post_pages';
+    public $hq_google_api_key = 'hq_google_api_key';
+    public $hq_default_pick_up_time = 'hq_default_pick_up_time';
+    public $hq_default_return_time = 'hq_default_return_time';
 
     public function __construct()
     {
@@ -445,6 +445,19 @@ class HQRentalsSettings
         return $this->getDecreasingRateOrder() === 'true';
     }
 
+    public function getEnableCustomPostsPages()
+    {
+        return get_option($this->hq_enable_custom_post_pages, 'false');
+    }
+    public function setEnableCustomPostsPages($data)
+    {
+        return update_option($this->hq_enable_custom_post_pages, $data);
+    }
+    public function isEnableCustomPostsPages()
+    {
+        return $this->getEnableCustomPostsPages() === 'true';
+    }
+
     public function noReplaceBaseURLOnBrandsSetting()
     {
         return empty(get_option($this->hq_replace_url_on_brand_option));
@@ -532,7 +545,9 @@ class HQRentalsSettings
                     $this->saveApiTenantTokenForWorkspot($postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location]);
                 } elseif ($key == $this->api_user_token_workspot_gebouw_location) {
                     $this->saveApiUserTokenForWorkspotModule($postDataFromSettings[$this->api_user_token_workspot_gebouw_location]);
-                } else {
+                } elseif ($key == $this->hq_google_api_key){
+                    $this->setGoogleAPIKey($postDataFromSettings[$this->hq_google_api_key]);
+                }else {
                     update_option($key, sanitize_text_field($data));
                 }
             }
@@ -552,9 +567,18 @@ class HQRentalsSettings
         if (empty($postDataFromSettings[$this->hq_enable_decreasing_rate_order_on_vehicles_query])) {
             update_option($this->hq_enable_decreasing_rate_order_on_vehicles_query, "false");
         }
+        if (empty($postDataFromSettings[$this->hq_enable_custom_post_pages])) {
+            update_option($this->hq_enable_custom_post_pages, "false");
+        }
         /*Refresh data on save */
         $worker = new HQRentalsCronJob();
         $worker->refreshAllData();
+
+        /*delete page in case*/
+        if(!$this->isEnableCustomPostsPages()){
+            $pages = new HQRentalsPagesHandler();
+            $pages->deleteAllPages();
+        }
     }
 
     /***
@@ -681,11 +705,14 @@ class HQRentalsSettings
         return get_option($this->hq_auth_email, "");
     }
 
+    public function noEnableCustomPostsPages()
+    {
+        return empty(get_option($this->hq_enable_custom_post_pages));
+    }
     public function noCurrencyIconOption()
     {
         return empty(get_option($this->hq_currency_symbol));
     }
-
     public function setCurrencyIconOption($icon)
     {
         return update_option($this->hq_currency_symbol, $icon);
@@ -694,5 +721,45 @@ class HQRentalsSettings
     public function getCurrencyIconOption()
     {
         return get_option($this->hq_currency_symbol, '');
+    }
+    public function noGoogleAPIKey()
+    {
+        return empty(get_option($this->hq_google_api_key));
+    }
+    public function setGoogleAPIKey($key)
+    {
+        return update_option($this->hq_google_api_key, HQRentalsEncryptionHandler::encrypt(sanitize_text_field($key)));
+    }
+
+    public function getGoogleAPIKey()
+    {
+        return HQRentalsEncryptionHandler::decrypt(get_option($this->hq_google_api_key));
+    }
+
+    public function noDefaultPickupTime() : string
+    {
+        return empty(get_option($this->hq_default_pick_up_time));
+    }
+    public function setDefaultPickupTime($data) : bool
+    {
+        return update_option($this->hq_default_pick_up_time, $data);
+    }
+
+    public function getDefaultPickupTime() : string
+    {
+        return get_option($this->hq_default_pick_up_time);
+    }
+    public function noDefaultReturnTime() : bool
+    {
+        return empty(get_option($this->hq_default_return_time));
+    }
+    public function setDefaultReturnTime($data) : bool
+    {
+        return update_option($this->hq_default_return_time, $data);
+    }
+
+    public function getDefaultReturnTime() : string
+    {
+        return get_option($this->hq_default_return_time);
     }
 }

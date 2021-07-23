@@ -2,6 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsModels;
 
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+
 class HQRentalsModelsVehicleType extends HQRentalsBaseModel
 {
     /*
@@ -25,6 +27,7 @@ class HQRentalsModelsVehicleType extends HQRentalsBaseModel
     public function __construct($post = null)
     {
         $this->post_id = '';
+        $this->settings = new HQRentalsSettings();
         $this->postArgs = array(
             'post_type' => $this->vehicleTypeCustomPostName,
             'post_status' => 'publish',
@@ -41,7 +44,7 @@ class HQRentalsModelsVehicleType extends HQRentalsBaseModel
             'labels' => $this->labels,
             'public' => false,
             'show_in_admin_bar' => true,
-            'publicly_queryable' => true,
+            'publicly_queryable' => $this->settings->isEnableCustomPostsPages(),
             'show_ui' => true,
             'query_var' => true,
             'has_archive' => false,

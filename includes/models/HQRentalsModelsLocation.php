@@ -134,7 +134,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'labels' => $this->labels,
             'public' => false,
             'show_in_admin_bar' => true,
-            'publicly_queryable' => true,
+            'publicly_queryable' => $this->settings->isEnableCustomPostsPages(),
             'show_ui' => true,
             'show_in_menu' => true,
             'show_in_nav_menus' => true,

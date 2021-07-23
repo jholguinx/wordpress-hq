@@ -235,3 +235,6 @@ button {
     color: #fff;
     text-transform: uppercase;
 }
+.large{
+    max-width: 330px !important;
+}

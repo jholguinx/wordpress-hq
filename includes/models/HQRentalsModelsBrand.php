@@ -108,6 +108,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
 
     public function __construct($post = null)
     {
+        $this->pluginSettings = new HQRentalsSettings();
         $this->post_id = '';
         if ($post) {
             $this->systemId = $post->ID;
@@ -119,26 +120,26 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'order' => 'ASC'
         );
         $this->labels = array(
-            'name' => _x('Brands', 'post type general name', 'your-plugin-textdomain'),
-            'singular_name' => _x('Brand', 'post type singular name', 'your-plugin-textdomain'),
-            'menu_name' => _x('Brands', 'admin menu', 'your-plugin-textdomain'),
-            'name_admin_bar' => _x('Brand', 'add new on admin bar', 'your-plugin-textdomain'),
-            'add_new' => _x('Add New', 'brand', 'your-plugin-textdomain'),
-            'add_new_item' => __('Add New Brand', 'your-plugin-textdomain'),
-            'new_item' => __('New Brand', 'your-plugin-textdomain'),
-            'edit_item' => __('Edit Brand', 'your-plugin-textdomain'),
-            'view_item' => __('View Brand', 'your-plugin-textdomain'),
-            'all_items' => __('All Brands', 'your-plugin-textdomain'),
-            'search_items' => __('Search Brands', 'your-plugin-textdomain'),
-            'parent_item_colon' => __('Parent Brands', 'your-plugin-textdomain'),
-            'not_found' => __('No brands found.', 'your-plugin-textdomain'),
-            'not_found_in_trash' => __('No brands found in Trash.', 'your-plugin-textdomain')
+            'name' => _x('Branches', 'post type general name', 'hq-rental-software'),
+            'singular_name' => _x('Branch', 'post type singular name', 'hq-rental-software'),
+            'menu_name' => _x('Branches', 'admin menu', 'hq-rental-software'),
+            'name_admin_bar' => _x('Branch', 'add new on admin bar', 'hq-rental-software'),
+            'add_new' => _x('Add New', 'Branch', 'hq-rental-software'),
+            'add_new_item' => __('Add New Branch', 'hq-rental-software'),
+            'new_item' => __('New Branch', 'hq-rental-software'),
+            'edit_item' => __('Edit Branch', 'hq-rental-software'),
+            'view_item' => __('View Branch', 'hq-rental-software'),
+            'all_items' => __('All Branches', 'hq-rental-software'),
+            'search_items' => __('Search Branches', 'hq-rental-software'),
+            'parent_item_colon' => __('Parent Branches', 'hq-rental-software'),
+            'not_found' => __('No Branches found.', 'hq-rental-software'),
+            'not_found_in_trash' => __('No Branches found in Trash.', 'hq-rental-software')
         );
         $this->customPostArgs = array(
             'labels' => $this->labels,
             'public' => true,
             'show_in_admin_bar' => true,
-            'publicly_queryable' => true,
+            'publicly_queryable' => $this->pluginSettings->isEnableCustomPostsPages(),
             'show_ui' => true,
             'show_in_menu' => true,
             'show_in_nav_menus' => true,
@@ -228,6 +229,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsQuotes, $this->snippetQuotes);
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPackageQuotes, $this->snippetPackageQuote );
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPaymentRequest, $this->snippetPaymentRequest );
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsCalendar, $this->snippetCalendar);
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsClassCalendar, $this->snippetClassCalendar);
         hq_update_post_meta( $post_id, $this->metaUUID, $this->uuid );
     }
 
@@ -274,6 +277,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetQuotes = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsQuotes, true ) );
         $this->snippetPackageQuote = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPackageQuotes, true ) );
         $this->snippetPaymentRequest = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPaymentRequest, true ));
+        $this->snippetCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsCalendar, true ));
+        $this->snippetClassCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsClassCalendar, true ));
     }
 
     public function all()
@@ -389,8 +394,24 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetPackageQuote = htmlspecialchars_decode($brandFromDB->package_quotes_snippet);
         $this->snippetPaymentRequest = htmlspecialchars_decode($brandFromDB->payment_requests_snippet);
     }
-    public function getTableName()
+    public function getTableName() : string
     {
         return $this->tableName;
+    }
+    public function getCalendarSnippet() : string
+    {
+        return $this->snippetCalendar;
+    }
+    public function getCalendarClassSnippet() : string
+    {
+        return $this->snippetCalendar;
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getName()
+    {
+        return $this->name;
     }
 }

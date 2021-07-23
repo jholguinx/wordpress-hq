@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 5.3.0
 Tested up to: 5.7.2
 Requires PHP: 7.0.0
-Stable tag: 1.4.33.3
+Stable tag: 1.4.34
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,10 @@ If you experience any issues, please review your user and password and try again
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.4.34 =
+
+Adding support for themes.
 
 = 1.4.33 =
 

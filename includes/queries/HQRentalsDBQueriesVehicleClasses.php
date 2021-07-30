@@ -65,4 +65,12 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
             $this->db->delete($this->model->getTableName(), $ids);
         }
     }
+
+    public function getVehicleClassById($id)
+    {
+        $query = $this->db->selectFromTable($this->model->getTableName(), '*', 'id=' . $id);
+        if ($query->success) {
+            return $this->fillObjectsFromDB($query->data);
+        }
+    }
 }

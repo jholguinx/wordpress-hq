@@ -73,4 +73,11 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
             return $this->fillObjectsFromDB($query->data);
         }
     }
+    public function getVehiclesByBrand($brandId)
+    {
+        $query = $this->db->selectFromTable($this->model->getTableName(), '*', 'brand_id=' . $brandId);
+        if ($query->success) {
+            return $this->fillObjectsFromDB($query->data);
+        }
+    }
 }

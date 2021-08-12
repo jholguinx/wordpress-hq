@@ -10,6 +10,7 @@ class HQRentalsVehicleGrid
 {
     private $linkURL;
     private $title;
+    private $brandId;
     public function __construct($params)
     {
         if(!empty($params['reservation_url_vehicle_grid'])){
@@ -17,6 +18,9 @@ class HQRentalsVehicleGrid
         }
         if(!empty($params['title_vehicle_grid'])){
             $this->title = $params['title_vehicle_grid'];
+        }
+        if(!empty($params['brand_id'])){
+            $this->brandId = $params['brand_id'];
         }
         add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
     }
@@ -43,7 +47,12 @@ class HQRentalsVehicleGrid
     public function getVehiclesHTML()
     {
         $query = new HQRentalsDBQueriesVehicleClasses();
-        $vehicles = $query->allVehicleClasses();
+        if($this->brandId){
+            $vehicles = $query->getVehiclesByBrand($this->brandId);
+        }else{
+            $vehicles = $query->allVehicleClasses();
+        }
+
         $html = '';
         if (count($vehicles)) {
             $innerHTML = '';

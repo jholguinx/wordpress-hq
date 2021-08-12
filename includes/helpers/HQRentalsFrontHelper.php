@@ -68,13 +68,19 @@ class HQRentalsFrontHelper
             return (string)$car->id == (string)$itemId;
         }))[0];
     }
-    public function getLocationOptions()
+    public function getLocationOptions($locations = null)
     {
         $html = "";
-        $query = new HQRentalsDBQueriesLocations();
-        $locations = $query->allLocations();
-        foreach ($locations as $location){
-            $html .= "<option value='{$location->getId()}'>{$location->getName()}</option>";
+        if(is_array($locations) and count($locations)){
+            foreach ($locations as $location){
+                $html .= "<option value='{$location->getId()}'>{$location->getName()}</option>";
+            }
+        }else{
+            $query = new HQRentalsDBQueriesLocations();
+            $dbLocations = $query->allLocations();
+            foreach ($dbLocations as $location){
+                $html .= "<option value='{$location->getId()}'>{$location->getName()}</option>";
+            }
         }
         return $html;
     }

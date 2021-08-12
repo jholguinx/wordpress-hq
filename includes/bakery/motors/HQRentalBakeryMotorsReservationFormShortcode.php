@@ -1,8 +1,9 @@
 <?php
 
-use \HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use \HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 
 new HQRentalBakeryMotorsReservationFormShortcode();
 
@@ -17,6 +18,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
         add_action('vc_before_init', array($this, 'setParams'));
         add_shortcode('hq_bakery_motors_reservation_form', array($this, 'content'));
         $this->query = new HQRentalsDBQueriesVehicleClasses();
+        $this->queryLocations = new HQRentalsDBQueriesLocations();
         $this->assets = new HQRentalsAssetsHandler();
         $this->helper = new HQRentalsFrontHelper();
     }
@@ -56,35 +58,15 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
     public function renderShortcode()
     {
         $this->assets->loadDatePickersReservationAssets();
-        $locations_options = $this->helper->getLocationOptions();
+        $locations = $this->queryLocations->allLocations();
+        $locations_options = $this->helper->getLocationOptions($locations);
         return HQRentalsAssetsHandler::getHQFontAwesome() . "
             <div class='stm_rent_car_form_wrapper style_1 text-right'>
                 <div class='stm_rent_car_form'>
                         <form action='{$this->reservationURL}' method='get'>
-                        <div class='hq-motors-input-wrapper'>
-                            <h4>Pickup</h4>
-                            <div class='stm_rent_form_fields'>
-                                <div class='stm_pickup_location'>
-                                    <i class='stm-service-icon-pin'></i>
-                                    <select id='hq-pick-up-location' name='pick_up_location' required='required'>
-                                        <option value=''>Select Location</option>
-                                        ". $locations_options ."
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='hq-motors-input-wrapper'>
-                            <h4>Return</h4>
-                            <div class='stm_rent_form_fields'>
-                                <div class='stm_pickup_location'>
-                                    <i class='stm-service-icon-pin'></i>
-                                    <select id='hq-return-location' name='return_location' required='required'>
-                                        <option value=''>Select Location</option>
-                                        ". $locations_options ."
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        " . $this->renderLocations($locations_options, $locations) . "
+                        " . $this->renderLocations($locations_options, $locations, true) . "
+                        " . $this->renderMessageInCaseOfOneLocation($locations) . "
                         <div class='hq-motors-input-wrapper'>
                             <h4>From</h4>
                             <div class='stm_date_time_input'>
@@ -141,5 +123,72 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                 }
             </style>
         ";
+    }
+
+    public function renderLocations($locationsOptions, $locations, $pickupReturnMode = false): string
+    {
+        $html = "";
+        if (is_array($locations)) {
+            if ($pickupReturnMode) {
+                if (count($locations) > 1) {
+                    $html .= "
+                    <div class='hq-motors-input-wrapper'>
+                            <h4>Return</h4>
+                            <div class='stm_rent_form_fields'>
+                                <div class='stm_pickup_location'>
+                                    <i class='stm-service-icon-pin'></i>
+                                    <select id='hq-return-location' name='return_location' required='required'>
+                                        <option value=''>Select Location</option>
+                                        " . $locationsOptions . "
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                ";
+                } else {
+                    if (count($locations) === 1) {
+                        $html .= "<input type='hidden' name='pick_up_location' value='" . $locations[0]->getId() . "' />";
+                    }
+                }
+            } else {
+                if (count($locations) > 1) {
+                    $html .= "
+                        <div class='hq-motors-input-wrapper'>
+                            <h4>Pickup</h4>
+                            <div class='stm_rent_form_fields'>
+                                <div class='stm_pickup_location'>
+                                    <i class='stm-service-icon-pin'></i>
+                                    <select id='hq-pick-up-location' name='pick_up_location' required='required'>
+                                        <option value=''>Select Location</option>
+                                        " . $locationsOptions . "
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+               ";
+                } else {
+                    if (count($locations) === 1) {
+                        $html .= "<input type='hidden' name='return_location' value='" . $locations[0]->getId() . "' />";
+                    }
+                }
+            }
+        }
+        return $html;
+    }
+
+    public function renderMessageInCaseOfOneLocation($locations): string
+    {
+        $html = "";
+        if (is_array($locations) and count($locations) === 1) {
+            $html .= "
+                    <div class='hq-motors-input-wrapper'>
+                            <h4>Pickup/Return Location</h4>
+                            <div class='stm_rent_form_fields'>
+                                <h5>" . $locations[0]->getName() . "</h5>
+                            </div>
+                        </div>
+                ";
+        }
+        return $html;
     }
 }

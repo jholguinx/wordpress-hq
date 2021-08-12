@@ -12,6 +12,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
 {
     private $query;
     private $reservationURL;
+    private $minimumRentalPeriod;
 
     public function __construct()
     {
@@ -26,9 +27,11 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
     public function content($atts, $content = null)
     {
         extract( shortcode_atts( array(
-            'reservation_page_url'				=>	'',
+            'reservation_page_url'  =>	'',
+            'minimum_rental_period' =>  1
         ), $atts ) );
         $this->reservationURL = $atts['reservation_page_url'];
+        $this->minimumRentalPeriod = $atts['minimum_rental_period'];
         echo $this->renderShortcode();
     }
 
@@ -49,6 +52,12 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                         'heading' => __('Reservation URL', 'hq-wordpress'),
                         'param_name' => 'reservation_page_url',
                         'value' => ''
+                    ),
+                    array(
+                        'type' => 'textfield',
+                        'heading' => __('Minimum Rental Period', 'hq-wordpress'),
+                        'param_name' => 'minimum_rental_period',
+                        'value' => ''
                     )
                 )
             )
@@ -61,6 +70,9 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
         $locations = $this->queryLocations->allLocations();
         $locations_options = $this->helper->getLocationOptions($locations);
         return HQRentalsAssetsHandler::getHQFontAwesome() . "
+            <script>
+                var hqMinimumDaysRental = ". $this->minimumRentalPeriod .";
+            </script>
             <div class='stm_rent_car_form_wrapper style_1 text-right'>
                 <div class='stm_rent_car_form'>
                         <form action='{$this->reservationURL}' method='get'>

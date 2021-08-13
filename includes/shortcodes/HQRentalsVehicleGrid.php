@@ -11,6 +11,7 @@ class HQRentalsVehicleGrid
     private $linkURL;
     private $title;
     private $brandId;
+    private $disableFeatures;
     public function __construct($params)
     {
         if(!empty($params['reservation_url_vehicle_grid'])){
@@ -21,6 +22,9 @@ class HQRentalsVehicleGrid
         }
         if(!empty($params['brand_id'])){
             $this->brandId = $params['brand_id'];
+        }
+        if(!empty($params['disable_features_vehicle_grid'])){
+            $this->disableFeatures = $params['disable_features_vehicle_grid'];
         }
         add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
     }
@@ -117,14 +121,16 @@ class HQRentalsVehicleGrid
 
     public function resolveVehicleFeaturesHTML($vehicle): string
     {
-        $features = $vehicle->getVehicleFeatures();
         $html = '';
-        if (is_array($features) and count($features)) {
-            $html .= "<ul class='list-feature-listing'>";
-            foreach ($features as $feature) {
-                $html .= $this->resolveFeatureHTML($feature);
+        if(!($this->disableFeatures === 'yes')){
+            $features = $vehicle->getVehicleFeatures();
+            if (is_array($features) and count($features)) {
+                $html .= "<ul class='list-feature-listing'>";
+                foreach ($features as $feature) {
+                    $html .= $this->resolveFeatureHTML($feature);
+                }
+                $html .= "</ul>";
             }
-            $html .= "</ul>";
         }
         return $html;
     }

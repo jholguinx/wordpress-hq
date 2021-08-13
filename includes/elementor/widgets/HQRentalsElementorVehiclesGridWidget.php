@@ -57,6 +57,18 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
                 'input_type' => 'string',
             ]
         );
+        $this->add_control(
+            'disable_features_vehicle_grid',
+            [
+                'label' => __('Disable Features', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'input_type' => 'string',
+                'label_on' => __( 'Hide', 'hq-wordpress' ),
+                'label_off' => __( 'Show', 'hq-wordpress' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
         $this->end_controls_section();
 
     }

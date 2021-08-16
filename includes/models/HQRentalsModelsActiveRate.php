@@ -453,7 +453,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     {
         return $this->dailyRate;
     }
-    private function parseDataToSaveOnDB(): array
+    public function parseDataToSaveOnDB(): array
     {
         return array(
             'vehicle_class_id' => $this->vehicleClassId,
@@ -493,5 +493,9 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
             'table_name' => $this->tableName,
             'table_columns' => $this->columns
         );
+    }
+    public function getTableName(): string
+    {
+        return $this->tableName;
     }
 }

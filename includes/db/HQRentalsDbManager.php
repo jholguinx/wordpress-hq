@@ -144,7 +144,7 @@ class HQRentalsDbManager
         if ($results) {
             return $this->resolveQuery(true, $results, null);
         } else {
-            return $this->resolveQuery(false, null, 'ERROR');
+            return $this->resolveQuery(false, null, $results);
         }
     }
 

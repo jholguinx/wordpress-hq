@@ -4,6 +4,7 @@ namespace HQRentalsPlugin\HQRentalsQueries;
 
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsCacheHandler;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsActiveRate;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsVehicleClass;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
@@ -17,15 +18,27 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
         $this->rateQuery = new HQRentalsQueriesActiveRates();
         $this->cache = new HQRentalsCacheHandler();
         $this->settings = new HQRentalsSettings();
+        $this->rate = new HQRentalsModelsActiveRate();
     }
 
     public function allVehicleClasses($order = null)
     {
-        $query = $this->db->selectFromTable($this->model->getTableName(), '*');
+        $query = $this->getVehicleByRate();
         if ($query->success) {
             return $this->fillObjectsFromDB($query->data);
         }
         return [];
+    }
+    public function getVehicleByRate($rate = "daily_rate_amount")
+    {
+        return $this->db->innerJoinTable(
+            $this->model->getTableName(),
+            $this->rate->getTableName(),
+            "id",
+            "vehicle_class_id",
+            $this->rate->getTableName() . "." . $rate ,
+            "asc"
+        );
     }
 
     public function fillObjectsFromDB($queryArray)

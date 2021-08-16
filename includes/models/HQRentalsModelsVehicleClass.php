@@ -305,6 +305,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             foreach ($this->rate as $rate) {
                 if ($rate instanceof HQRentalsModelsActiveRate) {
                     $rate->create();
+                    $rate->setDBFromAPI($this->id, $rate);
                 }
             }
         }
@@ -665,16 +666,17 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         } else {
             $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
         }
-        /*
         if(is_array($this->rate)){
             $rate = $this->rate[0];
-            $existResult = $this->db->selectFromTable($this->activeRate->getTableName(), '*', 'vehicle_class_id=' . $this->getId());
-            if($existResult->success){
-                $resultUpdateActive = $this->db->updateIntoTable($this->activeRate->getTableName(), $this->activeRate->parseDataToSaveOnDB(), array('vehicle_class_id' => $this->getId()));
-            }else{
-                $resultInsertActive = $this->db->insertIntoTable($this->activeRate->getTableName(), $this->activeRate->parseDataToSaveOnDB());
+            if ($rate instanceof HQRentalsModelsActiveRate) {
+                $existResult = $this->db->selectFromTable($this->activeRate->getTableName(), '*', 'vehicle_class_id=' . $this->getId());
+                if($existResult->success){
+                    $resultUpdateActive = $this->db->updateIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB(), array('vehicle_class_id' => $this->getId()));
+                }else{
+                    $resultInsertActive = $this->db->insertIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB());
+                }
             }
-        }*/
+        }
     }
 
     private function parseDataToSaveOnDB(): array

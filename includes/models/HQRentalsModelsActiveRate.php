@@ -27,7 +27,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         ),
         array(
             'column_name' => 'minute_rate_amount',
-            'column_data_type' => 'varchar(30)'
+            'column_data_type' => 'DECIMAL(19,4)'
         ),
         array(
             'column_name' => 'minute_rate_usd_amount',
@@ -47,7 +47,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         ),
         array(
             'column_name' => 'hourly_rate_amount',
-            'column_data_type' => 'varchar(30)'
+            'column_data_type' => 'DECIMAL(19,4)'
         ),
         array(
             'column_name' => 'hourly_rate_usd_amount',
@@ -67,7 +67,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         ),
         array(
             'column_name' => 'daily_rate_amount',
-            'column_data_type' => 'varchar(30)'
+            'column_data_type' => 'DECIMAL(19,4)'
         ),
         array(
             'column_name' => 'daily_rate_usd_amount',
@@ -87,7 +87,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         ),
         array(
             'column_name' => 'weekly_rate_amount',
-            'column_data_type' => 'varchar(30)'
+            'column_data_type' => 'DECIMAL(19,4)'
         ),
         array(
             'column_name' => 'weekly_rate_usd_amount',
@@ -107,7 +107,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         ),
         array(
             'column_name' => 'monthly_rate_amount',
-            'column_data_type' => 'varchar(30)'
+            'column_data_type' => 'DECIMAL(19,4)'
         ),
         array(
             'column_name' => 'monthly_rate_usd_amount',
@@ -497,5 +497,34 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function getTableName(): string
     {
         return $this->tableName;
+    }
+    public function setDBFromAPI($vehicleClassId, $rate)
+    {
+        $this->vehicleClassId = $vehicleClassId;
+        $this->minuteRateCurrency = $rate->minuteRate->currency;
+        $this->minuteRateCurrencyIcon = $rate->minuteRate->currency_icon;
+        $this->minuteRateAmount = (float)$rate->minuteRate->amount;
+        $this->minuteRateUSDAmount = $rate->minuteRate->usd_amount;
+        $this->minuteRateAmountForDisplay = $rate->minuteRate->amount_for_display;
+        $this->hourlyRateCurrency = $rate->hourlyRate->currency;
+        $this->hourlyRateCurrencyIcon = $rate->hourlyRate->currency_icon;
+        $this->hourlyRateAmount = (float) $rate->hourlyRate->amount;
+        $this->hourlyRateUSDAmount = $rate->hourlyRate->usd_amount;
+        $this->hourlyRateAmountForDisplay = $rate->hourlyRate->amount_for_display;
+        $this->dailyRateCurrency = $rate->dailyRate->currency;
+        $this->dailyRateCurrencyIcon = $rate->dailyRate->currency_icon;
+        $this->dailyRateAmount = (float)$rate->dailyRate->amount;
+        $this->dailyRateUSDAmount = $rate->dailyRate->usd_amount;
+        $this->dailyRateAmountForDisplay = $rate->dailyRate->amount_for_display;
+        $this->weeklyRateCurrency = $rate->weeklyRate->currency;
+        $this->weeklyRateCurrencyIcon = $rate->weeklyRate->currency_icon;
+        $this->weeklyRateAmount = (float)$rate->weeklyRate->amount;
+        $this->weeklyRateUSDAmount = $rate->weeklyRate->usd_amount;
+        $this->weeklyRateAmountForDisplay = $rate->weeklyRate->amount_for_display;
+        $this->monthlyRateCurrency = $rate->monthlyRate->currency;
+        $this->monthlyRateCurrencyIcon = $rate->monthlyRate->currency_icon;
+        $this->monthlyRateAmount = (float)$rate->monthlyRate->amount;
+        $this->monthlyRateUSDAmount = $rate->monthlyRate->usd_amount;
+        $this->monthlyRateAmountForDisplay = $rate->monthlyRate->amount_for_display;
     }
 }

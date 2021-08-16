@@ -11,6 +11,7 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
      */
     public $activeRateCustomPostName = 'hqwp_active_rate';
     public $activeRateCustomPostSlug = 'rate';
+    static $rates = ['minute_rate', 'hourly_rate', 'daily_rate', 'weekly_rate', 'monthly_rate'];
 
     /*
      * HQ Rentals Active Rate Data

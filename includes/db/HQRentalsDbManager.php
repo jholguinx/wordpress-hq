@@ -21,6 +21,32 @@ class HQRentalsDbManager
         $sqlQuery = $this->resolveCreateStatementString($tableName, $tableContent);
         return $this->query($sqlQuery);
     }
+    /*
+     * Changes on First DB -> Updates
+     * */
+    public function updateTableOnChanges($tableName, $tableContent): array
+    {
+        $results = [];
+        foreach ($tableContent as $column){
+            // check if exists
+            $exitsSQL = $this->resolveColumnCheckStatementString($tableName, $column['column_name']);
+            $resultExists = $this->query($exitsSQL);
+            if(empty($resultExists->data)){
+                $sqlAlterTable = $this->resolveAlterTableStatementString($tableName, $column['column_name'], $column['column_data_type']);
+                $results[] = $this->db->query($sqlAlterTable);
+            }else{
+                $results[] = $this->query("");
+            }
+        }
+        return $results;
+    }
+    public function resolveAlterTableStatementString($table, $columnName, $columnType)
+    {
+        return $this->db->prepare(
+            "ALTER TABLE {$this->dbPrefix}{$table} ADD {$columnName} {$columnType} NULL"
+        );
+    }
+
 
     public function checkColumnOnDB($tableName, $column): \stdClass
     {

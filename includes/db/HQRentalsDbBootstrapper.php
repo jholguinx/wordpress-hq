@@ -25,6 +25,8 @@ class HQRentalsDbBootstrapper
         $brandTable = $this->db->createTable($brandData['table_name'], $brandData['table_columns']);
         $locationTable = $this->db->createTable($locationData['table_name'], $locationData['table_columns']);
         $vehicleTable = $this->db->createTable($vehiclesData['table_name'], $vehiclesData['table_columns']);
+        //$vehicleTableCheckUp = $this->db->updateTableOnChanges($vehiclesData['table_name'], $vehiclesData['table_columns']);
+        //$rateTables = $this->db->createTable()
         // add validation for process completed
     }
     public function createColumnsForVehiclesClassesCustomFields($customFields)

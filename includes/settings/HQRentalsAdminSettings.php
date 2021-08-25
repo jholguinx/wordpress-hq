@@ -68,30 +68,6 @@ class HQRentalsAdminSettings
                         <div class="hq-title-item">
                             <h1 class="hq-admin-h1">HQ Rentals Setup</h1>
                         </div>
-                        <div></div>
-                        <?php if ($okAPI): ?>
-                            <div id="hq-connected-indicator"
-                                 style="background-color: #28a745; border: 2px solid #28a745;"
-                                 class="hq-connected-sign">
-                                <h6 class="hq-connected-sign-text">CONNECTED</h6>
-                            </div>
-                        <?php else: ?>
-                            <div id="hq-not-connected-indicator"
-                                 style="background-color: #dc3545; border: 2px solid #dc3545;"
-                                 class="hq-connected-sign">
-                                <h6 class="hq-connected-sign-text">NOT CONNECTED</h6>
-                            </div>
-                            <div id="hq-connected-indicator"
-                                 style="background-color: #28a745; border: 2px solid #28a745;"
-                                 class="hq-connected-sign">
-                                <h6 class="hq-connected-sign-text">CONNECTED</h6>
-                            </div>
-                            <style>
-                                #hq-connected-indicator {
-                                    display: none;
-                                }
-                            </style>
-                        <?php endif; ?>
                     </div>
 
                     <form action="" method="post">
@@ -117,6 +93,29 @@ class HQRentalsAdminSettings
                                         </style>
                                     <?php endif; ?>
                                 </div>
+                                <?php if ($okAPI): ?>
+                                    <div id="hq-connected-indicator"
+                                         style="background-color: #28a745; border: 2px solid #28a745;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                                    </div>
+                                <?php else: ?>
+                                    <div id="hq-not-connected-indicator"
+                                         style="background-color: #dc3545; border: 2px solid #dc3545;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">NOT CONNECTED</h6>
+                                    </div>
+                                    <div id="hq-connected-indicator"
+                                         style="background-color: #28a745; border: 2px solid #28a745;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                                    </div>
+                                    <style>
+                                        #hq-connected-indicator {
+                                            display: none;
+                                        }
+                                    </style>
+                                <?php endif; ?>
                             </div>
                             <div class="hq-general-settings-wrapper">
                                 <div class="hq-general-settings-item-wrapper hq-tokens-rows">

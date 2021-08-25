@@ -204,9 +204,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
 
         if (!empty($data->images)) {
-            foreach ($data->images as $image) {
+            foreach ($data->images as $key => $value) {
                 $newImage = new HQRentalsModelsVehicleClassImage();
-                $newImage->setVehicleClassImageFromApi($this->id, $image);
+                $newImage->setVehicleClassImageFromApi($this->id, $value, ((int) $key) + 1);
                 $this->images[] = $newImage;
             }
         }
@@ -324,9 +324,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             $this->additionalChargeForExceededDistance->setVehicleClassPostId($post_id);
             $this->additionalChargeForExceededDistance->create();
         }
-        /*DBs*/
-
-
     }
 
     public function find($caag_id)

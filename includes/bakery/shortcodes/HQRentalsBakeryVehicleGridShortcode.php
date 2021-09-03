@@ -17,7 +17,8 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
         extract( shortcode_atts( array(
             'title_vehicle_grid' => 	'',
             'reservation_url_vehicle_grid'   =>	'',
-            'brand_id'  => ''
+            'brand_id'  => '',
+            'button_position_vehicle_grid' => 'right'
         ), $atts ) );
         $shortcode = new HQRentalsVehicleGrid($atts);
         return $shortcode->renderShortcode();
@@ -50,6 +51,12 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
                         'heading'     => __( 'Branches', 'hq-wordpress' ),
                         'param_name'  => 'brand_id',
                         'value' => $this->query->getBrandsForBakery()
+                    ),
+                    array(
+                        'type'        => 'dropdown',
+                        'heading'     => __( 'Rent Button Position', 'hq-wordpress' ),
+                        'param_name'  => 'button_position_vehicle_grid',
+                        'value' => ['left', 'right']
                     ),
                 )
             )

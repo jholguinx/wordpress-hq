@@ -82,6 +82,14 @@
 }
 .hq-grid-button-wrapper{
     display: flex;
-    justify-content: flex-end;
     width: 100%;
+}
+.hq-grid-button-wrapper{
+    justify-content: flex-end;
+}
+.hq-grid-button-wrapper-left{
+    justify-content: space-between;
+}
+.hq-grid-button-wrapper-left h3{
+    margin: 0;
 }

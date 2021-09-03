@@ -69,6 +69,22 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
                 'default' => 'no',
             ]
         );
+        $this->add_control(
+            'button_position_vehicle_grid',
+            [
+                'label' => __('Rent Button Position', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'input_type' => 'string',
+                'label_on' => __( 'Hide', 'hq-wordpress' ),
+                'label_off' => __( 'Show', 'hq-wordpress' ),
+                'return_value' => 'yes',
+                'default' => 'left',
+                'options' => [
+                    'left'  => __( 'Left', 'hq-wordpress' ),
+                    'right' => __( 'Right', 'hq-wordpress' ),
+                ],
+            ]
+        );
         $this->end_controls_section();
 
     }

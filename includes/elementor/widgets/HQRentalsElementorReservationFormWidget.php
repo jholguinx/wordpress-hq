@@ -23,7 +23,7 @@ class HQRentalsElementorReservationFormWidget extends \Elementor\Widget_Base
 
     public function get_icon()
     {
-        return 'fab fa-wpforms';
+        return 'eicon-product-categories';
     }
 
     public function get_categories()

@@ -22,7 +22,7 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
 
     public function get_icon()
     {
-        return 'fas fa-grip-horizontal';
+        return 'eicon-gallery-grid';
     }
 
     public function get_categories()
@@ -60,11 +60,11 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
         $this->add_control(
             'disable_features_vehicle_grid',
             [
-                'label' => __('Disable Features', 'hq-wordpress'),
+                'label' => __('Hide Features', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'input_type' => 'string',
-                'label_on' => __( 'Hide', 'hq-wordpress' ),
-                'label_off' => __( 'Show', 'hq-wordpress' ),
+                'label_on' => __( 'No', 'hq-wordpress' ),
+                'label_off' => __( 'Yes', 'hq-wordpress' ),
                 'return_value' => 'yes',
                 'default' => 'no',
             ]

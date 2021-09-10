@@ -12,7 +12,7 @@ class HQRentalsVehicleGrid
     private $brandId;
     private $disableFeatures;
     private $buttonPosition;
-    public function __construct($params)
+    public function __construct($params = null)
     {
         if(!empty($params['reservation_url_vehicle_grid'])){
             $this->linkURL = $params['reservation_url_vehicle_grid'];

@@ -3,20 +3,31 @@
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use HQRentalsPlugin\HQRentalsElementor\HQRentalsElementorAssetsHandler;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 
 class HQRentalsVehicleGrid
 {
     private $linkURL;
     private $title;
-    public function __construct($params)
+    private $brandId;
+    private $disableFeatures;
+    private $buttonPosition;
+    public function __construct($params = null)
     {
         if(!empty($params['reservation_url_vehicle_grid'])){
             $this->linkURL = $params['reservation_url_vehicle_grid'];
         }
         if(!empty($params['title_vehicle_grid'])){
             $this->title = $params['title_vehicle_grid'];
+        }
+        if(!empty($params['brand_id'])){
+            $this->brandId = $params['brand_id'];
+        }
+        if(!empty($params['disable_features_vehicle_grid'])){
+            $this->disableFeatures = $params['disable_features_vehicle_grid'];
+        }
+        if(!empty($params['button_position_vehicle_grid'])){
+            $this->buttonPosition = $params['button_position_vehicle_grid'];
         }
         add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
     }
@@ -43,7 +54,12 @@ class HQRentalsVehicleGrid
     public function getVehiclesHTML()
     {
         $query = new HQRentalsDBQueriesVehicleClasses();
-        $vehicles = $query->allVehicleClasses();
+        if($this->brandId){
+            $vehicles = $query->getVehiclesByBrand($this->brandId);
+        }else{
+            $vehicles = $query->allVehicleClasses();
+        }
+
         $html = '';
         if (count($vehicles)) {
             $innerHTML = '';
@@ -61,10 +77,7 @@ class HQRentalsVehicleGrid
 
     public function resolveVehicleRowHTML($vehiclesRow): string
     {
-        $html =
-            '<div id="hq-smart-vehicle-grid-row" class="vehicle-cards-div">
-                ' . $this->resolveSingleRowHTML($vehiclesRow) . '
-            </div>';
+        $html = $this->resolveSingleRowHTML($vehiclesRow);
         return $html;
     }
 
@@ -79,7 +92,17 @@ class HQRentalsVehicleGrid
 
     public function resolveSingleVehicleHTML($vehicle): string
     {
-        $rateTag  = empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? "" : "<h3>{$vehicle->getActiveRate()->daily_rate->amount_for_display}/Day</h3>";
+        if($this->buttonPosition === 'right'){
+            $rateTag  = empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? "" : "<h3>{$vehicle->getActiveRate()->daily_rate->amount_for_display}/Day</h3>";
+        }else{
+            $rateTag  = "";
+        }
+        if($this->buttonPosition === 'left'){
+            $rateTagLeft  = empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? "" : "<h3>{$vehicle->getActiveRate()->daily_rate->amount_for_display}/Day</h3>";
+        }else{
+            $rateTagLeft  = "";
+        }
+
         $html = "
                 <div id='hq-vehicle-class-{$vehicle->getId()}' class='vehicle-card'>
                     <div class='hq-list-image-wrapper'>
@@ -96,8 +119,9 @@ class HQRentalsVehicleGrid
                             " . $this->resolveVehicleFeaturesHTML($vehicle) . "    
                         </div>
                         <div class='hq-grid-button-wrapper'>
-                            <div class='bottom-info hq-grid-button-wrapper'>
+                            <div class='bottom-info hq-grid-button-wrapper hq-grid-button-wrapper-{$this->buttonPosition}'>
                                 <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=2&vehicle_class_id={$vehicle->id}'>RENT NOW</a>
+                                {$rateTagLeft}
                             </div>
                         </div>
                     </div>
@@ -108,14 +132,16 @@ class HQRentalsVehicleGrid
 
     public function resolveVehicleFeaturesHTML($vehicle): string
     {
-        $features = $vehicle->getVehicleFeatures();
         $html = '';
-        if (is_array($features) and count($features)) {
-            $html .= "<ul class='list-feature-listing'>";
-            foreach ($features as $feature) {
-                $html .= $this->resolveFeatureHTML($feature);
+        if(!($this->disableFeatures === 'yes')){
+            $features = $vehicle->getVehicleFeatures();
+            if (is_array($features) and count($features)) {
+                $html .= "<ul class='list-feature-listing'>";
+                foreach ($features as $feature) {
+                    $html .= $this->resolveFeatureHTML($feature);
+                }
+                $html .= "</ul>";
             }
-            $html .= "</ul>";
         }
         return $html;
     }

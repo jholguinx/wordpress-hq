@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 5.3.0
 Tested up to: 5.7.2
 Requires PHP: 7.0.0
-Stable tag: 1.4.34
+Stable tag: 1.4.35
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,10 @@ You can now use the features of the plugin to set up the reservation process and
 If you experience any issues, please review your user and password and try again. If you are unable to authenticate your user information and fail to connect the plugin, please contact our support team via your HQ Rental Software account and we’ll happily assist you.
 
 == Frequently Asked Questions ==
+
+= 1.4.35 =
+
+Internal fixes
 
 == Changelog ==
 

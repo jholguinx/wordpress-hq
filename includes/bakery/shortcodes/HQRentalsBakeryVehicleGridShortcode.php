@@ -1,12 +1,14 @@
 <?php
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 use HQRentalsPlugin\HQRentalsShortcodes\HQRentalsVehicleGrid;
 
 
 class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
     public function __construct()
     {
+        $this->query = new HQRentalsDBQueriesBrands();
         add_action('vc_before_init', array($this, 'setParams'));
         add_shortcode('hq_bakery_vehicle_grid', array($this, 'content'));
     }
@@ -15,7 +17,8 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
         extract( shortcode_atts( array(
             'title_vehicle_grid' => 	'',
             'reservation_url_vehicle_grid'   =>	'',
-
+            'brand_id'  => '',
+            'button_position_vehicle_grid' => 'right'
         ), $atts ) );
         $shortcode = new HQRentalsVehicleGrid($atts);
         return $shortcode->renderShortcode();
@@ -42,6 +45,18 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
                         'heading'     => __( 'Title', 'hq-wordpress' ),
                         'param_name'  => 'title_vehicle_grid',
                         'value'       => ''
+                    ),
+                    array(
+                        'type'        => 'dropdown',
+                        'heading'     => __( 'Branches', 'hq-wordpress' ),
+                        'param_name'  => 'brand_id',
+                        'value' => $this->query->getBrandsForBakery()
+                    ),
+                    array(
+                        'type'        => 'dropdown',
+                        'heading'     => __( 'Rent Button Position', 'hq-wordpress' ),
+                        'param_name'  => 'button_position_vehicle_grid',
+                        'value' => ['left', 'right']
                     ),
                 )
             )

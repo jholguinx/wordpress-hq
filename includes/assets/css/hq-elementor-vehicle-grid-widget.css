@@ -13,7 +13,6 @@
     margin-bottom: 50px;
 }
 .vehicle-card{
-    width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -82,6 +81,20 @@
 }
 .hq-grid-button-wrapper{
     display: flex;
-    justify-content: flex-end;
     width: 100%;
+}
+.hq-grid-button-wrapper{
+    justify-content: flex-end;
+}
+.hq-grid-button-wrapper-left{
+    justify-content: space-between;
+}
+.hq-grid-button-wrapper-left h3{
+    margin: 0;
+}
+#hq-smart-vehicle-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 30px;
 }

@@ -75,7 +75,7 @@ class HQRentalsDBQueriesBrands extends HQRentalsDBBaseQueries
     {
         $brands = $this->allBrands();
         if(is_array($brands) and count($brands)){
-            $options = [];
+            $options = [''];
             foreach ($brands as $brand){
                 $options[] = (string)$brand->getId();
             }

@@ -21,6 +21,7 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
     protected $metaExtension = 'hq_wordpress_vehicle_image_extension_meta';
     protected $metaPublicLink = 'hq_wordpress_vehicle_image_public_link_meta';
     protected $metaVehicleClassPostId = 'hq_wordpress_vehicle_image_vehicle_class_post_id_meta';
+    protected $metaOrder = 'hq_wordpress_vehicle_image_vehicle_class_order_meta';
 
     /*
      * Object Data to Display
@@ -31,6 +32,7 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
     public $extension = '';
     public $publicLink = '';
     public $vehicleClassPostId = '';
+    public $order = '';
 
 
     public function __construct($post = null)
@@ -46,13 +48,14 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         }
     }
 
-    public function setVehicleClassImageFromApi($vehicleId, $data)
+    public function setVehicleClassImageFromApi($vehicleId, $data, $index)
     {
         $this->id = $data->id;
         $this->vehicleClassId = $vehicleId;
         $this->filename = $data->filename;
         $this->extension = $data->extension;
         $this->publicLink = $data->public_link;
+        $this->order = $index;
     }
 
     public function create()
@@ -71,6 +74,7 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         hq_update_post_meta($post_id, $this->metaFilename, $this->filename);
         hq_update_post_meta($post_id, $this->metaExtension, $this->extension);
         hq_update_post_meta($post_id, $this->metaPublicLink, $this->publicLink);
+        hq_update_post_meta($post_id, $this->metaOrder, $this->order);
     }
 
     public function find($caagImage)
@@ -104,6 +108,9 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         $args = array_merge(
             $this->postArgs,
             array(
+                'order' => 'ASC',
+                'orderby' => 'meta_value_num',
+                'meta_key' => $this->metaOrder,
                 'meta_query' => array(
                     array(
                         'key' => $this->metaVehicleClassId,
@@ -136,7 +143,8 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
             'filename' => $this->metaFilename,
             'extension' => $this->metaExtension,
             'publicLink' => $this->metaPublicLink,
-            'vehicleClassPostId' => $this->metaVehicleClassPostId
+            'vehicleClassPostId' => $this->metaVehicleClassPostId,
+            'order' => $this->metaOrder
         );
     }
 

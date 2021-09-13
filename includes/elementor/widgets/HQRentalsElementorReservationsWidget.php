@@ -23,7 +23,7 @@ class HQRentalsElementorReservationsWidget extends \Elementor\Widget_Base
 
     public function get_icon()
     {
-        return 'fas fa-car';
+        return 'eicon-product-categories';
     }
 
     public function get_categories()

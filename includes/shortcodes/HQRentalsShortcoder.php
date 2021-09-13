@@ -31,5 +31,6 @@ class HQRentalsShortcoder
         $this->paymentSnippet = new HQRentalsPaymentSnippetShortcode();
         $this->gCarVehicleFilterShortcode = new HQGCarVehicleFilterShortcode();
         $this->calendarSnippetShortcode = new HQRentalsAvailabilityCalendarSnippetShortcode();
+        $this->vehicleGrid = new HQRentalsVehicleGrid();
     }
 }

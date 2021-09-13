@@ -126,6 +126,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->locale = new HQRentalsLocaleHelper();
         $this->queryFeatures = new HQRentalsQueriesFeatures();
         $this->pluginSettings = new HQRentalsSettings();
+        $this->activeRate = new HQRentalsModelsActiveRate();
         $this->customFields = new \stdClass();
         $this->postArgs = [
             'post_type' => $this->vehicleClassesCustomPostName,
@@ -203,9 +204,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
 
         if (!empty($data->images)) {
-            foreach ($data->images as $image) {
+            foreach ($data->images as $key => $value) {
                 $newImage = new HQRentalsModelsVehicleClassImage();
-                $newImage->setVehicleClassImageFromApi($this->id, $image);
+                $newImage->setVehicleClassImageFromApi($this->id, $value, ((int) $key) + 1);
                 $this->images[] = $newImage;
             }
         }
@@ -304,6 +305,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             foreach ($this->rate as $rate) {
                 if ($rate instanceof HQRentalsModelsActiveRate) {
                     $rate->create();
+                    $rate->setDBFromAPI($this->id, $rate);
                 }
             }
         }
@@ -322,9 +324,6 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             $this->additionalChargeForExceededDistance->setVehicleClassPostId($post_id);
             $this->additionalChargeForExceededDistance->create();
         }
-        /*DBs*/
-
-
     }
 
     public function find($caag_id)
@@ -664,25 +663,34 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         } else {
             $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
         }
+        if(is_array($this->rate)){
+            $rate = $this->rate[0];
+            if ($rate instanceof HQRentalsModelsActiveRate) {
+                $existResult = $this->db->selectFromTable($this->activeRate->getTableName(), '*', 'vehicle_class_id=' . $this->getId());
+                if($existResult->success){
+                    $resultUpdateActive = $this->db->updateIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB(), array('vehicle_class_id' => $this->getId()));
+                }else{
+                    $resultInsertActive = $this->db->insertIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB());
+                }
+            }
+        }
     }
 
     private function parseDataToSaveOnDB(): array
     {
-        return array_merge(
-            array(
-                'id' => $this->id,
-                'name' => $this->name,
-                'brand_id' => $this->brandId,
-                'public_image_link' => $this->publicImageLink,
-                'vehicle_class_order' => $this->order,
-                'label_for_website' => json_encode($this->labels),
-                'short_description_for_website' => json_encode($this->shortDescriptions),
-                'description_for_website' => json_encode($this->descriptions),
-                'images' => json_encode($this->imagesDB),
-                'active_rates' => json_encode($this->activeRateDB),
-                'features' => json_encode($this->featuresDB)
-            ),
-            $this->getCustomFieldsAsArray()
+        return array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'brand_id' => $this->brandId,
+            'public_image_link' => $this->publicImageLink,
+            'vehicle_class_order' => $this->order,
+            'label_for_website' => json_encode($this->labels),
+            'short_description_for_website' => json_encode($this->shortDescriptions),
+            'description_for_website' => json_encode($this->descriptions),
+            'images' => json_encode($this->imagesDB),
+            'active_rates' => json_encode($this->activeRateDB),
+            'features' => json_encode($this->featuresDB),
+            'custom_fields' => json_encode($this->getCustomFieldsAsArray())
         );
     }
 

@@ -10,7 +10,126 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
      * Custom Post Configuration
      */
     public $activeRateCustomPostName = 'hqwp_active_rate';
+    private $tableName = 'hq_vehicle_active_rates';
     public $activeRateCustomPostSlug = 'rate';
+    private $columns = array(
+        array(
+            'column_name' => 'vehicle_class_id',
+            'column_data_type' => 'int'
+        ),
+        array(
+            'column_name' => 'minute_rate_currency',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'minute_rate_currency_icon',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'minute_rate_amount',
+            'column_data_type' => 'DECIMAL(19,4)'
+        ),
+        array(
+            'column_name' => 'minute_rate_usd_amount',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'minute_rate_amount_for_display',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'hourly_rate_currency',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'hourly_rate_currency_icon',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'hourly_rate_amount',
+            'column_data_type' => 'DECIMAL(19,4)'
+        ),
+        array(
+            'column_name' => 'hourly_rate_usd_amount',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'hourly_rate_amount_for_display',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'daily_rate_currency',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'daily_rate_currency_icon',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'daily_rate_amount',
+            'column_data_type' => 'DECIMAL(19,4)'
+        ),
+        array(
+            'column_name' => 'daily_rate_usd_amount',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'daily_rate_amount_for_display',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'weekly_rate_currency',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'weekly_rate_currency_icon',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'weekly_rate_amount',
+            'column_data_type' => 'DECIMAL(19,4)'
+        ),
+        array(
+            'column_name' => 'weekly_rate_usd_amount',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'weekly_rate_amount_for_display',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'monthly_rate_currency',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'monthly_rate_currency_icon',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'monthly_rate_amount',
+            'column_data_type' => 'DECIMAL(19,4)'
+        ),
+        array(
+            'column_name' => 'monthly_rate_usd_amount',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'monthly_rate_amount_for_display',
+            'column_data_type' => 'varchar(30)'
+        ),
+        array(
+            'column_name' => 'decreasing_rates_based_on_intervals',
+            'column_data_type' => 'tinyint(1)'
+        ),
+        array(
+            'column_name' => 'decreasing_rates_based_on_intervals_hourly',
+            'column_data_type' => 'tinyint(1)'
+        ),
+        array(
+            'column_name' => 'decreasing_rates_based_on_intervals_per_minute',
+            'column_data_type' => 'tinyint(1)'
+        ),
+    );
 
     /*
      * HQ Rentals Active Rate Data
@@ -36,6 +155,40 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public $dailyRate = '';
     public $weeklyRate = '';
     public $monthlyRate = '';
+
+    /*
+     * DB
+     *
+     * */
+    public $minuteRateCurrency = '';
+    public $minuteRateCurrencyIcon = '';
+    public $minuteRateAmount = '';
+    public $minuteRateUSDAmount = '';
+    public $minuteRateAmountForDisplay = '';
+    public $hourlyRateCurrency = '';
+    public $hourlyRateCurrencyIcon = '';
+    public $hourlyRateAmount = '';
+    public $hourlyRateUSDAmount = '';
+    public $hourlyRateAmountForDisplay = '';
+    public $dailyRateCurrency = '';
+    public $dailyRateCurrencyIcon = '';
+    public $dailyRateAmount = '';
+    public $dailyRateUSDAmount = '';
+    public $dailyRateAmountForDisplay = '';
+    public $weeklyRateCurrency = '';
+    public $weeklyRateCurrencyIcon = '';
+    public $weeklyRateAmount = '';
+    public $weeklyRateUSDAmount = '';
+    public $weeklyRateAmountForDisplay = '';
+    public $monthlyRateCurrency = '';
+    public $monthlyRateCurrencyIcon = '';
+    public $monthlyRateAmount = '';
+    public $monthlyRateUSDAmount = '';
+    public $monthlyRateAmountForDisplay = '';
+    public $decreasingRateBasedOnIntervals = '';
+    public $decreasingRateBasedOnIntervalsHourly = '';
+    public $decreasingRateBasedOnIntervalsPerMinute = '';
+    
 
     public function __construct($vehicleClassID = null, $allRates = null)
     {
@@ -299,5 +452,79 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
     public function getDailyRateObject()
     {
         return $this->dailyRate;
+    }
+    public function parseDataToSaveOnDB(): array
+    {
+        return array(
+            'vehicle_class_id' => $this->vehicleClassId,
+            'minute_rate_currency' => $this->minuteRateCurrency,
+            'minute_rate_currency_icon' => $this->minuteRateCurrencyIcon,
+            'minute_rate_amount' => $this->minuteRateAmount,
+            'minute_rate_usd_amount' => $this->minuteRateUSDAmount,
+            'minute_rate_amount_for_display' => $this->minuteRateAmountForDisplay,
+            'hourly_rate_currency' => $this->hourlyRateCurrency,
+            'hourly_rate_currency_icon' => $this->hourlyRateCurrencyIcon,
+            'hourly_rate_amount' => $this->hourlyRateAmount,
+            'hourly_rate_usd_amount' => $this->hourlyRateUSDAmount,
+            'hourly_rate_amount_for_display' => $this->hourlyRateAmountForDisplay,
+            'daily_rate_currency' => $this->dailyRateCurrency,
+            'daily_rate_currency_icon' => $this->dailyRateCurrencyIcon,
+            'daily_rate_amount' => $this->dailyRateAmount,
+            'daily_rate_usd_amount' => $this->dailyRateUSDAmount,
+            'daily_rate_amount_for_display' => $this->dailyRateAmountForDisplay,
+            'weekly_rate_currency' => $this->weeklyRateCurrency,
+            'weekly_rate_currency_icon' => $this->weeklyRateCurrencyIcon,
+            'weekly_rate_amount' => $this->weeklyRateAmount,
+            'weekly_rate_usd_amount' => $this->weeklyRateUSDAmount,
+            'weekly_rate_amount_for_display' => $this->weeklyRateAmountForDisplay,
+            'monthly_rate_currency' => $this->monthlyRateCurrency,
+            'monthly_rate_currency_icon' => $this->monthlyRateCurrencyIcon,
+            'monthly_rate_amount' => $this->monthlyRateAmount,
+            'monthly_rate_usd_amount' => $this->monthlyRateUSDAmount,
+            'monthly_rate_amount_for_display' => $this->monthlyRateAmountForDisplay,
+            'decreasing_rates_based_on_intervals' => $this->decreasingRateBasedOnIntervals,
+            'decreasing_rates_based_on_intervals_hourly' => $this->decreasingRateBasedOnIntervalsHourly,
+            'decreasing_rates_based_on_intervals_per_minute' => $this->decreasingRateBasedOnIntervalsPerMinute,
+        );
+    }
+    public function getDataToCreateTable()
+    {
+        return array(
+            'table_name' => $this->tableName,
+            'table_columns' => $this->columns
+        );
+    }
+    public function getTableName(): string
+    {
+        return $this->tableName;
+    }
+    public function setDBFromAPI($vehicleClassId, $rate)
+    {
+        $this->vehicleClassId = $vehicleClassId;
+        $this->minuteRateCurrency = $rate->minuteRate->currency;
+        $this->minuteRateCurrencyIcon = $rate->minuteRate->currency_icon;
+        $this->minuteRateAmount = (float)$rate->minuteRate->amount;
+        $this->minuteRateUSDAmount = $rate->minuteRate->usd_amount;
+        $this->minuteRateAmountForDisplay = $rate->minuteRate->amount_for_display;
+        $this->hourlyRateCurrency = $rate->hourlyRate->currency;
+        $this->hourlyRateCurrencyIcon = $rate->hourlyRate->currency_icon;
+        $this->hourlyRateAmount = (float) $rate->hourlyRate->amount;
+        $this->hourlyRateUSDAmount = $rate->hourlyRate->usd_amount;
+        $this->hourlyRateAmountForDisplay = $rate->hourlyRate->amount_for_display;
+        $this->dailyRateCurrency = $rate->dailyRate->currency;
+        $this->dailyRateCurrencyIcon = $rate->dailyRate->currency_icon;
+        $this->dailyRateAmount = (float)$rate->dailyRate->amount;
+        $this->dailyRateUSDAmount = $rate->dailyRate->usd_amount;
+        $this->dailyRateAmountForDisplay = $rate->dailyRate->amount_for_display;
+        $this->weeklyRateCurrency = $rate->weeklyRate->currency;
+        $this->weeklyRateCurrencyIcon = $rate->weeklyRate->currency_icon;
+        $this->weeklyRateAmount = (float)$rate->weeklyRate->amount;
+        $this->weeklyRateUSDAmount = $rate->weeklyRate->usd_amount;
+        $this->weeklyRateAmountForDisplay = $rate->weeklyRate->amount_for_display;
+        $this->monthlyRateCurrency = $rate->monthlyRate->currency;
+        $this->monthlyRateCurrencyIcon = $rate->monthlyRate->currency_icon;
+        $this->monthlyRateAmount = (float)$rate->monthlyRate->amount;
+        $this->monthlyRateUSDAmount = $rate->monthlyRate->usd_amount;
+        $this->monthlyRateAmountForDisplay = $rate->monthlyRate->amount_for_display;
     }
 }

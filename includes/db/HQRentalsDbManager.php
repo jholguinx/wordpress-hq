@@ -22,6 +22,34 @@ class HQRentalsDbManager
         return $this->query($sqlQuery);
     }
 
+    /*
+     * Changes on First DB -> Updates
+     * */
+    public function updateTableOnChanges($tableName, $tableContent): array
+    {
+        $results = [];
+        foreach ($tableContent as $column) {
+            // check if exists
+            $exitsSQL = $this->resolveColumnCheckStatementString($tableName, $column['column_name']);
+            $resultExists = $this->query($exitsSQL);
+            if (empty($resultExists->data)) {
+                $sqlAlterTable = $this->resolveAlterTableStatementString($tableName, $column['column_name'], $column['column_data_type']);
+                $results[] = $this->db->query($sqlAlterTable);
+            } else {
+                $results[] = $this->query("");
+            }
+        }
+        return $results;
+    }
+
+    public function resolveAlterTableStatementString($table, $columnName, $columnType)
+    {
+        return $this->db->prepare(
+            "ALTER TABLE {$this->dbPrefix}{$table} ADD {$columnName} {$columnType} NULL"
+        );
+    }
+
+
     public function checkColumnOnDB($tableName, $column): \stdClass
     {
         $sqlQuery = $this->resolveColumnCheckStatementString($tableName, $column);
@@ -31,6 +59,12 @@ class HQRentalsDbManager
     public function selectFromTable($tableName, $columns, $where = null, $order = null): \stdClass
     {
         $sqlQuery = $this->resolveSelectStatementString($tableName, $columns, $where, $order);
+        return $this->getResults($sqlQuery);
+    }
+
+    public function innerJoinTable($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order, $direction) : \stdClass
+    {
+        $sqlQuery = $this->resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order, $direction);
         return $this->getResults($sqlQuery);
     }
 
@@ -57,6 +91,11 @@ class HQRentalsDbManager
             'CREATE TABLE IF NOT EXISTS ' . $this->dbPrefix . $tableName . ' (
                   ' . $columns . '
                 ) ' . $this->charset . ';'
+        );
+    }
+    private function resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order = "", $direction = "asc"): string
+    {
+        return $this->db->prepare( "select * from {$this->resolveTableName($tableOne)} inner join {$this->resolveTableName($tableTwo)} on {$this->resolveTableName($tableOne)}.{$tableOneComparison} = {$this->resolveTableName($tableTwo)}.{$tableTwoComparison} order by {$this->resolveTableName($order)} ${direction};"
         );
     }
 
@@ -118,7 +157,7 @@ class HQRentalsDbManager
         if ($results) {
             return $this->resolveQuery(true, $results, null);
         } else {
-            return $this->resolveQuery(false, null, 'ERROR');
+            return $this->resolveQuery(false, null, $results);
         }
     }
 

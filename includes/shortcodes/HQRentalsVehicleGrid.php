@@ -77,10 +77,7 @@ class HQRentalsVehicleGrid
 
     public function resolveVehicleRowHTML($vehiclesRow): string
     {
-        $html =
-            '<div id="hq-smart-vehicle-grid-row" class="vehicle-cards-div">
-                ' . $this->resolveSingleRowHTML($vehiclesRow) . '
-            </div>';
+        $html = $this->resolveSingleRowHTML($vehiclesRow);
         return $html;
     }
 

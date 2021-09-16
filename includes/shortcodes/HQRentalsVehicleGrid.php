@@ -12,7 +12,17 @@ class HQRentalsVehicleGrid
     private $brandId;
     private $disableFeatures;
     private $buttonPosition;
+    private $wasInit;
     public function __construct($params = null)
+    {
+        $this->wasInit = !empty($params);
+        if($this->wasInit){
+            $this->setParams($params);
+        }
+        add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
+    }
+
+    private function setParams($params)
     {
         if(!empty($params['reservation_url_vehicle_grid'])){
             $this->linkURL = $params['reservation_url_vehicle_grid'];
@@ -29,11 +39,20 @@ class HQRentalsVehicleGrid
         if(!empty($params['button_position_vehicle_grid'])){
             $this->buttonPosition = $params['button_position_vehicle_grid'];
         }
-        add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
     }
-
-    public function renderShortcode() : string
+    public function renderShortcode($atts = []) : string
     {
+        $atts = shortcode_atts(
+        array(
+            'reservation_url_vehicle_grid' => '',
+            'title_vehicle_grid' => '',
+            'brand_id' => '',
+            'disable_features_vehicle_grid' => '',
+            'button_position_vehicle_grid' => ''
+        ), $atts);
+        if(!$this->wasInit){
+            $this->setParams($atts);
+        }
         $vehiclesCode = $this->getVehiclesHTML();
         HQRentalsAssetsHandler::loadVehicleGridAssets();
         return '

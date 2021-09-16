@@ -121,6 +121,15 @@ class HQRentalsApiCallResolver
         }
     }
 
+    public function resolveVehicleTypes($response)
+    {
+        if ($this->isErrorOnApiInteraction($response)) {
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
+        } else {
+            return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_vehicle_types);
+        }
+    }
+
     /**
      * Resolve Assets Data from API
      * @param $response

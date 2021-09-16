@@ -57,8 +57,7 @@ class HQRentalsApiConnector
     public function getHQRentalsVehicleTypes()
     {
         $response = wp_remote_get($this->endpoints->getVehicleTypesEndpoint(), $this->configuration->getBasicApiConfiguration());
-
-        return json_decode($response['body'])->fleets_vehicle_types;
+        return $this->resolver->resolveVehicleTypes($response);
     }
 
     public function getHQRentalsAdditionalCharges()

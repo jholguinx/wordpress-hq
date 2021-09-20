@@ -31,7 +31,6 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
 
     protected function _register_controls()
     {
-
         $this->start_controls_section(
             'content_section',
             [

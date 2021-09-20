@@ -17,6 +17,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 #hq-form-wrapper{
     background-color: #fff;
@@ -30,13 +32,9 @@
 }
 .hq-select-icon-wrapper{
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 10px;
+    top: 10px;
     bottom: 0;
-    margin-right: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .hq-places-times-input-wrapper{
     position: relative;
@@ -47,6 +45,49 @@
     font-family: inherit;
 }
 
+.hq-places-inner-wrapper, .hq-places-date-time-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.hq-places-times-input-wrapper{
+    position: relative;
+}
+#hq-place-form-desktop select{
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 14px 18px;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: inherit;
+    color: #999;
+    background-color: #f9f9f9;
+    border: 1px solid #f9f9f9;
+    border-radius: 0;
+    outline: 0;
+    -webkit-border-radius: 0;
+    -webkit-appearance: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    -webkit-transition: border-color 175ms cubic-bezier(.18,.43,.58,1);
+    -moz-transition: border-color 175ms cubic-bezier(.18,.43,.58,1);
+    transition: border-color 175ms cubic-bezier(.18,.43,.58,1);
+}
+.hq-places-submit-button{
+    position: relative;
+    width: auto;
+    outline: 0;
+    font-size: 12px;
+    line-height: 2em;
+    letter-spacing: .2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 5px 10px;
+    background-color: #FBBE5B;
+    border:0;
+}
 /*vertical*/
 .hq-places-date-time-wrapper-vertical{
     position: relative;

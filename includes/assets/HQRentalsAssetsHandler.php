@@ -49,7 +49,7 @@ class HQRentalsAssetsHandler
          * refactor - add static array and register everything separate
          * */
         wp_register_style('hq-elementor-vehicle-grid-widget-css', plugin_dir_url(__FILE__) . 'css/hq-elementor-vehicle-grid-widget.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('hq-places-form-css', plugin_dir_url(__FILE__) . 'css/hq-places-form-css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-places-form-css', plugin_dir_url(__FILE__) . 'css/hq-places-form.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-flatpickr-css', plugin_dir_url(__FILE__) . 'css/flatpickr.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-iframe-styles', plugin_dir_url(__FILE__) . 'css/hq-rentals.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-workspot-styles', plugin_dir_url(__FILE__) . 'css/hq-workspot-styles.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
@@ -266,15 +266,13 @@ class HQRentalsAssetsHandler
     public function loadPlacesReservationAssets()
     {
         $this->registerGoogleAssets();
-        wp_enqueue_style('hq-flatpickr-css');
-        wp_enqueue_script('hq-places-form-css');
+        wp_enqueue_style('hq-places-form-css');
+        wp_enqueue_style('hq-datepicker-style');
         wp_enqueue_script('hq-daysjs-custom-js');
         wp_enqueue_script('hq-daysjs-js');
-        wp_enqueue_script('hq-flatpickr-js');
-        wp_enqueue_style('hq-elementor-vehicle-grid-widget-css');
-        wp_enqueue_script('hq-flatpickr-js');
-        wp_enqueue_script('hq-places-form-js');
+        wp_enqueue_script('hq-datepicker-js');
         wp_enqueue_script('hq-google-js');
+        wp_enqueue_script('hq-places-form-js');
     }
     public function loadReservationFormRentit()
     {

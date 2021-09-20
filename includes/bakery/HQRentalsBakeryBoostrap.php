@@ -38,6 +38,7 @@ class HQRentalsBakeryBoostrap{
             plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryReservationFormShortcode.php',
             plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryReservationsShortcode.php',
             plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryVehicleGridShortcode.php',
+            plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryPlacesReservationForm.php',
         );
         foreach ($deps as $file){
             if (file_exists($file)) {

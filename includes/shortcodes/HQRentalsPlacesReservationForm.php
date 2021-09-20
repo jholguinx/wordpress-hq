@@ -4,7 +4,9 @@ namespace HQRentalsPlugin\HQRentalsShortcodes;
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsElementor\HQRentalsElementorAssetsHandler;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsPlacesReservationForm
@@ -12,20 +14,19 @@ class HQRentalsPlacesReservationForm
     private $linkURL;
     private $title;
     private $orientation;
+    private $supportForCustomLocation;
+    private $customLocationLabel;
 
     public function __construct($params)
     {
-        if (!empty($params['reservation_url_places_form'])) {
-            $this->linkURL = $params['reservation_url_places_form'];
-        }
-        if (!empty($params['title'])) {
-            $this->title = $params['title'];
-        }
-        if (!empty($params['orientation_places_form'])) {
-            $this->orientation = $params['orientation_places_form'];
-        }
+        $this->linkURL = !empty($params['reservation_url_places_form']) ? $params['reservation_url_places_form'] : '';
+        $this->title = !empty($params['title']) ? $params['title'] : '';
+        $this->orientation = !empty($params['orientation_places_form']) ? $params['orientation_places_form'] : '';
+        $this->supportForCustomLocation = !empty($params['support_for_custom_location']);
+        $this->customLocationLabel = !empty($params['custom_location_label']) ? $params['custom_location_label'] : '';
         $this->settings = new HQRentalsSettings();
         $this->assets =new HQRentalsAssetsHandler();
+        $this->front = new HQRentalsFrontHelper();
         add_shortcode('hq_rentals_places_reservation_form', array($this, 'renderShortcode'));
     }
 
@@ -49,7 +50,10 @@ class HQRentalsPlacesReservationForm
                                 <label class='hq-places-label'>PICK UP LOCATION</label> 
                             </div>
                             <div>
-                                <input type='text' name='pick_up_location_custom' id='hq-places-field' class='hq-places-auto-complete'>
+                                <select name='pick_up_location' id='hq-pick-up-location'>
+                                    {$this->front->getLocationOptions()}
+                                    {$this->resolveCustomLocation()}
+                                </select>
                             </div>
                         </div>
                         <div class='hq-places-input-wrapper'>
@@ -59,12 +63,19 @@ class HQRentalsPlacesReservationForm
                             <div class='hq-places-date-time-wrapper'>
                                 <div class='hq-places-times-input-wrapper'>
                                     <input type='text' name='pick_up_date' class='hq-places-auto-complete' id='hq-times-pick-up-date'>
-                                    <span class='hq-select-icon-wrapper'><i class='fas fa-chevron-down'></i></span>
+                                    <span class='hq-select-icon-wrapper'><i class='fas fa-clock'></i></span>
                                 </div>
-                                <div class='hq-places-times-input-wrapper'>
-                                    <input type='text' name='pick_up_time' class='hq-places-auto-complete' id='hq-times-pick-up-time'>
-                                    <span class='hq-select-icon-wrapper'><i class='fas fa-chevron-down'></i></span>
-                                </div>
+                            </div>
+                        </div>
+                        <div class='hq-places-input-wrapper'>
+                            <div>
+                                <label class='hq-places-label'>RETURN LOCATION</label> 
+                            </div>
+                            <div>
+                                <select name='return_location' id='hq-return-location'>
+                                    {$this->front->getLocationOptions()}
+                                    {$this->resolveCustomLocation()}
+                                </select>
                             </div>
                         </div>
                         <div class='hq-places-input-wrapper'>
@@ -74,11 +85,7 @@ class HQRentalsPlacesReservationForm
                             <div class='hq-places-date-time-wrapper'>
                                 <div class='hq-places-times-input-wrapper'>
                                     <input type='text' name='return_date' class='hq-places-auto-complete' id='hq-times-return-date'>
-                                    <span class='hq-select-icon-wrapper'><i class='fas fa-chevron-down'></i></span>
-                                </div>
-                                <div class='hq-places-times-input-wrapper'>
-                                    <input type='text' name='return_time' class='hq-places-auto-complete' id='hq-times-return-time'>
-                                    <span class='hq-select-icon-wrapper'><i class='fas fa-chevron-down'></i></span>
+                                    <span class='hq-select-icon-wrapper'><i class='fas fa-clock'></i></span>
                                 </div>
                             </div>
                         </div>
@@ -93,20 +100,6 @@ class HQRentalsPlacesReservationForm
                   </form>
                </div>
             </div>  
-            <style>
-                .hq-places-inner-wrapper, .hq-places-date-time-wrapper{
-                    display: flex;
-                    flex-direction: row;
-                }
-                .hq-places-times-input-wrapper{
-                    position: relative;
-                }
-                .hq-select-icon-wrapper i{
-                    position: absolute;
-                    bottom: 15px;
-                    right: 10px; 
-                }
-            </style>
         ";
         }else{
                 $html = "
@@ -246,9 +239,16 @@ class HQRentalsPlacesReservationForm
                             </div>
                         </div>
                     </div>
-                ";      
+                ";
             }
         }
         return $html;
+    }
+    public function resolveCustomLocation() : string
+    {
+        if($this->supportForCustomLocation){
+            return "<option value='custom'>{$this->customLocationLabel}</option>";
+        }
+        return '';
     }
 }

@@ -56,10 +56,9 @@ jQuery(document).ready(function(){
         ariaDateFormat: timeFormat,
         time_24hr: false
     }
-    flatpickr("#hq-times-pick-up-date", dateConfig);
-    flatpickr("#hq-times-pick-up-time", timeConfig);
-    flatpickr("#hq-times-return-date", dateConfig);
-    flatpickr("#hq-times-return-time", timeConfig);
+    jQuery("#hq-times-pick-up-date").datetimepicker(dateConfig);
+    jQuery("#hq-times-return-date").datetimepicker(dateConfig);
+
 
     setDefaults(dateFormat, jsDateFormat);
     jQuery("#hq-times-pick-up-date").on("change",function(){
@@ -68,6 +67,14 @@ jQuery(document).ready(function(){
     });
     jQuery("#hq-times-pick-up-time").on("change",function(){
         jQuery("#hq-times-return-time").val(jQuery("#hq-times-pick-up-time").val());
+    });
+    jQuery("#hq-pick-up-location").on("change",function(){
+        if(jQuery("#hq-pick-up-location").val() === "custom"){
+
+        }
+    );
+    jQuery("#hq-return-location").on("change",function(){
+
     });
 });
 function setDefaults(dateFormat, jsDateFormat){

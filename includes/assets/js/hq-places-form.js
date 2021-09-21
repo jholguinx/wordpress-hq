@@ -11,13 +11,18 @@ let autocomplete;
 let addressField;
 let addressFieldReturn;
 function initPlacesForm() {
-    const center = { lat: 26.7751182, lng: -82.2354601 };
-    const defaultBounds = {
-        north: center.lat + 2,
-        south: center.lat - 2,
-        east: center.lng + 2,
-        west: center.lng - 2,
-    };
+    //26.7751182,-82.2354601
+    //2
+    //us
+    const lat = (googleMapCenter) ? googleMapCenter.split(',')[0] : null;
+    const lng = (googleMapCenter) ? googleMapCenter.split(',')[1] : null;
+    const center = (lat && lng) ? { lat, lng} : null;
+    const defaultBounds = (googleMapAddressRadius) ? {
+        north: parseFloat(lat) + parseFloat(googleMapAddressRadius),
+        south: parseFloat(lat) - parseFloat(googleMapAddressRadius),
+        east: parseFloat(lng) + parseFloat(googleMapAddressRadius),
+        west: parseFloat(lng) - parseFloat(googleMapAddressRadius),
+    } : null;
     addressField = document.querySelector("#pick-up-location-custom");
     addressFieldReturn = document.querySelector("#return-location-custom");
     // Create the autocomplete object, restricting the search predictions to

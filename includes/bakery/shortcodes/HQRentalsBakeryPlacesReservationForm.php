@@ -64,11 +64,30 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
                         'value'       => '1'
                     ),
                     array(
+                        'type'        => 'textfield',
+                        'heading'     => __( 'Google Map Country Code', 'hq-wordpress' ),
+                        'param_name'  => 'google_country',
+                        'value'       => 'us'
+                    ),
+                    array(
+                        'type'        => 'textfield',
+                        'heading'     => __( 'Address Center', 'hq-wordpress' ),
+                        'param_name'  => 'google_map_center',
+                        'value'       => ''
+                    ),
+                    array(
+                        'type'        => 'textfield',
+                        'heading'     => __( 'Address Radius', 'hq-wordpress' ),
+                        'param_name'  => 'google_map_center_radius',
+                        'value'       => ''
+                    ),
+                    array(
                         'type'        => 'dropdown',
                         'heading'     => __( 'Orientation', 'hq-wordpress' ),
                         'param_name'  => 'orientation_places_form',
                         'value' => ['', 'horizontal', 'vertical']
                     ),
+
                 )
             )
         );

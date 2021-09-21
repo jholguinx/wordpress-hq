@@ -8,7 +8,7 @@
 .hq-general-settings-item-wrapper {
     display: flex;
     flex: 1;
-    flex-direction: column;
+    flex-direction: row;
     padding-right: 50px;
 }
 
@@ -30,7 +30,7 @@
 
 .hq-general-input-wrapper {
     display: flex;
-    flex: 3;
+    flex: 1;
     align-items: center;
     justify-content: flex-start;
 }
@@ -237,4 +237,7 @@ button {
 }
 .large{
     max-width: 330px !important;
+}
+.hq-flex-box-container{
+    flex-direction: row;
 }

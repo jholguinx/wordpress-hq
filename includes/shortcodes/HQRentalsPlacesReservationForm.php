@@ -17,6 +17,9 @@ class HQRentalsPlacesReservationForm
     private $supportForCustomLocation;
     private $customLocationLabel;
     private $minimumRental;
+    private $googleCountry;
+    private $mapCenter;
+    private $mapCenterRadius;
 
     public function __construct($params)
     {
@@ -26,6 +29,9 @@ class HQRentalsPlacesReservationForm
         $this->supportForCustomLocation = !empty($params['support_for_custom_location']);
         $this->customLocationLabel = !empty($params['custom_location_label']) ? $params['custom_location_label'] : '';
         $this->minimumRental = !empty($params['minimum_rental_period']) ? $params['minimum_rental_period'] : 1;
+        $this->googleCountry = !empty($params['google_country']) ? $params['google_country'] : 'us';
+        $this->mapCenter = !empty($params['google_map_center']) ? $params['google_map_center'] : '';
+        $this->mapCenterRadius = !empty($params['google_map_center_radius']) ? $params['google_map_center_radius'] : '';
         $this->settings = new HQRentalsSettings();
         $this->assets =new HQRentalsAssetsHandler();
         $this->front = new HQRentalsFrontHelper();
@@ -40,6 +46,9 @@ class HQRentalsPlacesReservationForm
         $minimumRental = "
             <script>
                 var minimumDayRentals = ". $this->minimumRental .";
+                var googleCountry = '". $this->googleCountry ."';
+                var googleMapCenter = '". $this->mapCenter ."';
+                var googleMapAddressRadius = '". $this->mapCenterRadius ."';
             </script>
         ";
         if(empty($key)){

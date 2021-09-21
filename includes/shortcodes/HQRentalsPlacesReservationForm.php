@@ -16,6 +16,7 @@ class HQRentalsPlacesReservationForm
     private $orientation;
     private $supportForCustomLocation;
     private $customLocationLabel;
+    private $minimumRental;
 
     public function __construct($params)
     {
@@ -24,6 +25,7 @@ class HQRentalsPlacesReservationForm
         $this->orientation = !empty($params['orientation_places_form']) ? $params['orientation_places_form'] : '';
         $this->supportForCustomLocation = !empty($params['support_for_custom_location']);
         $this->customLocationLabel = !empty($params['custom_location_label']) ? $params['custom_location_label'] : '';
+        $this->minimumRental = !empty($params['minimum_rental_period']) ? $params['minimum_rental_period'] : 1;
         $this->settings = new HQRentalsSettings();
         $this->assets =new HQRentalsAssetsHandler();
         $this->front = new HQRentalsFrontHelper();
@@ -35,29 +37,39 @@ class HQRentalsPlacesReservationForm
         $key = $this->settings->getGoogleAPIKey();
         $this->assets->loadPlacesReservationAssets();
         $html = "";
+        $minimumRental = "
+            <script>
+                var minimumDayRentals = ". $this->minimumRental .";
+            </script>
+        ";
         if(empty($key)){
             echo "<p>Add Google Key</p>";
         }else{
             if($this->orientation == 'horizontal'){
                 $html = "
-            ". HQRentalsAssetsHandler::getHQFontAwesome() ."
+            ". HQRentalsAssetsHandler::getHQFontAwesome() . $minimumRental ."
             <div id='hq-place-form-desktop' class=''>
                <div id='hq-form-wrapper' class=''>
-                  <form id='hq-form' class='' method='get' action='{$this->linkURL}'>
+                  <form id='hq-form' method='get' action='{$this->linkURL}'>
                      <div class='hq-places-inner-wrapper'>
                         <div class='hq-places-input-wrapper'>
-                            <div>
-                                <label class='hq-places-label'>PICK UP LOCATION</label> 
+                            <div class='hq-places-input-inner-wrapper'>
+                                <div class='hq-places-label-wrapper'>
+                                    <label class='hq-places-label'>PICK UP LOCATION</label> 
+                                </div>
+                                <div>
+                                    <select name='pick_up_location' id='hq-pick-up-location'>
+                                        {$this->front->getLocationOptions()}
+                                        {$this->resolveCustomLocation()}
+                                    </select>
+                                </div>
                             </div>
-                            <div>
-                                <select name='pick_up_location' id='hq-pick-up-location'>
-                                    {$this->front->getLocationOptions()}
-                                    {$this->resolveCustomLocation()}
-                                </select>
+                            <div class='hq-pickup-custom-location'>
+                                <input type='text' name='pick_up_location_custom' class='hq-places-auto-complete' id='pick-up-location-custom'>
                             </div>
                         </div>
                         <div class='hq-places-input-wrapper'>
-                            <div>
+                            <div class='hq-places-label-wrapper'>
                                 <label class='hq-places-label'>FROM</label> 
                             </div>
                             <div class='hq-places-date-time-wrapper'>
@@ -68,18 +80,23 @@ class HQRentalsPlacesReservationForm
                             </div>
                         </div>
                         <div class='hq-places-input-wrapper'>
-                            <div>
-                                <label class='hq-places-label'>RETURN LOCATION</label> 
+                            <div class='hq-placles-input-inner-wrapper'>
+                                <div class='hq-places-label-wrapper'>
+                                    <label class='hq-places-label'>RETURN LOCATION</label> 
+                                </div>
+                                <div>
+                                    <select name='return_location' id='hq-return-location'>
+                                        {$this->front->getLocationOptions()}
+                                        {$this->resolveCustomLocation()}
+                                    </select>
+                                </div>
                             </div>
-                            <div>
-                                <select name='return_location' id='hq-return-location'>
-                                    {$this->front->getLocationOptions()}
-                                    {$this->resolveCustomLocation()}
-                                </select>
+                            <div class='hq-return-custom-location'>
+                                <input type='text' name='return_location_custom' class='hq-places-auto-complete' id='return-location-custom'>
                             </div>
                         </div>
                         <div class='hq-places-input-wrapper'>
-                            <div>
+                            <div class='hq-places-label-wrapper'>
                                 <label class='hq-places-label'>UNTIL</label> 
                             </div>
                             <div class='hq-places-date-time-wrapper'>
@@ -90,12 +107,9 @@ class HQRentalsPlacesReservationForm
                             </div>
                         </div>
                         <div class='hq-places-input-wrapper hq-button-wrapper'>
+                            <input type='hidden' name='target_step' value='2'>
                             <button type='submit' class='hq-places-submit-button'>Book Now</button>    
                         </div>
-                        <input type='hidden' name='target_step' value='2'>
-                        <input type='hidden' name='pick_up_location' value='custom'>
-                        <input type='hidden' name='return_location' value='custom'>
-                        <input type='hidden' name='return_location_custom' value='' id='hq-return-location-custom'>
                      </div>
                   </form>
                </div>

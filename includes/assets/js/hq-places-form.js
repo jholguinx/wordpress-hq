@@ -9,6 +9,7 @@ dayjs.extend(window.dayjs_plugin_customParseFormat)
 // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 let autocomplete;
 let addressField;
+let addressFieldReturn;
 function initPlacesForm() {
     const center = { lat: 26.7751182, lng: -82.2354601 };
     const defaultBounds = {
@@ -17,36 +18,41 @@ function initPlacesForm() {
         east: center.lng + 2,
         west: center.lng - 2,
     };
-    addressField = document.querySelector("#hq-places-field");
+    addressField = document.querySelector("#pick-up-location-custom");
+    addressFieldReturn = document.querySelector("#return-location-custom");
     // Create the autocomplete object, restricting the search predictions to
     // addresses in the US and Canada.
-    autocomplete = new google.maps.places.Autocomplete(addressField, {
+    let autoConfig = {
         bounds: defaultBounds,
         origin: center,
         strictBounds: true,
         componentRestrictions: { country: ["us"] },
         fields: ["address_components"],
         types: ["address"],
-    });
+    };
+    autocomplete = new google.maps.places.Autocomplete(addressField, autoConfig);
+    autocompleteReturn = new google.maps.places.Autocomplete(addressFieldReturn, autoConfig);
     //address1Field.focus();
     addressField.focus();
+    addressFieldReturn.focus();
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
-    autocomplete.addListener("place_changed", updateReturnLocation);
+    //autocomplete.addListener("place_changed", updateReturnLocation);
 }
 function updateReturnLocation(){
     document.querySelector("#hq-return-location-custom").value = document.querySelector("#hq-places-field").value;
 }
 jQuery(document).ready(function(){
     const dateFormat = hqMomentDateFormat;
+    const minDays = minimumDayRentals;
     const dateConfig  = {
         dateFormat: dateFormat,
     };
-    setDefaults(dateFormat);
+    setDefaults(dateFormat, minDays);
     jQuery("#hq-times-pick-up-date").datetimepicker(dateConfig);
     jQuery("#hq-times-return-date").datetimepicker(dateConfig);
     jQuery("#hq-times-pick-up-date").on("change",function(){
-        var newDate = dayjs(jQuery("#hq-times-pick-up-date").val(), dateFormat).add(1, 'day').format(dateFormat);
+        var newDate = dayjs(jQuery("#hq-times-pick-up-date").val(), dateFormat).add(minimumDayRentals, 'day').format(dateFormat);
         jQuery("#hq-times-return-date").val(newDate);
     });
     jQuery("#hq-times-pick-up-time").on("change",function(){
@@ -54,16 +60,22 @@ jQuery(document).ready(function(){
     });
     jQuery("#hq-pick-up-location").on("change",function() {
         if (jQuery("#hq-pick-up-location").val() === "custom") {
-
+            jQuery('.hq-pickup-custom-location').slideDown();
+        }else{
+            jQuery('.hq-pickup-custom-location').slideUp();
         }
     });
     jQuery("#hq-return-location").on("change",function(){
-
+        if (jQuery("#hq-return-location").val() === "custom") {
+            jQuery('.hq-return-custom-location').slideDown();
+        }else{
+            jQuery('.hq-return-custom-location').slideUp();
+        }
     });
 });
-function setDefaults(dateFormat){
-    var newDate = dayjs().format(dateFormat);
-    var tomorrowDate = dayjs().add(1, 'day').format(dateFormat);
+function setDefaults(dateFormat,minimumDayRentals){
+    var newDate = dayjs().add(15, 'minutes').add(2,'hours').format(dateFormat);
+    var tomorrowDate = dayjs().add(minimumDayRentals, 'day').add(15, 'minutes').add(2,'hours').format(dateFormat);
     jQuery("#hq-times-pick-up-date").val(newDate);
     jQuery("#hq-times-return-date").val(tomorrowDate);
 }

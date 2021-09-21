@@ -58,6 +58,12 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
                         'value'       => ''
                     ),
                     array(
+                        'type'        => 'textfield',
+                        'heading'     => __( 'Minimum Rental Period', 'hq-wordpress' ),
+                        'param_name'  => 'minimum_rental_period',
+                        'value'       => '1'
+                    ),
+                    array(
                         'type'        => 'dropdown',
                         'heading'     => __( 'Orientation', 'hq-wordpress' ),
                         'param_name'  => 'orientation_places_form',

@@ -271,8 +271,8 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-daysjs-custom-js');
         wp_enqueue_script('hq-daysjs-js');
         wp_enqueue_script('hq-datepicker-js');
-        wp_enqueue_script('hq-google-js');
         wp_enqueue_script('hq-places-form-js');
+        wp_enqueue_script('hq-google-js');
     }
     public function loadReservationFormRentit()
     {

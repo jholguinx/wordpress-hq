@@ -38,51 +38,32 @@ function updateReturnLocation(){
     document.querySelector("#hq-return-location-custom").value = document.querySelector("#hq-places-field").value;
 }
 jQuery(document).ready(function(){
-    const dateFormat = hqRentalsTenantDatetimeFormat.split(' ')[0];
-    //const timeFormat = hqRentalsTenantDatetimeFormat.split(' ')[1];
-    const timeFormat = "h:iK";
-    const jsDateFormat = 'MM/DD/YYYY'
+    const dateFormat = hqMomentDateFormat;
     const dateConfig  = {
         dateFormat: dateFormat,
-        disableMobile: true,
     };
-    const timeConfig = {
-        dateFormat: timeFormat,
-        disableMobile: true,
-        enableTime:true,
-        noCalendar: true,
-        altFormat: timeFormat,
-        altInput: timeFormat,
-        ariaDateFormat: timeFormat,
-        time_24hr: false
-    }
+    setDefaults(dateFormat);
     jQuery("#hq-times-pick-up-date").datetimepicker(dateConfig);
     jQuery("#hq-times-return-date").datetimepicker(dateConfig);
-
-
-    setDefaults(dateFormat, jsDateFormat);
     jQuery("#hq-times-pick-up-date").on("change",function(){
-        var newDate = dayjs(jQuery("#hq-times-pick-up-date").val(), dateFormat).add(1, 'day').format(jsDateFormat);
+        var newDate = dayjs(jQuery("#hq-times-pick-up-date").val(), dateFormat).add(1, 'day').format(dateFormat);
         jQuery("#hq-times-return-date").val(newDate);
     });
     jQuery("#hq-times-pick-up-time").on("change",function(){
         jQuery("#hq-times-return-time").val(jQuery("#hq-times-pick-up-time").val());
     });
-    jQuery("#hq-pick-up-location").on("change",function(){
-        if(jQuery("#hq-pick-up-location").val() === "custom"){
+    jQuery("#hq-pick-up-location").on("change",function() {
+        if (jQuery("#hq-pick-up-location").val() === "custom") {
 
         }
-    );
+    });
     jQuery("#hq-return-location").on("change",function(){
 
     });
 });
-function setDefaults(dateFormat, jsDateFormat){
-    var newDate = dayjs().format(jsDateFormat);
-    var tomorrowDate = dayjs().add(1, 'day').format(jsDateFormat);
-    var nowMinute = dayjs().add(15,'minute').format("h:mm A");
+function setDefaults(dateFormat){
+    var newDate = dayjs().format(dateFormat);
+    var tomorrowDate = dayjs().add(1, 'day').format(dateFormat);
     jQuery("#hq-times-pick-up-date").val(newDate);
     jQuery("#hq-times-return-date").val(tomorrowDate);
-    jQuery("#hq-times-pick-up-time").val(nowMinute);
-    jQuery("#hq-times-return-time").val(nowMinute);
 }

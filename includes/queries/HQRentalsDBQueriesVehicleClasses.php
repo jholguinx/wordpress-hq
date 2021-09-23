@@ -29,15 +29,26 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
         }
         return [];
     }
-    public function getVehicleByRate($rate = "daily_rate_amount")
+    public function getVehicleByRate($rate = "daily_rate_amount", $force_rate = false)
     {
         return $this->db->innerJoinTable(
             $this->model->getTableName(),
             $this->rate->getTableName(),
             "id",
             "vehicle_class_id",
-            $this->rate->getTableName() . "." . $rate ,
-            "asc"
+            ($force_rate) ? $this->rate->getTableName() . "." . $rate
+                : array(
+                    array(
+                        'table' => $this->model->getTableName(),
+                        'column' => 'vehicle_class_order',
+                        'direction' => 'ASC'
+                    ),
+                    array(
+                        'table' => $this->rate->getTableName() ,
+                        'direction' => 'ASC',
+                        'column' => 'daily_rate_amount'
+                    )
+            ),
         );
     }
 

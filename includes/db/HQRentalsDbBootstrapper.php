@@ -31,6 +31,7 @@ class HQRentalsDbBootstrapper
         $rateTables = $this->db->createTable($ratesData['table_name'], $ratesData['table_columns']);
         //this should be implemented on updates
         $vehicleTableCheckUp = $this->db->updateTableOnChanges($vehiclesData['table_name'], $vehiclesData['table_columns']);
+        $rateTableCheckUp = $this->db->updateTableOnChanges($ratesData['table_name'],$ratesData['table_columns']);
         // add validation for process completed
     }
     public function createColumnsForVehiclesClassesCustomFields($customFields)

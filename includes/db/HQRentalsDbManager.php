@@ -63,9 +63,9 @@ class HQRentalsDbManager
         return $this->getResults($sqlQuery);
     }
 
-    public function innerJoinTable($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order, $direction) : \stdClass
+    public function innerJoinTable($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order) : \stdClass
     {
-        $sqlQuery = $this->resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order, $direction);
+        $sqlQuery = $this->resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order);
         return $this->getResults($sqlQuery);
     }
 
@@ -94,9 +94,18 @@ class HQRentalsDbManager
                 ) ' . $this->charset . ';'
         );
     }
-    private function resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order = "", $direction = "asc"): string
+    private function resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order = []): string
     {
-        return $this->db->prepare( "select * from {$this->resolveTableName($tableOne)} inner join {$this->resolveTableName($tableTwo)} on {$this->resolveTableName($tableOne)}.{$tableOneComparison} = {$this->resolveTableName($tableTwo)}.{$tableTwoComparison} order by {$this->resolveTableName($order)} ${direction};"
+        $orderSQL = "";
+        foreach ($order as $index => $orderItem){
+            $table = $this->resolveTableName($orderItem['table']);
+            $end = ((count($order) - 1) === $index) ? "" : ",";
+            $orderSQL .= $table . "." . $orderItem['column'] ." " . $orderItem['direction']. $end;
+        }
+        return $this->db->prepare(
+            "select * from {$this->resolveTableName($tableOne)} 
+                    inner join {$this->resolveTableName($tableTwo)} on {$this->resolveTableName($tableOne)}.{$tableOneComparison} = {$this->resolveTableName($tableTwo)}.{$tableTwoComparison} 
+                    order by ${orderSQL};"
         );
     }
 

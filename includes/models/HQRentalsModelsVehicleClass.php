@@ -436,8 +436,13 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 
     public function rates()
     {
-        $rateModel = new HQRentalsModelsActiveRate();
-        return $rateModel->allRatesFromVehicleClass($this->id);
+        try {
+            $rateModel = new HQRentalsModelsActiveRate();
+            return $rateModel->allRatesFromVehicleClass($this->id);
+        }catch (\Exception $e){
+            return [];
+        }
+
     }
 
     public function getPriceIntervals()
@@ -668,7 +673,11 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             if ($rate instanceof HQRentalsModelsActiveRate) {
                 $existResult = $this->db->selectFromTable($this->activeRate->getTableName(), '*', 'vehicle_class_id=' . $this->getId());
                 if($existResult->success){
-                    $resultUpdateActive = $this->db->updateIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB(), array('vehicle_class_id' => $this->getId()));
+                    $resultUpdateActive = $this->db->updateIntoTable(
+                        $this->activeRate->getTableName(),
+                        $rate->parseDataToSaveOnDB(),
+                        array('vehicle_class_id' => $this->getId())
+                    );
                 }else{
                     $resultInsertActive = $this->db->insertIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB());
                 }

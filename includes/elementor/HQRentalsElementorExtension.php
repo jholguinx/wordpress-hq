@@ -188,7 +188,7 @@ final class HQRentalsElementorExtension {
 
         // Include Widget files
         require_once( __DIR__ . '/widgets/HQRentalsElementorVehiclesGridWidget.php' );
-        //require_once( __DIR__ . '/widgets/HQRentalsElementorPlacesReservationForm.php' );
+        require_once( __DIR__ . '/widgets/HQRentalsElementorPlacesReservationForm.php' );
         require_once( __DIR__ . '/widgets/HQRentalsElementorReservationsWidget.php' );
         require_once( __DIR__ . '/widgets/HQRentalsElementorReservationFormWidget.php' );
 

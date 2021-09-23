@@ -7,6 +7,7 @@ class HQRentalsDbManager
     protected $db;
     protected $charset;
     protected $dbPrefix;
+    private $dbName;
 
     public function __construct()
     {
@@ -14,8 +15,8 @@ class HQRentalsDbManager
         $this->db = $wpdb;
         $this->charset = $wpdb->get_charset_collate();
         $this->dbPrefix = $wpdb->get_blog_prefix();
+        $this->dbName = $wpdb->__get('dbname');
     }
-
     public function createTable($tableName, $tableContent): \stdClass
     {
         $sqlQuery = $this->resolveCreateStatementString($tableName, $tableContent);
@@ -130,7 +131,8 @@ class HQRentalsDbManager
 
     private function resolveColumnCheckStatementString($table, $column)
     {
-        return $this->db->prepare('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = "'. $this->dbPrefix . $table .'" AND column_name = "'. $column .'";'
+        return $this->db->prepare(
+            'SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = "'. $this->dbPrefix . $table .'" AND TABLE_SCHEMA="'. $this->dbName .'" AND column_name = "'. $column .'";'
         );
     }
 
@@ -214,7 +216,6 @@ class HQRentalsDbManager
                 $query
             );
         } else {
-
             $data = $this->resolveQuery(
                 false,
                 null,

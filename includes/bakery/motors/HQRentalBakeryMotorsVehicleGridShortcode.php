@@ -131,9 +131,10 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
         $html = "";
         if(is_array($vehicle->getVehicleFeatures()) and count($vehicle->getVehicleFeatures())){
             foreach ($vehicle->getVehicleFeatures() as $feature){
+                $feature = empty($feature->icon) ? "<img src='{$feature->image}' class='feature-image'  alt='{$feature->label}' />" : "<i class='{$feature->icon}'></i>";
                 $html .= "
                     <div class='single_info'>
-                        <i class='{$feature->icon}'></i>
+                        {$feature}
                         <span>{$feature->label}</span>
                     </div>
                 ";

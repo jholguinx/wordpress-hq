@@ -62,6 +62,12 @@ class HQRentalsAdminSettings
             <script>
                 var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
             </script>
+            <style>
+                .hq-normal-wrapper{
+                    display: block !important;
+                    max-width: 600px;
+                }
+            </style>
             <div class="wrap">
                 <div id="wrap">
                     <div class="hq-title-wrapper">
@@ -118,38 +124,119 @@ class HQRentalsAdminSettings
                                 <?php endif; ?>
                             </div>
                             <div class="hq-general-settings-wrapper">
-                                <div class="hq-general-settings-item-wrapper hq-tokens-rows">
+                                <div class="hq-general-settings-item-wrapper hq-tokens-rows <?php echo empty($_GET['dev']) ? 'hq-normal-wrapper' : ''; ?>">
                                     <?php if ($_GET['dev']): ?>
-                                        <div class="hq-general-settings-item">
-                                            <div class="hq-general-label-wrapper">
-                                                <h4 class="wp-heading-inline" for="title">Tenant token</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                      data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
+                                        <style>
+                                            .hq-dev{
+                                                flex: 1;
+                                                display: flex;
+                                                flex-direction: column;
+                                                margin-right: 40px;
+                                            }
+                                        </style>
+                                    <div style="display: flex; flex-direction: row; width: 100%;">
+                                        <div class="hq-dev">
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper">
+                                                    <h4 class="wp-heading-inline" for="title">Tenant token</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                          data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper tokens">
+                                                    <input class="hq-admin-text-input"
+                                                           type="text"
+                                                           name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
+                                                           value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
+                                                           id="hq-api-tenant-token"
+                                                           spellcheck="true" autocomplete="off">
+                                                </div>
                                             </div>
-                                            <div class="hq-general-input-wrapper tokens">
-                                                <input class="hq-admin-text-input"
-                                                       type="text"
-                                                       name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
-                                                       value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
-                                                       id="hq-api-tenant-token"
-                                                       spellcheck="true" autocomplete="off">
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper">
+                                                    <h4 class="wp-heading-inline" for="title">User token</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                          data-tippy-content="Log in to your HQ account and navigate to settings > user management > users > integrations > select your user profile > generate and copy the API token and paste it here."></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper tokens">
+                                                    <input class="hq-admin-text-input"
+                                                           type="text"
+                                                           name="<?php echo esc_attr($this->settings->api_user_token); ?>"
+                                                           value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
+                                                           id="hq-api-user-token"
+                                                           spellcheck="true" autocomplete="off">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="hq-general-settings-item">
-                                            <div class="hq-general-label-wrapper">
-                                                <h4 class="wp-heading-inline" for="title">User token</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                      data-tippy-content="Log in to your HQ account and navigate to settings > user management > users > integrations > select your user profile > generate and copy the API token and paste it here."></span>
+                                        <div class="hq-dev">
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper hq-dates">
+                                                    <h4 class="wp-heading-inline" for="title">Select front-end date
+                                                        format</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                          data-tippy-content=" This is the format of the dates on your website, and this must match the system date format."></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper hq-dates-input">
+                                                    <select class="hq-admin-select-input"
+                                                            name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
+                                                        <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="hq-general-input-wrapper tokens">
-                                                <input class="hq-admin-text-input"
-                                                       type="text"
-                                                       name="<?php echo esc_attr($this->settings->api_user_token); ?>"
-                                                       value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
-                                                       id="hq-api-user-token"
-                                                       spellcheck="true" autocomplete="off">
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper hq-dates">
+                                                    <h4 class="wp-heading-inline" for="title">Select system date format</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                          data-tippy-content="This is the date format set up on your HQ account settings. You can find this under general settings."></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper hq-dates-input">
+                                                    <select class="hq-admin-select-input"
+                                                            name="<?php echo $this->settings->hq_datetime_format; ?>">
+                                                        <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper hq-dates">
+                                                    <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                          data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
+                                                                        <p>For xxx.hqrentals.app, your region is in America 2</p>
+                                                                        <p>For xxx.west.hqrentals.app, your region is in America West</p>
+                                                                        <p>For xxx.hqrentals.eu, your region is Europe</p>
+                                                                        <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper hq-dates-input">
+                                                    <select
+                                                            id="hq-api-user-base-url"
+                                                            class="hq-admin-select-input "
+                                                            name="<?php echo esc_attr($this->settings->api_base_url); ?>">
+                                                        <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
+                                                            America
+                                                        </option>
+                                                        <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
+                                                            America 2
+                                                        </option>
+                                                        <option value="https://api-america-3.caagcrm.com/api-america-3/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-3.caagcrm.com/api-america-3/') ? 'selected="selected"' : ''; ?>>
+                                                            America 3
+                                                        </option>
+                                                        <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
+                                                            America West
+                                                        </option>
+                                                        <option value="https://api-america-miami.caagcrm.com/api-america-miami/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-miami.caagcrm.com/api-america-miami/') ? 'selected="selected"' : ''; ?>>
+                                                            America Miami
+                                                        </option>
+                                                        <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
+                                                            Europe
+                                                        </option>
+                                                        <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
+                                                            Asia
+                                                        </option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
+
+                                    </div>
                                     <?php else: ?>
                                         <div class="hq-login-wrapper">
                                             <div id="hq-login-form-wrapper">
@@ -220,76 +307,6 @@ class HQRentalsAdminSettings
                                             The plugin has been successfully setup.
                                         </div>
                                     </div>
-                                </div>
-                                <div class="hq-general-settings-item-wrapper">
-                                    <?php if ($_GET['dev']): ?>
-                                        <div class="hq-general-settings-item">
-                                            <div class="hq-general-label-wrapper hq-dates">
-                                                <h4 class="wp-heading-inline" for="title">Select front-end date
-                                                    format</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                      data-tippy-content=" This is the format of the dates on your website, and this must match the system date format."></span>
-                                            </div>
-                                            <div class="hq-general-input-wrapper hq-dates-input">
-                                                <select class="hq-admin-select-input"
-                                                        name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
-                                                    <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="hq-general-settings-item">
-                                            <div class="hq-general-label-wrapper hq-dates">
-                                                <h4 class="wp-heading-inline" for="title">Select system date format</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                      data-tippy-content="This is the date format set up on your HQ account settings. You can find this under general settings."></span>
-                                            </div>
-                                            <div class="hq-general-input-wrapper hq-dates-input">
-                                                <select class="hq-admin-select-input"
-                                                        name="<?php echo $this->settings->hq_datetime_format; ?>">
-                                                    <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="hq-general-settings-item">
-                                            <div class="hq-general-label-wrapper hq-dates">
-                                                <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
-                                                <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                      data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
-                                                                        <p>For xxx.hqrentals.app, your region is in America 2</p>
-                                                                        <p>For xxx.west.hqrentals.app, your region is in America West</p>
-                                                                        <p>For xxx.hqrentals.eu, your region is Europe</p>
-                                                                        <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
-                                            </div>
-                                            <div class="hq-general-input-wrapper hq-dates-input">
-                                                <select
-                                                        id="hq-api-user-base-url"
-                                                        class="hq-admin-select-input "
-                                                        name="<?php echo esc_attr($this->settings->api_base_url); ?>">
-                                                    <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
-                                                        America
-                                                    </option>
-                                                    <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
-                                                        America 2
-                                                    </option>
-                                                    <option value="https://api-america-3.caagcrm.com/api-america-3/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-3.caagcrm.com/api-america-3/') ? 'selected="selected"' : ''; ?>>
-                                                        America 3
-                                                    </option>
-                                                    <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
-                                                        America West
-                                                    </option>
-                                                    <option value="https://api-america-miami.caagcrm.com/api-america-miami/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-miami.caagcrm.com/api-america-miami/') ? 'selected="selected"' : ''; ?>>
-                                                        America Miami
-                                                    </option>
-                                                    <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
-                                                        Europe
-                                                    </option>
-                                                    <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
-                                                        Asia
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

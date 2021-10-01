@@ -48,7 +48,7 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
                         'direction' => 'ASC',
                         'column' => 'daily_rate_amount'
                     )
-            ),
+            )
         );
     }
 
@@ -96,6 +96,7 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
         if ($query->success) {
             return $this->fillObjectsFromDB($query->data);
         }
+        return null;
     }
     public function getVehiclesByBrand($brandId)
     {
@@ -103,5 +104,6 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
         if ($query->success) {
             return $this->fillObjectsFromDB($query->data);
         }
+        return null;
     }
 }

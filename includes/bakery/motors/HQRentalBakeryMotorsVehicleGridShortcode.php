@@ -11,6 +11,7 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     private $query;
     private $reservationURL;
     private $title;
+    private $target_step;
 
     public function __construct()
     {
@@ -23,11 +24,12 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     {
         extract( shortcode_atts( array(
             'reservation_page_url'				=>	'',
-            'title'                             =>  ''
-
+            'title'                             =>  '',
+            'target_step'                       => '3'
         ), $atts ) );
         $this->reservationURL = $atts['reservation_page_url'];
         $this->title = $atts['title'];
+        $this->target_step = $atts['target_step'];
         echo $this->renderShortcode();
     }
 
@@ -47,6 +49,12 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                         'type' => 'textfield',
                         'heading' => __('Title', 'hq-wordpress'),
                         'param_name' => 'title',
+                        'value' => ''
+                    ),
+                    array(
+                        'type' => 'textfield',
+                        'heading' => __('Target Step', 'hq-wordpress'),
+                        'param_name' => 'target_step',
                         'value' => ''
                     ),
                     array(
@@ -106,7 +114,7 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
         return "
 
         <div class='stm_product_grid_single'>
-            <a href='{$this->reservationURL}?target_step=2&vehicle_class_id={$vehicle->getId()}' class='inner'>
+            <a href='{$this->reservationURL}?target_step={$this->target_step}&vehicle_class_id={$vehicle->getId()}' class='inner'>
                 <div class='stm_top clearfix'>
                     <div class='stm_left heading-font'>
                         <h3>{$vehicle->getLabelForWebsite()}</h3>
@@ -131,10 +139,10 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
         $html = "";
         if(is_array($vehicle->getVehicleFeatures()) and count($vehicle->getVehicleFeatures())){
             foreach ($vehicle->getVehicleFeatures() as $feature){
-                $feature = empty($feature->icon) ? "<img src='{$feature->image}' class='feature-image'  alt='{$feature->label}' />" : "<i class='{$feature->icon}'></i>";
+                $featureIcon = empty($feature->icon) ? "<img src='{$feature->image}' class='feature-image'  alt='{$feature->label}' />" : "<i class='{$feature->icon}'></i>";
                 $html .= "
                     <div class='single_info'>
-                        {$feature}
+                        {$featureIcon}
                         <span>{$feature->label}</span>
                     </div>
                 ";

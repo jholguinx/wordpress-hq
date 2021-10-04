@@ -412,22 +412,6 @@ class HQRentalsAdminSettings
                                             </div>
                                             <div class="hq-general-settings-item">
                                                 <div class="hq-general-label-wrapper">
-                                                    <h4 class="wp-heading-inline" for="title">Google API Key</h4>
-                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                          data-tippy-content="Google Services API Key"></span>
-                                                </div>
-                                                <div class="hq-general-input-wrapper">
-                                                    <input type="text"
-                                                           class="hq-admin-text-input hq-admin-text-input-medium medium large"
-                                                           name="<?php echo $this->settings->hq_google_api_key; ?>"
-                                                           value="<?php echo esc_attr($this->settings->getGoogleAPIKey()); ?>"/>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="hq-text-items-wrappers">
-                                            <div class="hq-general-settings-item">
-                                                <div class="hq-general-label-wrapper">
                                                     <h4 class="wp-heading-inline" for="title">DEFAULT CURRENCY DISPLAY</h4>
                                                     <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                           data-tippy-content="This will be the currency the displayed by default on the vehicle class grid, and the dedicated vehicle class pages."></span>
@@ -481,6 +465,9 @@ class HQRentalsAdminSettings
                                                            value="<?php echo esc_attr($this->settings->getLocationDescriptionField()); ?>"/>
                                                 </div>
                                             </div>
+
+                                        </div>
+                                        <div class="hq-text-items-wrappers">
                                             <div class="hq-general-settings-item">
                                                 <div class="hq-general-label-wrapper">
                                                     <h4 class="wp-heading-inline" for="title">Fleet location address field
@@ -591,6 +578,20 @@ class HQRentalsAdminSettings
                                                            class="hq-admin-text-input hq-admin-text-input-medium small"
                                                            name="<?php echo $this->settings->hq_url_to_replace_on_brands_option; ?>"
                                                            value="<?php echo esc_attr($this->settings->getBrandURLToReplaceSetting()); ?>"/>
+                                                </div>
+
+                                            </div>
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper">
+                                                    <h4 class="wp-heading-inline" for="title">Google API Key</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                          data-tippy-content="Google Services API Key"></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper">
+                                                    <input type="text"
+                                                           class="hq-admin-text-input hq-admin-text-input-medium medium large"
+                                                           name="<?php echo $this->settings->hq_google_api_key; ?>"
+                                                           value="<?php echo esc_attr($this->settings->getGoogleAPIKey()); ?>"/>
                                                 </div>
 
                                             </div>

@@ -83,6 +83,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
     protected $metaUUID = 'hq_wordpress_brand_uuid';
     protected $metaIntegrationSnippetsCalendar = 'hq_wordpress_brand_integration_snippets_calendar';
     protected $metaIntegrationSnippetsClassCalendar = 'hq_wordpress_brand_integration_snippets_class_calendar';
+    protected $metaIntegrationSnippetsMyReservation = 'hq_wordpress_brand_integration_snippets_my_reservation';
 
     public $id = '';
     public $name = '';
@@ -104,6 +105,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
     public $snippetPaymentRequest = '';
     public $snippetCalendar = '';
     public $snippetClassCalendar = '';
+    public $snippetMyReservation = '';
     public $uuid = '';
 
     public function __construct($post = null)
@@ -178,6 +180,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetPaymentRequest = htmlspecialchars($snippetData['payment-request']);
         $this->snippetCalendar = htmlspecialchars($snippetData['calendar']);
         $this->snippetClassCalendar = htmlspecialchars($snippetData['class-calendar']);
+        $this->snippetMyReservation = htmlspecialchars($snippetData['my-reservations']);
         if($this->settings->getReplaceBaseURLOnBrandsSetting() === "true"){
             $urlReplacement = $this->settings->getBrandURLToReplaceSetting();
             $this->publicReservationsLinkFull = $this->resolveBrandURL($data->public_reservations_link_full, $urlReplacement);
@@ -231,6 +234,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPaymentRequest, $this->snippetPaymentRequest );
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsCalendar, $this->snippetCalendar);
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsClassCalendar, $this->snippetClassCalendar);
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsMyReservation, $this->snippetMyReservation);
         hq_update_post_meta( $post_id, $this->metaUUID, $this->uuid );
     }
 
@@ -279,6 +283,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetPaymentRequest = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPaymentRequest, true ));
         $this->snippetCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsCalendar, true ));
         $this->snippetClassCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsClassCalendar, true ));
+        $this->snippetMyReservation = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsMyReservation, true ));
     }
 
     public function all()

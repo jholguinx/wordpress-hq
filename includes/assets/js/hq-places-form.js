@@ -16,6 +16,7 @@ function initPlacesForm() {
     //us
     const lat = (googleMapCenter) ? googleMapCenter.split(',')[0] : null;
     const lng = (googleMapCenter) ? googleMapCenter.split(',')[1] : null;
+    const country = (googleCountry) ? googleCountry : "us";
     const center = (lat && lng) ? { lat, lng} : null;
     const defaultBounds = (googleMapAddressRadius) ? {
         north: parseFloat(lat) + parseFloat(googleMapAddressRadius),
@@ -31,7 +32,7 @@ function initPlacesForm() {
         bounds: defaultBounds,
         origin: center,
         strictBounds: true,
-        componentRestrictions: { country: ["us"] },
+        componentRestrictions: { country: [country] },
         fields: ["address_components"],
         types: ["address"],
     };

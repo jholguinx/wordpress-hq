@@ -52,13 +52,16 @@ jQuery(document).ready(function(){
     const dateFormat = hqMomentDateFormat;
     const minDays = minimumDayRentals;
     const dateConfig  = {
-        dateFormat: dateFormat,
+        dateFormat: hqRentalsTenantDatetimeFormat,
+        minDate: 0,
+        format:hqRentalsTenantDatetimeFormat,
     };
     setDefaults(dateFormat, minDays);
     jQuery("#hq-times-pick-up-date").datetimepicker(dateConfig);
     jQuery("#hq-times-return-date").datetimepicker(dateConfig);
     jQuery("#hq-times-pick-up-date").on("change",function(){
-        var newDate = dayjs(jQuery("#hq-times-pick-up-date").val(), dateFormat).add(minimumDayRentals, 'day').format(dateFormat);
+        const dateFormatMoment = hqMomentDateFormat;
+        var newDate = dayjs( jQuery("#hq-times-pick-up-date").val(), dateFormatMoment ).add(minimumDayRentals, 'day').format(dateFormatMoment);
         jQuery("#hq-times-return-date").val(newDate);
     });
     jQuery("#hq-times-pick-up-time").on("change",function(){

@@ -169,7 +169,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                         <div class='reservation-form__pick-up-location reservation-form__location'>
                                             <div class='reservation-form__field-inner'>
                                                 <label for='reservation-form__pick-up-location-select' class='reservation-form__label reservation-form__pick-up-location-label reservation-form__location-label'>Pick-up</label>
-                                                <select name='pick_up_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
+                                                <select id='hq-pick-up-location' name='pick_up_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
                                                     <option>Select Location</option>
                                                     {$this->resolveOptionsForLocations($locations)}
                                                 </select>
@@ -179,7 +179,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                             <div class='reservation-form__field-inner'>
                                                 <label for='reservation-form__pick-up-date-input' class='reservation-form__label reservation-form__pick-up-date-label reservation-form__date-label'>Pick-up</label>
                                                 <div class='reservation-form__date-wrapper'>
-                                                    <input type='text' name='pick_up_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__pick-up-date-input' id='reservation-form__pick-up-date-input' data-date-format='yy-mm-dd' />
+                                                    <input type='text' name='pick_up_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__pick-up-date-input' id='reservation-form__pick-up-date-input' data-date-format='MM dd, yy' />
                                                 </div>
                                             </div>
                                         </div>
@@ -195,7 +195,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                         <div class='reservation-form__drop-off-location reservation-form__location'>
                                             <div class='reservation-form__field-inner'>
                                                 <label for='reservation-form__pick-up-location-select' class='reservation-form__label reservation-form__pick-up-location-label reservation-form__location-label'>Drop-off</label>
-                                                <select name='return_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
+                                                <select id='hq-return-location' name='return_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
                                                     <option>Select Location</option>
                                                     {$this->resolveOptionsForLocations($locations)}
                                                 </select>
@@ -205,7 +205,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                             <div class='reservation-form__field-inner'>
                                                 <label for='reservation-form__drop-off-date-input' class='reservation-form__label reservation-form__drop-off-date-label reservation-form__date-label'>Drop-off</label>
                                                 <div class='reservation-form__date-wrapper'>
-                                                    <input type='text' name='return_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__drop-off-date-input' id='reservation-form__drop-off-date-input' data-date-format='yy-mm-dd' />
+                                                    <input type='text' name='return_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__drop-off-date-input' id='reservation-form__drop-off-date-input' data-date-format='MM dd, yy' />
                                                 </div>
                                             </div>
                                         </div>
@@ -240,6 +240,19 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                 </div>
             </div>
         </div>
+        <script>
+            function setListeners(baseValue, changedValue){
+                var pickupLocation = document.getElementById(baseValue);
+                pickupLocation.addEventListener('change',function(){
+                    var pickupLocation = document.getElementById(baseValue);
+                    var returnLocation = document.getElementById(changedValue);
+                    console.log(pickupLocation.value);
+                    returnLocation.value = pickupLocation.value; 
+                });
+            }
+            setListeners('hq-pick-up-location','hq-return-location');
+            setListeners('reservation-form__pick-up-time-select','reservation-form__drop-off-time-select');
+        </script>
         ";
         return $html;
     }

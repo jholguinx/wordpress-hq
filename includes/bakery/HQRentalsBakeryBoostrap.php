@@ -10,18 +10,17 @@ class HQRentalsBakeryBoostrap{
     {
         $this->requireDependencies();
         $this->theme = wp_get_theme();
+        add_filter( 'theme_page_templates', array($this, 'addWheelsberryTemplateFiles'), 10, 4 );
+        add_filter( 'page_template', array($this, 'loadWheelsberryTemplateFiles'), 20, 5 );
     }
     public function boostrapBakery(){
         if(is_plugin_active('js_composer/js_composer.php') ){
-            if(
-                $this->theme->stylesheet !== 'wheelsberry' and
-                $this->theme->stylesheet !== 'wheelsberry-child'
-            ){
-                require_once($this->bakeryDeps);
-                $this->resolveBakeryItems();
-                $this->resolveFileForMotorsTheme();
-                $this->resolveFileForRentitTheme();
-            }
+            require_once($this->bakeryDeps);
+            $this->resolveBakeryItems();
+            $this->resolveFileForMotorsTheme();
+            $this->resolveFileForRentitTheme();
+            $this->resolveFileForWheelsberryTheme();
+
         }
     }
     public function requireDependencies()
@@ -81,6 +80,23 @@ class HQRentalsBakeryBoostrap{
             }
         }
     }
+    public function resolveFileForWheelsberryTheme()
+    {
+        if (
+            $this->theme->stylesheet === 'wheelsberry' or
+            $this->theme->stylesheet === 'wheelsberry-child' or
+            $this->theme->stylesheet === 'wheelsberry_child'
+        ) {
+            $themeDeps = array(
+                plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryReservationFormShortcode.php',
+            );
+            foreach ($themeDeps as $file){
+                if (file_exists($file)) {
+                    require_once($file);
+                }
+            }
+        }
+    }
     public function resolveFiles(){
         return array_merge(
             $this->dependencies,
@@ -90,6 +106,19 @@ class HQRentalsBakeryBoostrap{
                 plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryReservationFormShortcode.php',
             )
         );
+    }
+    public function addWheelsberryTemplateFiles($templates)
+    {
+        $templates['hq-wheelsberry-homepage.php'] = __( 'Homepage - HQ Wheelsberry', 'hq-wordpress' );
+        return $templates;
+    }
+
+    function loadWheelsberryTemplateFiles( $page_template ){
+
+        if ( get_page_template_slug() == 'hq-wheelsberry-homepage.php' ) {
+            $page_template = plugin_dir_path( __FILE__ ) . 'wheelsberry/templates/hq-wheelsberry-homepage.php';
+        }
+        return $page_template;
     }
 
 }

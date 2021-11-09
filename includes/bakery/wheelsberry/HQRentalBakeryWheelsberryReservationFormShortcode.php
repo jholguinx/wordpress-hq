@@ -277,16 +277,19 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         if (is_array($vehicles) and count($vehicles)) {
             $html = '';
             foreach ($vehicles as $vehicle) {
+                $priceHTML = "";
+                $priceHTML = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
+                $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? (" | <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";
                 $html .= "
                     <div class='cars-slider__item'>
                         <div class='om-container'>
                             <div class='cars-slider__item-inner om-container__inner'>
                                 <div class='cars-slider__item-description'>
-                                    <div class='cars-slider__item-category'>Economy</div>
+                                    <div class='cars-slider__item-category'>{$vehicle->name}</div>
                                     <h3 class='cars-slider__model'><span class='cars-slider__model-inner'>{$this->getTitle($vehicle->getLabelForWebsite())}</span></h3>
                                     <div class='cars-slider__item-description-sep'></div>
                                     <div class='cars-slider__item-price'>
-                                        <span class='cars-slider__item-price-value'><span class='omcr-price-currency'></span>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily | {$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>
+                                        <span class='cars-slider__item-price-value'>{$priceHTML}</span>
                                     </div>
                                     <div class='cars-slider__item-reserve'>
                                         <span class='cars-slider__item-reserve-button' data-car-id='{$vehicle->getId()}'>Reserve Now</span>

@@ -189,7 +189,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                             <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                                 <label for='reservation-form__pick-up-date-input' class='reservation-form__label reservation-form__pick-up-date-label reservation-form__date-label'>Pick-up</label>
                                                 <div class='reservation-form__date-wrapper'>
-                                                    <input type='text' name='pick_up_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__pick-up-date-input' id='reservation-form__pick-up-date-input' data-date-format='MM dd, yy' />
+                                                    <input type='text' name='pick_up_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__pick-up-date-input' id='reservation-form__pick-up-date-input' data-date-format='m/d/y' />
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                             <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                                 <label for='reservation-form__drop-off-date-input' class='reservation-form__label reservation-form__drop-off-date-label reservation-form__date-label'>Drop-off</label>
                                                 <div class='reservation-form__date-wrapper'>
-                                                    <input type='text' name='return_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__drop-off-date-input' id='reservation-form__drop-off-date-input' data-date-format='MM dd, yy' />
+                                                    <input type='text' name='return_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__drop-off-date-input' id='reservation-form__drop-off-date-input' data-date-format='m/d/y' />
                                                 </div>
                                             </div>
                                         </div>

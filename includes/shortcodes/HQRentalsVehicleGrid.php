@@ -139,7 +139,7 @@ class HQRentalsVehicleGrid
                         </div>
                         <div class='hq-grid-button-wrapper'>
                             <div class='bottom-info hq-grid-button-wrapper hq-grid-button-wrapper-{$this->buttonPosition}'>
-                                <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=2&vehicle_class_id={$vehicle->id}'>RENT NOW</a>
+                                <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=3&vehicle_class_id={$vehicle->id}'>RENT NOW</a>
                                 {$rateTagLeft}
                             </div>
                         </div>

@@ -681,6 +681,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
                 }else{
                     $resultInsertActive = $this->db->insertIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB());
                 }
+            }else{
+                $resultDelete = $this->db->delete($this->activeRate->getTableName(), null, array('vehicle_class_id' => $this->getId()));
             }
         }
     }

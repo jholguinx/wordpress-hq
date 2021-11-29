@@ -182,9 +182,9 @@ class HQRentalsDbManager
         }
     }
 
-    public function delete($tableName, $data): \stdClass
+    public function delete($tableName, $data, $overrideIdStatement = null): \stdClass
     {
-        $results = $this->db->delete($this->resolveTableName($tableName), array('id' => $data));
+        $results = $this->db->delete($this->resolveTableName($tableName), empty($overrideIdStatement) ? array('id' => $data) : $overrideIdStatement);
         if ($results) {
             return $this->resolveQuery(true, $results, null, $data);
         } else {

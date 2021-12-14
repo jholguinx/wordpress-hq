@@ -4,6 +4,7 @@ use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 
 new HQRentalBakeryMotorsReservationFormShortcode();
 
@@ -80,7 +81,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                         " . $this->renderLocations($locations_options, $locations, true) . "
                         " . $this->renderMessageInCaseOfOneLocation($locations) . "
                         <div class='hq-motors-input-wrapper'>
-                            <h4>From</h4>
+                            <h4>". HQRentalsLocaleHelper::translate('motors_reservation_form_from') ."</h4>
                             <div class='stm_date_time_input'>
                                 <div class='stm_date_input'>
                                     <input type='text' id='hq_pick_up_date' class=' active' name='pick_up_date' placeholder='Today' readonly='readonly' required='required'>
@@ -89,7 +90,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                             </div>
                         </div>
                         <div class='hq-motors-input-wrapper'> 
-                            <h4>Until</h4>
+                            <h4>". HQRentalsLocaleHelper::translate('motors_reservation_form_until') ."</h4>
                             <div class='stm_date_time_input'>
                                 <div class='stm_date_input'>
                                     <input type='text' id='hq_return_date' class=' active' name='return_date' placeholder='Tomorrow' readonly='readonly' required='required'>
@@ -98,7 +99,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                             </div>
                         </div>
                         <div class='hq-motors-input-wrapper'>
-                            <button type='submit'>Book<i class='fa fa-arrow-right'></i></button>
+                            <button type='submit'>". HQRentalsLocaleHelper::translate('motors_reservation_form_book') ."<i class='fa fa-arrow-right'></i></button>
                             <input type='hidden' name='target_step' value='2'>
                         </div>    
                         </form>
@@ -145,12 +146,12 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                 if (count($locations) > 1) {
                     $html .= "
                     <div class='hq-motors-input-wrapper'>
-                            <h4>Return</h4>
+                            <h4>". HQRentalsLocaleHelper::translate('motors_reservation_form_return') ."</h4>
                             <div class='stm_rent_form_fields'>
                                 <div class='stm_pickup_location'>
                                     <i class='stm-service-icon-pin'></i>
                                     <select id='hq-return-location' name='return_location' required='required'>
-                                        <option value=''>Select Location</option>
+                                        <option value=''>". HQRentalsLocaleHelper::translate('motors_reservation_form_location_placeholder') ."</option>
                                         " . $locationsOptions . "
                                     </select>
                                 </div>
@@ -166,12 +167,12 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
                 if (count($locations) > 1) {
                     $html .= "
                         <div class='hq-motors-input-wrapper'>
-                            <h4>Pickup</h4>
+                            <h4>". HQRentalsLocaleHelper::translate('motors_reservation_form_pickup') ."</h4>
                             <div class='stm_rent_form_fields'>
                                 <div class='stm_pickup_location'>
                                     <i class='stm-service-icon-pin'></i>
                                     <select id='hq-pick-up-location' name='pick_up_location' required='required'>
-                                        <option value=''>Select Location</option>
+                                        <option value=''>". HQRentalsLocaleHelper::translate('motors_reservation_form_location_placeholder') ."</option>
                                         " . $locationsOptions . "
                                     </select>
                                 </div>
@@ -194,7 +195,7 @@ class HQRentalBakeryMotorsReservationFormShortcode extends WPBakeryShortCode
         if (is_array($locations) and count($locations) === 1) {
             $html .= "
                     <div class='hq-motors-input-wrapper'>
-                            <h4>Pickup/Return Location</h4>
+                            <h4>". HQRentalsLocaleHelper::translate('motors_reservation_form_pick_return_label') ."</h4>
                             <div class='stm_rent_form_fields'>
                                 <h5>" . $locations[0]->getName() . "</h5>
                             </div>

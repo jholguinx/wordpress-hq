@@ -2,7 +2,7 @@
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
-
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
 
 new HQRentalBakeryMotorsVehicleGridShortcode();
 
@@ -120,8 +120,8 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                         <h3>{$vehicle->getLabelForWebsite()}</h3>
                         <div class='s_title'></div>
                         <div class='price'>
-                            <mark>From</mark>
-                            <span class='woocommerce-Price-amount amount'>{$vehicle->getActiveRate()->daily_rate->amount_for_display}<span style='font-size: 12px;'>/day</span></span>
+                            <mark>". HQRentalsLocaleHelper::resolveTranslation('motors_vehicle_grid_from') ."</mark>
+                            <span class='woocommerce-Price-amount amount'>{$vehicle->getActiveRate()->daily_rate->amount_for_display}<span style='font-size: 12px;'>/". HQRentalsLocaleHelper::resolveTranslation('motors_vehicle_grid_day') ."</span></span>
                         </div>
                     </div>
                     ". $this->renderFeatures($vehicle) ."

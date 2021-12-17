@@ -745,7 +745,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             if ($this->locale->language === "zh") {
                 return $this->labels->{"zh-Hans"};
             }
-            return $this->labels->{$this->locale->language};
+            return empty($this->labels->{$this->locale->language}) ? $this->name : $this->labels->{$this->locale->language};
         }
     }
         public function getVehicleFeatures()

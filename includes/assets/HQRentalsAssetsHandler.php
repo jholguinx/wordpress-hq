@@ -282,10 +282,10 @@ class HQRentalsAssetsHandler
     public function loadOwlCarouselAssets()
     {
         wp_enqueue_style('hq-owl-carousel-css');
-        wp_register_style('hq-fancy-box-css');
+        wp_enqueue_style('hq-fancy-box-css');
         wp_enqueue_style('hq-owl-carousel-theme-css');
         wp_enqueue_script('hq-fancy-box-js');
         wp_enqueue_script('hq-owl-carousel-js');
-        wp_register_script('hq-carousel-js');
+        wp_enqueue_script('hq-carousel-js');
     }
 }

@@ -120,6 +120,9 @@ class HQRentalsModelsFeature extends HQRentalsBaseModel
         if ($this->locale->language === "zh") {
             return $this->label_for_website->{"zh-Hans"};
         }
+        if($this instanceof \stdClass){
+
+        }
         return $this->label_for_website->{explode('_', get_locale())[0]};
     }
 

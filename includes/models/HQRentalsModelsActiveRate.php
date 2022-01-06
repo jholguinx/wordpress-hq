@@ -527,4 +527,12 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $this->monthlyRateUSDAmount = $rate->monthlyRate->usd_amount;
         $this->monthlyRateAmountForDisplay = $rate->monthlyRate->amount_for_display;
     }
+    public function getDailyRateObjectDB()
+    {
+        return $this->daily_rate;
+    }
+    public function getDailyRateAmountForDisplayDB()
+    {
+        return $this->getDailyRateObjectDB()->amount_for_display;
+    }
 }

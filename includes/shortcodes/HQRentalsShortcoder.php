@@ -33,5 +33,6 @@ class HQRentalsShortcoder
         $this->calendarSnippetShortcode = new HQRentalsAvailabilityCalendarSnippetShortcode();
         $this->vehicleGrid = new HQRentalsVehicleGrid();
         $this->myReservationsSnippet = new HQRentalsMyReservationsSnippetShortcode();
+        $this->carRentalVehicleTabs = new HQRentalsCarRentalVehicleTabShortcode();
     }
 }

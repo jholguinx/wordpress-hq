@@ -754,6 +754,9 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     }
     public function getActiveRate()
     {
+        if(is_array($this->rates)){
+
+        }
         return $this->rates;
     }
 }

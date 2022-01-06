@@ -84,4 +84,18 @@ class HQRentalsFrontHelper
         }
         return $html;
     }
+    static public function getTranslatedContent($object)
+    {
+        if($object instanceof \stdClass) {
+
+            $lang = explode("_", get_locale())[0];
+            if(isset($object->label_for_website)){
+                return empty($object->label_for_website->{$lang}) ? "" : $object->label_for_website->{$lang};
+            }else{
+                return "";
+            }
+        }else{
+            return "";
+        }
+    }
 }

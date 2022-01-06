@@ -4,6 +4,7 @@ namespace HQRentalsPlugin\HQRentalsShortcodes;
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 
 class HQRentalsCarRentalVehicleTabShortcode
 {
@@ -178,9 +179,7 @@ class HQRentalsCarRentalVehicleTabShortcode
                     margin-right: 7px;
                 }
 
-                .hq-vehicle-tap-carousel-wrapper{
-                    width: 75% !important;
-                }
+                
                 .hq-hq-nav a{
                     font-size: 16px;
                     color: #716d6e;
@@ -213,12 +212,24 @@ class HQRentalsCarRentalVehicleTabShortcode
                 #vehicles .hq-hq-nav {
                     list-style: none;
                 }
+                .hq-vehicle-tap-carousel-wrapper{
+                    width: 75% !important;
+                }
+                
+                @media only screen and (max-width: 991px) {
+                    .hq-vehicle-tap-carousel-wrapper{
+                        width: 100% !important;
+                    }   
+                    .vehicle-nav-row{
+                        display: none;
+                    }
+                }
                 
             </style>
             <div id='vehicles' class='container'>
 	            <div class='row'>
 		            <div class='col-md-12'>
-			            <h2 class='title wow fadeInDown' data-wow-offset='200'><span class='subtitle'>Vehicle Models - Our rental fleet at a glance</span></h2>
+			            <h2 class='title wow fadeInDown' data-wow-offset='200'><span class='subtitle'>{$atts['title']}</span></h2>
 		            </div>
 		            {$this->resolveNavBar($vehicles)}
 		            {$this->resolveVehicles($vehicles)}
@@ -247,7 +258,7 @@ class HQRentalsCarRentalVehicleTabShortcode
             foreach ($vehicles as $vehicle){
                 $class = ($counter == 0) ? "active" : '';
                 $html .= "
-                    <li class='hq-tab {$class}' data-position='{$counter}'>
+                    <li class='hq-tab {$class} hq-tap-pos-{$counter}' data-position='{$counter}'>
                         <a class='hq-tab-button' data-position='{$counter}' href='#{$vehicle->getId()}'>{$vehicle->getLabelForWebsite()}</a><span class='active'>&nbsp;</span>
                     </li>
                 ";
@@ -291,11 +302,13 @@ class HQRentalsCarRentalVehicleTabShortcode
     private function resolveVehicleFeatures($features)
     {
         $html = "";
+
         if(is_array($features) and count($features)){
             foreach ($features as $feature){
+                $content = HQRentalsFrontHelper::getTranslatedContent($feature);
                 $html .= "
                 <tr>
-                    <td>{$feature->label_for_website->en}</td>
+                    <td>{$content}</td>
                 </tr>
             ";
             }

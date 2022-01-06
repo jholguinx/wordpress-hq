@@ -81,6 +81,7 @@ class HQRentalsAssetsHandler
         wp_register_script('hg-gcar-vehicle-filter-js', plugin_dir_url(__FILE__) . 'js/hq-gcar-vehicle-filter.js', array(), HQ_RENTALS_PLUGIN_VERSION . '1', true);
         wp_register_script('hq-reservation-form-setup', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-places-form-js', plugin_dir_url(__FILE__) . 'js/hq-places-form.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_enqueue_script('hq-dummy-script');
         global $post;
         $theme = wp_get_theme();
@@ -277,5 +278,14 @@ class HQRentalsAssetsHandler
     public function loadReservationFormRentit()
     {
 
+    }
+    public function loadOwlCarouselAssets()
+    {
+        wp_enqueue_style('hq-owl-carousel-css');
+        wp_register_style('hq-fancy-box-css');
+        wp_enqueue_style('hq-owl-carousel-theme-css');
+        wp_enqueue_script('hq-fancy-box-js');
+        wp_enqueue_script('hq-owl-carousel-js');
+        wp_register_script('hq-carousel-js');
     }
 }

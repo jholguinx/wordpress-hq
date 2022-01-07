@@ -1,10 +1,11 @@
 jQuery(document).ready(function(){
     jQuery('.owl-carousel').owlCarousel({
         loop:true,
-        margin:10,
-        nav:false,
+        nav:true,
         items: 1,
-        dots: true
+        dots: true,
+        navText: ['',''],
+        mouseDrag: true,
     });
     jQuery('.hq-tab').on('click',function (e){
         e.preventDefault();

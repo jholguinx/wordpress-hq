@@ -94,8 +94,8 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
     public function renderShortcode()
     {
         global $post;
-        wp_enqueue_style('select2');
-        wp_enqueue_script('select2');
+        $this->assets->loadOwlCarouselAssets();
+        $this->assets->loadWheelsberryCSS();
         wp_enqueue_script('jquery-ui-datepicker');
         $vehicle_classes = $this->queryVehicles->allVehicleClasses();
         $locations = $this->queryLocations->allLocations();
@@ -115,7 +115,29 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
             $time_default = 43200;
         }
         $html = HQRentalsAssetsHandler::getHQFontAwesome() . "
+            
+            <link rel='preconnect' href='https://fonts.googleapis.com'> 
+            <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+            <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap' rel='stylesheet'>    
             <style>
+                .owl-nav{
+                    position:absolute !important;
+                    top:50%;
+                    height:0;
+                    left:0;
+                    right:0;    
+                }
+                .owl-prev, .owl-next{
+                    width: 60px !important;
+                    height: 60px !important;
+                    line-height: 60px !important;
+                    text-align: center !important;
+                    border-radius: 50% !important;
+                    font-size: 32px !important;
+                    color: red;
+                    background-color: #333333 !important;
+                }
+               
                 .cars-slider__hq-feature-icon{
                     display: inline-block;
                     position: relative;
@@ -141,7 +163,15 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                     overflow:hidden;
                 }
 
-            }
+                #reservation-form__pick-up-date-input, #reservation-form__drop-off-date-input{
+                    background-color: #fff !important;
+                }
+                .reservation-form select, .reservation-form input[type=text]{
+                    height: 50px;
+                }
+                .cars-slider__item-category{
+                    font-family: Montserrat !important;
+                }
             </style>
             <div id='hq-wheelsberry-slider' class='cars-slider' id='cars-slider'>
                 <div class='car-slider__title-wrapper om-container'>
@@ -152,7 +182,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                 </div>
             
                 <div class='cars-slider__inner owl-carousel'>
-                        {$this->renderVehiclesOnSlider($vehicle_classes)}
+                    {$this->renderVehiclesOnSlider($vehicle_classes)}
                 </div>
             </div>
         <div class='reservation reservation--full hq-reservation-form-wrapper' id='reservation'>
@@ -256,7 +286,6 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                 pickupLocation.addEventListener('change',function(){
                     var pickupLocation = document.getElementById(baseValue);
                     var returnLocation = document.getElementById(changedValue);
-                    console.log(pickupLocation.value);
                     returnLocation.value = pickupLocation.value; 
                 });
             }
@@ -292,7 +321,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                         <span class='cars-slider__item-price-value'>{$priceHTML}</span>
                                     </div>
                                     <div class='cars-slider__item-reserve'>
-                                        <span class='cars-slider__item-reserve-button' data-car-id='{$vehicle->getId()}'>Reserve Now</span>
+                                        <a href='#reservation'><span class='cars-slider__item-reserve-button' data-car-id='{$vehicle->getId()}'>Reserve Now</span></a>
                                     </div>
                                 </div>
                                 <div class='cars-slider__item-image hq-wheelsberry-image-wrapper'>

@@ -83,9 +83,7 @@ class HQRentalsBakeryBoostrap{
     public function resolveFileForWheelsberryTheme()
     {
         if (
-            $this->theme->stylesheet === 'wheelsberry' or
-            $this->theme->stylesheet === 'wheelsberry-child' or
-            $this->theme->stylesheet === 'wheelsberry_child'
+            true
         ) {
             $themeDeps = array(
                 plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryReservationFormShortcode.php',

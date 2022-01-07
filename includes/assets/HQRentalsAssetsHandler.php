@@ -48,6 +48,10 @@ class HQRentalsAssetsHandler
         /*
          * refactor - add static array and register everything separate
          * */
+        wp_register_style('hq-wheelsberry-styles', plugin_dir_url(__FILE__) . 'css/wheelsberry/style.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-wheelsberry-custom-styles', plugin_dir_url(__FILE__) . 'css/wheelsberry/style-custom.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-wheelsberry-om-font-styles', plugin_dir_url(__FILE__) . 'css/wheelsberry/omFont.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-wheelsberry-responsive-mobile', plugin_dir_url(__FILE__) . 'css/wheelsberry/responsive-mobile.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-elementor-vehicle-grid-widget-css', plugin_dir_url(__FILE__) . 'css/hq-elementor-vehicle-grid-widget.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-places-form-css', plugin_dir_url(__FILE__) . 'css/hq-places-form.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-flatpickr-css', plugin_dir_url(__FILE__) . 'css/flatpickr.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
@@ -287,5 +291,55 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-fancy-box-js');
         wp_enqueue_script('hq-owl-carousel-js');
         wp_enqueue_script('hq-carousel-js');
+    }
+    public function loadWheelsberryCSS()
+    {
+        wp_enqueue_style('hq-wheelsberry-styles');
+        wp_enqueue_style('hq-wheelsberry-custom-styles');
+        wp_enqueue_style('hq-wheelsberry-om-font-styles');
+        wp_enqueue_style('hq-wheelsberry-responsive-mobile');
+        wp_enqueue_script('jquery-ui-datepicker');
+        wp_enqueue_style('select2');
+        wp_enqueue_script('select2');
+        add_action('wp_footer', function(){
+            echo "
+            <script>
+                        jQuery('#reservation-form__pick-up-date-input').datepicker({
+                            nextText: '',
+                            prevText: '',
+                            minDate: 0,
+                            dateFormat: jQuery('#reservation-form__pick-up-date-input').data('date-format'),
+                            beforeShow: function(input, dp){
+                                jQuery(dp.dpDiv).css('min-width',jQuery(input).outerWidth() - 2 + 'px');
+                            },
+                            onSelect: function(date) {
+                                jQuery('#reservation-form__drop-off-date-input').datepicker('option', 'minDate', date);
+                                jQuery(this).trigger('change');
+                            }
+                        });
+                        jQuery('#reservation-form__drop-off-date-input').datepicker({
+                            nextText: '',
+                            prevText: '',
+                            minDate: 0,
+                            dateFormat: jQuery('#reservation-form__pick-up-date-input').data('date-format'),
+                            beforeShow: function(input, dp){
+                                jQuery(dp.dpDiv).css('min-width',jQuery(input).outerWidth() - 2 + 'px');
+                            },
+                            onSelect: function(date) {
+                                jQuery('#reservation-form__drop-off-date-input').datepicker('option', 'minDate', date);
+                                jQuery(this).trigger('change');
+                            }
+                        });
+                        jQuery('#reservation-form__car-select').on('change',function(){
+                            if(jQuery('#reservation-form__car-select').val()){
+                                jQuery('#reservation-form__car-select-label').html('');
+                            }else {
+                                jQuery('#reservation-form__car-select-label').html('Choose a car');
+                            }
+                        });
+                        
+                    </script>
+                ";
+        },100,100);
     }
 }

@@ -21,9 +21,14 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
         $this->rate = new HQRentalsModelsActiveRate();
     }
 
-    public function allVehicleClasses($order = null)
+    public function allVehicleClasses($all = false)
     {
-        $query = $this->getVehicleByRate();
+        if($all){
+            $query = $this->getVehicleByRate();
+        }else{
+            $query = $this->db->selectFromTable($this->model->getTableName(), '*', '','ORDER BY vehicle_class_order ASC');
+        }
+
         if ($query->success) {
             return $this->fillObjectsFromDB($query->data);
         }

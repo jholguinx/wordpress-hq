@@ -97,7 +97,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         wp_enqueue_style('select2');
         wp_enqueue_script('select2');
         wp_enqueue_script('jquery-ui-datepicker');
-        $vehicle_classes = $this->queryVehicles->allVehicleClasses();
+        $vehicle_classes = $this->queryVehicles->allVehicleClasses(true);
         $locations = $this->queryLocations->allLocations();
         wp_enqueue_style('owl-carousel');
         wp_enqueue_script('owl-carousel');

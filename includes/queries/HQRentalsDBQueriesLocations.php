@@ -72,4 +72,12 @@ class HQRentalsDBQueriesLocations extends HQRentalsDBBaseQueries
             $this->db->delete($this->model->getTableName(), $ids);
         }
     }
+    public function getLocationsByBrand($id)
+    {
+        $query = $this->db->selectFromTable($this->model->getTableName(), '*', 'brand_id=' . $id,'ORDER BY id');
+        if($query->success){
+            return $this->fillObjectsFromDB($query->data);
+        }
+        return [];
+    }
 }

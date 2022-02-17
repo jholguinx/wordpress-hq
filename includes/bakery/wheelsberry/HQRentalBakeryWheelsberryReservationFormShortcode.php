@@ -317,6 +317,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                     <div class='cars-slider__item-category'>{$vehicle->name}</div>
                                     <h3 class='cars-slider__model'><span class='cars-slider__model-inner'>{$this->getTitle($vehicle->getLabelForWebsite())}</span></h3>
                                     <div class='cars-slider__item-description-sep'></div>
+                                    <div class='cars-slider short-des'><p>{$vehicle->getShortDescriptionForWebsite()}</p></div>
                                     <div class='cars-slider__item-price'>
                                         <span class='cars-slider__item-price-value'>{$priceHTML}</span>
                                     </div>

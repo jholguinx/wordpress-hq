@@ -748,7 +748,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             return empty($this->labels->{$this->locale->language}) ? $this->name : $this->labels->{$this->locale->language};
         }
     }
-        public function getVehicleFeatures()
+    public function getVehicleFeatures()
     {
         return $this->features;
     }
@@ -758,5 +758,16 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 
         }
         return $this->rates;
+    }
+    public function getShortDescriptionForWebsite()
+    {
+        if (!empty($forcedLocale)) {
+            return $this->shortDescriptions[$forcedLocale];
+        } else {
+            if ($this->locale->language === "zh") {
+                return $this->shortDescriptions->{"zh-Hans"};
+            }
+            return empty($this->shortDescriptions->{$this->locale->language}) ? $this->name : $this->shortDescriptions->{$this->locale->language};
+        }
     }
 }

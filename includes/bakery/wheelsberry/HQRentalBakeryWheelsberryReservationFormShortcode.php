@@ -172,6 +172,9 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                 .cars-slider__item-category{
                     font-family: Montserrat !important;
                 }
+                .hq-upper-tag{
+                    text-transform: uppercase;
+                }
             </style>
             <div id='hq-wheelsberry-slider' class='cars-slider' id='cars-slider'>
                 <div class='car-slider__title-wrapper om-container'>
@@ -307,7 +310,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
             $html = '';
             foreach ($vehicles as $vehicle) {
                 $priceHTML = "";
-                $priceHTML = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
+                $priceHTML = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";
                 $html .= "
                     <div class='cars-slider__item'>

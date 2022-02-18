@@ -770,4 +770,22 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             return empty($this->shortDescriptions->{$this->locale->language}) ? $this->name : $this->shortDescriptions->{$this->locale->language};
         }
     }
+    public function getPriceIntervalsForWebsite()
+    {
+        if(is_array($this->getPriceIntervals())){
+            $data = $this->getPriceIntervals();
+            usort($data, function ($a, $b) {
+                return $a->getPriceAsANumber() - $b->getPriceAsANumber();
+            });
+            return $data;
+        }
+        return $this->rates->price_intervals;
+    }
+    public function getCheapestPriceIntervalForWebsite()
+    {
+        if(is_array($this->getPriceIntervalsForWebsite())){
+            return $this->getPriceIntervalsForWebsite()[0];
+        }
+       return $this->getPriceIntervalsForWebsite();
+    }
 }

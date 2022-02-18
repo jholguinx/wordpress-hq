@@ -310,7 +310,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         if (is_array($vehicles) and count($vehicles)) {
             $html = '';
             foreach ($vehicles as $vehicle) {
-                dd($vehicle);
+                dd($vehicle->getCheapestPriceIntervalForWebsite());
                 $priceHTML = "";
                 $priceHTML = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";

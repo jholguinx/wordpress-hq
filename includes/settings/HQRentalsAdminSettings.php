@@ -412,6 +412,18 @@ class HQRentalsAdminSettings
                                             </div>
                                             <div class="hq-general-settings-item">
                                                 <div class="hq-general-label-wrapper">
+                                                    <h4 class="wp-heading-inline" for="title">OVERRIDE DAILY RATE WITH PRICE INTERVALS</h4>
+                                                    <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                          data-tippy-content="This option will force the plugin to display price intervals intead of the daily rate."></span>
+                                                </div>
+                                                <div class="hq-general-input-wrapper">
+                                                    <input type="checkbox"
+                                                           name="<?php echo $this->settings->hq_override_daily_rate_with_price_interval; ?>"
+                                                           value="true" <?php echo ($this->settings->getOverrideDailyRateWithCheapestPriceInterval() === 'true') ? 'checked' : ''; ?> />
+                                                </div>
+                                            </div>
+                                            <div class="hq-general-settings-item">
+                                                <div class="hq-general-label-wrapper">
                                                     <h4 class="wp-heading-inline" for="title">DEFAULT CURRENCY DISPLAY</h4>
                                                     <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                           data-tippy-content="This will be the currency the displayed by default on the vehicle class grid, and the dedicated vehicle class pages."></span>

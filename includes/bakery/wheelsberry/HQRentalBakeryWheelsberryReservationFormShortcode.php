@@ -4,7 +4,7 @@ use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
-
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 new HQRentalBakeryWheelsberryReservationFormShortcode();
 
 
@@ -310,9 +310,18 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         if (is_array($vehicles) and count($vehicles)) {
             $html = '';
             foreach ($vehicles as $vehicle) {
-                dd($vehicle->getCheapestPriceIntervalForWebsite());
                 $priceHTML = "";
-                $priceHTML = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
+                $settings = new HQRentalsSettings();
+                $dailyRate = '';
+                if($settings->getOverrideDailyRateWithCheapestPriceInterval() === 'true'){
+                    $interval = $vehicle->getCheapestPriceIntervalForWebsite();
+                    // need this for price symbol
+                    $rate = $vehicle->getActiveRate()->daily_rate;
+                    $dailyRate = !empty($interval->price) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$rate->currency_icon}{$interval->price},00 daily</span>") : "";
+                }else{
+                    $dailyRate = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
+                }
+                $priceHTML = $dailyRate;
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";
                 $html .= "
                     <div class='cars-slider__item'>

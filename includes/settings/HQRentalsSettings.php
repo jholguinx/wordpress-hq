@@ -44,6 +44,7 @@ class HQRentalsSettings
     public $hq_google_api_key = 'hq_google_api_key';
     public $hq_default_pick_up_time = 'hq_default_pick_up_time';
     public $hq_default_return_time = 'hq_default_return_time';
+    public $hq_override_daily_rate_with_price_interval = 'hq_override_daily_rate_with_price_interval';
 
     public function __construct()
     {
@@ -570,6 +571,9 @@ class HQRentalsSettings
         if (empty($postDataFromSettings[$this->hq_enable_custom_post_pages])) {
             update_option($this->hq_enable_custom_post_pages, "false");
         }
+        if (empty($postDataFromSettings[$this->hq_override_daily_rate_with_price_interval])) {
+            update_option($this->hq_override_daily_rate_with_price_interval, "false");
+        }
         /*Refresh data on save */
         $worker = new HQRentalsCronJob();
         $worker->refreshAllData();
@@ -750,9 +754,9 @@ class HQRentalsSettings
         return get_option($this->hq_default_pick_up_time);
     }
     public function noDefaultReturnTime() : bool
-    {
-        return empty(get_option($this->hq_default_return_time));
-    }
+{
+    return empty(get_option($this->hq_default_return_time));
+}
     public function setDefaultReturnTime($data) : bool
     {
         return update_option($this->hq_default_return_time, $data);
@@ -761,5 +765,19 @@ class HQRentalsSettings
     public function getDefaultReturnTime() : string
     {
         return get_option($this->hq_default_return_time);
+    }
+
+    public function noOverrideDailyRateWithCheapestPriceInterval() : bool
+    {
+        return empty(get_option($this->hq_override_daily_rate_with_price_interval));
+    }
+    public function setOverrideDailyRateWithCheapestPriceInterval($data) : bool
+    {
+        return update_option($this->hq_override_daily_rate_with_price_interval, $data);
+    }
+
+    public function getOverrideDailyRateWithCheapestPriceInterval() : string
+    {
+        return get_option($this->hq_override_daily_rate_with_price_interval);
     }
 }

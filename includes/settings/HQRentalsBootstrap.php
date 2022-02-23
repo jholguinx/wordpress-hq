@@ -99,6 +99,9 @@ class HQRentalsBootstrap
         if ($this->settings->noEnableCustomPostsPages()) {
             $this->settings->setEnableCustomPostsPages('false');
         }
+        if ($this->settings->noOverrideDailyRateWithCheapestPriceInterval()) {
+            $this->settings->setOverrideDailyRateWithCheapestPriceInterval('false');
+        }
         if ($this->settings->noGoogleAPIKey()) {
             $this->settings->setGoogleAPIKey('');
         }

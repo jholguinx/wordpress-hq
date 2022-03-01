@@ -306,7 +306,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             if($override){
                 return $this->labelsForWebsite[$lang];
             }
-            return $this->labelsForWebsite->{explode('_',get_locale())[0]};
+            return empty($this->labelsForWebsite->{explode('_',get_locale())[0]}) ? $this->getName() : $this->labelsForWebsite->{explode('_',get_locale())[0]};
         }catch (\Exception $e){
             return '';
         }

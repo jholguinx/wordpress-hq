@@ -73,13 +73,13 @@ class HQRentalsFrontHelper
         $html = "";
         if(is_array($locations) and count($locations)){
             foreach ($locations as $location){
-                $html .= "<option value='{$location->getId()}'>{$location->getName()}</option>";
+                $html .= "<option value='{$location->getId()}'>{$location->getLabelForWebsite()}</option>";
             }
         }else{
             $query = new HQRentalsDBQueriesLocations();
             $dbLocations = $query->allLocations();
             foreach ($dbLocations as $location){
-                $html .= "<option value='{$location->getId()}'>{$location->getName()}</option>";
+                $html .= "<option value='{$location->getId()}'>{$location->getLabelForWebsite()}</option>";
             }
         }
         return $html;

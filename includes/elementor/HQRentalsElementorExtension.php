@@ -185,7 +185,7 @@ final class HQRentalsElementorExtension {
      * @access public
      */
     public function init_widgets() {
-
+        $theme = wp_get_theme();
         // Include Widget files
         require_once( __DIR__ . '/widgets/HQRentalsElementorVehiclesGridWidget.php' );
         require_once( __DIR__ . '/widgets/HQRentalsElementorPlacesReservationForm.php' );
@@ -198,6 +198,20 @@ final class HQRentalsElementorExtension {
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorReservationsWidget() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorReservationFormWidget() );
 
+        if (
+            $theme->stylesheet === 'aucapina' or
+            $theme->stylesheet === 'aucapina-child' or
+            $theme->stylesheet === 'aucapina_child') {
+            $themeDeps = array(
+                plugin_dir_path( __FILE__ ) . '/widgets/HQRentalsElementorAucapinaReservationForm.php',
+            );
+            foreach ($themeDeps as $file){
+                if (file_exists($file)) {
+                    require_once($file);
+                }
+            }
+            \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorAucapinaReservationForm() );
+        }
     }
 
     /**

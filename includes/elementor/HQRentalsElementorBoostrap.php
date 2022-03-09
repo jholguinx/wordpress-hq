@@ -7,6 +7,7 @@ class HQRentalsElementorBoostrap{
     public function __construct()
     {
         $this->requireDependencies();
+        $this->theme = wp_get_theme();
     }
     public function boostrapElementor(){
         if(is_plugin_active('elementor/elementor.php')){

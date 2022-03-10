@@ -98,4 +98,15 @@ class HQRentalsFrontHelper
             return "";
         }
     }
+    static public function getLocaleForSnippet()
+    {
+        $locale = explode('_', get_locale())[0];
+        try {
+            if($locale){
+                return $locale;
+            }
+        }catch (\Exception $e){
+            return 'en';
+        }
+    }
 }

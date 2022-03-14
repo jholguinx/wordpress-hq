@@ -85,6 +85,10 @@ jQuery(document).ready(function(){
 function setDefaults(dateFormat,minimumDayRentals){
     var newDate = dayjs().add(15, 'minutes').add(2,'hours').format(dateFormat);
     var tomorrowDate = dayjs().add(minimumDayRentals, 'day').add(15, 'minutes').add(2,'hours').format(dateFormat);
+    if(hqRentalsTenantDatetimeFormat && hqCarRentalSettingDefaultReturnTime){
+        newDate = newDate.split(' ')[0] + ' ' + hqCarRentalSettingDefaultPickupTime.setting;
+        tomorrowDate = tomorrowDate.split(' ')[0] + ' ' + hqCarRentalSettingDefaultReturnTime.setting;
+    }
     jQuery("#hq-times-pick-up-date").val(newDate);
     jQuery("#hq-times-return-date").val(tomorrowDate);
 }

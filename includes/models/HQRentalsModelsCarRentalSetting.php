@@ -88,4 +88,13 @@ class HQRentalsModelsCarRentalSetting extends HQRentalsBaseModel
         $this->preference = $settingApi->preference;
         $this->settings = $settingApi->settings;
     }
+    public function getPublicInterface()
+    {
+        $obj = array();
+        $obj['id'] = $this->id;
+        $obj['module'] = $this->module;
+        $obj['preference'] = $this->preference;
+        $obj['setting'] = $this->settings;
+        return $obj;
+    }
 }

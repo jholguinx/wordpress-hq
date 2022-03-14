@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsAssets;
 
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesCarRentalSetting;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsQueriesVehicleClasses;
@@ -24,6 +25,8 @@ class HQRentalsAssetsHandler
     protected $hqMomentDateFormat = 'hqMomentDateFormat';
     protected $site = 'hqSite';
     protected $spinner = 'hqSpinner';
+    protected $hqCarRentalSettingDefaultPickupTime = 'hqCarRentalSettingDefaultPickupTime';
+    protected $hqCarRentalSettingDefaultReturnTime = 'hqCarRentalSettingDefaultReturnTime';
 
     public function __construct()
     {
@@ -32,6 +35,7 @@ class HQRentalsAssetsHandler
         $this->locationQueries = new HQRentalsQueriesLocations();
         $this->vehicleQueries = new HQRentalsQueriesVehicleClasses();
         $this->settings = new HQRentalsSettings();
+        $this->queryCarRentalSetting = new HQRentalsDBQueriesCarRentalSetting();
         $this->helper = new HQRentalsDatesHelper();
         $this->workspotQuery = new HQRentalsQueriesWorkspotLocations();
         if (static::$count === 1) {
@@ -128,6 +132,8 @@ class HQRentalsAssetsHandler
     public function registerAndEnqueueFrontEndGlobalVariables()
     {
         $site = get_site_url();
+        $pick_up_time_setting = $this->queryCarRentalSetting->getCarRentalSetting('default_pick_up_time');
+        $return_time_setting = $this->queryCarRentalSetting->getCarRentalSetting('default_return_time');
         wp_localize_script('hq-dummy-script', $this->brandsGlobalFrontName, $this->brandQueries->allToFrontEnd());
         wp_localize_script('hq-dummy-script', $this->locationsGlobalFrontName, $this->locationQueries->allToFrontEnd());
         wp_localize_script('hq-dummy-script', $this->vehiclesGlobalFrontName, $this->vehicleQueries->allToFrontEnd());
@@ -137,6 +143,8 @@ class HQRentalsAssetsHandler
         wp_localize_script('hq-dummy-script', $this->hqMomentDateFormat, $this->helper->convertPhpToJsMomentFormat($this->settings->getTenantDatetimeFormat()));
         wp_localize_script('hq-dummy-script', $this->site, $site . '/');
         wp_localize_script('hq-dummy-script', $this->spinner, plugins_url('hq-rental-software/includes/assets/img/screen-spinner.gif'));
+        wp_localize_script('hq-dummy-script', $this->hqCarRentalSettingDefaultPickupTime, $pick_up_time_setting->getPublicInterface());
+        wp_localize_script('hq-dummy-script', $this->hqCarRentalSettingDefaultReturnTime, $return_time_setting->getPublicInterface());
         /*
          * Just for Workspot
          * */

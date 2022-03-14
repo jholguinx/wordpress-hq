@@ -87,6 +87,10 @@ class HQRentalsApiEndpoint
     {
         return $this->settings->getApiBaseUrl() . 'tenants/current';
     }
+    public function getCarRentalSettingEndpoint()
+    {
+        return $this->settings->getApiBaseUrl() . 'preferences';
+    }
 
     public function getGoogleAutocompleteEndpoint($input)
     {

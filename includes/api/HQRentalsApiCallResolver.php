@@ -5,6 +5,7 @@ namespace HQRentalsPlugin\HQRentalsApi;
 
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersBrands;
+use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersCarRentalSettings;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersGoogle;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersLocations;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersSettings;
@@ -229,6 +230,14 @@ class HQRentalsApiCallResolver
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
             return new HQRentalsApiResponse(null, true, HQRentalsTransformersSettings::transformDataFromApi(json_decode($response['body'])->data));
+        }
+    }
+    public function resolveApiCallCarRentalSettings($response)
+    {
+        if ($this->isErrorOnApiInteraction($response)) {
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
+        } else {
+            return new HQRentalsApiResponse(null, true, HQRentalsTransformersCarRentalSettings::transformDataFromApi(json_decode($response['body'])->data));
         }
     }
 

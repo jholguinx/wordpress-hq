@@ -13,7 +13,6 @@ class HQRentalsTransformersSettings extends HQRentalsTransformersBase
 
     public static function transformDataFromApi($apiData)
     {
-        //dd($apiData);
         return HQRentalsTransformersSettings::transformSettings($apiData);
     }
 

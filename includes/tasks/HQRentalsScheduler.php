@@ -37,6 +37,7 @@ class HQRentalsScheduler
         $this->vehicleTypesTask = new HQRentalsVehicleTypesTask();
         $this->additionalChargesTask = new HQRentalsAdditionalChargesTask();
         $this->settingsTask = new HQRentalsSettingsTask();
+        $this->carRentalSettingTask = new HQRentalsCarRentalSettingsTask();
         $this->workspot = new HQRentalsLocationsWorkspotTask();
         $this->cache = new HQRentalsCacheHandler();
         $this->siteURL = get_site_url();
@@ -49,6 +50,7 @@ class HQRentalsScheduler
                 $workspot = $this->workspot->refreshLocationsData();
             }
             $this->settingsTask->tryToRefreshSettingsData();
+            $this->carRentalSettingTask->tryToRefreshSettingsData();
             $this->brandsTask->tryToRefreshSettingsData();
             $this->locationsTask->tryToRefreshSettingsData();
             // additional charges -> not update
@@ -103,6 +105,7 @@ class HQRentalsScheduler
     {
         $this->vehicleClassesTask->setDataOnWP();
         $this->settingsTask->setDataOnWP();
+        $this->carRentalSettingTask->setDataOnWP();
         $this->brandsTask->setDataOnWP();
         $this->locationsTask->setDataOnWP();
         $this->additionalChargesTask->setDataOnWP();

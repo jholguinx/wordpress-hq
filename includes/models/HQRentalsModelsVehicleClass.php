@@ -785,4 +785,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
        return $this->getPriceIntervalsForWebsite();
     }
+    public function getImageForWebsite(){
+        return $this->images;
+    }
 }

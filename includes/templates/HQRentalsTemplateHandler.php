@@ -7,6 +7,8 @@ class HQRentalsTemplateHandler
     public function __construct()
     {
         add_filter('template_include', array($this, 'addingTemplates'), 3);
+        add_filter( 'theme_page_templates', array($this, 'addTemplateFileToWP'), 10, 4 );
+        add_filter( 'page_template', array($this, 'loadTemplateFiles'), 20, 5 );
     }
 
     public function addingTemplates($defaultTemplate)
@@ -29,5 +31,18 @@ class HQRentalsTemplateHandler
             load_template(dirname( __FILE__ ) . '/gcar/page.php');
         }
          * */
+    }
+    public function addTemplateFileToWP($templates)
+    {
+        $templates['page-aucapina-vehicle-class.php'] = __( 'Vehicle Class - HQ Auscapina', 'hq-wordpress' );
+        return $templates;
+    }
+
+    function loadTemplateFiles( $page_template ){
+
+        if ( get_page_template_slug() == 'page-aucapina-vehicle-class.php' ) {
+            $page_template = plugin_dir_path( __FILE__ ) . 'aucapina/templates/page-aucapina-vehicle-class.php';
+        }
+        return $page_template;
     }
 }

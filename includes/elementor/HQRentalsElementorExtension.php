@@ -194,7 +194,7 @@ final class HQRentalsElementorExtension {
 
         // Register widget
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorVehiclesGridWidget() );
-         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorPlacesReservationForm() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorPlacesReservationForm() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorReservationsWidget() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorReservationFormWidget() );
 

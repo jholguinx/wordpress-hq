@@ -1,8 +1,9 @@
 <?php
 namespace HQRentalsPlugin\HQRentalsElementor;
+
 class HQRentalsElementorBoostrap{
     protected $dependencies = array(
-        ABSPATH . 'wp-admin/includes/plugin.php',
+        ABSPATH . 'wp-admin/includes/plugin.php'
     );
     public function __construct()
     {
@@ -31,6 +32,7 @@ class HQRentalsElementorBoostrap{
             $this->theme->stylesheet === 'aucapina_child') {
             $themeDeps = array(
                 plugin_dir_path( __FILE__ ) . 'aucapina/HQRentalsElementorAucapinaReservationForm.php',
+                plugin_dir_path( __FILE__ ) . 'aucapina/templates/page-vehicle-class.php',
             );
             foreach ($themeDeps as $file){
                 if (file_exists($file)) {

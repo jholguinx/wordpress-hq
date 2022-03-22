@@ -100,7 +100,8 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
     {
         $query = $this->db->selectFromTable($this->model->getTableName(), '*', 'id=' . $id);
         if ($query->success) {
-            return $this->fillObjectsFromDB($query->data);
+            $result = $this->fillObjectsFromDB($query->data);
+            return (is_array($result) and count($result)) ? $result[0] : new HQRentalsModelsVehicleClass();
         }
         return null;
     }

@@ -41,7 +41,6 @@ class HQRentalsAssetsHandler
         if (static::$count === 1) {
             add_action('wp_enqueue_scripts', array($this, 'registerPluginAssets'), 10);
             add_action('wp_enqueue_scripts', array($this, 'registerAndEnqueueFrontEndGlobalVariables'), 20);
-            add_action('wp_enqueue_scripts', array($this, 'shortcodesRegistration'), 30);
             add_action('admin_enqueue_scripts', array($this, 'registerAdminAssets'), 20);
             add_action('admin_enqueue_scripts', array($this, 'adminSectionAssetResolver'), 50);
         }
@@ -90,6 +89,18 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-reservation-form-setup', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-places-form-js', plugin_dir_url(__FILE__) . 'js/hq-places-form.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_style('hq-fancy-box-css', plugin_dir_url(__FILE__) . 'css/jquery.fancybox.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-betheme-sc-vehicle-grid-styles', plugin_dir_url(__FILE__) . 'css/style.betheme.blue.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-owl-carousel-css', plugin_dir_url(__FILE__) . 'css/owl.carousel.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-owl-carousel-theme-css', plugin_dir_url(__FILE__) . 'css/owl.theme.default.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_script('hq-fancy-box-js', plugin_dir_url(__FILE__) . 'js/jquery.fancybox.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-owl-carousel-js', plugin_dir_url(__FILE__) . 'js/owl.carousel.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_style('hq-slider-pro-css', plugin_dir_url(__FILE__) . 'css/jquery.sliderPro.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_script('hq-slider-pro-js', plugin_dir_url(__FILE__) . 'js/jquery.sliderPro.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-aucapina-vehicle-page-js', plugin_dir_url(__FILE__) . 'js/hq-aucapina-vehicle-page.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        /*Inits*/
+        wp_register_script('hq-betheme-vehicle-grid-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-grid.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-betheme-vehicle-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_enqueue_script('hq-dummy-script');
         global $post;
         $theme = wp_get_theme();
@@ -210,19 +221,6 @@ class HQRentalsAssetsHandler
                 wp_localize_script('hq-admin-brand-edit-js', 'hqBrandSnippets', $data);
             }
         }
-    }
-
-    public function shortcodesRegistration()
-    {
-        wp_register_style('hq-fancy-box-css', plugin_dir_url(__FILE__) . 'css/jquery.fancybox.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('hq-betheme-sc-vehicle-grid-styles', plugin_dir_url(__FILE__) . 'css/style.betheme.blue.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('hq-owl-carousel-css', plugin_dir_url(__FILE__) . 'css/owl.carousel.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('hq-owl-carousel-theme-css', plugin_dir_url(__FILE__) . 'css/owl.theme.default.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_script('hq-fancy-box-js', plugin_dir_url(__FILE__) . 'js/jquery.fancybox.min.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
-        wp_register_script('hq-owl-carousel-js', plugin_dir_url(__FILE__) . 'js/owl.carousel.min.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
-        /*Inits*/
-        wp_register_script('hq-betheme-vehicle-grid-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-grid.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
-        wp_register_script('hq-betheme-vehicle-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
     }
 
     public function loadAssetsForAvailabilityGrid()
@@ -349,5 +347,13 @@ class HQRentalsAssetsHandler
                     </script>
                 ";
         },100,100);
+    }
+    public function loadAucapinaVehiclePageAssets()
+    {
+        wp_enqueue_style('hq-fancy-box-css');
+        wp_enqueue_style('hq-slider-pro-css');
+        wp_enqueue_script('hq-fancy-box-js');
+        wp_enqueue_script('hq-slider-pro-js');
+        wp_enqueue_script('hq-aucapina-vehicle-page-js');
     }
 }

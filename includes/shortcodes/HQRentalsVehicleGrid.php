@@ -76,7 +76,7 @@ class HQRentalsVehicleGrid
         if($this->brandId){
             $vehicles = $query->getVehiclesByBrand($this->brandId);
         }else{
-            $vehicles = $query->allVehicleClasses();
+            $vehicles = $query->allVehicleClasses(true);
         }
 
         $html = '';

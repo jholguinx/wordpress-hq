@@ -67,6 +67,12 @@ class HQRentalsElementorAucapinaReservationForm extends \Elementor\Widget_Base
                 width: 50% !important;
                 flex: 0 0 49% !important;
             }
+            @media (max-width: 797px){
+                .hq-field-wrapper{
+                    width: 100% !important;
+                    flex: 1 !important;
+                }
+            }
             .hq-field-wrapper select, .hq-field-wrapper span{
                 width:100% !important;
             }

@@ -41,7 +41,7 @@ class HQRentalsTemplateHandler
             $theme->stylesheet === 'aucapina_child') {
             $templates['page-aucapina-vehicle-class.php'] = __( 'Vehicle Class - HQ Auscapina', 'hq-wordpress' );
         }
-
+        $templates['page-vehicle-class-big-header-template.php'] = __( 'Vehicle Class Big Header Template', 'hq-wordpress' );
         return $templates;
     }
 
@@ -49,6 +49,9 @@ class HQRentalsTemplateHandler
 
         if ( get_page_template_slug() == 'page-aucapina-vehicle-class.php' ) {
             $page_template = plugin_dir_path( __FILE__ ) . 'aucapina/templates/page-aucapina-vehicle-class.php';
+        }
+        if ( get_page_template_slug() == 'page-vehicle-class-big-header-template.php' ) {
+            $page_template = plugin_dir_path( __FILE__ ) . 'generics/page-vehicle-class-big-header-template.php';
         }
         return $page_template;
     }

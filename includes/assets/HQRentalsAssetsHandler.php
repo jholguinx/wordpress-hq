@@ -371,4 +371,10 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-daysjs-custom-js');
         wp_enqueue_script('hq-aucapina-reservation-form-js');
     }
+    public function loadAssetsForAvailabilityGridFilter()
+    {
+        wp_enqueue_style('hq-availability-grip-styles');
+
+
+    }
 }

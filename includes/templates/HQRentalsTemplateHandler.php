@@ -34,7 +34,14 @@ class HQRentalsTemplateHandler
     }
     public function addTemplateFileToWP($templates)
     {
-        $templates['page-aucapina-vehicle-class.php'] = __( 'Vehicle Class - HQ Auscapina', 'hq-wordpress' );
+        $theme = wp_get_theme();
+        if (
+            $theme->stylesheet === 'aucapina' or
+            $theme->stylesheet === 'aucapina-child' or
+            $theme->stylesheet === 'aucapina_child') {
+            $templates['page-aucapina-vehicle-class.php'] = __( 'Vehicle Class - HQ Auscapina', 'hq-wordpress' );
+        }
+
         return $templates;
     }
 

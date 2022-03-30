@@ -20,8 +20,9 @@ class HQRentalsBakeryBoostrap{
             $this->resolveFileForMotorsTheme();
             $this->resolveFileForRentitTheme();
             $this->resolveFileForWheelsberryTheme();
-
         }
+
+
     }
     public function requireDependencies()
     {

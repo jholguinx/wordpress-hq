@@ -19,14 +19,14 @@ if (!defined('WPINC')) {
     die;
 }
 
-
 use HQRentalsPlugin\HQRentalsBakery\HQRentalsBakeryBoostrap;
 use HQRentalsPlugin\HQRentalsBootstrap\HQRentalsBootstrapPlugin;
 use HQRentalsPlugin\HQRentalsElementor\HQRentalsElementorBoostrap;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
+use HQRentalsPlugin\HQRentalsThemes\HQRentalsThemeCustomizer;
 
 $bootstraper = new HQRentalsBootstrapPlugin();
-
+$themeCustomizer = new HQRentalsThemeCustomizer();
 /*
  * Activation Routine
  * @return void
@@ -42,3 +42,4 @@ $elementor = new HQRentalsElementorBoostrap();
 $elementor->boostrapElementor();
 $bakery = new HQRentalsBakeryBoostrap();
 $bakery->boostrapBakery();
+

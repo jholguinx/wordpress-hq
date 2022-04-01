@@ -5,7 +5,7 @@ use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
-new HQRentalBakeryWheelsberryReservationFormShortcode();
+
 
 
 class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCode
@@ -105,21 +105,23 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         $slider_subtitle = get_post_meta($post->ID, 'wheelsberry_cars_slider_subtitle', true);
         $form_title = get_post_meta($post->ID, 'wheelsberry_reservation_form_title', true);
         $form_subtitle = get_post_meta($post->ID, 'wheelsberry_reservation_form_subtitle', true);
-        $time_from = intval(get_option('omcr_booking_time_from'));
-        $time_to = intval(get_option('omcr_booking_time_to'));
-        if (!$time_to) {
-            $time_to = 85500;
-        }
-        $time_default = get_option('omcr_booking_time_default');
-        if ($time_default === false) {
-            $time_default = 43200;
-        }
+
+        $image = wp_get_attachment_url(get_theme_mod('tenant_logo'));
+        $imageHTML = empty($image) ? "": "
+            <div class='branding-logo-w'>
+                <img class='branding-img' src='{$image}' />
+            </div>
+        ";
         $html = HQRentalsAssetsHandler::getHQFontAwesome() . "
             
             <link rel='preconnect' href='https://fonts.googleapis.com'> 
             <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
             <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap' rel='stylesheet'>    
             <style>
+                .branding-img{
+                    max-width: 200px;
+                    height: auto;
+                }
                 .owl-nav{
                     position:absolute !important;
                     top:50%;
@@ -191,6 +193,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
             </div>
         <div class='reservation reservation--full hq-reservation-form-wrapper' id='reservation'>
             <div class='reservation-form'>
+                {$imageHTML}
                 <div class='om-container'>
                     <div class='om-container__inner'>
                         <div class='reservation-form__inner'>
@@ -400,3 +403,4 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         return '';
     }
 }
+new HQRentalBakeryWheelsberryReservationFormShortcode();

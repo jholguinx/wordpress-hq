@@ -322,7 +322,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                     $rate = $vehicle->getActiveRate()->daily_rate;
                     $dailyRate = !empty($interval->price) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$rate->currency_icon}{$interval->price} daily</span>") : "";
                 }else{
-                    $dailyRate = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
+                    $dailyRate = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='cars-slider__item-price hq-upper-tag'> as low as </span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
                 }
                 $priceHTML = $dailyRate;
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";

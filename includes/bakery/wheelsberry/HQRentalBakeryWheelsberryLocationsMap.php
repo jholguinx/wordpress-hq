@@ -72,13 +72,9 @@ class HQRentalBakeryWheelsberryLocationsMap extends WPBakeryShortCode
             $html = HQRentalsAssetsHandler::getHQFontAwesome() . "
             <script>
                 function hq_google_maps_api_loaded() {
-                    jQuery(window).trigger('google_maps_api_loaded');
-                    jQuery(window).data('google_maps_api_loaded',true);
                     initMapLocationGlobal();
-                    
                 }
             </script>
-            
             <div id='hq-map-location' class='vc_om-rental-locations'>
                 <div class='om-rental-locations__header'>
                     <div class='om-container'>
@@ -92,7 +88,7 @@ class HQRentalBakeryWheelsberryLocationsMap extends WPBakeryShortCode
                         </div>
                     </div>
                 </div>
-                <div class='om-rental-locations__map' style='height: 370px; position: relative; overflow: hidden;' data-map-zoom='7' data-map-marker='https://gomobyl.com/wp-content/themes/wheelsberry/img/map-marker.png'></div>
+                <div class='om-rental-locations__map' style='height: 370px; position: relative; overflow: hidden; width: 100%;' data-map-zoom='7' data-map-marker='https://gomobyl.com/wp-content/themes/wheelsberry/img/map-marker.png'></div>
             </div>
             <script>
                 function initMapLocationGlobal(){

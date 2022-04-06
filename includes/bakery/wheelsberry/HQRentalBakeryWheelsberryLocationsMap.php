@@ -147,7 +147,7 @@ class HQRentalBakeryWheelsberryLocationsMap extends WPBakeryShortCode
                                 var marker = new google.maps.Marker(marker_agrs);
                                 var infowindow = new google.maps.InfoWindow({
                                     
-                                    content: '<b>' + location.name '</b><br/>' + location.address,
+                                    content: '<b>' + location.name + '</b><br/>' + location.address,
                                 });
                                 
                                 marker.addListener('click', function() {

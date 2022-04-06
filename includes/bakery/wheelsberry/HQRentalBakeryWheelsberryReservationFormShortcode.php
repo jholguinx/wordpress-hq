@@ -205,7 +205,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                 <div class='reservation-form__line reservation-form__car'>
                                     <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                         <select class='reservation-form__car-select' id='reservation-form__car-select' name='vehicle_class_id'>
-                                            <option></option>
+                                            <option>Select Vehicle</option>
                                             {$this->resolveOptionsForClasses($vehicle_classes)}
                                         </select>
                                         <div class='reservation-form__car-select-label' id='reservation-form__car-select-label'>Choose a car</div>

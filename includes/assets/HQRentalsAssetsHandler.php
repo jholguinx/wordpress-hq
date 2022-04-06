@@ -371,4 +371,8 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-daysjs-custom-js');
         wp_enqueue_script('hq-aucapina-reservation-form-js');
     }
+    static public function getDefaultMapMarkerImage()
+    {
+        return plugin_dir_url(__FILE__) . 'img/map-marker.webp';
+    }
 }

@@ -43,8 +43,8 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
     {
         vc_map(
             array(
-                'name' => __('HQRS Rentit Reservation Form', 'hq-wordpress'),
-                'base' => 'hq_bakery_rentit_reservation_form',
+                'name' => __('HQRS Wheelsberry Reservation Form', 'hq-wordpress'),
+                'base' => 'hq_bakery_wheelsberry_reservation_form',
                 'content_element' => true,
                 "category" => __('HQ Rental Software - Rentit Theme'),
                 'show_settings_on_create' => true,

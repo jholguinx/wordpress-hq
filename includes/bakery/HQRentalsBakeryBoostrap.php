@@ -85,6 +85,7 @@ class HQRentalsBakeryBoostrap{
     {
         $themeDeps = array(
             plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryReservationFormShortcode.php',
+            plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryLocationsMap.php',
         );
         foreach ($themeDeps as $file){
 

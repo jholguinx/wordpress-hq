@@ -289,6 +289,12 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     {
         return $this->address;
     }
+    public function getLatitude(){
+        return empty($this->coordinates->lat) ? 0.00 : $this->coordinates->lat;
+    }
+    public function getLongitude(){
+        return empty($this->coordinates->lng) ? 0.00 : $this->coordinates->lng;
+    }
 
     public function getCustomFieldForOfficeHours()
     {

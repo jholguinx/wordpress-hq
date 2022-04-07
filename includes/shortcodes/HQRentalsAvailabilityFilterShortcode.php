@@ -21,6 +21,7 @@ class HQRentalsAvailabilityFilterShortcode
             ), $atts);
         $queryVehicle = new HQRentalsDBQueriesVehicleClasses();
         $vehicles = $queryVehicle->allVehicleClasses(true);
+        ob_start();
         ?>
         <?php HQRentalsAssetsHandler::getHQFontAwesome(); ?>
         <script>
@@ -162,5 +163,8 @@ class HQRentalsAvailabilityFilterShortcode
             </div>
         </div>
         <?php
+        $output = ob_get_contents();
+        ob_end_clean();
+        return $output;
     }
 }

@@ -78,11 +78,15 @@ class HQRentalsAvailabilityFilterShortcode
             #hq-availability-grid-filter{
                 max-width: 1200px;
                 margin:auto;
+                padding: 0 5%;
             }
             .hq-vehicle-item-label{
                 font-size: 20px;
                 font-family: inherit;
                 font-weight: bold;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .hq-vehicle-single-icon{
                 font-size: 20px;
@@ -106,6 +110,17 @@ class HQRentalsAvailabilityFilterShortcode
             .hq-vehicle-features-wrapper{
                 padding: 10px 0;
             }
+            @media (max-width: 992px) {
+                #hq-availability-grid-wrapper{
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (max-width: 576px) {
+                #hq-availability-grid-wrapper{
+                    grid-template-columns: repeat(1, 1fr);
+                }
+            }
+
 
         </style>
         <div id="hq-availability-grid-filter">
@@ -127,7 +142,7 @@ class HQRentalsAvailabilityFilterShortcode
                                         <h4 class="hq-vehicle-item-label"><?php echo $vehicle->getLabelForWebsite(); ?></h4>
                                     </div>
                                     <div class="hq-vehicle-item-rate-inner-wrapper">
-                                        <h4 class="hq-vehicle-item-label">Price: XXX</h4>
+                                        <!--<h4 class="hq-vehicle-item-label">Price: XXX</h4>-->
                                     </div>
                                 </div>
                                 <div class="hq-vehicle-features-wrapper">

@@ -718,6 +718,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->images = json_decode($vehicleDB->images);
         $this->features = json_decode($vehicleDB->features);
         $this->rates = json_decode($vehicleDB->active_rates)[0];
+        $this->customFields = json_decode($vehicleDB->custom_fields);
     }
 
     public function getTableName(): string
@@ -756,10 +757,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return $this->rates;
     }
-    public function getShortDescriptionForWebsite()
+    public function getShortDescriptionForWebsite($forcedLocale = null)
     {
         if (!empty($forcedLocale)) {
-            return $this->shortDescriptions[$forcedLocale];
+            return $this->shortDescriptions->{$forcedLocale};
         } else {
             if ($this->locale->language === "zh") {
                 return $this->shortDescriptions->{"zh-Hans"};
@@ -796,7 +797,13 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         }
        return $this->getPriceIntervalsForWebsite();
     }
-    public function getImageForWebsite(){
+    public function getImageForWebsite()
+    {
         return $this->images;
     }
+    public function getCustomFieldForWebsite($dbColumn)
+    {
+        return $this->customFields->{$dbColumn};
+    }
+
 }

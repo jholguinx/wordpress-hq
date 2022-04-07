@@ -14,6 +14,8 @@ $query = new HQRentalsDBQueriesVehicleClasses();
 $vehicle = $query->getVehicleClassById($vehicleId);
 $helper = new HQRentalsFrontHelper();
 $optionsLocations = $helper->getLocationOptions();
+$assets = new HQRentalsAssetsHandler();
+$assets->loadDatePickersReservationAssets();
 get_header();
 ?>
     <?php HQRentalsAssetsHandler::getHQFontAwesome(); ?>
@@ -22,6 +24,7 @@ get_header();
             min-height: 500px;
             background-size: cover;
             background-repeat: no-repeat;
+            background-position: center;
         }
         #page_content_wrapper{
             max-width: 1200px;
@@ -205,16 +208,18 @@ get_header();
             padding-bottom: 0px !important;
         }
         .hq-vehicle-single-page-feature-wrapper{
-            border-top-width: 1px;
-            border-bottom-width: 1px;
-            border-color: #dce0e0;
+            border-top: 1px solid #dce0e0;
+            border-bottom: 1px solid #dce0e0;
+            padding: 10px 0px;
             display: flex;
         }
         #page_content_wrapper{
             width: 100%;
+            padding: 0 5%;
         }
         .hq-vehicle-content-wrapper{
             width: 70%;
+            padding: 40px;
         }
         .sidebar_wrapper{
             width: 30%;
@@ -239,6 +244,7 @@ get_header();
             padding: 10px 20px 20px 20px;
             box-sizing: border-box;
             border-radius: 5px;
+            box-shadow: 0 0 10px 2px rgb(0 0 0 / 20%);
         }
         #hq-widget-form label{
             font-weight: bold;
@@ -262,15 +268,44 @@ get_header();
             -webkit-appearance: none;
             border-radius: 5px;
         }
-
         /*End Features*/
+        .hq-short-description{
+            padding:20px 0px;
+        }
+        .hq-short-description,.hq-description{
+            padding:10px 0px;
+        }
+        .hq-feature-label{
+            font-size: 15px;
+            font-weight: bold;
+            font-family: inherit;
+            margin-right: 10px;
+        }
+        @media (max-width: 992px) {
+            .hq-feature-label{
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            #page_content_wrapper{
+                flex-direction: column;
+            }
+            .hq-vehicle-content-wrapper{
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .sidebar_wrapper{
+                width: 100%;
+                margin-top: 0px;
+            }
+        }
     </style>
     <div id="page_caption" class="hasbg lazy"
-         style="background-image: url(<?php echo $vehicle->getPublicImage(); ?>);">
+         style="background-image: url(<?php echo $vehicle->getCustomFieldForWebsite('f289')[0]->public_link; ?>);">
     </div>
     <div id="page_content_wrapper">
         <div id="vehicle-class-<?php echo $vehicle->getId(); ?>" class="hq-vehicle-content-wrapper inner">
-
             <!-- Begin main content -->
             <div class="inner_wrapper">
                 <div class="sidebar_content">
@@ -280,14 +315,14 @@ get_header();
                         </div>
                         <div>
                             <h1 class="hq-class-title">
-                                CH$49.761
+                                <!--CH$49.761-->
                             </h1>
                         </div>
                     </div>
-
                     <div class="hq-vehicle-single-page-feature-wrapper single_car_attribute_wrapper themeborder">
                         <?php foreach ($vehicle->getVehicleFeatures() as $feature): ?>
                             <div class="one_fourth hq-feature-wrapper">
+                                <p class="hq-feature-label"><?php echo $feature->label_for_website->es; ?></p>
                                 <i class="<?php echo $feature->icon; ?>"></i>
                                 <!--<div class="car_attribute_content">
                                     <?php //echo $feature->label; ?>
@@ -297,16 +332,14 @@ get_header();
                     </div>
                     <br class="clear">
                     <div class="single_car_content">
-                        <div class="single_car_content">
+                        <div class="single_car_content hq-short-description">
                             <?php echo $vehicle->getShortDescriptionForWebsite(); ?>
                         </div>
                     </div>
-                    <div class="single_car_departure_wrapper themeborder">
+                    <div class="single_car_departure_wrapper themeborder hq-description">
                         <?php echo $vehicle->getDescriptionForWebsite(); ?>
                     </div>
                 </div>
-
-
             </div>
             <!-- End main content -->
         </div>
@@ -315,7 +348,7 @@ get_header();
             <div class="content">
                 <div class="single_car_booking_wrapper themeborder book_instantly">
                     <div class="single_car_booking_woocommerce_wrapper">
-                        <form action="reservations/" method="GET" autocomplete="off"
+                        <form action="/reservas/" method="GET" autocomplete="off"
                               id="hq-widget-form">
                             <div class="hq-form-item-wrapper">
                                 <label for="">Pickup Location</label>
@@ -325,17 +358,9 @@ get_header();
                                 </select>
                             </div>
                             <div class="hq-form-item-wrapper">
-                                <label for="">Return Location</label>
-                                <select id="hq-return-location" name="return_location"
-                                        required="required" autocomplete="off" disabled="">
-                                    <?php echo $optionsLocations; ?>
-                                </select>
-                            </div>
-                            <div class="hq-form-item-wrapper">
                                 <label for="">Pickup Date</label>
-                                <input id="hq-pickup-date-time-input" class="hq-inputs" type="text"
-                                       autocomplete="off" name="pick_up_date" placeholder="Select Date"
-                                       required="required">
+                                <input id="hq_pick_up_date" class="hq-inputs" type="text"
+                                       autocomplete="off" name="pick_up_date" placeholder="Select Date" value="01-04-2022">
                             </div>
                             <div class="hq-form-item-wrapper">
                                 <label for="">Duration</label>
@@ -358,6 +383,8 @@ get_header();
                             <input type="hidden" name="target_step" value="4">
                             <input type="hidden" name="pick_up_time" value="12:00">
                             <input type="hidden" name="return_time" value="12:00">
+                            <input type="hidden" id="rate-type" name="rate_type_uuid" value="rx2fhigt-o79s-9v8g-6ynq-qul5c08mglfe" />
+                            <input type="hidden" id="hq-return-location" name="return_location" value="<?php echo $queryLocations->allLocations()[0]->getId(); ?>">
                             <input class="hq-submit-button" type="submit" value="Reserve Now">
                         </form>
                     </div>
@@ -367,5 +394,28 @@ get_header();
             <div class="sidebar_bottom"></div>
         </div>
     </div>
+    <script>
+        var rateType12 = 'rx2fhigt-o79s-9v8g-6ynq-qul5c08mglfe';
+        var rateType24 = 'ghpaspdi-i9tq-rfyh-b4f1-ddrqqepxurhz';
+        var rateType36 = 'tioiivab-hkqo-i78w-qf24-allupspu5fyj';
+        var reservation24Months = ''
+        jQuery(document).ready(function (){
+            jQuery('#pick-up-location').on('change', function (){
+                jQuery('#hq-return-location').val(jQuery(this).val());
+
+            });
+            jQuery('#reservation_interval').on('change',function(){
+                if(jQuery(this).val() === '12_month'){
+                    jQuery('#rate-type').val(rateType12);
+                }
+                if(jQuery(this).val() === '24_month'){
+                    jQuery('#rate-type').val(rateType24);
+                }
+                if(jQuery(this).val() === '36_month'){
+                    jQuery('#rate-type').val(rateType36);
+                }
+            });
+        });
+    </script>
 <?php
 get_footer();

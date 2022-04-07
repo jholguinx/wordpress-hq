@@ -289,6 +289,12 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     {
         return $this->address;
     }
+    public function getLatitude(){
+        return empty($this->coordinates->lat) ? 0.00 : $this->coordinates->lat;
+    }
+    public function getLongitude(){
+        return empty($this->coordinates->lng) ? 0.00 : $this->coordinates->lng;
+    }
 
     public function getCustomFieldForOfficeHours()
     {
@@ -337,7 +343,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'name' => $this->name,
             'brand_id' => $this->brandId,
             'is_airport' => $this->isAirport,
-            'coordinates' => $this->coordinates,
+            'coordinates' => json_encode($this->coordinates),
             'active' => $this->isActive,
             'location_order' => $this->order,
             'address' => $this->address,
@@ -356,7 +362,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->name = $locationFromDB->name;
         $this->brandId = $locationFromDB->brand_id;
         $this->isAirport = $locationFromDB->is_airport;
-        $this->coordinates = $locationFromDB->coordinates;
+        $this->coordinates = json_decode($locationFromDB->coordinates);
         $this->isActive = $locationFromDB->active;
         $this->order = $locationFromDB->location_order;
         $this->address = $locationFromDB->address;

@@ -83,16 +83,14 @@ class HQRentalsBakeryBoostrap{
     }
     public function resolveFileForWheelsberryTheme()
     {
-        if (
-            true
-        ) {
-            $themeDeps = array(
-                plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryReservationFormShortcode.php',
-            );
-            foreach ($themeDeps as $file){
-                if (file_exists($file)) {
-                    require_once($file);
-                }
+        $themeDeps = array(
+            plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryReservationFormShortcode.php',
+            plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryLocationsMap.php',
+        );
+        foreach ($themeDeps as $file){
+
+            if (file_exists($file)) {
+                require_once($file);
             }
         }
     }

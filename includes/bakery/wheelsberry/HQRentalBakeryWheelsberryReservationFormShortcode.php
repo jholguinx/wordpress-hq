@@ -5,7 +5,7 @@ use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
-new HQRentalBakeryWheelsberryReservationFormShortcode();
+
 
 
 class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCode
@@ -43,8 +43,8 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
     {
         vc_map(
             array(
-                'name' => __('HQRS Rentit Reservation Form', 'hq-wordpress'),
-                'base' => 'hq_bakery_rentit_reservation_form',
+                'name' => __('HQRS Wheelsberry Reservation Form', 'hq-wordpress'),
+                'base' => 'hq_bakery_wheelsberry_reservation_form',
                 'content_element' => true,
                 "category" => __('HQ Rental Software - Rentit Theme'),
                 'show_settings_on_create' => true,
@@ -105,21 +105,23 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         $slider_subtitle = get_post_meta($post->ID, 'wheelsberry_cars_slider_subtitle', true);
         $form_title = get_post_meta($post->ID, 'wheelsberry_reservation_form_title', true);
         $form_subtitle = get_post_meta($post->ID, 'wheelsberry_reservation_form_subtitle', true);
-        $time_from = intval(get_option('omcr_booking_time_from'));
-        $time_to = intval(get_option('omcr_booking_time_to'));
-        if (!$time_to) {
-            $time_to = 85500;
-        }
-        $time_default = get_option('omcr_booking_time_default');
-        if ($time_default === false) {
-            $time_default = 43200;
-        }
+
+        $image = wp_get_attachment_url(get_theme_mod('tenant_logo'));
+        $imageHTML = empty($image) ? "": "
+            <div class='branding-logo-w'>
+                <img class='branding-img' src='{$image}' />
+            </div>
+        ";
         $html = HQRentalsAssetsHandler::getHQFontAwesome() . "
             
             <link rel='preconnect' href='https://fonts.googleapis.com'> 
             <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
             <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap' rel='stylesheet'>    
             <style>
+                .branding-img{
+                    max-width: 200px;
+                    height: auto;
+                }
                 .owl-nav{
                     position:absolute !important;
                     top:50%;
@@ -191,6 +193,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
             </div>
         <div class='reservation reservation--full hq-reservation-form-wrapper' id='reservation'>
             <div class='reservation-form'>
+                {$imageHTML}
                 <div class='om-container'>
                     <div class='om-container__inner'>
                         <div class='reservation-form__inner'>
@@ -202,7 +205,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                                 <div class='reservation-form__line reservation-form__car'>
                                     <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                         <select class='reservation-form__car-select' id='reservation-form__car-select' name='vehicle_class_id'>
-                                            <option></option>
+                                            <option>Select Vehicle</option>
                                             {$this->resolveOptionsForClasses($vehicle_classes)}
                                         </select>
                                         <div class='reservation-form__car-select-label' id='reservation-form__car-select-label'>Choose a car</div>
@@ -319,13 +322,13 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                     $rate = $vehicle->getActiveRate()->daily_rate;
                     $dailyRate = !empty($interval->price) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$rate->currency_icon}{$interval->price} daily</span>") : "";
                 }else{
-                    $dailyRate = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='cars-slider__item-price hq-upper-tag'>as low as</span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
+                    $dailyRate = !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='cars-slider__item-price hq-upper-tag'> as low as </span><span class='omcr-price-currency hq-wheelsberry-daily-tag'>{$vehicle->getActiveRate()->daily_rate->amount_for_display} daily</span>") : "";
                 }
                 $priceHTML = $dailyRate;
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";
                 $html .= "
                     <div class='cars-slider__item'>
-                        <div class='om-container'>
+                        <div id='reservation' class='om-container'>
                             <div class='cars-slider__item-inner om-container__inner'>
                                 <div class='cars-slider__item-description'>
                                     <div class='cars-slider__item-category'>{$vehicle->name}</div>
@@ -400,3 +403,4 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         return '';
     }
 }
+new HQRentalBakeryWheelsberryReservationFormShortcode();

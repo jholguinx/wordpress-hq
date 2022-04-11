@@ -20,6 +20,7 @@ class HQRentalsBakeryBoostrap{
             $this->resolveFileForMotorsTheme();
             $this->resolveFileForRentitTheme();
             $this->resolveFileForWheelsberryTheme();
+            $this->resolveTurbolTheme();
         }
 
 
@@ -40,11 +41,7 @@ class HQRentalsBakeryBoostrap{
             plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryVehicleGridShortcode.php',
             plugin_dir_path( __FILE__ ) . 'shortcodes/HQRentalsBakeryPlacesReservationForm.php',
         );
-        foreach ($deps as $file){
-            if (file_exists($file)) {
-                require_once($file);
-            }
-        }
+        $this->addFiles($deps);
     }
     public function resolveFileForMotorsTheme()
     {
@@ -56,11 +53,7 @@ class HQRentalsBakeryBoostrap{
                 plugin_dir_path( __FILE__ ) . 'motors/HQRentalBakeryMotorsVehicleGridShortcode.php',
                 plugin_dir_path( __FILE__ ) . 'motors/HQRentalBakeryMotorsReservationFormShortcode.php',
             );
-            foreach ($themeDeps as $file){
-                if (file_exists($file)) {
-                    require_once($file);
-                }
-            }
+            $this->addFiles($themeDeps);
         }
     }
     public function resolveFileForRentitTheme()
@@ -74,11 +67,7 @@ class HQRentalsBakeryBoostrap{
                 plugin_dir_path( __FILE__ ) . 'rentit/HQRentalBakeryRentitReservationFormShortcode.php',
                 plugin_dir_path( __FILE__ ) . 'rentit/HQRentalBakeryRentitSliderShortcode.php',
             );
-            foreach ($themeDeps as $file){
-                if (file_exists($file)) {
-                    require_once($file);
-                }
-            }
+            $this->addFiles($themeDeps);
         }
     }
     public function resolveFileForWheelsberryTheme()
@@ -87,12 +76,7 @@ class HQRentalsBakeryBoostrap{
             plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryReservationFormShortcode.php',
             plugin_dir_path( __FILE__ ) . 'wheelsberry/HQRentalBakeryWheelsberryLocationsMap.php',
         );
-        foreach ($themeDeps as $file){
-
-            if (file_exists($file)) {
-                require_once($file);
-            }
-        }
+        $this->addFiles($themeDeps);
     }
     public function resolveFiles(){
         return array_merge(
@@ -116,6 +100,27 @@ class HQRentalsBakeryBoostrap{
             $page_template = plugin_dir_path( __FILE__ ) . 'wheelsberry/templates/hq-wheelsberry-homepage.php';
         }
         return $page_template;
+    }
+    function resolveTurbolTheme()
+    {
+        if(
+            $this->theme->stylesheet === 'turbo' or
+            $this->theme->stylesheet === 'turbo-child' or
+            $this->theme->stylesheet === 'turbo_child'
+        ){
+            $themeDeps = array(
+                plugin_dir_path( __FILE__ ) . 'turbo/HQRentalBakeryTurboReservationForm.php',
+            );
+            $this->addFiles($themeDeps);
+        }
+    }
+    private function addFiles($arrayOfFiles)
+    {
+        if(is_array($arrayOfFiles) and count($arrayOfFiles)){
+            foreach ($arrayOfFiles as $file){
+                require_once($file);
+            }
+        }
     }
 
 }

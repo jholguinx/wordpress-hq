@@ -384,9 +384,9 @@ get_header();
                             <input type="hidden" name="target_step" value="4">
                             <input type="hidden" name="pick_up_time" value="12:00">
                             <input type="hidden" name="return_time" value="12:00">
-                            <input id="hq_return_date" type="hidden" name="return_date" value="<?php echo Carbon::now()->addDay()->add( 12 * 30 )->format('d-m-Y'); ?>" />
+                            <input id="hq_return_date" type="hidden" name="return_date" value="<?php echo Carbon::now()->addDay()->addDays( 12 * 30   )->format('d-m-Y'); ?>" />
                             <input type="hidden" id="rate-type" name="rate_type_uuid" value="rx2fhigt-o79s-9v8g-6ynq-qul5c08mglfe" />
-                            <!--<input type="hidden" name="reservation_type" value="short" />-->
+                            <input type="hidden" name="reservation_type" value="long" />
                             <input type="hidden" id="hq-return-location" name="return_location" value="<?php echo $queryLocations->allLocations()[0]->getId(); ?>">
                             <input class="hq-submit-button" type="submit" value="Reserve Now">
                         </form>
@@ -415,14 +415,17 @@ get_header();
                 if(jQuery(this).val() === '12_month'){
                     jQuery('#rate-type').val(rateType12);
                     addMonthsToReturn(12);
+                    //addYearsToReturn(1);
                 }
                 if(jQuery(this).val() === '24_month'){
                     jQuery('#rate-type').val(rateType24);
                     addMonthsToReturn(24);
+                    //addYearsToReturn(2);
                 }
                 if(jQuery(this).val() === '36_month'){
                     jQuery('#rate-type').val(rateType36);
                     addMonthsToReturn(36);
+                    //addYearsToReturn(3);
                 }
             });
             // init pickup date
@@ -432,7 +435,13 @@ get_header();
             var pickup = jQuery('#hq_pick_up_date');
             jQuery('#hq_return_date').val(
                 dayjs(pickup.val(), dateFormatMoment).add(months * 30,'day').format(dateFormatMoment)
-            )
+            );
+        }
+        function addYearsToReturn(years){
+            var pickup = jQuery('#hq_pick_up_date');
+            jQuery('#hq_return_date').val(
+                dayjs(pickup.val(), dateFormatMoment).add(years,'year').format(dateFormatMoment)
+            );
         }
 
     </script>

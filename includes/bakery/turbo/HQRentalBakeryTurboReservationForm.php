@@ -13,6 +13,7 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
     private $reservationURL;
     private $title;
     private $content;
+    private $backgroundImage;
 
     public function __construct()
     {
@@ -29,12 +30,15 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
         extract(shortcode_atts(array(
             'search_form_title' => '',
             'content' => '',
-            'action_url' => '/reservations/'
+            'action_url' => '/reservations/',
+            'background_image_id' => ''
         ), $atts));
+
         $this->assets->loadAucapinaReservationFormAssets();
         $this->reservationURL = $atts['action_url'];
         $this->title = $atts['search_form_title'];
         $this->content = $atts['content'];
+        $this->backgroundImage = wp_get_attachment_url($atts['background_image_id']);
         echo $this->renderShortcode();
     }
 
@@ -72,13 +76,7 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
                         "admin_label" => true,
                         "heading" => __("Background Image", "hq-wordpress"),
                         "param_name" => "background_image_id",
-                    ),
-                    array(
-                        'type' => 'css_editor',
-                        'heading' => __('Customize Block', 'hq-wordpress'),
-                        'param_name' => 'bg_css',
-                        'group' => __('Design options', 'hq-wordpress'),
-                    ),
+                    )
                 )
             )
         );
@@ -133,7 +131,7 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
                 var locale = '{$locale}';
             </script>
             <div id='hq-turbo-reservation-form' class='header turbo-vertical-search-wrapper index-two-header'>
-                <div class='header-body' style='background: url(https://ecoscooters.test/wp-content/uploads/2022/02/Banner_01_v3.jpg) top center no-repeat; background-size: 100% auto;'>
+                <div class='header-body' style='background: url({$this->backgroundImage}) top center no-repeat; background-size: 100% auto;'>
                     <div class='container'>
                         <div class='turbo-vertical-search-area'>
                             <div class='search-header'>

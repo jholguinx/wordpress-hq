@@ -11,7 +11,8 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
 {
     private $query;
     private $reservationURL;
-    private $minimumRentalPeriod;
+    private $title;
+    private $content;
 
     public function __construct()
     {
@@ -26,11 +27,14 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
     public function content($atts, $content = null)
     {
         extract(shortcode_atts(array(
-            'reservation_page_url' => '',
-            'minimum_rental_period' => 1
+            'search_form_title' => '',
+            'content' => '',
+            'action_url' => '/reservations/'
         ), $atts));
-        $this->reservationURL = $atts['reservation_page_url'];
-        $this->minimumRentalPeriod = $atts['minimum_rental_period'];
+        $this->assets->loadAucapinaReservationFormAssets();
+        $this->reservationURL = $atts['action_url'];
+        $this->title = $atts['search_form_title'];
+        $this->content = $atts['content'];
         echo $this->renderShortcode();
     }
 
@@ -82,9 +86,9 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
 
     public function renderShortcode()
     {
-        $this->assets->loadDatePickersReservationAssets();
         $locations = $this->queryLocations->allLocations();
         $locations_options = $this->helper->getLocationOptions($locations);
+        $locale = get_locale();
         return HQRentalsAssetsHandler::getHQFontAwesome() . "
             <style>
                 .hq-turbo-label{
@@ -125,50 +129,54 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
                     text-decoration: none;
                 }
             </style>
+            <script>
+                var locale = '{$locale}';
+            </script>
             <div id='hq-turbo-reservation-form' class='header turbo-vertical-search-wrapper index-two-header'>
                 <div class='header-body' style='background: url(https://ecoscooters.test/wp-content/uploads/2022/02/Banner_01_v3.jpg) top center no-repeat; background-size: 100% auto;'>
                     <div class='container'>
                         <div class='turbo-vertical-search-area'>
                             <div class='search-header'>
-                                <h3>Make Your Ride</h3>
-                                <p>Best bike rental in Tulum</p>
+                                <h3>{$this->title}</h3>
+                                <p>{$this->content}</p>
                             </div>
-                            <form action='get' method='get'>
+                            <form action='{$this->reservationURL}' method='get'>
+                                <input type='hidden' id='hq_pick_up_date' name='pick_up_date' />
+                                <input type='hidden' id='hq_return_date' name='return_date' />
+                                <input type='hidden' name='target_step' value='2' />
                                 <div class='turbo-obb-vertical-search-form'>
                                     <div class='turbo-horizontal-search-oob'>
                                         <div class='hq-turbo-input-group-wrapper'>
                                             <div class='hq-turbo-input-label-wrapper'>
-                                                <label class='hq-turbo-label' for=''>PICK UP LOCATION</label>
+                                                <label class='hq-turbo-label' for='hq_pick_up_location'>PICK UP LOCATION</label>
                                             </div>
                                             <div class='hq-turbo-input-wrapper'>
-                                                <select name='' id=''>
+                                                <select name='pick_up_location' id='hq_pick_up_location'>
                                                     {$locations_options}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class='hq-turbo-input-group-wrapper'>
                                             <div class='hq-turbo-input-label-wrapper'>
-                                                <label for='' class='hq-turbo-label'>DROP OFF LOCATION</label>
+                                                <label for='hq_return_location' class='hq-turbo-label'>DROP OFF LOCATION</label>
                                             </div>
                                             <div class='hq-turbo-input-wrapper'>
-                                                <select name='' id=''>
+                                                <select name='return_location' id='hq_return_location' />
                                                     {$locations_options}
                                                 </select>
                                             </div>
                                         </div>
                                         <div class='hq-turbo-input-group-wrapper'>
                                             <div class='hq-turbo-input-label-wrapper'>
-                                                <label for='' class='hq-turbo-label'>CHOOSE DATE</label>
+                                                <label for='hq-daterange' class='hq-turbo-label'>CHOOSE DATE</label>
                                             </div>
                                             <div class='hq-turbo-input-wrapper'>
-                                                <select name='' id=''>
-                                                    {$locations_options}
-                                                </select>
+                                                <input type='text' id='hq-daterange' name='hq-daterange' required='required' />
                                             </div>
                                         </div>
                                         <div class='hq-turbo-input-group-wrapper'>
                                             <div class='hq-turbo-input-label-wrapper'>
-                                               <button type='button' class='hq-turbo-submit-button'>Search</button>
+                                               <button type='submit' class='hq-turbo-submit-button'>Search</button>
                                             </div>
                                         </div>
                                     </div>
@@ -178,6 +186,11 @@ class HQRentalBakeryTurboReservationForm extends WPBakeryShortCode
                     </div>
                 </div>
             </div>
+            <script>
+                jQuery(document).ready(function(){
+                    
+                });
+            </script>
         ";
     }
 }

@@ -5,6 +5,7 @@ jQuery(document).ready(function (){
         disableMobile: 'true',
         enableTime: false,
         mode: "range",
+        locale: resolveLang(locale),
         onChange: function(data){
             var pickUpDate = data[0];
             var returnDate = data[1];
@@ -39,11 +40,7 @@ jQuery(document).ready(function (){
             })
             jQuery('#vehicle-tag').html(vehiclesFileteres[0].name);
         }
-
     });
-
-
-
 });
 
 function parseDateToText(date,format){

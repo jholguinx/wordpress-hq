@@ -15,7 +15,7 @@ jQuery(document).ready(function (){
     };
     var dateFormatMoment = 'DD-MM-YYYY';
     flatpickr('#hq-daterange', config);
-    var pickDefault = dayjs().add(1, 'day').add(15,'minute').format(dateFormatMoment)
+    var pickDefault = dayjs().add(1, 'day').add(15,'minute').format(dateFormatMoment);
     var returnDefault = dayjs().add(1, 'day').add(3,'day').add(15,'minute').format(dateFormatMoment);
     jQuery('#hq_pick_up_date').val(pickDefault);
     jQuery('#hq_return_date').val(returnDefault);

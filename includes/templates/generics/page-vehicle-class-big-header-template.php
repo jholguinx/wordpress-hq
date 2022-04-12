@@ -2,8 +2,9 @@
 
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 use \HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
-use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
+use \HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 use \HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
+use HQRentalsPlugin\HQRentalsVendor\Carbon;
 $vehicleId = $_GET['id'];
 $queryLocations = new HQRentalsDBQueriesLocations();
 if(empty($vehicleId)){
@@ -360,7 +361,7 @@ get_header();
                             <div class="hq-form-item-wrapper">
                                 <label for="">Pickup Date</label>
                                 <input id="hq_pick_up_date" class="hq-inputs" type="text"
-                                       autocomplete="off" name="pick_up_date" placeholder="Select Date" value="01-04-2022">
+                                       autocomplete="off" name="pick_up_date" placeholder="Select Date" />
                             </div>
                             <div class="hq-form-item-wrapper">
                                 <label for="">Duration</label>
@@ -383,7 +384,9 @@ get_header();
                             <input type="hidden" name="target_step" value="4">
                             <input type="hidden" name="pick_up_time" value="12:00">
                             <input type="hidden" name="return_time" value="12:00">
+                            <input id="hq_return_date" type="hidden" name="return_date" value="<?php echo Carbon::now()->addDay()->add( 12 * 30 )->format('d-m-Y'); ?>" />
                             <input type="hidden" id="rate-type" name="rate_type_uuid" value="rx2fhigt-o79s-9v8g-6ynq-qul5c08mglfe" />
+                            <!--<input type="hidden" name="reservation_type" value="short" />-->
                             <input type="hidden" id="hq-return-location" name="return_location" value="<?php echo $queryLocations->allLocations()[0]->getId(); ?>">
                             <input class="hq-submit-button" type="submit" value="Reserve Now">
                         </form>
@@ -394,10 +397,14 @@ get_header();
             <div class="sidebar_bottom"></div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.0/dayjs.min.js" integrity="sha512-KTFpdbCb05CY4l242bLjyaPhoL9vAy4erP1Wkn7Rji0AG6jx6zzGtKkdHc7jUOYOVSmbMbTg728u260CA/Qugg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.0/plugin/customParseFormat.min.js" integrity="sha512-nbPJ/ANJ1DCwUWGyfS+PY7RMysy5UnFyOzPTjzcphOuVbUqrukQAZ9kkNvTkPmItJRuuL5IqNufQTHPyxxpmig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        dayjs.extend(window.dayjs_plugin_customParseFormat);
         var rateType12 = 'rx2fhigt-o79s-9v8g-6ynq-qul5c08mglfe';
         var rateType24 = 'ghpaspdi-i9tq-rfyh-b4f1-ddrqqepxurhz';
         var rateType36 = 'tioiivab-hkqo-i78w-qf24-allupspu5fyj';
+        var dateFormatMoment = 'DD-MM-YYYY';
         var reservation24Months = ''
         jQuery(document).ready(function (){
             jQuery('#pick-up-location').on('change', function (){
@@ -407,15 +414,27 @@ get_header();
             jQuery('#reservation_interval').on('change',function(){
                 if(jQuery(this).val() === '12_month'){
                     jQuery('#rate-type').val(rateType12);
+                    addMonthsToReturn(12);
                 }
                 if(jQuery(this).val() === '24_month'){
                     jQuery('#rate-type').val(rateType24);
+                    addMonthsToReturn(24);
                 }
                 if(jQuery(this).val() === '36_month'){
                     jQuery('#rate-type').val(rateType36);
+                    addMonthsToReturn(36);
                 }
             });
+            // init pickup date
+            jQuery('#hq_pick_up_date').val('13-04-2022');
         });
+        function addMonthsToReturn(months){
+            var pickup = jQuery('#hq_pick_up_date');
+            jQuery('#hq_return_date').val(
+                dayjs(pickup.val(), dateFormatMoment).add(months * 30,'day').format(dateFormatMoment)
+            )
+        }
+
     </script>
 <?php
 get_footer();

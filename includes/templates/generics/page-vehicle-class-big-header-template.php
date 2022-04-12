@@ -429,7 +429,7 @@ get_header();
                 }
             });
             // init pickup date
-            jQuery('#hq_pick_up_date').val('13-04-2022');
+            jQuery('#hq_pick_up_date').val(dayjs().add(1, 'day').format(dateFormatMoment));
         });
         function addMonthsToReturn(months){
             var pickup = jQuery('#hq_pick_up_date');

@@ -132,7 +132,7 @@ class HQRentalsAvailabilityFilterShortcode
                 <?php foreach ($vehicles as $vehicle): ?>
                     <div class="hq-vehicle-item-wrapper">
                         <div class="hq-vehicle-item-image-wrapper">
-                            <a href="/vehicle-class/?id=<?php echo $vehicle->getId(); ?>">
+                            <a href="<?php echo get_site_url(); ?>/vehicle-class/?id=<?php echo $vehicle->getId(); ?>">
                                 <img src="<?php echo $vehicle->getPublicImage(); ?>" alt="">
                             </a>
                         </div>

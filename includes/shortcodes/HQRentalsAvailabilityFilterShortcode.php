@@ -154,7 +154,7 @@ class HQRentalsAvailabilityFilterShortcode
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="hq-vehicle-button-wrapper">
-                                    <a class="hq-vehicle-single-button" href="/vehicle-class/?id=<?php echo $vehicle->getId(); ?>">Ver más</a>
+                                    <a class="hq-vehicle-single-button" href="<?php echo get_site_url(); ?>/vehicle-class/?id=<?php echo $vehicle->getId(); ?>">Ver más</a>
                                 </div>
                             </div>
                         </div>

@@ -18,6 +18,7 @@ $helper = new HQRentalsFrontHelper();
 $vehicle = $query->getVehicleClassById($vehicleId);
 $optionsLocations = $helper->getLocationOptions();
 $assets->loadAssetsForBigHeaderPageTemplate();
+$site = get_site_url();
 get_header();
 ?>
     <?php HQRentalsAssetsHandler::getHQFontAwesome(); ?>
@@ -345,12 +346,15 @@ get_header();
             </div>
             <!-- End main content -->
         </div>
+        <script>
+            var baseURL = "<?php echo $site; ?>";
+        </script>
         <div class="sidebar_wrapper">
             <div class="sidebar_top"></div>
             <div class="content">
                 <div class="single_car_booking_wrapper themeborder book_instantly">
                     <div class="single_car_booking_woocommerce_wrapper">
-                        <form action="<?php echo get_site_url(); ?>/reservas/" method="GET" autocomplete="off"
+                        <form action="<?php echo $site; ?>/reservas/" method="GET" autocomplete="off"
                               id="hq-widget-form">
                             <div class="hq-form-item-wrapper">
                                 <label for="">Pickup Location</label>
@@ -366,10 +370,10 @@ get_header();
                             </div>
                             <div class="hq-form-item-wrapper">
                                 <label for="">Duration</label>
-                                <select name="reservation_interval" id="reservation_interval">
-                                    <option value="365_day">1 Year</option>
-                                    <option value="730_day">2 Years</option>
-                                    <option value="1095_day">3 Years</option>
+                                <select name="reservation_interval_years" id="reservation_interval">
+                                    <option value="1">1 Year</option>
+                                    <option value="2">2 Years</option>
+                                    <option value="3">3 Years</option>
                                 </select>
                             </div>
                             <style>
@@ -386,7 +390,7 @@ get_header();
                             <input type="hidden" name="pick_up_time" value="08:00">
                             <input type="hidden" name="return_time" value="08:00">
                             <input id="hq_return_date" type="hidden" name="return_date" value="<?php echo Carbon::now()->addDay()->addYear()->format('d-m-Y'); ?>" />
-                            <input type="hidden" id="rate-type" name="rate_type_uuid" value="rx2fhigt-o79s-9v8g-6ynq-qul5c08mglfe" />
+                            <!--<input type="hidden" id="rate-type" name="rate_type_uuid" value="rx2fhigt-o79s-9v8g-6ynq-qul5c08mglfe" />-->
                             <input type="hidden" id="reservation-type" name="reservation_type" value="short" />
                             <input type="hidden" id="hq-return-location" name="return_location" value="<?php echo $queryLocations->allLocations()[0]->getId(); ?>">
                             <input class="hq-submit-button" type="submit" value="Reserve Now">
@@ -400,10 +404,10 @@ get_header();
     </div>
     <link rel="stylesheet" href="/wp-content/plugins/hq-rental-software/includes/assets/css/jquery.datetimepicker.min.css">
 
-    <script src="/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script>
-    <script src="/wp-content/plugins/hq-rental-software/includes/assets/js/jquery.datetimepicker.full.min.js"></script>
-    <script src="/wp-content/plugins/hq-rental-software/includes/assets/js/daysjs-customParseFormat.min.js"></script>
-    <script src="/wp-content/plugins/hq-rental-software/includes/assets/js/dayjs.min.js"></script>
-<script src="/wp-content/plugins/hq-rental-software/includes/assets/js/page-vehicle-class-big-header.js"></script>
+    <script src="<?php echo $site; ?>/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script>
+    <script src="<?php echo $site; ?>/wp-content/plugins/hq-rental-software/includes/assets/js/jquery.datetimepicker.full.min.js"></script>
+    <script src="<?php echo $site; ?>/wp-content/plugins/hq-rental-software/includes/assets/js/daysjs-customParseFormat.min.js"></script>
+    <script src="<?php echo $site; ?>/wp-content/plugins/hq-rental-software/includes/assets/js/dayjs.min.js"></script>
+<script src="<?php echo $site; ?>/wp-content/plugins/hq-rental-software/includes/assets/js/page-vehicle-class-big-header.js"></script>
 
 <?php get_footer(); ?>

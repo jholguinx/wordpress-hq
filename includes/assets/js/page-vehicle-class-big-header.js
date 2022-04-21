@@ -11,7 +11,6 @@ jQuery(document).ready(function (){
     jQuery('#reservation_interval').on('change',function(){
         var interval = jQuery(this).val();
         updateReturnDate(interval);
-
     });
     // init pickup date
     jQuery('#hq_pick_up_date_interval').val(dayjs().add(1, 'day').format(dateFormatMoment));
@@ -26,19 +25,22 @@ jQuery(document).ready(function (){
     });
 });
 function updateReturnDate(interval){
-    if(interval === '365_day'){
+    if(interval === '1'){
         jQuery('#rate-type').val(rateType12);
         jQuery('#rate-type-id').val(1);
+        //jQuery('#hq-widget-form').attr('action', baseURL + '/reservaciones-12-meses/');
         addYearsToReturn(1);
     }
-    if(interval === '730_day'){
+    if(interval === '2'){
         jQuery('#rate-type').val(rateType24);
         jQuery('#rate-type-id').val(2);
+        //jQuery('#hq-widget-form').attr('action', baseURL + '/reservaciones-24-meses/');
         addYearsToReturn(2);
     }
-    if(interval === '1095_day'){
+    if(interval === '3'){
         jQuery('#rate-type').val(rateType36);
         jQuery('#rate-type-id').val(3);
+        //jQuery('#hq-widget-form').attr('action', baseURL + '/reservaciones-36-meses/');
         addYearsToReturn(3);
     }
 }

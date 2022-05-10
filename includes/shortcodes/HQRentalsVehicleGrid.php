@@ -13,6 +13,7 @@ class HQRentalsVehicleGrid
     private $disableFeatures;
     private $buttonPosition;
     private $wasInit;
+    private $atts;
     public function __construct($params = null)
     {
         $this->wasInit = !empty($params);
@@ -48,8 +49,10 @@ class HQRentalsVehicleGrid
             'title_vehicle_grid' => '',
             'brand_id' => '',
             'disable_features_vehicle_grid' => '',
-            'button_position_vehicle_grid' => ''
+            'button_position_vehicle_grid' => '',
+            'button_text' => 'RENT NOW'
         ), $atts);
+        $this->atts = $atts;
         if(!$this->wasInit){
             $this->setParams($atts);
         }
@@ -139,7 +142,7 @@ class HQRentalsVehicleGrid
                         </div>
                         <div class='hq-grid-button-wrapper'>
                             <div class='bottom-info hq-grid-button-wrapper hq-grid-button-wrapper-{$this->buttonPosition}'>
-                                <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=3&vehicle_class_id={$vehicle->id}'>RENT NOW</a>
+                                <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=3&vehicle_class_id={$vehicle->id}'>{$this->atts['button_text']}</a>
                                 {$rateTagLeft}
                             </div>
                         </div>

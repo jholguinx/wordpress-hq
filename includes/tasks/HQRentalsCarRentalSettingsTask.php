@@ -29,9 +29,9 @@ class HQRentalsCarRentalSettingsTask extends HQRentalsBaseTask
     public function setDataOnWP()
     {
         if ($this->response->success and !empty($this->response->data)) {
-            foreach ($this->response->data as $location) {
+            foreach ($this->response->data as $settingData) {
                 $setting = new HQRentalsModelsCarRentalSetting();
-                $setting->setFromApi($location);
+                $setting->setFromApi($settingData);
                 $setting->saveOrUpdate();
             }
         }

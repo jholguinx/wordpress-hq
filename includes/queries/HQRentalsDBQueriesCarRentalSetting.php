@@ -3,11 +3,15 @@
 namespace HQRentalsPlugin\HQRentalsQueries;
 
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsCarRentalSetting;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsLocation;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
 class HQRentalsDBQueriesCarRentalSetting extends HQRentalsDBBaseQueries
 {
+    static $settingTimeHQ = "H:i";
 
     public function __construct()
     {
@@ -28,7 +32,7 @@ class HQRentalsDBQueriesCarRentalSetting extends HQRentalsDBBaseQueries
         }
         return new HQRentalsModelsCarRentalSetting();
     }
-    public function fillObjectsFromDB(){
-
+    public function fillObjectsFromDB()
+    {
     }
 }

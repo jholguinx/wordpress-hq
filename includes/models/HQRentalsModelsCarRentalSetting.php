@@ -3,7 +3,10 @@
 namespace HQRentalsPlugin\HQRentalsModels;
 
 use HQRentalsPlugin\HQRentalsDb\HQRentalsDbManager;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesCarRentalSetting;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
 class HQRentalsModelsCarRentalSetting extends HQRentalsBaseModel
 {
@@ -96,5 +99,22 @@ class HQRentalsModelsCarRentalSetting extends HQRentalsBaseModel
         $obj['preference'] = $this->preference;
         $obj['setting'] = $this->settings;
         return $obj;
+    }
+    public function getSetting()
+    {
+        return $this->settings;
+    }
+    public function getPickUpTime()
+    {
+
+    }
+    public function transformTimeSettingToMoment()
+    {
+        $helper = new HQRentalsDatesHelper();
+        $settingHandler = new HQRentalsSettings();
+        $dateFormat = $settingHandler->getTenantDatetimeFormat();
+        $timeFormat = $helper->getTimeFormatFromPHPDate($dateFormat);
+        $newData = Carbon::createFromFormat(HQRentalsDBQueriesCarRentalSetting::$settingTimeHQ, $this->getSetting() )->format($timeFormat);
+        $this->settings = $newData;
     }
 }

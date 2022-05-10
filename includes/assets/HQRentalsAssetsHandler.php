@@ -150,6 +150,8 @@ class HQRentalsAssetsHandler
         $site = get_site_url();
         $pick_up_time_setting = $this->queryCarRentalSetting->getCarRentalSetting('default_pick_up_time');
         $return_time_setting = $this->queryCarRentalSetting->getCarRentalSetting('default_return_time');
+        $pick_up_time_setting->transformTimeSettingToMoment();
+        $return_time_setting->transformTimeSettingToMoment();
         wp_localize_script('hq-dummy-script', $this->brandsGlobalFrontName, $this->brandQueries->allToFrontEnd());
         wp_localize_script('hq-dummy-script', $this->locationsGlobalFrontName, $this->locationQueries->allToFrontEnd());
         wp_localize_script('hq-dummy-script', $this->vehiclesGlobalFrontName, $this->vehicleQueries->allToFrontEnd());

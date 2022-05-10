@@ -11,7 +11,7 @@ class HQRentalsCarRentalVehicleTabShortcode
     public function __construct()
     {
         $this->assets = new HQRentalsAssetsHandler();
-        add_shortcode('hq_rentals_vehicles_tabs', array($this, 'render'));
+        add_shortcode('+', array($this, 'render'));
     }
 
     public function render($atts = [])

@@ -3,7 +3,9 @@
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
-
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsCarRentalSetting;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsCurrencyHelper;
 new HQRentalBakeryMotorsVehicleGridShortcode();
 
 class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
@@ -111,8 +113,13 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
 
     public function resolveSingleVehicleCode($vehicle)
     {
-        return "
+        $setting = new HQRentalsSettings();
+        $option = $setting->getOverrideDailyRateWithCheapestPriceInterval();
+        $priceInterval = $vehicle->getCheapestPriceIntervalForWebsite()->formatPrice();
+        $currency = HQRentalsCurrencyHelper::getCurrencySymbol();
+        $rate = ($option == 'true') ? ($currency . ' '  . $priceInterval) : $vehicle->getActiveRate()->daily_rate->amount_for_display;
 
+        return "
         <div class='stm_product_grid_single'>
             <a href='{$this->reservationURL}?target_step={$this->target_step}&vehicle_class_id={$vehicle->getId()}' class='inner'>
                 <div class='stm_top clearfix'>
@@ -121,7 +128,7 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                         <div class='s_title'></div>
                         <div class='price'>
                             <mark>". HQRentalsLocaleHelper::resolveTranslation('motors_vehicle_grid_from') ."</mark>
-                            <span class='woocommerce-Price-amount amount'>{$vehicle->getActiveRate()->daily_rate->amount_for_display}<span style='font-size: 12px;'>/". HQRentalsLocaleHelper::resolveTranslation('motors_vehicle_grid_day') ."</span></span>
+                            <span class='woocommerce-Price-amount amount'>{$rate}<span style='font-size: 12px;'>/". HQRentalsLocaleHelper::resolveTranslation('motors_vehicle_grid_day') ."</span></span>
                         </div>
                     </div>
                     ". $this->renderFeatures($vehicle) ."

@@ -104,10 +104,6 @@ class HQRentalsModelsCarRentalSetting extends HQRentalsBaseModel
     {
         return $this->settings;
     }
-    public function getPickUpTime()
-    {
-
-    }
     public function transformTimeSettingToMoment()
     {
         $helper = new HQRentalsDatesHelper();

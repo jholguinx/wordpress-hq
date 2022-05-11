@@ -7,6 +7,7 @@ class HQRentalsTransformersCarRentalSettings extends HQRentalsTransformersBase
     protected static $singleSettingsProperties = [
         'car_rental_default_pick_up_time',
         'car_rental_default_return_time',
+        'car_rental_default_currency'
 
     ];
 

@@ -155,14 +155,15 @@ class HQRentalsAssetsHandler
         wp_localize_script('hq-dummy-script', $this->brandsGlobalFrontName, $this->brandQueries->allToFrontEnd());
         wp_localize_script('hq-dummy-script', $this->locationsGlobalFrontName, $this->locationQueries->allToFrontEnd());
         wp_localize_script('hq-dummy-script', $this->vehiclesGlobalFrontName, $this->vehicleQueries->allToFrontEnd());
-        wp_localize_script('hq-dummy-script', $this->frontDateFormatFrontName, $this->settings->getFrontEndDatetimeFormat());
-        wp_localize_script('hq-dummy-script', $this->systemDateFormatFrontName, $this->settings->getHQDatetimeFormat());
-        wp_localize_script('hq-dummy-script', $this->tenantDatetimeFormatFrontName, $this->settings->getTenantDatetimeFormat());
-        wp_localize_script('hq-dummy-script', $this->hqMomentDateFormat, $this->helper->convertPhpToJsMomentFormat($this->settings->getTenantDatetimeFormat()));
-        wp_localize_script('hq-dummy-script', $this->site, $site . '/');
-        wp_localize_script('hq-dummy-script', $this->spinner, plugins_url('hq-rental-software/includes/assets/img/screen-spinner.gif'));
         wp_localize_script('hq-dummy-script', $this->hqCarRentalSettingDefaultPickupTime, $pick_up_time_setting->getPublicInterface());
         wp_localize_script('hq-dummy-script', $this->hqCarRentalSettingDefaultReturnTime, $return_time_setting->getPublicInterface());
+        // move this for header or other place on WP
+        wp_add_inline_script('hq-dummy-script', 'var ' . $this->frontDateFormatFrontName . '=' . '"' . $this->settings->getFrontEndDatetimeFormat() . '"', 'before');
+        wp_add_inline_script('hq-dummy-script', 'var ' . $this->systemDateFormatFrontName . '=' . '"' . $this->settings->getHQDatetimeFormat() . '"', 'before');
+        wp_add_inline_script('hq-dummy-script', 'var ' . $this->tenantDatetimeFormatFrontName . '=' . '"' . $this->settings->getTenantDatetimeFormat() . '"', 'before');
+        wp_add_inline_script('hq-dummy-script', 'var ' . $this->hqMomentDateFormat . '=' . '"' . $this->helper->convertPhpToJsMomentFormat($this->settings->getTenantDatetimeFormat()) . '"', 'before');
+        wp_add_inline_script('hq-dummy-script', 'var ' . $this->site. '=' . '"' . $site . '/"', 'before');
+        wp_add_inline_script('hq-dummy-script', 'var ' . $this->spinner. '=' . '"' . plugins_url('hq-rental-software/includes/assets/img/screen-spinner.gif') . '"', 'before');
         /*
          * Just for Workspot
          * */

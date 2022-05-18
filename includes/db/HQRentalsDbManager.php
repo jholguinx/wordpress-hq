@@ -117,9 +117,8 @@ class HQRentalsDbManager
                 'SELECT ' . join(',', $tableColumns) . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';'
             );
         }
-        return $this->db->prepare(
-            'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';'
-        );
+        // no need to prepare, no data is set
+        return 'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';';
     }
 
     private function resolveAlterStatementString($tableName, $tableColumns): string

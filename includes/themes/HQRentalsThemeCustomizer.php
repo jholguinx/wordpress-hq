@@ -15,7 +15,8 @@ class HQRentalsThemeCustomizer
             'title' => __( 'HQ Rental Software' ),
             'description' => 'Theme Customization Options', // Include html tags such as <p>.
             'priority' => 300, // Mixed with top-level-section hierarchy.
-        ));
+            )
+        );
         $wp_customize->add_section( 'images_section' , array(
             'title' => 'Images',
             'panel' => 'hq_rental_theme_menu',
@@ -34,7 +35,5 @@ class HQRentalsThemeCustomizer
                 )
             )
         );
-
     }
-
 }

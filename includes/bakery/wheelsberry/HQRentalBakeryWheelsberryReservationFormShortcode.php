@@ -106,7 +106,7 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
         $form_title = get_post_meta($post->ID, 'wheelsberry_reservation_form_title', true);
         $form_subtitle = get_post_meta($post->ID, 'wheelsberry_reservation_form_subtitle', true);
 
-        $image = wp_get_attachment_url(get_theme_mod('tenant_logo'));
+        $image = wp_get_attachment_url(get_theme_mod('hq_tenant_logo'));
         $imageHTML = empty($image) ? "": "
             <div class='branding-logo-w'>
                 <img class='branding-img' src='{$image}' />

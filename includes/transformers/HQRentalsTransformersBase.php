@@ -35,7 +35,12 @@ abstract class HQRentalsTransformersBase
 
         foreach ($properties as $property) {
             if (empty($nestedObject)) {
-                $objectToReturn->{$property} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$property});
+                if(isset($apiObject->{$property})){
+                    $objectToReturn->{$property} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$property});
+                }else{
+                    $objectToReturn->{$property} = '';
+                }
+
             }
         }
         if ($isLocation) {

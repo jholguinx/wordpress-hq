@@ -61,6 +61,7 @@ class HQRentalsAdminSettings
             ?>
             <script>
                 var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
+                var hqWebsiteURL = "<?php echo home_url(); ?>"
             </script>
             <style>
                 .hq-normal-wrapper{
@@ -83,7 +84,7 @@ class HQRentalsAdminSettings
                                     <h3 class="hq-admin-h3">General Settings</h3>
                                 </div>
                                 <div>
-                                    <?php if (!$_GET['dev']): ?>
+                                    <?php if ( !isset($_GET['dev']) and empty($_GET['dev'])): ?>
                                         <button id="hq-login-toogle-button" class="hq-admin-toggle-button" type="button"
                                                 aria-expanded="true">
                                             <i id="hq-login-button-icon"
@@ -125,7 +126,7 @@ class HQRentalsAdminSettings
                             </div>
                             <div class="hq-general-settings-wrapper">
                                 <div class="hq-general-settings-item-wrapper hq-tokens-rows <?php echo empty($_GET['dev']) ? 'hq-normal-wrapper' : ''; ?>">
-                                    <?php if ($_GET['dev']): ?>
+                                    <?php if (isset($_GET['dev']) and $_GET['dev']): ?>
                                         <style>
                                             .hq-dev{
                                                 flex: 1;

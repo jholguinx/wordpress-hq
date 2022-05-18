@@ -34,7 +34,7 @@ class HQRentalsApiCallResolver
             return true;
         }
         $responseData = json_decode($responseWP['body']);
-        if ($responseData->errors) {
+        if (isset($responseData->errors) and $responseData->errors) {
             return true;
         }
         return false;

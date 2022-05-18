@@ -63,8 +63,8 @@ class HQRentalsModelsVehicleClassImage extends HQRentalsBaseModel
         $this->postArgs = array_merge(
             $this->postArgs,
             array(
-                'post_title' => $this->label,
-                'post_name' => $this->label
+                'post_title' => isset($this->label) ?? '',
+                'post_name' => isset($this->label) ?? ''
             )
         );
         $post_id = wp_insert_post($this->postArgs);

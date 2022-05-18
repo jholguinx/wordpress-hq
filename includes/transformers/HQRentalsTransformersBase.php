@@ -37,6 +37,8 @@ abstract class HQRentalsTransformersBase
             if (empty($nestedObject)) {
                 if(isset($apiObject->{$property})){
                     $objectToReturn->{$property} = HQRentalsTransformersBase::resolveSingleAttribute($apiObject->{$property});
+                }else{
+                    $objectToReturn->{$property} = '';
                 }
 
             }

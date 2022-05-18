@@ -205,7 +205,6 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-admin-popper-js');
         wp_enqueue_script('hq-admin-tippy-js');
         wp_enqueue_script('hq-admin-admin-js');
-        wp_localize_script('hq-admin-admin-js', "hqWebsiteURL", home_url());
     }
 
     public function adminSectionAssetResolver($hook)

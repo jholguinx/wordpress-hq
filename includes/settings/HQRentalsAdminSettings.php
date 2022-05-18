@@ -614,8 +614,8 @@ class HQRentalsAdminSettings
                                 </div>
                             </div>
                             <div class="hq-admin-help-section">
-                                <input style="max-width: 64px;" type="submit"
-                                       name="save" value="SAVE"
+                                <input style="max-width: 100px;" type="submit"
+                                       name="save" value="Refresh Data"
                                        class="button button-primary button-large hq-admin-submit-button">
                                 <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
                                                                  href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for

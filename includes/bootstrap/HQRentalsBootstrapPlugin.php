@@ -19,6 +19,9 @@ use HQRentalsPlugin\HQRentalsWebhooks\HQRentalsWebsiteEndpoints;
 
 class HQRentalsBootstrapPlugin
 {
+    static $localeFiles = [
+        'hq-wordpress-es_CL.mo'
+    ];
     /**
      * HQRentalsBootstrapPlugin constructor.
      * Review menus Later on
@@ -39,5 +42,13 @@ class HQRentalsBootstrapPlugin
         $this->elementor = new HQElementorActions();
         $this->templates = new HQRentalsTemplateHandler();
         $this->ajaxHandler = new HQRentalsAjaxHandler();
+        $this->loadLocalizationFiles();
+    }
+    private function loadLocalizationFiles()
+    {
+        foreach (HQRentalsBootstrapPlugin::$localeFiles as $localeFile){
+            load_textdomain('hq-wordpress', WP_PLUGIN_DIR . '/hq-rental-software/langs/' . $localeFile);
+        }
+
     }
 }

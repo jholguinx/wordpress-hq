@@ -357,23 +357,23 @@ get_header();
                         <form action="<?php echo $site; ?>/reservas/" method="GET" autocomplete="off"
                               id="hq-widget-form">
                             <div class="hq-form-item-wrapper">
-                                <label for="">Pickup Location</label>
+                                <label for=""><?php echo __('pick_up_location', 'hq-wordpress'); ?></label>
                                 <select id="pick-up-location" name="pick_up_location" required="required"
                                         autocomplete="off">
                                     <?php echo $optionsLocations; ?>
                                 </select>
                             </div>
                             <div class="hq-form-item-wrapper">
-                                <label for="">Pickup Date</label>
+                                <label for=""><?php echo __('pick_up_date', 'hq-wordpress'); ?></label>
                                 <input id="hq_pick_up_date_interval" class="hq-inputs" type="text"
                                        autocomplete="off" name="pick_up_date" placeholder="Select Date" />
                             </div>
                             <div class="hq-form-item-wrapper">
-                                <label for="">Duration</label>
+                                <label for=""><?php echo __('duration', 'hq-wordpress'); ?></label>
                                 <select name="reservation_interval_years" id="reservation_interval">
-                                    <option value="1">1 Year</option>
-                                    <option value="2">2 Years</option>
-                                    <option value="3">3 Years</option>
+                                    <option value="1">1 <?php echo __('year', 'hq-wordpress'); ?></option>
+                                    <option value="2">2 <?php echo __('years', 'hq-wordpress'); ?></option>
+                                    <option value="3">3 <?php echo __('years', 'hq-wordpress'); ?></option>
                                 </select>
                             </div>
                             <style>
@@ -393,7 +393,7 @@ get_header();
                             <!--<input type="hidden" id="rate-type" name="rate_type_uuid" value="rx2fhigt-o79s-9v8g-6ynq-qul5c08mglfe" />-->
                             <input type="hidden" id="reservation-type" name="reservation_type" value="short" />
                             <input type="hidden" id="hq-return-location" name="return_location" value="<?php echo $queryLocations->allLocations()[0]->getId(); ?>">
-                            <input class="hq-submit-button" type="submit" value="Reserve Now">
+                            <input class="hq-submit-button" type="submit" value="<?php echo __('reserve_now', 'hq-wordpress'); ?>">
                         </form>
                     </div>
                 </div>

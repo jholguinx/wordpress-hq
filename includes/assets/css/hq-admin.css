@@ -1,3 +1,13 @@
+@font-face {
+    font-family: Gotham;
+    src: url('../fonts/GothamBook.woff');
+    font-weight: normal;
+}
+@font-face {
+    font-family: Gotham;
+    src: url('../fonts/Gotham-Bold.woff');
+    font-weight: bold;
+}
 .hq-general-settings-wrapper {
     display: flex;
     flex: 1;
@@ -111,6 +121,8 @@
 
 .wp-heading-inline, .hq-admin-h1, .hq-admin-h3 {
     text-transform: uppercase;
+    font-family: Gotham, SansSerif;
+    font-weight: bold !important;
 }
 
 .hq-admin-text-input-medium {
@@ -167,8 +179,9 @@
 
 .hq-title-wrapper {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+    margin:30px 0;
 }
 
 .hq-title-item {
@@ -234,10 +247,24 @@ button {
     margin: 0px;
     color: #fff;
     text-transform: uppercase;
+    font-family: Gotham, SansSerif;
 }
 .large{
     max-width: 330px !important;
 }
 .hq-flex-box-container{
     flex-direction: row;
+}
+#hq-submit-login-button, .hq-admin-submit-button{
+    font-family: Gotham,SansSerif !important;
+    font-weight: bold;
+}
+.form-outer-wrapper{
+    background-color: #fff;
+    width: 60%;
+    padding:40px;
+    border-radius: 10px;
+}
+.hq-header-submit-button-wrapper{
+
 }

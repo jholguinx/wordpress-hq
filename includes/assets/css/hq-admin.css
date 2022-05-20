@@ -40,22 +40,32 @@
 
 .hq-general-input-wrapper {
     display: flex;
-    flex: 1;
     align-items: center;
     justify-content: flex-start;
+    width:35%;
 }
-
+.hq-general-input-wrapper-checkbox{
+    display: flex;
+    justify-content: flex-end;
+}
 .hq-general-label-wrapper {
     display: flex;
-    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    width:65%;
+}
+.hq-general-input-wrapper-big-fields {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width:75%;
+}
+.hq-general-label-wrapper-big-fields {
+    display: flex;
     align-items: center;
     justify-content: space-between;
+    width:25%;
 }
-
-.small {
-    max-width: 50px !important;
-}
-
 .tokens {
     flex: 4;
 }
@@ -126,7 +136,7 @@
 }
 
 .hq-admin-text-input-medium {
-    max-width: 300px;
+    width:100%;
 }
 
 .hq-admin-text-input-small-medium {

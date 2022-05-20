@@ -125,10 +125,10 @@ class HQRentalsAdminSettings
                                             <div class="hq-login-wrapper">
                                                 <div id="hq-login-form-wrapper">
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper">
+                                                        <div class="hq-general-label-wrapper-big-fields">
                                                             <h4 class="wp-heading-inline" for="title">Email</h4>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper tokens">
+                                                        <div class="hq-general-input-wrapper-big-fields tokens">
                                                             <input class="hq-admin-text-input"
                                                                    type="text"
                                                                    name="hq-email"
@@ -139,10 +139,10 @@ class HQRentalsAdminSettings
                                                         </div>
                                                     </div>
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper">
+                                                        <div class="hq-general-label-wrapper-big-fields">
                                                             <h4 class="wp-heading-inline" for="title">Password</h4>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper tokens">
+                                                        <div class="hq-general-input-wrapper-big-fields tokens">
                                                             <input
                                                                     class="hq-admin-text-input"
                                                                     type="password"
@@ -199,7 +199,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input hq-admin-text-input-medium small"
+                                                               class="hq-admin-text-input hq-admin-text-input-medium"
                                                                name="<?php echo $this->settings->hq_url_to_replace_on_brands_option; ?>"
                                                                value="<?php echo esc_attr($this->settings->getBrandURLToReplaceSetting()); ?>"/>
                                                     </div>
@@ -211,7 +211,7 @@ class HQRentalsAdminSettings
                                                         <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                               data-tippy-content="This will disable the redirection to the public reservation link of your HQ account for users using a Safari browser. You will need to update CNAME record for compatibility"></span>
                                                     </div>
-                                                    <div class="hq-general-input-wrapper">
+                                                    <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
                                                         <input type="checkbox"
                                                                name="<?php echo $this->settings->hq_disable_safari_functionality; ?>"
                                                                value="true" <?php echo ($this->settings->getDisableSafari() === 'true') ? 'checked' : ''; ?>/>
@@ -223,7 +223,7 @@ class HQRentalsAdminSettings
                                                         <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                               data-tippy-content="Support for reservations iframe on the home page  - this should be applied in case that you are placing the reservation process on the home page."></span>
                                                     </div>
-                                                    <div class="hq-general-input-wrapper">
+                                                    <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
                                                         <input type="checkbox"
                                                                name="<?php echo $this->settings->hq_integration_on_home; ?>"
                                                                value="true" <?php echo ($this->settings->getSupportForHomeIntegration() === 'true') ? 'checked' : ''; ?>/>
@@ -235,7 +235,7 @@ class HQRentalsAdminSettings
                                                         <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                               data-tippy-content="This option will enable you to change the base url for the public links of the reservation process."></span>
                                                     </div>
-                                                    <div class="hq-general-input-wrapper">
+                                                    <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
                                                         <input type="checkbox"
                                                                name="<?php echo $this->settings->hq_replace_url_on_brand_option; ?>"
                                                                value="true" <?php echo ($this->settings->getReplaceBaseURLOnBrandsSetting() === 'true') ? 'checked' : ''; ?>/>
@@ -256,7 +256,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_location_coordinate_field; ?>"
                                                                value="<?php echo esc_attr($this->settings->getLocationCoordinateField()); ?>"/>
                                                     </div>
@@ -270,7 +270,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_location_image_field; ?>"
                                                                value="<?php echo esc_attr($this->settings->getLocationImageField()); ?>"/>
                                                     </div>
@@ -284,7 +284,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_location_description_field; ?>"
                                                                value="<?php echo esc_attr($this->settings->getLocationDescriptionField()); ?>"/>
                                                     </div>
@@ -298,7 +298,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_location_address_label_field; ?>"
                                                                value="<?php echo esc_attr($this->settings->getAddressLabelField()); ?>"/>
                                                     </div>
@@ -312,7 +312,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_location_office_hours_field; ?>"
                                                                value="<?php echo esc_attr($this->settings->getOfficeHoursSetting()); ?>"/>
                                                     </div>
@@ -326,7 +326,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_location_address_field; ?>"
                                                                value="<?php echo esc_attr($this->settings->getAddressSetting()); ?>"/>
                                                     </div>
@@ -340,7 +340,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_location_phone_field; ?>"
                                                                value="<?php echo esc_attr($this->settings->getPhoneSetting()); ?>"/>
                                                     </div>
@@ -354,7 +354,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_location_brands_field; ?>"
                                                                value="<?php echo esc_attr($this->settings->getBrandsSetting()); ?>"/>
                                                     </div>
@@ -368,7 +368,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input hq-admin-text-input-small-medium small"
+                                                               class="hq-admin-text-input hq-admin-text-input-small-medium"
                                                                name="<?php echo $this->settings->hq_default_latitude_for_map_shortcode; ?>"
                                                                value="<?php echo esc_attr($this->settings->getDefaultLatitudeSetting()); ?>"/>
                                                     </div>
@@ -382,7 +382,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input hq-admin-text-input-small-medium small"
+                                                               class="hq-admin-text-input hq-admin-text-input-small-medium"
                                                                name="<?php echo $this->settings->hq_default_longitude_for_map_shortcode; ?>"
                                                                value="<?php echo esc_attr($this->settings->getDefaultLongitudeSetting()); ?>"/>
                                                     </div>
@@ -400,7 +400,7 @@ class HQRentalsAdminSettings
                                                         <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                               data-tippy-content="Select this option to stop data sychronization between HQ Rental Software and the website."></span>
                                                     </div>
-                                                    <div class="hq-general-input-wrapper">
+                                                    <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
                                                         <input type="checkbox"
                                                                name="<?php echo $this->settings->hq_disable_cronjob_option; ?>"
                                                                value="true" <?php echo ($this->settings->getDisableCronjobOption() === 'true') ? 'checked' : ''; ?>/>
@@ -419,7 +419,7 @@ class HQRentalsAdminSettings
                                                         <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                               data-tippy-content="This option will display the vehicles with rates in the vehicle widget from highest to lowest instead of the default ascending order."></span>
                                                     </div>
-                                                    <div class="hq-general-input-wrapper">
+                                                    <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
                                                         <input type="checkbox"
                                                                name="<?php echo $this->settings->hq_enable_decreasing_rate_order_on_vehicles_query; ?>"
                                                                value="true" <?php echo ($this->settings->getDecreasingRateOrder() === 'true') ? 'checked' : ''; ?> />
@@ -431,7 +431,7 @@ class HQRentalsAdminSettings
                                                         <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                               data-tippy-content="This option will enable Vehicle Classes single pages on your website."></span>
                                                     </div>
-                                                    <div class="hq-general-input-wrapper">
+                                                    <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
                                                         <input type="checkbox"
                                                                name="<?php echo $this->settings->hq_enable_custom_post_pages; ?>"
                                                                value="true" <?php echo ($this->settings->getEnableCustomPostsPages() === 'true') ? 'checked' : ''; ?> />
@@ -443,7 +443,7 @@ class HQRentalsAdminSettings
                                                         <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
                                                               data-tippy-content="This option will force the plugin to display price intervals intead of the daily rate."></span>
                                                     </div>
-                                                    <div class="hq-general-input-wrapper">
+                                                    <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
                                                         <input type="checkbox"
                                                                name="<?php echo $this->settings->hq_override_daily_rate_with_price_interval; ?>"
                                                                value="true" <?php echo ($this->settings->getOverrideDailyRateWithCheapestPriceInterval() === 'true') ? 'checked' : ''; ?> />
@@ -457,7 +457,7 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
                                                         <input type="text"
-                                                               class="hq-admin-text-input small"
+                                                               class="hq-admin-text-input"
                                                                name="<?php echo $this->settings->hq_currency_symbol; ?>"
                                                                value="<?php echo esc_attr($this->settings->getCurrencyIconOption()); ?>"/>
                                                     </div>
@@ -485,9 +485,6 @@ class HQRentalsAdminSettings
                                         </div>
                                         <!-- End Key Tab -->
                                     </div>
-
-
-
                                 </div>
                                 <div class="hq-general-settings-wrapper">
                                     <div class="hq-general-settings-item-wrapper hq-tokens-rows <?php echo empty($_GET['dev']) ? 'hq-normal-wrapper' : ''; ?>">

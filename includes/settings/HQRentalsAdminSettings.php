@@ -65,7 +65,7 @@ class HQRentalsAdminSettings
                 var hqWebsiteURL = "<?php echo home_url(); ?>"
             </script>
             <style>
-                .hq-normal-wrapper{
+                .hq-normal-wrapper {
                     display: block !important;
                     max-width: 600px;
                 }
@@ -109,7 +109,7 @@ class HQRentalsAdminSettings
                                 <div class="hq-form-component-wrapper">
                                     <div class="hq-tabs-wrapper">
                                         <ul data-tabs-position="vertical left" data-role="tabs">
-                                            <?php if($devMode): ?>
+                                            <?php if ($devMode): ?>
                                                 <li><a href="#dev">Dev Options</a></li>
                                             <?php else: ?>
                                                 <li><a href="#auth">Authentication</a></li>
@@ -122,14 +122,15 @@ class HQRentalsAdminSettings
                                         </ul>
                                     </div>
                                     <div class="hq-tabs-content border bd-default no-border-top p-2">
-                                        <?php if($devMode): ?>
+                                        <?php if ($devMode): ?>
                                             <!-- Begin Dev Tab -->
                                             <div id="dev">
                                                 <div class="hq-text-items-wrappers">
                                                     <div class="hq-general-settings-item">
                                                         <div class="hq-general-label-wrapper">
                                                             <h4 class="wp-heading-inline" for="title">Tenant token</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                            <span id="hq-tooltip-tenant-token"
+                                                                  class="dashicons dashicons-search"
                                                                   data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
                                                         </div>
                                                         <div class="hq-general-input-wrapper tokens">
@@ -144,7 +145,8 @@ class HQRentalsAdminSettings
                                                     <div class="hq-general-settings-item">
                                                         <div class="hq-general-label-wrapper">
                                                             <h4 class="wp-heading-inline" for="title">User token</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                            <span id="hq-tooltip-tenant-token"
+                                                                  class="dashicons dashicons-search"
                                                                   data-tippy-content="Log in to your HQ account and navigate to settings > user management > users > integrations > select your user profile > generate and copy the API token and paste it here."></span>
                                                         </div>
                                                         <div class="hq-general-input-wrapper tokens">
@@ -158,9 +160,11 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-settings-item">
                                                         <div class="hq-general-label-wrapper hq-dates">
-                                                            <h4 class="wp-heading-inline" for="title">Select front-end date
+                                                            <h4 class="wp-heading-inline" for="title">Select front-end
+                                                                date
                                                                 format</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                            <span id="hq-tooltip-tenant-token"
+                                                                  class="dashicons dashicons-search"
                                                                   data-tippy-content=" This is the format of the dates on your website, and this must match the system date format."></span>
                                                         </div>
                                                         <div class="hq-general-input-wrapper hq-dates-input">
@@ -172,8 +176,10 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-settings-item">
                                                         <div class="hq-general-label-wrapper hq-dates">
-                                                            <h4 class="wp-heading-inline" for="title">Select system date format</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                            <h4 class="wp-heading-inline" for="title">Select system date
+                                                                format</h4>
+                                                            <span id="hq-tooltip-tenant-token"
+                                                                  class="dashicons dashicons-search"
                                                                   data-tippy-content="This is the date format set up on your HQ account settings. You can find this under general settings."></span>
                                                         </div>
                                                         <div class="hq-general-input-wrapper hq-dates-input">
@@ -185,8 +191,10 @@ class HQRentalsAdminSettings
                                                     </div>
                                                     <div class="hq-general-settings-item">
                                                         <div class="hq-general-label-wrapper hq-dates">
-                                                            <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                            <h4 class="wp-heading-inline" for="title">API Tenant
+                                                                Region</h4>
+                                                            <span id="hq-tooltip-tenant-token"
+                                                                  class="dashicons dashicons-search"
                                                                   data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
                                                                         <p>For xxx.hqrentals.app, your region is in America 2</p>
                                                                         <p>For xxx.west.hqrentals.app, your region is in America West</p>
@@ -228,68 +236,68 @@ class HQRentalsAdminSettings
                                         <?php else: ?>
                                             <!-- Begin Auth Tab -->
                                             <div id="auth">
-                                                <div id="dev">
-                                                    <div class="hq-text-items-wrappers">
-                                                        <div class="hq-general-settings-item">
-                                                            <div class="hq-general-label-wrapper-big-fields">
-                                                                <h4 class="wp-heading-inline" for="title">Email</h4>
-                                                            </div>
-                                                            <div class="hq-general-input-wrapper-big-fields tokens">
-                                                                <input class="hq-admin-text-input"
-                                                                       type="text"
-                                                                       name="hq-email"
-                                                                       id="hq-email"
-                                                                       spellcheck="true" autocomplete="off"
-                                                                       value="<?php echo esc_attr($this->settings->getEmail()); ?>"
-                                                                >
-                                                            </div>
+                                                <div class="hq-text-items-wrappers">
+                                                    <div class="hq-general-settings-item">
+                                                        <div class="hq-general-label-wrapper-big-fields">
+                                                            <h4 class="wp-heading-inline" for="title">Email</h4>
                                                         </div>
-                                                        <div class="hq-general-settings-item">
-                                                            <div class="hq-general-label-wrapper-big-fields">
-                                                                <h4 class="wp-heading-inline" for="title">Password</h4>
-                                                            </div>
-                                                            <div class="hq-general-input-wrapper-big-fields tokens">
-                                                                <input
-                                                                        class="hq-admin-text-input"
-                                                                        type="password"
-                                                                        name="hq-password"
-                                                                        id="hq-password"
-                                                                        spellcheck="true" autocomplete="off"/>
-                                                            </div>
-                                                            <input type="hidden"
-                                                                   name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
-                                                                   value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
-                                                                   id="hq-api-tenant-token">
-                                                            <input type="hidden"
-                                                                   name="<?php echo esc_attr($this->settings->api_user_token); ?>"
-                                                                   value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
-                                                                   id="hq-api-user-token">
-
-                                                            <input
-                                                                    type="hidden"
-                                                                    name="<?php echo esc_attr($this->settings->api_base_url); ?>"
-                                                                    value="<?php echo esc_attr($this->settings->getApiBaseUrl()); ?>"
-                                                                    id="hq-api-user-base-url"
-                                                                    spellcheck="true" autocomplete="off">
-                                                        </div>
-                                                        <div class="hq-loader">
-                                                            <div class="hq-loader-inner-wrapper">
-                                                                <img src="<?php echo plugins_url('hq-rental-software/includes/assets/img/spinner.gif'); ?>"
-                                                                     alt="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="hq-messages-box-failed">
-                                                            <div class="alert alert-danger" role="alert">
-                                                                There was an issue, please review your login information.
-                                                            </div>
-                                                        </div>
-                                                        <div class="hq-submit-login-button-wrapper">
-                                                            <button id="hq-submit-login-button" type="button" name="save"
-                                                                    value="Save" class="button button-primary button-large">
-                                                                AUTHENTICATE
-                                                            </button>
+                                                        <div class="hq-general-input-wrapper-big-fields tokens">
+                                                            <input class="hq-admin-text-input"
+                                                                   type="text"
+                                                                   name="hq-email"
+                                                                   id="hq-email"
+                                                                   spellcheck="true" autocomplete="off"
+                                                                   value="<?php echo esc_attr($this->settings->getEmail()); ?>"
+                                                            >
                                                         </div>
                                                     </div>
+                                                    <div class="hq-general-settings-item">
+                                                        <div class="hq-general-label-wrapper-big-fields">
+                                                            <h4 class="wp-heading-inline" for="title">Password</h4>
+                                                        </div>
+                                                        <div class="hq-general-input-wrapper-big-fields tokens">
+                                                            <input
+                                                                    class="hq-admin-text-input"
+                                                                    type="password"
+                                                                    name="hq-password"
+                                                                    id="hq-password"
+                                                                    spellcheck="true" autocomplete="off"/>
+                                                        </div>
+                                                        <input type="hidden"
+                                                               name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
+                                                               value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
+                                                               id="hq-api-tenant-token">
+                                                        <input type="hidden"
+                                                               name="<?php echo esc_attr($this->settings->api_user_token); ?>"
+                                                               value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
+                                                               id="hq-api-user-token">
+
+                                                        <input
+                                                                type="hidden"
+                                                                name="<?php echo esc_attr($this->settings->api_base_url); ?>"
+                                                                value="<?php echo esc_attr($this->settings->getApiBaseUrl()); ?>"
+                                                                id="hq-api-user-base-url"
+                                                                spellcheck="true" autocomplete="off">
+                                                    </div>
+                                                    <div class="hq-loader">
+                                                        <div class="hq-loader-inner-wrapper">
+                                                            <img src="<?php echo plugins_url('hq-rental-software/includes/assets/img/spinner.gif'); ?>"
+                                                                 alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="hq-messages-box-failed">
+                                                        <div class="alert alert-danger" role="alert">
+                                                            There was an issue, please review your login information.
+                                                        </div>
+                                                    </div>
+                                                    <div class="hq-submit-login-button-wrapper">
+                                                        <button id="hq-submit-login-button" type="button" name="save"
+                                                                value="Save" class="button button-primary button-large">
+                                                            AUTHENTICATE
+                                                        </button>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                             <!-- End Auth Tab -->
                                         <?php endif; ?>
@@ -298,9 +306,11 @@ class HQRentalsAdminSettings
                                             <div class="hq-text-items-wrappers">
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Domain to replace in the
+                                                        <h4 class="wp-heading-inline" for="title">Domain to replace
+                                                            in the
                                                             public reservation process</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This domain will be used to replace the system url in public reservation processes"></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -312,8 +322,10 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Disable safari redirect</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <h4 class="wp-heading-inline" for="title">Disable safari
+                                                            redirect</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This will disable the redirection to the public reservation link of your HQ account for users using a Safari browser. You will need to update CNAME record for compatibility"></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
@@ -324,8 +336,10 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Support for reservation iFrame on homepage</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <h4 class="wp-heading-inline" for="title">Support for
+                                                            reservation iFrame on homepage</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="Support for reservations iframe on the home page  - this should be applied in case that you are placing the reservation process on the home page."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
@@ -336,8 +350,10 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Enable change of branch url</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <h4 class="wp-heading-inline" for="title">Enable change of
+                                                            branch url</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This option will enable you to change the base url for the public links of the reservation process."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
@@ -354,9 +370,11 @@ class HQRentalsAdminSettings
                                             <div class="hq-text-items-wrappers">
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Fleet location coordinates
+                                                        <h4 class="wp-heading-inline" for="title">Fleet location
+                                                            coordinates
                                                             field id</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -368,9 +386,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Fleet location image field
+                                                        <h4 class="wp-heading-inline" for="title">Fleet location
+                                                            image field
                                                             id</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -382,9 +402,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Fleet location description
+                                                        <h4 class="wp-heading-inline" for="title">Fleet location
+                                                            description
                                                             field id</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -396,9 +418,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Fleet location address field
+                                                        <h4 class="wp-heading-inline" for="title">Fleet location
+                                                            address field
                                                             id</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -410,9 +434,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Fleet location office hours
+                                                        <h4 class="wp-heading-inline" for="title">Fleet location
+                                                            office hours
                                                             field id</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -424,9 +450,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Fleet location address field
+                                                        <h4 class="wp-heading-inline" for="title">Fleet location
+                                                            address field
                                                             id</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -438,9 +466,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Fleet location phone number
+                                                        <h4 class="wp-heading-inline" for="title">Fleet location
+                                                            phone number
                                                             field id</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -452,9 +482,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Fleet location vehicle brands
+                                                        <h4 class="wp-heading-inline" for="title">Fleet location
+                                                            vehicle brands
                                                             field id</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This is the id of the custom field added to the locations form. Please navigate to settings > items > fields > search for the custom field you added and paste the number under DB column here."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -466,9 +498,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Default latitude for Map
+                                                        <h4 class="wp-heading-inline" for="title">Default latitude
+                                                            for Map
                                                             Shortcode</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="Place here the latitude of the location you would like for the map to set focus on in case the user denies location access."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -480,9 +514,11 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Default longitude for Map
+                                                        <h4 class="wp-heading-inline" for="title">Default longitude
+                                                            for Map
                                                             Shortcode</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="Place here the longitude of the location you would like for the map to set focus on in case the user denies location access."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -502,7 +538,8 @@ class HQRentalsAdminSettings
                                                     <div class="hq-general-label-wrapper">
                                                         <h4 class="wp-heading-inline" for="title">Disable Data
                                                             Synchronization</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="Select this option to stop data sychronization between HQ Rental Software and the website."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
@@ -519,9 +556,11 @@ class HQRentalsAdminSettings
                                             <div class="hq-text-items-wrappers">
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">ORDER VEHICLE CLASSES ON
+                                                        <h4 class="wp-heading-inline" for="title">ORDER VEHICLE
+                                                            CLASSES ON
                                                             WIDGET WITH RATES FROM HIGHEST TO LOWEST</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This option will display the vehicles with rates in the vehicle widget from highest to lowest instead of the default ascending order."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
@@ -532,8 +571,10 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">ENABLE CUSTOM POSTS PAGES</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <h4 class="wp-heading-inline" for="title">ENABLE CUSTOM
+                                                            POSTS PAGES</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This option will enable Vehicle Classes single pages on your website."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
@@ -544,8 +585,10 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">OVERRIDE DAILY RATE WITH PRICE INTERVALS</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <h4 class="wp-heading-inline" for="title">OVERRIDE DAILY
+                                                            RATE WITH PRICE INTERVALS</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This option will force the plugin to display price intervals intead of the daily rate."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
@@ -556,8 +599,10 @@ class HQRentalsAdminSettings
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">DEFAULT CURRENCY DISPLAY</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <h4 class="wp-heading-inline" for="title">DEFAULT CURRENCY
+                                                            DISPLAY</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="This will be the currency the displayed by default on the vehicle class grid, and the dedicated vehicle class pages."></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -575,8 +620,10 @@ class HQRentalsAdminSettings
                                             <div class="hq-text-items-wrappers">
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
-                                                        <h4 class="wp-heading-inline" for="title">Google API Key</h4>
-                                                        <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                        <h4 class="wp-heading-inline" for="title">Google API
+                                                            Key</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
                                                               data-tippy-content="Google Services API Key"></span>
                                                     </div>
                                                     <div class="hq-general-input-wrapper">
@@ -591,22 +638,19 @@ class HQRentalsAdminSettings
                                         <!-- End Key Tab -->
                                     </div>
                                 </div>
-
                             </div>
-
-
-                            </div>
-                        </form>
                     </div>
-                    <div class="hq-admin-help-section">
-                        <input style="max-width: 100px;" type="submit"
-                               name="save" value="Refresh Data"
-                               class="button button-primary button-large hq-admin-submit-button">
-                        <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
-                                                                                         href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
-                            more information on how to set up the HQ Rentals plugin.</p>
-                    </div>
+                    </form>
                 </div>
+                <div class="hq-admin-help-section">
+                    <input style="max-width: 100px;" type="submit"
+                           name="save" value="Refresh Data"
+                           class="button button-primary button-large hq-admin-submit-button">
+                    <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
+                                                                                     href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
+                        more information on how to set up the HQ Rentals plugin.</p>
+                </div>
+            </div>
             </div>
             <?php
         }

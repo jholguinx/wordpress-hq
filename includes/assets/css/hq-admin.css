@@ -268,3 +268,12 @@ button {
 .hq-header-submit-button-wrapper{
 
 }
+.hq-tabs-wrapper{
+    width: 20%;
+}
+.hq-tabs-content{
+    width: 80%;
+}
+.hq-form-component-wrapper{
+    display: flex;
+}

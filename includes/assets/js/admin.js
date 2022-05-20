@@ -8,6 +8,7 @@
             alert(e);
         }
     });
+    /*
     jQuery('#hq-login-toogle-button').on('click', function () {
         loginActive = !loginActive;
         jQuery('.hq-login-wrapper').toggle(1000);
@@ -26,7 +27,7 @@
         }
         jQuery('.hq-advanced-section').toggle(1000);
 
-    });
+    });*/
 })(jQuery);
 
 function onAdvancedActive(selector) {

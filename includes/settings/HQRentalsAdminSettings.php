@@ -58,6 +58,7 @@ class HQRentalsAdminSettings
             $this->assets->loadAssetsForAdminSettingPage();
             $okAPI = $this->settings->isApiOkay();
             HQRentalsAssetsHandler::getHQFontAwesome();
+            $devMode = isset($_GET['dev']);
             ?>
             <script>
                 var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
@@ -73,10 +74,7 @@ class HQRentalsAdminSettings
             <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
             <div class="wrap">
                 <div id="wrap">
-
-
                     <div class="form-outer-wrapper">
-
                         <div class="hq-title-wrapper">
                             <img src="https://hqrentalsoftware.com/wp-content/uploads/2019/04/HQ-Logo-Color.svg" alt="">
                             <?php if ($okAPI): ?>
@@ -111,7 +109,11 @@ class HQRentalsAdminSettings
                                 <div class="hq-form-component-wrapper">
                                     <div class="hq-tabs-wrapper">
                                         <ul data-tabs-position="vertical left" data-role="tabs">
-                                            <li><a href="#auth">Authentication</a></li>
+                                            <?php if($devMode): ?>
+                                                <li><a href="#dev">Dev Options</a></li>
+                                            <?php else: ?>
+                                                <li><a href="#auth">Authentication</a></li>
+                                            <?php endif; ?>
                                             <li><a href="#iframe">Iframe</a></li>
                                             <li><a href="#custom_fields">Custom Fields</a></li>
                                             <li><a href="#sync">Syncronization</a></li>
@@ -120,73 +122,177 @@ class HQRentalsAdminSettings
                                         </ul>
                                     </div>
                                     <div class="hq-tabs-content border bd-default no-border-top p-2">
-                                        <!-- Begin Auth Tab -->
-                                        <div id="auth">
-                                            <div class="hq-login-wrapper">
-                                                <div id="hq-login-form-wrapper">
+                                        <?php if($devMode): ?>
+                                            <!-- Begin Dev Tab -->
+                                            <div id="dev">
+                                                <div class="hq-text-items-wrappers">
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper-big-fields">
-                                                            <h4 class="wp-heading-inline" for="title">Email</h4>
+                                                        <div class="hq-general-label-wrapper">
+                                                            <h4 class="wp-heading-inline" for="title">Tenant token</h4>
+                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                                  data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper-big-fields tokens">
+                                                        <div class="hq-general-input-wrapper tokens">
                                                             <input class="hq-admin-text-input"
                                                                    type="text"
-                                                                   name="hq-email"
-                                                                   id="hq-email"
-                                                                   spellcheck="true" autocomplete="off"
-                                                                   value="<?php echo esc_attr($this->settings->getEmail()); ?>"
-                                                            >
+                                                                   name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
+                                                                   value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
+                                                                   id="hq-api-tenant-token"
+                                                                   spellcheck="true" autocomplete="off">
                                                         </div>
                                                     </div>
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper-big-fields">
-                                                            <h4 class="wp-heading-inline" for="title">Password</h4>
+                                                        <div class="hq-general-label-wrapper">
+                                                            <h4 class="wp-heading-inline" for="title">User token</h4>
+                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                                  data-tippy-content="Log in to your HQ account and navigate to settings > user management > users > integrations > select your user profile > generate and copy the API token and paste it here."></span>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper-big-fields tokens">
-                                                            <input
-                                                                    class="hq-admin-text-input"
-                                                                    type="password"
-                                                                    name="hq-password"
-                                                                    id="hq-password"
-                                                                    spellcheck="true" autocomplete="off"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="hq-loader">
-                                                        <div class="hq-loader-inner-wrapper">
-                                                            <img src="<?php echo plugins_url('hq-rental-software/includes/assets/img/spinner.gif'); ?>"
-                                                                 alt="">
+                                                        <div class="hq-general-input-wrapper tokens">
+                                                            <input class="hq-admin-text-input"
+                                                                   type="text"
+                                                                   name="<?php echo esc_attr($this->settings->api_user_token); ?>"
+                                                                   value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
+                                                                   id="hq-api-user-token"
+                                                                   spellcheck="true" autocomplete="off">
                                                         </div>
                                                     </div>
-                                                    <div class="hq-messages-box-failed">
-                                                        <div class="alert alert-danger" role="alert">
-                                                            There was an issue, please review your login information.
+                                                    <div class="hq-general-settings-item">
+                                                        <div class="hq-general-label-wrapper hq-dates">
+                                                            <h4 class="wp-heading-inline" for="title">Select front-end date
+                                                                format</h4>
+                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                                  data-tippy-content=" This is the format of the dates on your website, and this must match the system date format."></span>
+                                                        </div>
+                                                        <div class="hq-general-input-wrapper hq-dates-input">
+                                                            <select class="hq-admin-select-input"
+                                                                    name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
+                                                                <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                    <div class="hq-submit-login-button-wrapper">
-                                                        <button id="hq-submit-login-button" type="button" name="save"
-                                                                value="Save" class="button button-primary button-large">
-                                                            AUTHENTICATE
-                                                        </button>
+                                                    <div class="hq-general-settings-item">
+                                                        <div class="hq-general-label-wrapper hq-dates">
+                                                            <h4 class="wp-heading-inline" for="title">Select system date format</h4>
+                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                                  data-tippy-content="This is the date format set up on your HQ account settings. You can find this under general settings."></span>
+                                                        </div>
+                                                        <div class="hq-general-input-wrapper hq-dates-input">
+                                                            <select class="hq-admin-select-input"
+                                                                    name="<?php echo $this->settings->hq_datetime_format; ?>">
+                                                                <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hq-general-settings-item">
+                                                        <div class="hq-general-label-wrapper hq-dates">
+                                                            <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
+                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
+                                                                  data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
+                                                                        <p>For xxx.hqrentals.app, your region is in America 2</p>
+                                                                        <p>For xxx.west.hqrentals.app, your region is in America West</p>
+                                                                        <p>For xxx.hqrentals.eu, your region is Europe</p>
+                                                                        <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
+                                                        </div>
+                                                        <div class="hq-general-input-wrapper hq-dates-input">
+                                                            <select
+                                                                    id="hq-api-user-base-url"
+                                                                    class="hq-admin-select-input "
+                                                                    name="<?php echo esc_attr($this->settings->api_base_url); ?>">
+                                                                <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
+                                                                    America
+                                                                </option>
+                                                                <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
+                                                                    America 2
+                                                                </option>
+                                                                <option value="https://api-america-3.caagcrm.com/api-america-3/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-3.caagcrm.com/api-america-3/') ? 'selected="selected"' : ''; ?>>
+                                                                    America 3
+                                                                </option>
+                                                                <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
+                                                                    America West
+                                                                </option>
+                                                                <option value="https://api-america-miami.caagcrm.com/api-america-miami/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-miami.caagcrm.com/api-america-miami/') ? 'selected="selected"' : ''; ?>>
+                                                                    America Miami
+                                                                </option>
+                                                                <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
+                                                                    Europe
+                                                                </option>
+                                                                <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
+                                                                    Asia
+                                                                </option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="hidden"
-                                                   name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
-                                                   value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
-                                                   id="hq-api-tenant-token">
-                                            <input type="hidden"
-                                                   name="<?php echo esc_attr($this->settings->api_user_token); ?>"
-                                                   value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
-                                                   id="hq-api-user-token">
+                                            <!-- End Dev Tab -->
+                                        <?php else: ?>
+                                            <!-- Begin Auth Tab -->
+                                            <div id="auth">
+                                                <div id="dev">
+                                                    <div class="hq-text-items-wrappers">
+                                                        <div class="hq-general-settings-item">
+                                                            <div class="hq-general-label-wrapper-big-fields">
+                                                                <h4 class="wp-heading-inline" for="title">Email</h4>
+                                                            </div>
+                                                            <div class="hq-general-input-wrapper-big-fields tokens">
+                                                                <input class="hq-admin-text-input"
+                                                                       type="text"
+                                                                       name="hq-email"
+                                                                       id="hq-email"
+                                                                       spellcheck="true" autocomplete="off"
+                                                                       value="<?php echo esc_attr($this->settings->getEmail()); ?>"
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                        <div class="hq-general-settings-item">
+                                                            <div class="hq-general-label-wrapper-big-fields">
+                                                                <h4 class="wp-heading-inline" for="title">Password</h4>
+                                                            </div>
+                                                            <div class="hq-general-input-wrapper-big-fields tokens">
+                                                                <input
+                                                                        class="hq-admin-text-input"
+                                                                        type="password"
+                                                                        name="hq-password"
+                                                                        id="hq-password"
+                                                                        spellcheck="true" autocomplete="off"/>
+                                                            </div>
+                                                            <input type="hidden"
+                                                                   name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
+                                                                   value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
+                                                                   id="hq-api-tenant-token">
+                                                            <input type="hidden"
+                                                                   name="<?php echo esc_attr($this->settings->api_user_token); ?>"
+                                                                   value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
+                                                                   id="hq-api-user-token">
 
-                                            <input
-                                                    type="hidden"
-                                                    name="<?php echo esc_attr($this->settings->api_base_url); ?>"
-                                                    value="<?php echo esc_attr($this->settings->getApiBaseUrl()); ?>"
-                                                    id="hq-api-user-base-url"
-                                                    spellcheck="true" autocomplete="off">
-                                        </div>
-                                        <!-- End Auth Tab -->
+                                                            <input
+                                                                    type="hidden"
+                                                                    name="<?php echo esc_attr($this->settings->api_base_url); ?>"
+                                                                    value="<?php echo esc_attr($this->settings->getApiBaseUrl()); ?>"
+                                                                    id="hq-api-user-base-url"
+                                                                    spellcheck="true" autocomplete="off">
+                                                        </div>
+                                                        <div class="hq-loader">
+                                                            <div class="hq-loader-inner-wrapper">
+                                                                <img src="<?php echo plugins_url('hq-rental-software/includes/assets/img/spinner.gif'); ?>"
+                                                                     alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="hq-messages-box-failed">
+                                                            <div class="alert alert-danger" role="alert">
+                                                                There was an issue, please review your login information.
+                                                            </div>
+                                                        </div>
+                                                        <div class="hq-submit-login-button-wrapper">
+                                                            <button id="hq-submit-login-button" type="button" name="save"
+                                                                    value="Save" class="button button-primary button-large">
+                                                                AUTHENTICATE
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <!-- End Auth Tab -->
+                                        <?php endif; ?>
                                         <!-- Begin Iframe Tab -->
                                         <div id="iframe">
                                             <div class="hq-text-items-wrappers">
@@ -203,7 +309,6 @@ class HQRentalsAdminSettings
                                                                name="<?php echo $this->settings->hq_url_to_replace_on_brands_option; ?>"
                                                                value="<?php echo esc_attr($this->settings->getBrandURLToReplaceSetting()); ?>"/>
                                                     </div>
-
                                                 </div>
                                                 <div class="hq-general-settings-item">
                                                     <div class="hq-general-label-wrapper">
@@ -486,163 +591,20 @@ class HQRentalsAdminSettings
                                         <!-- End Key Tab -->
                                     </div>
                                 </div>
-                                <div class="hq-general-settings-wrapper">
-                                    <div class="hq-general-settings-item-wrapper hq-tokens-rows <?php echo empty($_GET['dev']) ? 'hq-normal-wrapper' : ''; ?>">
-                                        <?php if (isset($_GET['dev']) and $_GET['dev']): ?>
-                                            <style>
-                                                .hq-dev{
-                                                    flex: 1;
-                                                    display: flex;
-                                                    flex-direction: column;
-                                                    margin-right: 40px;
-                                                }
-                                            </style>
-                                            <div style="display: flex; flex-direction: row; width: 100%;">
-                                                <div class="hq-dev">
-                                                    <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper">
-                                                            <h4 class="wp-heading-inline" for="title">Tenant token</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                                  data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
-                                                        </div>
-                                                        <div class="hq-general-input-wrapper tokens">
-                                                            <input class="hq-admin-text-input"
-                                                                   type="text"
-                                                                   name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
-                                                                   value="<?php echo esc_attr($this->settings->getApiTenantToken()); ?>"
-                                                                   id="hq-api-tenant-token"
-                                                                   spellcheck="true" autocomplete="off">
-                                                        </div>
-                                                    </div>
-                                                    <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper">
-                                                            <h4 class="wp-heading-inline" for="title">User token</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                                  data-tippy-content="Log in to your HQ account and navigate to settings > user management > users > integrations > select your user profile > generate and copy the API token and paste it here."></span>
-                                                        </div>
-                                                        <div class="hq-general-input-wrapper tokens">
-                                                            <input class="hq-admin-text-input"
-                                                                   type="text"
-                                                                   name="<?php echo esc_attr($this->settings->api_user_token); ?>"
-                                                                   value="<?php echo esc_attr($this->settings->getApiUserToken()); ?>"
-                                                                   id="hq-api-user-token"
-                                                                   spellcheck="true" autocomplete="off">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="hq-dev">
-                                                    <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper hq-dates">
-                                                            <h4 class="wp-heading-inline" for="title">Select front-end date
-                                                                format</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                                  data-tippy-content=" This is the format of the dates on your website, and this must match the system date format."></span>
-                                                        </div>
-                                                        <div class="hq-general-input-wrapper hq-dates-input">
-                                                            <select class="hq-admin-select-input"
-                                                                    name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
-                                                                <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper hq-dates">
-                                                            <h4 class="wp-heading-inline" for="title">Select system date format</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                                  data-tippy-content="This is the date format set up on your HQ account settings. You can find this under general settings."></span>
-                                                        </div>
-                                                        <div class="hq-general-input-wrapper hq-dates-input">
-                                                            <select class="hq-admin-select-input"
-                                                                    name="<?php echo $this->settings->hq_datetime_format; ?>">
-                                                                <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper hq-dates">
-                                                            <h4 class="wp-heading-inline" for="title">API Tenant Region</h4>
-                                                            <span id="hq-tooltip-tenant-token" class="dashicons dashicons-search"
-                                                                  data-tippy-content="<span>For xxx.caagcrm.com, your region is America</span>
-                                                                        <p>For xxx.hqrentals.app, your region is in America 2</p>
-                                                                        <p>For xxx.west.hqrentals.app, your region is in America West</p>
-                                                                        <p>For xxx.hqrentals.eu, your region is Europe</p>
-                                                                        <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
-                                                        </div>
-                                                        <div class="hq-general-input-wrapper hq-dates-input">
-                                                            <select
-                                                                    id="hq-api-user-base-url"
-                                                                    class="hq-admin-select-input "
-                                                                    name="<?php echo esc_attr($this->settings->api_base_url); ?>">
-                                                                <option value="https://api.caagcrm.com/api/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api.caagcrm.com/api/') ? 'selected="selected"' : ''; ?>>
-                                                                    America
-                                                                </option>
-                                                                <option value="https://api-america-2.caagcrm.com/api-america-2/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-2.caagcrm.com/api-america-2/') ? 'selected="selected"' : ''; ?>>
-                                                                    America 2
-                                                                </option>
-                                                                <option value="https://api-america-3.caagcrm.com/api-america-3/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-3.caagcrm.com/api-america-3/') ? 'selected="selected"' : ''; ?>>
-                                                                    America 3
-                                                                </option>
-                                                                <option value="https://api-america-west.caagcrm.com/api-america-west/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-west.caagcrm.com/api-america-west/') ? 'selected="selected"' : ''; ?>>
-                                                                    America West
-                                                                </option>
-                                                                <option value="https://api-america-miami.caagcrm.com/api-america-miami/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-america-miami.caagcrm.com/api-america-miami/') ? 'selected="selected"' : ''; ?>>
-                                                                    America Miami
-                                                                </option>
-                                                                <option value="https://api-europe.caagcrm.com/api-europe/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-europe.caagcrm.com/api-europe/') ? 'selected="selected"' : ''; ?>>
-                                                                    Europe
-                                                                </option>
-                                                                <option value="https://api-asia.caagcrm.com/api-asia/" <?php echo ($this->settings->getApiBaseUrl() == 'https://api-asia.caagcrm.com/api-asia/') ? 'selected="selected"' : ''; ?>>
-                                                                    Asia
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                            </div>
-                                        <?php else: ?>
-
-                                        <?php endif; ?>
-                                        <div class="hq-messages-box-success">
-                                            <div class="alert alert-success" role="alert">
-                                                The plugin has been successfully setup.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="hq-advanced-section">
-                                <style>
-                                    .hq-text-items-wrappers{
-                                        flex:1;
-                                    }
-                                </style>
-                                <div class="hq-general-settings-wrapper">
-                                    <div class="hq-general-settings-item-wrapper">
-                                        <div class="hq-general-settings-item-wrapper hq-flex-box-container">
-                                            <div class="hq-text-items-wrappers">
 
 
-
-
-
-
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hq-admin-help-section">
-                                    <input style="max-width: 100px;" type="submit"
-                                           name="save" value="Refresh Data"
-                                           class="button button-primary button-large hq-admin-submit-button">
-                                    <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
-                                                                                                     href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
-                                        more information on how to set up the HQ Rentals plugin.</p>
-                                </div>
                             </div>
                         </form>
+                    </div>
+                    <div class="hq-admin-help-section">
+                        <input style="max-width: 100px;" type="submit"
+                               name="save" value="Refresh Data"
+                               class="button button-primary button-large hq-admin-submit-button">
+                        <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
+                                                                                         href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
+                            more information on how to set up the HQ Rentals plugin.</p>
                     </div>
                 </div>
             </div>

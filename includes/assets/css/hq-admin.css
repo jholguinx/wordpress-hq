@@ -288,7 +288,7 @@ button {
 .hq-form-component-wrapper{
     display: flex;
 }
-.expand-title{
+.expand-title,.hamburger{
     font-family: Gotham, SansSerif;
     display: none;
 }

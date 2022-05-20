@@ -283,7 +283,34 @@ button {
 }
 .hq-tabs-content{
     width: 80%;
+    padding: 20px;
 }
 .hq-form-component-wrapper{
     display: flex;
+}
+.expand-title{
+    font-family: Gotham, SansSerif;
+    display: none;
+}
+.tabs-list li{
+    height: 30px;
+    background-color: #fff;
+    font-family: Gotham,SansSerif;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+.tabs-list li.active{
+    background-color: #24385C;
+    font-family: Gotham,SansSerif;
+}
+.tabs-list li.active a{
+    color: #fff;
+    line-height: 30px;
+}
+.tabs-list li a{
+    color: #000;
+    line-height: 30px;
+    text-decoration: none;
+    width: 100%;
+    display: block;
 }

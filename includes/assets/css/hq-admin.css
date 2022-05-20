@@ -4,7 +4,7 @@
     font-weight: normal;
 }
 @font-face {
-    font-family: Gotham;
+    font-family: Gotham-Bold;
     src: url('../fonts/Gotham-Bold.woff');
     font-weight: bold;
 }
@@ -100,7 +100,6 @@
 
 .hq-admin-help-section, .hq-admin-help-section {
     padding-top: 25px;
-    padding-bottom: 25px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -202,6 +201,8 @@
 }
 
 .hq-title-item {
+    display: flex;
+    justify-content: space-between;
 }
 
 .hq-loader {
@@ -220,7 +221,7 @@
 .hq-submit-login-button-wrapper {
     display: flex;
     flex: 1;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-content: center;
 }
 
@@ -274,7 +275,7 @@ button {
 }
 #hq-submit-login-button, .hq-admin-submit-button{
     font-family: Gotham,SansSerif !important;
-    font-weight: bold;
+    font-weight: normal;
 }
 .form-outer-wrapper{
     background-color: #fff;
@@ -323,4 +324,13 @@ button {
 }
 .tippy-popper{
     font-family: Gotham,SansSerif;
+}
+#hq-settings-page button,
+#hq-settings-page input[type=submit]{
+    background-color: #24385C;
+    font-family: Gotham,SansSerif;
+    font-weight: normal;
+}
+#hq-submit-login-button{
+    width: 30%;
 }

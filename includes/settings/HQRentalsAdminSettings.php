@@ -72,7 +72,7 @@ class HQRentalsAdminSettings
             </style>
             <!--<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css">-->
             <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
-            <div class="wrap">
+            <div id="hq-settings-page" class="wrap">
                 <div id="wrap">
                     <div class="form-outer-wrapper">
                         <div class="hq-title-wrapper">
@@ -101,10 +101,14 @@ class HQRentalsAdminSettings
                                 </style>
                             <?php endif; ?>
                         </div>
-                        <div class="hq-title-item">
-                            <h1 class="hq-admin-h1">Settings</h1>
-                        </div>
                         <form action="" method="post">
+                            <div class="hq-title-item">
+                                <h1 class="hq-admin-h1">Settings</h1>
+                                <button
+                                        type="submit"
+                                        name="save"
+                                        class="button button-primary button-large hq-admin-submit-button">Refresh Data</button>
+                            </div>
                             <div class="hq-general-settings-section-wrapper">
                                 <div class="hq-form-component-wrapper">
                                     <div class="hq-tabs-wrapper">
@@ -638,20 +642,16 @@ class HQRentalsAdminSettings
                                         <!-- End Key Tab -->
                                     </div>
                                 </div>
+                                <div class="hq-admin-help-section">
+                                    <p>Need help? Please click <strong><a target="_blank"
+                                                                                                     href="https://www.notion.so/hqrs/HQRS-WordPress-Plugin-22982d6ceb6e439aaa0cf4d66a84f6dc">here</a></strong> for
+                                        more information on how to set up the HQ Rentals plugin.</p>
+                                </div>
                             </div>
+
+                        </form>
                     </div>
-                    </form>
                 </div>
-                <div class="hq-admin-help-section">
-                    <input style="max-width: 100px;" type="submit"
-                           name="save" value="Refresh Data"
-                           class="button button-primary button-large hq-admin-submit-button">
-                    <p style="margin-left: 20px;">Need help? Please click <strong><a target="_blank"
-                                                                                     href="https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/ ">here</a></strong> for
-                        more information on how to set up the HQ Rentals plugin.</p>
-                </div>
-            </div>
-            </div>
             <?php
         }
     }

@@ -326,11 +326,12 @@ button {
     width: 100%;
     display: block;
 }
-.tippy-popper{
+.tippy-popper,.alert{
     font-family: Gotham,SansSerif;
+    font-weight: normal;
 }
 #hq-settings-page button,
-#hq-settings-page input[type=submit]{
+#hq-settings-page input[type=submit] {
     background-color: #24385C;
     font-family: Gotham,SansSerif;
     font-weight: normal;

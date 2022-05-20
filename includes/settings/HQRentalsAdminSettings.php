@@ -70,13 +70,12 @@ class HQRentalsAdminSettings
                     max-width: 600px;
                 }
             </style>
-            <!--<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css">-->
             <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
             <div id="hq-settings-page" class="wrap">
                 <div id="wrap">
                     <div class="form-outer-wrapper">
                         <div class="hq-title-wrapper">
-                            <img src="https://hqrentalsoftware.com/wp-content/uploads/2019/04/HQ-Logo-Color.svg" alt="">
+                            <img src="<?php echo HQRentalsAssetsHandler::getLogoForAdminArea(); ?>" alt="">
                             <?php if ($okAPI): ?>
                                 <div id="hq-connected-indicator"
                                      style="background-color: #28a745; border: 2px solid #28a745;"

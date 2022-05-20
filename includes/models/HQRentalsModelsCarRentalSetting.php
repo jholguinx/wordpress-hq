@@ -106,11 +106,16 @@ class HQRentalsModelsCarRentalSetting extends HQRentalsBaseModel
     }
     public function transformTimeSettingToMoment()
     {
-        $helper = new HQRentalsDatesHelper();
-        $settingHandler = new HQRentalsSettings();
-        $dateFormat = $settingHandler->getTenantDatetimeFormat();
-        $timeFormat = $helper->getTimeFormatFromPHPDate($dateFormat);
-        $newData = Carbon::createFromFormat(HQRentalsDBQueriesCarRentalSetting::$settingTimeHQ, $this->getSetting() )->format($timeFormat);
-        $this->settings = $newData;
+        try {
+            $helper = new HQRentalsDatesHelper();
+            $settingHandler = new HQRentalsSettings();
+            $dateFormat = $settingHandler->getTenantDatetimeFormat();
+            $timeFormat = $helper->getTimeFormatFromPHPDate($dateFormat);
+            $newData = Carbon::createFromFormat(HQRentalsDBQueriesCarRentalSetting::$settingTimeHQ, $this->getSetting() )->format($timeFormat);
+            $this->settings = $newData;
+        }catch (\Exception $exception){
+            $this->settings = '';
+        }
+
     }
 }

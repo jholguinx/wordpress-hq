@@ -60,10 +60,17 @@
     justify-content: flex-start;
     width:75%;
 }
+.hq-general-input-wrapper-big-fields input,
+.hq-general-input-wrapper-big-fields select,
+.hq-general-input-wrapper input,
+.hq-general-input-wrapper select{
+    text-align: right;
+    font-family: Gotham, SansSerif;
+}
 .hq-general-label-wrapper-big-fields {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     width:25%;
 }
 .tokens {
@@ -313,4 +320,7 @@ button {
     text-decoration: none;
     width: 100%;
     display: block;
+}
+.tippy-popper{
+    font-family: Gotham,SansSerif;
 }

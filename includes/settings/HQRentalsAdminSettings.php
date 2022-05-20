@@ -127,13 +127,13 @@ class HQRentalsAdminSettings
                                             <div id="dev">
                                                 <div class="hq-text-items-wrappers">
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper">
+                                                        <div class="hq-general-label-wrapper-big-fields">
                                                             <h4 class="wp-heading-inline" for="title">Tenant token</h4>
                                                             <span id="hq-tooltip-tenant-token"
                                                                   class="dashicons dashicons-search"
                                                                   data-tippy-content="Log in to your HQ account and navigate to settings > settings > integrations > copy the API token and paste it here."></span>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper tokens">
+                                                        <div class="hq-general-input-wrapper-big-fields tokens">
                                                             <input class="hq-admin-text-input"
                                                                    type="text"
                                                                    name="<?php echo esc_attr($this->settings->api_tenant_token); ?>"
@@ -143,13 +143,13 @@ class HQRentalsAdminSettings
                                                         </div>
                                                     </div>
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper">
+                                                        <div class="hq-general-label-wrapper-big-fields">
                                                             <h4 class="wp-heading-inline" for="title">User token</h4>
                                                             <span id="hq-tooltip-tenant-token"
                                                                   class="dashicons dashicons-search"
                                                                   data-tippy-content="Log in to your HQ account and navigate to settings > user management > users > integrations > select your user profile > generate and copy the API token and paste it here."></span>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper tokens">
+                                                        <div class="hq-general-input-wrapper-big-fields tokens">
                                                             <input class="hq-admin-text-input"
                                                                    type="text"
                                                                    name="<?php echo esc_attr($this->settings->api_user_token); ?>"
@@ -159,7 +159,7 @@ class HQRentalsAdminSettings
                                                         </div>
                                                     </div>
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper hq-dates">
+                                                        <div class="hq-general-label-wrapper">
                                                             <h4 class="wp-heading-inline" for="title">Select front-end
                                                                 date
                                                                 format</h4>
@@ -167,7 +167,7 @@ class HQRentalsAdminSettings
                                                                   class="dashicons dashicons-search"
                                                                   data-tippy-content=" This is the format of the dates on your website, and this must match the system date format."></span>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper hq-dates-input">
+                                                        <div class="hq-general-input-wrapper">
                                                             <select class="hq-admin-select-input"
                                                                     name="<?php echo esc_attr($this->settings->front_end_datetime_format); ?>">
                                                                 <?php echo $this->dateHelper->getHtmlOptionForFrontEndDateSettingOption(); ?>
@@ -175,14 +175,14 @@ class HQRentalsAdminSettings
                                                         </div>
                                                     </div>
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper hq-dates">
+                                                        <div class="hq-general-label-wrapper">
                                                             <h4 class="wp-heading-inline" for="title">Select system date
                                                                 format</h4>
                                                             <span id="hq-tooltip-tenant-token"
                                                                   class="dashicons dashicons-search"
                                                                   data-tippy-content="This is the date format set up on your HQ account settings. You can find this under general settings."></span>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper hq-dates-input">
+                                                        <div class="hq-general-input-wrapper">
                                                             <select class="hq-admin-select-input"
                                                                     name="<?php echo $this->settings->hq_datetime_format; ?>">
                                                                 <?php echo $this->dateHelper->getHtmlOptionForSystemDateSettingOption(); ?>
@@ -190,7 +190,7 @@ class HQRentalsAdminSettings
                                                         </div>
                                                     </div>
                                                     <div class="hq-general-settings-item">
-                                                        <div class="hq-general-label-wrapper hq-dates">
+                                                        <div class="hq-general-label-wrapper">
                                                             <h4 class="wp-heading-inline" for="title">API Tenant
                                                                 Region</h4>
                                                             <span id="hq-tooltip-tenant-token"
@@ -201,7 +201,7 @@ class HQRentalsAdminSettings
                                                                         <p>For xxx.hqrentals.eu, your region is Europe</p>
                                                                         <p>For xxx.hqrentals.asia, your region is Asia</p>"></span>
                                                         </div>
-                                                        <div class="hq-general-input-wrapper hq-dates-input">
+                                                        <div class="hq-general-input-wrapper">
                                                             <select
                                                                     id="hq-api-user-base-url"
                                                                     class="hq-admin-select-input "

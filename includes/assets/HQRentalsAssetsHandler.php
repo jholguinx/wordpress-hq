@@ -81,7 +81,7 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-resize-script', plugin_dir_url(__FILE__) . 'js/hq-resize.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-scroll-script', plugin_dir_url(__FILE__) . 'js/hq-scroll-to-top.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-submit-script', plugin_dir_url(__FILE__) . 'js/hq-submit.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
-        wp_register_script('hq-dummy-script', plugin_dir_url(__FILE__) . 'js/hq-dummy.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-dummy-script', plugin_dir_url(__FILE__) . 'js/hq-dummy.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-wordpress-dates-js', plugin_dir_url(__FILE__) . 'js/hq-dates-pickers.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-workspot-sc-script', plugin_dir_url(__FILE__) . 'js/hq-workspot-map-shortcode.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-map-form-script', plugin_dir_url(__FILE__) . 'js/hq-map-booking-form.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);

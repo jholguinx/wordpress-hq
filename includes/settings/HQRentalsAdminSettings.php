@@ -5,13 +5,16 @@ namespace HQRentalsPlugin\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 
 
 class HQRentalsAdminSettings
 {
-    protected $settingsPageTitle = 'HQ Rentals Settings';
-    protected $settingsMenuTitle = 'HQ Rentals';
-    protected $settingsSlug = 'hq-wordpress-settings';
+    static protected $settingsPageTitle = 'HQ Rental';
+    static protected $settingsMenuTitle = 'Settings';
+    static protected $settingsSlug = 'hq-wordpress-settings';
+    static protected $settingBrandPageTitle = 'Brands';
+    static protected $settingBrandPageSlug = 'hq-brands';
 
     function __construct()
     {
@@ -20,16 +23,34 @@ class HQRentalsAdminSettings
         $this->frontHelper = new HQRentalsFrontHelper();
         $this->assets = new HQRentalsAssetsHandler();
         add_action('admin_menu', array($this, 'setAdminMenuOptions'));
+
     }
 
     public function setAdminMenuOptions()
     {
-        add_options_page(
-            $this->settingsPageTitle,
-            $this->settingsMenuTitle,
+        /*add_options_page(
+            HQRentalsAdminSettings::$settingsPageTitle,
+            HQRentalsAdminSettings::$settingsMenuTitle,
             'manage_options',
-            $this->settingsSlug,
+            HQRentalsAdminSettings::$settingsSlug,
             array($this, 'displaySettingsPage')
+        );*/
+        add_menu_page(
+            HQRentalsAdminSettings::$settingsPageTitle,
+            HQRentalsAdminSettings::$settingsMenuTitle,
+            'manage_options',
+            HQRentalsAdminSettings::$settingsSlug,
+            array($this, 'displaySettingsPage'),
+            HQRentalsAssetsHandler::getLogoForAdminMenu(),
+            100
+        );
+        add_submenu_page(
+            HQRentalsAdminSettings::$settingsSlug,
+            HQRentalsAdminSettings::$settingBrandPageTitle,
+            HQRentalsAdminSettings::$settingBrandPageTitle,
+            'manage_options',
+            HQRentalsAdminSettings::$settingBrandPageSlug,
+            array($this, 'displayBrandsPage'),
         );
     }
 
@@ -653,5 +674,86 @@ class HQRentalsAdminSettings
                 </div>
             <?php
         }
+    }
+    public function displayBrandsPage()
+    {
+        $this->assets->loadAssetsForAdminSettingPage();
+        $okAPI = $this->settings->isApiOkay();
+        HQRentalsAssetsHandler::getHQFontAwesome();
+        $devMode = isset($_GET['dev']);
+        $query = new HQRentalsDBQueriesBrands();
+        $brands = $query->allBrands();
+        ?>
+                <script>
+                    var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
+                    var hqWebsiteURL = "<?php echo home_url(); ?>"
+                </script>
+                <style>
+                    .hq-normal-wrapper {
+                        display: block !important;
+                        max-width: 600px;
+                    }
+                </style>
+                <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+                <div id="hq-settings-page" class="wrap">
+                    <div id="wrap">
+                        <div class="form-outer-wrapper-tables">
+                            <div class="hq-title-wrapper">
+                                <img src="<?php echo HQRentalsAssetsHandler::getLogoForAdminArea(); ?>" alt="">
+                                <?php if ($okAPI): ?>
+                                    <div id="hq-connected-indicator"
+                                         style="background-color: #28a745; border: 2px solid #28a745;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                                    </div>
+                                <?php else: ?>
+                                    <div id="hq-not-connected-indicator"
+                                         style="background-color: #dc3545; border: 2px solid #dc3545;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">NOT CONNECTED</h6>
+                                    </div>
+                                    <div id="hq-connected-indicator"
+                                         style="background-color: #28a745; border: 2px solid #28a745;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                                    </div>
+                                    <style>
+                                        #hq-connected-indicator {
+                                            display: none;
+                                        }
+                                    </style>
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <table class="hq-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Reservation Form Snippet</th>
+                                            <th>Reservation Snippet</th>
+                                            <th>Vehicle Class Calendar</th>
+                                            <th>Updated</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($brands as $brand): ?>
+                                            <tr>
+                                                <th><?php echo $brand->getId(); ?></th>
+                                                <th><code>[hq_rentals_reservation_form_snippet id=<?php echo $brand->getId(); ?>]</code></th>
+                                                <th><code>[hq_rentals_reservations_snippet id=<?php echo $brand->getId(); ?>]</code></th>
+                                                <th><code>[hq_rentals_vehicle_calendar id=<?php echo $brand->getId(); ?>]</code></th>
+                                                <th>Updated</th>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <?php
     }
 }

@@ -339,3 +339,12 @@ button {
 #hq-submit-login-button{
     width: 30%;
 }
+.hq-table{
+    width: 100%;
+}
+.form-outer-wrapper-tables{
+    background-color: #fff;
+    width: 100%;
+    padding:40px;
+    border-radius: 10px;
+}

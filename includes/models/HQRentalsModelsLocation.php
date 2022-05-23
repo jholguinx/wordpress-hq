@@ -68,6 +68,10 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'column_name' => 'label_for_website_translated',
             'column_data_type' => 'varchar(255)'
         ),
+        array(
+            'column_name' => 'updated_at',
+            'column_data_type' => 'varchar(50)'
+        )
     );
 
     protected $metaId = 'hq_wordpress_location_id_meta';
@@ -103,6 +107,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $address = '';
     public $phone = '';
     public $labelsForWebsite = [];
+    public $updated_at;
 
 
     public function __construct($post = null)
@@ -178,6 +183,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->phone = isset($data->phone) ?? '';
         $this->address = isset($data->address) ?? '';
         $this->labelsForWebsite = isset($data->label_for_website) ?? '';
+        $this->updated_at = current_time('mysql', 1);
     }
 
 
@@ -352,7 +358,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'all_map_coordinate' => '',
             'pick_up_allowed' => 1,
             'return_allowed' => 1,
-            'label_for_website_translated' => ''
+            'label_for_website_translated' => '',
+            'updated_at' => $this->updated_at
         );
     }
 
@@ -368,6 +375,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->address = $locationFromDB->address;
         $this->officeHours = $locationFromDB->open_hours;
         $this->labelsForWebsite = json_decode($locationFromDB->label_for_website);
+        $this->updated_at = $locationFromDB->updated_at;
     }
 
     public function getId()

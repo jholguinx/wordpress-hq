@@ -35,6 +35,7 @@ class HQRentalsDbBootstrapper
         $preferenceTables = $this->db->createTable($preferenceData['table_name'], $preferenceData['table_columns']);
         //this should be implemented on updates
         $brandsTableCheckUp = $this->db->updateTableOnChanges($brandData['table_name'], $brandData['table_columns']);
+        $locationsTableCheckUp = $this->db->updateTableOnChanges($locationData['table_name'], $locationData['table_columns']);
         $vehicleTableCheckUp = $this->db->updateTableOnChanges($vehiclesData['table_name'], $vehiclesData['table_columns']);
         $rateTableCheckUp = $this->db->updateTableOnChanges($ratesData['table_name'],$ratesData['table_columns']);
         // add validation for process completed

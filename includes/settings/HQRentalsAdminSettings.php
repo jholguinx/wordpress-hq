@@ -6,6 +6,7 @@ use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 
 
 class HQRentalsAdminSettings
@@ -15,6 +16,8 @@ class HQRentalsAdminSettings
     static protected $settingsSlug = 'hq-wordpress-settings';
     static protected $settingBrandPageTitle = 'Brands';
     static protected $settingBrandPageSlug = 'hq-brands';
+    static protected $settingsLocationPageTitle = 'Locations';
+    static protected $settingsLocationPageSlug = 'hq-locations';
 
     function __construct()
     {
@@ -51,6 +54,14 @@ class HQRentalsAdminSettings
             'manage_options',
             HQRentalsAdminSettings::$settingBrandPageSlug,
             array($this, 'displayBrandsPage'),
+        );
+        add_submenu_page(
+            HQRentalsAdminSettings::$settingsSlug,
+            HQRentalsAdminSettings::$settingsLocationPageTitle,
+            HQRentalsAdminSettings::$settingsLocationPageSlug,
+            'manage_options',
+            HQRentalsAdminSettings::$settingsLocationPageSlug,
+            array($this, 'displayLocationsPage'),
         );
     }
 
@@ -755,6 +766,90 @@ class HQRentalsAdminSettings
                                             <th>Reservation Form Snippet</th>
                                             <th>Reservation Snippet</th>
                                             <th>Vehicle Class Calendar</th>
+                                            <th>Updated At</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <?php
+    }
+    public function displayLocationsPage()
+    {
+        $this->assets->loadAssetsForAdminSettingPage();
+        $okAPI = $this->settings->isApiOkay();
+        HQRentalsAssetsHandler::getHQFontAwesome();
+        $devMode = isset($_GET['dev']);
+        $query = new HQRentalsDBQueriesLocations();
+        $locations = $query->allLocations();
+        ?>
+                <script>
+                    var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
+                    var hqWebsiteURL = "<?php echo home_url(); ?>"
+                </script>
+                <style>
+                    .hq-normal-wrapper {
+                        display: block !important;
+                        max-width: 600px;
+                    }
+                </style>
+                <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+                <div id="hq-settings-page" class="wrap">
+                    <div id="wrap">
+                        <div class="form-outer-wrapper-tables">
+                            <div class="hq-title-wrapper">
+                                <img src="<?php echo HQRentalsAssetsHandler::getLogoForAdminArea(); ?>" alt="">
+                                <?php if ($okAPI): ?>
+                                    <div id="hq-connected-indicator"
+                                         style="background-color: #28a745; border: 2px solid #28a745;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                                    </div>
+                                <?php else: ?>
+                                    <div id="hq-not-connected-indicator"
+                                         style="background-color: #dc3545; border: 2px solid #dc3545;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">NOT CONNECTED</h6>
+                                    </div>
+                                    <div id="hq-connected-indicator"
+                                         style="background-color: #28a745; border: 2px solid #28a745;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                                    </div>
+                                    <style>
+                                        #hq-connected-indicator {
+                                            display: none;
+                                        }
+                                    </style>
+                                <?php endif; ?>
+                            </div>
+                            <div class="hq-title-item-tables">
+                                <h1 class="hq-admin-h1">Locations</h1>
+                            </div>
+                            <div>
+                                <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Updated At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($locations as $location): ?>
+                                            <tr>
+                                                <th><?php echo $location->getId(); ?></th>
+                                                <th><?php echo $location->getName(); ?></th>
+                                                <th><?php echo $location->getUpdatedAt(); ?></th>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
                                             <th>Updated At</th>
                                         </tr>
                                     </tfoot>

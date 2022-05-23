@@ -186,7 +186,6 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetCalendar = htmlspecialchars($snippetData['calendar']);
         $this->snippetClassCalendar = htmlspecialchars($snippetData['class-calendar']);
         $this->snippetMyReservation = htmlspecialchars($snippetData['my-reservations']);
-        $this->snippetPaymentRequest = htmlspecialchars($snippetData['payment-requests']);
         $this->updated_at = current_time('mysql', 1);
         if($this->settings->getReplaceBaseURLOnBrandsSetting() === "true"){
             $urlReplacement = $this->settings->getBrandURLToReplaceSetting();

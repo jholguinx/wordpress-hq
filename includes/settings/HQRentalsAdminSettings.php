@@ -28,8 +28,7 @@ class HQRentalsAdminSettings
         $this->dateHelper = new HQRentalsDatesHelper();
         $this->frontHelper = new HQRentalsFrontHelper();
         $this->assets = new HQRentalsAssetsHandler();
-        add_action('admin_menu', array($this, 'setAdminMenuOptions'));
-
+        add_action('admin_menu', array($this, 'setAdminMenuOptions'), 10);
     }
 
     public function setAdminMenuOptions()
@@ -67,6 +66,8 @@ class HQRentalsAdminSettings
             HQRentalsAdminSettings::$settingsVehicleClassPageSlug,
             array($this, 'displayVehicleClassPage'),
         );
+        // remove same name sub-item
+        remove_submenu_page(HQRentalsAdminSettings::$settingsSlug,HQRentalsAdminSettings::$settingsSlug);
     }
 
     public function displaySettingsPage()

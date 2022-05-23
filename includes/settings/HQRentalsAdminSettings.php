@@ -34,13 +34,6 @@ class HQRentalsAdminSettings
 
     public function setAdminMenuOptions()
     {
-        /*add_options_page(
-            HQRentalsAdminSettings::$settingsPageTitle,
-            HQRentalsAdminSettings::$settingsMenuTitle,
-            'manage_options',
-            HQRentalsAdminSettings::$settingsSlug,
-            array($this, 'displaySettingsPage')
-        );*/
         add_menu_page(
             HQRentalsAdminSettings::$settingsPageTitle,
             HQRentalsAdminSettings::$settingsPageTitle,

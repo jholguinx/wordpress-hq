@@ -380,4 +380,8 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-daysjs-js');
         wp_enqueue_script('hq-page-vehicle-class-big-header-js');
     }
+    static public function getLogoForAdminArea() : string
+    {
+        return plugin_dir_url(__FILE__) . 'img/hq-admin-logo.svg';
+    }
 }

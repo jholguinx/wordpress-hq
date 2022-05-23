@@ -1,3 +1,13 @@
+@font-face {
+    font-family: Gotham;
+    src: url('../fonts/GothamBook.woff');
+    font-weight: normal;
+}
+@font-face {
+    font-family: Gotham-Bold;
+    src: url('../fonts/Gotham-Bold.woff');
+    font-weight: bold;
+}
 .hq-general-settings-wrapper {
     display: flex;
     flex: 1;
@@ -30,22 +40,40 @@
 
 .hq-general-input-wrapper {
     display: flex;
-    flex: 1;
     align-items: center;
     justify-content: flex-start;
+    width:35%;
 }
-
+.hq-general-input-wrapper-checkbox{
+    display: flex;
+    justify-content: flex-end;
+}
 .hq-general-label-wrapper {
     display: flex;
-    flex: 1;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    width:65%;
 }
-
-.small {
-    max-width: 50px !important;
+.hq-general-input-wrapper-big-fields {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width:75%;
 }
-
+.hq-general-input-wrapper-big-fields input,
+.hq-general-input-wrapper-big-fields select,
+.hq-general-input-wrapper input,
+.hq-general-input-wrapper select{
+    text-align: right;
+    font-family: Gotham, SansSerif;
+    font-weight: normal;
+}
+.hq-general-label-wrapper-big-fields {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width:25%;
+}
 .tokens {
     flex: 4;
 }
@@ -73,12 +101,14 @@
 
 .hq-admin-help-section, .hq-admin-help-section {
     padding-top: 25px;
-    padding-bottom: 25px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
-
+.hq-admin-help-section p{
+    font-family: Gotham, SansSerif;
+    font-weight: normal;
+}
 .hq-admin-select-input {
     width: 100%;
 }
@@ -111,10 +141,12 @@
 
 .wp-heading-inline, .hq-admin-h1, .hq-admin-h3 {
     text-transform: uppercase;
+    font-family: Gotham, SansSerif;
+    font-weight: bold !important;
 }
 
 .hq-admin-text-input-medium {
-    max-width: 300px;
+    width:100%;
 }
 
 .hq-admin-text-input-small-medium {
@@ -167,11 +199,14 @@
 
 .hq-title-wrapper {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+    margin:30px 0;
 }
 
 .hq-title-item {
+    display: flex;
+    justify-content: space-between;
 }
 
 .hq-loader {
@@ -190,7 +225,7 @@
 .hq-submit-login-button-wrapper {
     display: flex;
     flex: 1;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-content: center;
 }
 
@@ -234,10 +269,73 @@ button {
     margin: 0px;
     color: #fff;
     text-transform: uppercase;
+    font-family: Gotham, SansSerif;
 }
 .large{
     max-width: 330px !important;
 }
 .hq-flex-box-container{
     flex-direction: row;
+}
+#hq-submit-login-button, .hq-admin-submit-button{
+    font-family: Gotham,SansSerif !important;
+    font-weight: normal;
+}
+.form-outer-wrapper{
+    background-color: #fff;
+    width: 60%;
+    padding:40px;
+    border-radius: 10px;
+}
+.hq-header-submit-button-wrapper{
+
+}
+.hq-tabs-wrapper{
+    width: 20%;
+}
+.hq-tabs-content{
+    width: 80%;
+    padding: 20px;
+}
+.hq-form-component-wrapper{
+    display: flex;
+}
+.expand-title,.hamburger{
+    font-family: Gotham, SansSerif;
+    display: none;
+}
+.tabs-list li{
+    height: 30px;
+    background-color: #fff;
+    font-family: Gotham,SansSerif;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+.tabs-list li.active{
+    background-color: #24385C;
+    font-family: Gotham,SansSerif;
+}
+.tabs-list li.active a{
+    color: #fff;
+    line-height: 30px;
+}
+.tabs-list li a{
+    color: #000;
+    line-height: 30px;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+}
+.tippy-popper,.alert{
+    font-family: Gotham,SansSerif;
+    font-weight: normal;
+}
+#hq-settings-page button,
+#hq-settings-page input[type=submit] {
+    background-color: #24385C;
+    font-family: Gotham,SansSerif;
+    font-weight: normal;
+}
+#hq-submit-login-button{
+    width: 30%;
 }

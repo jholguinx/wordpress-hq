@@ -114,6 +114,9 @@ class HQRentalsBootstrap
         if ($this->settings->noDefaultReturnTime()) {
             $this->settings->setDefaultReturnTime('');
         }
+        if ($this->settings->noWebhookSyncOption()) {
+            $this->settings->setWebhookSyncOption('false');
+        }
         $this->notifyToSystemOnActivation();
         $this->dbBootstrap->createTablesOnInit();
     }

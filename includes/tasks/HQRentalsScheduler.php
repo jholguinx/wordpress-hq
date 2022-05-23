@@ -4,6 +4,8 @@ namespace HQRentalsPlugin\HQRentalsTasks;
 
 use Exception;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsCacheHandler;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
 class HQRentalsScheduler
 {
@@ -46,26 +48,55 @@ class HQRentalsScheduler
     public function refreshHQData()
     {
         try {
+            $settings = new HQRentalsSettings();
             if ($this->isWorkspotWebsite()) {
                 $workspot = $this->workspot->refreshLocationsData();
             }
-            $this->settingsTask->tryToRefreshSettingsData();
-            $this->carRentalSettingTask->tryToRefreshSettingsData();
-            $this->brandsTask->tryToRefreshSettingsData();
-            $this->locationsTask->tryToRefreshSettingsData();
-            // additional charges -> not update
-            $this->additionalChargesTask->tryToRefreshSettingsData();
-            $this->vehicleClassesTask->tryToRefreshSettingsData();
-            $this->vehicleTypesTask->tryToRefreshSettingsData();
-            if ($this->allResponseAreOK()) {
-                $this->deleteHQData();
-                $this->refreshAllDataOnDatabase();
-                $_POST['success'] = 'success';
-            } else {
-                $error = $this->getErrorOnSync();
-                $error = "There was an issue with your request. Please verify tokens and installation region.";
-                $this->setErrorMessage($error);
+            if($settings->getWebhookSyncOption() === 'true'){
+                $option = $settings->getLastSyncOption();
+                $lastUpdated = Carbon::createFromFormat('Y-m-d H:i:s', $option);
+                $now = Carbon::now();
+                if($now->diffInMinutes($lastUpdated) > 5){
+                    $settings->setLastSyncOption();
+                    $this->settingsTask->tryToRefreshSettingsData();
+                    $this->carRentalSettingTask->tryToRefreshSettingsData();
+                    $this->brandsTask->tryToRefreshSettingsData();
+                    $this->locationsTask->tryToRefreshSettingsData();
+                    // additional charges -> not update
+                    $this->additionalChargesTask->tryToRefreshSettingsData();
+                    $this->vehicleClassesTask->tryToRefreshSettingsData();
+                    $this->vehicleTypesTask->tryToRefreshSettingsData();
+                    if ($this->allResponseAreOK()) {
+                        $this->deleteHQData();
+                        $this->refreshAllDataOnDatabase();
+                        $_POST['success'] = 'success';
+                    } else {
+                        $error = $this->getErrorOnSync();
+                        $error = "There was an issue with your request. Please verify tokens and installation region.";
+                        $this->setErrorMessage($error);
+                    }
+                }
+            }else{
+                $settings->setLastSyncOption();
+                $this->settingsTask->tryToRefreshSettingsData();
+                $this->carRentalSettingTask->tryToRefreshSettingsData();
+                $this->brandsTask->tryToRefreshSettingsData();
+                $this->locationsTask->tryToRefreshSettingsData();
+                // additional charges -> not update
+                $this->additionalChargesTask->tryToRefreshSettingsData();
+                $this->vehicleClassesTask->tryToRefreshSettingsData();
+                $this->vehicleTypesTask->tryToRefreshSettingsData();
+                if ($this->allResponseAreOK()) {
+                    $this->deleteHQData();
+                    $this->refreshAllDataOnDatabase();
+                    $_POST['success'] = 'success';
+                } else {
+                    $error = $this->getErrorOnSync();
+                    $error = "There was an issue with your request. Please verify tokens and installation region.";
+                    $this->setErrorMessage($error);
+                }
             }
+
         } catch (Exception $e) {
             $this->setErrorMessage($e->getMessage());
         }

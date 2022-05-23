@@ -34,7 +34,7 @@ class HQRentalsAdminSettings
     public function setAdminMenuOptions()
     {
         add_menu_page(
-            HQRentalsAdminSettings::$settingsPageTitle,
+            HQRentalsAdminSettings::$settingsMenuTitle,
             HQRentalsAdminSettings::$settingsPageTitle,
             'manage_options',
             HQRentalsAdminSettings::$settingsSlug,
@@ -67,7 +67,7 @@ class HQRentalsAdminSettings
             array($this, 'displayVehicleClassPage'),
         );
         // remove same name sub-item
-        remove_submenu_page(HQRentalsAdminSettings::$settingsSlug,HQRentalsAdminSettings::$settingsSlug);
+        //remove_submenu_page(HQRentalsAdminSettings::$settingsSlug,HQRentalsAdminSettings::$settingsSlug);
     }
 
     public function displaySettingsPage()
@@ -586,6 +586,19 @@ class HQRentalsAdminSettings
                                                         <input type="checkbox"
                                                                name="<?php echo $this->settings->hq_disable_cronjob_option; ?>"
                                                                value="true" <?php echo ($this->settings->getDisableCronjobOption() === 'true') ? 'checked' : ''; ?>/>
+                                                    </div>
+                                                </div>
+                                                <div class="hq-general-settings-item">
+                                                    <div class="hq-general-label-wrapper">
+                                                        <h4 class="wp-heading-inline" for="title">Enable Sync Through Webhooks</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
+                                                              data-tippy-content="Select this option to enable keeping the website sync using system webhooks."></span>
+                                                    </div>
+                                                    <div class="hq-general-input-wrapper hq-general-input-wrapper-checkbox">
+                                                        <input type="checkbox"
+                                                               name="<?php echo $this->settings->hq_webhook_sync; ?>"
+                                                               value="true" <?php echo ($this->settings->getWebhookSyncOption() === 'true') ? 'checked' : ''; ?>/>
                                                     </div>
                                                 </div>
                                             </div>

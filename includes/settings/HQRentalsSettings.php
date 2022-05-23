@@ -45,6 +45,8 @@ class HQRentalsSettings
     public $hq_default_pick_up_time = 'hq_default_pick_up_time';
     public $hq_default_return_time = 'hq_default_return_time';
     public $hq_override_daily_rate_with_price_interval = 'hq_override_daily_rate_with_price_interval';
+    public $hq_webhook_sync = 'hq_webhook_sync';
+    public $hq_last_sync_date = 'hq_last_sync_date';
 
     public function __construct()
     {
@@ -577,6 +579,10 @@ class HQRentalsSettings
         if (empty($postDataFromSettings[$this->hq_override_daily_rate_with_price_interval])) {
             update_option($this->hq_override_daily_rate_with_price_interval, "false");
         }
+        if (empty($postDataFromSettings[$this->hq_webhook_sync])) {
+            update_option($this->hq_webhook_sync, "false");
+        }
+
         /*Refresh data on save */
         $worker = new HQRentalsCronJob();
         $worker->refreshAllData();
@@ -782,5 +788,33 @@ class HQRentalsSettings
     public function getOverrideDailyRateWithCheapestPriceInterval() : string
     {
         return get_option($this->hq_override_daily_rate_with_price_interval);
+    }
+
+
+    public function noWebhookSyncOption() : bool
+    {
+        return empty(get_option($this->hq_webhook_sync));
+    }
+    public function setWebhookSyncOption($data) : bool
+    {
+        return update_option($this->hq_webhook_sync, $data);
+    }
+
+    public function getWebhookSyncOption() : string
+    {
+        return get_option($this->hq_webhook_sync);
+    }
+
+    public function noLastSyncOption() : bool
+    {
+        return empty(get_option($this->hq_last_sync_date));
+    }
+    public function setLastSyncOption() : bool
+    {
+        return update_option($this->hq_last_sync_date, current_time('mysql', 1));
+    }
+    public function getLastSyncOption() : string
+    {
+        return get_option($this->hq_last_sync_date);
     }
 }

@@ -348,3 +348,10 @@ button {
     padding:40px;
     border-radius: 10px;
 }
+.hq-table thead tr{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.hq-table{
+    table-layout: auto;
+}

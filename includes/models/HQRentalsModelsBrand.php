@@ -61,6 +61,10 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'column_name' => 'calendar_snippet',
             'column_data_type' => 'varchar(1000)'
         ),
+        array(
+            'column_name' => 'updated_at',
+            'column_data_type' => 'varchar(50)'
+        )
     );
 
     protected $metaId = 'hq_wordpress_brand_id_meta';
@@ -107,6 +111,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
     public $snippetClassCalendar = '';
     public $snippetMyReservation = '';
     public $uuid = '';
+    public $updated_at = '';
 
     public function __construct($post = null)
     {
@@ -181,6 +186,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetCalendar = htmlspecialchars($snippetData['calendar']);
         $this->snippetClassCalendar = htmlspecialchars($snippetData['class-calendar']);
         $this->snippetMyReservation = htmlspecialchars($snippetData['my-reservations']);
+        $this->snippetPaymentRequest = htmlspecialchars($snippetData['payment-requests']);
+        $this->updated_at = current_time('mysql', 1);
         if($this->settings->getReplaceBaseURLOnBrandsSetting() === "true"){
             $urlReplacement = $this->settings->getBrandURLToReplaceSetting();
             $this->publicReservationsLinkFull = $this->resolveBrandURL($data->public_reservations_link_full, $urlReplacement);
@@ -384,6 +391,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'quote_snippet' => $this->snippetQuotes,
             'package_quotes_snippet' => $this->snippetPackageQuote,
             'payment_requests_snippet' => $this->snippetPaymentRequest,
+            'calendar_snippet' => $this->getCalendarSnippet(),
+            'updated_at' => $this->updated_at
         );
     }
     public function setFromDB($brandFromDB)
@@ -398,6 +407,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetQuotes = htmlspecialchars_decode($brandFromDB->quote_snippet);
         $this->snippetPackageQuote = htmlspecialchars_decode($brandFromDB->package_quotes_snippet);
         $this->snippetPaymentRequest = htmlspecialchars_decode($brandFromDB->payment_requests_snippet);
+        $this->updated_at = $brandFromDB->updated_at;
     }
     public function getTableName() : string
     {

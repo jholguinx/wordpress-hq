@@ -725,29 +725,35 @@ class HQRentalsAdminSettings
                                 <?php endif; ?>
                             </div>
                             <div>
-                                <table class="hq-table">
+                                <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
                                             <th>Reservation Form Snippet</th>
                                             <th>Reservation Snippet</th>
                                             <th>Vehicle Class Calendar</th>
-                                            <th>Updated</th>
+                                            <th>Updated At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($brands as $brand): ?>
                                             <tr>
-                                                <th><?php echo $brand->getId(); ?></th>
+                                                <th><?php echo $brand->getName(); ?></th>
                                                 <th><code>[hq_rentals_reservation_form_snippet id=<?php echo $brand->getId(); ?>]</code></th>
                                                 <th><code>[hq_rentals_reservations_snippet id=<?php echo $brand->getId(); ?>]</code></th>
                                                 <th><code>[hq_rentals_vehicle_calendar id=<?php echo $brand->getId(); ?>]</code></th>
-                                                <th>Updated</th>
+                                                <th><?php echo $brand->getUpdatedAt(); ?></th>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                     <tfoot>
-
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Reservation Form Snippet</th>
+                                            <th>Reservation Snippet</th>
+                                            <th>Vehicle Class Calendar</th>
+                                            <th>Updated At</th>
+                                        </tr>
                                     </tfoot>
                                 </table>
                             </div>

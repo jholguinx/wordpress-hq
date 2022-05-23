@@ -375,7 +375,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->address = $locationFromDB->address;
         $this->officeHours = $locationFromDB->open_hours;
         $this->labelsForWebsite = json_decode($locationFromDB->label_for_website);
-        $this->updated_at = $locationFromDB->updated_at;
+        $this->setUpdatedAt($locationFromDB->updated_at);
     }
 
     public function getId()

@@ -10,10 +10,12 @@ abstract class HQRentalsBaseModel
     {
         try {
             $date = $this->updated_at;
-            return $date;
+            return empty($date) ? 'N/A' : $date;
         }catch (\Exception $e){
             return 'N/A';
         }
-
+    }
+    public function setUpdatedAt($updatedAtFromDB) : void{
+        $this->updated_at = $updatedAtFromDB;
     }
 }

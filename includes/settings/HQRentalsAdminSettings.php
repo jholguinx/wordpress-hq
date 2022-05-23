@@ -7,6 +7,7 @@ use HQRentalsPlugin\HQRentalsHelpers\HQRentalsDatesHelper;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 
 
 class HQRentalsAdminSettings
@@ -18,6 +19,8 @@ class HQRentalsAdminSettings
     static protected $settingBrandPageSlug = 'hq-brands';
     static protected $settingsLocationPageTitle = 'Locations';
     static protected $settingsLocationPageSlug = 'hq-locations';
+    static protected $settingsVehicleClassPageTitle = 'Vehicle Classes';
+    static protected $settingsVehicleClassPageSlug = 'hq-vehicle-classes';
 
     function __construct()
     {
@@ -62,6 +65,14 @@ class HQRentalsAdminSettings
             'manage_options',
             HQRentalsAdminSettings::$settingsLocationPageSlug,
             array($this, 'displayLocationsPage'),
+        );
+        add_submenu_page(
+            HQRentalsAdminSettings::$settingsSlug,
+            HQRentalsAdminSettings::$settingsVehicleClassPageTitle,
+            HQRentalsAdminSettings::$settingsVehicleClassPageTitle,
+            'manage_options',
+            HQRentalsAdminSettings::$settingsVehicleClassPageSlug,
+            array($this, 'displayVehicleClassPage'),
         );
     }
 
@@ -699,12 +710,6 @@ class HQRentalsAdminSettings
                     var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
                     var hqWebsiteURL = "<?php echo home_url(); ?>"
                 </script>
-                <style>
-                    .hq-normal-wrapper {
-                        display: block !important;
-                        max-width: 600px;
-                    }
-                </style>
                 <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
                 <div id="hq-settings-page" class="wrap">
                     <div id="wrap">
@@ -740,18 +745,18 @@ class HQRentalsAdminSettings
                             </div>
                             <div>
                                 <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Reservation Form Snippet</th>
-                                            <th>Reservation Snippet</th>
-                                            <th>Vehicle Class Calendar</th>
-                                            <th>Updated At</th>
-                                        </tr>
-                                    </thead>
+                                    <?php echo $this->renderHeaderAndOrFooter([
+                                        'Id',
+                                        'Name',
+                                        'Reservation Form Snippet',
+                                        'Reservation Snippet',
+                                        'Vehicle Class Calendar',
+                                        'Updated At'
+                                    ]); ?>
                                     <tbody>
                                         <?php foreach ($brands as $brand): ?>
                                             <tr>
+                                                <th><?php echo $brand->getId(); ?></th>
                                                 <th><?php echo $brand->getName(); ?></th>
                                                 <th><code>[hq_rentals_reservation_form_snippet id=<?php echo $brand->getId(); ?>]</code></th>
                                                 <th><code>[hq_rentals_reservations_snippet id=<?php echo $brand->getId(); ?>]</code></th>
@@ -760,15 +765,14 @@ class HQRentalsAdminSettings
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Reservation Form Snippet</th>
-                                            <th>Reservation Snippet</th>
-                                            <th>Vehicle Class Calendar</th>
-                                            <th>Updated At</th>
-                                        </tr>
-                                    </tfoot>
+                                    <?php echo $this->renderHeaderAndOrFooter([
+                                        'Id',
+                                        'Name',
+                                        'Reservation Form Snippet',
+                                        'Reservation Snippet',
+                                        'Vehicle Class Calendar',
+                                        'Updated At'
+                                    ], true); ?>
                                 </table>
                             </div>
                         </div>
@@ -789,12 +793,6 @@ class HQRentalsAdminSettings
                     var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
                     var hqWebsiteURL = "<?php echo home_url(); ?>"
                 </script>
-                <style>
-                    .hq-normal-wrapper {
-                        display: block !important;
-                        max-width: 600px;
-                    }
-                </style>
                 <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
                 <div id="hq-settings-page" class="wrap">
                     <div id="wrap">
@@ -830,13 +828,11 @@ class HQRentalsAdminSettings
                             </div>
                             <div>
                                 <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Updated At</th>
-                                        </tr>
-                                    </thead>
+                                    <?php echo $this->renderHeaderAndOrFooter([
+                                        'Id',
+                                        'Name',
+                                        'Updated At'
+                                    ]); ?>
                                     <tbody>
                                         <?php foreach ($locations as $location): ?>
                                             <tr>
@@ -846,18 +842,104 @@ class HQRentalsAdminSettings
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Updated At</th>
-                                        </tr>
-                                    </tfoot>
+                                    <?php echo $this->renderHeaderAndOrFooter([
+                                        'Id',
+                                        'Name',
+                                        'Updated At'
+                                    ], true); ?>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
         <?php
+    }
+    public function displayVehicleClassPage()
+    {
+        $this->assets->loadAssetsForAdminSettingPage();
+        $okAPI = $this->settings->isApiOkay();
+        HQRentalsAssetsHandler::getHQFontAwesome();
+        $devMode = isset($_GET['dev']);
+        $query = new HQRentalsDBQueriesVehicleClasses();
+        $vehicles = $query->allVehicleClasses(true);
+        ?>
+                <script>
+                    var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
+                    var hqWebsiteURL = "<?php echo home_url(); ?>"
+                </script>
+                <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+                <div id="hq-settings-page" class="wrap">
+                    <div id="wrap">
+                        <div class="form-outer-wrapper-tables">
+                            <div class="hq-title-wrapper">
+                                <img src="<?php echo HQRentalsAssetsHandler::getLogoForAdminArea(); ?>" alt="">
+                                <?php if ($okAPI): ?>
+                                    <div id="hq-connected-indicator"
+                                         style="background-color: #28a745; border: 2px solid #28a745;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                                    </div>
+                                <?php else: ?>
+                                    <div id="hq-not-connected-indicator"
+                                         style="background-color: #dc3545; border: 2px solid #dc3545;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">NOT CONNECTED</h6>
+                                    </div>
+                                    <div id="hq-connected-indicator"
+                                         style="background-color: #28a745; border: 2px solid #28a745;"
+                                         class="hq-connected-sign">
+                                        <h6 class="hq-connected-sign-text">CONNECTED</h6>
+                                    </div>
+                                    <style>
+                                        #hq-connected-indicator {
+                                            display: none;
+                                        }
+                                    </style>
+                                <?php endif; ?>
+                            </div>
+                            <div class="hq-title-item-tables">
+                                <h1 class="hq-admin-h1">Locations</h1>
+                            </div>
+                            <div>
+                                <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">
+                                    <?php echo $this->renderHeaderAndOrFooter([
+                                        'Id',
+                                        'Name',
+                                        'Updated At'
+                                    ]); ?>
+                                    <tbody>
+                                        <?php foreach ($vehicles as $vehicle): ?>
+                                            <tr>
+                                                <th><?php echo $vehicle->getId(); ?></th>
+                                                <th><?php echo $vehicle->getLabelForWebsite(); ?></th>
+                                                <th><?php echo $vehicle->getUpdatedAt(); ?></th>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <?php echo $this->renderHeaderAndOrFooter([
+                                        'Id',
+                                        'Name',
+                                        'Updated At'
+                                    ], true); ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <?php
+    }
+    private function renderHeaderAndOrFooter($items, $footer = false)
+    {
+        if(is_array($items)){
+            $innerHtml = '';
+            foreach ($items as $item){
+                $innerHtml .= "<th>{$item}</th>";
+            }
+            return ($footer) ?
+            "<tfoot><tr>" . $innerHtml . "</tfoot></tr>" :
+            "<thead><tr>" . $innerHtml . "</thead></tr>";
+
+        }
+        return '';
     }
 }

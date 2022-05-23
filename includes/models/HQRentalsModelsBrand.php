@@ -406,7 +406,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetQuotes = htmlspecialchars_decode($brandFromDB->quote_snippet);
         $this->snippetPackageQuote = htmlspecialchars_decode($brandFromDB->package_quotes_snippet);
         $this->snippetPaymentRequest = htmlspecialchars_decode($brandFromDB->payment_requests_snippet);
-        $this->updated_at = $brandFromDB->updated_at;
+        $this->setUpdatedAt($brandFromDB->updated_at);
     }
     public function getTableName() : string
     {

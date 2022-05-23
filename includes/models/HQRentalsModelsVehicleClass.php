@@ -68,6 +68,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'column_name' => 'custom_fields',
             'column_data_type' => 'LONGTEXT'
         ),
+        array(
+            'column_name' => 'updated_at',
+            'column_data_type' => 'varchar(50)'
+        )
     );
 
     protected $metaId = 'hq_wordpress_vehicle_class_id_meta';
@@ -119,6 +123,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $distanceLimitPerWeek = '';
     public $distanceLimitPerMonth = '';
     public $additionalChargeForExceededDistance = null;
+    public $updated_at = '';
 
     public function __construct($post = null)
     {
@@ -213,6 +218,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->featuresDB = $data->features;
         $this->activeRateDB = $data->activeRates;
         $this->imagesDB = $data->images;
+        $this->updated_at = current_time('mysql', 1);
         foreach ($data->features as $feature) {
             $newFeature = new HQRentalsModelsFeature();
             $newFeature->setFeatureFromApi($this->id, $feature);
@@ -701,7 +707,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'images' => json_encode($this->imagesDB),
             'active_rates' => json_encode($this->activeRateDB),
             'features' => json_encode($this->featuresDB),
-            'custom_fields' => json_encode($this->getCustomFieldsAsArray())
+            'custom_fields' => json_encode($this->getCustomFieldsAsArray()),
+            'updated_at' => $this->updated_at
         );
     }
 
@@ -719,6 +726,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->features = json_decode($vehicleDB->features);
         $this->rates = json_decode($vehicleDB->active_rates)[0];
         $this->customFields = json_decode($vehicleDB->custom_fields);
+        $this->setUpdatedAt($vehicleDB->updated_at);
     }
 
     public function getTableName(): string

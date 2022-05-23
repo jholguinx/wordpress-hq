@@ -58,7 +58,7 @@ class HQRentalsAdminSettings
         add_submenu_page(
             HQRentalsAdminSettings::$settingsSlug,
             HQRentalsAdminSettings::$settingsLocationPageTitle,
-            HQRentalsAdminSettings::$settingsLocationPageSlug,
+            HQRentalsAdminSettings::$settingsLocationPageTitle,
             'manage_options',
             HQRentalsAdminSettings::$settingsLocationPageSlug,
             array($this, 'displayLocationsPage'),

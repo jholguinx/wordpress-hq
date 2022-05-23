@@ -726,10 +726,6 @@ class HQRentalsAdminSettings
                             </div>
                             <div class="hq-title-item-tables">
                                 <h1 class="hq-admin-h1">Brands</h1>
-                                <button
-                                        type="submit"
-                                        name="save"
-                                        class="button button-primary button-large hq-admin-submit-button">Refresh Data</button>
                             </div>
                             <div>
                                 <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">

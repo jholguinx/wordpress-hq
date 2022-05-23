@@ -339,3 +339,28 @@ button {
 #hq-submit-login-button{
     width: 30%;
 }
+.hq-table{
+    width: 100%;
+}
+.form-outer-wrapper-tables{
+    background-color: #fff;
+    width: 100%;
+    padding:40px;
+    border-radius: 10px;
+}
+.hq-table thead tr{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.hq-table{
+    table-layout: auto;
+}
+.hq-title-item-tables {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.hq-thumbnail-on-tables{
+    width: 100px;
+    height: auto;
+}

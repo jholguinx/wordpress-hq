@@ -384,4 +384,8 @@ class HQRentalsAssetsHandler
     {
         return plugin_dir_url(__FILE__) . 'img/hq-admin-logo.svg';
     }
+    static public function getLogoForAdminMenu() : string
+    {
+        return plugin_dir_url(__FILE__) . 'img/logo-admin.png';
+    }
 }

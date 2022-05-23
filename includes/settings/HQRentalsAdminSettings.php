@@ -738,7 +738,7 @@ class HQRentalsAdminSettings
                                 <h1 class="hq-admin-h1">Brands</h1>
                             </div>
                             <div>
-                                <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">
+                                <table class="hq-table wp-list-table widefat striped table-view-list posts">
                                     <?php echo $this->renderHeaderAndOrFooter([
                                         'Id',
                                         'Name',

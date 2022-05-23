@@ -10,7 +10,7 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 
 class HQRentalsAdminSettings
 {
-    static protected $settingsPageTitle = 'HQ Rental';
+    static protected $settingsPageTitle = 'HQ Rentals';
     static protected $settingsMenuTitle = 'Settings';
     static protected $settingsSlug = 'hq-wordpress-settings';
     static protected $settingBrandPageTitle = 'Brands';
@@ -37,7 +37,7 @@ class HQRentalsAdminSettings
         );*/
         add_menu_page(
             HQRentalsAdminSettings::$settingsPageTitle,
-            HQRentalsAdminSettings::$settingsMenuTitle,
+            HQRentalsAdminSettings::$settingsPageTitle,
             'manage_options',
             HQRentalsAdminSettings::$settingsSlug,
             array($this, 'displaySettingsPage'),
@@ -723,6 +723,13 @@ class HQRentalsAdminSettings
                                         }
                                     </style>
                                 <?php endif; ?>
+                            </div>
+                            <div class="hq-title-item-tables">
+                                <h1 class="hq-admin-h1">Brands</h1>
+                                <button
+                                        type="submit"
+                                        name="save"
+                                        class="button button-primary button-large hq-admin-submit-button">Refresh Data</button>
                             </div>
                             <div>
                                 <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">

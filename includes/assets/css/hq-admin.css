@@ -355,3 +355,8 @@ button {
 .hq-table{
     table-layout: auto;
 }
+.hq-title-item-tables {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}

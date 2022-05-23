@@ -46,6 +46,7 @@ class HQRentalsModelsVehicleType extends HQRentalsBaseModel
             'show_in_admin_bar' => true,
             'publicly_queryable' => $this->settings->isEnableCustomPostsPages(),
             'show_ui' => true,
+            'show_in_menu' => false,
             'query_var' => true,
             'has_archive' => false,
             'hierarchical' => false,

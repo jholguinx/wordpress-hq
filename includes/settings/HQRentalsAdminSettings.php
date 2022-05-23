@@ -904,6 +904,7 @@ class HQRentalsAdminSettings
                                 <table class="hq-table wp-list-table widefat fixed striped table-view-list posts">
                                     <?php echo $this->renderHeaderAndOrFooter([
                                         'Id',
+                                        'Feature Image',
                                         'Name',
                                         'Updated At'
                                     ]); ?>
@@ -911,6 +912,7 @@ class HQRentalsAdminSettings
                                         <?php foreach ($vehicles as $vehicle): ?>
                                             <tr>
                                                 <th><?php echo $vehicle->getId(); ?></th>
+                                                <th><img class="hq-thumbnail-on-tables" src="<?php echo $vehicle->getFeatureImage(); ?>" alt="<?php echo $vehicle->getLabelForWebsite(); ?>"></th>
                                                 <th><?php echo $vehicle->getLabelForWebsite(); ?></th>
                                                 <th><?php echo $vehicle->getUpdatedAt(); ?></th>
                                             </tr>
@@ -918,6 +920,7 @@ class HQRentalsAdminSettings
                                     </tbody>
                                     <?php echo $this->renderHeaderAndOrFooter([
                                         'Id',
+                                        'Feature Image',
                                         'Name',
                                         'Updated At'
                                     ], true); ?>

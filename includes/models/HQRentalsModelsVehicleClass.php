@@ -160,7 +160,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'show_in_admin_bar' => true,
             'publicly_queryable' => $this->pluginSettings->isEnableCustomPostsPages(),
             'show_ui' => true,
-            'show_in_menu' => true,
+            'show_in_menu' => false,
             'show_in_nav_menus' => true,
             'query_var' => true,
             'rewrite' => ['slug' => $this->vehicleClassesCustomPostSlug],

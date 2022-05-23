@@ -360,3 +360,7 @@ button {
     justify-content: space-between;
     margin-bottom: 20px;
 }
+.hq-thumbnail-on-tables{
+    width: 100px;
+    height: auto;
+}

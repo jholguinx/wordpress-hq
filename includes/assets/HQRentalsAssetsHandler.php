@@ -378,6 +378,7 @@ class HQRentalsAssetsHandler
         wp_enqueue_style('hq-datepicker-style');
         wp_enqueue_script('hq-daysjs-custom-js');
         wp_enqueue_script('hq-daysjs-js');
+        wp_enqueue_script('hq-datepicker-js');
         wp_enqueue_script('hq-page-vehicle-class-big-header-js');
     }
     static public function getLogoForAdminArea() : string

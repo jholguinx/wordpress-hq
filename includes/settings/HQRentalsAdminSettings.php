@@ -107,7 +107,6 @@ class HQRentalsAdminSettings
                     max-width: 600px;
                 }
             </style>
-            <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
             <div id="hq-settings-page" class="wrap">
                 <div id="wrap">
                     <div class="form-outer-wrapper">
@@ -717,7 +716,6 @@ class HQRentalsAdminSettings
                     var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
                     var hqWebsiteURL = "<?php echo home_url(); ?>"
                 </script>
-                <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
                 <div id="hq-settings-page" class="wrap">
                     <div id="wrap">
                         <div class="form-outer-wrapper-tables">
@@ -800,7 +798,6 @@ class HQRentalsAdminSettings
                     var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
                     var hqWebsiteURL = "<?php echo home_url(); ?>"
                 </script>
-                <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
                 <div id="hq-settings-page" class="wrap">
                     <div id="wrap">
                         <div class="form-outer-wrapper-tables">
@@ -874,7 +871,6 @@ class HQRentalsAdminSettings
                     var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
                     var hqWebsiteURL = "<?php echo home_url(); ?>"
                 </script>
-                <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
                 <div id="hq-settings-page" class="wrap">
                     <div id="wrap">
                         <div class="form-outer-wrapper-tables">

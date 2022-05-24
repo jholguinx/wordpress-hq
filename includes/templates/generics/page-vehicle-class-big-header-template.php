@@ -402,12 +402,4 @@ get_header();
             <div class="sidebar_bottom"></div>
         </div>
     </div>
-    <link rel="stylesheet" href="/wp-content/plugins/hq-rental-software/includes/assets/css/jquery.datetimepicker.min.css">
-
-    <script src="<?php echo $site; ?>/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script>
-    <script src="<?php echo $site; ?>/wp-content/plugins/hq-rental-software/includes/assets/js/jquery.datetimepicker.full.min.js"></script>
-    <script src="<?php echo $site; ?>/wp-content/plugins/hq-rental-software/includes/assets/js/daysjs-customParseFormat.min.js"></script>
-    <script src="<?php echo $site; ?>/wp-content/plugins/hq-rental-software/includes/assets/js/dayjs.min.js"></script>
-<script src="<?php echo $site; ?>/wp-content/plugins/hq-rental-software/includes/assets/js/page-vehicle-class-big-header.js"></script>
-
 <?php get_footer(); ?>

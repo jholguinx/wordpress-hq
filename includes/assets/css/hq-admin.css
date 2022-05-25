@@ -364,3 +364,6 @@ button {
     width: 100px;
     height: auto;
 }
+.e-notice{
+    display: none;
+}

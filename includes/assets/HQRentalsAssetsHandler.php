@@ -265,9 +265,13 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-wordpress-dates-js');
     }
 
-    public static function getHQFontAwesome()
+    public static function getHQFontAwesome() : void
     {
         echo '<link rel="stylesheet" href="https://caag.caagcrm.com/assets/font-awesome">';
+    }
+    public static function getHQFontAwesomeForHTML() : string
+    {
+        return '<link rel="stylesheet" href="https://caag.caagcrm.com/assets/font-awesome">';
     }
     public static function getHQLogo()
     {

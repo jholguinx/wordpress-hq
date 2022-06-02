@@ -19,8 +19,8 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
             'orientation_places_form'   =>	'horizontal',
             'title' => ''
         ), $atts ) );
-        $shortcode = new HQRentalsPlacesReservationForm($atts);
-        return $shortcode->renderShortcode();
+        $shortcode = new HQRentalsPlacesReservationForm();
+        return $shortcode->renderShortcode($atts);
     }
     public function setParams(){
         vc_map(

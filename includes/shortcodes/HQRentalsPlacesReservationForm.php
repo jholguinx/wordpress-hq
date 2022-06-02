@@ -21,8 +21,17 @@ class HQRentalsPlacesReservationForm
     private $mapCenter;
     private $mapCenterRadius;
 
-    public function __construct($params)
+    public function __construct()
     {
+        $this->settings = new HQRentalsSettings();
+        $this->assets =new HQRentalsAssetsHandler();
+        $this->front = new HQRentalsFrontHelper();
+        add_shortcode('hq_rentals_places_reservation_form', array($this, 'renderShortcode'));
+    }
+
+    public function renderShortcode($params = [])
+    {
+        //[hq_rentals_places_reservation_form reservation_url_places_form="/reservations/" title="Places Form" support_for_custom_location="true" custom_location_label="Address" minimum_rental_period="2" google_country="syc" orientation_places_form="horizontal"]
         $this->linkURL = !empty($params['reservation_url_places_form']) ? $params['reservation_url_places_form'] : '';
         $this->title = !empty($params['title']) ? $params['title'] : '';
         $this->orientation = !empty($params['orientation_places_form']) ? $params['orientation_places_form'] : '';
@@ -32,14 +41,6 @@ class HQRentalsPlacesReservationForm
         $this->googleCountry = !empty($params['google_country']) ? $params['google_country'] : 'us';
         $this->mapCenter = !empty($params['google_map_center']) ? $params['google_map_center'] : '';
         $this->mapCenterRadius = !empty($params['google_map_center_radius']) ? $params['google_map_center_radius'] : '';
-        $this->settings = new HQRentalsSettings();
-        $this->assets =new HQRentalsAssetsHandler();
-        $this->front = new HQRentalsFrontHelper();
-        add_shortcode('hq_rentals_places_reservation_form', array($this, 'renderShortcode'));
-    }
-
-    public function renderShortcode()
-    {
         $key = $this->settings->getGoogleAPIKey();
         $this->assets->loadPlacesReservationAssets();
         $html = "";
@@ -55,8 +56,7 @@ class HQRentalsPlacesReservationForm
             echo "<p>Add Google Key</p>";
         }else{
             if($this->orientation == 'horizontal'){
-                $html = "
-            ". HQRentalsAssetsHandler::getHQFontAwesome() . $minimumRental ."
+                $html = HQRentalsAssetsHandler::getHQFontAwesomeForHTML() . $minimumRental ."
             <div id='hq-place-form-desktop' class=''>
                <div id='hq-form-wrapper' class=''>
                   <form id='hq-form' method='get' action='{$this->linkURL}'>
@@ -184,7 +184,7 @@ class HQRentalsPlacesReservationForm
                         min-height: 50px;
                     }
                 </style>
-            ". HQRentalsAssetsHandler::getHQFontAwesome() ."
+            ". HQRentalsAssetsHandler::getHQFontAwesomeForHTML() . $minimumRental  ."
                     <div class='hq-places-vertical-form-wrapper'>
                         <div class=''>
                             <div class=''>

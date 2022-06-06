@@ -55,6 +55,7 @@ jQuery(document).ready(function(){
         dateFormat: hqRentalsTenantDatetimeFormat,
         minDate: 0,
         format:hqRentalsTenantDatetimeFormat,
+        step: 5
     };
     setDefaults(dateFormat, minDays);
     jQuery("#hq-times-pick-up-date").datetimepicker(dateConfig);

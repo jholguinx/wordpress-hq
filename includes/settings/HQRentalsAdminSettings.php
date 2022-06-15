@@ -48,7 +48,7 @@ class HQRentalsAdminSettings
             HQRentalsAdminSettings::$settingBrandPageTitle,
             'manage_options',
             HQRentalsAdminSettings::$settingBrandPageSlug,
-            array($this, 'displayBrandsPage'),
+            array($this, 'displayBrandsPage')
         );
         add_submenu_page(
             HQRentalsAdminSettings::$settingsSlug,
@@ -56,7 +56,7 @@ class HQRentalsAdminSettings
             HQRentalsAdminSettings::$settingsLocationPageTitle,
             'manage_options',
             HQRentalsAdminSettings::$settingsLocationPageSlug,
-            array($this, 'displayLocationsPage'),
+            array($this, 'displayLocationsPage')
         );
         add_submenu_page(
             HQRentalsAdminSettings::$settingsSlug,
@@ -64,7 +64,7 @@ class HQRentalsAdminSettings
             HQRentalsAdminSettings::$settingsVehicleClassPageTitle,
             'manage_options',
             HQRentalsAdminSettings::$settingsVehicleClassPageSlug,
-            array($this, 'displayVehicleClassPage'),
+            array($this, 'displayVehicleClassPage')
         );
         // remove same name sub-item
         //remove_submenu_page(HQRentalsAdminSettings::$settingsSlug,HQRentalsAdminSettings::$settingsSlug);

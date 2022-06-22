@@ -142,7 +142,7 @@ class HQRentalsAdminSettings
                                 <button
                                         type="submit"
                                         name="save"
-                                        class="button button-primary button-large hq-admin-submit-button">Refresh Data</button>
+                                        class="button button-primary button-large hq-admin-submit-button">Save Changes</button>
                             </div>
                             <div class="hq-general-settings-section-wrapper">
                                 <div class="hq-form-component-wrapper">

@@ -44,12 +44,6 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
                         'value'       => ''
                     ),
                     array(
-                        'type'        => 'textfield',
-                        'heading'     => __( 'Title', 'hq-wordpress' ),
-                        'param_name'  => 'title',
-                        'value'       => ''
-                    ),
-                    array(
                         'type'        => 'checkbox',
                         'heading'     => __( 'Support for Custom Location', 'hq-wordpress' ),
                         'param_name'  => 'support_for_custom_location',

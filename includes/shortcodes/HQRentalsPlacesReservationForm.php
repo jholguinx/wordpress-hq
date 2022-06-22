@@ -174,10 +174,6 @@ class HQRentalsPlacesReservationForm
                                                 <input type='text' name='pick_up_date' class='hq-places-auto-complete' placeholder='Today' id='hq-times-pick-up-date' required='required'>
                                                 <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-calendar-alt'></i></span>
                                             </div>
-                                            <div class='hq-places-times-input-wrapper hq-places-dates-wrapper-vertical'>
-                                                <input type='text' name='pick_up_time' class='hq-places-auto-complete' placeholder='12:00' id='hq-times-pick-up-time' required='required'>
-                                                <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-clock'></i></span>
-                                            </div>
                                         </div>
                                 </div>
                                 <div class='hq-places-vertical-form-item-wrapper hq-places-vertical-form-dates-wrapper'>
@@ -188,10 +184,6 @@ class HQRentalsPlacesReservationForm
                                             <div class='hq-places-times-input-wrapper hq-places-dates-wrapper-vertical'>
                                                 <input type='text' name='return_date' class='hq-places-auto-complete' placeholder='Tomorrow' id='hq-times-return-date' required='required'>
                                                 <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-calendar-alt'></i></span>
-                                            </div>
-                                            <div class='hq-places-times-input-wrapper hq-places-dates-wrapper-vertical'>
-                                                <input type='text' name='return_time' class='hq-places-auto-complete' placeholder='12:00' id='hq-times-return-time' required='required'>
-                                                <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-clock'></i></span>
                                             </div>
                                         </div>
                                 </div>
@@ -204,9 +196,6 @@ class HQRentalsPlacesReservationForm
                                            </span>
                                     </button>
                                     <input type='hidden' name='target_step' value='2'>
-                                    <input type='hidden' name='pick_up_location' value='custom'>
-                                    <input type='hidden' name='return_location' value='custom'>
-                                    <input type='hidden' name='return_location_custom' value='' id='hq-return-location-custom'>
                                 </div>
                         </form>
                     </div>

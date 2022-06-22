@@ -107,7 +107,7 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
             'google_map_center_radius',
             [
                 'label' => __('Label for Custom Location', 'hq-wordpress'),
-                'description' => __('Degress', 'hq-wordpress'),
+                'description' => __('Degrees', 'hq-wordpress'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'input_type' => 'string',
                 'default' => 'us'

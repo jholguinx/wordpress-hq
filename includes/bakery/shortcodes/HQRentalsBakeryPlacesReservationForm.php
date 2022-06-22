@@ -84,7 +84,7 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
                         'type'        => 'textfield',
                         'heading'     => __( 'Address Radius', 'hq-wordpress' ),
                         'param_name'  => 'google_map_center_radius',
-                        'description' => 'Degress',
+                        'description' => 'Degrees',
                         'value'       => ''
                     ),
                     array(

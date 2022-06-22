@@ -1,6 +1,6 @@
 <?php
-
 use \HQRentalsPlugin\HQRentalsShortcodes\HQRentalsPlacesReservationForm;
+
 class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
 {
     public function __construct($data = [], $args = null)
@@ -59,6 +59,61 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'support_for_custom_location',
+            [
+                'label' => __('Support for Custom Location', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'default' => 'true',
+            ]
+        );
+        $this->add_control(
+            'custom_location_label',
+            [
+                'label' => __('Label for Custom Location', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+            ]
+        );
+        $this->add_control(
+            'minimum_rental_period',
+            [
+                'label' => __('Label for Custom Location', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+                'default' => '1'
+            ]
+        );
+        $this->add_control(
+            'google_country',
+            [
+                'label' => __('Label for Custom Location', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+                'default' => 'us'
+            ]
+        );
+        $this->add_control(
+            'google_map_center',
+            [
+                'label' => __('Label for Custom Location', 'hq-wordpress'),
+                'description' => __('lat,lon', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+                'default' => 'us'
+            ]
+        );
+        $this->add_control(
+            'google_map_center_radius',
+            [
+                'label' => __('Label for Custom Location', 'hq-wordpress'),
+                'description' => __('Degress', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+                'default' => 'us'
+            ]
+        );
+
         $this->end_controls_section();
     }
 

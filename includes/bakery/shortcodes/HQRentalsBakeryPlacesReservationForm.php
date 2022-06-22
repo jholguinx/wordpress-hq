@@ -4,7 +4,6 @@ use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesBrands;
 use \HQRentalsPlugin\HQRentalsShortcodes\HQRentalsPlacesReservationForm;
 
-
 class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
     public function __construct()
     {
@@ -17,7 +16,12 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
         extract( shortcode_atts( array(
             'reservation_url_places_form' => 	'',
             'orientation_places_form'   =>	'horizontal',
-            'title' => ''
+            'support_for_custom_location' => 'true',
+            'custom_location_label' => '',
+            'minimum_rental_period' => '1',
+            'google_country' => 'us',
+            'google_map_center' => '',
+            'google_map_center_radius' => ''
         ), $atts ) );
         $shortcode = new HQRentalsPlacesReservationForm();
         return $shortcode->renderShortcode($atts);
@@ -73,12 +77,14 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
                         'type'        => 'textfield',
                         'heading'     => __( 'Address Center', 'hq-wordpress' ),
                         'param_name'  => 'google_map_center',
+                        'description' => 'lat,lon',
                         'value'       => ''
                     ),
                     array(
                         'type'        => 'textfield',
                         'heading'     => __( 'Address Radius', 'hq-wordpress' ),
                         'param_name'  => 'google_map_center_radius',
+                        'description' => 'Degress',
                         'value'       => ''
                     ),
                     array(

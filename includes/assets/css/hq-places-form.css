@@ -99,7 +99,7 @@
     -webkit-transition: color 175ms cubic-bezier(.18,.43,.58,1),background-color 175ms cubic-bezier(.18,.43,.58,1),border-color 175ms cubic-bezier(.18,.43,.58,1);
     -moz-transition: color 175ms cubic-bezier(.18,.43,.58,1),background-color 175ms cubic-bezier(.18,.43,.58,1),border-color 175ms cubic-bezier(.18,.43,.58,1);
     transition: color 175ms cubic-bezier(.18,.43,.58,1),background-color 175ms cubic-bezier(.18,.43,.58,1),border-color 175ms cubic-bezier(.18,.43,.58,1);
-    padding: 12px 45px;
+    padding: 12px 30px;
     cursor: pointer;
 }
 .hq-pickup-custom-location,.hq-return-custom-location{

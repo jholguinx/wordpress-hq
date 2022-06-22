@@ -14,7 +14,6 @@ class HQRentalsPlacesReservationForm
     /*
      [hq_bakery_places_reservation_form
         reservation_url_places_form="/reservations/"
-        title="Places Form"
         support_for_custom_location="true"
         custom_location_label="La Paz (Additional Charge 180 USD)"
         minimum_rental_period="2"
@@ -44,7 +43,7 @@ class HQRentalsPlacesReservationForm
         //[hq_rentals_places_reservation_form reservation_url_places_form="/reservations/" title="Places Form" support_for_custom_location="true" custom_location_label="Address" minimum_rental_period="2" google_country="syc" orientation_places_form="horizontal"]
         $this->linkURL = !empty($params['reservation_url_places_form']) ? $params['reservation_url_places_form'] : '';
         $this->orientation = !empty($params['orientation_places_form']) ? $params['orientation_places_form'] : '';
-        $this->supportForCustomLocation = !empty($params['support_for_custom_location']);
+        $this->supportForCustomLocation = !empty($params['support_for_custom_location']) ? $params['support_for_custom_location'] : "false";
         $this->customLocationLabel = !empty($params['custom_location_label']) ? $params['custom_location_label'] : '';
         $this->minimumRental = !empty($params['minimum_rental_period']) ? $params['minimum_rental_period'] : 1;
         $this->googleCountry = !empty($params['google_country']) ? $params['google_country'] : 'us';
@@ -205,20 +204,22 @@ class HQRentalsPlacesReservationForm
                                                     <label for='form-field-location'
                                                            class='hq-smart-label'>Pickup Location</label>
                                                     <div class='hq-places-dates-wrapper-vertical'>
-                                                        <input type='text' name='pick_up_location_custom' id='hq-places-field' class='hq-places-auto-complete' placeholder='Address' required='required'>
+                                                        <select name='pick_up_location' id='hq-pick-up-location'>
+                                                            {$this->front->getLocationOptions()}
+                                                            {$this->resolveCustomLocation()}
+                                                        </select>
                                                         <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-map-marked-alt'></i></span>
                                                     </div>
                                                 </div>
                                                 <div class='hq-places-vertical-form-item-wrapper'>
                                                     <label for='form-field-location'
-                                                           class='hq-smart-label'>Vehicle Type</label>
+                                                           class='hq-smart-label'>Return Location</label>
                                                     <div class='hq-places-dates-wrapper-vertical'>
-                                                        <select name='vehicle_type' placeholder='Vehicle, Bike or Scooter' class='hq-palces-vertical-select'>
-                                                            <option value='vehicle'>Vehicle</option>
-                                                            <option value='scooter'>Scooter</option>
-                                                            <option value='bike'>Bike</option>
+                                                        <select name='return_location' id='hq-return-location'>
+                                                            {$this->front->getLocationOptions()}
+                                                            {$this->resolveCustomLocation()}
                                                         </select>
-                                                        <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-chevron-down'></i></span>
+                                                        <span class='hq-select-icon-wrapper-vertical'><i class='fas fa-map-marked-alt'></i></span>
                                                     </div>
                                                 </div>
                                                 <div class='hq-places-vertical-form-item-wrapper hq-places-vertical-form-dates-wrapper'>
@@ -278,7 +279,7 @@ class HQRentalsPlacesReservationForm
     }
     public function resolveCustomLocation() : string
     {
-        if($this->supportForCustomLocation){
+        if($this->supportForCustomLocation === 'true'){
             return "<option value='custom'>{$this->customLocationLabel}</option>";
         }
         return '';

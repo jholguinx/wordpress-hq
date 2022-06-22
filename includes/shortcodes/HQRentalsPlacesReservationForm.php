@@ -40,7 +40,6 @@ class HQRentalsPlacesReservationForm
 
     public function renderShortcode($params = [])
     {
-        //[hq_rentals_places_reservation_form reservation_url_places_form="/reservations/" title="Places Form" support_for_custom_location="true" custom_location_label="Address" minimum_rental_period="2" google_country="syc" orientation_places_form="horizontal"]
         $this->linkURL = !empty($params['reservation_url_places_form']) ? $params['reservation_url_places_form'] : '';
         $this->orientation = !empty($params['orientation_places_form']) ? $params['orientation_places_form'] : '';
         $this->supportForCustomLocation = !empty($params['support_for_custom_location']) ? $params['support_for_custom_location'] : "false";

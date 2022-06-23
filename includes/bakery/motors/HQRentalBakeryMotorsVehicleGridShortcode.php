@@ -14,6 +14,8 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     private $reservationURL;
     private $title;
     private $target_step;
+    private $ramdomize_items;
+    private $number_of_vehicles;
 
     public function __construct()
     {
@@ -27,11 +29,15 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
         extract( shortcode_atts( array(
             'reservation_page_url'				=>	'',
             'title'                             =>  '',
-            'target_step'                       => '3'
+            'target_step'                       =>  '3',
+            'randomize_grid'                    =>  'false',
+            'number_of_vehicles'                =>  ''
         ), $atts ) );
         $this->reservationURL = $atts['reservation_page_url'];
         $this->title = $atts['title'];
         $this->target_step = $atts['target_step'];
+        $this->ramdomize_items = $atts['randomize_grid'];
+        $this->number_of_vehicles = $atts['number_of_vehicles'];
         echo $this->renderShortcode();
     }
 
@@ -64,6 +70,21 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                         'heading' => __('Reservation URL', 'hq-wordpress'),
                         'param_name' => 'reservation_page_url',
                         'value' => ''
+                    ),
+                    array(
+                        'type' => 'textfield',
+                        'heading' => __('Number of Vehicles', 'hq-wordpress'),
+                        'param_name' => 'number_of_vehicles',
+                        'value' => ''
+                    ),
+                    array(
+                        'type' => 'dropdown',
+                        'heading' => __('Randomize Items', 'hq-wordpress'),
+                        'param_name' => 'randomize_grid',
+                        'value'      => array(
+                            __( 'Yes', "hq-wordpress" ) => 'true',
+                            __( 'No', "hq-wordpress" ) => 'false',
+                        ),
                     )
                 )
             )
@@ -74,9 +95,19 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     {
         $html_loop = "";
         $vehicles = $this->query->allVehicleClasses();
-        foreach ($vehicles as $vehicle) {
-            $html_loop .= $this->resolveSingleVehicleCode($vehicle);
+        if($this->ramdomize_items === 'true'){
+            shuffle($vehicles);
         }
+        if(!empty($this->number_of_vehicles) and is_numeric($this->number_of_vehicles)){
+            foreach (array_slice($vehicles, 0, (int)$this->number_of_vehicles) as $vehicle) {
+                $html_loop .= $this->resolveSingleVehicleCode($vehicle);
+            }
+        }else{
+            foreach ($vehicles as $vehicle) {
+                $html_loop .= $this->resolveSingleVehicleCode($vehicle);
+            }
+        }
+
         return HQRentalsAssetsHandler::getHQFontAwesome() . "
             <div class='wpb_column vc_column_container vc_col-sm-12 hq-grid-wrapper'>
                 <div class='wpb_column vc_column_container vc_col-sm-12 hq-grid-inner-wrapper'>

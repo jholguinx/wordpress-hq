@@ -14,6 +14,8 @@ class HQRentalsVehicleGrid
     private $buttonPosition;
     private $wasInit;
     private $atts;
+    private $ramdomizeItems;
+    private $numberOfVehicles;
     public function __construct($params = null)
     {
         $this->wasInit = !empty($params);
@@ -40,6 +42,12 @@ class HQRentalsVehicleGrid
         if(!empty($params['button_position_vehicle_grid'])){
             $this->buttonPosition = $params['button_position_vehicle_grid'];
         }
+        if(!empty($params['randomize_grid'])){
+            $this->ramdomizeItems = $params['randomize_grid'];
+        }
+        if(!empty($params['number_of_vehicles'])){
+            $this->numberOfVehicles = $params['number_of_vehicles'];
+        }
     }
     public function renderShortcode($atts = []) : string
     {
@@ -50,7 +58,9 @@ class HQRentalsVehicleGrid
             'brand_id' => '',
             'disable_features_vehicle_grid' => '',
             'button_position_vehicle_grid' => '',
-            'button_text' => 'RENT NOW'
+            'button_text' => 'RENT NOW',
+            'randomize_grid'                    =>  'false',
+            'number_of_vehicles'                =>  ''
         ), $atts);
         $this->atts = $atts;
         if(!$this->wasInit){
@@ -60,17 +70,16 @@ class HQRentalsVehicleGrid
         HQRentalsAssetsHandler::loadVehicleGridAssets();
         return '
     ' . HQRentalsAssetsHandler::getHQFontAwesome() . ' 
-    <div class="elementor-widget-container hq-elementor-title">
-			<h2 class="elementor-heading-title elementor-size-default">' . $this->title . '</h2>		
-    </div>
-    <div class="elementor-element elementor-widget elementor-widget-html">
-        <div class="elementor-widget-container">
-            <!-- Begin Loop -->
-            ' . $vehiclesCode . '
-            <!-- End Loop -->
-           
-        </div>
-    </div>
+            <div class="elementor-widget-container hq-elementor-title">
+                    <h2 class="elementor-heading-title elementor-size-default">' . $this->title . '</h2>		
+            </div>
+            <div class="elementor-element elementor-widget elementor-widget-html">
+                <div class="elementor-widget-container">
+                    <!-- Begin Loop -->
+                    ' . $vehiclesCode . '
+                    <!-- End Loop -->       
+                </div>
+            </div>
         ';
     }
     public function getVehiclesHTML()
@@ -81,13 +90,23 @@ class HQRentalsVehicleGrid
         }else{
             $vehicles = $query->allVehicleClasses(true);
         }
+        if($this->ramdomizeItems === 'true'){
+            shuffle($vehicles);
+        }
 
         $html = '';
         if (count($vehicles)) {
             $innerHTML = '';
-            foreach (array_chunk($vehicles, 3) as $vehiclesRow) {
-                $innerHTML .= $this->resolveVehicleRowHTML($vehiclesRow);
+            if(!empty($this->number_of_vehicles) and is_numeric($this->number_of_vehicles)){
+                foreach (array_chunk(array_slice($vehicles,0, (int)$this->numberOfVehicles), 3) as $vehiclesRow) {
+                    $innerHTML .= $this->resolveVehicleRowHTML($vehiclesRow);
+                }
+            }else{
+                foreach (array_chunk($vehicles, 3) as $vehiclesRow) {
+                    $innerHTML .= $this->resolveVehicleRowHTML($vehiclesRow);
+                }
             }
+
             $html .=
                 '<div id="hq-smart-vehicle-grid">
                     ' . $innerHTML . '

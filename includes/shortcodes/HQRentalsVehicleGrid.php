@@ -3,7 +3,11 @@
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsCarRentalSetting;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesCarRentalSetting;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
 class HQRentalsVehicleGrid
 {
@@ -16,6 +20,8 @@ class HQRentalsVehicleGrid
     private $atts;
     private $ramdomizeItems;
     private $numberOfVehicles;
+    private $defaultDates;
+
     public function __construct($params = null)
     {
         $this->wasInit = !empty($params);
@@ -48,6 +54,11 @@ class HQRentalsVehicleGrid
         if(!empty($params['number_of_vehicles'])){
             $this->numberOfVehicles = $params['number_of_vehicles'];
         }
+        if(!empty($params['default_dates'])){
+            $this->defaultDates = $params['default_dates'];
+        }
+
+
     }
     public function renderShortcode($atts = []) : string
     {
@@ -60,7 +71,8 @@ class HQRentalsVehicleGrid
             'button_position_vehicle_grid'      => '',
             'button_text'                       => 'RENT NOW',
             'randomize_grid'                    =>  'false',
-            'number_of_vehicles'                =>  ''
+            'number_of_vehicles'                =>  '',
+            'default_dates'                     =>  'false',
         ), $atts);
         $this->atts = $atts;
         if(!$this->wasInit){
@@ -161,7 +173,7 @@ class HQRentalsVehicleGrid
                         </div>
                         <div class='hq-grid-button-wrapper'>
                             <div class='bottom-info hq-grid-button-wrapper hq-grid-button-wrapper-{$this->buttonPosition}'>
-                                <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=3&vehicle_class_id={$vehicle->id}'>{$this->atts['button_text']}</a>
+                                <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=3&vehicle_class_id={$vehicle->id}{$this->resolveDefaultDates()}'>{$this->atts['button_text']}</a>
                                 {$rateTagLeft}
                             </div>
                         </div>
@@ -195,5 +207,17 @@ class HQRentalsVehicleGrid
                     <span class='feature-label'>{$feature->label}</span>
                 </li>";
         return $html;
+    }
+    public function resolveDefaultDates() : string
+    {
+        if($this->defaultDates === 'true'){
+            $setting = new HQRentalsSettings();
+            $format = $setting->getTenantDatetimeFormat();
+            $carbon = new Carbon();
+            $pick_up_date = Carbon::now()->addDay(1)->format($format);
+            $return_date = Carbon::now()->addDay(2)->format($format);
+            return '&pick_up_date=' . $pick_up_date . '&return_date=' . $return_date;
+        }
+        return '';
     }
 }

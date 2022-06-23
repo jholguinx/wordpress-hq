@@ -20,7 +20,8 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
             'brand_id'  => '',
             'button_position_vehicle_grid' => 'right',
             'randomize_grid'                    =>  'false',
-            'number_of_vehicles'                =>  ''
+            'number_of_vehicles'                =>  '',
+            'default_dates'                     =>  'false'
         ), $atts ) );
         $shortcode = new HQRentalsVehicleGrid();
         return $shortcode->renderShortcode($atts);
@@ -70,6 +71,15 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
                         'type' => 'dropdown',
                         'heading' => __('Randomize Items', 'hq-wordpress'),
                         'param_name' => 'randomize_grid',
+                        'value'      => array(
+                            __( 'No', "hq-wordpress" ) => 'false',
+                            __( 'Yes', "hq-wordpress" ) => 'true',
+                        ),
+                    ),
+                    array(
+                        'type' => 'dropdown',
+                        'heading' => __('Add Default Date', 'hq-wordpress'),
+                        'param_name' => 'default_dates',
                         'value'      => array(
                             __( 'No', "hq-wordpress" ) => 'false',
                             __( 'Yes', "hq-wordpress" ) => 'true',

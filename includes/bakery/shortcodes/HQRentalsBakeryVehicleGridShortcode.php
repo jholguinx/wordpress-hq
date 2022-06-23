@@ -64,15 +64,15 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
                         'type' => 'textfield',
                         'heading' => __('Number of Vehicles', 'hq-wordpress'),
                         'param_name' => 'number_of_vehicles',
-                        'value' => ''
+                        'value' => '',
                     ),
                     array(
                         'type' => 'dropdown',
                         'heading' => __('Randomize Items', 'hq-wordpress'),
                         'param_name' => 'randomize_grid',
                         'value'      => array(
-                            __( 'Yes', "hq-wordpress" ) => 'true',
                             __( 'No', "hq-wordpress" ) => 'false',
+                            __( 'Yes', "hq-wordpress" ) => 'true',
                         ),
                     )
                 )

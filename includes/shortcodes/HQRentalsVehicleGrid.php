@@ -53,12 +53,12 @@ class HQRentalsVehicleGrid
     {
         $atts = shortcode_atts(
         array(
-            'reservation_url_vehicle_grid' => '',
-            'title_vehicle_grid' => '',
-            'brand_id' => '',
-            'disable_features_vehicle_grid' => '',
-            'button_position_vehicle_grid' => '',
-            'button_text' => 'RENT NOW',
+            'reservation_url_vehicle_grid'      => '',
+            'title_vehicle_grid'                => '',
+            'brand_id'                          => '',
+            'disable_features_vehicle_grid'     => '',
+            'button_position_vehicle_grid'      => '',
+            'button_text'                       => 'RENT NOW',
             'randomize_grid'                    =>  'false',
             'number_of_vehicles'                =>  ''
         ), $atts);
@@ -97,7 +97,7 @@ class HQRentalsVehicleGrid
         $html = '';
         if (count($vehicles)) {
             $innerHTML = '';
-            if(!empty($this->number_of_vehicles) and is_numeric($this->number_of_vehicles)){
+            if(!empty($this->numberOfVehicles) and is_numeric($this->numberOfVehicles)){
                 foreach (array_chunk(array_slice($vehicles,0, (int)$this->numberOfVehicles), 3) as $vehiclesRow) {
                     $innerHTML .= $this->resolveVehicleRowHTML($vehiclesRow);
                 }

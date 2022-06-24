@@ -21,7 +21,8 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
             'minimum_rental_period' => '1',
             'google_country' => 'us',
             'google_map_center' => '',
-            'google_map_center_radius' => ''
+            'google_map_center_radius' => '',
+            'submit_button_label' => ''
         ), $atts ) );
         $shortcode = new HQRentalsPlacesReservationForm();
         return $shortcode->renderShortcode($atts);
@@ -87,7 +88,12 @@ class HQRentalsBakeryPlacesReservationForm extends WPBakeryShortCode{
                         'param_name'  => 'orientation_places_form',
                         'value' => ['', 'horizontal', 'vertical']
                     ),
-
+                    array(
+                        'type'        => 'textfield',
+                        'heading'     => __( 'Submit Button Label', 'hq-wordpress' ),
+                        'param_name'  => 'submit_button_label',
+                        'value'       => ''
+                    ),
                 )
             )
         );

@@ -29,6 +29,7 @@ class HQRentalsPlacesReservationForm
     private $googleCountry;
     private $mapCenter;
     private $mapCenterRadius;
+    private $submitButtonLabel;
 
     public function __construct()
     {
@@ -48,6 +49,7 @@ class HQRentalsPlacesReservationForm
         $this->googleCountry = !empty($params['google_country']) ? $params['google_country'] : 'us';
         $this->mapCenter = !empty($params['google_map_center']) ? $params['google_map_center'] : '';
         $this->mapCenterRadius = !empty($params['google_map_center_radius']) ? $params['google_map_center_radius'] : '';
+        $this->submitButtonLabel = !empty($params['submit_button_label']) ? $params['submit_button_label'] : 'Book Now';
         $key = $this->settings->getGoogleAPIKey();
         $this->assets->loadPlacesReservationAssets();
         $html = "";
@@ -124,7 +126,7 @@ class HQRentalsPlacesReservationForm
                         </div>
                         <div class='hq-places-input-wrapper hq-button-wrapper'>
                             <input type='hidden' name='target_step' value='2'>
-                            <button type='submit' class='hq-places-submit-button'>Book Now</button>    
+                            <button type='submit' class='hq-places-submit-button'>{$this->submitButtonLabel}</button>    
                         </div>
                      </div>
                   </form>
@@ -191,7 +193,7 @@ class HQRentalsPlacesReservationForm
                                             class='hq-submit-button'>
                                            <span>
                                            <span class='elementor-button-icon'></span>
-                                           <span class='elementor-button-text'>Book Now</span>
+                                           <span class='elementor-button-text'>{$this->submitButtonLabel}</span>
                                            </span>
                                     </button>
                                     <input type='hidden' name='target_step' value='2'>

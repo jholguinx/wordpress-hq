@@ -134,13 +134,13 @@ class HQRentalsScheduler
 
     public function refreshAllDataOnDatabase()
     {
-        $this->vehicleClassesTask->setDataOnWP();
         $this->settingsTask->setDataOnWP();
         $this->carRentalSettingTask->setDataOnWP();
         $this->brandsTask->setDataOnWP();
         $this->locationsTask->setDataOnWP();
         $this->additionalChargesTask->setDataOnWP();
         $this->vehicleTypesTask->setDataOnWP();
+        $this->vehicleClassesTask->setDataOnWP();
     }
 
     public function getErrorOnSync()

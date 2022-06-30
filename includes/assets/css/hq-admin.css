@@ -283,7 +283,7 @@ button {
 }
 .form-outer-wrapper{
     background-color: #fff;
-    width: 60%;
+    width: 80%;
     padding:40px;
     border-radius: 10px;
 }
@@ -366,4 +366,28 @@ button {
 }
 .e-notice,.notice-warning,.jquery-migrate-dashboard-notice{
     display: none !important;
+}
+@media all and (max-width: 1024px) {
+    .form-outer-wrapper {
+        width: 100%;
+    }
+    .hq-general-label-wrapper{
+        width: 50%;
+    }
+    .hq-general-input-wrapper{
+        width: 50%;
+        margin-left: 30px;
+    }
+}
+@media all and (max-width: 768px) {
+    /*
+    .hq-form-component-wrapper{
+        flex-direction: column;
+    }
+    .hq-tabs-wrapper,.hq-tabs-content,.hq-general-label-wrapper,.hq-general-input-wrapper{
+        width: 100%;
+    }
+    .hq-general-settings-item{
+        flex-direction: column;
+    }*/
 }

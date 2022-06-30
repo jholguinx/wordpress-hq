@@ -11,7 +11,7 @@ Text Domain: hq-wordpress
 
 namespace HQRentalsPlugin;
 
-define('HQ_RENTALS_PLUGIN_VERSION', '1.4.35.39');
+define('HQ_RENTALS_PLUGIN_VERSION', '1.4.35.39-a');
 
 require_once('includes/autoloader.php');
 // If this file is accessed directory, then abort.

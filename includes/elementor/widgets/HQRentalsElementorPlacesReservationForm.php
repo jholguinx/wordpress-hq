@@ -11,12 +11,12 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
 
     public function get_name()
     {
-        return 'Places Reservation Form';
+        return 'Custom Reservation Form';
     }
 
     public function get_title()
     {
-        return __('Places Form', 'hq-wordpress');
+        return __('Custom Reservation Form', 'hq-wordpress');
     }
 
     public function get_icon()

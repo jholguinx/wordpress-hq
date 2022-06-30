@@ -364,6 +364,6 @@ button {
     width: 100px;
     height: auto;
 }
-.e-notice{
-    display: none;
+.e-notice,.notice-warning,.jquery-migrate-dashboard-notice{
+    display: none !important;
 }

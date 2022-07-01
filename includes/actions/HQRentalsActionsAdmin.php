@@ -17,7 +17,7 @@ class HQRentalsActionsAdmin
 
     public function removeNotices()
     {
-        $page = $_GET['page'];
+        $page = $_GET['page'] ?? '';
         if (!$this->isPluginAdminPage($page)) return;
         remove_all_actions('admin_notices');
         remove_all_actions('all_admin_notices');

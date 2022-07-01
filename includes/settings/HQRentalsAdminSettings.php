@@ -96,6 +96,7 @@ class HQRentalsAdminSettings
             $okAPI = $this->settings->isApiOkay();
             HQRentalsAssetsHandler::getHQFontAwesome();
             $devMode = isset($_GET['dev']);
+            $tenantLink = $this->settings->getTenantLink();
             ?>
             <script>
                 var loginActive = <?php echo ($okAPI) ? 'true' : 'false'; ?>;
@@ -138,7 +139,10 @@ class HQRentalsAdminSettings
                         </div>
                         <form action="" method="post">
                             <div class="hq-title-item">
-                                <h1 class="hq-admin-h1">Settings</h1>
+                                <h1 class="hq-admin-h1">Settings
+                                <?php if($devMode): ?>
+                                    <a class="hq-tenant-link-button" target="_blank" href="<?php echo $tenantLink; ?>"><i class="far fa-building"></i></a>
+                                <?php endif; ?></h1>
                                 <button
                                         type="submit"
                                         name="save"

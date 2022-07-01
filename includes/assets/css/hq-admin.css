@@ -406,3 +406,10 @@ button {
         margin-left: 0;
     }
 }
+.hq-tenant-link-button{
+    margin-left: 2px;
+}
+.hq-tenant-link-button i{
+    font-size: 20px;
+    color:#3c434a;
+}

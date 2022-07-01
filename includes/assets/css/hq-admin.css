@@ -380,7 +380,6 @@ button {
     }
 }
 @media all and (max-width: 768px) {
-    /*
     .hq-form-component-wrapper{
         flex-direction: column;
     }
@@ -389,5 +388,20 @@ button {
     }
     .hq-general-settings-item{
         flex-direction: column;
-    }*/
+    }
+    .hq-general-label-wrapper-big-fields,
+    .hq-general-input-wrapper-big-fields,
+    #hq-submit-login-button{
+        width:100%;
+    }
+    .hq-tabs-content{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .hq-submit-login-button-wrapper{
+        margin-top: 20px;
+    }
+    .hq-general-input-wrapper{
+        margin-left: 0;
+    }
 }

@@ -295,7 +295,7 @@ button {
 }
 .hq-tabs-content{
     width: 80%;
-    padding: 20px;
+    padding: 20px 0px 20px 20px;
 }
 .hq-form-component-wrapper{
     display: flex;

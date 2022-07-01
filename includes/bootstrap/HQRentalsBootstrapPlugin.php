@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsBootstrap;
 
 use HQRentalsPlugin\HQRentalsActions\elementor\HQElementorActions;
+use HQRentalsPlugin\HQRentalsActions\HQRentalsActionsAdmin;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsActionsRedirects;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsAjaxHandler;
 use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
@@ -42,6 +43,7 @@ class HQRentalsBootstrapPlugin
         $this->elementor = new HQElementorActions();
         $this->templates = new HQRentalsTemplateHandler();
         $this->ajaxHandler = new HQRentalsAjaxHandler();
+        $this->adminActins = new HQRentalsActionsAdmin();
         $this->loadLocalizationFiles();
     }
     private function loadLocalizationFiles()

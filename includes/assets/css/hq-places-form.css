@@ -186,3 +186,7 @@ b{
     margin-top: 10px !important;
     margin-bottom: 10px !important;
 }
+#pick-up-location-custom,
+#return-location-custom{
+    border-radius: 5px !important;
+}

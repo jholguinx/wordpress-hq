@@ -674,7 +674,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         } else {
             $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
         }
-        if(is_array($this->rate)){
+        if(isset($this->rate) and is_array($this->rate)){
             $rate = $this->rate[0];
             if ($rate instanceof HQRentalsModelsActiveRate) {
                 $existResult = $this->db->selectFromTable($this->activeRate->getTableName(), '*', 'vehicle_class_id=' . $this->getId());

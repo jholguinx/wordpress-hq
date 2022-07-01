@@ -537,8 +537,8 @@ class HQRentalsSettings
         $postDataFromSettings = $this->helper->sanitizeTextInputs($postDataFromSettings);
         $this->saveEncodedApiKey($postDataFromSettings[$this->api_tenant_token], $postDataFromSettings[$this->api_user_token]);
         $this->saveEncodedApiKeyForWorkspotLocation(
-            isset($postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location]) ?? '',
-        isset($postDataFromSettings[$this->api_user_token_workspot_gebouw_location]) ?? ''
+            $postDataFromSettings[$this->api_tenant_token_workspot_gebouw_location] ?? '',
+            $postDataFromSettings[$this->api_user_token_workspot_gebouw_location] ?? ''
         );
         $this->saveNewAuthScheme('true');
         foreach ($postDataFromSettings as $key => $data) {

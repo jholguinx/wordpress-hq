@@ -182,7 +182,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetReservationForm = htmlspecialchars($snippetData['reservation-form']);
         $this->snippetQuotes = htmlspecialchars($snippetData['quotes']);
         $this->snippetPackageQuote = htmlspecialchars($snippetData['package-quotes']);
-        $this->snippetPaymentRequest = htmlspecialchars(isset($snippetData['payment-request']) ?? '');
+        $this->snippetPaymentRequest = htmlspecialchars($snippetData['payment-request'] ?? '');
         $this->snippetCalendar = htmlspecialchars($snippetData['calendar']);
         $this->snippetClassCalendar = htmlspecialchars($snippetData['class-calendar']);
         $this->snippetMyReservation = htmlspecialchars($snippetData['my-reservations']);

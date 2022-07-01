@@ -171,18 +171,18 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->brandId = $data->brand_id;
         $this->name = $data->name;
         $this->isAirport = $data->is_airport;
-        $this->isOffice = isset($data->is_office) ?? '';
-        $this->coordinates = isset($data->coordinates) ?? '';
-        $this->isActive = isset($data->active) ?? '';
-        $this->order = isset($data->order) ?? '';
-        $this->image = isset($data->image) ?? '';
-        $this->description = isset($data->description) ?? '';
-        $this->officeHours = isset($data->officeHours) ?? '';
-        $this->addressLabel =isset($data->addressLabel) ?? '' ;
-        $this->brands = isset($data->brands) ?? '';
-        $this->phone = isset($data->phone) ?? '';
-        $this->address = isset($data->address) ?? '';
-        $this->labelsForWebsite = isset($data->label_for_website) ?? '';
+        $this->isOffice = $data->is_office ?? '';
+        $this->coordinates = $data->coordinates ?? '';
+        $this->isActive = $data->active ?? true;
+        $this->order = $data->order ?? '';
+        $this->image = $data->image ?? '';
+        $this->description = $data->description ?? '';
+        $this->officeHours = $data->officeHours ?? '';
+        $this->addressLabel = $data->addressLabel ?? '' ;
+        $this->brands = $data->brands ?? '';
+        $this->phone = $data->phone ?? '';
+        $this->address = $data->address ?? '';
+        $this->labelsForWebsite = $data->label_for_website ?? '';
         $this->updated_at = current_time('mysql', 1);
     }
 

@@ -224,8 +224,8 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $this->postArg = array_merge(
             $this->postArg,
             array(
-                'post_title' => 'Active Rate ' . (isset($this->id) ?? ''),
-                'post_name' => 'Active Rate ' . (isset($this->id) ?? '')
+                'post_title' => 'Active Rate ' . $this->id ?? '',
+                'post_name' => 'Active Rate ' . $this->id ?? ''
             )
         );
         $post_id = wp_insert_post($this->postArg);

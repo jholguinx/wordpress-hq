@@ -104,7 +104,11 @@ class HQRentalsApiCallResolver
         if ($this->isErrorOnApiInteraction($response)) {
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
-            return new HQRentalsApiResponse(null, true, HQRentalsTransformersLocations::transformDataFromApi(json_decode($response['body'])->fleets_locations));
+            $parseData = json_decode($response['body']);
+            if(isset($parseData->fleets_locations)){
+                return new HQRentalsApiResponse(null, true, HQRentalsTransformersLocations::transformDataFromApi($parseData->fleets_locations));
+            }
+            return new HQRentalsApiResponse(null, true, HQRentalsTransformersLocations::transformDataFromApi([]));
         }
     }
 

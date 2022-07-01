@@ -113,7 +113,7 @@ class HQRentalsModelsAdditionalCharge extends HQRentalsBaseModel
             hq_update_post_meta($post_id, $this->metaMandatoryBrands, $value);
         }
         hq_update_post_meta($post_id, $this->metaSelectionType, $this->selectionType);
-        hq_update_post_meta($post_id, isset($this->metaHardcoded) ?? '', isset($this->hardcoded) ?? '');
+        hq_update_post_meta($post_id, $this->metaHardcoded ?? '', $this->hardcoded ?? '');
         foreach ($this->descriptions as $key => $value) {
             hq_update_post_meta($post_id, $this->metaDescription . '_' . $key, $value);
         }

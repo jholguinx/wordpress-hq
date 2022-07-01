@@ -69,20 +69,28 @@ jQuery(document).ready(function(){
         jQuery("#hq-times-return-time").val(jQuery("#hq-times-pick-up-time").val());
     });
     jQuery("#hq-pick-up-location").on("change",function() {
-        if (jQuery("#hq-pick-up-location").val() === "custom") {
-            jQuery('.hq-pickup-custom-location').slideDown();
-        }else{
-            jQuery('.hq-pickup-custom-location').slideUp();
-        }
+        checkCustomPickupLocation();
     });
     jQuery("#hq-return-location").on("change",function(){
-        if (jQuery("#hq-return-location").val() === "custom") {
-            jQuery('.hq-return-custom-location').slideDown();
-        }else{
-            jQuery('.hq-return-custom-location').slideUp();
-        }
+        checkCustomReturnLocation();
     });
+    checkCustomPickupLocation();
+    checkCustomReturnLocation();
 });
+function checkCustomPickupLocation(){
+    if (jQuery("#hq-pick-up-location").val() === "custom") {
+        jQuery('.hq-pickup-custom-location').slideDown();
+    }else{
+        jQuery('.hq-pickup-custom-location').slideUp();
+    }
+}
+function checkCustomReturnLocation(){
+    if (jQuery("#hq-return-location").val() === "custom") {
+        jQuery('.hq-return-custom-location').slideDown();
+    }else{
+        jQuery('.hq-return-custom-location').slideUp();
+    }
+}
 function setDefaults(dateFormat,minimumDayRentals){
     var newDate = dayjs().add(15, 'minutes').add(2,'hours').format(dateFormat);
     var tomorrowDate = dayjs().add(minimumDayRentals, 'day').add(15, 'minutes').add(2,'hours').format(dateFormat);

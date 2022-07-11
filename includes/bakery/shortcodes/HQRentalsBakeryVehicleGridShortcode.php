@@ -18,10 +18,13 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
             'title_vehicle_grid' => 	'',
             'reservation_url_vehicle_grid'   =>	'',
             'brand_id'  => '',
-            'button_position_vehicle_grid' => 'right'
+            'button_position_vehicle_grid' => 'right',
+            'randomize_grid'                    =>  'false',
+            'number_of_vehicles'                =>  '',
+            'default_dates'                     =>  'false'
         ), $atts ) );
-        $shortcode = new HQRentalsVehicleGrid($atts);
-        return $shortcode->renderShortcode();
+        $shortcode = new HQRentalsVehicleGrid();
+        return $shortcode->renderShortcode($atts);
     }
     public function setParams(){
         vc_map(
@@ -58,6 +61,30 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
                         'param_name'  => 'button_position_vehicle_grid',
                         'value' => ['left', 'right']
                     ),
+                    array(
+                        'type' => 'textfield',
+                        'heading' => __('Number of Vehicles', 'hq-wordpress'),
+                        'param_name' => 'number_of_vehicles',
+                        'value' => '',
+                    ),
+                    array(
+                        'type' => 'dropdown',
+                        'heading' => __('Randomize Items', 'hq-wordpress'),
+                        'param_name' => 'randomize_grid',
+                        'value'      => array(
+                            __( 'No', "hq-wordpress" ) => 'false',
+                            __( 'Yes', "hq-wordpress" ) => 'true',
+                        ),
+                    ),
+                    array(
+                        'type' => 'dropdown',
+                        'heading' => __('Add Default Date', 'hq-wordpress'),
+                        'param_name' => 'default_dates',
+                        'value'      => array(
+                            __( 'No', "hq-wordpress" ) => 'false',
+                            __( 'Yes', "hq-wordpress" ) => 'true',
+                        ),
+                    )
                 )
             )
         );

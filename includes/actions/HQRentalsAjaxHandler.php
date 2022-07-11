@@ -15,7 +15,7 @@ class HQRentalsAjaxHandler
     {
         return [
             'test' => 1,
-            'fasd ' => 1,
+            'fasd' => 1,
         ];
     }
 

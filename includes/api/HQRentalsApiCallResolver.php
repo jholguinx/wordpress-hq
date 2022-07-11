@@ -5,6 +5,7 @@ namespace HQRentalsPlugin\HQRentalsApi;
 
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersBrands;
+use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersCarRentalSettings;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersGoogle;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersLocations;
 use HQRentalsPlugin\HQRentalsTransformers\HQRentalsTransformersSettings;
@@ -33,7 +34,7 @@ class HQRentalsApiCallResolver
             return true;
         }
         $responseData = json_decode($responseWP['body']);
-        if ($responseData->errors) {
+        if (isset($responseData->errors) and $responseData->errors) {
             return true;
         }
         return false;
@@ -103,7 +104,11 @@ class HQRentalsApiCallResolver
         if ($this->isErrorOnApiInteraction($response)) {
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
-            return new HQRentalsApiResponse(null, true, HQRentalsTransformersLocations::transformDataFromApi(json_decode($response['body'])->fleets_locations));
+            $parseData = json_decode($response['body']);
+            if(isset($parseData->fleets_locations)){
+                return new HQRentalsApiResponse(null, true, HQRentalsTransformersLocations::transformDataFromApi($parseData->fleets_locations));
+            }
+            return new HQRentalsApiResponse(null, true, HQRentalsTransformersLocations::transformDataFromApi([]));
         }
     }
 
@@ -118,6 +123,15 @@ class HQRentalsApiCallResolver
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
             return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_additional_charges);
+        }
+    }
+
+    public function resolveVehicleTypes($response)
+    {
+        if ($this->isErrorOnApiInteraction($response)) {
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
+        } else {
+            return new HQRentalsApiResponse(null, true, json_decode($response['body'])->fleets_vehicle_types);
         }
     }
 
@@ -220,6 +234,14 @@ class HQRentalsApiCallResolver
             return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
         } else {
             return new HQRentalsApiResponse(null, true, HQRentalsTransformersSettings::transformDataFromApi(json_decode($response['body'])->data));
+        }
+    }
+    public function resolveApiCallCarRentalSettings($response)
+    {
+        if ($this->isErrorOnApiInteraction($response)) {
+            return new HQRentalsApiResponse($this->resolveErrorMessageFromResponse($response), false, null);
+        } else {
+            return new HQRentalsApiResponse(null, true, HQRentalsTransformersCarRentalSettings::transformDataFromApi(json_decode($response['body'])->data));
         }
     }
 

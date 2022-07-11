@@ -111,13 +111,17 @@ class HQRentalsDatesHelper
 
     public function convertPhpToJsMomentFormat(string $phpFormat): string
     {
-
-
         // Converts escaped characters.
         foreach ($this->replacements as $from => $to) {
             $this->replacements['\\' . $from] = '[' . $from . ']';
         }
-
         return strtr($phpFormat, $this->replacements);
+    }
+    public function getTimeFormatFromPHPDate($format){
+        $splitFormat = explode(' ', $format);
+        return implode(
+            " ",
+            array_splice($splitFormat, 1, count($splitFormat))
+        );
     }
 }

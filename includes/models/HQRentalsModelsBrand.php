@@ -61,6 +61,10 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'column_name' => 'calendar_snippet',
             'column_data_type' => 'varchar(1000)'
         ),
+        array(
+            'column_name' => 'updated_at',
+            'column_data_type' => 'varchar(50)'
+        )
     );
 
     protected $metaId = 'hq_wordpress_brand_id_meta';
@@ -83,6 +87,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
     protected $metaUUID = 'hq_wordpress_brand_uuid';
     protected $metaIntegrationSnippetsCalendar = 'hq_wordpress_brand_integration_snippets_calendar';
     protected $metaIntegrationSnippetsClassCalendar = 'hq_wordpress_brand_integration_snippets_class_calendar';
+    protected $metaIntegrationSnippetsMyReservation = 'hq_wordpress_brand_integration_snippets_my_reservation';
 
     public $id = '';
     public $name = '';
@@ -104,7 +109,9 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
     public $snippetPaymentRequest = '';
     public $snippetCalendar = '';
     public $snippetClassCalendar = '';
+    public $snippetMyReservation = '';
     public $uuid = '';
+    public $updated_at = '';
 
     public function __construct($post = null)
     {
@@ -141,7 +148,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'show_in_admin_bar' => true,
             'publicly_queryable' => $this->pluginSettings->isEnableCustomPostsPages(),
             'show_ui' => true,
-            'show_in_menu' => true,
+            'show_in_menu' => false,
             'show_in_nav_menus' => true,
             'query_var' => true,
             'rewrite' => array('slug' => $this->brandsCustomPostSlug),
@@ -170,14 +177,16 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->uuid = $data->uuid;
         $this->taxLabel = $data->tax_label;
         $this->websiteLink = $data->website_link;
-        $snippetData = (array)$data->integration_snippets;
+        $snippetData = isset($data->integration_snippets) ? (array)$data->integration_snippets : [];
         $this->snippetReservations = htmlspecialchars($snippetData['reservations']);
         $this->snippetReservationForm = htmlspecialchars($snippetData['reservation-form']);
         $this->snippetQuotes = htmlspecialchars($snippetData['quotes']);
         $this->snippetPackageQuote = htmlspecialchars($snippetData['package-quotes']);
-        $this->snippetPaymentRequest = htmlspecialchars($snippetData['payment-request']);
+        $this->snippetPaymentRequest = htmlspecialchars($snippetData['payment-request'] ?? '');
         $this->snippetCalendar = htmlspecialchars($snippetData['calendar']);
         $this->snippetClassCalendar = htmlspecialchars($snippetData['class-calendar']);
+        $this->snippetMyReservation = htmlspecialchars($snippetData['my-reservations']);
+        $this->updated_at = current_time('mysql', 1);
         if($this->settings->getReplaceBaseURLOnBrandsSetting() === "true"){
             $urlReplacement = $this->settings->getBrandURLToReplaceSetting();
             $this->publicReservationsLinkFull = $this->resolveBrandURL($data->public_reservations_link_full, $urlReplacement);
@@ -231,6 +240,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsPaymentRequest, $this->snippetPaymentRequest );
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsCalendar, $this->snippetCalendar);
         hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsClassCalendar, $this->snippetClassCalendar);
+        hq_update_post_meta( $post_id, $this->metaIntegrationSnippetsMyReservation, $this->snippetMyReservation);
         hq_update_post_meta( $post_id, $this->metaUUID, $this->uuid );
     }
 
@@ -279,6 +289,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetPaymentRequest = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsPaymentRequest, true ));
         $this->snippetCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsCalendar, true ));
         $this->snippetClassCalendar = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsClassCalendar, true ));
+        $this->snippetMyReservation = htmlspecialchars_decode( get_post_meta( $id, $this->metaIntegrationSnippetsMyReservation, true ));
     }
 
     public function all()
@@ -379,6 +390,8 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
             'quote_snippet' => $this->snippetQuotes,
             'package_quotes_snippet' => $this->snippetPackageQuote,
             'payment_requests_snippet' => $this->snippetPaymentRequest,
+            'calendar_snippet' => $this->getCalendarSnippet(),
+            'updated_at' => $this->updated_at
         );
     }
     public function setFromDB($brandFromDB)
@@ -393,6 +406,7 @@ class HQRentalsModelsBrand extends HQRentalsBaseModel
         $this->snippetQuotes = htmlspecialchars_decode($brandFromDB->quote_snippet);
         $this->snippetPackageQuote = htmlspecialchars_decode($brandFromDB->package_quotes_snippet);
         $this->snippetPaymentRequest = htmlspecialchars_decode($brandFromDB->payment_requests_snippet);
+        $this->setUpdatedAt($brandFromDB->updated_at);
     }
     public function getTableName() : string
     {

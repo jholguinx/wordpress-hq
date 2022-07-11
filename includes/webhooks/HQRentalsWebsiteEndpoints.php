@@ -27,38 +27,65 @@ class HQRentalsWebsiteEndpoints
         register_rest_route('hqrentals', '/brands/', array(
             'methods' => 'GET',
             'callback' => array($this, 'brands'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         register_rest_route('hqrentals', '/brand/', array(
             'methods' => 'GET',
             'callback' => array($this, 'brand'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         register_rest_route('hqrentals', '/shortcodes/bookingform', array(
             'methods' => 'GET',
             'callback' => array($this, 'bookingform'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         register_rest_route('hqrentals', '/shortcodes/vehicle-types', array(
             'methods' => 'GET',
             'callback' => array($this, 'vehicleTypes'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         register_rest_route('hqrentals', '/google/autocomplete', array(
             'methods' => 'GET',
             'callback' => array($this, 'googleAutocomplete'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         register_rest_route('hqrentals', '/google/place', array(
             'methods' => 'GET',
             'callback' => array($this, 'googlePlace'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         register_rest_route('hqrentals', '/shortcodes/availability', array(
             'methods' => 'GET',
             'callback' => array($this, 'availability'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         register_rest_route('hqrentals', '/shortcodes/vehicle-filter', array(
             'methods' => 'GET',
             'callback' => array($this, 'vehicleFilter'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         register_rest_route('hqrentals', '/shortcodes/availability/dates', array(
             'methods' => 'GET',
             'callback' => array($this, 'dates'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
     }
 

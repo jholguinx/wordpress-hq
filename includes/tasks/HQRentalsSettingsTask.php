@@ -29,8 +29,12 @@ class HQRentalsSettingsTask extends HQRentalsBaseTask
         if ($this->response->success) {
             $this->settings->saveTenantDatetimeOption($this->response->data->date_format);
             $this->settings->saveTenantLink($this->response->data->tenant_link);
-            $this->settings->setDefaultPickupTime($this->response->data->default_pick_up_time);
-            $this->settings->setDefaultReturnTime($this->response->data->default_return_time);
+            $this->settings->setDefaultPickupTime(
+                $this->response->data->default_pick_up_time ?? ''
+            );
+            $this->settings->setDefaultReturnTime(
+                $this->response->data->default_return_time ?? ''
+            );
         }
     }
 

@@ -73,15 +73,40 @@ class HQRentalsFrontHelper
         $html = "";
         if(is_array($locations) and count($locations)){
             foreach ($locations as $location){
-                $html .= "<option value='{$location->getId()}'>{$location->getName()}</option>";
+                $html .= "<option value='{$location->getId()}'>{$location->getLabelForWebsite()}</option>";
             }
         }else{
             $query = new HQRentalsDBQueriesLocations();
             $dbLocations = $query->allLocations();
             foreach ($dbLocations as $location){
-                $html .= "<option value='{$location->getId()}'>{$location->getName()}</option>";
+                $html .= "<option value='{$location->getId()}'>{$location->getLabelForWebsite()}</option>";
             }
         }
         return $html;
+    }
+    static public function getTranslatedContent($object)
+    {
+        if($object instanceof \stdClass) {
+
+            $lang = explode("_", get_locale())[0];
+            if(isset($object->label_for_website)){
+                return empty($object->label_for_website->{$lang}) ? "" : $object->label_for_website->{$lang};
+            }else{
+                return "";
+            }
+        }else{
+            return "";
+        }
+    }
+    static public function getLocaleForSnippet()
+    {
+        $locale = explode('_', get_locale())[0];
+        try {
+            if($locale){
+                return $locale;
+            }
+        }catch (\Exception $e){
+            return 'en';
+        }
     }
 }

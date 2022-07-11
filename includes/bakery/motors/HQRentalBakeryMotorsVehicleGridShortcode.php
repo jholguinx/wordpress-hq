@@ -2,8 +2,10 @@
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
-
-
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsLocaleHelper;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsCarRentalSetting;
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsCurrencyHelper;
 new HQRentalBakeryMotorsVehicleGridShortcode();
 
 class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
@@ -11,6 +13,9 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     private $query;
     private $reservationURL;
     private $title;
+    private $target_step;
+    private $ramdomize_items;
+    private $number_of_vehicles;
 
     public function __construct()
     {
@@ -23,11 +28,16 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     {
         extract( shortcode_atts( array(
             'reservation_page_url'				=>	'',
-            'title'                             =>  ''
-
+            'title'                             =>  '',
+            'target_step'                       =>  '3',
+            'randomize_grid'                    =>  'false',
+            'number_of_vehicles'                =>  ''
         ), $atts ) );
         $this->reservationURL = $atts['reservation_page_url'];
         $this->title = $atts['title'];
+        $this->target_step = $atts['target_step'];
+        $this->ramdomize_items = $atts['randomize_grid'];
+        $this->number_of_vehicles = $atts['number_of_vehicles'];
         echo $this->renderShortcode();
     }
 
@@ -51,9 +61,30 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
                     ),
                     array(
                         'type' => 'textfield',
+                        'heading' => __('Target Step', 'hq-wordpress'),
+                        'param_name' => 'target_step',
+                        'value' => ''
+                    ),
+                    array(
+                        'type' => 'textfield',
                         'heading' => __('Reservation URL', 'hq-wordpress'),
                         'param_name' => 'reservation_page_url',
                         'value' => ''
+                    ),
+                    array(
+                        'type' => 'textfield',
+                        'heading' => __('Number of Vehicles', 'hq-wordpress'),
+                        'param_name' => 'number_of_vehicles',
+                        'value' => ''
+                    ),
+                    array(
+                        'type' => 'dropdown',
+                        'heading' => __('Randomize Items', 'hq-wordpress'),
+                        'param_name' => 'randomize_grid',
+                        'value'      => array(
+                            __( 'Yes', "hq-wordpress" ) => 'true',
+                            __( 'No', "hq-wordpress" ) => 'false',
+                        ),
                     )
                 )
             )
@@ -64,9 +95,19 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
     {
         $html_loop = "";
         $vehicles = $this->query->allVehicleClasses();
-        foreach ($vehicles as $vehicle) {
-            $html_loop .= $this->resolveSingleVehicleCode($vehicle);
+        if($this->ramdomize_items === 'true'){
+            shuffle($vehicles);
         }
+        if(!empty($this->number_of_vehicles) and is_numeric($this->number_of_vehicles)){
+            foreach (array_slice($vehicles, 0, (int)$this->number_of_vehicles) as $vehicle) {
+                $html_loop .= $this->resolveSingleVehicleCode($vehicle);
+            }
+        }else{
+            foreach ($vehicles as $vehicle) {
+                $html_loop .= $this->resolveSingleVehicleCode($vehicle);
+            }
+        }
+
         return HQRentalsAssetsHandler::getHQFontAwesome() . "
             <div class='wpb_column vc_column_container vc_col-sm-12 hq-grid-wrapper'>
                 <div class='wpb_column vc_column_container vc_col-sm-12 hq-grid-inner-wrapper'>
@@ -103,17 +144,22 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
 
     public function resolveSingleVehicleCode($vehicle)
     {
-        return "
+        $setting = new HQRentalsSettings();
+        $option = $setting->getOverrideDailyRateWithCheapestPriceInterval();
+        $priceInterval = $vehicle->getCheapestPriceIntervalForWebsite()->formatPrice();
+        $currency = HQRentalsCurrencyHelper::getCurrencySymbol();
+        $rate = ($option == 'true') ? ($currency . ' '  . $priceInterval) : $vehicle->getActiveRate()->daily_rate->amount_for_display;
 
+        return "
         <div class='stm_product_grid_single'>
-            <a href='{$this->reservationURL}?target_step=2&vehicle_class_id={$vehicle->getId()}' class='inner'>
+            <a href='{$this->reservationURL}?target_step={$this->target_step}&vehicle_class_id={$vehicle->getId()}' class='inner'>
                 <div class='stm_top clearfix'>
                     <div class='stm_left heading-font'>
                         <h3>{$vehicle->getLabelForWebsite()}</h3>
                         <div class='s_title'></div>
                         <div class='price'>
-                            <mark>From</mark>
-                            <span class='woocommerce-Price-amount amount'>{$vehicle->getActiveRate()->daily_rate->amount_for_display}<span style='font-size: 12px;'>/day</span></span>
+                            <mark>". HQRentalsLocaleHelper::resolveTranslation('motors_vehicle_grid_from') ."</mark>
+                            <span class='woocommerce-Price-amount amount'>{$rate}<span style='font-size: 12px;'>/". HQRentalsLocaleHelper::resolveTranslation('motors_vehicle_grid_day') ."</span></span>
                         </div>
                     </div>
                     ". $this->renderFeatures($vehicle) ."
@@ -131,9 +177,10 @@ class HQRentalBakeryMotorsVehicleGridShortcode extends WPBakeryShortCode
         $html = "";
         if(is_array($vehicle->getVehicleFeatures()) and count($vehicle->getVehicleFeatures())){
             foreach ($vehicle->getVehicleFeatures() as $feature){
+                $featureIcon = empty($feature->icon) ? "<img src='{$feature->image}' class='feature-image'  alt='{$feature->label}' />" : "<i class='{$feature->icon}'></i>";
                 $html .= "
                     <div class='single_info'>
-                        <i class='{$feature->icon}'></i>
+                        {$featureIcon}
                         <span>{$feature->label}</span>
                     </div>
                 ";

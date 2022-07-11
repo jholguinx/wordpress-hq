@@ -99,6 +99,9 @@ class HQRentalsBootstrap
         if ($this->settings->noEnableCustomPostsPages()) {
             $this->settings->setEnableCustomPostsPages('false');
         }
+        if ($this->settings->noOverrideDailyRateWithCheapestPriceInterval()) {
+            $this->settings->setOverrideDailyRateWithCheapestPriceInterval('false');
+        }
         if ($this->settings->noGoogleAPIKey()) {
             $this->settings->setGoogleAPIKey('');
         }
@@ -110,6 +113,9 @@ class HQRentalsBootstrap
         }
         if ($this->settings->noDefaultReturnTime()) {
             $this->settings->setDefaultReturnTime('');
+        }
+        if ($this->settings->noWebhookSyncOption()) {
+            $this->settings->setWebhookSyncOption('false');
         }
         $this->notifyToSystemOnActivation();
         $this->dbBootstrap->createTablesOnInit();

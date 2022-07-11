@@ -7,6 +7,7 @@ class HQRentalsDbManager
     protected $db;
     protected $charset;
     protected $dbPrefix;
+    private $dbName;
 
     public function __construct()
     {
@@ -14,8 +15,8 @@ class HQRentalsDbManager
         $this->db = $wpdb;
         $this->charset = $wpdb->get_charset_collate();
         $this->dbPrefix = $wpdb->get_blog_prefix();
+        $this->dbName = $wpdb->__get('dbname');
     }
-
     public function createTable($tableName, $tableContent): \stdClass
     {
         $sqlQuery = $this->resolveCreateStatementString($tableName, $tableContent);
@@ -62,9 +63,9 @@ class HQRentalsDbManager
         return $this->getResults($sqlQuery);
     }
 
-    public function innerJoinTable($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order, $direction) : \stdClass
+    public function innerJoinTable($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order) : \stdClass
     {
-        $sqlQuery = $this->resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order, $direction);
+        $sqlQuery = $this->resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order);
         return $this->getResults($sqlQuery);
     }
 
@@ -93,9 +94,18 @@ class HQRentalsDbManager
                 ) ' . $this->charset . ';'
         );
     }
-    private function resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order = "", $direction = "asc"): string
+    private function resolveJoinStatement($tableOne, $tableTwo, $tableOneComparison, $tableTwoComparison, $order = []): string
     {
-        return $this->db->prepare( "select * from {$this->resolveTableName($tableOne)} inner join {$this->resolveTableName($tableTwo)} on {$this->resolveTableName($tableOne)}.{$tableOneComparison} = {$this->resolveTableName($tableTwo)}.{$tableTwoComparison} order by {$this->resolveTableName($order)} ${direction};"
+        $orderSQL = "";
+        foreach ($order as $index => $orderItem){
+            $table = $this->resolveTableName($orderItem['table']);
+            $end = ((count($order) - 1) === $index) ? "" : ",";
+            $orderSQL .= $table . "." . $orderItem['column'] ." " . $orderItem['direction']. $end;
+        }
+        return $this->db->prepare(
+            "select * from {$this->resolveTableName($tableOne)} 
+                    inner join {$this->resolveTableName($tableTwo)} on {$this->resolveTableName($tableOne)}.{$tableOneComparison} = {$this->resolveTableName($tableTwo)}.{$tableTwoComparison} 
+                    order by ${orderSQL};"
         );
     }
 
@@ -106,10 +116,11 @@ class HQRentalsDbManager
             return $this->db->prepare(
                 'SELECT ' . join(',', $tableColumns) . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';'
             );
+        }else{
+            // no need to prep
+            return 'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';';
         }
-        return $this->db->prepare(
-            'SELECT ' . $tableColumns . ' FROM ' . $this->dbPrefix . $tableName . $whereClause . ' ' . $order . ';'
-        );
+
     }
 
     private function resolveAlterStatementString($tableName, $tableColumns): string
@@ -130,7 +141,8 @@ class HQRentalsDbManager
 
     private function resolveColumnCheckStatementString($table, $column)
     {
-        return $this->db->prepare('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = "'. $this->dbPrefix . $table .'" AND column_name = "'. $column .'";'
+        return $this->db->prepare(
+            'SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = "'. $this->dbPrefix . $table .'" AND TABLE_SCHEMA="'. $this->dbName .'" AND column_name = "'. $column .'";'
         );
     }
 
@@ -171,9 +183,9 @@ class HQRentalsDbManager
         }
     }
 
-    public function delete($tableName, $data): \stdClass
+    public function delete($tableName, $data, $overrideIdStatement = null): \stdClass
     {
-        $results = $this->db->delete($this->resolveTableName($tableName), array('id' => $data));
+        $results = $this->db->delete($this->resolveTableName($tableName), empty($overrideIdStatement) ? array('id' => $data) : $overrideIdStatement);
         if ($results) {
             return $this->resolveQuery(true, $results, null, $data);
         } else {
@@ -214,7 +226,6 @@ class HQRentalsDbManager
                 $query
             );
         } else {
-
             $data = $this->resolveQuery(
                 false,
                 null,

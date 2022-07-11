@@ -68,6 +68,10 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'column_name' => 'label_for_website_translated',
             'column_data_type' => 'varchar(255)'
         ),
+        array(
+            'column_name' => 'updated_at',
+            'column_data_type' => 'varchar(50)'
+        )
     );
 
     protected $metaId = 'hq_wordpress_location_id_meta';
@@ -103,6 +107,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     public $address = '';
     public $phone = '';
     public $labelsForWebsite = [];
+    public $updated_at;
 
 
     public function __construct($post = null)
@@ -136,7 +141,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'show_in_admin_bar' => true,
             'publicly_queryable' => $this->settings->isEnableCustomPostsPages(),
             'show_ui' => true,
-            'show_in_menu' => true,
+            'show_in_menu' => false,
             'show_in_nav_menus' => true,
             'query_var' => true,
             'rewrite' => array('slug' => $this->locationsCustomPostSlug),
@@ -166,18 +171,19 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->brandId = $data->brand_id;
         $this->name = $data->name;
         $this->isAirport = $data->is_airport;
-        $this->isOffice = $data->is_office;
-        $this->coordinates = $data->coordinates;
-        $this->isActive = $data->active;
-        $this->order = $data->order;
-        $this->image = $data->image;
-        $this->description = $data->description;
-        $this->officeHours = $data->officeHours;
-        $this->addressLabel = $data->addressLabel;
-        $this->brands = $data->brands;
-        $this->phone = $data->phone;
-        $this->address = $data->address;
-        $this->labelsForWebsite = $data->label_for_website;
+        $this->isOffice = $data->is_office ?? '';
+        $this->coordinates = $data->coordinates ?? '';
+        $this->isActive = $data->active ?? true;
+        $this->order = $data->order ?? '';
+        $this->image = $data->image ?? '';
+        $this->description = $data->description ?? '';
+        $this->officeHours = $data->officeHours ?? '';
+        $this->addressLabel = $data->addressLabel ?? '' ;
+        $this->brands = $data->brands ?? '';
+        $this->phone = $data->phone ?? '';
+        $this->address = $data->address ?? '';
+        $this->labelsForWebsite = $data->label_for_website ?? '';
+        $this->updated_at = current_time('mysql', 1);
     }
 
 
@@ -289,6 +295,12 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
     {
         return $this->address;
     }
+    public function getLatitude(){
+        return empty($this->coordinates->lat) ? 0.00 : $this->coordinates->lat;
+    }
+    public function getLongitude(){
+        return empty($this->coordinates->lng) ? 0.00 : $this->coordinates->lng;
+    }
 
     public function getCustomFieldForOfficeHours()
     {
@@ -306,7 +318,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             if($override){
                 return $this->labelsForWebsite[$lang];
             }
-            return $this->labelsForWebsite->{explode('_',get_locale())[0]};
+            return empty($this->labelsForWebsite->{explode('_',get_locale())[0]}) ? $this->getName() : $this->labelsForWebsite->{explode('_',get_locale())[0]};
         }catch (\Exception $e){
             return '';
         }
@@ -337,7 +349,7 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'name' => $this->name,
             'brand_id' => $this->brandId,
             'is_airport' => $this->isAirport,
-            'coordinates' => $this->coordinates,
+            'coordinates' => json_encode($this->coordinates),
             'active' => $this->isActive,
             'location_order' => $this->order,
             'address' => $this->address,
@@ -346,7 +358,8 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
             'all_map_coordinate' => '',
             'pick_up_allowed' => 1,
             'return_allowed' => 1,
-            'label_for_website_translated' => ''
+            'label_for_website_translated' => '',
+            'updated_at' => $this->updated_at
         );
     }
 
@@ -356,12 +369,13 @@ class HQRentalsModelsLocation extends HQRentalsBaseModel
         $this->name = $locationFromDB->name;
         $this->brandId = $locationFromDB->brand_id;
         $this->isAirport = $locationFromDB->is_airport;
-        $this->coordinates = $locationFromDB->coordinates;
+        $this->coordinates = json_decode($locationFromDB->coordinates);
         $this->isActive = $locationFromDB->active;
         $this->order = $locationFromDB->location_order;
         $this->address = $locationFromDB->address;
         $this->officeHours = $locationFromDB->open_hours;
         $this->labelsForWebsite = json_decode($locationFromDB->label_for_website);
+        $this->setUpdatedAt($locationFromDB->updated_at);
     }
 
     public function getId()

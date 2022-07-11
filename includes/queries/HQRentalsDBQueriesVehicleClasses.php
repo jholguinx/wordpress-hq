@@ -21,23 +21,39 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
         $this->rate = new HQRentalsModelsActiveRate();
     }
 
-    public function allVehicleClasses($order = null)
+    public function allVehicleClasses($all = false)
     {
-        $query = $this->getVehicleByRate();
+        if($all){
+            $query = $this->db->selectFromTable($this->model->getTableName(), '*', '','ORDER BY vehicle_class_order ASC');
+        }else{
+            $query = $this->getVehicleByRate();
+        }
+
         if ($query->success) {
             return $this->fillObjectsFromDB($query->data);
         }
         return [];
     }
-    public function getVehicleByRate($rate = "daily_rate_amount")
+    public function getVehicleByRate($rate = "daily_rate_amount", $force_rate = false)
     {
         return $this->db->innerJoinTable(
             $this->model->getTableName(),
             $this->rate->getTableName(),
             "id",
             "vehicle_class_id",
-            $this->rate->getTableName() . "." . $rate ,
-            "asc"
+            ($force_rate) ? $this->rate->getTableName() . "." . $rate
+                : array(
+                    array(
+                        'table' => $this->model->getTableName(),
+                        'column' => 'vehicle_class_order',
+                        'direction' => 'ASC'
+                    ),
+                    array(
+                        'table' => $this->rate->getTableName() ,
+                        'direction' => 'ASC',
+                        'column' => 'daily_rate_amount'
+                    )
+            )
         );
     }
 
@@ -83,8 +99,10 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
     {
         $query = $this->db->selectFromTable($this->model->getTableName(), '*', 'id=' . $id);
         if ($query->success) {
-            return $this->fillObjectsFromDB($query->data);
+            $result = $this->fillObjectsFromDB($query->data);
+            return (is_array($result) and count($result)) ? $result[0] : new HQRentalsModelsVehicleClass();
         }
+        return null;
     }
     public function getVehiclesByBrand($brandId)
     {
@@ -92,5 +110,6 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
         if ($query->success) {
             return $this->fillObjectsFromDB($query->data);
         }
+        return null;
     }
 }

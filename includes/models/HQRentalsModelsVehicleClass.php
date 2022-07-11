@@ -68,6 +68,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'column_name' => 'custom_fields',
             'column_data_type' => 'LONGTEXT'
         ),
+        array(
+            'column_name' => 'updated_at',
+            'column_data_type' => 'varchar(50)'
+        )
     );
 
     protected $metaId = 'hq_wordpress_vehicle_class_id_meta';
@@ -119,6 +123,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     public $distanceLimitPerWeek = '';
     public $distanceLimitPerMonth = '';
     public $additionalChargeForExceededDistance = null;
+    public $updated_at = '';
 
     public function __construct($post = null)
     {
@@ -155,7 +160,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'show_in_admin_bar' => true,
             'publicly_queryable' => $this->pluginSettings->isEnableCustomPostsPages(),
             'show_ui' => true,
-            'show_in_menu' => true,
+            'show_in_menu' => false,
             'show_in_nav_menus' => true,
             'query_var' => true,
             'rewrite' => ['slug' => $this->vehicleClassesCustomPostSlug],
@@ -213,6 +218,7 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->featuresDB = $data->features;
         $this->activeRateDB = $data->activeRates;
         $this->imagesDB = $data->images;
+        $this->updated_at = current_time('mysql', 1);
         foreach ($data->features as $feature) {
             $newFeature = new HQRentalsModelsFeature();
             $newFeature->setFeatureFromApi($this->id, $feature);
@@ -436,8 +442,13 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
 
     public function rates()
     {
-        $rateModel = new HQRentalsModelsActiveRate();
-        return $rateModel->allRatesFromVehicleClass($this->id);
+        try {
+            $rateModel = new HQRentalsModelsActiveRate();
+            return $rateModel->allRatesFromVehicleClass($this->id);
+        }catch (\Exception $e){
+            return [];
+        }
+
     }
 
     public function getPriceIntervals()
@@ -663,15 +674,21 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         } else {
             $resultInsert = $this->db->insertIntoTable($this->tableName, $this->parseDataToSaveOnDB());
         }
-        if(is_array($this->rate)){
+        if(isset($this->rate) and is_array($this->rate)){
             $rate = $this->rate[0];
             if ($rate instanceof HQRentalsModelsActiveRate) {
                 $existResult = $this->db->selectFromTable($this->activeRate->getTableName(), '*', 'vehicle_class_id=' . $this->getId());
                 if($existResult->success){
-                    $resultUpdateActive = $this->db->updateIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB(), array('vehicle_class_id' => $this->getId()));
+                    $resultUpdateActive = $this->db->updateIntoTable(
+                        $this->activeRate->getTableName(),
+                        $rate->parseDataToSaveOnDB(),
+                        array('vehicle_class_id' => $this->getId())
+                    );
                 }else{
                     $resultInsertActive = $this->db->insertIntoTable($this->activeRate->getTableName(), $rate->parseDataToSaveOnDB());
                 }
+            }else{
+                $resultDelete = $this->db->delete($this->activeRate->getTableName(), null, array('vehicle_class_id' => $this->getId()));
             }
         }
     }
@@ -690,7 +707,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             'images' => json_encode($this->imagesDB),
             'active_rates' => json_encode($this->activeRateDB),
             'features' => json_encode($this->featuresDB),
-            'custom_fields' => json_encode($this->getCustomFieldsAsArray())
+            'custom_fields' => json_encode($this->getCustomFieldsAsArray()),
+            'updated_at' => $this->updated_at
         );
     }
 
@@ -707,6 +725,8 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
         $this->images = json_decode($vehicleDB->images);
         $this->features = json_decode($vehicleDB->features);
         $this->rates = json_decode($vehicleDB->active_rates)[0];
+        $this->customFields = json_decode($vehicleDB->custom_fields);
+        $this->setUpdatedAt($vehicleDB->updated_at);
     }
 
     public function getTableName(): string
@@ -734,10 +754,10 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
             if ($this->locale->language === "zh") {
                 return $this->labels->{"zh-Hans"};
             }
-            return $this->labels->{$this->locale->language};
+            return empty($this->labels->{$this->locale->language}) ? $this->name : $this->labels->{$this->locale->language};
         }
     }
-        public function getVehicleFeatures()
+    public function getVehicleFeatures()
     {
         return $this->features;
     }
@@ -745,4 +765,53 @@ class HQRentalsModelsVehicleClass extends HQRentalsBaseModel
     {
         return $this->rates;
     }
+    public function getShortDescriptionForWebsite($forcedLocale = null)
+    {
+        if (!empty($forcedLocale)) {
+            return $this->shortDescriptions->{$forcedLocale};
+        } else {
+            if ($this->locale->language === "zh") {
+                return $this->shortDescriptions->{"zh-Hans"};
+            }
+            return empty($this->shortDescriptions->{$this->locale->language}) ? $this->name : $this->shortDescriptions->{$this->locale->language};
+        }
+    }
+    public function getDescriptionForWebsite()
+    {
+        if (!empty($forcedLocale)) {
+            return $this->descriptions[$forcedLocale];
+        } else {
+            if ($this->locale->language === "zh") {
+                return $this->descriptions->{"zh-Hans"};
+            }
+            return empty($this->descriptions->{$this->locale->language}) ? $this->name : $this->descriptions->{$this->locale->language};
+        }
+    }
+    public function getPriceIntervalsForWebsite()
+    {
+        if(is_array($this->getPriceIntervals())){
+            $data = $this->getPriceIntervals();
+            usort($data, function ($a, $b) {
+                return $a->getPriceAsANumber() - $b->getPriceAsANumber();
+            });
+            return $data;
+        }
+        return $this->rates->price_intervals;
+    }
+    public function getCheapestPriceIntervalForWebsite()
+    {
+        if(is_array($this->getPriceIntervalsForWebsite())){
+            return $this->getPriceIntervalsForWebsite()[0];
+        }
+       return $this->getPriceIntervalsForWebsite();
+    }
+    public function getImageForWebsite()
+    {
+        return $this->images;
+    }
+    public function getCustomFieldForWebsite($dbColumn)
+    {
+        return $this->customFields->{$dbColumn};
+    }
+
 }

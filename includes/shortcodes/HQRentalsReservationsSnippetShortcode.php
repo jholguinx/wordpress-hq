@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
+use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 
 class HQRentalsReservationsSnippetShortcode extends HQBaseShortcode
@@ -22,7 +23,7 @@ class HQRentalsReservationsSnippetShortcode extends HQBaseShortcode
         $atts = shortcode_atts(
             array(
                 'id' => '1',
-                'forced_locale' => '',
+                'forced_locale' => HQRentalsFrontHelper::getLocaleForSnippet(),
             ), $atts);
         ob_start();
         $brand = new HQRentalsModelsBrand();

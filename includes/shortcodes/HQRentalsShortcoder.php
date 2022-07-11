@@ -32,5 +32,9 @@ class HQRentalsShortcoder
         $this->gCarVehicleFilterShortcode = new HQGCarVehicleFilterShortcode();
         $this->calendarSnippetShortcode = new HQRentalsAvailabilityCalendarSnippetShortcode();
         $this->vehicleGrid = new HQRentalsVehicleGrid();
+        $this->myReservationsSnippet = new HQRentalsMyReservationsSnippetShortcode();
+        $this->carRentalVehicleTabs = new HQRentalsCarRentalVehicleTabShortcode();
+        $this->availabilityGridFilter = new HQRentalsAvailabilityFilterShortcode();
+        $this->placesShortcode = new HQRentalsPlacesReservationForm();
     }
 }

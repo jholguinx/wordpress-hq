@@ -16,7 +16,7 @@ class HQRentalsDBQueriesLocations extends HQRentalsDBBaseQueries
 
     public function allLocations()
     {
-        $query = $this->db->selectFromTable($this->model->getTableName(), '*', '','ORDER BY location_order');
+        $query = $this->db->selectFromTable($this->model->getTableName(), '*', '','ORDER BY location_order ASC, id ASC');
         if ($query->success) {
             return $this->fillObjectsFromDB($query->data);
         }
@@ -71,5 +71,13 @@ class HQRentalsDBQueriesLocations extends HQRentalsDBBaseQueries
         if(is_string($ids)){
             $this->db->delete($this->model->getTableName(), $ids);
         }
+    }
+    public function getLocationsByBrand($id)
+    {
+        $query = $this->db->selectFromTable($this->model->getTableName(), '*', 'brand_id=' . $id,'ORDER BY id');
+        if($query->success){
+            return $this->fillObjectsFromDB($query->data);
+        }
+        return [];
     }
 }

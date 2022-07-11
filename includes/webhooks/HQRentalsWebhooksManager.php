@@ -32,32 +32,50 @@ class HQRentalsWebhooksManager
         register_rest_route('hqrentals', '/update/', array(
             'methods' => 'POST',
             'callback' => array($this, 'fireUpdate'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         //upgrade plugin remotely
         //baseURl/wp-json/hqrentals/plugin/upgrade/
         register_rest_route('hqrentals', '/plugin/upgrade/', array(
             'methods' => 'POST',
             'callback' => array($this, 'firePluginUpgrade'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         // admin auth
         register_rest_route('hqrentals', '/plugin/auth', array(
             'methods' => 'GET',
             'callback' => array($this, 'loginUser'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         //baseURl/wp-json/hqrentals/update/locations
         register_rest_route('hqrentals', '/update/locations', array(
             'methods' => 'POST',
             'callback' => array($this, 'fireUpdateLocations'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         //baseURl/wp-json/hqrentals/update/brands
         register_rest_route('hqrentals', '/update/brands', array(
             'methods' => 'POST',
             'callback' => array($this, 'fireUpdateBrands'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
         //baseURl/wp-json/hqrentals/update/vehicle-classes
         register_rest_route('hqrentals', '/update/vehicle-classes', array(
             'methods' => 'POST',
             'callback' => array($this, 'fireUpdateVehicleClasses'),
+            'permission_callback' => function() {
+                return true;
+            }
         ));
     }
 
@@ -67,7 +85,9 @@ class HQRentalsWebhooksManager
         $this->scheduler->refreshHQData();
         $response = new \WP_REST_Response();
         $response->status = 200;
-
+        $response->data = HQRentalsApiResponse::resolveSuccess([
+            'message' => 'Sync Completed'
+        ]);
         return $response;
     }
 

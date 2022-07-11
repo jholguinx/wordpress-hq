@@ -1,6 +1,6 @@
 <?php
-
 use \HQRentalsPlugin\HQRentalsShortcodes\HQRentalsPlacesReservationForm;
+
 class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
 {
     public function __construct($data = [], $args = null)
@@ -11,12 +11,12 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
 
     public function get_name()
     {
-        return 'Places Reservation Form';
+        return 'Custom Reservation Form';
     }
 
     public function get_title()
     {
-        return __('Places Form', 'hq-wordpress');
+        return __('Custom Reservation Form', 'hq-wordpress');
     }
 
     public function get_icon()
@@ -31,7 +31,6 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
 
     protected function _register_controls()
     {
-
         $this->start_controls_section(
             'content_section',
             [
@@ -60,14 +59,72 @@ class HQRentalsElementorPlacesReservationForm extends \Elementor\Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'support_for_custom_location',
+            [
+                'label' => __('Support for Custom Location', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'true',
+                'options' => [
+                    'true'  => __( 'Yes', 'hq-wordpress' ),
+                    'false' => __( 'No', 'hq-wordpress' ),
+                ],
+            ]
+        );
+        $this->add_control(
+            'custom_location_label',
+            [
+                'label' => __('Label for Custom Location', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+            ]
+        );
+        $this->add_control(
+            'minimum_rental_period',
+            [
+                'label' => __('Minimum Rental Period', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+                'description' => 'Days',
+                'default' => '1'
+            ]
+        );
+        $this->add_control(
+            'google_country',
+            [
+                'label' => __('Google Country - ISO Code', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+                'default' => 'us'
+            ]
+        );
+        $this->add_control(
+            'google_map_center',
+            [
+                'label' => __('Google Map - Limitation Center', 'hq-wordpress'),
+                'description' => __('lat,lon', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+            ]
+        );
+        $this->add_control(
+            'google_map_center_radius',
+            [
+                'label' => __('Google Map - Bounds', 'hq-wordpress'),
+                'description' => __('Degrees', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+            ]
+        );
+
         $this->end_controls_section();
     }
 
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $shortcode = new HQRentalsPlacesReservationForm($settings);
-        echo $shortcode->renderShortcode();
+        $shortcode = new HQRentalsPlacesReservationForm();
+        echo $shortcode->renderShortcode($settings);
     }
 }
 

@@ -224,8 +224,8 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $this->postArg = array_merge(
             $this->postArg,
             array(
-                'post_title' => 'Active Rate ' . $this->id,
-                'post_name' => 'Active Rate ' . $this->id
+                'post_title' => 'Active Rate ' . $this->id ?? '',
+                'post_name' => 'Active Rate ' . $this->id ?? ''
             )
         );
         $post_id = wp_insert_post($this->postArg);
@@ -526,5 +526,13 @@ class HQRentalsModelsActiveRate extends HQRentalsBaseModel
         $this->monthlyRateAmount = (float)$rate->monthlyRate->amount;
         $this->monthlyRateUSDAmount = $rate->monthlyRate->usd_amount;
         $this->monthlyRateAmountForDisplay = $rate->monthlyRate->amount_for_display;
+    }
+    public function getDailyRateObjectDB()
+    {
+        return $this->daily_rate;
+    }
+    public function getDailyRateAmountForDisplayDB()
+    {
+        return $this->getDailyRateObjectDB()->amount_for_display;
     }
 }

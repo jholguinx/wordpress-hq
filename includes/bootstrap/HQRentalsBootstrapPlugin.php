@@ -3,6 +3,7 @@
 namespace HQRentalsPlugin\HQRentalsBootstrap;
 
 use HQRentalsPlugin\HQRentalsActions\elementor\HQElementorActions;
+use HQRentalsPlugin\HQRentalsActions\HQRentalsActionsAdmin;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsActionsRedirects;
 use HQRentalsPlugin\HQRentalsActions\HQRentalsAjaxHandler;
 use HQRentalsPlugin\HQRentalsAdmin\HQRentalsAdminBrandsPosts;
@@ -19,6 +20,9 @@ use HQRentalsPlugin\HQRentalsWebhooks\HQRentalsWebsiteEndpoints;
 
 class HQRentalsBootstrapPlugin
 {
+    static $localeFiles = [
+        'hq-wordpress-es_CL.mo'
+    ];
     /**
      * HQRentalsBootstrapPlugin constructor.
      * Review menus Later on
@@ -39,5 +43,14 @@ class HQRentalsBootstrapPlugin
         $this->elementor = new HQElementorActions();
         $this->templates = new HQRentalsTemplateHandler();
         $this->ajaxHandler = new HQRentalsAjaxHandler();
+        $this->adminActins = new HQRentalsActionsAdmin();
+        $this->loadLocalizationFiles();
+    }
+    private function loadLocalizationFiles()
+    {
+        foreach (HQRentalsBootstrapPlugin::$localeFiles as $localeFile){
+            load_textdomain('hq-wordpress', WP_PLUGIN_DIR . '/hq-rental-software/langs/' . $localeFile);
+        }
+
     }
 }

@@ -3,7 +3,7 @@
 Plugin Name: HQ Rental Software
 Plugin URI: https://hqrentalsoftware.com/knowledgebase/wordpress-plugin/
 Description: This plugin is to easily integrate HQ Rental Software with your website which will allow your rental business to receive reservations directly from your site.
-Version: 1.4.35
+Version: 1.5.0
 Author: HQ Rental Software
 Author URI: https://hqrentalsoftware.com
 Text Domain: hq-wordpress
@@ -11,7 +11,7 @@ Text Domain: hq-wordpress
 
 namespace HQRentalsPlugin;
 
-define('HQ_RENTALS_PLUGIN_VERSION', '1.4.35');
+define('HQ_RENTALS_PLUGIN_VERSION', '1.5.0');
 
 require_once('includes/autoloader.php');
 // If this file is accessed directory, then abort.
@@ -19,14 +19,14 @@ if (!defined('WPINC')) {
     die;
 }
 
-
 use HQRentalsPlugin\HQRentalsBakery\HQRentalsBakeryBoostrap;
 use HQRentalsPlugin\HQRentalsBootstrap\HQRentalsBootstrapPlugin;
 use HQRentalsPlugin\HQRentalsElementor\HQRentalsElementorBoostrap;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsBootstrap;
+use HQRentalsPlugin\HQRentalsThemes\HQRentalsThemeCustomizer;
 
 $bootstraper = new HQRentalsBootstrapPlugin();
-
+$themeCustomizer = new HQRentalsThemeCustomizer();
 /*
  * Activation Routine
  * @return void
@@ -42,3 +42,4 @@ $elementor = new HQRentalsElementorBoostrap();
 $elementor->boostrapElementor();
 $bakery = new HQRentalsBakeryBoostrap();
 $bakery->boostrapBakery();
+

@@ -57,8 +57,7 @@ class HQRentalsApiConnector
     public function getHQRentalsVehicleTypes()
     {
         $response = wp_remote_get($this->endpoints->getVehicleTypesEndpoint(), $this->configuration->getBasicApiConfiguration());
-
-        return json_decode($response['body'])->fleets_vehicle_types;
+        return $this->resolver->resolveVehicleTypes($response);
     }
 
     public function getHQRentalsAdditionalCharges()
@@ -113,6 +112,13 @@ class HQRentalsApiConnector
     {
         $response = wp_remote_get($this->endpoints->getTenantsSettingsEndpoint(), $this->configuration->getBasicApiConfiguration());
         return $this->resolver->resolveApiCallTenantsSettings($response);
+    }
+    public function getHQRentalsCarRentalSettings()
+    {
+        $response = wp_remote_get($this->endpoints->getCarRentalSettingEndpoint(), $this->configuration->getBasicApiConfiguration([
+            'module' => 'car_rental'
+        ]));
+        return $this->resolver->resolveApiCallCarRentalSettings($response);
     }
 
     public function getGooglePlacesOnAutocomplete($input)

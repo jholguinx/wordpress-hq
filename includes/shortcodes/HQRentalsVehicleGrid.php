@@ -3,7 +3,11 @@
 namespace HQRentalsPlugin\HQRentalsShortcodes;
 
 use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsCarRentalSetting;
+use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesCarRentalSetting;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
 class HQRentalsVehicleGrid
 {
@@ -12,7 +16,22 @@ class HQRentalsVehicleGrid
     private $brandId;
     private $disableFeatures;
     private $buttonPosition;
+    private $wasInit;
+    private $atts;
+    private $ramdomizeItems;
+    private $numberOfVehicles;
+    private $defaultDates;
+
     public function __construct($params = null)
+    {
+        $this->wasInit = !empty($params);
+        if($this->wasInit){
+            $this->setParams($params);
+        }
+        add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
+    }
+
+    private function setParams($params)
     {
         if(!empty($params['reservation_url_vehicle_grid'])){
             $this->linkURL = $params['reservation_url_vehicle_grid'];
@@ -29,26 +48,50 @@ class HQRentalsVehicleGrid
         if(!empty($params['button_position_vehicle_grid'])){
             $this->buttonPosition = $params['button_position_vehicle_grid'];
         }
-        add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
-    }
+        if(!empty($params['randomize_grid'])){
+            $this->ramdomizeItems = $params['randomize_grid'];
+        }
+        if(!empty($params['number_of_vehicles'])){
+            $this->numberOfVehicles = $params['number_of_vehicles'];
+        }
+        if(!empty($params['default_dates'])){
+            $this->defaultDates = $params['default_dates'];
+        }
 
-    public function renderShortcode() : string
+
+    }
+    public function renderShortcode($atts = []) : string
     {
+        $atts = shortcode_atts(
+        array(
+            'reservation_url_vehicle_grid'      => '',
+            'title_vehicle_grid'                => '',
+            'brand_id'                          => '',
+            'disable_features_vehicle_grid'     => '',
+            'button_position_vehicle_grid'      => '',
+            'button_text'                       => 'RENT NOW',
+            'randomize_grid'                    =>  'false',
+            'number_of_vehicles'                =>  '',
+            'default_dates'                     =>  'false',
+        ), $atts);
+        $this->atts = $atts;
+        if(!$this->wasInit){
+            $this->setParams($atts);
+        }
         $vehiclesCode = $this->getVehiclesHTML();
         HQRentalsAssetsHandler::loadVehicleGridAssets();
         return '
     ' . HQRentalsAssetsHandler::getHQFontAwesome() . ' 
-    <div class="elementor-widget-container hq-elementor-title">
-			<h2 class="elementor-heading-title elementor-size-default">' . $this->title . '</h2>		
-    </div>
-    <div class="elementor-element elementor-widget elementor-widget-html">
-        <div class="elementor-widget-container">
-            <!-- Begin Loop -->
-            ' . $vehiclesCode . '
-            <!-- End Loop -->
-           
-        </div>
-    </div>
+            <div class="elementor-widget-container hq-elementor-title">
+                    <h2 class="elementor-heading-title elementor-size-default">' . $this->title . '</h2>		
+            </div>
+            <div class="elementor-element elementor-widget elementor-widget-html">
+                <div class="elementor-widget-container">
+                    <!-- Begin Loop -->
+                    ' . $vehiclesCode . '
+                    <!-- End Loop -->       
+                </div>
+            </div>
         ';
     }
     public function getVehiclesHTML()
@@ -57,15 +100,25 @@ class HQRentalsVehicleGrid
         if($this->brandId){
             $vehicles = $query->getVehiclesByBrand($this->brandId);
         }else{
-            $vehicles = $query->allVehicleClasses();
+            $vehicles = $query->allVehicleClasses(true);
+        }
+        if($this->ramdomizeItems === 'true'){
+            shuffle($vehicles);
         }
 
         $html = '';
         if (count($vehicles)) {
             $innerHTML = '';
-            foreach (array_chunk($vehicles, 3) as $vehiclesRow) {
-                $innerHTML .= $this->resolveVehicleRowHTML($vehiclesRow);
+            if(!empty($this->numberOfVehicles) and is_numeric($this->numberOfVehicles)){
+                foreach (array_chunk(array_slice($vehicles,0, (int)$this->numberOfVehicles), 3) as $vehiclesRow) {
+                    $innerHTML .= $this->resolveVehicleRowHTML($vehiclesRow);
+                }
+            }else{
+                foreach (array_chunk($vehicles, 3) as $vehiclesRow) {
+                    $innerHTML .= $this->resolveVehicleRowHTML($vehiclesRow);
+                }
             }
+
             $html .=
                 '<div id="hq-smart-vehicle-grid">
                     ' . $innerHTML . '
@@ -120,7 +173,7 @@ class HQRentalsVehicleGrid
                         </div>
                         <div class='hq-grid-button-wrapper'>
                             <div class='bottom-info hq-grid-button-wrapper hq-grid-button-wrapper-{$this->buttonPosition}'>
-                                <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=2&vehicle_class_id={$vehicle->id}'>RENT NOW</a>
+                                <a class='hq-list-rent-button' href='{$this->linkURL}?target_step=3&vehicle_class_id={$vehicle->id}{$this->resolveDefaultDates()}'>{$this->atts['button_text']}</a>
                                 {$rateTagLeft}
                             </div>
                         </div>
@@ -154,5 +207,17 @@ class HQRentalsVehicleGrid
                     <span class='feature-label'>{$feature->label}</span>
                 </li>";
         return $html;
+    }
+    public function resolveDefaultDates() : string
+    {
+        if($this->defaultDates === 'true'){
+            $setting = new HQRentalsSettings();
+            $format = $setting->getTenantDatetimeFormat();
+            $carbon = new Carbon();
+            $pick_up_date = Carbon::now()->addDay(1)->format($format);
+            $return_date = Carbon::now()->addDay(2)->format($format);
+            return '&pick_up_date=' . $pick_up_date . '&return_date=' . $return_date;
+        }
+        return '';
     }
 }

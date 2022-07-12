@@ -3,7 +3,7 @@ Contributors: faggioni
 Donate link: https://hqrentalsoftware.com
 Tags: hqrentalsoftware
 Requires at least: 5.3.0
-Tested up to: 5.7.2
+Tested up to: 6.0
 Requires PHP: 7.0.0
 Stable tag: 1.5.1
 License: GPLv2 or later

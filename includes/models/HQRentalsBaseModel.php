@@ -15,7 +15,7 @@ abstract class HQRentalsBaseModel
             return 'N/A';
         }
     }
-    public function setUpdatedAt($updatedAtFromDB) : void{
+    public function setUpdatedAt($updatedAtFromDB){
         $this->updated_at = $updatedAtFromDB;
     }
 }

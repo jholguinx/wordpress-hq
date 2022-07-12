@@ -190,3 +190,7 @@ b{
 #return-location-custom{
     border-radius: 5px !important;
 }
+#pick-up-location-custom,
+#return-location-custom{
+    font-family: Montserrat!important;
+}

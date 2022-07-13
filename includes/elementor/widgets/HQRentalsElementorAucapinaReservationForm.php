@@ -82,6 +82,7 @@ class HQRentalsElementorAucapinaReservationForm extends \Elementor\Widget_Base
                 height: 50px !important;
             }
         </style>
+        <script>var locale = "<?php echo get_locale(); ?>"</script>
         <div class="elementor-widget-container hq-aucapina-form">
             <form method="GET" action="<?php echo empty($settings['reservation_url_aucapina_form']) ? '/reservations/' : $settings['reservation_url_aucapina_form']; ?>" class="js-filter-form ">
                 <div class="l-section l-section--container c-filter c-filter--col-3 c-filter--layout-1"

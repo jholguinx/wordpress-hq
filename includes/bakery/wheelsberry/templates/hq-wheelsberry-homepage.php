@@ -9,7 +9,7 @@ get_header();
             background-color: transparent !important;
         }
     </style>
-	<?php echo do_shortcode('[hq_bakery_wheelsberry_reservation_form]'); ?>
+	<?php echo do_shortcode('[hq_wheelsberry_reservation_form]'); ?>
 	<div class="content">
 		<div class="content-columns om-container">
 			<div class="content-columns__content">

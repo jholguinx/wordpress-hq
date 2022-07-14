@@ -36,5 +36,6 @@ class HQRentalsShortcoder
         $this->carRentalVehicleTabs = new HQRentalsCarRentalVehicleTabShortcode();
         $this->availabilityGridFilter = new HQRentalsAvailabilityFilterShortcode();
         $this->placesShortcode = new HQRentalsPlacesReservationForm();
+        $this->wheelsberryShortcode = new HQWheelsberrySliderShortcode();
     }
 }

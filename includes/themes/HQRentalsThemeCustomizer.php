@@ -2,6 +2,8 @@
 
 namespace HQRentalsPlugin\HQRentalsThemes;
 
+use HQRentalsPlugin\HQRentalsAssets\HQRentalsAssetsHandler;
+
 class HQRentalsThemeCustomizer
 {
     public function __construct()
@@ -25,6 +27,9 @@ class HQRentalsThemeCustomizer
         $wp_customize->add_setting('hq_tenant_logo',array(
             'default'=>'',
         ));
+        $wp_customize->add_setting('hq_map_pin_image',array(
+            'default'=>'',
+        ));
 
         $wp_customize->add_control(
             new \WP_Customize_Media_Control(
@@ -32,6 +37,16 @@ class HQRentalsThemeCustomizer
                 'hq_tenant_logo', // Setting id
                 array( // Args, including any custom ones.
                     'label' => __( 'Tenant Logo' ),
+                    'section' => 'images_section',
+                )
+            )
+        );
+        $wp_customize->add_control(
+            new \WP_Customize_Media_Control(
+                $wp_customize, // WP_Customize_Manager
+                'hq_map_pin_image', // Setting id
+                array( // Args, including any custom ones.
+                    'label' => __( 'Google Map Pin Image' ),
                     'section' => 'images_section',
                 )
             )
@@ -55,6 +70,17 @@ class HQRentalsThemeCustomizer
                 )
             )
         );
-
+    }
+    static public function getThemeColor() : string
+    {
+        return get_theme_mod('hq_theme_color') ?? '#FFF';
+    }
+    static public function getTenantLogoURL() : string
+    {
+        return wp_get_attachment_url(get_theme_mod('hq_tenant_logo')) ?? '';
+    }
+    static public function getMapPinImage() : string
+    {
+        return empty(wp_get_attachment_url(get_theme_mod('hq_map_pin_image'))) ? HQRentalsAssetsHandler::getDefaultMapMarkerImage() : wp_get_attachment_url(get_theme_mod('hq_map_pin_image'));
     }
 }

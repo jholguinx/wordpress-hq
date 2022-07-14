@@ -395,4 +395,8 @@ class HQRentalsAssetsHandler
     {
         return plugin_dir_url(__FILE__) . 'img/logo-admin.png';
     }
+    static public function getDefaultMapMarkerImage() : string
+    {
+        return plugin_dir_url(__FILE__) . 'img/map-marker.webp';
+    }
 }

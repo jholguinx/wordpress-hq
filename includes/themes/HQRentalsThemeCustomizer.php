@@ -81,6 +81,6 @@ class HQRentalsThemeCustomizer
     }
     static public function getMapPinImage() : string
     {
-        return wp_get_attachment_url(get_theme_mod('hq_map_pin_image')) ?? HQRentalsAssetsHandler::getDefaultMapMarkerImage();
+        return empty(wp_get_attachment_url(get_theme_mod('hq_map_pin_image'))) ? HQRentalsAssetsHandler::getDefaultMapMarkerImage() : wp_get_attachment_url(get_theme_mod('hq_map_pin_image'));
     }
 }

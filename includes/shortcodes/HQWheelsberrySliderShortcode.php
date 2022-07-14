@@ -8,6 +8,7 @@ use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
+use HQRentalsPlugin\HQRentalsThemes\HQRentalsThemeCustomizer;
 
 class HQWheelsberrySliderShortcode
 {
@@ -59,12 +60,12 @@ class HQWheelsberrySliderShortcode
         $this->assets->loadWheelsberryCSS();
         $vehicle_classes = $this->queryVehicles->allVehicleClasses(true);
         $locations = $this->queryLocations->allLocations();
-
+        $themeColor = HQRentalsThemeCustomizer::getThemeColor();
         $slider_title = $atts['title'];
         $slider_subtitle = $atts['sub_title'];
         $form_title = $atts['form_title'];
         $form_subtitle = $atts['form_sub_title'];
-        $image = wp_get_attachment_url(get_theme_mod('hq_tenant_logo'));
+        $image = HQRentalsThemeCustomizer::getTenantLogoURL();
         $imageHTML = empty($image) ? "": "
             <div class='branding-logo-w'>
                 <img class='branding-img' src='{$image}' />
@@ -75,6 +76,9 @@ class HQWheelsberrySliderShortcode
             <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
             <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap' rel='stylesheet'>    
             <style>
+                #hq-wheelsberry-slider{
+                    background-color: {$themeColor};
+                }
                 .branding-img{
                     max-width: 200px;
                     height: auto;

@@ -55,6 +55,13 @@ class HQRentalsThemeCustomizer
                 )
             )
         );
-
+    }
+    static public function getThemeColor() : string
+    {
+        return get_theme_mod('hq_theme_color') ?? '#FFF';
+    }
+    static public function getTenantLogoURL() : string
+    {
+        return wp_get_attachment_url(get_theme_mod('hq_tenant_logo')) ?? '';
     }
 }

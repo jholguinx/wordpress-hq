@@ -58,7 +58,7 @@ class HQWheelsberryLocationMapShortcode
                         </div>
                     </div>
                 </div>
-                <div class='om-rental-locations__map' style='height: 370px; position: relative; overflow: hidden; width: 100%;' data-map-zoom='12' data-map-marker='". HQRentalsAssetsHandler::getDefaultMapMarkerImage() ."'></div>
+                <div class='om-rental-locations__map' style='height: 370px; position: relative; overflow: hidden; width: 100%;' data-map-zoom='12' data-map-marker='". HQRentalsThemeCustomizer::getMapPinImage() ."'></div>
             </div>
             <script>
                 function initMapLocationGlobal(){

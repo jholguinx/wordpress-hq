@@ -37,5 +37,6 @@ class HQRentalsShortcoder
         $this->availabilityGridFilter = new HQRentalsAvailabilityFilterShortcode();
         $this->placesShortcode = new HQRentalsPlacesReservationForm();
         $this->wheelsberryShortcode = new HQWheelsberrySliderShortcode();
+        $this->wheelsberryLocationMapShortcode = new HQWheelsberryLocationMapShortcode();
     }
 }

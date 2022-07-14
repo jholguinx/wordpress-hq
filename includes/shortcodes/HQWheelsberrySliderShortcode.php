@@ -25,23 +25,6 @@ class HQWheelsberrySliderShortcode
         $this->queryLocations = new HQRentalsDBQueriesLocations();
         add_shortcode('hq_wheelsberry_reservation_form', array($this, 'renderShortcode'));
     }
-    /*
-    public function renderShortcode($params = [])
-    {
-        $this->linkURL = !empty($params['reservation_url_places_form']) ? $params['reservation_url_places_form'] : '';
-        $this->orientation = !empty($params['orientation_places_form']) ? $params['orientation_places_form'] : '';
-        $this->supportForCustomLocation = !empty($params['support_for_custom_location']) ? $params['support_for_custom_location'] : "false";
-        $this->customLocationLabel = !empty($params['custom_location_label']) ? $params['custom_location_label'] : '';
-        $this->minimumRental = !empty($params['minimum_rental_period']) ? $params['minimum_rental_period'] : 1;
-        $this->googleCountry = !empty($params['google_country']) ? $params['google_country'] : 'us';
-        $this->mapCenter = !empty($params['google_map_center']) ? $params['google_map_center'] : '';
-        $this->mapCenterRadius = !empty($params['google_map_center_radius']) ? $params['google_map_center_radius'] : '';
-        $this->submitButtonLabel = !empty($params['submit_button_label']) ? $params['submit_button_label'] : 'Book Now';
-        $key = $this->settings->getGoogleAPIKey();
-        $this->assets->loadPlacesReservationAssets();
-        $html = "";
-        return $html;
-    }*/
     public function renderShortcode($atts = [])
     {
         $atts = shortcode_atts(

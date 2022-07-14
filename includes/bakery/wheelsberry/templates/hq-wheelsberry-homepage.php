@@ -10,8 +10,6 @@ get_header();
         }
     </style>
 	<?php echo do_shortcode('[hq_wheelsberry_reservation_form]'); ?>
-    <?php echo do_shortcode('[hq_wheelsberry_location_map ]'); ?>
-
 	<div class="content">
 		<div class="content-columns om-container">
 			<div class="content-columns__content">

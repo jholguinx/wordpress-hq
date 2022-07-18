@@ -18,15 +18,17 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
 
     public function content($atts = [], $content = null)
     {
-        extract(shortcode_atts(array(
+        shortcode_atts(array(
             'title' => "",
             'sub_title' => "",
             'form_title' => '',
             'form_sub_title' => '',
             'button_text' => esc_html__('Continue Booking', 'hq-wordpress'),
             'reservation_url' => '/reservations/',
-        ), $atts));
-        $shortcode = new HQWheelsberrySliderShortcode($atts);
+            'render_form' => ''
+        ), $atts);
+        $atts['render_form'] = isset($atts['render_form']) ? 'true' : 'false';
+        $shortcode = new HQWheelsberrySliderShortcode();
         return $shortcode->renderShortcode($atts);
     }
 
@@ -64,18 +66,16 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                         'description' => esc_html__('Enter the Form Title', 'hq-wordpress')
                     ),
                     array(
-                        'type' => 'attach_image',
-                        'heading' => esc_html__('Backgroung Image', 'hq-wordpress'),
-                        'param_name' => 'background_image',
-                        'value' => '',
-                        'description' => esc_html__('Backgroung Image', 'hq-wordpress')
-                    ),
-                    array(
                         'type' => 'textfield',
-                        'heading' => esc_html__('Reservation URL', 'hq-wordpress'),
+                        'heading' => esc_html__('Reservation Engine Page URL', 'hq-wordpress'),
                         'param_name' => 'reservation_url',
                         'value' => '',
-                        'description' => esc_html__('Enter Reservation Page Url', 'hq-wordpress')
+                    ),
+                    array(
+                        'type' => 'checkbox',
+                        'heading' => esc_html__('Render Form', 'hq-wordpress'),
+                        'param_name' => 'render_form',
+                        'value' => 'true'
                     ),
                 )
             )

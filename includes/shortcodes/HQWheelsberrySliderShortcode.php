@@ -144,7 +144,7 @@ class HQWheelsberrySliderShortcode
     }
     private function resolveForm($resolve_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url) : string
     {
-        if($resolve_form){
+        if($resolve_form == 'true'){
             return "<!--Begin Form-->
             <div class='reservation reservation--full hq-reservation-form-wrapper' id='reservation'>
                 <div class='reservation-form'>
@@ -329,7 +329,6 @@ class HQWheelsberrySliderShortcode
         }else{
             return $reservation_url;
         }
-
     }
 
     private function resolveFeatures($features)

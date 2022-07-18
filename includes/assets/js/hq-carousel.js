@@ -19,7 +19,6 @@ jQuery(document).ready(function(){
         jQuery('.hq-tap-pos-'+event.page.index).addClass('active');
     });
     var form = jQuery('.hq-reservation-form-wrapper');
-    console.log('tes');
     if(form.length){
         var scroll = new SmoothScroll('a[href*="#"]',{
             speed: 1000,

@@ -40,6 +40,7 @@ class HQWheelsberrySliderShortcode
         wp_enqueue_script('jquery-ui-datepicker');
         wp_enqueue_style('owl-carousel');
         wp_enqueue_script('owl-carousel');
+
         $this->assets->loadOwlCarouselAssets();
         $this->assets->loadWheelsberryCSS();
         $vehicle_classes = $this->queryVehicles->allVehicleClasses(true);

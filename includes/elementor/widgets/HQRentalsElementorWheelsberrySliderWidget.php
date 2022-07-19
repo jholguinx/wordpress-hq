@@ -88,6 +88,18 @@ class HQRentalsElementorWheelsberrySliderWidget extends \Elementor\Widget_Base
                 'input_type' => 'string',
             ]
         );
+        $this->add_control(
+            'render_form',
+            [
+                'label' => __('Render Form', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'input_type' => 'string',
+                'label_on' => __( 'Yes', 'hq-wordpress' ),
+                'label_off' => __( 'No', 'hq-wordpress' ),
+                'return_value' => 'true',
+                'default' => 'true',
+            ]
+        );
         $this->end_controls_section();
 
     }

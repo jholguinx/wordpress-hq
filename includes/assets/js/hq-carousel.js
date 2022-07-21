@@ -7,6 +7,8 @@ jQuery(document).ready(function(){
         responsiveClass: true,
         navText: ['',''],
         mouseDrag: false,
+        autoHeight: true,
+        autoplay: true,
         /*
         responsive : {
             // breakpoint from 0 up

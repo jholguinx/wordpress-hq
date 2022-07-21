@@ -119,6 +119,19 @@ class HQWheelsberrySliderShortcode
                     text-transform: uppercase;
                     font-size: 16px;
                 }
+                .owl-nav{
+                    padding-top: 20px;
+                }
+                .cars-slider .owl-prev,
+                 .cars-slider .owl-next{
+                    top: -60px !important;
+                }
+                @media only screen and (max-width: 1350px){
+                    .cars-slider .owl-prev,
+                     .cars-slider .owl-next{
+                        bottom: 30px !important;
+                    }
+                }
             </style>
             <div id='hq-wheelsberry-slider' class='cars-slider' id='cars-slider'>
                 <div class='car-slider__title-wrapper om-container'>

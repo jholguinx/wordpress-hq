@@ -6,7 +6,7 @@ jQuery(document).ready(function(){
         dots: false,
         responsiveClass: true,
         navText: ['',''],
-        mouseDrag: true,
+        mouseDrag: false,
         /*
         responsive : {
             // breakpoint from 0 up

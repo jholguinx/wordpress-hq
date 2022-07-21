@@ -127,12 +127,8 @@ class HQWheelsberrySliderShortcode
                         <div class='h-subtitle cars-slider__subtitle'>{$slider_subtitle}</div>
                     </div>
                 </div>
-                <div class='cars-slider__inner'>
-                    <div class='cars-slider__item'>
-                        <div id='reservation' class='om-container owl-carousel'>
-                            {$this->renderVehiclesOnSlider($vehicle_classes, $render_form, $reservation_url)}
-                        </div>
-                    </div>
+                <div class='om-container owl-carousel'>
+                    {$this->renderVehiclesOnSlider($vehicle_classes, $render_form, $reservation_url)}
                 </div>
             </div>
             {$this->resolveForm($render_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url)}
@@ -294,7 +290,7 @@ class HQWheelsberrySliderShortcode
                                     </div>
                                 </div>
                                 <div class='cars-slider__item-image hq-wheelsberry-image-wrapper'>
-                                    <img src='{$vehicle->getPublicImage()}' alt='{$vehicle->getLabelForWebsite()}' />
+                                    <img class='img-responsive' src='{$vehicle->getPublicImage()}' alt='{$vehicle->getLabelForWebsite()}' />
                                 </div>
                                 <div class='cars-slider__item-options'>
                                     <div class='cars-slider__item-options-inner'>

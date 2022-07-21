@@ -3,9 +3,31 @@ jQuery(document).ready(function(){
         loop:true,
         nav:true,
         items: 1,
-        dots: true,
+        dots: false,
+        responsiveClass: true,
         navText: ['',''],
         mouseDrag: true,
+        /*
+        responsive : {
+            // breakpoint from 0 up
+            0 : {
+                option1 : value,
+                option2 : value,
+                ...
+            },
+            // breakpoint from 480 up
+            480 : {
+                option1 : value,
+                option2 : value,
+                ...
+            },
+            // breakpoint from 768 up
+            768 : {
+                option1 : value,
+                option2 : value,
+                ...
+            }
+        }*/
     });
     jQuery('.hq-tab').on('click',function (e){
         e.preventDefault();

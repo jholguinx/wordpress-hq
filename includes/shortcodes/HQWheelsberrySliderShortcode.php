@@ -70,13 +70,6 @@ class HQWheelsberrySliderShortcode
                     max-width: 200px;
                     height: auto;
                 }
-                .owl-nav{
-                    position:absolute !important;
-                    top:50%;
-                    height:0;
-                    left:0;
-                    right:0;    
-                }
                 .owl-prev, .owl-next{
                     width: 60px !important;
                     height: 60px !important;
@@ -134,9 +127,12 @@ class HQWheelsberrySliderShortcode
                         <div class='h-subtitle cars-slider__subtitle'>{$slider_subtitle}</div>
                     </div>
                 </div>
-            
-                <div class='cars-slider__inner owl-carousel'>
-                    {$this->renderVehiclesOnSlider($vehicle_classes, $render_form, $reservation_url)}
+                <div class='cars-slider__inner'>
+                    <div class='cars-slider__item'>
+                        <div id='reservation' class='om-container owl-carousel'>
+                            {$this->renderVehiclesOnSlider($vehicle_classes, $render_form, $reservation_url)}
+                        </div>
+                    </div>
                 </div>
             </div>
             {$this->resolveForm($render_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url)}
@@ -284,8 +280,6 @@ class HQWheelsberrySliderShortcode
                 $priceHTML = $dailyRate;
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";
                 $html .= "
-                    <div class='cars-slider__item'>
-                        <div id='reservation' class='om-container'>
                             <div class='cars-slider__item-inner om-container__inner'>
                                 <div class='cars-slider__item-description'>
                                     <div class='cars-slider__item-category'>{$vehicle->name}</div>
@@ -313,10 +307,7 @@ class HQWheelsberrySliderShortcode
                                         <span class='cars-slider__item-reserve-button' data-car-id='{$vehicle->getId()}'>Reserve Now</span>
                                     </a>
                                 </div>
-                            </div>            
-                        </div>
-                    </div>
-                    
+                            </div>
                 ";
             }
             return $html;

@@ -169,7 +169,6 @@ class HQWheelsberrySliderShortcode
                                                 <option>Select Vehicle</option>
                                                 {$this->resolveOptionsForClasses($vehicle_classes)}
                                             </select>
-                                            <div class='reservation-form__car-select-label' id='reservation-form__car-select-label'>Choose a car</div>
                                         </div>
                                     </div>
                                     <div class='reservation-form__more'>

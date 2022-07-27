@@ -70,13 +70,6 @@ class HQWheelsberrySliderShortcode
                     max-width: 200px;
                     height: auto;
                 }
-                .owl-nav{
-                    position:absolute !important;
-                    top:50%;
-                    height:0;
-                    left:0;
-                    right:0;    
-                }
                 .owl-prev, .owl-next{
                     width: 60px !important;
                     height: 60px !important;
@@ -126,6 +119,19 @@ class HQWheelsberrySliderShortcode
                     text-transform: uppercase;
                     font-size: 16px;
                 }
+                .owl-nav{
+                    padding-top: 20px;
+                }
+                .cars-slider .owl-prev,
+                 .cars-slider .owl-next{
+                    top: -60px !important;
+                }
+                @media only screen and (max-width: 1350px){
+                    .cars-slider .owl-prev,
+                     .cars-slider .owl-next{
+                        bottom: 30px !important;
+                    }
+                }
             </style>
             <div id='hq-wheelsberry-slider' class='cars-slider' id='cars-slider'>
                 <div class='car-slider__title-wrapper om-container'>
@@ -134,8 +140,7 @@ class HQWheelsberrySliderShortcode
                         <div class='h-subtitle cars-slider__subtitle'>{$slider_subtitle}</div>
                     </div>
                 </div>
-            
-                <div class='cars-slider__inner owl-carousel'>
+                <div class='om-container owl-carousel'>
                     {$this->renderVehiclesOnSlider($vehicle_classes, $render_form, $reservation_url)}
                 </div>
             </div>
@@ -164,7 +169,6 @@ class HQWheelsberrySliderShortcode
                                                 <option>Select Vehicle</option>
                                                 {$this->resolveOptionsForClasses($vehicle_classes)}
                                             </select>
-                                            <div class='reservation-form__car-select-label' id='reservation-form__car-select-label'>Choose a car</div>
                                         </div>
                                     </div>
                                     <div class='reservation-form__more'>
@@ -284,8 +288,6 @@ class HQWheelsberrySliderShortcode
                 $priceHTML = $dailyRate;
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";
                 $html .= "
-                    <div class='cars-slider__item'>
-                        <div id='reservation' class='om-container'>
                             <div class='cars-slider__item-inner om-container__inner'>
                                 <div class='cars-slider__item-description'>
                                     <div class='cars-slider__item-category'>{$vehicle->name}</div>
@@ -300,7 +302,7 @@ class HQWheelsberrySliderShortcode
                                     </div>
                                 </div>
                                 <div class='cars-slider__item-image hq-wheelsberry-image-wrapper'>
-                                    <img src='{$vehicle->getPublicImage()}' alt='{$vehicle->getLabelForWebsite()}' />
+                                    <img class='img-responsive' src='{$vehicle->getPublicImage()}' alt='{$vehicle->getLabelForWebsite()}' />
                                 </div>
                                 <div class='cars-slider__item-options'>
                                     <div class='cars-slider__item-options-inner'>
@@ -313,10 +315,7 @@ class HQWheelsberrySliderShortcode
                                         <span class='cars-slider__item-reserve-button' data-car-id='{$vehicle->getId()}'>Reserve Now</span>
                                     </a>
                                 </div>
-                            </div>            
-                        </div>
-                    </div>
-                    
+                            </div>
                 ";
             }
             return $html;

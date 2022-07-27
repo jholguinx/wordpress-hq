@@ -65,6 +65,7 @@ class HQWheelsberrySliderShortcode
             <style>
                 #hq-wheelsberry-slider{
                     background-color: {$themeColor};
+                    font-family: Montserrat, Open Sans !important;
                 }
                 .branding-img{
                     max-width: 200px;

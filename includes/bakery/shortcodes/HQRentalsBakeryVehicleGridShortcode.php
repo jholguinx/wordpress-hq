@@ -21,7 +21,8 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
             'button_position_vehicle_grid' => 'right',
             'randomize_grid'                    =>  'false',
             'number_of_vehicles'                =>  '',
-            'default_dates'                     =>  'false'
+            'default_dates'                     =>  'false',
+            'force_vehicles_by_rate'            =>  'false'
         ), $atts ) );
         $shortcode = new HQRentalsVehicleGrid();
         return $shortcode->renderShortcode($atts);
@@ -80,6 +81,15 @@ class HQRentalsBakeryVehicleGridShortcode extends WPBakeryShortCode{
                         'type' => 'dropdown',
                         'heading' => __('Add Default Date', 'hq-wordpress'),
                         'param_name' => 'default_dates',
+                        'value'      => array(
+                            __( 'No', "hq-wordpress" ) => 'false',
+                            __( 'Yes', "hq-wordpress" ) => 'true',
+                        ),
+                    ),
+                    array(
+                        'type' => 'dropdown',
+                        'heading' => __('Force Order Vehicles By Daily Rate', 'hq-wordpress'),
+                        'param_name' => 'force_vehicles_by_rate',
                         'value'      => array(
                             __( 'No', "hq-wordpress" ) => 'false',
                             __( 'Yes', "hq-wordpress" ) => 'true',

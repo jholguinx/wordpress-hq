@@ -21,6 +21,7 @@ class HQRentalsVehicleGrid
     private $ramdomizeItems;
     private $numberOfVehicles;
     private $defaultDates;
+    private $forceVehiclesByRate;
 
     public function __construct($params = null)
     {
@@ -57,8 +58,9 @@ class HQRentalsVehicleGrid
         if(!empty($params['default_dates'])){
             $this->defaultDates = $params['default_dates'];
         }
-
-
+        if(!empty($params['force_vehicles_by_rate'])){
+            $this->forceVehiclesByRate = $params['force_vehicles_by_rate'];
+        }
     }
     public function renderShortcode($atts = []) : string
     {
@@ -73,9 +75,11 @@ class HQRentalsVehicleGrid
             'randomize_grid'                    =>  'false',
             'number_of_vehicles'                =>  '',
             'default_dates'                     =>  'false',
+            'force_vehicles_by_rate'            =>  'false'
         ), $atts);
         $this->atts = $atts;
         if(!$this->wasInit){
+            dd('1');
             $this->setParams($atts);
         }
         $vehiclesCode = $this->getVehiclesHTML();
@@ -100,7 +104,12 @@ class HQRentalsVehicleGrid
         if($this->brandId){
             $vehicles = $query->getVehiclesByBrand($this->brandId);
         }else{
-            $vehicles = $query->allVehicleClasses(true);
+            if($this->forceVehiclesByRate === 'true'){
+                $vehicles = $query->allVehicleClasses(false);
+            }else{
+                $vehicles = $query->allVehicleClasses(true);
+            }
+
         }
         if($this->ramdomizeItems === 'true'){
             shuffle($vehicles);

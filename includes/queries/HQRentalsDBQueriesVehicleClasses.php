@@ -44,14 +44,14 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
             ($force_rate) ? $this->rate->getTableName() . "." . $rate
                 : array(
                     array(
-                        'table' => $this->model->getTableName(),
-                        'column' => 'vehicle_class_order',
-                        'direction' => 'ASC'
-                    ),
-                    array(
                         'table' => $this->rate->getTableName() ,
                         'direction' => 'ASC',
                         'column' => 'daily_rate_amount'
+                    ),
+                    array(
+                        'table' => $this->model->getTableName(),
+                        'column' => 'vehicle_class_order',
+                        'direction' => 'ASC'
                     )
             )
         );

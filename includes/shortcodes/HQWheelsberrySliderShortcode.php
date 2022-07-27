@@ -67,7 +67,10 @@ class HQWheelsberrySliderShortcode
                     background-color: {$themeColor};
                     font-family: Montserrat, Open Sans !important;
                 }
-                .hq-reservation-form-wrapper{
+                .hq-reservation-form-wrapper,
+                .hq-reservation-form-wrapper select,
+                .hq-reservation-form-wrapper input,
+                .hq-reservation-form-wrapper select placeholder{
                     font-family: Montserrat, Open Sans !important;
                 }
                 #hq-wheelsberry-slider .cars-slider__item-option-label{

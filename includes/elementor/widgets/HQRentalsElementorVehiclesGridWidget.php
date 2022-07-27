@@ -85,6 +85,18 @@ class HQRentalsElementorVehiclesGridWidget extends \Elementor\Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'force_vehicles_by_rate',
+            [
+                'label' => __('Force Order Vehicle By Rates', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'input_type' => 'string',
+                'label_on' => __( 'Yes', 'hq-wordpress' ),
+                'label_off' => __( 'No', 'hq-wordpress' ),
+                'return_value' => 'true',
+                'default_value' => 'false'
+            ]
+        );
         $this->end_controls_section();
 
     }

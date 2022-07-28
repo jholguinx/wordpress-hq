@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+# [1.5.11] - 2022-07-28
+
+- Fix Deployment Issue v1.5.10
+
+### Changed
+
+- No changes
+
 # [1.5.10] - 2022-07-28
 
 - Fix Deployment Issue v1.5.9

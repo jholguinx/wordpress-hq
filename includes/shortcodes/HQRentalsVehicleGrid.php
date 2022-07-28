@@ -79,7 +79,6 @@ class HQRentalsVehicleGrid
         ), $atts);
         $this->atts = $atts;
         if(!$this->wasInit){
-            dd('1');
             $this->setParams($atts);
         }
         $vehiclesCode = $this->getVehiclesHTML();

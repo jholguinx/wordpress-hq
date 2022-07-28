@@ -29,6 +29,11 @@ If you experience any issues, please review your user and password and try again
 
 == Frequently Asked Questions ==
 
+= 1.5.9 =
+
+Adding support to disable vehicle field on Wheelsberry slider
+Adding support for target step on Wheelsberry slider
+
 = 1.5.8 =
 
 Fix for Wheelsberry theme Slider

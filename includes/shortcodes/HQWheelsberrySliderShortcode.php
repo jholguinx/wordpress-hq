@@ -35,7 +35,8 @@ class HQWheelsberrySliderShortcode
                 'form_sub_title' => '',
                 'button_text' => esc_html__('Continue Booking', 'hq-wordpress'),
                 'reservation_url' => '/reservations/',
-                'render_form'   => 'true'
+                'render_form'   => 'true',
+                'target_step'   => '3'
             ), $atts );
         wp_enqueue_script('jquery-ui-datepicker');
         wp_enqueue_style('owl-carousel');
@@ -52,6 +53,7 @@ class HQWheelsberrySliderShortcode
         $form_subtitle = $atts['form_sub_title'];
         $render_form = $atts['render_form'];
         $reservation_url = $atts['reservation_url'];
+        $target_step = $atts['target_step'];
         $image = HQRentalsThemeCustomizer::getTenantLogoURL();
         $imageHTML = empty($image) ? "": "
             <div class='branding-logo-w'>
@@ -154,11 +156,11 @@ class HQWheelsberrySliderShortcode
                     {$this->renderVehiclesOnSlider($vehicle_classes, $render_form, $reservation_url)}
                 </div>
             </div>
-            {$this->resolveForm($render_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url)}
+            {$this->resolveForm($render_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url, $target_step)}
         ";
         return $html;
     }
-    private function resolveForm($resolve_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url) : string
+    private function resolveForm($resolve_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url, $target_step) : string
     {
         if($resolve_form == 'true'){
             return "<!--Begin Form-->
@@ -241,7 +243,7 @@ class HQWheelsberrySliderShortcode
                                         </div>
                                         <div class='reservation-form__line reservation-form__submit'>
                                             <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
-                                                <input type='hidden' name='target_step' value='3' />
+                                                <input type='hidden' name='target_step' value='{$target_step}' />
                                                 <input type='submit' class='reservation-form__submit-button' id='reservation-form__submit-button' value='Continue booking' />
                                                 <circle class='path' cx='24' cy='24' r='20' fill='none' stroke='#fff' stroke-width='4'>
                                                   <animate attributeName='stroke-dasharray' attributeType='XML' from='1,200' to='89,200' values='1,200; 89,200; 89,200' keyTimes='0; 0.5; 1' dur='1.5s' repeatCount='indefinite' />

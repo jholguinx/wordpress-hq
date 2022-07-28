@@ -100,6 +100,15 @@ class HQRentalsElementorWheelsberrySliderWidget extends \Elementor\Widget_Base
                 'default' => 'true',
             ]
         );
+        $this->add_control(
+            'target_step',
+            [
+                'label' => __('Reservation Engine Page URL', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+                'default'   => '3'
+            ]
+        );
         $this->end_controls_section();
 
     }

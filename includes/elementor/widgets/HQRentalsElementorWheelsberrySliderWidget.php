@@ -109,6 +109,18 @@ class HQRentalsElementorWheelsberrySliderWidget extends \Elementor\Widget_Base
                 'default'   => '3'
             ]
         );
+        $this->add_control(
+            'render_vehicle_field',
+            [
+                'label' => __('Display Vehicle Class Field', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'input_type' => 'string',
+                'label_on' => __( 'Yes', 'hq-wordpress' ),
+                'label_off' => __( 'No', 'hq-wordpress' ),
+                'return_value' => 'true',
+                'default' => 'true',
+            ]
+        );
         $this->end_controls_section();
 
     }

@@ -26,7 +26,8 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
             'button_text' => esc_html__('Continue Booking', 'hq-wordpress'),
             'reservation_url' => '/reservations/',
             'render_form' => '',
-            'target_step' => '3'
+            'target_step' => '3',
+            'render_vehicle_field' => 'true'
         ), $atts);
         $atts['render_form'] = isset($atts['render_form']) ? 'true' : 'false';
         $shortcode = new HQWheelsberrySliderShortcode();
@@ -83,6 +84,12 @@ class HQRentalBakeryWheelsberryReservationFormShortcode extends WPBakeryShortCod
                         'heading' => esc_html__('Reservation Engine Target Step', 'hq-wordpress'),
                         'param_name' => 'target_step',
                         'value' => '3',
+                    ),
+                    array(
+                        'type' => 'checkbox',
+                        'heading' => esc_html__('Render Vehicle Field', 'hq-wordpress'),
+                        'param_name' => 'render_vehicle_field',
+                        'value' => 'true'
                     ),
                 )
             )

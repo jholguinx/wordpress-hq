@@ -36,7 +36,8 @@ class HQWheelsberrySliderShortcode
                 'button_text' => esc_html__('Continue Booking', 'hq-wordpress'),
                 'reservation_url' => '/reservations/',
                 'render_form'   => 'true',
-                'target_step'   => '3'
+                'target_step'   => '3',
+                'render_vehicle_field' => 'true'
             ), $atts );
         wp_enqueue_script('jquery-ui-datepicker');
         wp_enqueue_style('owl-carousel');
@@ -54,6 +55,7 @@ class HQWheelsberrySliderShortcode
         $render_form = $atts['render_form'];
         $reservation_url = $atts['reservation_url'];
         $target_step = $atts['target_step'];
+        $render_vehicle_field = $atts['render_vehicle_field'];
         $image = HQRentalsThemeCustomizer::getTenantLogoURL();
         $imageHTML = empty($image) ? "": "
             <div class='branding-logo-w'>
@@ -72,7 +74,8 @@ class HQWheelsberrySliderShortcode
                 .hq-reservation-form-wrapper,
                 .hq-reservation-form-wrapper select,
                 .hq-reservation-form-wrapper input,
-                .hq-reservation-form-wrapper select placeholder{
+                .hq-reservation-form-wrapper select placeholder,
+                .hq-reservation-form-wrapper select option{
                     font-family: Montserrat, Open Sans !important;
                 }
                 #hq-wheelsberry-slider .cars-slider__item-option-label{
@@ -156,11 +159,11 @@ class HQWheelsberrySliderShortcode
                     {$this->renderVehiclesOnSlider($vehicle_classes, $render_form, $reservation_url)}
                 </div>
             </div>
-            {$this->resolveForm($render_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url, $target_step)}
+            {$this->resolveForm($render_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url, $target_step,$render_vehicle_field)}
         ";
         return $html;
     }
-    private function resolveForm($resolve_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url, $target_step) : string
+    private function resolveForm($resolve_form, $imageHTML, $form_title, $form_subtitle,$vehicle_classes,$locations,$reservation_url, $target_step,$render_vehicle_field) : string
     {
         if($resolve_form == 'true'){
             return "<!--Begin Form-->
@@ -175,14 +178,7 @@ class HQWheelsberrySliderShortcode
                                         <div class='h-subtitle reservation-form__subtitle'>{$form_subtitle}</div>
                                     </div>
                                 <form action='{$reservation_url}' method='get'>
-                                    <div class='reservation-form__line reservation-form__car'>
-                                        <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
-                                            <select class='reservation-form__car-select' id='reservation-form__car-select' name='vehicle_class_id'>
-                                                <option>Select Vehicle</option>
-                                                {$this->resolveOptionsForClasses($vehicle_classes)}
-                                            </select>
-                                        </div>
-                                    </div>
+                                    {$this->resolveVehicleClassId($render_vehicle_field, $vehicle_classes)}
                                     <div class='reservation-form__more'>
                                         <div class='reservation-form__line reservation-form__set reservation-form__pick-up'>
                                             <div class='reservation-form__pick-up-location reservation-form__location'>
@@ -274,6 +270,23 @@ class HQWheelsberrySliderShortcode
             <!--End Form-->";
         }
         return "";
+    }
+    private function resolveVehicleClassId($render_vehicle_field,$vehicle_classes) : string
+    {
+        if($render_vehicle_field == 'true'){
+            return "
+                <div class='reservation-form__line reservation-form__car'>
+                    <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
+                        <select class='reservation-form__car-select' id='reservation-form__car-select' name='vehicle_class_id'>
+                            <option>Select Vehicle</option>
+                            {$this->resolveOptionsForClasses($vehicle_classes)}
+                        </select>
+                    </div>
+                </div>
+            ";
+        }else{
+            return '';
+        }
     }
 
     private function getTitle($classTitle)

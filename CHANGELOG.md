@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+# [1.5.13] - 2022-07-29
+
+- Wordpress metadata test 2
+
+### Changed
+
+- No changes
+
 # [1.5.12] - 2022-07-29
 
 - Wordpress metadata test

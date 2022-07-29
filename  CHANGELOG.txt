@@ -1,5 +1,9 @@
 == Change Log ==
 
+= 1.5.13 =
+
+Meta-data Test 2
+
 = 1.5.12 =
 
 Meta-data Test

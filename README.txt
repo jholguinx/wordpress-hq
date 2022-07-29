@@ -5,7 +5,7 @@ Tags: hqrentalsoftware
 Requires at least: 5.3.0
 Tested up to: 6.0
 Requires PHP: 7.3.0
-Stable tag: 1.5.11
+Stable tag: 1.5.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,51 +26,6 @@ Step 3 - Press the Authenticate button, if the credentials are approved, the sys
 You can now use the features of the plugin to set up the reservation process and more. For further information and options, please go to our Website Integrations section on our Knowledge Base https://hqrentalsoftware.com/knowledgebase_category/website-integration/
 
 If you experience any issues, please review your user and password and try again. If you are unable to authenticate your user information and fail to connect the plugin, please contact our support team via your HQ Rental Software account and we’ll happily assist you.
-
-== Frequently Asked Questions ==
-
-= 1.5.11 =
-
-Fix Deployment Issue v1.5.10
-
-= 1.5.10 =
-
-Fix Deployment Issue v1.5.9
-
-= 1.5.9 =
-
-Adding support to disable vehicle field on Wheelsberry slider
-Adding support for target step on Wheelsberry slider
-
-= 1.5.8 =
-
-Fix for Wheelsberry theme Slider
-
-= 1.5.7 =
-
-Internal Fixes
-
-= 1.5.5 =
-
-Support for Wheelsberry theme shortcodes on Elementor and WP Bakery builders.
-
-= 1.5.4 =
-
-Internal fixes
-
-= 1.5.3 =
-
-Fix on PHP requirements
-
-= 1.5.2 =
-
-Meta data update
-
-= 1.5.1 =
-
-Internal issues
-
-= 1.5.0 =
 
 == Screenshots ==
 

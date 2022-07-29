@@ -1,5 +1,9 @@
 == Change Log ==
 
+= 1.5.12 =
+
+Meta-data Test
+
 = 1.5.11 =
 
 Fix Deployment Issue v1.5.10

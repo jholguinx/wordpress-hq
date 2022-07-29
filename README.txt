@@ -27,51 +27,6 @@ You can now use the features of the plugin to set up the reservation process and
 
 If you experience any issues, please review your user and password and try again. If you are unable to authenticate your user information and fail to connect the plugin, please contact our support team via your HQ Rental Software account and we’ll happily assist you.
 
-== Frequently Asked Questions ==
-
-= 1.5.11 =
-
-Fix Deployment Issue v1.5.10
-
-= 1.5.10 =
-
-Fix Deployment Issue v1.5.9
-
-= 1.5.9 =
-
-Adding support to disable vehicle field on Wheelsberry slider
-Adding support for target step on Wheelsberry slider
-
-= 1.5.8 =
-
-Fix for Wheelsberry theme Slider
-
-= 1.5.7 =
-
-Internal Fixes
-
-= 1.5.5 =
-
-Support for Wheelsberry theme shortcodes on Elementor and WP Bakery builders.
-
-= 1.5.4 =
-
-Internal fixes
-
-= 1.5.3 =
-
-Fix on PHP requirements
-
-= 1.5.2 =
-
-Meta data update
-
-= 1.5.1 =
-
-Internal issues
-
-= 1.5.0 =
-
 == Screenshots ==
 
 1. Here you will need to login using the same credentials you use for logging into the system. Only account credentials from users with an “Administrator” role should be used.

@@ -360,7 +360,7 @@ class HQWheelsberrySliderShortcode
     {
         if (is_array($features) and count($features)) {
             $html = '';
-            foreach ($features as $feature) {
+            foreach (array_slice($features,0, 5) as $feature) {
                 $html .= "
                     <div class='cars-slider__item-option car-option'><i class='cars-slider__hq-feature-icon {$feature->icon}'></i><span class='cars-slider__item-option-label'>{$feature->label}</span></div>       
                 ";

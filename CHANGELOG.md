@@ -2,8 +2,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+This project adheres to [Semantic Versioning](http://semver.org/).
+
+# [1.5.14] - 2022-08-10
+
+- Fixes on styles for Wheelsberry Slider Widget.
+- Setting 5 feature max for Wheelsberry Slider Widget.
+
+### Changed
+
+- ```HQWheelsberrySliderShortcode.php``` Wheelsberry Slider Shortcode File.
+- Styles files.
 
 # [1.5.13] - 2022-07-29
 

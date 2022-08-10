@@ -1,5 +1,9 @@
 == Change Log ==
 
+= 1.5.16 =
+
+Remove styles for Wheelsberry.
+
 = 1.5.15 =
 
 Fix on deploy.

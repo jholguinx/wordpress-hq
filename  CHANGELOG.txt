@@ -1,5 +1,9 @@
 == Change Log ==
 
+= 1.5.15 =
+
+Fix on deploy.
+
 = 1.5.14 =
 
 Fixes on styles for Wheelsberry Slider Widget.

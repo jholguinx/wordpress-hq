@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# [1.5.16] - 2022-08-10
+
+- Fix styles on Wheelsberry Slider.
+
+### Changed
+
+- Styles files.
+
 # [1.5.15] - 2022-08-10
 
 - Fix on deploy.

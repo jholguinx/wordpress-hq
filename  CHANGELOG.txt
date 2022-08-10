@@ -1,5 +1,10 @@
 == Change Log ==
 
+= 1.5.14 =
+
+Fixes on styles for Wheelsberry Slider Widget.
+Setting 5 feature max for Wheelsberry Slider Widget.
+
 = 1.5.13 =
 
 Meta-data Test 2

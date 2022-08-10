@@ -1391,7 +1391,6 @@ body.sidebar--hidden .content-columns__content-inner {
 		right:-60px;
 	}
 }
-
 @media only screen and (max-width: 1350px) {
 	.cars-slider .owl-controls {
 		top:auto;

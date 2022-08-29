@@ -4,10 +4,10 @@
 .hq-reservation-form-wrapper input,
 .hq-reservation-form-wrapper select placeholder,
 .hq-reservation-form-wrapper select option{
-    font-family: Montserrat, Open Sans, serif !important;
+    font-family: Montserrat,"Open Sans", sans-serif;
 }
 #hq-wheelsberry-slider .cars-slider__item-option-label{
-    font-family: Open Sans, Montserrat, serif !important;
+    font-family: Montserrat,"Open Sans", sans-serif;
 }
 .branding-img{
     max-width: 200px;
@@ -40,6 +40,113 @@
 .hq-wheelsberry-image-wrapper{
     width: 45%;
 }
+
+.cars-slider__item-price{font-size:0.55rem}
+
+
+.short-des {
+  display: none;
+}
+.hq-wheelsberry-separator{display:none}
+
+.cars-slider__item-price-value {
+  display: flex;
+  align-content: start;
+  justify-content: stretch;
+  width: 17vw;
+  flex-wrap: wrap;
+  max-width: 200px;
+}
+
+.cars-slider__item-option-label {
+  position: relative;
+  bottom: 5px;
+}
+
+.cars-slider__hq-feature-icon {border-radius:2px!important;
+line-height:40px!importan;
+background-color:transparent!important}
+.cars-slider__model-inner {
+  display: flex!important;
+  justify-content: flex-start!important;
+  flex-wrap: wrap!important;
+  max-width: 300px!important;
+}
+.cars.\-.slider__model.br {
+  padding-right: 8px;
+}
+.cars-slider__item-category{display:none}
+.cars-slider__item-reserve-button{background-color:black!important}
+.cars-slider__item-reserve-button:hover{background-color:#333333!important;
+text-decoration:none!important;}
+
+.reservation-form__submit-button{background-color:black!important}
+.reservation-form__submit-button:hover{background-color:#333333!important;
+text-decoration:none!important;}
+
+
+.img-responsive {
+  border: 5px solid black !important;
+  border-radius: 3px !important;
+
+}
+.cars-slider__item-description-sep{background-color:#dfe2ef!important}
+
+.reservation-form__car-select{display:none!important}
+.reservation-form{background-color:#dfe2ef!important}
+.cars-slider, .your-booking__car-image {
+  background-color: #5ec1e6!important;
+}
+.cars-slider__item-options {
+ color:black!important
+}
+.cars-slider__item-price-value{color:black}
+.cars-slider__model{color:black!important}
+.menu-link{font-weight:400!important;font-size:1.2rem!important}
+
+.reservation-form::after{border-top-color:black!important}
+.cars-slider::after{border-top-color:black!important}
+.cars-slider__model{display:none!important}
+.cars-slider__item-category {
+  display: block;
+font-weight: 600!important
+}
+
+
+#hq-wheelsberry-slider {
+  height: 480px;
+}
+.cars-slider__item-category {
+font-size: 30px!important;
+width: 285px!important;
+ overflow: hidden;
+  text-overflow: ellipsis;
+  height: 50px;
+}
+@media only screen and (max-width: 900px){
+	.cars-slider__item-reserve{margin-top:25px!important}
+}
+
+@media only screen and (max-width: 767px){
+.cars-slider__item-price-value {
+  width: 50vw!important;
+}
+	.cars-slider__item-options-inner{display:none}
+#hq-wheelsberry-slider {
+  height: 600px!important;
+}
+
+}
+@media screen and (min-width: 1350px){
+.cars-slider .owl-nav {
+  padding-top: 20px;
+  position: absolute;
+  width: 100%;
+  bottom: 43%!important;
+	}}
+
+
+
 @media only screen and (max-width: 519px){
     .hq-wheelsberry-image-wrapper{
         width: 100%;

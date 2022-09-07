@@ -9,7 +9,7 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
-class HQRentalsVehicleGrid
+class HQRentalsVehicleGrid implements HQShortcodeInterface
 {
     private $linkURL;
     private $title;

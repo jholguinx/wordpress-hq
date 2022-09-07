@@ -194,6 +194,7 @@ final class HQRentalsElementorExtension {
         require_once( __DIR__ . '/widgets/HQRentalsElementorAucapinaReservationForm.php' );
         require_once( __DIR__ . '/widgets/HQRentalsElementorWheelsberrySliderWidget.php' );
         require_once( __DIR__ . '/widgets/HQRentalsElementorWheelsberryLocationsWidget.php' );
+        require_once( __DIR__ . '/widgets/HQRentalsElementorReservationFormByVehicleType.php' );
 
         // Register widget
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorVehiclesGridWidget() );
@@ -203,6 +204,7 @@ final class HQRentalsElementorExtension {
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorAucapinaReservationForm() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorWheelsberrySliderWidget() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorWheelsberryLocationsWidget() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \HQRentalsElementorReservationFormByVehicleType() );
     }
 
     /**

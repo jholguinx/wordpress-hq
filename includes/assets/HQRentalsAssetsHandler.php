@@ -91,6 +91,7 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-availability-grip-script', plugin_dir_url(__FILE__) . 'js/hq-availability-grid.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hg-gcar-vehicle-filter-js', plugin_dir_url(__FILE__) . 'js/hq-gcar-vehicle-filter.js', array(), HQ_RENTALS_PLUGIN_VERSION . '1', true);
         wp_register_script('hq-reservation-form-setup', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-reservation-form-setup-without-times', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup-without-times.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-places-form-js', plugin_dir_url(__FILE__) . 'js/hq-places-form.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_style('hq-fancy-box-css', plugin_dir_url(__FILE__) . 'css/jquery.fancybox.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
@@ -242,16 +243,25 @@ class HQRentalsAssetsHandler
 
     }
 
-    public function loadDatePickersReservationAssets()
+    public function loadDatePickersReservationAssets($justDatePicker = false) : void
     {
         wp_enqueue_style('hq-datepicker-style');
         wp_enqueue_script('hq-moment');
         wp_enqueue_script('hq-datepicker-js');
-        wp_enqueue_script('hq-reservation-form-setup');
-        $data = array(
-            'HQFormatDate' => $this->settings->getFrontEndDatetimeFormat()
-        );
-        wp_localize_script('hq-reservation-form-setup', 'HQReservationFormData', $data);
+        if($justDatePicker){
+            wp_enqueue_script('hq-reservation-form-setup-without-times');
+            $data = array(
+                'HQFormatDate' => $this->settings->getFrontEndDatetimeFormat()
+            );
+            wp_localize_script('hq-reservation-form-setup-without-times', 'HQReservationFormData', $data);
+        }else{
+            wp_enqueue_script('hq-reservation-form-setup');
+            $data = array(
+                'HQFormatDate' => $this->settings->getFrontEndDatetimeFormat()
+            );
+            wp_localize_script('hq-reservation-form-setup', 'HQReservationFormData', $data);
+        }
+
     }
 
     public function gCarVehicleFilterAssets()

@@ -571,6 +571,20 @@ class HQRentalsAdminSettings
                                                                value="<?php echo esc_attr($this->settings->getDefaultLongitudeSetting()); ?>"/>
                                                     </div>
                                                 </div>
+                                                <div class="hq-general-settings-item">
+                                                    <div class="hq-general-label-wrapper">
+                                                        <h4 class="wp-heading-inline" for="title">Vehicle Class Type Field</h4>
+                                                        <span id="hq-tooltip-tenant-token"
+                                                              class="dashicons dashicons-search"
+                                                              data-tippy-content="Place here vehicle type field to filter vehicles."></span>
+                                                    </div>
+                                                    <div class="hq-general-input-wrapper">
+                                                        <input type="text"
+                                                               class="hq-admin-text-input hq-admin-text-input-small-medium"
+                                                               name="<?php echo $this->settings->hq_vehicle_class_type_field; ?>"
+                                                               value="<?php echo esc_attr($this->settings->getVehicleClassTypeField()); ?>"/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- End Custom Fields Tab -->

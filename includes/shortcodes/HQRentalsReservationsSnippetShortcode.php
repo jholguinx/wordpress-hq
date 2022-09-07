@@ -5,7 +5,7 @@ namespace HQRentalsPlugin\HQRentalsShortcodes;
 use HQRentalsPlugin\HQRentalsHelpers\HQRentalsFrontHelper;
 use HQRentalsPlugin\HQRentalsModels\HQRentalsModelsBrand;
 
-class HQRentalsReservationsSnippetShortcode extends HQBaseShortcode
+class HQRentalsReservationsSnippetShortcode extends HQBaseShortcode implements HQShortcodeInterface
 {
     static $shortcodeTag = 'hq_rentals_reservations_snippet';
     private $brand_id;

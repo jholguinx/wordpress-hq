@@ -68,7 +68,7 @@ class HQRentalsFrontHelper
             return (string)$car->id == (string)$itemId;
         }))[0];
     }
-    public function getLocationOptions($locations = null)
+    public function getLocationOptions($locations = null) : string
     {
         $html = "";
         if(is_array($locations) and count($locations)){

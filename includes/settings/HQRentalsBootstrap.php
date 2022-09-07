@@ -117,6 +117,9 @@ class HQRentalsBootstrap
         if ($this->settings->noWebhookSyncOption()) {
             $this->settings->setWebhookSyncOption('false');
         }
+        if($this->settings->getVehicleClassTypeField()){
+            $this->settings->setVehicleClassTypeField('');
+        }
         $this->notifyToSystemOnActivation();
         $this->dbBootstrap->createTablesOnInit();
     }

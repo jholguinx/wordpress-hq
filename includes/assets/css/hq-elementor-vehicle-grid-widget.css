@@ -1,3 +1,9 @@
+#hq-smart-vehicle-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 30px;
+}
 .hq-elementor-title{
     display: flex;
     justify-content: center;
@@ -92,10 +98,4 @@
 }
 .hq-grid-button-wrapper-left h3{
     margin: 0;
-}
-#hq-smart-vehicle-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 10px;
-    row-gap: 30px;
 }

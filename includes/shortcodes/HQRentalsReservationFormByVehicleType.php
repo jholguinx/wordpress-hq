@@ -247,7 +247,7 @@ class HQRentalsReservationFormByVehicleType implements HQShortcodeInterface
     private function resolveTypes() : string
     {
         $html = '';
-        $fields = $this->queryVehicle->getAllCustomFields();
+        $fields = $this->queryVehicle->getAllCustomFieldsValues();
         foreach ($fields as $field){
             $html .= "<option value='{$field}'>{$field}</option>";
         }

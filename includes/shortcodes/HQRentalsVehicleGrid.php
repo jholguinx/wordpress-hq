@@ -151,7 +151,7 @@ class HQRentalsVehicleGrid implements HQShortcodeInterface
         return $html;
     }
 
-    public function resolveSingleVehicleHTML($vehicle): string
+    public function resolveSingleVehicleHTML($vehicle, $dataAttr = ''): string
     {
         if($this->buttonPosition === 'right'){
             $rateTag  = empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? "" : "<h3>{$vehicle->getActiveRate()->daily_rate->amount_for_display}/Day</h3>";
@@ -165,7 +165,7 @@ class HQRentalsVehicleGrid implements HQShortcodeInterface
         }
 
         $html = "
-                <div id='hq-vehicle-class-{$vehicle->getId()}' class='vehicle-card'>
+                <div id='hq-vehicle-class-{$vehicle->getId()}' class='vehicle-card' {$dataAttr}>
                     <div class='hq-list-image-wrapper'>
                         <img class='img-response' src='{$vehicle->getPublicImage()}'>
                     </div>

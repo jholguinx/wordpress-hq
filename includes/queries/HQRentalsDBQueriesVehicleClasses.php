@@ -112,6 +112,18 @@ class HQRentalsDBQueriesVehicleClasses extends HQRentalsDBBaseQueries
         }
         return null;
     }
+    public function getAllCustomFieldsValues() : array
+    {
+        $vehicles = $this->allVehicleClasses();
+        $data = array();
+        foreach ($vehicles as $vehicle){
+            $fields = $vehicle->getCustomFieldsAsArray();
+            if($fields[$this->settings->getVehicleClassTypeField()]){
+                $data[] = $fields[$this->settings->getVehicleClassTypeField()];
+            }
+        }
+        return array_unique($data);
+    }
     public function getAllCustomFields() : array
     {
         $vehicles = $this->allVehicleClasses();

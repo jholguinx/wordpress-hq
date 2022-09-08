@@ -105,6 +105,7 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-aucapina-vehicle-page-js', plugin_dir_url(__FILE__) . 'js/hq-aucapina-vehicle-page.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-aucapina-reservation-form-js', plugin_dir_url(__FILE__) . 'js/hq-aucapina-reservation-form.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-page-vehicle-class-big-header-js', plugin_dir_url(__FILE__) . 'js/hq-page-vehicle-class-big-header.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-tabs-js', plugin_dir_url(__FILE__) . 'js/hq-tabs.js', array('jquery','jquery-ui-tabs'), HQ_RENTALS_PLUGIN_VERSION, true);
 
         /*Inits*/
         wp_register_script('hq-betheme-vehicle-grid-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-grid.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
@@ -289,11 +290,15 @@ class HQRentalsAssetsHandler
     {
         return plugin_dir_url(__FILE__) . 'img/logo.png';
     }
-    public static function loadVehicleGridAssets()
+    public static function loadVehicleGridAssets($flavors = '')
     {
         wp_enqueue_style('hq-flatpickr-css');
         wp_enqueue_style('hq-elementor-vehicle-grid-widget-css');
         wp_enqueue_script('hq-flatpickr-js');
+        if($flavors == 'tabs'){
+            wp_enqueue_script('jquery-ui-tabs');
+            wp_enqueue_script('hq-tabs-js');
+        }
     }
     public function loadPlacesReservationAssets()
     {

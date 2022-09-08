@@ -39,5 +39,6 @@ class HQRentalsShortcoder
         $this->wheelsberryShortcode = new HQWheelsberrySliderShortcode();
         $this->wheelsberryLocationMapShortcode = new HQWheelsberryLocationMapShortcode();
         $this->vehicleTypeForm = new HQRentalsReservationFormByVehicleType();
+        $this->vehicleTypeGrid = new HQRentalsVehicleTypesGrid();
     }
 }

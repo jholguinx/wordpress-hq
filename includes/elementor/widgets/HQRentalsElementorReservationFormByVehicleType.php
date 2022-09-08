@@ -48,7 +48,37 @@ class HQRentalsElementorReservationFormByVehicleType extends \Elementor\Widget_B
                 'input_type' => 'string',
             ]
         );
-
+        $this->add_control(
+            'render_warning',
+            [
+                'label' => __('Display Warning Message', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'input_type' => 'string',
+                'default' => 'false',
+                'options' => [
+                    'true'  => __( 'Yes', 'hq-wordpress' ),
+                    'false' => __( 'No', 'hq-wordpress' ),
+                ],
+            ]
+        );
+        $this->add_control(
+            'warning_message',
+            [
+                'label' => __('Form Warning Message', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+            ]
+        );
+        $this->add_control(
+            'submit_bottom_label',
+            [
+                'label' => __('Submit Button Label', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+                'default' => 'Find a Car'
+            ]
+        );
+        //'render_warning' => 'false',
         $this->end_controls_section();
 
     }

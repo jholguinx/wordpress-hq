@@ -40,6 +40,14 @@ class HQRentalsElementorReservationFormByVehicleType extends \Elementor\Widget_B
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
+        $this->add_control(
+            'reservation_url',
+            [
+                'label' => __('Reservations URL', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'input_type' => 'string',
+            ]
+        );
 
         $this->end_controls_section();
 

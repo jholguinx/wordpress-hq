@@ -824,7 +824,7 @@ class HQRentalsSettings
         return empty(get_option($this->hq_vehicle_class_type_field));
     }
 
-    public function getVehicleClassTypeField()
+    public function getVehicleClassTypeField() : string
     {
         return get_option($this->hq_vehicle_class_type_field, "");
     }

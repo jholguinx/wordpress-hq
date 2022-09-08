@@ -51,7 +51,8 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
         $html = "";
         if(is_array($customFields) and count($customFields)){
             foreach ($customFields as $field) {
-                $html .= "<li><a href='#{$field}'>{$field}</a></li>";
+                $idField = str_replace(' ', '', $field);
+                $html .= "<li><a href='#{$idField}'>{$field}</a></li>";
             }
         }
         return $html;
@@ -64,8 +65,9 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
                 $filteredVehicles = array_filter($vehicles, function ($vehicle) use ($field) {
                     return $field == $vehicle->getCustomFieldForWebsite($this->settings->getVehicleClassTypeField());
                 });
+                $idField = str_replace(' ', '', $field);
                 $html .= "
-                    <div id='{$field}' class='elementor-element elementor-widget elementor-widget-html'>
+                    <div id='{$idField}' class='elementor-element elementor-widget elementor-widget-html'>
                     <div class='elementor-widget-container'>
                         <!-- Begin Loop - Tabs -->
                         <div id='hq-smart-vehicle-grid'>

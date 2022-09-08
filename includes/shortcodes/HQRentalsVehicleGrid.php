@@ -17,7 +17,7 @@ class HQRentalsVehicleGrid implements HQShortcodeInterface
     private $disableFeatures;
     private $buttonPosition;
     private $wasInit;
-    private $atts;
+    public $atts;
     private $ramdomizeItems;
     private $numberOfVehicles;
     private $defaultDates;
@@ -163,7 +163,6 @@ class HQRentalsVehicleGrid implements HQShortcodeInterface
         }else{
             $rateTagLeft  = "";
         }
-
         $html = "
                 <div id='hq-vehicle-class-{$vehicle->getId()}' class='vehicle-card' {$dataAttr}>
                     <div class='hq-list-image-wrapper'>

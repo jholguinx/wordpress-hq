@@ -16,6 +16,9 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
         $this->queryVehicles = new HQRentalsDBQueriesVehicleClasses();
         $this->settings = new HQRentalsSettings();
         $this->assets = new HQRentalsAssetsHandler();
+        if($this->wasInit){
+            $this->setParams($params);
+        }
         add_shortcode('hq_rentals_vehicle_types_grid', array($this, 'renderShortcode'));
     }
     public function renderShortcode($atts = []): string
@@ -33,6 +36,9 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
                 'default_dates'                     =>  'false',
                 'force_vehicles_by_rate'            =>  'false'
             ), $atts);
+        if(!$this->wasInit){
+            $this->setParams($atts);
+        }
         $this->atts = $atts;
         $vehicles = $this->queryVehicles->allVehicleClasses();
         $fields = $this->queryVehicles->getAllCustomFieldsValues();

@@ -16,7 +16,7 @@ class HQRentalsVehicleGrid implements HQShortcodeInterface
     private $brandId;
     private $disableFeatures;
     private $buttonPosition;
-    private $wasInit;
+    public $wasInit;
     public $atts;
     private $ramdomizeItems;
     private $numberOfVehicles;
@@ -32,7 +32,7 @@ class HQRentalsVehicleGrid implements HQShortcodeInterface
         add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
     }
 
-    private function setParams($params)
+    public function setParams($params)
     {
         if(!empty($params['reservation_url_vehicle_grid'])){
             $this->linkURL = $params['reservation_url_vehicle_grid'];

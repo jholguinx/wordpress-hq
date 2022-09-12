@@ -104,8 +104,8 @@ class HQRentalsElementorVehiclesTypesGridWidget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $shortcode = new HQRentalsVehicleTypesGrid();
-        echo $shortcode->renderShortcode($settings);
+        $shortcode = new HQRentalsVehicleTypesGrid($settings);
+        echo $shortcode->renderShortcode();
     }
 
 }

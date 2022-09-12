@@ -56,6 +56,7 @@ class HQRentalsAssetsHandler
         wp_register_style('hq-wheelsberry-om-font-styles', plugin_dir_url(__FILE__) . 'css/wheelsberry/omFont.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wheelsberry-responsive-mobile', plugin_dir_url(__FILE__) . 'css/wheelsberry/responsive-mobile.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wheelsberry-slider-css', plugin_dir_url(__FILE__) . 'css/hq-wheelsberry-slider.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-base-vendor-styles', plugin_dir_url(__FILE__) . 'css/hq-base-vendor-styles.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-elementor-vehicle-grid-widget-css', plugin_dir_url(__FILE__) . 'css/hq-elementor-vehicle-grid-widget.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-places-form-css', plugin_dir_url(__FILE__) . 'css/hq-places-form.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-flatpickr-css', plugin_dir_url(__FILE__) . 'css/flatpickr.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
@@ -293,6 +294,7 @@ class HQRentalsAssetsHandler
     public static function loadVehicleGridAssets($flavors = '')
     {
         wp_enqueue_style('hq-flatpickr-css');
+        wp_enqueue_style('hq-base-vendor-styles');
         wp_enqueue_style('hq-elementor-vehicle-grid-widget-css');
         wp_enqueue_script('hq-flatpickr-js');
         if($flavors == 'tabs'){

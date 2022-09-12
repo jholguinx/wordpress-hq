@@ -37,7 +37,7 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
         $vehicles = $this->queryVehicles->allVehicleClasses();
         $fields = $this->queryVehicles->getAllCustomFieldsValues();
         HQRentalsAssetsHandler::loadVehicleGridAssets('tabs');
-        return HQRentalsAssetsHandler::getHQFontAwesome() . " 
+        return HQRentalsAssetsHandler::getHQFontAwesome() . "
             <style>
                 .vehicle-card{
                     background-color: #fff;

@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# [1.5.17] - 2022-09-15
+
+We added a couple of new shortcodes to the plugin.
+
+- ```[hq_rentals_reservation_form_vehicle_types]```
+- ```[hq_rentals_vehicle_types_grid]```
+
+We added support for Elementor and Bakery website builder. Also, we fixed 
+styling issues with the Wheelsberry theme and some of our shortcodes.
+
+### Changed
+
+- ```HQRentalsReservationFormByVehicleType.php``` added.
+- ```HQRentalsVehicleTypeGrid.php``` added.
+
+
 # [1.5.16] - 2022-08-10
 
 - Fix styles on Wheelsberry Slider.

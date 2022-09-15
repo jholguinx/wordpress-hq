@@ -1,8 +1,9 @@
 import { defineConfig } from 'cypress';
-
+const test = require('./.test.config.js');
+// please create a .test.config.json file with the baseURL
 export default defineConfig({
     e2e: {
-        baseUrl: 'http://hn.test',
+        baseUrl: test.baseURL,
         defaultCommandTimeout: 10000
     }
 })

@@ -1,0 +1,17 @@
+{
+    "name": "hq-rental-software",
+    "version": "1.0.0",
+    "description": "HQ Rental Software Wordpress Plugin",
+    "main": "index.js",
+    "scripts": {
+        "test": "npx cypress open"
+    },
+    "keywords": [
+        "wordpress"
+    ],
+    "author": "Faggioni",
+    "devDependencies": {
+        "cypress": "^10.8.0",
+        "typescript": "^4.8.3"
+    }
+}

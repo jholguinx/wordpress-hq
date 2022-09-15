@@ -9,15 +9,15 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 use HQRentalsPlugin\HQRentalsVendor\Carbon;
 
-class HQRentalsVehicleGrid
+class HQRentalsVehicleGrid implements HQShortcodeInterface
 {
     private $linkURL;
     private $title;
     private $brandId;
     private $disableFeatures;
     private $buttonPosition;
-    private $wasInit;
-    private $atts;
+    public $wasInit;
+    public $atts;
     private $ramdomizeItems;
     private $numberOfVehicles;
     private $defaultDates;
@@ -32,7 +32,7 @@ class HQRentalsVehicleGrid
         add_shortcode('hq_rentals_vehicle_grid', array($this, 'renderShortcode'));
     }
 
-    private function setParams($params)
+    public function setParams($params)
     {
         if(!empty($params['reservation_url_vehicle_grid'])){
             $this->linkURL = $params['reservation_url_vehicle_grid'];
@@ -151,7 +151,7 @@ class HQRentalsVehicleGrid
         return $html;
     }
 
-    public function resolveSingleVehicleHTML($vehicle): string
+    public function resolveSingleVehicleHTML($vehicle, $dataAttr = ''): string
     {
         if($this->buttonPosition === 'right'){
             $rateTag  = empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? "" : "<h3>{$vehicle->getActiveRate()->daily_rate->amount_for_display}/Day</h3>";
@@ -163,9 +163,8 @@ class HQRentalsVehicleGrid
         }else{
             $rateTagLeft  = "";
         }
-
         $html = "
-                <div id='hq-vehicle-class-{$vehicle->getId()}' class='vehicle-card'>
+                <div id='hq-vehicle-class-{$vehicle->getId()}' class='vehicle-card' {$dataAttr}>
                     <div class='hq-list-image-wrapper'>
                         <img class='img-response' src='{$vehicle->getPublicImage()}'>
                     </div>

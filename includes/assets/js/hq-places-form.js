@@ -55,11 +55,14 @@ jQuery(document).ready(function(){
         dateFormat: hqRentalsTenantDatetimeFormat,
         minDate: 0,
         format:hqRentalsTenantDatetimeFormat,
-        step: 5
+        step: 5,
+        validateOnBlur: false
     };
     setDefaults(dateFormat, minDays);
-    jQuery("#hq-times-pick-up-date").datetimepicker(dateConfig);
-    jQuery("#hq-times-return-date").datetimepicker(dateConfig);
+    var pickupDate = jQuery("#hq-times-pick-up-date").datetimepicker(dateConfig);
+    var returnDate = jQuery("#hq-times-return-date").datetimepicker(dateConfig);
+    pickupDate.off("blur");
+    returnDate.off("blur");
     jQuery("#hq-times-pick-up-date").on("change",function(){
         const dateFormatMoment = hqMomentDateFormat;
         var newDate = dayjs( jQuery("#hq-times-pick-up-date").val(), dateFormatMoment ).add(minimumDayRentals, 'day').format(dateFormatMoment);

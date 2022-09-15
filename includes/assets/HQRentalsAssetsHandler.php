@@ -56,8 +56,11 @@ class HQRentalsAssetsHandler
         wp_register_style('hq-wheelsberry-om-font-styles', plugin_dir_url(__FILE__) . 'css/wheelsberry/omFont.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wheelsberry-responsive-mobile', plugin_dir_url(__FILE__) . 'css/wheelsberry/responsive-mobile.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wheelsberry-slider-css', plugin_dir_url(__FILE__) . 'css/hq-wheelsberry-slider.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
-        wp_register_style('hq-elementor-vehicle-grid-widget-css', plugin_dir_url(__FILE__) . 'css/hq-elementor-vehicle-grid-widget.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-base-vendor-styles', plugin_dir_url(__FILE__) . 'css/hq-base-vendor-styles.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-elementor-vehicle-grid-widget-css', plugin_dir_url(__FILE__) . 'css/hq-elementor-vehicle-grid-widget.css', false, HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-places-form-css', plugin_dir_url(__FILE__) . 'css/hq-places-form.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-vehicle-grid-types-css', plugin_dir_url(__FILE__) . 'css/hq-vehicle-grid-types.css', false, HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-vehicle-grid-types-form-css', plugin_dir_url(__FILE__) . 'css/hq-vehicle-grid-types-form.css', false, HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-flatpickr-css', plugin_dir_url(__FILE__) . 'css/flatpickr.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-iframe-styles', plugin_dir_url(__FILE__) . 'css/hq-rentals.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-workspot-styles', plugin_dir_url(__FILE__) . 'css/hq-workspot-styles.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
@@ -91,6 +94,7 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-availability-grip-script', plugin_dir_url(__FILE__) . 'js/hq-availability-grid.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hg-gcar-vehicle-filter-js', plugin_dir_url(__FILE__) . 'js/hq-gcar-vehicle-filter.js', array(), HQ_RENTALS_PLUGIN_VERSION . '1', true);
         wp_register_script('hq-reservation-form-setup', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-reservation-form-setup-without-times', plugin_dir_url(__FILE__) . 'js/hq-reservation-form-setup-without-times.js', array(), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-places-form-js', plugin_dir_url(__FILE__) . 'js/hq-places-form.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_style('hq-fancy-box-css', plugin_dir_url(__FILE__) . 'css/jquery.fancybox.min.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
@@ -104,6 +108,7 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-aucapina-vehicle-page-js', plugin_dir_url(__FILE__) . 'js/hq-aucapina-vehicle-page.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-aucapina-reservation-form-js', plugin_dir_url(__FILE__) . 'js/hq-aucapina-reservation-form.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-page-vehicle-class-big-header-js', plugin_dir_url(__FILE__) . 'js/hq-page-vehicle-class-big-header.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
+        wp_register_script('hq-tabs-js', plugin_dir_url(__FILE__) . 'js/hq-tabs.js', array('jquery','jquery-ui-tabs'), HQ_RENTALS_PLUGIN_VERSION, true);
 
         /*Inits*/
         wp_register_script('hq-betheme-vehicle-grid-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-grid.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
@@ -242,16 +247,25 @@ class HQRentalsAssetsHandler
 
     }
 
-    public function loadDatePickersReservationAssets()
+    public function loadDatePickersReservationAssets($justDatePicker = false) : void
     {
         wp_enqueue_style('hq-datepicker-style');
         wp_enqueue_script('hq-moment');
         wp_enqueue_script('hq-datepicker-js');
-        wp_enqueue_script('hq-reservation-form-setup');
-        $data = array(
-            'HQFormatDate' => $this->settings->getFrontEndDatetimeFormat()
-        );
-        wp_localize_script('hq-reservation-form-setup', 'HQReservationFormData', $data);
+        if($justDatePicker){
+            wp_enqueue_script('hq-reservation-form-setup-without-times');
+            $data = array(
+                'HQFormatDate' => $this->settings->getFrontEndDatetimeFormat()
+            );
+            wp_localize_script('hq-reservation-form-setup-without-times', 'HQReservationFormData', $data);
+        }else{
+            wp_enqueue_script('hq-reservation-form-setup');
+            $data = array(
+                'HQFormatDate' => $this->settings->getFrontEndDatetimeFormat()
+            );
+            wp_localize_script('hq-reservation-form-setup', 'HQReservationFormData', $data);
+        }
+
     }
 
     public function gCarVehicleFilterAssets()
@@ -279,11 +293,16 @@ class HQRentalsAssetsHandler
     {
         return plugin_dir_url(__FILE__) . 'img/logo.png';
     }
-    public static function loadVehicleGridAssets()
+    public static function loadVehicleGridAssets($flavors = '')
     {
         wp_enqueue_style('hq-flatpickr-css');
+        wp_enqueue_style('hq-base-vendor-styles');
         wp_enqueue_style('hq-elementor-vehicle-grid-widget-css');
         wp_enqueue_script('hq-flatpickr-js');
+        if($flavors == 'tabs'){
+            wp_enqueue_script('jquery-ui-tabs');
+            wp_enqueue_script('hq-tabs-js');
+        }
     }
     public function loadPlacesReservationAssets()
     {
@@ -403,5 +422,13 @@ class HQRentalsAssetsHandler
     static public function getDefaultMapMarkerImage() : string
     {
         return plugin_dir_url(__FILE__) . 'img/map-marker.webp';
+    }
+    static public function loadVehicleTypesStyles() : void
+    {
+        wp_enqueue_style('hq-vehicle-grid-types-css',false);
+    }
+    static public function loadVehicleTypesFormAssets() : void
+    {
+        wp_enqueue_style('hq-vehicle-grid-types-form-css',false);
     }
 }

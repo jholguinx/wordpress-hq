@@ -62,36 +62,9 @@ h6,
 .sidebar-widget-title {
     letter-spacing: -1px;
 }
-.header-wrapper,
-.header,
-.mobile-menu-container {
-    color: #ffffff;
-    background: #15315e;
-}
-.mobile-menu-overlay {
-    background-color: rgba(21, 49, 94, 0.7);
-}
 .header-wpml-selector #lang_sel a.lang_sel_sel,
 .header-wpml-selector #lang_sel_click a.lang_sel_sel {
     border-color: rgba(255, 255, 255, 0.2);
-}
-.header-wpml-selector #lang_sel li ul a,
-.header-wpml-selector #lang_sel_click li ul a {
-    background: #ffffff !important;
-    color: #d1d1d1 !important;
-}
-.header-wpml-selector #lang_sel li ul a:hover,
-.header-wpml-selector #lang_sel_click li ul a:hover {
-    color: #e0e0e0 !important;
-}
-.primary-menu a,
-.primary-mobile-menu a {
-    color: #ffffff;
-}
-.mobile-menu-control__l1,
-.mobile-menu-control__l2,
-.mobile-menu-control__l3 {
-    background: #ffffff;
 }
 .primary-menu-highlight-active .primary-menu > li.current-menu-item > a,
 .primary-menu-highlight-active .primary-menu > li.current-menu-item > a:hover,
@@ -146,36 +119,11 @@ h6,
 .rent-option-description-link.active {
     color: #f4c42a;
 }
-.om-services__pane,
 .owl-carousel .owl-dot.active,
-.om-about__pane,
-.om-social-icon,
-.om-back-to-top,
-.hover-image-extra .link-url:before,
-.hover-image-extra .link-zoom:before,
-.read-more-link:hover,
-.navigation-pages span.page-numbers.current,
-.navigation-prev a:hover:before,
-.navigation-next a:hover:after,
-input[type="button"]:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
 .cars-slider__item-reserve-button:hover,
 .reservation-form,
 .ui-datepicker-calendar td a:not(.ui-state-active):hover,
-div.wpcf7-mail-sent-ok,
-.om-rental-locations__header,
-.footer-widgets input[type="submit"],
-.om-wpb .vc_toggle_size_md.vc_toggle_default .vc_toggle_icon:after,
-.om-wpb .vc_toggle_size_md.vc_toggle_default .vc_toggle_icon:before,
-.custom-gallery .control-progress .progress,
-body.om-wpb .vc_tta .vc_tta-controls-icon.vc_tta-controls-icon-plus::before,
-body.om-wpb .vc_tta .vc_tta-controls-icon.vc_tta-controls-icon-plus::after,
-.om-wpb .vc_pagination.vc_pagination-style-flat .vc_active .vc_pagination-trigger,
-.om-wpb .vc_btn3.vc_btn3-color-om-accent-color,
-.om-wpb .vc_btn3.vc_btn3-color-om-accent-color2:hover,
-.om-wpb .vc_btn3.vc_btn3-color-om-button-color:hover,
-.om-wpb .vc_general.vc_cta3.vc_cta3-color-om-accent-color.vc_cta3-style-flat {
+.footer-widgets input[type="submit"]{
     background-color: #f4c42a;
 }
 .om-persons__item,
@@ -221,9 +169,6 @@ input[type="submit"].reservation-form__submit-button:disabled,
 .cars-slider,
 .your-booking__car-image {
     background-color: #15315e;
-}
-.cars-slider:after {
-    border-top-color: #15315e;
 }
 .cars-slider {
     color: #ffffff;
@@ -372,25 +317,4 @@ body.om-wpb .vc_tta.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-heading,
 body.om-wpb .vc_tta.vc_tta-style-classic .vc_tta-panel.vc_active .vc_tta-panel-heading,
 .post-password-form label input {
     background-color: #ffffff;
-}
-.footer-widgets {
-    background-color: #f4c42a;
-    background-image: url(http://trustusarentacar.com/wp-content/uploads/2021/08/miami-palms.jpg);
-    background-position: center center;
-    background-size: cover;
-    background-attachment: scroll;
-}
-.footer-widgets,
-.footer-widgets a {
-    color: #ffffff;
-}
-.footer-widget li {
-    border-color: rgba(255, 255, 255, 0.12);
-}
-.footer-widget.widget_recent_entries .post-date:before,
-.footer-widget.wheelsberry_widget_tweets .tweet-time:before {
-    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%229%22 height=%229%22%3E%3Cline x1=%220%22 y1=%229%22 x2=%229%22 y2=%220%22 style=%22stroke:%234f4f4f;stroke-width:1%22/%3E%3C/svg%3E");
-}
-.sub-footer {
-    color: #3a3a3a;
 }

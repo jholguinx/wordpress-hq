@@ -67,6 +67,9 @@ class HQWheelsberrySliderShortcode
                     background-color: {$themeColor};
                     font-family: Montserrat, Open Sans,serif !important;
                 }
+                .cars-slider:after {
+                    border-top-color: {$themeColor} !important;
+                }
             </style>
             <div id='hq-wheelsberry-slider' class='cars-slider' id='cars-slider'>
                 <div class='car-slider__title-wrapper om-container'>

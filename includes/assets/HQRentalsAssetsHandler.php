@@ -60,6 +60,7 @@ class HQRentalsAssetsHandler
         wp_register_style('hq-elementor-vehicle-grid-widget-css', plugin_dir_url(__FILE__) . 'css/hq-elementor-vehicle-grid-widget.css', false, HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-places-form-css', plugin_dir_url(__FILE__) . 'css/hq-places-form.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-vehicle-grid-types-css', plugin_dir_url(__FILE__) . 'css/hq-vehicle-grid-types.css', false, HQ_RENTALS_PLUGIN_VERSION, 'all');
+        wp_register_style('hq-vehicle-grid-types-form-css', plugin_dir_url(__FILE__) . 'css/hq-vehicle-grid-types-form.css', false, HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-flatpickr-css', plugin_dir_url(__FILE__) . 'css/flatpickr.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-iframe-styles', plugin_dir_url(__FILE__) . 'css/hq-rentals.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
         wp_register_style('hq-wordpress-workspot-styles', plugin_dir_url(__FILE__) . 'css/hq-workspot-styles.css', array(), HQ_RENTALS_PLUGIN_VERSION, 'all');
@@ -425,5 +426,9 @@ class HQRentalsAssetsHandler
     static public function loadVehicleTypesStyles() : void
     {
         wp_enqueue_style('hq-vehicle-grid-types-css',false);
+    }
+    static public function loadVehicleTypesFormAssets() : void
+    {
+        wp_enqueue_style('hq-vehicle-grid-types-form-css',false);
     }
 }

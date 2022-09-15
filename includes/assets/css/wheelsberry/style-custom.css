@@ -122,8 +122,7 @@ h6,
 .owl-carousel .owl-dot.active,
 .cars-slider__item-reserve-button:hover,
 .reservation-form,
-.ui-datepicker-calendar td a:not(.ui-state-active):hover,
-.footer-widgets input[type="submit"]{
+.ui-datepicker-calendar td a:not(.ui-state-active):hover{
     background-color: #f4c42a;
 }
 .om-persons__item,
@@ -172,13 +171,6 @@ input[type="submit"].reservation-form__submit-button:disabled,
 }
 .cars-slider {
     color: #ffffff;
-}
-.content,
-.om-back-to-top,
-.comment-meta .author,
-.sidebar-widget a,
-.sidebar-widget li:before {
-    color: #6d6d6d;
 }
 input[type="text"],
 input[type="email"],

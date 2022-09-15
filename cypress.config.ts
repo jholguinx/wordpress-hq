@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress';
 
 export default defineConfig({
     e2e: {
-        baseUrl: 'http://hnh.test'
+        baseUrl: 'http://hn.test',
+        defaultCommandTimeout: 10000
     }
 })

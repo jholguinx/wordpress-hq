@@ -45,7 +45,7 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
         HQRentalsAssetsHandler::loadVehicleGridAssets('tabs');
         HQRentalsAssetsHandler::loadVehicleTypesStyles();
         return HQRentalsAssetsHandler::getHQFontAwesome() . "
-            <div class='elementor-widget-container hq-elementor-title'>
+            <div id='hq-vehicle-grid-with-types' data-cy='hq-vehicle-grid-with-types' class='elementor-widget-container hq-elementor-title'>
                 <h2 class='elementor-heading-title elementor-size-default'>{$atts['title_vehicle_grid']}</h2>		
             </div>
             <div id='hq-tabs'>
@@ -62,7 +62,7 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
         if(is_array($customFields) and count($customFields)){
             foreach ($customFields as $field) {
                 $idField = str_replace(' ', '', $field);
-                $html .= "<li><a class='trigger' href='#{$idField}'>{$field}</a></li>";
+                $html .= "<li><a data-cy='trigger-{$idField}' class='trigger' href='#{$idField}'>{$field}</a></li>";
             }
         }
         return $html;
@@ -80,7 +80,7 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
                     <div id='{$idField}' class='elementor-element elementor-widget elementor-widget-html'>
                     <div class='elementor-widget-container'>
                         <!-- Begin Loop - Tabs -->
-                        <div id='hq-smart-vehicle-grid'>
+                        <div id='hq-smart-vehicle-grid' data-cy='hq-smart-vehicle-grid'>
                             {$this->resolveVehicles($filteredVehicles)}  
                         </div>
                         <!-- End Loop - Tabs-->
@@ -94,7 +94,9 @@ class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortc
     private function resolveVehicles($vehicles) : string{
         $html = "";
         foreach ($vehicles as $vehicle){
-            $html .= $this->resolveSingleVehicleHTML($vehicle, 'data-custom_field="' . $vehicle->getCustomFieldForWebsite($this->settings->getVehicleClassTypeField()) .'"' );
+            $html .= $this->resolveSingleVehicleHTML($vehicle,
+                'data-cy="' . $vehicle->getCustomFieldForWebsite($this->settings->getVehicleClassTypeField()) .'"'
+                . 'data-custom_field="' . $vehicle->getCustomFieldForWebsite($this->settings->getVehicleClassTypeField()) .'"' );
         }
         return $html;
     }

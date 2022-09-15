@@ -7,6 +7,8 @@ describe('HQRentalsVehicleTypesGrid Shortcode Test', () => {
         cy.getCy('hq-vehicle-grid-with-types').should('exist');
     });
     it('should filter by vehicle types', () => {
+        // this test was made using the following tenant:
+        // https://hn-rent-a-car-honduras.us5.hqrentals.app
         cy.fixture('vehicle-types.json').then((vehiclesTypes) => {
             vehiclesTypes.forEach((type) => {
                 cy.getCy('trigger-' + type.id).click();

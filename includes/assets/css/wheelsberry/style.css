@@ -1,96 +1,10 @@
 /*-----------------------------------------------------------------------------------
-
-	Theme Name: Wheelsberry
-	Theme URI: https://themeforest.net/item/wheelsberry-car-rental-wordpress-theme-landing-page/17664341
-	Description: Car Rental WordPress Theme / Landing Page
-	Author: OlevMedia
-	Author URI: http://www.olevmedia.com
-	License: GNU General Public License version 3.0
-	License URI: http://www.gnu.org/licenses/gpl-3.0.html
-	Version: 1.2.8
-	Text Domain: wheelsberry
-	
-	All files, unless otherwise stated, are released under the GNU General Public License
-	version 3.0 (http://www.gnu.org/licenses/gpl-3.0.html)
-
------------------------------------------------------------------------------------*/
-
-/*-----------------------------------------------------------------------------------
-
-Table of contents
-
-1.	Basic Styles
-2.	Typography
-3.	Containers
-4.	Columns
-5.	Header
-		- WPML selector
-6.	Primary menu
-		- mobile menu
-7.	Sidebar
-8.	Widgets
-		- WP Calendar
-		- Tags cloud widget
-		- Facebook
 9.	Cars slider
 10.	Reservation Form
-11.	Your booking
-12.	Page Titles
-13.	Breadcrumbs
-14.	Footer
-15.	Social Icons
-16.	Blog
-17.	Forms
-18.	Contact Form 7
-19.	Comments
-		- New comment form
-		- Facebook comments
-20.	Responsive Embeds
-21.	Galleries
-		- Gallery Masonry/Grid
-		- Gallery sliced
-		- Slider
-22.	Image Hover Links
-23.	Page Navigation
-		- Prev / next navigation
-		- Page number navigation
-24.	Read More Link
-25.	Back to Top
-26.	WordPress Elements
-27.	Search
-28.	Sitemap
-29.	Visual Composer
-		- row
-		- custom heading
-		- reduce_space
-		- common owl carousel elements
-		- services
-		- about
-		- testimonials
-		- persons
-		- logos
-		- logos carousel mode
-		- rental locations
-		- om_max_width
-		- separator
-		- message box
-		- toggle
-		- gallery
-		- tabs/tours/accordion
-		- pageable
-		- button
-		- CTA
-		- video
-		- gplus
-		- progress bar
-
 -----------------------------------------------------------------------------------*/
-
-
 /*******************************************
  * 9. Cars slider
  *******************************************/
-
 .cars-slider {
 	position:relative;
 }

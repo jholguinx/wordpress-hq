@@ -88,7 +88,7 @@ class HQWheelsberrySliderShortcode
         if($resolve_form == 'true'){
             return "<!--Begin Form-->
             <div class='reservation reservation--full hq-reservation-form-wrapper' id='reservation'>
-                <div class='reservation-form'>
+                <div class='reservation-form reservation-form-hq'>
                     {$imageHTML}
                     <div class='om-container'>
                         <div class='om-container__inner'>

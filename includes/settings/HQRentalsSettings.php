@@ -47,6 +47,7 @@ class HQRentalsSettings
     public $hq_override_daily_rate_with_price_interval = 'hq_override_daily_rate_with_price_interval';
     public $hq_webhook_sync = 'hq_webhook_sync';
     public $hq_last_sync_date = 'hq_last_sync_date';
+    public $hq_vehicle_class_type_field = 'hq_vehicle_class_type_field';
 
     public function __construct()
     {
@@ -816,5 +817,20 @@ class HQRentalsSettings
     public function getLastSyncOption() : string
     {
         return get_option($this->hq_last_sync_date);
+    }
+
+    public function noVehicleClassTypeField()
+    {
+        return empty(get_option($this->hq_vehicle_class_type_field));
+    }
+
+    public function getVehicleClassTypeField() : string
+    {
+        return get_option($this->hq_vehicle_class_type_field, "");
+    }
+
+    public function setVehicleClassTypeField($data)
+    {
+        return update_option($this->hq_vehicle_class_type_field, $data);
     }
 }

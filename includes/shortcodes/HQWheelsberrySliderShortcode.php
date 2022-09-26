@@ -71,7 +71,7 @@ class HQWheelsberrySliderShortcode
                     border-top-color: {$themeColor} !important;
                 }
             </style>
-            <div id='hq-wheelsberry-slider' class='cars-slider' id='cars-slider'>
+            <div id='hq-wheelsberry-slider' data-cy='hq-wheelsberry-slider' class='cars-slider' id='cars-slider'>
                 <div class='car-slider__title-wrapper om-container'>
                     <div class='om-container__inner'>
                         <h2 class='cars-slider__title'>{$slider_title}</h2>
@@ -100,14 +100,14 @@ class HQWheelsberrySliderShortcode
                                         <h2 class='reservation-form__title'>{$form_title}</h2>
                                         <div class='h-subtitle reservation-form__subtitle'>{$form_subtitle}</div>
                                     </div>
-                                <form action='{$reservation_url}' method='get'>
+                                <form id='hq-wheelsberry-slider-form' data-cy='hq-wheelsberry-slider-form' action='{$reservation_url}' method='get'>
                                     {$this->resolveVehicleClassId($render_vehicle_field, $vehicle_classes)}
                                     <div class='reservation-form__more'>
                                         <div class='reservation-form__line reservation-form__set reservation-form__pick-up'>
                                             <div class='reservation-form__pick-up-location reservation-form__location'>
                                                 <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                                     <label for='reservation-form__pick-up-location-select' class='reservation-form__label reservation-form__pick-up-location-label reservation-form__location-label'>Pick-up</label>
-                                                    <select id='hq-pick-up-location' name='pick_up_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
+                                                    <select id='hq-pick-up-location' data-cy='hq-wheelsberry-slider-form-pick-up-location' name='pick_up_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
                                                         <option>Select Location</option>
                                                         {$this->resolveOptionsForLocations($locations)}
                                                     </select>
@@ -133,7 +133,7 @@ class HQWheelsberrySliderShortcode
                                             <div class='reservation-form__drop-off-location reservation-form__location'>
                                                 <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                                     <label for='reservation-form__pick-up-location-select' class='reservation-form__label reservation-form__pick-up-location-label reservation-form__location-label'>Drop-off</label>
-                                                    <select id='hq-return-location' name='return_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
+                                                    <select id='hq-return-location' data-cy='hq-wheelsberry-slider-form-return-location' name='return_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
                                                         <option>Select Location</option>
                                                         {$this->resolveOptionsForLocations($locations)}
                                                     </select>
@@ -181,7 +181,7 @@ class HQWheelsberrySliderShortcode
             <script>
                 function setListeners(baseValue, changedValue){
                     var pickupLocation = document.getElementById(baseValue);
-                    pickupLocation.addEventListener('change',function(){
+                    pickupLocation.addEventListener('change', function(){
                         var pickupLocation = document.getElementById(baseValue);
                         var returnLocation = document.getElementById(changedValue);
                         returnLocation.value = pickupLocation.value; 
@@ -236,7 +236,7 @@ class HQWheelsberrySliderShortcode
                 $priceHTML = $dailyRate;
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";
                 $html .= "
-                            <div class='cars-slider__item-inner om-container__inner'>
+                            <div id='hq-vehicle-wheelsberry-{$vehicle->id}' data-cy='hq-vehicle-class' class='cars-slider__item-inner om-container__inner'>
                                 <div class='cars-slider__item-description'>
                                     <div class='cars-slider__item-category'>{$vehicle->name}</div>
                                     <h3 class='cars-slider__model'><span class='cars-slider__model-inner'>{$this->getTitle($vehicle->getLabelForWebsite())}</span></h3>

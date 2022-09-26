@@ -328,7 +328,6 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-owl-carousel-js');
         wp_enqueue_script('hq-smooth-js');
         wp_enqueue_script('hq-carousel-js');
-
     }
     public function loadWheelsberryCSS()
     {

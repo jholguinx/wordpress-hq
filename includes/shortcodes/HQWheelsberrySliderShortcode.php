@@ -107,7 +107,7 @@ class HQWheelsberrySliderShortcode
                                             <div class='reservation-form__pick-up-location reservation-form__location'>
                                                 <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                                     <label for='reservation-form__pick-up-location-select' class='reservation-form__label reservation-form__pick-up-location-label reservation-form__location-label'>Pick-up</label>
-                                                    <select id='hq-pick-up-location' data-cy='hq-wheelsberry-slider-form-pick-up-location' name='pick_up_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
+                                                    <select id='hq-pick-up-location' data-cy='hq-wheelsberry-slider-form-pick-up-location' name='pick_up_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location' required='required'>
                                                         <option>Select Location</option>
                                                         {$this->resolveOptionsForLocations($locations)}
                                                     </select>
@@ -117,13 +117,13 @@ class HQWheelsberrySliderShortcode
                                                 <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                                     <label for='reservation-form__pick-up-date-input' class='reservation-form__label reservation-form__pick-up-date-label reservation-form__date-label'>Pick-up</label>
                                                     <div class='reservation-form__date-wrapper'>
-                                                        <input type='text' name='pick_up_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__pick-up-date-input' id='reservation-form__pick-up-date-input' data-date-format='m/d/y' />
+                                                        <input type='text' name='pick_up_date' readonly='readonly' placeholder='Choose a date' class='reservation-form__pick-up-date-input' id='reservation-form__pick-up-date-input' data-date-format='m/d/y' required='required' />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class='reservation-form__pick-up-time reservation-form__time'>
                                                 <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
-                                                    <select name='pick_up_time' class='reservation-form__pick-up-time-select' id='reservation-form__pick-up-time-select'>
+                                                    <select name='pick_up_time' class='reservation-form__pick-up-time-select' data-cy='hq-wheelsberry-slider-form-pick-up-time' id='reservation-form__pick-up-time-select' required='required'>
                                                         {$this->front->getTimesWithFormat('00:00','23:50')}
                                                     </select>
                                                 </div>
@@ -133,7 +133,7 @@ class HQWheelsberrySliderShortcode
                                             <div class='reservation-form__drop-off-location reservation-form__location'>
                                                 <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
                                                     <label for='reservation-form__pick-up-location-select' class='reservation-form__label reservation-form__pick-up-location-label reservation-form__location-label'>Drop-off</label>
-                                                    <select id='hq-return-location' data-cy='hq-wheelsberry-slider-form-return-location' name='return_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location'>
+                                                    <select id='hq-return-location' data-cy='hq-wheelsberry-slider-form-return-location' name='return_location' class='reservation-form__pick-up-time-select' data-placeholder='Choose a location' required='required' >
                                                         <option>Select Location</option>
                                                         {$this->resolveOptionsForLocations($locations)}
                                                     </select>
@@ -149,7 +149,7 @@ class HQWheelsberrySliderShortcode
                                             </div>
                                             <div class='reservation-form__drop-off-time reservation-form__time'>
                                                 <div class='reservation-form__field-inner hq-reservation-item-inner-wrapper'>
-                                                    <select name='return_time' class='reservation-form__drop-off-time-select' id='reservation-form__drop-off-time-select'>
+                                                    <select name='return_time' class='reservation-form__drop-off-time-select' data-cy='hq-wheelsberry-slider-form-return-time' id='reservation-form__drop-off-time-select'>
                                                         {$this->front->getTimesWithFormat('00:00','23:50')}
                                                     </select>                                                
                                                 </div>

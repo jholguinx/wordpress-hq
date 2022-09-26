@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
     });
     var form = jQuery('.hq-reservation-form-wrapper');
     if(form.length){
-        var scroll = new SmoothScroll('a[href*="#"]',{
+        var scroll = new SmoothScroll('a[href*="#"]', {
             speed: 1000,
             /*
             offset: function (anchor, toggle) {

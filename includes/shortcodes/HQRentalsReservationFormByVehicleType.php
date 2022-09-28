@@ -191,12 +191,11 @@ class HQRentalsReservationFormByVehicleType implements HQShortcodeInterface
             ";
         }else{
             return "
-            Horizontal
-            {$this->resolveWarning($atts['render_warning'], $atts['warning_message'])}
-            <div class='hq-reservation-inner-wrapper'>
+            <div class='hq-reservation-inner-wrapper hq-types-orientation-horizontal'>
+                {$this->resolveWarning($atts['render_warning'], $atts['warning_message'])}
                 <form method='get' action='". $atts['reservation_url'] ."'>
                     <div class='hq-types-form-inner-wrapper'> 
-                        <div class='hq-types-form-field-wrapper'>
+                        <div class='hq-types-form-field-wrapper hq-types-form-field-wrapper-horizontal'>
                             <div class='hq-types-form-label-wrapper'>
                                 <label for='hq-type-vehicle-type'>Vehicle</label>
                             </div>
@@ -210,50 +209,46 @@ class HQRentalsReservationFormByVehicleType implements HQShortcodeInterface
                             </div>
                         </div>
                         {$this->resolveLocations()}
-                        <div class='hq-types-dates'>
-                            <div class='hq-types-form-field-wrapper-date'>
-                                <div class='hq-types-form-label-wrapper'>
-                                    <label for='hq-type-vehicle-type'>Pick-up Date</label>
-                                </div>
-                                <div class='hq-types-form-input-wrapper'>
-                                    <input id='hq_pick_up_date' name='pick_up_date' />
-                                </div>
+                        <div class='hq-types-form-field-wrapper-date'>
+                            <div class='hq-types-form-label-wrapper'>
+                                <label for='hq-type-vehicle-type'>Pick-up Date</label>
                             </div>
-                            <div class='hq-types-form-field-wrapper-time'>
-                                <div class='hq-types-form-label-wrapper'>
-                                    <label for='hq-type-vehicle-type'>Pick-up Time</label>
-                                </div>
-                                <div class='hq-types-form-input-wrapper hq-select-wrapper'>
-                                    <div class='hq-select-icon-wrapper'>
-                                        <i class='fas fa-chevron-down'></i>
-                                    </div>
-                                    <select id='hq-type-vehicle-type' name='pick_up_time'>
-                                        {$this->front->getTimesForDropdowns('00:00','23:50','12:00','+15 minutes')}
-                                    </select>
-                                </div>
+                            <div class='hq-types-form-input-wrapper'>
+                                <input id='hq_pick_up_date' name='pick_up_date' />
                             </div>
                         </div>
-                        <div class='hq-types-dates'>
-                            <div class='hq-types-form-field-wrapper-date'>
-                                <div class='hq-types-form-label-wrapper'>
-                                    <label for='hq-type-vehicle-type'>Return Date</label>
-                                </div>
-                                <div class='hq-types-form-input-wrapper'>
-                                    <input id='hq_return_date' name='return_date' />
-                                </div>
+                        <div class='hq-types-form-field-wrapper-time'>
+                            <div class='hq-types-form-label-wrapper'>
+                                <label for='hq-type-vehicle-type'>Pick-up Time</label>
                             </div>
-                            <div class='hq-types-form-field-wrapper-time'>
-                                <div class='hq-types-form-label-wrapper'>
-                                    <label for='hq-type-vehicle-type'>Return Time</label>
+                            <div class='hq-types-form-input-wrapper hq-select-wrapper'>
+                                <div class='hq-select-icon-wrapper'>
+                                    <i class='fas fa-chevron-down'></i>
                                 </div>
-                                <div class='hq-types-form-input-wrapper hq-select-wrapper'>
-                                    <div class='hq-select-icon-wrapper'>
-                                        <i class='fas fa-chevron-down'></i>
-                                    </div>
-                                    <select id='hq-type-vehicle-type' name='return_time'>
-                                        {$this->front->getTimesForDropdowns('00:00','23:50','12:00','+15 minutes')}
-                                    </select>
+                                <select id='hq-type-vehicle-type' name='pick_up_time'>
+                                    {$this->front->getTimesForDropdowns('00:00','23:50','12:00','+15 minutes')}
+                                </select>
+                            </div>
+                        </div>
+                        <div class='hq-types-form-field-wrapper-date'>
+                            <div class='hq-types-form-label-wrapper'>
+                                <label for='hq-type-vehicle-type'>Return Date</label>
+                            </div>
+                            <div class='hq-types-form-input-wrapper'>
+                                <input id='hq_return_date' name='return_date' />
+                            </div>
+                        </div>
+                        <div class='hq-types-form-field-wrapper-time'>
+                            <div class='hq-types-form-label-wrapper'>
+                                <label for='hq-type-vehicle-type'>Return Time</label>
+                            </div>
+                            <div class='hq-types-form-input-wrapper hq-select-wrapper'>
+                                <div class='hq-select-icon-wrapper'>
+                                    <i class='fas fa-chevron-down'></i>
                                 </div>
+                                <select id='hq-type-vehicle-type' name='return_time'>
+                                    {$this->front->getTimesForDropdowns('00:00','23:50','12:00','+15 minutes')}
+                                </select>
                             </div>
                         </div>
                         <div class='hq-types-button-wrapper'>

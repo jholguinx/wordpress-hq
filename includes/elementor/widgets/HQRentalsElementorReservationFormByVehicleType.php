@@ -78,6 +78,18 @@ class HQRentalsElementorReservationFormByVehicleType extends \Elementor\Widget_B
                 'default' => 'Find a Car'
             ]
         );
+        $this->add_control(
+            'orientation',
+            [
+                'label' => __('Form Orientation', 'hq-wordpress'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'vertical',
+                'options' => [
+                    'horizontal'  => __( 'Horizontal', 'hq-wordpress' ),
+                    'vertical' => __( 'Vertical', 'hq-wordpress' ),
+                ],
+            ]
+        );
         //'render_warning' => 'false',
         $this->end_controls_section();
 

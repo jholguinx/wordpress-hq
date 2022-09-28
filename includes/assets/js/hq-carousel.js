@@ -9,6 +9,7 @@ jQuery(document).ready(function(){
         mouseDrag: false,
         autoHeight: true,
         autoplay: true,
+        autoplayTimeout: 5000
     });
     jQuery('.hq-tab').on('click',function (e){
         e.preventDefault();

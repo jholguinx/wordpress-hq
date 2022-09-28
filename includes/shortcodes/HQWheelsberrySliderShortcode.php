@@ -41,6 +41,7 @@ class HQWheelsberrySliderShortcode
             ), $atts );
         $this->assets->loadOwlCarouselAssets();
         $this->assets->loadWheelsberryCSS();
+        $this->assets->loadWheelsberrySliderAssets();
         $vehicle_classes = $this->queryVehicles->allVehicleClasses(true);
         $locations = $this->queryLocations->allLocations();
         $themeColor = HQRentalsThemeCustomizer::getThemeColor();
@@ -221,7 +222,7 @@ class HQWheelsberrySliderShortcode
     {
         if (is_array($vehicles) and count($vehicles)) {
             $html = '';
-            foreach ($vehicles as $vehicle) {
+            foreach ($vehicles as $index => $vehicle) {
                 $priceHTML = "";
                 $settings = new HQRentalsSettings();
                 $dailyRate = '';
@@ -236,7 +237,11 @@ class HQWheelsberrySliderShortcode
                 $priceHTML = $dailyRate;
                 $priceHTML .= !empty($vehicle->getActiveRate()->daily_rate->amount_for_display) ? ("<span class='omcr-price-currency hq-wheelsberry-separator'> |</span> <span class='omcr-price-currency hq-wheelsberry-weekly-tag'>{$vehicle->getActiveRate()->weekly_rate->amount_for_display} weekly</span>") : "";
                 $html .= "
-                            <div id='hq-vehicle-wheelsberry-{$vehicle->id}' data-cy='hq-vehicle-class' class='cars-slider__item-inner om-container__inner'>
+                            <div id='hq-vehicle-wheelsberry-{$vehicle->id}' 
+                                data-cy='hq-vehicle-class' 
+                                data-vehicle-class-id='{$vehicle->id}'
+                                data-vehicle-class-index='{$index}'
+                                class='cars-slider__item-inner om-container__inner'>
                                 <div class='cars-slider__item-description'>
                                     <div class='cars-slider__item-category'>{$vehicle->name}</div>
                                     <h3 class='cars-slider__model'><span class='cars-slider__model-inner'>{$this->getTitle($vehicle->getLabelForWebsite())}</span></h3>

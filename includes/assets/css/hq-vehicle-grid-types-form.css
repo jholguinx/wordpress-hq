@@ -184,3 +184,59 @@ i.fa-clock {
 .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_today {
     color: #012b7f!important;
 }
+
+.hq-types-orientation-horizontal .hq-types-form-inner-wrapper{
+    flex-direction: row;
+    display: flex;
+}
+.hq-types-orientation-horizontal{
+    background-color: transparent;
+}
+.hq-types-orientation-horizontal form{
+    background-color: #fff;
+    padding:2.5%;
+}
+.hq-types-orientation-horizontal .hq-types-form-field-wrapper-date,
+.hq-types-orientation-horizontal .hq-types-form-field-wrapper-time{
+    width:7.5%;
+    margin-left: 20px;
+}
+.hq-types-orientation-horizontal .hq-types-button-wrapper {
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.hq-types-orientation-horizontal .hq-types-form-field-wrapper-time,
+.hq-types-orientation-horizontal .hq-types-form-field-wrapper-date,
+.hq-types-orientation-horizontal .hq-types-form-field-wrapper{
+    justify-content: center;
+}
+.hq-types-form-field-wrapper-horizontal{
+    padding: 0 !important;
+}
+@media all and (max-width: 992px) {
+    .hq-types-orientation-horizontal .hq-types-form-inner-wrapper{
+        flex-direction: column;
+    }
+    .hq-types-orientation-horizontal .hq-types-form-field-wrapper-date,
+    .hq-types-orientation-horizontal .hq-types-form-field-wrapper-time{
+        width: 100%;
+        margin:0;
+    }
+    .hq-types-orientation-horizontal input,
+    .hq-types-orientation-horizontal  select{
+        width: 100%;
+    }
+    .hq-types-orientation-horizontal form{
+        padding: 5%;
+    }
+    .hq-types-orientation-horizontal .hq-types-form-field-wrapper-time,
+    .hq-types-orientation-horizontal .hq-types-form-field-wrapper-date,
+    .hq-types-orientation-horizontal .hq-types-form-field-wrapper{
+        margin-bottom: 15px;
+    }
+    .hq-types-orientation-horizontal .hq-types-button-wrapper{
+        margin-left:0;
+    }
+}

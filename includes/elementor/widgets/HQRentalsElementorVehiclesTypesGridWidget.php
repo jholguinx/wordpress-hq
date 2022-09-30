@@ -12,7 +12,7 @@ class HQRentalsElementorVehiclesTypesGridWidget extends \Elementor\Widget_Base
 
     public function get_name()
     {
-        return 'Vehicles Grid';
+        return 'Vehicles Types Grid';
     }
 
     public function get_title()

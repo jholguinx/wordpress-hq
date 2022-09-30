@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# [1.5.18] - 2022-09-30
+
+
+Hot fix version.
+
+### Changed
+
+- Hotfix on Vehicle Grid - Heritage Issue on Shortcodes
+- Fixes on Wheelsberry Slider regarding dates
+- Adding support for horizontal vehicle types form
+
 # [1.5.17] - 2022-09-15
 
 We added a couple of new shortcodes to the plugin.

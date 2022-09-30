@@ -2,6 +2,7 @@
 
 namespace HQRentalsPlugin\HQRentalsHelpers;
 use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesLocations;
+use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsFrontHelper
 {
@@ -18,7 +19,27 @@ class HQRentalsFrontHelper
             $output .= "<option value=\"{$time}\"{$sel}>" . date('H:i', $current) . '</option>';
             $current = strtotime($interval, $current);
         }
+        return $output;
+    }
+    public function getTimesWithFormat($begining, $end, $default = '12:00', $interval = '+15 minutes') : string
+    {
+        $output = '';
+        $current = strtotime($begining);
+        $end = strtotime($end);
+        $setting = new HQRentalsSettings();
+        //setting
+        $format = $setting->getTenantDatetimeFormat();
+        $formatAsArray = explode(' ',$format);
+        $timeFormat = array_shift($formatAsArray);
+        $timeFormat = join(' ', $formatAsArray);
+        while ($current <= $end) {
+            $setting =
+            $time = date($timeFormat, $current);
+            $sel = ($time == $default) ? ' selected' : '';
 
+            $output .= "<option value=\"{$time}\"{$sel}>" . date($timeFormat, $current) . '</option>';
+            $current = strtotime($interval, $current);
+        }
         return $output;
     }
 

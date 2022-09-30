@@ -1,5 +1,11 @@
 == Change Log ==
 
+= 1.5.18 =
+
+Hotfix on Vehicle Grid - Heritage Issue on Shortcodes
+Fixes on Wheelsberry Slider regarding dates
+Adding support for horizontal vehicle types form
+
 = 1.5.17 =
 
 Vehicle Types Filter Grid

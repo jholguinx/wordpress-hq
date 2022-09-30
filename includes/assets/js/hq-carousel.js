@@ -9,6 +9,7 @@ jQuery(document).ready(function(){
         mouseDrag: false,
         autoHeight: true,
         autoplay: true,
+        autoplayTimeout: 5000
     });
     jQuery('.hq-tab').on('click',function (e){
         e.preventDefault();
@@ -23,7 +24,7 @@ jQuery(document).ready(function(){
     });
     var form = jQuery('.hq-reservation-form-wrapper');
     if(form.length){
-        var scroll = new SmoothScroll('a[href*="#"]',{
+        var scroll = new SmoothScroll('a[href*="#"]', {
             speed: 1000,
             /*
             offset: function (anchor, toggle) {

@@ -109,7 +109,7 @@ class HQRentalsAssetsHandler
         wp_register_script('hq-aucapina-reservation-form-js', plugin_dir_url(__FILE__) . 'js/hq-aucapina-reservation-form.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-page-vehicle-class-big-header-js', plugin_dir_url(__FILE__) . 'js/hq-page-vehicle-class-big-header.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-tabs-js', plugin_dir_url(__FILE__) . 'js/hq-tabs.js', array('jquery','jquery-ui-tabs'), HQ_RENTALS_PLUGIN_VERSION, true);
-
+        wp_register_script('hq-wheelsberry-slider-js', plugin_dir_url(__FILE__) . 'js/hq-wheelsberry-slider.js', array('jquery','jquery-ui-tabs'), HQ_RENTALS_PLUGIN_VERSION, true);
         /*Inits*/
         wp_register_script('hq-betheme-vehicle-grid-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-grid.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
         wp_register_script('hq-betheme-vehicle-carousel-js', plugin_dir_url(__FILE__) . 'js/hq-betheme-vehicle-carousel.js', array('jquery'), HQ_RENTALS_PLUGIN_VERSION, true);
@@ -328,7 +328,10 @@ class HQRentalsAssetsHandler
         wp_enqueue_script('hq-owl-carousel-js');
         wp_enqueue_script('hq-smooth-js');
         wp_enqueue_script('hq-carousel-js');
-
+    }
+    public function loadWheelsberrySliderAssets()
+    {
+        wp_enqueue_script('hq-wheelsberry-slider-js');
     }
     public function loadWheelsberryCSS()
     {

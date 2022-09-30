@@ -7,12 +7,12 @@ use HQRentalsPlugin\HQRentalsQueries\HQRentalsDBQueriesVehicleClasses;
 use HQRentalsPlugin\HQRentalsSettings\HQRentalsSettings;
 
 class HQRentalsVehicleTypesGrid extends HQRentalsVehicleGrid implements HQShortcodeInterface {
+
     private $settings;
     public $atts;
 
     public function __construct($params = null)
     {
-        parent::__construct($params);
         $this->queryVehicles = new HQRentalsDBQueriesVehicleClasses();
         $this->settings = new HQRentalsSettings();
         $this->assets = new HQRentalsAssetsHandler();

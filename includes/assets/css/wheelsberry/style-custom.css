@@ -119,12 +119,6 @@ h6,
 .rent-option-description-link.active {
     color: #f4c42a;
 }
-.owl-carousel .owl-dot.active,
-.cars-slider__item-reserve-button:hover,
-.reservation-form,
-.ui-datepicker-calendar td a:not(.ui-state-active):hover{
-    background-color: #f4c42a;
-}
 .om-persons__item,
 input[type="text"]:focus,
 input[type="email"]:focus,

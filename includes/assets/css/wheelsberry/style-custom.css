@@ -304,3 +304,7 @@ body.om-wpb .vc_tta.vc_tta-style-classic .vc_tta-panel.vc_active .vc_tta-panel-h
 .post-password-form label input {
     background-color: #ffffff;
 }
+.owl-theme .owl-dots .owl-dot span,
+.owl-theme .owl-dots .owl-dot.active span{
+    background: transparent;
+}

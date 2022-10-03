@@ -1,5 +1,6 @@
+var carouselSelector = '#hq-carousel'
 jQuery(document).ready(function(){
-    jQuery('.owl-carousel').owlCarousel({
+    jQuery(carouselSelector).owlCarousel({
         loop:true,
         nav:true,
         items: 1,
@@ -16,9 +17,9 @@ jQuery(document).ready(function(){
         var pos = jQuery(this).attr('data-position');
         jQuery('.hq-tab').removeClass('active');
         jQuery(this).addClass('active');
-        jQuery(".owl-carousel").trigger("to.owl.carousel", [pos, 1])
+        jQuery(carouselSelector).trigger("to.owl.carousel", [pos, 1])
     });
-    jQuery('.owl-carousel').on('changed.owl.carousel', function(event) {
+    jQuery(carouselSelector).on('changed.owl.carousel', function(event) {
         jQuery('.hq-tab').removeClass('active');
         jQuery('.hq-tap-pos-'+event.page.index).addClass('active');
     });

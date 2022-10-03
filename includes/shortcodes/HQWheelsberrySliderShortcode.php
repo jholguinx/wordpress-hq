@@ -79,7 +79,7 @@ class HQWheelsberrySliderShortcode
                         <div class='h-subtitle cars-slider__subtitle'>{$slider_subtitle}</div>
                     </div>
                 </div>
-                <div class='om-container owl-carousel'>
+                <div id='hq-carousel' class='om-container owl-carousel'>
                     {$this->renderVehiclesOnSlider($vehicle_classes, $render_form, $reservation_url)}
                 </div>
             </div>
